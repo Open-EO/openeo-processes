@@ -1,10 +1,10 @@
 {
-    "id": "filter_bands",
-    "summary": "Filters the bands in the image collection",
-    "description": "The order of the bands matters!",
+    "id": "resample_spatial",
+    "summary": "Resample spatial dimension",
+    "description": "Resample spatial dimension",
     "categories": [
         "core",
-        "filter"
+        "aggregate"
     ],
     "parameters": {
         "data": {
@@ -15,20 +15,19 @@
             },
             "required": true
         },
-        "bands": {
+        "method": {
             "description": "",
             "schema": {
-                "oneOf": [
-                    {
-                        "type": "string"
-                    },
-                    {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                ]
+                "type": "string",
+                "default": null
+            },
+            "required": false
+        },
+        "target": {
+            "description": "",
+            "schema": {
+                "type": "object",
+                "format": "image-collection"
             },
             "required": true
         }

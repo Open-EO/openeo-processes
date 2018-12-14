@@ -1,10 +1,10 @@
 {
-    "id": "filter_bands",
-    "summary": "Filters the bands in the image collection",
-    "description": "The order of the bands matters!",
+    "id": "reduce",
+    "summary": "reduce dimensions - lower dimensionality, same resolution.",
+    "description": "reduce dimensions - lower dimensionality, same resolution.",
     "categories": [
         "core",
-        "filter"
+        "reducer"
     ],
     "parameters": {
         "data": {
@@ -15,20 +15,18 @@
             },
             "required": true
         },
-        "bands": {
+        "reducer": {
             "description": "",
             "schema": {
-                "oneOf": [
-                    {
-                        "type": "string"
-                    },
-                    {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                ]
+                "type": "object",
+                "format": "callback"
+            },
+            "required": true
+        },
+        "dimension": {
+            "description": "",
+            "schema": {
+                "type": "string"
             },
             "required": true
         }

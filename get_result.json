@@ -1,7 +1,7 @@
 {
-    "id": "get_collection",
-    "summary": "Load an internal collection by id",
-    "description": "Load a collection from the current back-end by collection id",
+    "id": "get_result",
+    "summary": "Load batch job results by id",
+    "description": "Load internal batch job results by job id.",
     "categories": [
         "core",
         "import"

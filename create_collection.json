@@ -1,20 +1,11 @@
 {
-    "id": "get_collection",
-    "summary": "Load an internal collection by id",
-    "description": "Load a collection from the current back-end by collection id",
+    "id": "create_collection",
+    "summary": "Creates a new collection without dimensions.",
+    "description": "Creates a new collection without dimensions.",
     "categories": [
-        "core",
-        "import"
+        "core"
     ],
-    "parameters": {
-        "id": {
-            "description": "",
-            "schema": {
-                "type": "string"
-            },
-            "required": true
-        }
-    },
+    "parameters": {},
     "returns": {
         "description": "",
         "schema": {

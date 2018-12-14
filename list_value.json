@@ -1,32 +1,30 @@
 {
-    "id": "filter_bands",
-    "summary": "Filters the bands in the image collection",
-    "description": "The order of the bands matters!",
+    "id": "list_value",
+    "summary": "Value of the element at the specified index.",
+    "description": "Value of the element at the specified index.",
     "categories": [
-        "core",
         "filter"
     ],
     "parameters": {
         "data": {
             "description": "",
             "schema": {
-                "type": "object",
-                "format": "image-collection"
+                "type": "array",
+                "items": {
+                    "description": "Mixed values, any data type allowed."
+                }
             },
             "required": true
         },
-        "bands": {
+        "index": {
             "description": "",
             "schema": {
                 "oneOf": [
                     {
-                        "type": "string"
+                        "type": "integer"
                     },
                     {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
+                        "type": "string"
                     }
                 ]
             },
@@ -36,8 +34,7 @@
     "returns": {
         "description": "",
         "schema": {
-            "type": "object",
-            "format": "image-collection"
+            "description": "Mixed values, any data type allowed."
         }
     }
 }

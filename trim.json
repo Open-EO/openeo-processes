@@ -1,10 +1,9 @@
 {
-    "id": "NDVI",
-    "summary": "Normalized Difference Vegetation Index",
-    "description": "Alias for `normalized_difference`, which determines the bands automatically based on common_names (\u201cred\u201d\/\u201dnir\u201d). Bands are replaced.",
+    "id": "trim",
+    "summary": "Removes slices with nodata.",
+    "description": "Alias. If the dimension is irregular categorical then slices in the middle can be removed.",
     "categories": [
-        "math > indices",
-        "vegetation_indices"
+        "core"
     ],
     "parameters": {
         "data": {

@@ -1,13 +1,12 @@
 {
-    "id": "get_collection",
-    "summary": "Load an internal collection by id",
-    "description": "Load a collection from the current back-end by collection id",
+    "id": "import_result",
+    "summary": "Load external batch job results by url",
+    "description": "Load an external batch job results by url",
     "categories": [
-        "core",
         "import"
     ],
     "parameters": {
-        "id": {
+        "url": {
             "description": "",
             "schema": {
                 "type": "string"

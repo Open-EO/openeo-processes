@@ -1,7 +1,7 @@
 {
-    "id": "filter_bbox",
-    "summary": "Limits the data to the specified bbox.",
-    "description": "Limits the data to the specified bbox.",
+    "id": "filter_temporal",
+    "summary": "Limits the data to the specified date range.",
+    "description": "Alias for filter() with callbacks to between_datetime(), between_date(), between_month() and between_year().",
     "categories": [
         "core",
         "filter"
@@ -23,47 +23,14 @@
             },
             "required": true
         },
-        "west": {
+        "from": {
             "description": "",
             "schema": {
-                "type": "number"
+                "type": "string"
             },
             "required": true
         },
-        "south": {
-            "description": "",
-            "schema": {
-                "type": "number"
-            },
-            "required": true
-        },
-        "east": {
-            "description": "",
-            "schema": {
-                "type": "number"
-            },
-            "required": true
-        },
-        "north": {
-            "description": "",
-            "schema": {
-                "type": "number"
-            },
-            "required": true
-        },
-        "base": {
-            "description": "",
-            "schema": {
-                "type": "number"
-            }
-        },
-        "height": {
-            "description": "",
-            "schema": {
-                "type": "number"
-            }
-        },
-        "crs": {
+        "to": {
             "description": "",
             "schema": {
                 "type": "string"

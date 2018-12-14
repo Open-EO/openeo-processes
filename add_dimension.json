@@ -1,10 +1,9 @@
 {
-    "id": "filter_bands",
-    "summary": "Filters the bands in the image collection",
-    "description": "The order of the bands matters!",
+    "id": "add_dimension",
+    "summary": "Adds a new dimension with the name in `dimension`.",
+    "description": "Adds a new dimension with the name in `dimension`.",
     "categories": [
-        "core",
-        "filter"
+        "core"
     ],
     "parameters": {
         "data": {
@@ -15,20 +14,17 @@
             },
             "required": true
         },
-        "bands": {
+        "dimension": {
             "description": "",
             "schema": {
-                "oneOf": [
-                    {
-                        "type": "string"
-                    },
-                    {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                ]
+                "type": "string"
+            },
+            "required": true
+        },
+        "dimension_value": {
+            "description": "",
+            "schema": {
+                "description": "Mixed values, any data type allowed."
             },
             "required": true
         }

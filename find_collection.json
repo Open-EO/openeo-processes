@@ -1,16 +1,17 @@
 {
-    "id": "get_collection",
-    "summary": "Load an internal collection by id",
-    "description": "Load a collection from the current back-end by collection id",
+    "id": "find_collection",
+    "summary": "Select and load an internal collection by properties.",
+    "description": "Select and load an internal collection by properties.",
     "categories": [
         "core",
         "import"
     ],
     "parameters": {
-        "id": {
+        "expression": {
             "description": "",
             "schema": {
-                "type": "string"
+                "type": "object",
+                "format": "callback"
             },
             "required": true
         }
