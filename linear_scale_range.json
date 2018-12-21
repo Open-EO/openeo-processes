@@ -6,7 +6,7 @@
         "math"
     ],
     "parameters": {
-        "data": {
+        "x": {
             "description": "",
             "schema": {
                 "type": [
