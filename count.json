@@ -1,7 +1,7 @@
 {
     "id": "count",
-    "summary": "Number of valid elements (see is_valid).",
-    "description": "Number of valid elements (see is_valid).",
+    "summary": "Number of valid elements.",
+    "description": "Number of valid elements (see @is_valid).",
     "categories": [
         "arrays",
         "reducer"
