@@ -1,7 +1,7 @@
 {
     "id": "product",
     "summary": "Multiplication of a sequence of numbers",
-    "description": "This process is an exact alias for the `multiply` process. See @multiply for more information.",
+    "description": "This process is an exact alias for the `multiply` process. See ``multiply()`` for more information.",
     "categories": [
         "math",
         "reducer"
@@ -9,7 +9,7 @@
     "parameter_order": ["data", "ignore_nodata"],
     "parameters": {
         "data": {
-            "description": "See @multiply for more information.",
+            "description": "See ``multiply()`` for more information.",
             "schema": {
                 "type": "array",
                 "items": {
@@ -22,7 +22,7 @@
             "required": true
         },
         "ignore_nodata": {
-            "description": "See @multiply for more information.",
+            "description": "See ``multiply()`` for more information.",
             "schema": {
                 "type": "boolean",
                 "default": true
@@ -30,7 +30,7 @@
         }
     },
     "returns": {
-        "description": "See @multiply for more information.",
+        "description": "See ``multiply()`` for more information.",
         "schema": {
             "type": [
                 "number",
