@@ -5,6 +5,7 @@
     "categories": [
         "filter"
     ],
+    "parameter_order": ["data", "bands"],
     "parameters": {
         "data": {
             "description": "",

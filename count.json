@@ -1,7 +1,7 @@
 {
     "id": "count",
     "summary": "Count the number of elements",
-    "description": "Gives the number of elements in an array that matches a certain criterion / expression.\n\n**Remarks:**\n* By default counts the number of valid elements. A valid element is every element for which ``is_valid()`` returns `true`.\n* To count all elements in a list set the `expression` parameter to boolean `true`.",
+    "description": "Gives the number of elements in an array that matches a certain criterion / expression.\n\n**Remarks:**\n\n* By default counts the number of valid elements. A valid element is every element for which ``is_valid()`` returns `true`.\n* To count all elements in a list set the `expression` parameter to boolean `true`.",
     "categories": [
         "arrays",
         "reducer"

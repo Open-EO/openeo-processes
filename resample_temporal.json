@@ -1,11 +1,12 @@
 {
     "id": "resample_temporal",
     "summary": "Resample the temporal dimension",
-    "description": "If dimension is not set, the data cube is expected to have only one temporal dimension.",
+    "description": "If dimension is not set, the data cube is expected to have only one temporal dimension. Same dimensionality, lower resolution.",
     "categories": [
         "cubes",
         "aggregate"
     ],
+    "parameter_order": ["data", "method", "target", "dimension"],
     "parameters": {
         "data": {
             "description": "",

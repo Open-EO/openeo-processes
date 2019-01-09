@@ -5,6 +5,7 @@
     "categories": [
         "filter"
     ],
+    "parameter_order": ["data", "from", "to"],
     "parameters": {
         "data": {
             "description": "",

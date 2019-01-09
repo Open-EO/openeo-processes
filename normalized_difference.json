@@ -6,7 +6,7 @@
         "math > indices",
         "vegetation indices"
     ],
-    "parameter_order": ["band1", "band2"],
+    "parameter_order": ["band1", "band2", "name"],
     "parameters": {
         "band1": {
             "description": "A raster data cube with exactly one band to be used as first band.",

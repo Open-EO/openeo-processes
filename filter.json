@@ -1,11 +1,12 @@
 {
     "id": "filter",
     "summary": "Filtering data based on a logical expression.",
-    "description": "",
+    "description": "Same dimensionality, same resolution, limited extents.",
     "categories": [
         "cubes",
         "filter"
     ],
+    "parameter_order": ["data", "expression", "dimension"],
     "parameters": {
         "data": {
             "description": "",
@@ -27,7 +28,12 @@
             "description": "",
             "schema": {
                 "type": "object",
-                "format": "callback"
+                "format": "callback",
+                "properties": {
+                    "value": {
+                        "description": "A value of any data type could be passed."
+                    }
+                }
             },
             "required": true
         },

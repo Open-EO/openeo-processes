@@ -1,11 +1,12 @@
 {
     "id": "resample_spatial",
     "summary": "Resample spatial dimension",
-    "description": "Resample spatial dimension",
+    "description": "Resample spatial dimension. Same dimensionality, lower resolution.",
     "categories": [
         "cubes",
         "aggregate"
     ],
+    "parameter_order": ["data", "method", "target"],
     "parameters": {
         "data": {
             "description": "",

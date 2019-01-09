@@ -6,6 +6,7 @@
         "cubes",
         "reducer"
     ],
+    "parameter_order": ["data", "reducer", "dimension"],
     "parameters": {
         "data": {
             "description": "",

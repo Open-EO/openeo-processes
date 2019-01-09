@@ -5,6 +5,7 @@
     "categories": [
         "cubes"
     ],
+    "parameter_order": ["data", "process", "kernel"],
     "parameters": {
         "data": {
             "description": "",

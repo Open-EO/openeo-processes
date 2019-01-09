@@ -6,6 +6,7 @@
         "math > indices",
         "vegetation indices"
     ],
+    "parameter_order": ["data", "name"],
     "parameters": {
         "data": {
             "description": "A raster data cube with two bands that have the common names `red` and `nir` assigned.",
