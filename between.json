@@ -96,7 +96,7 @@
             "returns": null
         },
         {
-            "description": "Swapped bounds (min is greather than max) MUST always return `false`.",
+            "description": "Swapped bounds (min is greater than max) MUST always return `false`.",
             "arguments": {
                 "x": 0.5,
                 "min": 1,

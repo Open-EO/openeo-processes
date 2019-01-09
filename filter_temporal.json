@@ -1,7 +1,7 @@
 {
     "id": "filter_temporal",
     "summary": "Limits the data to the specified date range.",
-    "description": "Alias for filter() with callbacks to between_datetime(), between_date(), between_month() and between_year().",
+    "description": "",
     "categories": [
         "filter"
     ],
