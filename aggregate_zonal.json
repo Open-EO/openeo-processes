@@ -19,7 +19,7 @@
         "polygons": {
             "description": "",
             "schema": {
-                "oneOf": [
+                "anyOf": [
                     {
                         "type": "object",
                         "format": "geojson"

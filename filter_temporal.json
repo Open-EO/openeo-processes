@@ -18,14 +18,21 @@
         "from": {
             "description": "",
             "schema": {
-                "type": "string"
+                "type": [
+                    "string",
+                    "null"
+                ]
             },
             "required": true
         },
         "to": {
             "description": "",
             "schema": {
-                "type": "string"
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "default": null
             }
         }
     },

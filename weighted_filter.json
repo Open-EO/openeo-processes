@@ -18,7 +18,7 @@
         "weights": {
             "description": "",
             "schema": {
-                "oneOf": [
+                "anyOf": [
                     {
                         "type": "number"
                     },

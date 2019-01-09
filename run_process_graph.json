@@ -10,7 +10,7 @@
         "id": {
             "description": "A process graph id or an absolute URI to an externally hosted process graph.",
             "schema": {
-                "oneOf": [
+                "anyOf": [
                     {
                         "description": "URI",
                         "type": "string",

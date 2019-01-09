@@ -11,7 +11,7 @@
         "data": {
             "description": "The data to save.",
             "schema": {
-                "oneOf": [
+                "anyOf": [
                     {
                         "type": "object",
                         "format": "raster-cube"

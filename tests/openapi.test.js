@@ -1,6 +1,7 @@
 const glob = require('glob');
 const fs = require('fs');
 const markdownlint = require('markdownlint');
+const Ajv = require('Ajv');
 
 var idRegExp = /^[A-Za-z0-9_]+$/;
 var paramKeyRegExp = /^[A-Za-z0-9_]+$/; 
@@ -8,23 +9,41 @@ var exceptionNameRegExp = /^[A-Za-z0-9_]+$/;
 
 var files = glob.sync("../*.json", {realpath: true});
 
+var ajvOptions = {
+	format: 'full',
+	formats: {
+		// ToDo: Validate callback (should be a process graph)
+		'callback': {type: 'object', validate: () => true},
+		// ToDo: Validate GeoJSON
+		'geojson': {type: 'object', validate: () => true},
+		'raster-cube': {type: 'object', validate: () => true},
+		'vector-cube': {type: 'object', validate: () => true},
+	}
+};
+
+var ajv = new Ajv(ajvOptions);
+
 describe.each(files)("%s", (file) => {
 	try {
 		var p = JSON.parse(fs.readFileSync(file));
 		
-		test(file + " > Basics", () => {
-			// id
+		test(file + " > ID", () => {
 			expect(typeof p.id).toBe('string');
 			expect(idRegExp.test(p.id)).toBe(true);
+		});
 
-			// summary
+		test(file + " > Summary", () => {
 			expect(typeof p.summary === 'undefined' || typeof p.summary === 'string').toBeTruthy();
 			checkSpelling(p.summary);
+		});
 
+		test(file + " > Description", () => {
 			// description
 			expect(typeof p.description).toBe('string');
 			checkDescription(p.description);
+		});
 
+		test(file + " > Categories", () => {
 			// categories
 			expect(typeof p.categories === 'undefined' || Array.isArray(p.categories)).toBeTruthy();
 			if (Array.isArray(p.categories)) {
@@ -32,40 +51,48 @@ describe.each(files)("%s", (file) => {
 					expect(typeof p.categories[i]).toBe('string');
 				}
 			}
+		});
 
+		test(file + " > Deprecated", () => {
 			// deprecated
 			expect(typeof p.deprecated === 'undefined' || typeof p.deprecated === 'boolean').toBeTruthy();
-
 		});
 
 		test(file + " > Parameters", () => {
 			expect(typeof p.parameters).toBe('object');
 			expect(p.parameters).not.toBeNull();
+		});
+		
+		test.each(o2a(p.parameters))(file + " > Parameters > %s", (key, param) => {
+			expect(paramKeyRegExp.test(key)).toBe(true);
 
+			// parameter description
+			expect(typeof param.description).toBe('string');
+			checkDescription(param.description);
+
+			// Parameter flags
+			expect(typeof param.required === 'undefined' || typeof param.required === 'boolean').toBeTruthy();
+			expect(typeof param.deprecated === 'undefined' || typeof param.deprecated === 'boolean').toBeTruthy();
+
+			// Parameter media type
+			expect(typeof param.media_type === 'undefined' || typeof param.media_type === 'string').toBeTruthy();
+
+			// Parameter schema
+			expect(typeof param.schema).toBe('object');
+			expect(param.schema).not.toBeNull();
+			checkJsonSchema(param.schema);
+
+			// Parameters that are not required should define a default value - just a warning for now
+			// ToDo: Doesn't work for oneOf/allOf/...
+			if(param.required !== true && typeof param.schema.default === 'undefined') {
+				console.warn(p.id + ": Optional parameter '" + key + "' should define a default value.");
+			}
+		});
+
+		test(file + " > Parameter Order", () => {
 			let paramKeys = Object.keys(p.parameters);
 			let paramCount = paramKeys.length;
-			for(let key in p.parameters) {
-				expect(paramKeyRegExp.test(key)).toBe(true);
-				let param = p.parameters[key];
-
-				// parameter description
-				expect(typeof param.description).toBe('string');
-				checkDescription(param.description);
-
-				// Parameter flags
-				expect(typeof param.required === 'undefined' || typeof param.required === 'boolean').toBeTruthy();
-				expect(typeof param.deprecated === 'undefined' || typeof param.deprecated === 'boolean').toBeTruthy();
-
-				// Parameter media type
-				expect(typeof param.media_type === 'undefined' || typeof param.media_type === 'string').toBeTruthy();
-
-				// Parameter schema
-				expect(typeof param.schema).toBe('object');
-				expect(param.schema).not.toBeNull();
-				checkJsonSchema(param.schema);
-			}
-
-			// parameter order
+	
 			expect(typeof p.parameter_order === 'undefined' || Array.isArray(p.parameter_order)).toBeTruthy();
 			expect(typeof p.parameter_order === 'undefined' || p.parameter_order.length === paramCount).toBeTruthy();
 
@@ -98,106 +125,101 @@ describe.each(files)("%s", (file) => {
 
 		test(file + " > Exceptions", () => {
 			expect(typeof p.exceptions === 'undefined' || (typeof p.exceptions === 'object' && p.exceptions !== 'null')).toBeTruthy();
+		});
 
-			if (typeof p.exceptions !== 'undefined') {
-				for(let key in p.exceptions) {
-					expect(exceptionNameRegExp.test(key)).toBe(true);
-					let e = p.exceptions[key];
+		test.each(o2a(p.exceptions))(file + " > Exceptions > %s", (key, e) => {
+			expect(exceptionNameRegExp.test(key)).toBe(true);
 
-					// exception message
-					expect(typeof e.message).toBe('string');
+			// exception message
+			expect(typeof e.message).toBe('string');
 
-					// exception description
-					expect(typeof e.description === 'undefined' || typeof e.description === 'boolean').toBeTruthy();
-					checkDescription(e.description);
+			// exception description
+			expect(typeof e.description === 'undefined' || typeof e.description === 'boolean').toBeTruthy();
+			checkDescription(e.description);
 
-					// exception http code
-					if (typeof e.http !== 'undefined') {
-						expect(e.http).toBeGreaterThanOrEqual(100);
-						expect(e.http).toBeLessThan(600);
-					}
-				}
+			// exception http code
+			if (typeof e.http !== 'undefined') {
+				expect(e.http).toBeGreaterThanOrEqual(100);
+				expect(e.http).toBeLessThan(600);
 			}
 		});
 
 		test(file + " > Examples", () => {
 			expect(typeof p.examples === 'undefined' || Array.isArray(p.examples)).toBeTruthy();
-
-			if (typeof p.examples !== 'undefined') {
-				let paramKeys = Object.keys(p.parameters);
-				for(let i in p.examples) {
-					let example = p.examples[i];
-	
-					expect(typeof example).toBe('object');
-					expect(example).not.toBeNull();
-
-					// example title
-					expect(typeof example.title === 'undefined' || typeof example.title === 'string').toBeTruthy();
-
-					// example description
-					expect(typeof example.description === 'undefined' || typeof example.description === 'string').toBeTruthy();
-					checkDescription(example.description);
-
-					// Is either process_graph or arguments set?
-					expect((example.process_graph || example.arguments) && !(example.process_graph && example.arguments)).toBeTruthy();
-
-					// example process graph
-					if (typeof example.process_graph !== 'undefined') {
-						expect(typeof example.process_graph).toBe('object');
-						expect(example.process_graph).not.toBeNull();
-						checkProcessGraph(example.process_graph);
-					}
-
-					// example arguments
-					if (typeof example.arguments !== 'undefined') {
-						expect(typeof example.arguments).toBe('object');
-						expect(example.arguments).not.toBeNull();
-						// Check argument values
-						for(let argName in example.arguments) {
-							// Does parameter with this name exist?
-							
-							expect(paramKeys).toContain(argName);
-							checkJsonSchemaValue(p.parameters[argName].schema, example.arguments[argName]);
-						}
-						// Check whether all required parameters are set
-						for(let key in p.parameters) {
-							if (p.parameters[key].required) {
-								expect(example.arguments[key]).toBeDefined();
-							}
-						}
-					}
-
-					// example returns: Nothing to validate, everything is allowed
-				}
-			}
 		});
+
+		if (Array.isArray(p.examples)) {
+			test.each(p.examples)(file + " > Examples > %#", (example) => {
+				let paramKeys = Object.keys(p.parameters);
+
+				expect(typeof example).toBe('object');
+				expect(example).not.toBeNull();
+
+				// example title
+				expect(typeof example.title === 'undefined' || typeof example.title === 'string').toBeTruthy();
+
+				// example description
+				expect(typeof example.description === 'undefined' || typeof example.description === 'string').toBeTruthy();
+				checkDescription(example.description);
+
+				// Is either process_graph or arguments set?
+				expect((example.process_graph || example.arguments) && !(example.process_graph && example.arguments)).toBeTruthy();
+
+				// example process graph
+				if (typeof example.process_graph !== 'undefined') {
+					expect(typeof example.process_graph).toBe('object');
+					expect(example.process_graph).not.toBeNull();
+					checkProcessGraph(example.process_graph);
+				}
+
+				// example arguments
+				if (typeof example.arguments !== 'undefined') {
+					expect(typeof example.arguments).toBe('object');
+					expect(example.arguments).not.toBeNull();
+					// Check argument values
+					for(let argName in example.arguments) {
+						// Does parameter with this name exist?
+						
+						expect(paramKeys).toContain(argName);
+						checkJsonSchemaValue(p.parameters[argName].schema, example.arguments[argName]);
+					}
+					// Check whether all required parameters are set
+					for(let key in p.parameters) {
+						if (p.parameters[key].required) {
+							expect(example.arguments[key]).toBeDefined();
+						}
+					}
+				}
+
+				// example returns: Nothing to validate, everything is allowed
+			});
+		}
 
 		test(file + " > Links", () => {
 			expect(typeof p.links === 'undefined' || Array.isArray(p.links)).toBeTruthy();
-
-			if (typeof p.links !== 'undefined') {
-				for(var i in p.links) {
-					var link = p.links[i];
-	
-					expect(typeof link).toBe('object');
-					expect(link).not.toBeNull();
-
-					// link href
-					expect(typeof link.href).toBe('string');
-
-					// link rel
-					expect(typeof link.rel === 'undefined' || typeof link.rel === 'string').toBeTruthy();
-
-					// link title
-					expect(typeof link.title === 'undefined' || typeof link.title === 'string').toBeTruthy();
-
-					// link type
-					expect(typeof link.type === 'undefined' || typeof link.type === 'string').toBeTruthy();
-				}
-			}
 		});
 
+		if (Array.isArray(p.links)) {
+			test.each(p.links)(file + " > Links > %#", (link) => {
+				expect(typeof link).toBe('object');
+				expect(link).not.toBeNull();
+
+				// link href
+				expect(typeof link.href).toBe('string');
+
+				// link rel
+				expect(typeof link.rel === 'undefined' || typeof link.rel === 'string').toBeTruthy();
+
+				// link title
+				expect(typeof link.title === 'undefined' || typeof link.title === 'string').toBeTruthy();
+
+				// link type
+				expect(typeof link.type === 'undefined' || typeof link.type === 'string').toBeTruthy();
+			});
+		}
+
 	} catch(err) {
+		console.error(err);
 		expect(err).toBeUndefined();
 	}
 });
@@ -237,6 +259,7 @@ function checkSpelling(text) {
 		return;
 	}
 
+	// ToDo: Implement spell check
 }
 
 function checkProcessGraph(pg) {
@@ -248,11 +271,27 @@ function checkProcessGraph(pg) {
 }
 
 function checkJsonSchema(schema) {
-	// ToDo: Check JSON schema
-	// http://json-schema.org/draft-07/schema.json
+	if (typeof schema["$schema"] === 'undefined') {
+		// Set applicable JSON SChema draft version if not already set
+		schema["$schema"] = "http://json-schema.org/draft-07/schema#";
+	}
+
+	let result = ajv.compile(schema);
+	expect(result.errors).toBeNull();
 }
 
 function checkJsonSchemaValue(schema, value) {
-	// ToDo: Validate value against parameter schema
+	ajv.validate(schema, value);
+	expect(ajv.errors).toBeNull();
+}
 
+function o2a(o) {
+	if (!o) {
+		return [];
+	}
+	var a = [];
+	for(var k in o) {
+		a.push([k, o[k]]);
+	}
+	return a;
 }

@@ -11,7 +11,7 @@
         "udf": {
             "description": "Either source code, an absolute URL or a path to an UDF script.",
             "schema": {
-                "oneOf": [
+                "anyOf": [
                     {
                         "description": "URI to an UDF",
                         "type": "string",

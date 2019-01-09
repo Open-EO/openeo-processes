@@ -11,7 +11,7 @@
         "x": {
             "description": "First operand.",
             "schema": {
-                "oneOf": [
+                "anyOf": [
                     {
                         "type": "number"
                     },
@@ -43,7 +43,7 @@
         "y": {
             "description": "Second operand.",
             "schema": {
-                "oneOf": [
+                "anyOf": [
                     {
                         "type": "number"
                     },

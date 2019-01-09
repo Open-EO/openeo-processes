@@ -26,7 +26,7 @@
         "replacement": {
             "description": "The value used to replace non-zero and `true` values with.",
             "schema": {
-                "oneOf": [
+                "anyOf": [
                     {
                         "type": "number"
                     },

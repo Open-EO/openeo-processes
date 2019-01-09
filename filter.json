@@ -11,7 +11,7 @@
         "data": {
             "description": "",
             "schema": {
-                "oneOf": [
+                "anyOf": [
                     {
                         "type": "object",
                         "format": "raster-cube"
@@ -48,7 +48,7 @@
     "returns": {
         "description": "",
         "schema": {
-            "oneOf": [
+            "anyOf": [
                 {
                     "type": "object",
                     "format": "raster-cube"

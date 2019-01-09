@@ -18,7 +18,7 @@
         "geometry": {
             "description": "A geometry, either a GeoJSON or a vector data cube.\n\nIf multiple geometries are passed, the intersection of all geometries is used as geometry.",
             "schema": {
-                "oneOf": [
+                "anyOf": [
                     {
                         "type": "object",
                         "format": "geojson"
