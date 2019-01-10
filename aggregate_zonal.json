@@ -1,7 +1,7 @@
 {
     "id": "aggregate_zonal",
     "summary": "Zonal statistics for polygons",
-    "description": "Aggregates zonal data/statistics for one or multiple GeoJSON features. For focal aggregation see ``apply()``. Number of valid/invalid pixels get returned together with the calculated values. Same dimensionality, lower resolution.",
+    "description": "Aggregates zonal data/statistics for one or multiple GeoJSON features. For focal aggregation see ``apply()``. Number of valid/invalid pixels get returned together with the calculated values.",
     "categories": [
         "cubes",
         "aggregate"
@@ -41,12 +41,18 @@
         }
     },
     "returns": {
-        "description": "",
+        "description": "A vector data cube or a GeoJSON object, depending on the input for `polygons` parameter.",
         "schema": {
-            "type": "array",
-            "items": {
-                "type": "object"
-            }
+            "anyOf": [
+                {
+                    "type": "object",
+                    "format": "geojson"
+                },
+                {
+                    "type": "object",
+                    "format": "vector-cube"
+                }
+            ]
         }
     }
 }
