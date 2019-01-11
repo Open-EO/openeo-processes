@@ -125,6 +125,11 @@ describe.each(processes)("%s", (file, p) => {
 		if(param.required !== true && typeof param.schema.default === 'undefined') {
 			console.warn(p.id + ": Optional parameter '" + key + "' should define a default value.");
 		}
+
+		// Checking that callbacks define their parameters
+		if (typeof param.schema === 'object' && param.schema.format === 'callback') {
+			expect(param.schema.additionalProperties || (typeof param.schema.properties === 'object' && Object.keys(param.schema.properties).length)).toBeTruthy();
+		}
 	});
 
 	test("Parameter Order", () => {
