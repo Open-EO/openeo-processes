@@ -326,6 +326,24 @@ function checkJsonSchema(schema) {
 
 	let result = jsv.compile(schema);
 	expect(result.errors).toBeNull();
+
+	checkSchemaSpelling(schema);
+}
+
+function checkSchemaSpelling(schema) {
+	for(var i in schema) {
+		var obj = schema[i];
+		if (typeof obj === 'object' && obj !== null) {
+			checkSchemaSpelling(obj);
+		}
+
+		switch(i) {
+			case 'title':
+			case 'description':
+				checkSpelling(obj);
+				break;
+		}
+	}
 }
 
 function checkJsonSchemaValue(schema, value) {
