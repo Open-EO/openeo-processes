@@ -1,7 +1,7 @@
 {
     "id": "resample_temporal",
-    "summary": "Resample the temporal dimension",
-    "description": "Resamples the temporal dimension. If the dimension is not set, the data cube is expected to only have one temporal dimension.",
+    "summary": "Resample a temporal dimension",
+    "description": "Resamples a temporal dimension. If the dimension is not set, the data cube is expected to only have one temporal dimension.",
     "categories": [
         "cubes",
         "aggregate"
@@ -18,14 +18,24 @@
             "required": true
         },
         "method": {
-            "description": "",
+            "description": "A resampling method to be applied, could be a reducer for downsampling or other methods for upsampling. The method must be a callable process (or a set processes) such as ``first()``, ``last()``, ``min()``, ``max()``, ``mean()`` or ``median()``.",
             "schema": {
-                "type": "string",
-                "default": null
-            }
+                "type": "object",
+                "format": "callback",
+                "properties": {
+                    "data": {
+                        "description": "An array with elements of any type.",
+                        "type": "array",
+                        "items": {
+                            "description": "Any data type."
+                        }
+                    }
+                }
+            },
+            "required": true
         },
         "target": {
-            "description": "",
+            "description": "A data cube that describes the target resolution.",
             "schema": {
                 "type": "object",
                 "format": "raster-cube"
