@@ -19,6 +19,8 @@ var ajvOptions = {
 		'geojson': {type: 'object', validate: () => true},
 		'raster-cube': {type: 'object', validate: () => true},
 		'vector-cube': {type: 'object', validate: () => true},
+		// ToDo: Validate temporal intervals
+		'temporal-intervals': {type: 'array', validate: () => true}
 	}
 };
 
