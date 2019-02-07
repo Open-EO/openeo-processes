@@ -10,6 +10,11 @@ var exceptionNameRegExp = /^[A-Za-z0-9_]+$/;
 
 var files = glob.sync("../*.json", {realpath: true});
 
+var anyOfRequired = [
+  "filter_bands",
+  "quantiles"
+];
+
 var ajvOptions = {
 	format: 'full',
 	formats: {
@@ -124,7 +129,7 @@ describe.each(processes)("%s", (file, p) => {
 
 		// Parameters that are not required should define a default value - just a warning for now
 		// ToDo: Doesn't work for oneOf/allOf/...
-		if(param.required !== true && typeof param.schema.default === 'undefined') {
+		if(param.required !== true && typeof param.schema.default === 'undefined' && !anyOfRequired.includes(p.id)) {
 			console.warn(p.id + ": Optional parameter '" + key + "' should define a default value.");
 		}
 
