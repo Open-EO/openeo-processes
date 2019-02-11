@@ -1,0 +1,70 @@
+{
+    "id": "warp_projection",
+    "summary": "Warps the projection of a collection.",
+    "description": "Warps the projection of a collection to the target one. The target projection must be specified with a [PROJ](https://proj4.org/about.html) definition or EPSG code.",
+    "categories": [
+        "spatial"
+    ],
+    "parameter_order": ["data", "projection", "method"],
+    "parameters": {
+        "data": {
+            "description": "A raster data cube.",
+            "schema": {
+                "type": "object",
+                "format": "raster-cube"
+            },
+            "required": true
+        },
+        "projection": {
+            "description": "PROJ definition or EPSG code.",
+            "schema": {
+                "type": "string",
+                "example": {
+                  "PROJ": "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
+                  "EPSG": "EPSG:7099"
+                }
+            },
+              "required": true
+        },
+        "method": {
+          "description": "Resampling method. Methods are inspired by GDAL, see [gdalwarp](https://www.gdal.org/gdalwarp.html) for more information.",
+          "schema": {
+            "type": "string",
+            "default": "near",
+            "enum": [
+              "near",
+              "bilinear",
+              "cubic",
+              "cubicspline",
+              "lanczos",
+              "average",
+              "mode",
+              "max",
+              "min",
+              "med",
+              "q1",
+              "q3"
+            ]
+          }
+        }
+    },
+    "returns": {
+        "description": "A raster data cube with values warped onto the new projection.",
+        "schema": {
+            "type": "object",
+            "format": "raster-cube"
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://proj4.org/usage/projections.html",
+            "title": "PROJ parameters for cartographic projections."
+        },
+        {
+            "rel": "about",
+            "href": "http://spatialreference.org/ref/sr-org/7099/",
+            "title": "Example projection inputs refer to the Mollweide projection."
+        }
+    ]
+}
