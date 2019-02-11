@@ -1,9 +1,10 @@
 {
     "id": "warp_projection",
-    "summary": "Warps the projection of a collection.",
-    "description": "Warps the projection of a collection to the target one. The target projection must be specified with a [PROJ](https://proj4.org/about.html) definition or EPSG code.",
+    "summary": "Warp the projection",
+    "description": "Warps the projection of a data cube to the target one. The target projection must be specified with a [PROJ](https://proj4.org) definition or [EPSG](http://www.epsg.org) code.",
     "categories": [
-        "spatial"
+        "cubes",
+        "aggregate"
     ],
     "parameter_order": ["data", "projection", "method"],
     "parameters": {
@@ -19,10 +20,10 @@
             "description": "PROJ definition or EPSG code.",
             "schema": {
                 "type": "string",
-                "example": {
-                  "PROJ": "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
-                  "EPSG": "EPSG:7099"
-                }
+                "examples": [
+                  "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
+                  "EPSG:7099"
+                ]
             },
               "required": true
         },
@@ -59,12 +60,17 @@
         {
             "rel": "about",
             "href": "https://proj4.org/usage/projections.html",
-            "title": "PROJ parameters for cartographic projections."
+            "title": "PROJ parameters for cartographic projections"
         },
         {
             "rel": "about",
-            "href": "http://spatialreference.org/ref/sr-org/7099/",
-            "title": "Example projection inputs refer to the Mollweide projection."
+            "href": "http://www.epsg-registry.org",
+            "title": "Official EPSG code registry"
+        },
+        {
+            "rel": "about",
+            "href": "http://www.epsg.io",
+            "title": "Unofficial EPSG code database"
         }
     ]
 }
