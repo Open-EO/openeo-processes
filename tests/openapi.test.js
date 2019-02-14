@@ -20,8 +20,12 @@ var ajvOptions = {
 	formats: {
 		// ToDo: Validate callback (should be a process graph)
 		'callback': {type: 'object', validate: () => true},
+		// ToDo: Validate EPSG code
+		'epsg-code': {type: 'integer', validate: () => true},
 		// ToDo: Validate GeoJSON
 		'geojson': {type: 'object', validate: () => true},
+		// ToDo: Validate PROJ
+		'proj-definition': {type: 'string', validate: () => true},
 		'raster-cube': {type: 'object', validate: () => true},
 		'vector-cube': {type: 'object', validate: () => true},
 		// ToDo: Validate temporal intervals

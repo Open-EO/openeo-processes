@@ -1,7 +1,7 @@
 {
     "id": "warp_projection",
     "summary": "Warp the projection",
-    "description": "Warps the projection of a data cube to the target one. The target projection must be specified with a [PROJ](https://proj4.org) definition or [EPSG](http://www.epsg.org) code.",
+    "description": "Warps the data cube to the target projection.",
     "categories": [
         "cubes",
         "aggregate"
@@ -17,15 +17,24 @@
             "required": true
         },
         "projection": {
-            "description": "PROJ definition or EPSG code.",
+            "description": "Target projection specified as [EPSG](http://www.epsg.org) code or [PROJ](https://proj4.org) definition.",
             "schema": {
-                "type": "string",
-                "examples": [
-                  "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
-                  "EPSG:7099"
+                "oneOf": [
+                    {
+                        "title": "EPSG Code",
+                        "type": "integer",
+                        "format": "epsg-code",
+                        "example": 7099
+                    },
+                    {
+                        "title": "PROJ definition",
+                        "type": "string",
+                        "format": "proj-definition",
+                        "example": "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
+                    }
                 ]
             },
-              "required": true
+            "required": true
         },
         "method": {
           "description": "Resampling method. Methods are inspired by GDAL, see [gdalwarp](https://www.gdal.org/gdalwarp.html) for more information.",
