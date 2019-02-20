@@ -5,7 +5,7 @@
     "categories": [
         "cubes"
     ],
-    "parameter_order": ["data", "name", "dimension_value"],
+    "parameter_order": ["data", "name", "value"],
     "parameters": {
         "data": {
             "description": "A data cube to add the dimension to.",
@@ -22,10 +22,29 @@
             },
             "required": true
         },
-        "dimension_value": {
-            "description": "Value for the dimension.",
+        "value": {
+            "description": "A dimension value (**not** a pixel value).",
             "schema": {
-                "description": "Any data type is allowed."
+                "anyOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "string"
+                    },
+                    {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    {
+                        "type": "string",
+                        "format": "time"
+                    }
+                ]
             },
             "required": true
         }

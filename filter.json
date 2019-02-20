@@ -22,8 +22,28 @@
                 "type": "object",
                 "format": "callback",
                 "properties": {
-                    "x": {
-                        "description": "A single dimension values to compare against. Any data type could be passed depending on the dimension values stored in the data cube."
+                    "value": {
+                        "description": "A single dimension values to compare against.",
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "string",
+                                "format": "date"
+                            },
+                            {
+                                "type": "string",
+                                "format": "time"
+                            }
+                        ]
                     }
                 }
             },
