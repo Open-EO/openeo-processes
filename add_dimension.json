@@ -1,11 +1,11 @@
 {
     "id": "add_dimension",
     "summary": "Add a new dimension",
-    "description": "Adds a new named dimension to the data cube.\n\nAfterwards, the dimension can be referenced with the specified `name`. If a dimension with the specified name already exists, a `DimensionExists` exception is thrown. The values of the dimension are set to the specified `value`.",
+    "description": "Adds a new named dimension to the data cube.\n\nAfterwards, the dimension can be referenced with the specified `name`. If a dimension with the specified name already exists, a `DimensionExists` exception is thrown. The dimension value of the dimension is set to the specified `value`.",
     "categories": [
         "cubes"
     ],
-    "parameter_order": ["data", "name", "value"],
+    "parameter_order": ["data", "name", "dimension_value"],
     "parameters": {
         "data": {
             "description": "A data cube to add the dimension to.",
@@ -22,7 +22,7 @@
             },
             "required": true
         },
-        "value": {
+        "dimension_value": {
             "description": "Value for the dimension.",
             "schema": {
                 "description": "Any data type is allowed."

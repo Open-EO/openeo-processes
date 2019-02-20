@@ -1,11 +1,12 @@
 {
     "id": "load_collection",
     "summary": "Load a collection",
-    "description": "Loads a collection from the current back-end by its id and returns it as processable data cube. The data that is added to the data cube can be filtered by an expression so that every part of the data that matches the expression is included in the data cube. ",
+    "description": "Loads a collection from the current back-end by its id and returns it as processable data cube. The data that is added to the data cube can be filtered by an expression so that every part of the data that matches the expression is included in the data cube.",
     "categories": [
         "cubes",
         "import"
     ],
+    "parameter_order": ["id", "expression"],
     "parameters": {
         "id": {
             "description": "The collection id.",

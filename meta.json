@@ -16,7 +16,7 @@
             "required": true
         },
         "property": {
-            "description": "Name of the metadata property. All available metadata can be retrieved with the openEO Data Discovery for Collections. The fields groupes in `properties` can be accessed directly, too.",
+            "description": "Name of the metadata property. All available metadata can be retrieved with the openEO Data Discovery for Collections. The fields grouped in `properties` can be accessed directly, too.",
             "schema": {
                 "type": "string"
             },
