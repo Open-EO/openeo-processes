@@ -1,7 +1,7 @@
 {
     "id": "resample_cube_spatial",
     "summary": "Resample the spatial dimensions to a target data cube",
-    "description": "Resamples the spatial dimensions from a source data cube to a target data cube and return the results as a new data cube.",
+    "description": "Resamples the spatial dimensions (x,y) from a source data cube to a target data cube and return the results as a new data cube.",
     "categories": [
         "cubes",
         "aggregate & resample"
