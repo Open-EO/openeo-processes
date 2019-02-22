@@ -6,7 +6,7 @@
         "cubes",
         "filter"
     ],
-    "parameter_order": ["data", "expression", "dimensions"],
+    "parameter_order": ["data", "expression", "dimension"],
     "parameters": {
         "data": {
             "description": "A data cube.",
