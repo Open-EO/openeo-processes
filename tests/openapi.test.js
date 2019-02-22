@@ -16,20 +16,25 @@ var anyOfRequired = [
 ];
 
 var ajvOptions = {
+	schemaId: 'auto',
 	format: 'full',
 	formats: {
-		// ToDo: Validate callback (should be a process graph)
+		// ToDo: Add validators
+		'bounding-box': {type: 'object', validate: () => true},
 		'callback': {type: 'object', validate: () => true},
-		// ToDo: Validate EPSG code
+		'collection-id': {type: 'string', validate: () => true},
 		'epsg-code': {type: 'integer', validate: () => true},
-		// ToDo: Validate GeoJSON
 		'geojson': {type: 'object', validate: () => true},
-		// ToDo: Validate PROJ
+		'job-id': {type: 'string', validate: () => true},
+		'kernel': {type: 'array', validate: () => true},
+		'output-format': {type: 'string', validate: () => true},
+		'output-format-options': {type: 'array', validate: () => true},
+		'process-graph-id': {type: 'string', validate: () => true},
+		'process-graph-variables': {type: 'array', validate: () => true},
 		'proj-definition': {type: 'string', validate: () => true},
 		'raster-cube': {type: 'object', validate: () => true},
-		'vector-cube': {type: 'object', validate: () => true},
-		// ToDo: Validate temporal intervals
-		'temporal-intervals': {type: 'array', validate: () => true}
+		'temporal-intervals': {type: 'array', validate: () => true},
+		'vector-cube': {type: 'object', validate: () => true}
 	}
 };
 
@@ -45,6 +50,20 @@ var spellcheckOptions = {
 
 // Init JSON Schema validator
 var jsv = new ajv(ajvOptions);
+jsv.addKeyword('parameters', {
+	dependencies: [
+		"type",
+		"format"
+	],
+	metaSchema: {
+		type: "object",
+		additionalProperties: {
+			type: "object"
+		}
+	},
+	valid: true,
+	errors: true
+});
 
 // Read custom dictionary for spell check
 var words = fs.readFileSync('.words').toString().split(/\r\n|\n|\r/);
@@ -112,36 +131,39 @@ describe.each(processes)("%s", (file, p) => {
 		expect(p.parameters).not.toBeNull();
 	});
 	
-	test.each(o2a(p.parameters))("Parameters > %s", (key, param) => {
-		expect(paramKeyRegExp.test(key)).toBe(true);
+	var params = o2a(p.parameters);
+	if (params.length > 0) {
+		test.each(params)("Parameters > %s", (key, param) => {
+			expect(paramKeyRegExp.test(key)).toBe(true);
 
-		// parameter description
-		expect(typeof param.description).toBe('string');
-		checkDescription(param.description, p);
+			// parameter description
+			expect(typeof param.description).toBe('string');
+			checkDescription(param.description, p);
 
-		// Parameter flags
-		expect(typeof param.required === 'undefined' || typeof param.required === 'boolean').toBeTruthy();
-		expect(typeof param.deprecated === 'undefined' || typeof param.deprecated === 'boolean').toBeTruthy();
+			// Parameter flags
+			expect(typeof param.required === 'undefined' || typeof param.required === 'boolean').toBeTruthy();
+			expect(typeof param.deprecated === 'undefined' || typeof param.deprecated === 'boolean').toBeTruthy();
 
-		// Parameter media type
-		expect(typeof param.media_type === 'undefined' || typeof param.media_type === 'string').toBeTruthy();
+			// Parameter media type
+			expect(typeof param.media_type === 'undefined' || typeof param.media_type === 'string').toBeTruthy();
 
-		// Parameter schema
-		expect(typeof param.schema).toBe('object');
-		expect(param.schema).not.toBeNull();
-		checkJsonSchema(param.schema);
+			// Parameter schema
+			expect(typeof param.schema).toBe('object');
+			expect(param.schema).not.toBeNull();
+			checkJsonSchema(param.schema);
 
-		// Parameters that are not required should define a default value - just a warning for now
-		// ToDo: Doesn't work for oneOf/allOf/...
-		if(param.required !== true && typeof param.schema.default === 'undefined' && !anyOfRequired.includes(p.id)) {
-			console.warn(p.id + ": Optional parameter '" + key + "' should define a default value.");
-		}
+			// Parameters that are not required should define a default value - just a warning for now
+			// ToDo: Doesn't work for oneOf/allOf/...
+			if(param.required !== true && typeof param.schema.default === 'undefined' && !anyOfRequired.includes(p.id)) {
+				console.warn(p.id + ": Optional parameter '" + key + "' should define a default value.");
+			}
 
-		// Checking that callbacks define their parameters
-		if (typeof param.schema === 'object' && param.schema.format === 'callback') {
-			expect(param.schema.additionalProperties || (typeof param.schema.properties === 'object' && Object.keys(param.schema.properties).length)).toBeTruthy();
-		}
-	});
+			// Checking that callbacks define their parameters
+			if (typeof param.schema === 'object' && param.schema.format === 'callback') {
+				expect(typeof param.schema.parameters === 'object' && Object.keys(param.schema.parameters).length).toBeTruthy();
+			}
+		});
+	}
 
 	test("Parameter Order", () => {
 		let paramKeys = Object.keys(p.parameters);
@@ -181,29 +203,32 @@ describe.each(processes)("%s", (file, p) => {
 		expect(typeof p.exceptions === 'undefined' || (typeof p.exceptions === 'object' && p.exceptions !== 'null')).toBeTruthy();
 	});
 
-	test.each(o2a(p.exceptions))("Exceptions > %s", (key, e) => {
-		expect(exceptionNameRegExp.test(key)).toBe(true);
+	var exceptions = o2a(p.exceptions);
+	if (exceptions.length > 0) {
+		test.each(exceptions)("Exceptions > %s", (key, e) => {
+			expect(exceptionNameRegExp.test(key)).toBe(true);
 
-		// exception message
-		expect(typeof e.message).toBe('string');
-		checkSpelling(e.message, p);
+			// exception message
+			expect(typeof e.message).toBe('string');
+			checkSpelling(e.message, p);
 
-		// exception description
-		expect(typeof e.description === 'undefined' || typeof e.description === 'boolean').toBeTruthy();
-		checkDescription(e.description, p);
+			// exception description
+			expect(typeof e.description === 'undefined' || typeof e.description === 'boolean').toBeTruthy();
+			checkDescription(e.description, p);
 
-		// exception http code
-		if (typeof e.http !== 'undefined') {
-			expect(e.http).toBeGreaterThanOrEqual(100);
-			expect(e.http).toBeLessThan(600);
-		}
-	});
+			// exception http code
+			if (typeof e.http !== 'undefined') {
+				expect(e.http).toBeGreaterThanOrEqual(100);
+				expect(e.http).toBeLessThan(600);
+			}
+		});
+	}
 
 	test("Examples", () => {
 		expect(typeof p.examples === 'undefined' || Array.isArray(p.examples)).toBeTruthy();
 	});
 
-	if (Array.isArray(p.examples)) {
+	if (Array.isArray(p.examples) && p.examples.length > 0) {
 		test.each(p.examples)("Examples > %#", (example) => {
 			let paramKeys = Object.keys(p.parameters);
 

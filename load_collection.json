@@ -12,6 +12,7 @@
             "description": "The collection id.",
             "schema": {
                 "type": "string",
+                "format": "collection-id",
                 "pattern": "^[A-Za-z0-9_\\-\\.~\/]+$"
             },
             "required": true
@@ -23,10 +24,11 @@
                     {
                         "type": "object",
                         "format": "callback",
-                        "properties": {
+                        "parameters": {
                             "id": {
                                 "description": "The collection id.",
                                 "type": "string",
+                                "format": "collection-id",
                                 "pattern": "^[A-Za-z0-9_\\-\\.~\/]+$"
                             }
                         }

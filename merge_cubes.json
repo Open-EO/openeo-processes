@@ -5,7 +5,6 @@
     "categories": [
         "cubes"
     ],
-    "experimental": true,
     "parameter_order": ["cube1", "cube2", "overlap_resolver"],
     "parameters": {
         "cube1": {
@@ -31,7 +30,7 @@
                     {
                         "type": "object",
                         "format": "callback",
-                        "properties": {
+                        "parameters": {
                             "overlap": {
                                 "description": "An array with elements of any type.",
                                 "type": "array",
