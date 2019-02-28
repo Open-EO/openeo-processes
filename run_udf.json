@@ -6,7 +6,7 @@
         "import",
         "udf"
     ],
-    "parameter_order": ["data", "udf", "runtime", "version", "options"],
+    "parameter_order": ["data", "udf", "runtime", "version", "context"],
     "parameters": {
         "data": {
             "description": "The data to be passed to the UDF as array.",
