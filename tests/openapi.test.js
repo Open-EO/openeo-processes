@@ -33,6 +33,7 @@ var ajvOptions = {
 		'process-graph-variables': {type: 'array', validate: () => true},
 		'proj-definition': {type: 'string', validate: () => true},
 		'raster-cube': {type: 'object', validate: () => true},
+		'temporal-interval': {type: 'array', validate: () => true},
 		'temporal-intervals': {type: 'array', validate: () => true},
 		'vector-cube': {type: 'object', validate: () => true}
 	}
