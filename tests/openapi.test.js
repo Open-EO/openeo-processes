@@ -20,6 +20,7 @@ var ajvOptions = {
 	format: 'full',
 	formats: {
 		// ToDo: Add validators
+		'band-name': {type: 'string', validate: () => true},
 		'bounding-box': {type: 'object', validate: () => true},
 		'callback': {type: 'object', validate: () => true},
 		'collection-id': {type: 'string', validate: () => true},
