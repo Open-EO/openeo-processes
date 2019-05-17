@@ -6,22 +6,11 @@
         },
         "result": false
     },
-    "filtertemporal1": {
-        "process_id": "filter_temporal",
-        "arguments": {
-            "data": {
-                "from_node": "getcollection1"
-            },
-            "from": "2017-05-01",
-            "to": "2017-10-01"
-        },
-        "result": false
-    },
     "filterbbox1": {
         "process_id": "filter_bbox",
         "arguments": {
             "data": {
-                "from_node": "filtertemporal1"
+                "from_node": "getcollection1"
             },
             "west": 5.143297433853149,
             "east": 5.159090280532837,
@@ -86,12 +75,32 @@
                         },
                         "result": false
                     },
+                    "arrayelement3": {
+                        "process_id": "array_element",
+                        "arguments": {
+                            "data": {
+                                "from_argument": "data"
+                            },
+                            "index": 3
+                        },
+                        "result": false
+                    },
+                    "arrayelement4": {
+                        "process_id": "array_element",
+                        "arguments": {
+                            "data": {
+                                "from_argument": "data"
+                            },
+                            "index": 2
+                        },
+                        "result": false
+                    },
                     "product2": {
                         "process_id": "product",
                         "arguments": {
                             "data": [
                                 {
-                                    "from_node": "arrayelement2"
+                                    "from_node": "arrayelement4"
                                 },
                                 6.0
                             ]
@@ -103,7 +112,7 @@
                         "arguments": {
                             "data": [
                                 {
-                                    "from_node": "arrayelement1"
+                                    "from_node": "arrayelement3"
                                 },
                                 {
                                     "from_node": "product2"
@@ -112,7 +121,7 @@
                         },
                         "result": false
                     },
-                    "arrayelement3": {
+                    "arrayelement5": {
                         "process_id": "array_element",
                         "arguments": {
                             "data": {
@@ -127,7 +136,7 @@
                         "arguments": {
                             "data": [
                                 {
-                                    "from_node": "arrayelement3"
+                                    "from_node": "arrayelement5"
                                 },
                                 7.5
                             ]
@@ -176,6 +185,17 @@
                     }
                 }
             }
+        },
+        "result": false
+    },
+    "filtertemporal1": {
+        "process_id": "filter_temporal",
+        "arguments": {
+            "data": {
+                "from_node": "reduce1"
+            },
+            "from": "2017-05-01",
+            "to": "2017-10-01"
         },
         "result": false
     }
