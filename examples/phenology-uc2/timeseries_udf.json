@@ -199,11 +199,99 @@
         },
         "result": false
     },
+    "getcollection2": {
+        "process_id": "get_collection",
+        "arguments": {
+            "name": "S2_FAPAR_SCENECLASSIFICATION_V102_PYRAMID"
+        },
+        "result": false
+    },
+    "filterbbox2": {
+        "process_id": "filter_bbox",
+        "arguments": {
+            "data": {
+                "from_node": "getcollection2"
+            },
+            "west": 5.143297433853149,
+            "east": 5.159090280532837,
+            "north": 51.18450357774117,
+            "south": 51.18163191723127,
+            "crs": "EPSG:4326"
+        },
+        "result": false
+    },
+    "reduce2": {
+        "process_id": "reduce",
+        "arguments": {
+            "data": {
+                "from_node": "filterbbox2"
+            },
+            "dimension": "spectral_bands",
+            "reducer": {
+                "callback": {
+                    "arrayelement1": {
+                        "process_id": "array_element",
+                        "arguments": {
+                            "data": {
+                                "from_argument": "data"
+                            },
+                            "index": 0
+                        },
+                        "result": false
+                    },
+                    "eq1": {
+                        "process_id": "eq",
+                        "arguments": {
+                            "x": {
+                                "from_node": "arrayelement1"
+                            },
+                            "y": 4
+                        },
+                        "result": false
+                    },
+                    "not1": {
+                        "process_id": "not",
+                        "arguments": {
+                            "expression": {
+                                "from_node": "eq1"
+                            }
+                        },
+                        "result": true
+                    }
+                }
+            }
+        },
+        "result": false
+    },
+    "filtertemporal2": {
+        "process_id": "filter_temporal",
+        "arguments": {
+            "data": {
+                "from_node": "reduce2"
+            },
+            "from": "2017-05-01",
+            "to": "2017-10-01"
+        },
+        "result": false
+    },
+    "mask1": {
+        "process_id": "mask",
+        "arguments": {
+            "data": {
+                "from_node": "filtertemporal1"
+            },
+            "mask": {
+                "from_node": "filtertemporal2"
+            },
+            "replacement": NaN
+        },
+        "result": false
+    },
     "applydimension1": {
         "process_id": "apply_dimension",
         "arguments": {
             "data": {
-                "from_node": "filtertemporal1"
+                "from_node": "mask1"
             },
             "dimension": "temporal",
             "process": {
