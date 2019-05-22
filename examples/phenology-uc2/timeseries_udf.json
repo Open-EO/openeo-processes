@@ -39,6 +39,18 @@
                         },
                         "result": false
                     },
+                    "product1": {
+                        "process_id": "product",
+                        "arguments": {
+                            "data": [
+                                {
+                                    "from_node": "arrayelement1"
+                                },
+                                0.0001
+                            ]
+                        },
+                        "result": false
+                    },
                     "arrayelement2": {
                         "process_id": "array_element",
                         "arguments": {
@@ -49,21 +61,33 @@
                         },
                         "result": false
                     },
+                    "product2": {
+                        "process_id": "product",
+                        "arguments": {
+                            "data": [
+                                {
+                                    "from_node": "arrayelement2"
+                                },
+                                0.0001
+                            ]
+                        },
+                        "result": false
+                    },
                     "subtract1": {
                         "process_id": "subtract",
                         "arguments": {
                             "data": [
                                 {
-                                    "from_node": "arrayelement1"
+                                    "from_node": "product1"
                                 },
                                 {
-                                    "from_node": "arrayelement2"
+                                    "from_node": "product2"
                                 }
                             ]
                         },
                         "result": false
                     },
-                    "product1": {
+                    "product3": {
                         "process_id": "product",
                         "arguments": {
                             "data": [
@@ -85,6 +109,18 @@
                         },
                         "result": false
                     },
+                    "product4": {
+                        "process_id": "product",
+                        "arguments": {
+                            "data": [
+                                {
+                                    "from_node": "arrayelement3"
+                                },
+                                0.0001
+                            ]
+                        },
+                        "result": false
+                    },
                     "arrayelement4": {
                         "process_id": "array_element",
                         "arguments": {
@@ -95,14 +131,14 @@
                         },
                         "result": false
                     },
-                    "product2": {
+                    "product5": {
                         "process_id": "product",
                         "arguments": {
                             "data": [
                                 {
                                     "from_node": "arrayelement4"
                                 },
-                                6.0
+                                0.0006000000000000001
                             ]
                         },
                         "result": false
@@ -112,10 +148,10 @@
                         "arguments": {
                             "data": [
                                 {
-                                    "from_node": "arrayelement3"
+                                    "from_node": "product4"
                                 },
                                 {
-                                    "from_node": "product2"
+                                    "from_node": "product5"
                                 }
                             ]
                         },
@@ -131,14 +167,14 @@
                         },
                         "result": false
                     },
-                    "product3": {
+                    "product6": {
                         "process_id": "product",
                         "arguments": {
                             "data": [
                                 {
                                     "from_node": "arrayelement5"
                                 },
-                                7.5
+                                0.00075
                             ]
                         },
                         "result": false
@@ -151,7 +187,7 @@
                                     "from_node": "sum1"
                                 },
                                 {
-                                    "from_node": "product3"
+                                    "from_node": "product6"
                                 }
                             ]
                         },
@@ -174,7 +210,7 @@
                         "arguments": {
                             "data": [
                                 {
-                                    "from_node": "product1"
+                                    "from_node": "product3"
                                 },
                                 {
                                     "from_node": "sum2"
