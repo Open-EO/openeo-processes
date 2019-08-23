@@ -22,7 +22,7 @@ def rct_savitzky_golay(udf_data):
         filled=df.as_matrix().reshape(timeseries_array.shape)
 
         #now apply savitzky golay on filled data
-        smoothed_array = savgol_filter(filled, 5, 1,axis=0)
+        smoothed_array = savgol_filter(filled, 5, 2,axis=0)
         #print(smoothed_array)
         tile.set_data(smoothed_array)
 
