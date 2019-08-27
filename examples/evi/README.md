@@ -16,7 +16,7 @@ This process graph assumes the dataset is called `Sentinel-2`. The temporal exte
 {
   "dc": {
     "process_id": "load_collection",
-    "process_description": "Loading the data; The order of the specified bands is important for the following reduce operation.",
+    "description": "Loading the data; The order of the specified bands is important for the following reduce operation.",
     "arguments": {
       "id": "Sentinel-2",
       "spatial_extent": {
@@ -31,7 +31,7 @@ This process graph assumes the dataset is called `Sentinel-2`. The temporal exte
   },
   "evi": {
     "process_id": "reduce",
-    "process_description": "Compute the EVI. Formula: 2.5 * (NIR - RED) / (1 + NIR + 6*RED + -7.5*BLUE)",
+    "description": "Compute the EVI. Formula: 2.5 * (NIR - RED) / (1 + NIR + 6*RED + -7.5*BLUE)",
     "arguments": {
       "data": {"from_node": "dc"},
       "dimension": "spectral",
@@ -101,7 +101,7 @@ This process graph assumes the dataset is called `Sentinel-2`. The temporal exte
   },
   "mintime": {
     "process_id": "reduce",
-    "process_description": "Compute a minimum time composite by reducing the temporal dimension",
+    "description": "Compute a minimum time composite by reducing the temporal dimension",
     "arguments": {
       "data": {"from_node": "evi"},
       "dimension": "temporal",
