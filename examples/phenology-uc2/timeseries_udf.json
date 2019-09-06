@@ -16,7 +16,7 @@
         "result": false,
         "process_id": "mask",
         "arguments": {
-            "replacement": NaN,
+            "replacement": null,
             "mask": {
                 "from_node": "filtertemporal2"
             },
