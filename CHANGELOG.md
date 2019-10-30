@@ -10,7 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added examples.
 
 ### Changed
-- `debug`: 
+- `clip`: Works on a single value instead on arrays (replaced parameter `data` with `x`). (#75)[https://github.com/Open-EO/openeo-processes/issues/75]
+- `debug`: Refers to logging instead of WebSockets.
 
 ### Deprecated
 - `filter_bbox`, `load_collection`, `resample_spatial`: PROJ definitions are deprecated in favor of EPSG codes, WKT2 and PROJJSON. (#58)[https://github.com/Open-EO/openeo-processes/issues/58]
