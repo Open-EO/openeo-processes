@@ -8,7 +8,6 @@ unary
 STAC
 band1
 band2
-proj4
 Resample
 resample
 Resamples
