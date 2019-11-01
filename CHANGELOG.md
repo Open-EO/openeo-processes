@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 - `output`: Use `debug` (see above) instead.
+- `find_collections`: Use `load_collection` and manual data discovery through the clients. [#52](https://github.com/Open-EO/openeo-api/issues/52)
 
 ### Fixed
 - `ndvi`: Default value of parameter `name` is now `ndvi` instead of `normalized_difference`.
