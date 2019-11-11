@@ -10,9 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added examples.
 
 ### Changed
+- Schema format `callback` has been renamed to `process-graph`.
 - `clip`: Works on a single value instead on arrays (replaced parameter `data` with `x`). (#75)[https://github.com/Open-EO/openeo-processes/issues/75]
 - `debug`: Replaced with a completely new definition. (#82)[https://github.com/Open-EO/openeo-processes/issues/71], (#100)[https://github.com/Open-EO/openeo-api/issues/100], (#214)[https://github.com/Open-EO/openeo-api/issues/214]
-
 
 ### Deprecated
 - `filter_bbox`, `load_collection`, `resample_spatial`: PROJ definitions are deprecated in favor of EPSG codes, WKT2 and PROJJSON. (#58)[https://github.com/Open-EO/openeo-processes/issues/58]

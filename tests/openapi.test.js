@@ -22,7 +22,6 @@ var ajvOptions = {
 		// ToDo: Add validators
 		'band-name': {type: 'string', validate: () => true},
 		'bounding-box': {type: 'object', validate: () => true},
-		'callback': {type: 'object', validate: () => true},
 		'collection-id': {type: 'string', validate: () => true},
 		'epsg-code': {type: 'integer', validate: () => true},
 		'geojson': {type: 'object', validate: () => true},
@@ -30,6 +29,7 @@ var ajvOptions = {
 		'kernel': {type: 'array', validate: () => true},
 		'output-format': {type: 'string', validate: () => true},
 		'output-format-options': {type: 'array', validate: () => true},
+		'process-graph': {type: 'object', validate: () => true},
 		'process-graph-id': {type: 'string', validate: () => true},
 		'process-graph-variables': {type: 'array', validate: () => true},
 		'proj-definition': {type: 'string', validate: () => true},
@@ -162,8 +162,8 @@ describe.each(processes)("%s", (file, p) => {
 				console.warn(p.id + ": Optional parameter '" + key + "' should define a default value.");
 			}
 
-			// Checking that callbacks define their parameters
-			if (typeof param.schema === 'object' && param.schema.format === 'callback') {
+			// Checking that callbacks (process-graphs) define their parameters
+			if (typeof param.schema === 'object' && param.schema.format === 'process-graph') {
 				expect(typeof param.schema.parameters === 'object' && Object.keys(param.schema.parameters).length).toBeTruthy();
 			}
 		});
