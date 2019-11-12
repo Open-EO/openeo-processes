@@ -15,31 +15,37 @@ var anyOfRequired = [
   "quantiles"
 ];
 
+var subtypes = {
+	// Inherited from JSON Schema format
+	'date': {type: 'string'},
+	'date-time': {type: 'string'},
+	'time': {type: 'string'},
+	'uri': {type: 'string'},
+	// Custom subtypes
+	'band-name': {type: 'string'},
+	'bounding-box': {type: 'object'},
+	'collection-id': {type: 'string'},
+	'epsg-code': {type: 'integer'},
+	'geojson': {type: 'object'},
+	'job-id': {type: 'string'},
+	'kernel': {type: 'array'},
+	'output-format': {type: 'string'},
+	'output-format-options': {type: 'object'},
+	'process-graph': {type: 'object'},
+	'process-graph-id': {type: 'string'},
+	'process-graph-variables': {type: 'object'},
+	'proj-definition': {type: 'string'},
+	'projjson-definition': {type: 'object'},
+	'raster-cube': {type: 'object'},
+	'temporal-interval': {type: 'array'},
+	'temporal-intervals': {type: 'array'},
+	'vector-cube': {type: 'object'},
+	'wkt2-definition': {type: 'string'}
+}
+
 var ajvOptions = {
 	schemaId: 'auto',
-	format: 'full',
-	formats: {
-		// ToDo: Add validators
-		'band-name': {type: 'string', validate: () => true},
-		'bounding-box': {type: 'object', validate: () => true},
-		'collection-id': {type: 'string', validate: () => true},
-		'epsg-code': {type: 'integer', validate: () => true},
-		'geojson': {type: 'object', validate: () => true},
-		'job-id': {type: 'string', validate: () => true},
-		'kernel': {type: 'array', validate: () => true},
-		'output-format': {type: 'string', validate: () => true},
-		'output-format-options': {type: 'array', validate: () => true},
-		'process-graph': {type: 'object', validate: () => true},
-		'process-graph-id': {type: 'string', validate: () => true},
-		'process-graph-variables': {type: 'array', validate: () => true},
-		'proj-definition': {type: 'string', validate: () => true},
-		'projjson-definition': {type: 'string', validate: () => true},
-		'raster-cube': {type: 'object', validate: () => true},
-		'temporal-interval': {type: 'array', validate: () => true},
-		'temporal-intervals': {type: 'array', validate: () => true},
-		'vector-cube': {type: 'object', validate: () => true},
-		'wkt2-definition': {type: 'string', validate: () => true}
-	}
+	format: 'full'
 };
 
 var spellcheckOptions = {
@@ -54,10 +60,10 @@ var spellcheckOptions = {
 
 // Init JSON Schema validator
 var jsv = new ajv(ajvOptions);
-jsv.addKeyword('parameters', {
+jsv.addKeyword("parameters", {
 	dependencies: [
 		"type",
-		"format"
+		"subtype"
 	],
 	metaSchema: {
 		type: "object",
@@ -65,8 +71,25 @@ jsv.addKeyword('parameters', {
 			type: "object"
 		}
 	},
-	valid: true,
-	errors: true
+	valid: true
+});
+jsv.addKeyword("subtype", {
+	dependencies: [
+		"type"
+	],
+	metaSchema: {
+		type: "string",
+		enum: Object.keys(subtypes)
+	},
+// Doesn't work yet, see https://github.com/epoberezkin/ajv/issues/1049
+/*	compile: function (subtype, schema) {
+		if (schema.type != subtypes[subtype].type) {
+			return false;
+//			throw "Subtype '"+subtype+"' not allowed for type '"+schema.type+"'.";
+		}
+		return true;
+	}, */
+	errors: false
 });
 
 // Read custom dictionary for spell check
@@ -163,7 +186,7 @@ describe.each(processes)("%s", (file, p) => {
 			}
 
 			// Checking that callbacks (process-graphs) define their parameters
-			if (typeof param.schema === 'object' && param.schema.format === 'process-graph') {
+			if (typeof param.schema === 'object' && param.schema.subtype === 'process-graph') {
 				expect(typeof param.schema.parameters === 'object' && Object.keys(param.schema.parameters).length).toBeTruthy();
 			}
 		});
@@ -367,20 +390,25 @@ function checkJsonSchema(schema) {
 	let result = jsv.compile(schema);
 	expect(result.errors).toBeNull();
 
-	checkSchemaSpelling(schema);
+	checkSchemaRecursive(schema);
 }
 
-function checkSchemaSpelling(schema) {
+function checkSchemaRecursive(schema) {
 	for(var i in schema) {
-		var obj = schema[i];
-		if (typeof obj === 'object' && obj !== null) {
-			checkSchemaSpelling(obj);
+		var val = schema[i];
+		if (typeof val === 'object' && val !== null) {
+			checkSchemaRecursive(val);
 		}
 
 		switch(i) {
 			case 'title':
 			case 'description':
-				checkSpelling(obj);
+				checkSpelling(val);
+				break;
+			case 'format':
+				if (schema.subtype !== val) {
+					throw "format '"+val+"' has no corresponding subtype.";
+				}
 				break;
 		}
 	}

@@ -94,7 +94,7 @@ Only a single GeoJSON polygon is specified, which fully covers the spatial exten
       "data": {
         "from_node": "aggreg1"
       },
-      "format": "JSON"
+      "subtype": "JSON"
     },
     "result": true
   }

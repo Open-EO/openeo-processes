@@ -122,7 +122,7 @@ This process graph assumes the dataset is called `Sentinel-2`. The temporal exte
     "process_id": "save_result",
     "arguments": {
       "data": {"from_node": "mintime"},
-      "format": "GTiff"
+      "subtype": "GTiff"
     },
     "result": true
   }
