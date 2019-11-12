@@ -5,7 +5,10 @@
     "categories": [
         "filter"
     ],
-    "parameter_order": ["data", "extent"],
+    "parameter_order": [
+        "data",
+        "extent"
+    ],
     "parameters": {
         "data": {
             "description": "A data cube.",
@@ -21,7 +24,12 @@
             "schema": {
                 "type": "object",
                 "subtype": "bounding-box",
-                "required": ["west", "south", "east", "north"],
+                "required": [
+                    "west",
+                    "south",
+                    "east",
+                    "north"
+                ],
                 "properties": {
                     "west": {
                         "description": "West (lower left corner, coordinate axis 1).",
@@ -41,12 +49,18 @@
                     },
                     "base": {
                         "description": "Base (optional, lower left corner, coordinate axis 3).",
-                        "type": ["number", "null"],
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "default": null
                     },
                     "height": {
                         "description": "Height (optional, upper right corner, coordinate axis 3).",
-                        "type": ["number", "null"],
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "default": null
                     },
                     "crs": {
@@ -57,7 +71,9 @@
                                     "title": "EPSG Code",
                                     "type": "integer",
                                     "subtype": "epsg-code",
-                                    "examples": [7099]
+                                    "examples": [
+                                        7099
+                                    ]
                                 },
                                 {
                                     "title": "WKT2",
