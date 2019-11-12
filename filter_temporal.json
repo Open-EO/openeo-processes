@@ -67,9 +67,9 @@
                 "type": [
                     "string",
                     "null"
-                ],
-                "default": null
-            }
+                ]
+            },
+            "default": null
         }
     },
     "returns": {

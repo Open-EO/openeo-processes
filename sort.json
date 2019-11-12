@@ -47,9 +47,9 @@
         "asc": {
             "description": "The default sort order is ascending, with smallest values first. To sort in reverse (descending) order, set this parameter to `false`.",
             "schema": {
-                "type": "boolean",
-                "default": true
-            }
+                "type": "boolean"
+            },
+            "default": true
         },
         "nodata": {
             "description": "Controls the handling of no-data values (`null`). By default they are removed. If `true`, missing values in the data are put last; if `false`, they are put first.",
@@ -57,9 +57,9 @@
                 "type": [
                     "boolean",
                     "null"
-                ],
-                "default": null
-            }
+                ]
+            },
+            "default": null
         }
     },
     "returns": {

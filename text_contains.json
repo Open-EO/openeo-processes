@@ -29,9 +29,9 @@
         "case_sensitive": {
             "description": "Case sensitive comparison can be disabled by setting this parameter to `false`.",
             "schema": {
-                "type": "boolean",
-                "default": true
-            }
+                "type": "boolean"
+            },
+            "default": true
         }
     },
     "returns": {

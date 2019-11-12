@@ -14,91 +14,85 @@
     "parameters": {
         "x": {
             "description": "",
-            "schema": {
-                "anyOf": [
-                    {
-                        "type": "number"
-                    },
-                    {
-                        "type": "null"
-                    },
-                    {
-                        "type": "string",
-                        "format": "date-time",
-                        "subtype": "date-time"
-                    },
-                    {
-                        "type": "string",
-                        "format": "date",
-                        "subtype": "date"
-                    },
-                    {
-                        "type": "string",
-                        "format": "time",
-                        "subtype": "time"
-                    }
-                ]
-            },
+            "schema": [
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string",
+                    "format": "date-time",
+                    "subtype": "date-time"
+                },
+                {
+                    "type": "string",
+                    "format": "date",
+                    "subtype": "date"
+                },
+                {
+                    "type": "string",
+                    "format": "time",
+                    "subtype": "time"
+                }
+            ],
             "required": true
         },
         "min": {
             "description": "Lower boundary (inclusive) to check against.",
-            "schema": {
-                "anyOf": [
-                    {
-                        "type": "number"
-                    },
-                    {
-                        "type": "string",
-                        "format": "date-time",
-                        "subtype": "date-time"
-                    },
-                    {
-                        "type": "string",
-                        "format": "date",
-                        "subtype": "date"
-                    },
-                    {
-                        "type": "string",
-                        "format": "time",
-                        "subtype": "time"
-                    }
-                ]
-            },
+            "schema": [
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "string",
+                    "format": "date-time",
+                    "subtype": "date-time"
+                },
+                {
+                    "type": "string",
+                    "format": "date",
+                    "subtype": "date"
+                },
+                {
+                    "type": "string",
+                    "format": "time",
+                    "subtype": "time"
+                }
+            ],
             "required": true
         },
         "max": {
             "description": "Upper boundary (inclusive) to check against.",
-            "schema": {
-                "anyOf": [
-                    {
-                        "type": "number"
-                    },
-                    {
-                        "type": "string",
-                        "format": "date-time",
-                        "subtype": "date-time"
-                    },
-                    {
-                        "type": "string",
-                        "format": "date",
-                        "subtype": "date"
-                    },
-                    {
-                        "type": "string",
-                        "format": "time",
-                        "subtype": "time"
-                    }
-                ]
-            },
+            "schema": [
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "string",
+                    "format": "date-time",
+                    "subtype": "date-time"
+                },
+                {
+                    "type": "string",
+                    "format": "date",
+                    "subtype": "date"
+                },
+                {
+                    "type": "string",
+                    "format": "time",
+                    "subtype": "time"
+                }
+            ],
             "required": true
         },
         "exclude_max": {
             "description": "Exclude the upper boundary `max` if set to `true`. Defaults to `false`.",
             "schema": {
-                "type": "boolean",
-                "default": false
-            }
+                "type": "boolean"
+            },
+            "default": false
         }
     },
     "returns": {

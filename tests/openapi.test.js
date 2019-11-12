@@ -11,7 +11,6 @@ var exceptionNameRegExp = /^[A-Za-z0-9_]+$/;
 var files = glob.sync("../*.json", {realpath: true});
 
 var anyOfRequired = [
-  "filter_bands",
   "quantiles"
 ];
 
@@ -180,8 +179,7 @@ describe.each(processes)("%s", (file, p) => {
 			checkJsonSchema(param.schema);
 
 			// Parameters that are not required should define a default value - just a warning for now
-			// ToDo: Doesn't work for oneOf/allOf/...
-			if(param.required !== true && typeof param.schema.default === 'undefined' && !anyOfRequired.includes(p.id)) {
+			if(param.required !== true && typeof param.default === 'undefined' && !anyOfRequired.includes(p.id)) {
 				console.warn(p.id + ": Optional parameter '" + key + "' should define a default value.");
 			}
 
@@ -381,13 +379,21 @@ function checkProcessGraph(pg) {
 	// ToDo: Validate process graph
 }
 
-function checkJsonSchema(schema) {
+function prepareSchema(schema) {
 	if (typeof schema["$schema"] === 'undefined') {
 		// Set applicable JSON SChema draft version if not already set
 		schema["$schema"] = "http://json-schema.org/draft-07/schema#";
 	}
+	if (Array.isArray(schema)) {
+		schema = {
+			anyOf: schema
+		};
+	}
+	return schema;
+}
 
-	let result = jsv.compile(schema);
+function checkJsonSchema(schema) {
+	let result = jsv.compile(prepareSchema(schema));
 	expect(result.errors).toBeNull();
 
 	checkSchemaRecursive(schema);
@@ -415,7 +421,7 @@ function checkSchemaRecursive(schema) {
 }
 
 function checkJsonSchemaValue(schema, value) {
-	jsv.validate(schema, value);
+	jsv.validate(prepareSchema(schema), value);
 	expect(jsv.errors).toBeNull();
 }
 

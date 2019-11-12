@@ -28,7 +28,8 @@
                     "type": "string",
                     "subtype": "band-name"
                 }
-            }
+            },
+            "default": []
         },
         "common_names": {
             "description": "A list of common band names.\n\nThe order of the specified array defines the order of the bands in the data cube.",
@@ -37,7 +38,8 @@
                 "items": {
                     "type": "string"
                 }
-            }
+            },
+            "default": []
         },
         "wavelengths": {
             "description": "A list of sub-lists with each sub-list consisting of two elements. The first element is the minimum wavelength and the second element is the maximum wavelength. Wavelengths are specified in micrometres (μm).\n\nThe order of the specified array defines the order of the bands in the data cube.",
@@ -63,7 +65,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "default": []
         }
     },
     "returns": {

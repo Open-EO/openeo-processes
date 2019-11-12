@@ -13,24 +13,22 @@
     "parameters": {
         "data": {
             "description": "A data cube.",
-            "schema": {
-                "anyOf": [
-                    {
-                        "type": "object",
-                        "subtype": "raster-cube"
-                    },
-                    {
-                        "type": "object",
-                        "subtype": "vector-cube"
-                    },
-                    {
-                        "description": "A collection id.",
-                        "type": "string",
-                        "subtype": "collection-id",
-                        "pattern": "^[A-Za-z0-9_\\-\\.~/]+$"
-                    }
-                ]
-            },
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "raster-cube"
+                },
+                {
+                    "type": "object",
+                    "subtype": "vector-cube"
+                },
+                {
+                    "description": "A collection id.",
+                    "type": "string",
+                    "subtype": "collection-id",
+                    "pattern": "^[A-Za-z0-9_\\-\\.~/]+$"
+                }
+            ],
             "required": true
         },
         "name": {
@@ -46,9 +44,9 @@
                 "type": [
                     "string",
                     "null"
-                ],
-                "default": null
-            }
+                ]
+            },
+            "default": null
         }
     },
     "returns": {

@@ -24,9 +24,9 @@
         "ignore_nodata": {
             "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is returned if the first value is such a value.",
             "schema": {
-                "type": "boolean",
-                "default": true
-            }
+                "type": "boolean"
+            },
+            "default": true
         }
     },
     "returns": {

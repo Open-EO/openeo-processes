@@ -14,18 +14,16 @@
     "parameters": {
         "data": {
             "description": "The data to save.",
-            "schema": {
-                "anyOf": [
-                    {
-                        "type": "object",
-                        "subtype": "raster-cube"
-                    },
-                    {
-                        "type": "object",
-                        "subtype": "vector-cube"
-                    }
-                ]
-            },
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "raster-cube"
+                },
+                {
+                    "type": "object",
+                    "subtype": "vector-cube"
+                }
+            ],
             "required": true
         },
         "subtype": {
@@ -40,9 +38,9 @@
             "description": "The file format options to be used to create the file(s). Must correspond to the options that the server reports as supported options for the chosen `format`. The option names and valid values usually correspond to the GDAL/OGR format options.",
             "schema": {
                 "type": "object",
-                "subtype": "output-format-options",
-                "default": {}
-            }
+                "subtype": "output-format-options"
+            },
+            "default": {}
         }
     },
     "returns": {

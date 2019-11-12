@@ -27,9 +27,9 @@
         "ignore_nodata": {
             "description": "See ``multiply()`` for more information.",
             "schema": {
-                "type": "boolean",
-                "default": true
-            }
+                "type": "boolean"
+            },
+            "default": true
         }
     },
     "returns": {

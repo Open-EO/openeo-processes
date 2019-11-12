@@ -31,9 +31,9 @@
         "return_nodata": {
             "description": "By default this process throws an `IndexOutOfBounds` exception if the index is invalid. If you want to return `null` instead, set this flag to `true`.",
             "schema": {
-                "type": "boolean",
-                "default": false
-            }
+                "type": "boolean"
+            },
+            "default": false
         }
     },
     "returns": {

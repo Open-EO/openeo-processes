@@ -33,9 +33,9 @@
                     "number",
                     "boolean",
                     "null"
-                ],
-                "default": ""
-            }
+                ]
+            },
+            "default": ""
         }
     },
     "returns": {

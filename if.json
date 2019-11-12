@@ -26,16 +26,16 @@
         "accept": {
             "description": "A value that is returned if the boolean expression is `true`. Defaults to `true`.",
             "schema": {
-                "description": "Any data type is allowed.",
-                "default": true
-            }
+                "description": "Any data type is allowed."
+            },
+            "default": true
         },
         "reject": {
             "description": "A value that is returned if the boolean expression is `false`. Defaults to `false`.",
             "schema": {
-                "description": "Any data type is allowed.",
-                "default": false
-            }
+                "description": "Any data type is allowed."
+            },
+            "default": false
         }
     },
     "returns": {

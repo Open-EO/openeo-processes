@@ -40,16 +40,16 @@
         "outputMin": {
             "description": "Minimum value of the desired output range.",
             "schema": {
-                "type": "number",
-                "default": 0
-            }
+                "type": "number"
+            },
+            "default": 0
         },
         "outputMax": {
             "description": "Maximum value of the desired output range.",
             "schema": {
-                "type": "number",
-                "default": 1
-            }
+                "type": "number"
+            },
+            "default": 1
         }
     },
     "returns": {

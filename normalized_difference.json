@@ -32,9 +32,9 @@
             "description": "Name of the newly created band with the computed values. Defaults to `normalized_difference`.",
             "schema": {
                 "type": "string",
-                "default": "normalized_difference",
                 "pattern": "^[A-Za-z0-9_]+$"
-            }
+            },
+            "default": "normalized_difference"
         }
     },
     "returns": {
