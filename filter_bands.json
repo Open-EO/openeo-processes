@@ -5,7 +5,12 @@
     "categories": [
         "filter"
     ],
-    "parameter_order": ["data", "bands", "common_names", "wavelengths"],
+    "parameter_order": [
+        "data",
+        "bands",
+        "common_names",
+        "wavelengths"
+    ],
     "parameters": {
         "data": {
             "description": "A data cube with bands.",
@@ -46,7 +51,16 @@
                         "type": "number"
                     },
                     "examples": [
-                        [[0.45, 0.5], [0.6, 0.7]]
+                        [
+                            [
+                                0.45,
+                                0.5
+                            ],
+                            [
+                                0.6,
+                                0.7
+                            ]
+                        ]
                     ]
                 }
             }
@@ -74,5 +88,4 @@
             "title": "List of common band names as specified by the STAC specification"
         }
     ]
-    
 }

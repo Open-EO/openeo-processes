@@ -6,7 +6,11 @@
         "texts",
         "comparison"
     ],
-    "parameter_order": ["data", "pattern", "case_sensitive"],
+    "parameter_order": [
+        "data",
+        "pattern",
+        "case_sensitive"
+    ],
     "parameters": {
         "data": {
             "description": "Text in which to find something in.",

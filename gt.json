@@ -5,7 +5,10 @@
     "categories": [
         "comparison"
     ],
-    "parameter_order": ["x", "y"],
+    "parameter_order": [
+        "x",
+        "y"
+    ],
     "parameters": {
         "x": {
             "description": "First operand.",

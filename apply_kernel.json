@@ -6,7 +6,11 @@
         "cubes",
         "math > image filter"
     ],
-    "parameter_order": ["data", "kernel", "factor"],
+    "parameter_order": [
+        "data",
+        "kernel",
+        "factor"
+    ],
     "parameters": {
         "data": {
             "description": "A data cube.",

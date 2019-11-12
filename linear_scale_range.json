@@ -5,7 +5,13 @@
     "categories": [
         "math"
     ],
-    "parameter_order": ["x", "inputMin", "inputMax", "outputMin", "outputMax"],
+    "parameter_order": [
+        "x",
+        "inputMin",
+        "inputMax",
+        "outputMin",
+        "outputMax"
+    ],
     "parameters": {
         "x": {
             "description": "A number to transform.",

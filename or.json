@@ -6,7 +6,10 @@
         "logic",
         "reducer"
     ],
-    "parameter_order": ["expressions", "ignore_nodata"],
+    "parameter_order": [
+        "expressions",
+        "ignore_nodata"
+    ],
     "parameters": {
         "expressions": {
             "description": "A set of boolean values.",
@@ -41,51 +44,76 @@
     "examples": [
         {
             "arguments": {
-                "expressions": [false, null]
+                "expressions": [
+                    false,
+                    null
+                ]
             },
             "returns": false
         },
         {
             "arguments": {
-                "expressions": [true, null]
+                "expressions": [
+                    true,
+                    null
+                ]
             },
             "returns": true
         },
         {
             "arguments": {
-                "expressions": [false, null],
+                "expressions": [
+                    false,
+                    null
+                ],
                 "ignore_nodata": false
             },
             "returns": null
         },
         {
             "arguments": {
-                "expressions": [true, null],
+                "expressions": [
+                    true,
+                    null
+                ],
                 "ignore_nodata": false
             },
             "returns": true
         },
         {
             "arguments": {
-                "expressions": [true, false, true, false]
+                "expressions": [
+                    true,
+                    false,
+                    true,
+                    false
+                ]
             },
             "returns": true
         },
         {
             "arguments": {
-                "expressions": [true, false]
+                "expressions": [
+                    true,
+                    false
+                ]
             },
             "returns": true
         },
         {
             "arguments": {
-                "expressions": [false, false]
+                "expressions": [
+                    false,
+                    false
+                ]
             },
             "returns": false
         },
         {
             "arguments": {
-                "expressions": [true]
+                "expressions": [
+                    true
+                ]
             },
             "returns": true
         },

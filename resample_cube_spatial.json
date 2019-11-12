@@ -6,7 +6,11 @@
         "cubes",
         "aggregate & resample"
     ],
-    "parameter_order": ["data", "target", "method"],
+    "parameter_order": [
+        "data",
+        "target",
+        "method"
+    ],
     "parameters": {
         "data": {
             "description": "A data cube.",

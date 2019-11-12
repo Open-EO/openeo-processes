@@ -5,7 +5,10 @@
     "categories": [
         "filter"
     ],
-    "parameter_order": ["data", "polygons"],
+    "parameter_order": [
+        "data",
+        "polygons"
+    ],
     "parameters": {
         "data": {
             "description": "A data cube.",

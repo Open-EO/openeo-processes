@@ -6,7 +6,13 @@
         "import",
         "udf"
     ],
-    "parameter_order": ["data", "udf", "runtime", "version", "context"],
+    "parameter_order": [
+        "data",
+        "udf",
+        "runtime",
+        "version",
+        "context"
+    ],
     "parameters": {
         "data": {
             "description": "The data to be passed to the UDF as array or raster data cube.",

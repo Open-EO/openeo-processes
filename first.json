@@ -6,7 +6,10 @@
         "arrays",
         "reducer"
     ],
-    "parameter_order": ["data", "ignore_nodata"],
+    "parameter_order": [
+        "data",
+        "ignore_nodata"
+    ],
     "parameters": {
         "data": {
             "description": "An array with elements of any data type. An empty array resolves always with `null`.",
@@ -35,19 +38,32 @@
     "examples": [
         {
             "arguments": {
-                "data": [1,0,3,2]
+                "data": [
+                    1,
+                    0,
+                    3,
+                    2
+                ]
             },
             "returns": 1
         },
         {
             "arguments": {
-                "data": [null,"A","B"]
+                "data": [
+                    null,
+                    "A",
+                    "B"
+                ]
             },
             "returns": "A"
         },
         {
             "arguments": {
-                "data": [null,2,3],
+                "data": [
+                    null,
+                    2,
+                    3
+                ],
                 "ignore_nodata": false
             },
             "returns": null

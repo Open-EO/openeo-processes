@@ -5,7 +5,11 @@
     "categories": [
         "cubes"
     ],
-    "parameter_order": ["data", "name", "dimension"],
+    "parameter_order": [
+        "data",
+        "name",
+        "dimension"
+    ],
     "parameters": {
         "data": {
             "description": "A data cube.",
@@ -23,7 +27,7 @@
                         "description": "A collection id.",
                         "type": "string",
                         "subtype": "collection-id",
-                        "pattern": "^[A-Za-z0-9_\\-\\.~\/]+$"
+                        "pattern": "^[A-Za-z0-9_\\-\\.~/]+$"
                     }
                 ]
             },
@@ -39,7 +43,10 @@
         "dimension": {
             "description": "Optionally, a dimension to get the property for. `null` by default, which gets a property globally for the collection/data cube. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
             "schema": {
-                "type": ["string", "null"],
+                "type": [
+                    "string",
+                    "null"
+                ],
                 "default": null
             }
         }

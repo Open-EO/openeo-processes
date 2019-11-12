@@ -6,7 +6,10 @@
         "import"
     ],
     "experimental": true,
-    "parameter_order": ["id", "variables"],
+    "parameter_order": [
+        "id",
+        "variables"
+    ],
     "parameters": {
         "id": {
             "description": "A process graph id or an absolute URI to an externally hosted process graph.",

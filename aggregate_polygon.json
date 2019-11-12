@@ -7,7 +7,13 @@
         "aggregate & resample"
     ],
     "experimental": true,
-    "parameter_order": ["data", "polygons", "reducer", "name", "binary"],
+    "parameter_order": [
+        "data",
+        "polygons",
+        "reducer",
+        "name",
+        "binary"
+    ],
     "parameters": {
         "data": {
             "description": "A data cube.",
@@ -50,7 +56,7 @@
                                     "description": "Any data type."
                                 }
                             }
-                        } 
+                        }
                     },
                     {
                         "title": "Binary behaviour",
@@ -64,7 +70,7 @@
                             "y": {
                                 "description": "The second value. Any data type could be passed."
                             }
-                        } 
+                        }
                     }
                 ]
             },

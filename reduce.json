@@ -6,7 +6,13 @@
         "cubes",
         "reducer"
     ],
-    "parameter_order": ["data", "reducer", "dimension", "target_dimension", "binary"],
+    "parameter_order": [
+        "data",
+        "reducer",
+        "dimension",
+        "target_dimension",
+        "binary"
+    ],
     "parameters": {
         "data": {
             "description": "A data cube.",
@@ -33,7 +39,7 @@
                                     "description": "Any data type."
                                 }
                             }
-                        } 
+                        }
                     },
                     {
                         "title": "Binary behaviour",
@@ -47,7 +53,7 @@
                             "y": {
                                 "description": "The second value. Any data type could be passed."
                             }
-                        } 
+                        }
                     },
                     {
                         "title": "No operation behaviour",
@@ -68,7 +74,10 @@
         "target_dimension": {
             "description": "The name of the target dimension. Only required if the reducer returns multiple values, otherwise ignored. By default creates a new dimension with the specified name and the type `other` (see ``add_dimension()``). If a dimension with the specified name exists, the dimension is replaced, but keeps the original type.",
             "schema": {
-                "type": ["string", "null"],
+                "type": [
+                    "string",
+                    "null"
+                ],
                 "default": null
             }
         },

@@ -5,7 +5,11 @@
     "categories": [
         "cubes"
     ],
-    "parameter_order": ["data", "old", "new"],
+    "parameter_order": [
+        "data",
+        "old",
+        "new"
+    ],
     "parameters": {
         "data": {
             "description": "The data cube.",

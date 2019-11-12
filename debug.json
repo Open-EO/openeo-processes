@@ -6,7 +6,12 @@
         "development"
     ],
     "experimental": true,
-    "parameter_order": ["data", "code", "level", "message"],
+    "parameter_order": [
+        "data",
+        "code",
+        "level",
+        "message"
+    ],
     "parameters": {
         "data": {
             "description": "Data to publish.",

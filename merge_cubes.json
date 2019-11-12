@@ -5,7 +5,12 @@
     "categories": [
         "cubes"
     ],
-    "parameter_order": ["cube1", "cube2", "overlap_resolver", "binary"],
+    "parameter_order": [
+        "cube1",
+        "cube2",
+        "overlap_resolver",
+        "binary"
+    ],
     "parameters": {
         "cube1": {
             "description": "The first data cube.",
@@ -40,7 +45,7 @@
                                     "description": "Any data type."
                                 }
                             }
-                        } 
+                        }
                     },
                     {
                         "title": "Binary behaviour",
@@ -54,7 +59,7 @@
                             "y": {
                                 "description": "The second value. Any data type could be passed."
                             }
-                        } 
+                        }
                     },
                     {
                         "title": "No overlap resolver",

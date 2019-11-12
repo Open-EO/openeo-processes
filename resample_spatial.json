@@ -6,7 +6,13 @@
         "cubes",
         "aggregate & resample"
     ],
-    "parameter_order": ["data", "resolution", "projection", "method", "align"],
+    "parameter_order": [
+        "data",
+        "resolution",
+        "projection",
+        "method",
+        "align"
+    ],
     "parameters": {
         "data": {
             "description": "A raster data cube.",
@@ -47,7 +53,9 @@
                         "title": "EPSG Code",
                         "type": "integer",
                         "subtype": "epsg-code",
-                        "examples": [7099]
+                        "examples": [
+                            7099
+                        ]
                     },
                     {
                         "title": "WKT2",
@@ -74,25 +82,25 @@
             }
         },
         "method": {
-          "description": "Resampling method. Methods are inspired by GDAL, see [gdalwarp](https://www.gdal.org/gdalwarp.html) for more information.",
-          "schema": {
-            "type": "string",
-            "default": "near",
-            "enum": [
-              "near",
-              "bilinear",
-              "cubic",
-              "cubicspline",
-              "lanczos",
-              "average",
-              "mode",
-              "max",
-              "min",
-              "med",
-              "q1",
-              "q3"
-            ]
-          }
+            "description": "Resampling method. Methods are inspired by GDAL, see [gdalwarp](https://www.gdal.org/gdalwarp.html) for more information.",
+            "schema": {
+                "type": "string",
+                "default": "near",
+                "enum": [
+                    "near",
+                    "bilinear",
+                    "cubic",
+                    "cubicspline",
+                    "lanczos",
+                    "average",
+                    "mode",
+                    "max",
+                    "min",
+                    "med",
+                    "q1",
+                    "q3"
+                ]
+            }
         },
         "align": {
             "description": "Specifies to which corner of the spatial extent the new resampled data is aligned to.",

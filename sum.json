@@ -6,7 +6,10 @@
         "math",
         "reducer"
     ],
-    "parameter_order": ["data", "ignore_nodata"],
+    "parameter_order": [
+        "data",
+        "ignore_nodata"
+    ],
     "parameters": {
         "data": {
             "description": "An array of numbers with at least two elements.",
@@ -47,19 +50,29 @@
     "examples": [
         {
             "arguments": {
-                "data": [5,1]
+                "data": [
+                    5,
+                    1
+                ]
             },
             "returns": 6
         },
         {
             "arguments": {
-                "data": [-2,4,2.5]
+                "data": [
+                    -2,
+                    4,
+                    2.5
+                ]
             },
             "returns": 4.5
         },
         {
             "arguments": {
-                "data": [1,null],
+                "data": [
+                    1,
+                    null
+                ],
                 "ignore_nodata": false
             },
             "returns": null

@@ -6,7 +6,11 @@
         "import",
         "udf"
     ],
-    "parameter_order": ["data", "url", "context"],
+    "parameter_order": [
+        "data",
+        "url",
+        "context"
+    ],
     "parameters": {
         "data": {
             "description": "The data to be passed to the UDF as array or raster data cube.",

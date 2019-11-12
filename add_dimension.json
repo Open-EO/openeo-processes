@@ -5,7 +5,12 @@
     "categories": [
         "cubes"
     ],
-    "parameter_order": ["data", "name", "value", "type"],
+    "parameter_order": [
+        "data",
+        "name",
+        "value",
+        "type"
+    ],
     "parameters": {
         "data": {
             "description": "A data cube to add the dimension to.",

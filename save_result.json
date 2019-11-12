@@ -6,7 +6,11 @@
         "cubes",
         "export"
     ],
-    "parameter_order": ["data", "subtype", "options"],
+    "parameter_order": [
+        "data",
+        "subtype",
+        "options"
+    ],
     "parameters": {
         "data": {
             "description": "The data to save.",
