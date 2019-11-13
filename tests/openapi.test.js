@@ -80,14 +80,12 @@ jsv.addKeyword("subtype", {
 		type: "string",
 		enum: Object.keys(subtypes)
 	},
-// Doesn't work yet, see https://github.com/epoberezkin/ajv/issues/1049
-/*	compile: function (subtype, schema) {
+	compile: function (subtype, schema) {
 		if (schema.type != subtypes[subtype].type) {
-			return false;
-//			throw "Subtype '"+subtype+"' not allowed for type '"+schema.type+"'.";
+			throw "Subtype '"+subtype+"' not allowed for type '"+schema.type+"'."
 		}
-		return true;
-	}, */
+		return () => true;
+	},
 	errors: false
 });
 

@@ -14,18 +14,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Schema format/subtype `callback` has been renamed to `process-graph`.
 - Default values are now specified on the parameter-level, not in the JSON schemas.
 - Processes supporting multiple data types in parameters or return values with `anyOf` are now listing the data types directly as array. `anyOf` is discouraged.
-- `clip`: Works on a single value instead on arrays (replaced parameter `data` with `x`). (#75)[https://github.com/Open-EO/openeo-processes/issues/75]
-- `debug`: Replaced with a completely new definition. (#82)[https://github.com/Open-EO/openeo-processes/issues/71], (#100)[https://github.com/Open-EO/openeo-api/issues/100], (#214)[https://github.com/Open-EO/openeo-api/issues/214]
+- `clip`: Works on a single value instead on arrays (replaced parameter `data` with `x`). [#75](https://github.com/Open-EO/openeo-processes/issues/75)
+- `debug`: Replaced with a completely new definition. [#82](https://github.com/Open-EO/openeo-processes/issues/71), [API#100](https://github.com/Open-EO/openeo-api/issues/100), [API#214](https://github.com/Open-EO/openeo-api/issues/214)
 
 ### Deprecated
-- `filter_bbox`, `load_collection`, `resample_spatial`: PROJ definitions are deprecated in favor of EPSG codes, WKT2 and PROJJSON. (#58)[https://github.com/Open-EO/openeo-processes/issues/58]
+- `filter_bbox`, `load_collection`, `resample_spatial`: PROJ definitions are deprecated in favor of EPSG codes, WKT2 and PROJJSON. [#58](https://github.com/Open-EO/openeo-processes/issues/58)
 
 ### Removed
 - `output`: Use `debug` (see above) instead.
-- `find_collections`: Use `load_collection` and manual data discovery through the clients. [#52](https://github.com/Open-EO/openeo-api/issues/52)
+- `find_collections`: Use `load_collection` and manual data discovery through the clients. [API#52](https://github.com/Open-EO/openeo-api/issues/52)
 
 ### Fixed
 - `ndvi`: Default value of parameter `name` is now `ndvi` instead of `normalized_difference`.
+- `filter_bbox`, `load_collection`: The schema for the property `crs` in the parameters `extent`/`spatial_extent` contained invalid JSON Schema.
 
 ## [0.4.2] - 2019-06-11
 
