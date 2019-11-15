@@ -168,9 +168,6 @@ describe.each(processes)("%s", (file, p) => {
 			expect(typeof param.required === 'undefined' || typeof param.required === 'boolean').toBeTruthy();
 			expect(typeof param.deprecated === 'undefined' || typeof param.deprecated === 'boolean').toBeTruthy();
 
-			// Parameter media type
-			expect(typeof param.media_type === 'undefined' || typeof param.media_type === 'string').toBeTruthy();
-
 			// Parameter schema
 			expect(typeof param.schema).toBe('object');
 			expect(param.schema).not.toBeNull();
@@ -212,9 +209,6 @@ describe.each(processes)("%s", (file, p) => {
 		// return value description
 		expect(typeof p.returns.description).toBe('string');
 		checkDescription(p.returns.description, p);
-
-		// return value media type
-		expect(typeof p.returns.media_type === 'undefined' || typeof p.returns.media_type === 'string').toBeTruthy();
 
 		// return value schema
 		expect(typeof p.returns.schema).toBe('object');
