@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
-- Added examples.
+- New processes
+  - `drop_dimension`
+- Added further examples
 
 ### Changed
 - The JSON Schema keyword `format` has been replaced with the custom keyword `subtype`.
@@ -17,7 +19,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `clip`: Works on a single value instead on arrays (replaced parameter `data` with `x`). [#75](https://github.com/Open-EO/openeo-processes/issues/75)
 - `debug`: Replaced with a completely new definition. [#82](https://github.com/Open-EO/openeo-processes/issues/71), [API#100](https://github.com/Open-EO/openeo-api/issues/100), [API#214](https://github.com/Open-EO/openeo-api/issues/214)
 - `ndvi`: Adds a new band to the data cube instead of replacing the existing bands.
-- `reduce`: Order or parameters `reducer` and `dimension` swapped. [#57](https://github.com/Open-EO/openeo-processes/issues/57)
 
 ### Deprecated
 - `filter_bbox`, `load_collection`, `resample_spatial`: PROJ definitions are deprecated in favor of EPSG codes, WKT2 and PROJJSON. [#58](https://github.com/Open-EO/openeo-processes/issues/58)
@@ -26,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `output`: Use `debug` (see above) instead.
 - `find_collections`: Use `load_collection` and manual data discovery through the clients. [API#52](https://github.com/Open-EO/openeo-api/issues/52)
 - Data type `vector-cube` from several processes. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
+- `reduce`: The `null` (no-operation) reducer has been removed. Use the process `drop_dimension` instead. [#57](https://github.com/Open-EO/openeo-processes/issues/57)
 
 ### Fixed
 - Several clarifications in written texts. [#86]( https://github.com/Open-EO/openeo-processes/issues/86)
