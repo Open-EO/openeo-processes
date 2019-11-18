@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Processes supporting multiple data types in parameters or return values with `anyOf` are now listing the data types directly as array. `anyOf` is discouraged.
 - `clip`: Works on a single value instead on arrays (replaced parameter `data` with `x`). [#75](https://github.com/Open-EO/openeo-processes/issues/75)
 - `debug`: Replaced with a completely new definition. [#82](https://github.com/Open-EO/openeo-processes/issues/71), [API#100](https://github.com/Open-EO/openeo-api/issues/100), [API#214](https://github.com/Open-EO/openeo-api/issues/214)
+- `ndvi`: Adds a new band to the data cube instead of replacing the existing bands.
 - `reduce`: Order or parameters `reducer` and `dimension` swapped. [#57](https://github.com/Open-EO/openeo-processes/issues/57)
 
 ### Deprecated
@@ -27,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Data type `vector-cube` from several processes. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
 
 ### Fixed
+- Several clarifications in written texts. [#86]( https://github.com/Open-EO/openeo-processes/issues/86)
 - `ndvi`: Default value of parameter `name` is now `ndvi` instead of `normalized_difference`.
 - `filter_bbox`, `load_collection`: The schema for the property `crs` in the parameters `extent`/`spatial_extent` contained invalid JSON Schema.
 

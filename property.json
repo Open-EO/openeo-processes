@@ -35,7 +35,7 @@
             "required": true
         },
         "dimension": {
-            "description": "Optionally, a dimension to get the property for. `null` by default, which gets a property globally for the collection/data cube. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+            "description": "Optionally, the name of a dimension to get the property for. `null` by default, which gets a property globally for the collection/data cube. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
             "schema": {
                 "type": [
                     "string",
