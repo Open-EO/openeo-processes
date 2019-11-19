@@ -8,7 +8,7 @@
     "parameter_order": [
         "data",
         "name",
-        "value",
+        "label",
         "type"
     ],
     "parameters": {
