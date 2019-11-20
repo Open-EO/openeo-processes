@@ -65,7 +65,7 @@
             "required": true
         },
         "target_dimension": {
-            "description": "The name of the target dimension or `null` to drop the dimension (default).\n\nIf a target dimension is specified, a new dimension with the specified name and the type `other` (see ``add_dimension()``) is created and the old dimension is dropped. If a dimension with the specified name exists, the dimension is replaced, but keeps the original type.\n\nThe resulting target dimension has as many dimension labels as the reducer returned values. For example, a reducer returning a single scalar results in a dimension with a single label, a reducer returning an array with four elements results in a dimension with four labels.\n\nIf a reducer returns multiple value, this parameter is required to be a string. Otherwise the process produces the error `TargetDimensionMissing`.",
+            "description": "The name of the target dimension or `null` to drop the dimension (default).\n\nIf a target dimension is specified, a new dimension with the specified name and the type `other` (see ``add_dimension()``) is created and the old dimension is dropped. If a dimension with the specified name exists, the dimension is replaced, but keeps the original type.\n\nThe resulting target dimension has as many dimension labels as the reducer returned values. For example, a reducer returning a single scalar results in a dimension with a single label, a reducer returning an array with four elements results in a dimension with four labels.\n\nIf a reducer returns multiple values, this parameter is required to be a string. Otherwise the process produces the error `TargetDimensionMissing`.",
             "schema": {
                 "type": [
                     "string",

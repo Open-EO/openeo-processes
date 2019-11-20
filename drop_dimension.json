@@ -1,7 +1,7 @@
 {
     "id": "drop_dimension",
     "summary": "Removes a dimension",
-    "description": "Drops a dimension from the data cube.\n\nDropping a dimension only works on dimensions with a single dimension value left, otherwise the process fails with a `TooManyDimensionValues` error. Dimension values can be reduced to a single value with a filter such as ``filter_bands()`` or the ``reduce()`` process. If a dimension with the specified name does not exist, the process fails with a `DimensionExists` error.",
+    "description": "Drops a dimension from the data cube.\n\nDropping a dimension only works on dimensions with a single dimension label left, otherwise the process fails with a `DimensionLabelCountMismatch` error. Dimension values can be reduced to a single value with a filter such as ``filter_bands()`` or the ``reduce()`` process. If a dimension with the specified name does not exist, the process fails with a `DimensionNotAvailable` error.",
     "categories": [
         "cubes"
     ],
@@ -34,7 +34,7 @@
         }
     },
     "exceptions": {
-        "TooManyDimensionValues": {
+        "DimensionLabelCountMismatch": {
             "message": "The number of dimension labels exceeds one, which requires a reducer."
         },
         "DimensionNotAvailable": {
