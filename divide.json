@@ -6,11 +6,11 @@
         "math"
     ],
     "parameter_order": [
-        "a",
-        "b"
+        "x",
+        "y"
     ],
     "parameters": {
-        "a": {
+        "x": {
             "description": "The dividend.",
             "schema": {
                 "type": [
@@ -20,7 +20,7 @@
             },
             "required": true
         },
-        "b": {
+        "y": {
             "description": "The divisor.",
             "schema": {
                 "type": [
@@ -48,22 +48,22 @@
     "examples": [
         {
             "arguments": {
-                "a": 5,
-                "b": 2.5
+                "x": 5,
+                "y": 2.5
             },
             "returns": 2
         },
         {
             "arguments": {
-                "a": -2,
-                "b": 4
+                "x": -2,
+                "y": 4
             },
             "returns": -0.5
         },
         {
             "arguments": {
-                "a": 1,
-                "b": null
+                "x": 1,
+                "y": null
             },
             "returns": null
         }
