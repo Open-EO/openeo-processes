@@ -9,9 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added examples.
 - New processes:
-  - `add`
-  - `all`
-  - `any`
+    - `add`
+    - `all`
+    - `any`
+    - `array_find`
 
 ### Changed
 - The JSON Schema keyword `format` has been replaced with the custom keyword `subtype`.
@@ -31,7 +32,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `filter_bbox`, `load_collection`, `resample_spatial`: PROJ definitions are deprecated in favor of EPSG codes, WKT2 and PROJJSON. [#58](https://github.com/Open-EO/openeo-processes/issues/58)
 
 ### Removed
-- `output`: Use `debug` (see above) instead.
+- `array_contains`: Use `array_find` instead.
+- `output`: Use `debug` instead.
 - `find_collections`: Use `load_collection` and manual data discovery through the clients. [API#52](https://github.com/Open-EO/openeo-api/issues/52)
 - Data type `vector-cube` from several processes. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
 - The following operations don't support `ignore_nodata` any longer: `and`, `divide`, `multiply`, `or`, `subtract`, `xor`. [#85](https://github.com/Open-EO/openeo-processes/issues/85)
