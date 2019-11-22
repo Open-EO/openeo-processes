@@ -38,6 +38,9 @@ var subtypes = {
 	'raster-cube': {type: 'object'},
 	'temporal-interval': {type: 'array'},
 	'temporal-intervals': {type: 'array'},
+	'udf-code': {type: 'string'},
+	'udf-runtime': {type: 'string'},
+	'udf-runtime-version': {type: 'string'},
 	'vector-cube': {type: 'object'},
 	'wkt2-definition': {type: 'string'}
 }
