@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - New processes:
+    - `array_find`
     - `drop_dimension`
     - `rename_labels`
 - Added further examples
@@ -30,8 +31,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Data type `vector-cube` from several processes. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
 - `reduce`: The `null` (no-operation) reducer has been removed. Use the process `drop_dimension` instead. [#57](https://github.com/Open-EO/openeo-processes/issues/57)
 - Removed processes:
-    - `output`: Use `debug` (see above) instead.
+    - `array_contains`: Use `array_find` instead.
     - `find_collections`: Use `load_collection` and manual data discovery through the clients. [API#52](https://github.com/Open-EO/openeo-api/issues/52)
+    - `output`: Use `debug` instead.
 
 ### Fixed
 - Several clarifications in written texts. [#86]( https://github.com/Open-EO/openeo-processes/issues/86)
