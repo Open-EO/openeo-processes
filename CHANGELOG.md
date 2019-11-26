@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `add_dimension`: Parameter `value` renamed to `label`.
 - `clip`: Works on a single value instead on arrays (replaced parameter `data` with `x`). [#75](https://github.com/Open-EO/openeo-processes/issues/75)
 - `debug`: Replaced with a completely new definition. [#82](https://github.com/Open-EO/openeo-processes/issues/71), [API#100](https://github.com/Open-EO/openeo-api/issues/100), [API#214](https://github.com/Open-EO/openeo-api/issues/214)
-- `ndvi`: Adds a new band to the data cube instead of replacing the existing bands.
+- `ndvi` and `normalized_difference`: Rewrite of the processes with a completely new behaviour. [#60](https://github.com/Open-EO/openeo-processes/issues/60)
 - `reduce`: Order or parameters `reducer` and `dimension` swapped. [#57](https://github.com/Open-EO/openeo-processes/issues/57)
 - `resample_spatial`: Default value of parameter `align` changed from `lower-left` to `upper-left`. [#61](https://github.com/Open-EO/openeo-processes/issues/61)
 
@@ -33,8 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `array_contains`: Use `array_find` instead.
 
 ### Fixed
-- Several clarifications in written texts. [#86]( https://github.com/Open-EO/openeo-processes/issues/86)
-- `ndvi`: Default value of parameter `name` is now `ndvi` instead of `normalized_difference`.
+- Several clarifications in written texts. [#86](https://github.com/Open-EO/openeo-processes/issues/86)
 - `filter_bbox`, `load_collection`: The schema for the property `crs` in the parameters `extent`/`spatial_extent` contained invalid JSON Schema.
 
 ## [0.4.2] - 2019-06-11
