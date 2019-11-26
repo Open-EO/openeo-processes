@@ -33,7 +33,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `filter_bbox`, `load_collection`, `resample_spatial`: PROJ definitions are deprecated in favor of EPSG codes, WKT2 and PROJJSON. [#58](https://github.com/Open-EO/openeo-processes/issues/58)
 
 ### Removed
-- Data type `vector-cube` from several processes. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
 - `reduce`: The `null` (no-operation) reducer has been removed. Use the process `drop_dimension` instead. [#57](https://github.com/Open-EO/openeo-processes/issues/57)
 - The following operations don't support `ignore_nodata` any longer: `and`, `divide`, `multiply`, `or`, `subtract`, `xor`. [#85](https://github.com/Open-EO/openeo-processes/issues/85)
 - Removed processes:
