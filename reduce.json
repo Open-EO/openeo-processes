@@ -1,7 +1,7 @@
 {
     "id": "reduce",
     "summary": "Reduce dimensions",
-    "description": "Applies a reducer to a data cube dimension by collapsing all the input values along the specified dimension into an output value computed by the reducer.\n\nBy default the dimension is dropped, but this behaviour can be influenced with the parameter `target_dimension` The parameter must be specified, if a reducer such as ``extrema()`` returns multiple values.\n\nBy default, a reducer must accept an array as input. The process can also work on two values by setting the parameter `binary` to `true`. The reducer doesn't get executed on a single value.\n\nNominal values can be reduced too, but need to be mapped. For example date strings to numeric timestamps since 1970 etc.",
+    "description": "Applies a reducer to a data cube dimension by collapsing all the input values along the specified dimension into an output value computed by the reducer.\n\nBy default the dimension is dropped, but this behaviour can be influenced with the parameter `target_dimension` The parameter must be specified, if a reducer such as ``extrema()`` returns multiple values.\n\nBy default, a reducer must accept an array as input. The process can also work on two values by setting the parameter `binary` to `true`. The reducer doesn't get executed on a single value.",
     "categories": [
         "cubes",
         "reducer"
