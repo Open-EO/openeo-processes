@@ -21,3 +21,8 @@ common_names
 gdalwarp
 center
 UDFs
+summand
+inputMin
+inputMax
+outputMin
+outputMax
