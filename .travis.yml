@@ -1,0 +1,41 @@
+language: node_js
+
+node_js:
+  - stable
+
+sudo: false
+
+install:
+- cd tests
+- npm install
+- npm install -g concat-json-files
+
+script:
+- npm run test
+
+before_deploy:
+- concat-json-files "*.json" -t "processes.json"
+- git clone --branch gh-pages https://$GITHUB_TOKEN@github.com/Open-EO/openeo-processes.git gh-pages
+- cd gh-pages
+- |
+  if [[ $TRAVIS_BRANCH == 'master' ]] ; then
+    cp ../index.html index.html
+    cp ../processes.json processes.json
+  fi
+- |
+  if [ -n "$TRAVIS_TAG" ] ; then
+    rm -rf $TRAVIS_TAG
+    mkdir -p $TRAVIS_TAG
+    cp ../index.html $TRAVIS_TAG/index.html
+    cp ../processes.json $TRAVIS_TAG/processes.json
+  fi
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local-dir: gh-pages
+  keep-history: true
+  committer-from-gh: true
+  on:
+    condition: $TRAVIS_BRANCH == 'master' || $TRAVIS_TAG =~ '^.+$'
