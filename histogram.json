@@ -1,0 +1,96 @@
+{
+    "id": "histogram",
+    "summary": "Distribution of numeric data",
+    "description": "A histogram groups data into bins and plots the number of members in each bin versus the bin number.",
+    "categories": [
+        "math",
+        "reducer"
+    ],
+    "parameter_order": ["data"],
+    "parameters": {
+        "data": {
+            "description": "An array of numbers",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "required": true
+        }
+    },
+    "returns": {
+        "description": "An array of (bin, count) pairs. null values in the input array end up in a null-bin.",
+        "schema": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "bin": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "count": {
+                        "type": "number"
+                    }
+                }
+            }
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "data": [0, 1, 2, 1, 0]
+            },
+            "returns": [
+                {
+                    "bin": 0,
+                    "count": 2
+                },
+                {
+                    "bin": 1,
+                    "count": 2
+                },
+                {
+                    "bin": 2,
+                    "count": 1
+                }
+            ]
+        },
+        {
+            "arguments": {
+                "data": [null, 1, 2, 1, 0]
+            },
+            "returns": [
+                {
+                    "bin": null,
+                    "count": 1
+                },
+                {
+                    "bin": 0,
+                    "count": 1
+                },
+                {
+                    "bin": 1,
+                    "count": 2
+                },
+                {
+                    "bin": 2,
+                    "count": 1
+                }
+            ]
+        }
+    ],
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://mathworld.wolfram.com/Histogram.html",
+            "title": "Histogram explained by Wolfram MathWorld"
+        }
+    ]
+}
