@@ -1,4 +1,2 @@
-# openEO processes
-Repository for openEO process descriptions.
-
-Human readable version available at https://processes.openeo.org.
+# openeo-processes
+Repository for openEO process descriptions
