@@ -11,7 +11,7 @@
             "description": "The id of a batch job with results.",
             "schema": {
                 "type": "string",
-                "subtype": "job-id",
+                "format": "job-id",
                 "pattern": "^[A-Za-z0-9_\\-\\.~]+$"
             },
             "required": true
@@ -19,11 +19,17 @@
     },
     "returns": {
         "description": "A data cube for further processing.",
-        "schema": [
-            {
-                "type": "object",
-                "subtype": "raster-cube"
-            }
-        ]
+        "schema": {
+            "anyOf": [
+                {
+                    "type": "object",
+                    "format": "raster-cube"
+                },
+                {
+                    "type": "object",
+                    "format": "vector-cube"
+                }
+            ]
+        }
     }
 }

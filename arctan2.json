@@ -5,10 +5,7 @@
     "categories": [
         "math > trigonometric"
     ],
-    "parameter_order": [
-        "y",
-        "x"
-    ],
+    "parameter_order": ["y", "x"],
     "parameters": {
         "y": {
             "description": "A number to be used as dividend.",
@@ -43,14 +40,14 @@
     "examples": [
         {
             "arguments": {
-                "y": 0,
+                "y": 0, 
                 "x": 0
             },
             "returns": 0
         },
         {
             "arguments": {
-                "y": null,
+                "y": null, 
                 "x": 1.5
             },
             "returns": null

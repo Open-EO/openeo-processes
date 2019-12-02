@@ -1,57 +1,39 @@
 {
     "id": "debug",
-    "summary": "Publish debugging information",
-    "description": "Sends debugging information about the data to the log output. Passes the data through.",
+    "summary": "Send debugging information to subscribed clients",
+    "description": "Sends debugging information about the data to clients, which are subscribed to the topic `openeo.jobs.debug`.",
     "categories": [
         "development"
     ],
     "experimental": true,
-    "parameter_order": [
-        "data",
-        "code",
-        "level",
-        "message"
-    ],
+    "parameter_order": ["data", "id"],
     "parameters": {
         "data": {
-            "description": "Data to publish.",
+            "description": "Data to send.",
             "schema": {
                 "description": "Any data type is allowed."
             },
             "required": true
         },
-        "code": {
-            "description": "An identifier to help identify the log entry in a bunch of other log entries.",
-            "schema": {
-                "type": "string"
-            },
-            "default": ""
-        },
-        "level": {
-            "description": "The severity level of this message. Note that the level `error` forces the computation to be stopped!",
+        "id": {
+            "description": "An identifier to help identify the message in a bunch of other messages.",
             "schema": {
                 "type": "string",
-                "enum": [
-                    "error",
-                    "warning",
-                    "info",
-                    "debug"
-                ]
-            },
-            "default": "debug"
-        },
-        "message": {
-            "description": "A message to send in addition to the data.",
-            "schema": {
-                "type": "string"
-            },
-            "default": ""
+                "default": ""
+            }
         }
     },
     "returns": {
-        "description": "Returns the data as passed to the `data` parameter.",
+        "description": "`false` if the information could not be sent, `true` otherwise.",
         "schema": {
-            "description": "Any data type is allowed."
+            "type": "boolean"
         }
-    }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://open-eo.github.io/openeo-api/apireference-subscriptions/#publish-openeojobsdebug",
+            "title": "Information about the openEO API for Subscriptions"
+        }
+    ]
 }

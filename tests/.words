@@ -8,6 +8,7 @@ unary
 STAC
 band1
 band2
+proj4
 Resample
 resample
 Resamples
@@ -21,8 +22,3 @@ common_names
 gdalwarp
 center
 UDFs
-summand
-inputMin
-inputMax
-outputMin
-outputMax

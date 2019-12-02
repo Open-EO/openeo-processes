@@ -8,7 +8,7 @@ The process graph could be visualized as follows:
 
 This process graph is meant to be used as batch job or can be lazy evaluated. It returns a GeoTiff file with the computed results.
 
-This process graph assumes the dataset is called `Sentinel-2`. The temporal extent covered is January 2018 and bands `B02` (blue), `B04` (red) and `B08` (nir) are used for the computation. Please note that the order of the bands in `get_collection` is important as they are requested by their order (index) in the process graph specified for the reducer.
+This process graph assumes the dataset is called `Sentinel-2`. The temporal extent covered is January 2018 and bands `B02` (blue), `B04` (red) and `B08` (nir) are used for the computation. Please note that the order of the bands in `get_collection` is important as they are requested by their order (index) in the callback.
 
 ## Process Graph
 
@@ -122,7 +122,7 @@ This process graph assumes the dataset is called `Sentinel-2`. The temporal exte
     "process_id": "save_result",
     "arguments": {
       "data": {"from_node": "mintime"},
-      "subtype": "GTiff"
+      "format": "GTiff"
     },
     "result": true
   }

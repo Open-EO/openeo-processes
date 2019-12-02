@@ -1,24 +1,26 @@
 {
     "id": "rename_dimension",
     "summary": "Renames a dimension",
-    "description": "Renames a dimension in the data cube.",
+    "description": "Renames a dimension in the data cube. Afterwards, the dimension can be referenced with the new name.",
     "categories": [
         "cubes"
     ],
-    "parameter_order": [
-        "data",
-        "old",
-        "new"
-    ],
+    "parameter_order": ["data", "old", "new"],
     "parameters": {
         "data": {
             "description": "The data cube.",
-            "schema": [
-                {
-                    "type": "object",
-                    "subtype": "raster-cube"
-                }
-            ],
+            "schema": {
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "format": "raster-cube"
+                    },
+                    {
+                        "type": "object",
+                        "format": "vector-cube"
+                    }
+                ]
+            },
             "required": true
         },
         "old": {
@@ -38,12 +40,18 @@
     },
     "returns": {
         "description": "The data cube with the renamed dimension. The old name can not be referenced any longer.",
-        "schema": [
-            {
-                "type": "object",
-                "subtype": "raster-cube"
-            }
-        ]
+        "schema": {
+            "anyOf": [
+                {
+                    "type": "object",
+                    "format": "raster-cube"
+                },
+                {
+                    "type": "object",
+                    "format": "vector-cube"
+                }
+            ]
+        }
     },
     "exceptions": {
         "DimensionNotAvailable": {

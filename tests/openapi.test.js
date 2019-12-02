@@ -11,43 +11,33 @@ var exceptionNameRegExp = /^[A-Za-z0-9_]+$/;
 var files = glob.sync("../*.json", {realpath: true});
 
 var anyOfRequired = [
+  "filter_bands",
   "quantiles"
 ];
 
-var subtypes = {
-	// Inherited from JSON Schema format
-	'date': {type: 'string'},
-	'date-time': {type: 'string'},
-	'time': {type: 'string'},
-	'uri': {type: 'string'},
-	// Custom subtypes
-	'band-name': {type: 'string'},
-	'bounding-box': {type: 'object'},
-	'collection-id': {type: 'string'},
-	'epsg-code': {type: 'integer'},
-	'geojson': {type: 'object'},
-	'job-id': {type: 'string'},
-	'kernel': {type: 'array'},
-	'output-format': {type: 'string'},
-	'output-format-options': {type: 'object'},
-	'process-graph': {type: 'object'},
-	'process-graph-id': {type: 'string'},
-	'process-graph-variables': {type: 'object'},
-	'proj-definition': {type: 'string'},
-	'projjson-definition': {type: 'object'},
-	'raster-cube': {type: 'object'},
-	'temporal-interval': {type: 'array'},
-	'temporal-intervals': {type: 'array'},
-	'udf-code': {type: 'string'},
-	'udf-runtime': {type: 'string'},
-	'udf-runtime-version': {type: 'string'},
-	'vector-cube': {type: 'object'},
-	'wkt2-definition': {type: 'string'}
-}
-
 var ajvOptions = {
 	schemaId: 'auto',
-	format: 'full'
+	format: 'full',
+	formats: {
+		// ToDo: Add validators
+		'band-name': {type: 'string', validate: () => true},
+		'bounding-box': {type: 'object', validate: () => true},
+		'callback': {type: 'object', validate: () => true},
+		'collection-id': {type: 'string', validate: () => true},
+		'epsg-code': {type: 'integer', validate: () => true},
+		'geojson': {type: 'object', validate: () => true},
+		'job-id': {type: 'string', validate: () => true},
+		'kernel': {type: 'array', validate: () => true},
+		'output-format': {type: 'string', validate: () => true},
+		'output-format-options': {type: 'array', validate: () => true},
+		'process-graph-id': {type: 'string', validate: () => true},
+		'process-graph-variables': {type: 'array', validate: () => true},
+		'proj-definition': {type: 'string', validate: () => true},
+		'raster-cube': {type: 'object', validate: () => true},
+		'temporal-interval': {type: 'array', validate: () => true},
+		'temporal-intervals': {type: 'array', validate: () => true},
+		'vector-cube': {type: 'object', validate: () => true}
+	}
 };
 
 var spellcheckOptions = {
@@ -62,10 +52,10 @@ var spellcheckOptions = {
 
 // Init JSON Schema validator
 var jsv = new ajv(ajvOptions);
-jsv.addKeyword("parameters", {
+jsv.addKeyword('parameters', {
 	dependencies: [
 		"type",
-		"subtype"
+		"format"
 	],
 	metaSchema: {
 		type: "object",
@@ -73,23 +63,8 @@ jsv.addKeyword("parameters", {
 			type: "object"
 		}
 	},
-	valid: true
-});
-jsv.addKeyword("subtype", {
-	dependencies: [
-		"type"
-	],
-	metaSchema: {
-		type: "string",
-		enum: Object.keys(subtypes)
-	},
-	compile: function (subtype, schema) {
-		if (schema.type != subtypes[subtype].type) {
-			throw "Subtype '"+subtype+"' not allowed for type '"+schema.type+"'."
-		}
-		return () => true;
-	},
-	errors: false
+	valid: true,
+	errors: true
 });
 
 // Read custom dictionary for spell check
@@ -171,18 +146,22 @@ describe.each(processes)("%s", (file, p) => {
 			expect(typeof param.required === 'undefined' || typeof param.required === 'boolean').toBeTruthy();
 			expect(typeof param.deprecated === 'undefined' || typeof param.deprecated === 'boolean').toBeTruthy();
 
+			// Parameter media type
+			expect(typeof param.media_type === 'undefined' || typeof param.media_type === 'string').toBeTruthy();
+
 			// Parameter schema
 			expect(typeof param.schema).toBe('object');
 			expect(param.schema).not.toBeNull();
 			checkJsonSchema(param.schema);
 
 			// Parameters that are not required should define a default value - just a warning for now
-			if(param.required !== true && typeof param.default === 'undefined' && !anyOfRequired.includes(p.id)) {
+			// ToDo: Doesn't work for oneOf/allOf/...
+			if(param.required !== true && typeof param.schema.default === 'undefined' && !anyOfRequired.includes(p.id)) {
 				console.warn(p.id + ": Optional parameter '" + key + "' should define a default value.");
 			}
 
-			// Checking that callbacks (process-graphs) define their parameters
-			if (typeof param.schema === 'object' && param.schema.subtype === 'process-graph') {
+			// Checking that callbacks define their parameters
+			if (typeof param.schema === 'object' && param.schema.format === 'callback') {
 				expect(typeof param.schema.parameters === 'object' && Object.keys(param.schema.parameters).length).toBeTruthy();
 			}
 		});
@@ -212,6 +191,9 @@ describe.each(processes)("%s", (file, p) => {
 		// return value description
 		expect(typeof p.returns.description).toBe('string');
 		checkDescription(p.returns.description, p);
+
+		// return value media type
+		expect(typeof p.returns.media_type === 'undefined' || typeof p.returns.media_type === 'string').toBeTruthy();
 
 		// return value schema
 		expect(typeof p.returns.schema).toBe('object');
@@ -374,49 +356,36 @@ function checkProcessGraph(pg) {
 	// ToDo: Validate process graph
 }
 
-function prepareSchema(schema) {
+function checkJsonSchema(schema) {
 	if (typeof schema["$schema"] === 'undefined') {
 		// Set applicable JSON SChema draft version if not already set
 		schema["$schema"] = "http://json-schema.org/draft-07/schema#";
 	}
-	if (Array.isArray(schema)) {
-		schema = {
-			anyOf: schema
-		};
-	}
-	return schema;
-}
 
-function checkJsonSchema(schema) {
-	let result = jsv.compile(prepareSchema(schema));
+	let result = jsv.compile(schema);
 	expect(result.errors).toBeNull();
 
-	checkSchemaRecursive(schema);
+	checkSchemaSpelling(schema);
 }
 
-function checkSchemaRecursive(schema) {
+function checkSchemaSpelling(schema) {
 	for(var i in schema) {
-		var val = schema[i];
-		if (typeof val === 'object' && val !== null) {
-			checkSchemaRecursive(val);
+		var obj = schema[i];
+		if (typeof obj === 'object' && obj !== null) {
+			checkSchemaSpelling(obj);
 		}
 
 		switch(i) {
 			case 'title':
 			case 'description':
-				checkSpelling(val);
-				break;
-			case 'format':
-				if (schema.subtype !== val) {
-					throw "format '"+val+"' has no corresponding subtype.";
-				}
+				checkSpelling(obj);
 				break;
 		}
 	}
 }
 
 function checkJsonSchemaValue(schema, value) {
-	jsv.validate(prepareSchema(schema), value);
+	jsv.validate(schema, value);
 	expect(jsv.errors).toBeNull();
 }
 

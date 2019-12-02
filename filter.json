@@ -1,33 +1,29 @@
 {
     "id": "filter",
     "summary": "Filter based on a logical expression.",
-    "description": "Filters the dimension labels based on a logical expression so that afterwards each dimension label in the data cube conforms to the expression.",
+    "description": "Filters the dimension values based on a logical expression so that afterwards each dimension value in the data cube conforms to the expression.",
     "categories": [
         "cubes",
         "filter"
     ],
-    "parameter_order": [
-        "data",
-        "expression",
-        "dimension"
-    ],
+    "parameter_order": ["data", "expression", "dimension"],
     "parameters": {
         "data": {
             "description": "A data cube.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "format": "raster-cube"
             },
             "required": true
         },
         "expression": {
-            "description": "An expression that is evaluated against each dimension label in the specified dimension. A dimension label is dropped from the data cube if the expression returns `false`. The data type of the parameter depends on the dimension labels stored for the dimension.",
+            "description": "An expression that is evaluated against each dimension value in the specified dimension. A dimension value is dropped from the data cube if the expression returns `false`. The data type of the parameter depends on the dimension values stored for the dimension.",
             "schema": {
                 "type": "object",
-                "subtype": "process-graph",
+                "format": "callback",
                 "parameters": {
                     "value": {
-                        "description": "A single dimension label to compare against.",
+                        "description": "A single dimension value to compare against.",
                         "anyOf": [
                             {
                                 "type": "number"
@@ -37,18 +33,15 @@
                             },
                             {
                                 "type": "string",
-                                "format": "date-time",
-                                "subtype": "date-time"
+                                "format": "date-time"
                             },
                             {
                                 "type": "string",
-                                "format": "date",
-                                "subtype": "date"
+                                "format": "date"
                             },
                             {
                                 "type": "string",
-                                "format": "time",
-                                "subtype": "time"
+                                "format": "time"
                             }
                         ]
                     }
@@ -57,7 +50,7 @@
             "required": true
         },
         "dimension": {
-            "description": "The name of the dimension to filter on. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Remarks:**\n\n* The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.\n* There could be multiple spatial dimensions such as `x`, `y` or `z`.\n* For multi-spectral imagery there is usually a separate dimension of type `bands` for the bands.",
+            "description": "The dimension to filter on. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Remarks:**\n\n* The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.\n* There could be multiple spatial dimensions such as `x`, `y` or `z`.\n* For multi-spectral imagery there is usually a separate dimension of type `bands` for the bands.",
             "schema": {
                 "type": "string"
             },
@@ -68,7 +61,7 @@
         "description": "A data cube restricted by the specified expression. Therefore, the cardinality is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "format": "raster-cube"
         }
     },
     "exceptions": {

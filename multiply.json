@@ -1,38 +1,37 @@
 {
     "id": "multiply",
-    "summary": "Multiplication of two numbers",
-    "description": "Multiplies the two numbers `x` and `y` (*x * y*) and returns the computed product.\n\nNo-data values are taken into account so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it.",
+    "summary": "Multiplication of a sequence of numbers",
+    "description": "Multiplies all elements in a sequential array of numbers and returns the computed product.\n\nThe computations should follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) whenever the processing environment supports it. Otherwise an exception must the thrown for incomputable results.\n\nBy default no-data values are ignored. Setting `ignore_nodata` to `false` considers no-data values so that `null` is returned if any element is such a value.",
     "categories": [
-        "math"
+        "math",
+        "reducer"
     ],
-    "parameter_order": [
-        "x",
-        "y"
-    ],
+    "parameter_order": ["data", "ignore_nodata"],
     "parameters": {
-        "x": {
-            "description": "The multiplier.",
+        "data": {
+            "description": "An array of numbers with at least two elements.",
             "schema": {
-                "type": [
-                    "number",
-                    "null"
-                ]
+                "type": "array",
+                "items": {
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "minItems": 2
             },
             "required": true
         },
-        "y": {
-            "description": "The multiplicand.",
+        "ignore_nodata": {
+            "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is returned if any value is such a value.",
             "schema": {
-                "type": [
-                    "number",
-                    "null"
-                ]
-            },
-            "required": true
+                "type": "boolean",
+                "default": true
+            }
         }
     },
     "returns": {
-        "description": "The computed product of the two numbers.",
+        "description": "The computed product of the sequence of numbers.",
         "schema": {
             "type": [
                 "number",
@@ -48,22 +47,20 @@
     "examples": [
         {
             "arguments": {
-                "x": 5,
-                "y": 2.5
+                "data": [5,0]
             },
-            "returns": 12.5
+            "returns": 0
         },
         {
             "arguments": {
-                "x": -2,
-                "y": -4
+                "data": [-2,4,2.5]
             },
-            "returns": 8
+            "returns": -20
         },
         {
             "arguments": {
-                "x": 1,
-                "y": null
+                "data": [1,null],
+                "ignore_nodata": false
             },
             "returns": null
         }
@@ -76,8 +73,8 @@
         },
         {
             "rel": "about",
-            "href": "https://ieeexplore.ieee.org/document/8766229",
-            "title": "IEEE Standard 754-2019 for Floating-Point Arithmetic"
+            "href": "https://ieeexplore.ieee.org/document/4610935",
+            "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
         }
     ]
 }

@@ -5,63 +5,58 @@
     "categories": [
         "comparison"
     ],
-    "parameter_order": [
-        "x",
-        "y"
-    ],
+    "parameter_order": ["x", "y"],
     "parameters": {
         "x": {
             "description": "First operand.",
-            "schema": [
-                {
-                    "type": "number"
-                },
-                {
-                    "type": "null"
-                },
-                {
-                    "type": "string",
-                    "format": "date-time",
-                    "subtype": "date-time"
-                },
-                {
-                    "type": "string",
-                    "format": "date",
-                    "subtype": "date"
-                },
-                {
-                    "type": "string",
-                    "format": "time",
-                    "subtype": "time"
-                }
-            ],
+            "schema": {
+                "anyOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "null"
+                    },
+                    {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    {
+                        "type": "string",
+                        "format": "time"
+                    }
+                ]
+            },
             "required": true
         },
         "y": {
             "description": "Second operand.",
-            "schema": [
-                {
-                    "type": "number"
-                },
-                {
-                    "type": "null"
-                },
-                {
-                    "type": "string",
-                    "format": "date-time",
-                    "subtype": "date-time"
-                },
-                {
-                    "type": "string",
-                    "format": "date",
-                    "subtype": "date"
-                },
-                {
-                    "type": "string",
-                    "format": "time",
-                    "subtype": "time"
-                }
-            ],
+            "schema": {
+                "anyOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "null"
+                    },
+                    {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    {
+                        "type": "string",
+                        "format": "time"
+                    }
+                ]
+            },
             "required": true
         }
     },
@@ -123,6 +118,13 @@
                 "y": "2018-01-01T12:00:00Z"
             },
             "returns": false
+        }
+    ],
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://open-eo.github.io/openeo-api/processes/#openeo-specific-formats",
+            "title": "Information about the supported temporal formats."
         }
     ]
 }

@@ -1,35 +1,34 @@
 {
     "id": "clip",
-    "summary": "Clips a value between a minimum and a maximum value.",
-    "description": "Clips a number between specified minimum and maximum values. A value larger than the maximal value will have the maximal value, a value lower than minimal value will have the minimal value.",
+    "summary": "Clips values between minimum and maximum values.",
+    "description": "Clips an array of numbers between specified minimum and maximum values. All values larger than the maximal value will have the maximal value, all values lower than minimal value will have the minimal value.",
     "categories": [
         "math"
     ],
-    "parameter_order": [
-        "x",
-        "min",
-        "max"
-    ],
+    "parameter_order": ["data", "min", "max"],
     "parameters": {
-        "x": {
-            "description": "A number.",
+        "data": {
+            "description": "An array of numbers.",
             "schema": {
-                "type": [
-                    "number",
-                    "null"
-                ]
+                "type": "array",
+                "items": {
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
             },
             "required": true
         },
         "min": {
-            "description": "Minimum value. If the value is lower than this value, the process will return the value of this parameter.",
+            "description": "Minimum value. All values lower than this value will be set to the value of this parameter.",
             "schema": {
                 "type": "number"
             },
             "required": true
         },
         "max": {
-            "description": "Maximum value. If the value is greater than this value, the process will return the value of this parameter.",
+            "description": "Maximum value. All values greater than this value will be set to the value of this parameter.",
             "schema": {
                 "type": "number"
             },
@@ -37,46 +36,33 @@
         }
     },
     "returns": {
-        "description": "The value clipped to the specified range.",
+        "description": "An array with the values clipped to the specified range.",
         "schema": {
-            "type": [
-                "number",
-                "null"
-            ]
+            "type": "array",
+            "items": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            }
         }
     },
     "examples": [
         {
             "arguments": {
-                "x": -5,
+                "data": [-2,-1,0,1,2],
                 "min": -1,
                 "max": 1
             },
-            "returns": -1
+            "returns": [-1,-1,0,1,1]
         },
         {
             "arguments": {
-                "x": 10.001,
-                "min": 1,
-                "max": 10
-            },
-            "returns": 10
-        },
-        {
-            "arguments": {
-                "x": 0.000001,
-                "min": 0,
-                "max": 0.02
-            },
-            "returns": 0.000001
-        },
-        {
-            "arguments": {
-                "x": null,
+                "data": [-0.1,-0.001,null,0,0.25,0.75,1.001,null],
                 "min": 0,
                 "max": 1
             },
-            "returns": null
+            "returns": [0,0,null,0,0.25,0.75,1,null]
         }
     ]
 }

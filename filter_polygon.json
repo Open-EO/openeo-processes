@@ -5,27 +5,30 @@
     "categories": [
         "filter"
     ],
-    "parameter_order": [
-        "data",
-        "polygons"
-    ],
+    "parameter_order": ["data", "polygons"],
     "parameters": {
         "data": {
             "description": "A data cube.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "format": "raster-cube"
             },
             "required": true
         },
         "polygons": {
             "description": "One or more polygons used for filtering, either specified as GeoJSON or vector data cube.\n\nFor GeoJSON this can be one of the following GeoJSON types:\n\n* A `Polygon` geometry,\n* a `GeometryCollection` containing Polygons,\n* a `Feature` with a `Polygon` geometry or\n* a `FeatureCollection` containing `Feature`s with a `Polygon` geometry.",
-            "schema": [
-                {
-                    "type": "object",
-                    "subtype": "geojson"
-                }
-            ],
+            "schema": {
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "format": "geojson"
+                    },
+                    {
+                        "type": "object",
+                        "format": "vector-cube"
+                    }
+                ]
+            },
             "required": true
         }
     },
@@ -33,7 +36,7 @@
         "description": "A data cube restricted to the specified polygons. Therefore, the cardinality is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "format": "raster-cube"
         }
     },
     "links": [
