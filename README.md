@@ -10,13 +10,12 @@ The openEO processes are currently released as version [**0.4.2**](http://proces
 
 **Note:** The specification is currently still an early version, with the potential for some major things to change. The core is now fleshed out, so implementors are encouraged to try it out and give feedback. But the goal is to actually be able to act on that feedback, which will mean changes are quite possible. A solid basis is specified right now, but best practices, extensions and specification details will emerge with implementation.
 
-| Version / Branch                                             | Status                    | openEO API versions |
-| ------------------------------------------------------------ | ------------------------- | ------------------- |
-| [unreleased / draft](https://processes.openeo.org/draft)     | in development            | 1.0.0               |
-| [**0.4.2** / **master**](https://processes.openeo.org/0.4.2) | **latest stable version** | 0.4.x               |
-| [0.4.1](https://processes.openeo.org/0.4.1/)                 | legacy version            | 0.4.x               |
-| [0.4.0](https://processes.openeo.org/0.4.0/)                 | legacy version            | 0.4.x               |
+| Version / Branch                                 | Status                    | openEO API versions |
+| ------------------------------------------------ | ------------------------- | ------------------- |
+| [master](https://processes.openeo.org)           | in development            | 1.0.0               |
+| [**0.4.2**](https://processes.openeo.org/0.4.2/) | **latest stable version** | 0.4.x               |
+| [0.4.1](https://processes.openeo.org/0.4.1/)     | legacy version            | 0.4.x               |
+| [0.4.0](https://processes.openeo.org/0.4.0/)     | legacy version            | 0.4.x               |
 
-**Note:** https://processes.openeo.org always points to the latest stable version.
 
 See also the [changelog](CHANGELOG.md) for the changes between versions and the [milestones](https://github.com/Open-EO/openeo-api/milestones) for a rough roadmap based on GitHub issues.

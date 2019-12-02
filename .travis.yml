@@ -24,13 +24,6 @@ before_deploy:
     cp ../processes.json processes.json
   fi
 - |
-  if [[ $TRAVIS_BRANCH == 'draft' ]] ; then
-    rm -rf draft
-    mkdir -p draft
-    cp ../index.html draft/index.html
-    cp ../processes.json draft/processes.json
-  fi
-- |
   if [ -n "$TRAVIS_TAG" ] ; then
     rm -rf $TRAVIS_TAG
     mkdir -p $TRAVIS_TAG
@@ -39,22 +32,11 @@ before_deploy:
   fi
 
 deploy:
-  - provider: pages
-    skip-cleanup: true
-    github-token: $GITHUB_TOKEN
-    local-dir: gh-pages
-    keep-history: true
-    committer-from-gh: true
-    on:
-      tags: true
-  - provider: pages
-    skip-cleanup: true
-    github-token: $GITHUB_TOKEN
-    local-dir: gh-pages
-    keep-history: true
-    committer-from-gh: true
-    on:
-      branches:
-        only:
-          - master
-          - draft
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local-dir: gh-pages
+  keep-history: true
+  committer-from-gh: true
+  on:
+    condition: $TRAVIS_BRANCH == 'master' || -n "$TRAVIS_TAG"
