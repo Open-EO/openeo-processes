@@ -54,7 +54,5 @@ deploy:
     keep-history: true
     committer-from-gh: true
     on:
-      branches:
-        only:
-          - master
-          - draft
+      all_branches: true
+      condition: $TRAVIS_BRANCH =~ ^(master|draft)$
