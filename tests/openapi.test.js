@@ -25,6 +25,7 @@ var subtypes = {
 	'bounding-box': {type: 'object'},
 	'collection-id': {type: 'string'},
 	'epsg-code': {type: 'integer'},
+	'file-path': {type: 'string'},
 	'geojson': {type: 'object'},
 	'job-id': {type: 'string'},
 	'kernel': {type: 'array'},

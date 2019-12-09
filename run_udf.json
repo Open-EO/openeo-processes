@@ -47,6 +47,11 @@
                     "subtype": "uri"
                 },
                 {
+                    "description": "Path to an UDF uploaded to the server.",
+                    "type": "string",
+                    "subtype": "file-path"
+                },
+                {
                     "description": "Source code as string",
                     "type": "string",
                     "subtype": "udf-code"
