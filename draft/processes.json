@@ -8456,7 +8456,7 @@
     ],
     "parameter_order": [
       "data",
-      "subtype",
+      "format",
       "options"
     ],
     "parameters": {
@@ -8474,7 +8474,7 @@
         ],
         "required": true
       },
-      "subtype": {
+      "format": {
         "description": "The file format to save to. It must be one of the values that the server reports as supported output file formats, which usually correspond to the short GDAL/OGR codes. This parameter is *case insensitive*.",
         "schema": {
           "type": "string",
