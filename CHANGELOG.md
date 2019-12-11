@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `array_find`
     - `drop_dimension`
     - `rename_labels`
+- Parameter `crs` added to `load_collection`. [#98](https://github.com/Open-EO/openeo-processes/issues/98)
 - Added further examples
 
 ### Changed

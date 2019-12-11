@@ -1,7 +1,7 @@
 {
     "id": "load_collection",
     "summary": "Load a collection",
-    "description": "Loads a collection from the current back-end by its id and returns it as processable data cube. The data that is added to the data cube can be restricted with the additional `spatial_extent`, `temporal_extent`, `bands` and `properties`.\n\n**Remarks:**\n\n* The bands (and all dimensions that specify nominal dimension labels) are expected to be ordered as specified in the metadata if the `bands` parameter is set to `null`.\n* If no additional parameter is specified this would imply that the whole data set is expected to be loaded. Due to the large size of many data sets this is not recommended and may be optimized by back-ends to only load the data that is actually required after evaluating subsequent processes such as filters. This means that the pixel values should be processed only after the data has been limited to the required extents and as a consequence also to a manageable size.",
+    "description": "Loads a collection from the current back-end by its id and returns it as processable data cube. The data that is added to the data cube can be restricted with the additional `spatial_extent`, `temporal_extent`, `bands` and `properties`. If the data requested from a collection has multiple coordinate reference systems (CRS) assigned, a target CRS for the data cube must be specified with the parameter `crs`.\n\n**Remarks:**\n\n* The bands (and all dimensions that specify nominal dimension labels) are expected to be ordered as specified in the metadata if the `bands` parameter is set to `null`.\n* If no additional parameter is specified this would imply that the whole data set is expected to be loaded. Due to the large size of many data sets this is not recommended and may be optimized by back-ends to only load the data that is actually required after evaluating subsequent processes such as filters. This means that the pixel values should be processed only after the data has been limited to the required extents and as a consequence also to a manageable size.",
     "categories": [
         "cubes",
         "import"
@@ -11,7 +11,8 @@
         "spatial_extent",
         "temporal_extent",
         "bands",
-        "properties"
+        "properties",
+        "crs"
     ],
     "parameters": {
         "id": {
@@ -204,6 +205,40 @@
                 }
             ],
             "default": null
+        },
+        "crs": {
+            "description": "If the data requested from a collection has multiple coordinate reference systems (CRS) assigned, a target CRS for the data cube must be specified. Otherwise, the requested data must either be available in a single CRS or a `TargetCrsMissing` error is thrown.\n\nThe CRS must be specified as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html), [PROJJSON](https://proj.org/projjson.html) or [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html). Defaults to `null` (no target CRS).",
+            "schema": [
+                {
+                    "title": "EPSG Code",
+                    "type": "integer",
+                    "subtype": "epsg-code",
+                    "examples": [
+                        7099
+                    ]
+                },
+                {
+                    "title": "WKT2",
+                    "type": "string",
+                    "subtype": "wkt2-definition"
+                },
+                {
+                    "title": "PROJ definition",
+                    "type": "string",
+                    "subtype": "proj-definition",
+                    "deprecated": true
+                },
+                {
+                    "title": "PROJJSON",
+                    "type": "object",
+                    "subtype": "projjson-definition"
+                },
+                {
+                    "title": "No target CRS",
+                    "type": "null"
+                }
+            ],
+            "default": null
         }
     },
     "returns": {
@@ -221,7 +256,7 @@
     },
     "examples": [
         {
-            "description": "Loading `Sentinel-2B` data from a `Sentinel-2` collection for 2018, but only with cloud cover between 0 and 10%.",
+            "description": "Loading `Sentinel-2B` data from a `Sentinel-2` collection for 2018, but only with cloud cover between 0 and 10%. Data cube will be projected to EPSG:3857.",
             "process_graph": {
                 "loadco1": {
                     "process_id": "load_collection",
@@ -268,13 +303,19 @@
                                     }
                                 }
                             }
-                        }
+                        },
+                        "crs": 3857
                     },
                     "result": true
                 }
             }
         }
     ],
+    "exceptions": {
+        "TargetCrsMissing": {
+            "message": "The data requested from the collection has multiple CRS assigned and thus the parameter `crs` must be specified."
+        }
+    },
     "links": [
         {
             "rel": "about",
