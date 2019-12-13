@@ -19,23 +19,23 @@
             "description": "A raster data cube.",
             "schema": {
                 "type": "object",
-                "format": "raster-cube"
+                "subtype": "raster-cube"
             },
-            "required": true,
+            "required": true
         },
         "vector": {
             "description": "A vector data cube containing features on which the aggregation will be based.",
             "schema": [
                 {
                     "type": "object",
-                    "format": "geojson"
+                    "subtype": "geojson"
                 },
                 {
                     "type": "object",
-                    "format": "vector-cube"
+                    "subtype": "vector-cube"
                 }
-            ]
-            "required": true,
+            ],
+            "required": true
         },
         "reducer": {
             "description": "A reducer to be applied on all values of each geometry. The reducer must be a callable process (or a set of processes as process graph) such as ``mean()`` that accepts by default array as input. The process can also work on two values by setting the parameter `binary` to `true`.",
@@ -70,19 +70,19 @@
                     }
                 }
             ],
-            "required": true,
+            "required": true
         },
         "name": {
             "description": "The property name (for GeoJSON) or the new dimension name (for vector cubes) to be used for storing the results. Defaults to `result`.",
             "schema": {
-                "type": "string",
+                "type": "string"
             },
             "default": "result"
         },
         "binary": {
             "description": "Specifies whether the process should pass two values to the reducer or a list of values (default).\n\nIf the process passes two values, the reducer must be both associative and commutative as the execution may be executed in parallel and therefore the order of execution is arbitrary.\n\nThis parameter is especially useful for UDFs passed as reducers. Back-ends may still optimize and parallelize processes that work on list of values.",
             "schema": {
-                "type": "boolean",
+                "type": "boolean"
             },
             "default": false
         }
@@ -92,11 +92,11 @@
         "schema": [
             {
                 "type": "object",
-                "format": "geojson"
+                "subtype": "geojson"
             },
             {
                 "type": "object",
-                "format": "vector-cube"
+                "subtype": "vector-cube"
             }
         ]
     },
@@ -112,7 +112,7 @@
             "title": "More information about the experimental status of the process"
         },
         {
-            "href": "https://open-eo.github.io/openeo-api/v/0.4.1/glossary/#aggregation-and-resampling",
+            "href": "https://open-eo.github.io/openeo-api/glossary/#aggregation-and-resampling",
             "rel": "about",
             "title": "Aggregation explained in the openEO glossary"
         },
@@ -128,4 +128,3 @@
         }
     ]
 }
-
