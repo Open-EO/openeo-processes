@@ -1,0 +1,65 @@
+{
+    "id": "load_uploaded_files",
+    "summary": "Load files from the user workspace.",
+    "description": "Loads user-uploaded files from the local user workspace / data store. The files must have been stored by the authenticated user on the back-end currently connected to.",
+    "categories": [
+        "cubes",
+        "import"
+	],
+    "parameter_order": [
+        "paths",
+        "format",
+        "options"
+    ],
+    "parameters": {
+        "paths": {
+            "description": "The file(s) and folder(s) to read.",
+            "schema": {
+				"type": "array",
+				"subtype": "file-folder-paths",
+				"items": {
+					"anyOf": [
+						{
+							"type": "string",
+							"subtype": "file-path"
+						},
+						{
+							"type": "string",
+							"subtype": "folder-path"
+						}
+					]
+				}
+			},
+            "required": true
+        },
+        "format": {
+            "description": "The file format to save to. It must be one of the values that the server reports as supported input file formats, which usually correspond to the short GDAL/OGR codes. This parameter is *case insensitive*.",
+            "schema": {
+                "type": "string",
+                "subtype": "input-format"
+            },
+            "required": true
+        },
+        "options": {
+            "description": "The file format options to be used to read the file(s). Must correspond to the options that the server reports as supported options for the chosen `format`. The option names and valid values usually correspond to the GDAL/OGR format options.",
+            "schema": {
+                "type": "object",
+                "subtype": "input-format-options"
+            },
+            "default": {}
+        }
+    },
+    "returns": {
+        "description": "A data cube for further processing.",
+        "schema": [
+            {
+                "type": "object",
+                "subtype": "raster-cube"
+            },
+            {
+                "type": "object",
+                "subtype": "vector-cube"
+            }
+        ]
+    }
+}
