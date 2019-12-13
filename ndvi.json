@@ -22,34 +22,20 @@
             "required": true
         },
         "nir": {
-            "description": "The name of the NIR band. Defaults to the band that has the common name `nir` assigned.",
-            "schema": [
-                {
-                    "type": "string",
-                    "subtype": "band-name"
-                },
-                {
-                    "title": "Default NIR band",
-                    "description": "Use the band that has the common name `nir` assigned in the collection metadata.",
-                    "type": "null"
-                }
-            ],
-            "default": null
+            "description": "The name of the NIR band. Defaults to the band that has the common name `nir` assigned.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If unique band name and common name conflict, the unique band name has higher priority.",
+            "schema": {
+                "type": "string",
+                "subtype": "band-name"
+            },
+            "default": "nir"
         },
         "red": {
-            "description": "The name of the red band. Defaults to the band that has the common name `red` assigned.",
-            "schema": [
-                {
-                    "type": "string",
-                    "subtype": "band-name"
-                },
-                {
-                    "title": "Default red band",
-                    "description": "Use the band that has the common name `red` assigned in the collection metadata.",
-                    "type": "null"
-                }
-            ],
-            "default": null
+            "description": "The name of the red band. Defaults to the band that has the common name `red` assigned.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If unique band name and common name conflict, the unique band name has higher priority.",
+            "schema": {
+                "type": "string",
+                "subtype": "band-name"
+            },
+            "default": "red"
         },
         "target_band": {
             "description": "By default, the dimension of type `bands` is dropped. To keep the dimension specify a new band name in this parameter so that a new dimension label with the specified name will be added for the computed values.",
