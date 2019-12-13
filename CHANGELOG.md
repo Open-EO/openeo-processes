@@ -36,7 +36,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `reduce`: The `null` (no-operation) reducer has been removed. Use the process `drop_dimension` instead. [#57](https://github.com/Open-EO/openeo-processes/issues/57)
 - The following operations don't support `ignore_nodata` any longer: `and`, `divide`, `multiply`, `or`, `subtract`, `xor`. [#85](https://github.com/Open-EO/openeo-processes/issues/85)
 - Removed processes:
-    - `array_contains`: Use `array_find` instead.
     - `find_collections`: Use `load_collection` and manual data discovery through the clients. [API#52](https://github.com/Open-EO/openeo-api/issues/52)
     - `output`: Use `debug` instead.
 
