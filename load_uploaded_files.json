@@ -33,7 +33,7 @@
             "required": true
         },
         "format": {
-            "description": "The file format to save to. It must be one of the values that the server reports as supported input file formats, which usually correspond to the short GDAL/OGR codes. This parameter is *case insensitive*.",
+            "description": "The file format to read from. It must be one of the values that the server reports as supported input file formats, which usually correspond to the short GDAL/OGR codes. This parameter is *case insensitive*.",
             "schema": {
                 "type": "string",
                 "subtype": "input-format"
