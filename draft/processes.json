@@ -3517,14 +3517,13 @@
   {
     "id": "filter_bands",
     "summary": "Filter the bands by name",
-    "description": "Filters the bands in the data cube so that bands that don't match any of the criteria are dropped from the data cube. The data cube is expected to have only one dimension of type `bands`. Fails with a `DimensionMissing` error if no such dimension exists.\n\nThe following criteria can be used to select bands:\n\n* `bands`: band name (e.g. `B01` or `B8A`)\n* `common_names`: common band names (e.g. `red` or `nir`)\n* `wavelengths`: ranges of wavelengths in micrometres (μm) (e.g. 0.5 - 0.6)\n\nAll these information are exposed in the band metadata of the collection. To keep algorithms interoperable it is recommended to prefer the common bands names or the wavelengths over collection and/or back-end specific band names.\n\nIf multiple criteria are specified, any of them must match and not all of them, i.e. they are combined with an OR-operation. If no criteria is specified, the `BandFilterParameterMissing` exception must be thrown.\n\n**Important:** The order of the specified array defines the order of the bands in the data cube, which can be important for subsequent processes. If multiple bands are matched by a single criterion (e.g. a range of wavelengths), they are ordered as specified in the collection metadata.",
+    "description": "Filters the bands in the data cube so that bands that don't match any of the criteria are dropped from the data cube. The data cube is expected to have only one dimension of type `bands`. Fails with a `DimensionMissing` error if no such dimension exists.\n\nThe following criteria can be used to select bands:\n\n* `bands`: band name or common band name (e.g. `B01`, `B8A`, `red` or `nir`)\n* `wavelengths`: ranges of wavelengths in micrometres (μm) (e.g. 0.5 - 0.6)\n\nAll these information are exposed in the band metadata of the collection. To keep algorithms interoperable it is recommended to prefer the common bands names or the wavelengths over collection and/or back-end specific band names.\n\nIf multiple criteria are specified, any of them must match and not all of them, i.e. they are combined with an OR-operation. If no criteria is specified, the `BandFilterParameterMissing` exception must be thrown.\n\n**Important:** The order of the specified array defines the order of the bands in the data cube, which can be important for subsequent processes. If multiple bands are matched by a single criterion (e.g. a range of wavelengths), they stay in the original order.",
     "categories": [
       "filter"
     ],
     "parameter_order": [
       "data",
       "bands",
-      "common_names",
       "wavelengths"
     ],
     "parameters": {
@@ -3537,7 +3536,7 @@
         "required": true
       },
       "bands": {
-        "description": "A list of band names.\n\nThe order of the specified array defines the order of the bands in the data cube.",
+        "description": "A list of band names. Either the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands). If unique band name and common name conflict, the unique band name has higher priority.\n\nThe order of the specified array defines the order of the bands in the data cube. If multiple bands match a common name, all matched bands are included in the original order.",
         "schema": {
           "type": "array",
           "items": {
@@ -3547,18 +3546,8 @@
         },
         "default": []
       },
-      "common_names": {
-        "description": "A list of common band names.\n\nThe order of the specified array defines the order of the bands in the data cube.",
-        "schema": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "default": []
-      },
       "wavelengths": {
-        "description": "A list of sub-lists with each sub-list consisting of two elements. The first element is the minimum wavelength and the second element is the maximum wavelength. Wavelengths are specified in micrometres (μm).\n\nThe order of the specified array defines the order of the bands in the data cube.",
+        "description": "A list of sub-lists with each sub-list consisting of two elements. The first element is the minimum wavelength and the second element is the maximum wavelength. Wavelengths are specified in micrometres (μm).\n\nThe order of the specified array defines the order of the bands in the data cube. If multiple bands match the wavelengths, all matched bands are included in the original order.",
         "schema": {
           "type": "array",
           "items": {
@@ -5003,7 +4992,7 @@
         "required": true
       },
       "temporal_extent": {
-        "description": "Limits the data to load from the collection to the specified left-closed temporal interval. Applies to all temporal dimensions if there are multiple of them. The interval has to be specified as an array with exactly two elements:\n\n1. The first element is the start of the date and/or time interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the date and/or time interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://tools.ietf.org/html/rfc3339). Although [RFC 3339 prohibits the hour to be '24'](https://tools.ietf.org/html/rfc3339#section-5.7), **this process allows the value '24' for the hour** of an end time in order to make it possible that left-closed time intervals can fully cover the day.\n\nAlso supports open intervals by setting one of the boundaries to `null`, but never both.\n\nSet this parameter to `null` to set no limit for the spatial extent. Be careful with this when loading large datasets!",
+        "description": "Limits the data to load from the collection to the specified left-closed temporal interval. Applies to all temporal dimensions. The interval has to be specified as an array with exactly two elements:\n\n1. The first element is the start of the date and/or time interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the date and/or time interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://tools.ietf.org/html/rfc3339). Although [RFC 3339 prohibits the hour to be '24'](https://tools.ietf.org/html/rfc3339#section-5.7), **this process allows the value '24' for the hour** of an end time in order to make it possible that left-closed time intervals can fully cover the day.\n\nAlso supports open intervals by setting one of the boundaries to `null`, but never both.\n\nSet this parameter to `null` to set no limit for the spatial extent. Be careful with this when loading large datasets!",
         "schema": [
           {
             "type": "array",
@@ -5052,7 +5041,7 @@
         "required": true
       },
       "bands": {
-        "description": "Only adds the specified bands into the data cube so that bands that don't match the list of band names are not available. Applies to all dimensions of type `bands` if there are multiple of them.\n\nThe order of the specified array defines the order of the bands in the data cube.",
+        "description": "Only adds the specified bands into the data cube so that bands that don't match the list of band names are not available. Applies to all dimensions of type `bands`.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If unique band name and common name conflict, the unique band name has higher priority.\n\nThe order of the specified array defines the order of the bands in the data cube. f multiple bands match a common name, all matched bands are included in the original order.",
         "schema": [
           {
             "type": "array",
@@ -5183,6 +5172,11 @@
         "href": "http://www.opengeospatial.org/standards/sfa",
         "rel": "about",
         "title": "Simple Features standard by the OGC"
+      },
+      {
+        "rel": "about",
+        "href": "https://github.com/radiantearth/stac-spec/tree/master/extensions/eo#common-band-names",
+        "title": "List of common band names as specified by the STAC specification"
       }
     ]
   },
@@ -6318,34 +6312,20 @@
         "required": true
       },
       "nir": {
-        "description": "The name of the NIR band. Defaults to the band that has the common name `nir` assigned.",
-        "schema": [
-          {
-            "type": "string",
-            "subtype": "band-name"
-          },
-          {
-            "title": "Default NIR band",
-            "description": "Use the band that has the common name `nir` assigned in the collection metadata.",
-            "type": "null"
-          }
-        ],
-        "default": null
+        "description": "The name of the NIR band. Defaults to the band that has the common name `nir` assigned.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If unique band name and common name conflict, the unique band name has higher priority.",
+        "schema": {
+          "type": "string",
+          "subtype": "band-name"
+        },
+        "default": "nir"
       },
       "red": {
-        "description": "The name of the red band. Defaults to the band that has the common name `red` assigned.",
-        "schema": [
-          {
-            "type": "string",
-            "subtype": "band-name"
-          },
-          {
-            "title": "Default red band",
-            "description": "Use the band that has the common name `red` assigned in the collection metadata.",
-            "type": "null"
-          }
-        ],
-        "default": null
+        "description": "The name of the red band. Defaults to the band that has the common name `red` assigned.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If unique band name and common name conflict, the unique band name has higher priority.",
+        "schema": {
+          "type": "string",
+          "subtype": "band-name"
+        },
+        "default": "red"
       },
       "target_band": {
         "description": "By default, the dimension of type `bands` is dropped. To keep the dimension specify a new band name in this parameter so that a new dimension label with the specified name will be added for the computed values.",
