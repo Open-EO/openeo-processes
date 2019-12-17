@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `any`
     - `array_find`
     - `drop_dimension`
+    - `load_uploaded_files`
     - `rename_labels`
 - Added further examples
 
