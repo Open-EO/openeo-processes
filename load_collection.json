@@ -313,7 +313,7 @@
     ],
     "exceptions": {
         "TargetCrsMissing": {
-            "message": "The data requested from the collection has multiple CRS assigned and thus the parameter `crs` must be specified."
+            "message": "The data requested from the collection has multiple CRS assigned and thus a valid target CRS must be specified."
         }
     },
     "links": [
