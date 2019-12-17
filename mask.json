@@ -1,14 +1,15 @@
 {
     "id": "mask",
     "summary": "Apply a mask",
-    "description": "Applies a mask to a raster data cube. A mask can either be specified as:\n\n* **Raster data cube** for which parallel pixels among `data` and `mask` are compared and those pixels in `data` are replaced, which are non-zero (for numbers) or `true` (for boolean values) in `mask`.\n* **GeoJSON or vector data cube** containing one or more polygons. All pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC) are replaced.\n\nThe pixel values are replaced with the value specified for `replacement`, which defaults to `null` (no data). No data values will be left untouched by the masking operation.",
+    "description": "Applies a mask to a raster data cube. By default, a mask can either be specified as:\n\n* **Raster data cube** for which parallel pixels among `data` and `mask` are compared and those pixels in `data` are replaced, which are non-zero (for numbers) or `true` (for boolean values) in `mask`.\n* **GeoJSON or vector data cube** containing one or more polygons. All pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC) are replaced.\n\nThis behavior can be inverted with the parameter `invert`. The pixel values are replaced with the value specified for `replacement`, which defaults to `null` (no data). No data values will be left untouched by the masking operation.",
     "categories": [
         "masks"
     ],
     "parameter_order": [
         "data",
         "mask",
-        "replacement"
+        "replacement",
+        "invert"
     ],
     "parameters": {
         "data": {
@@ -48,6 +49,13 @@
                 ]
             },
             "default": null
+        },
+        "invert": {
+            "description": "If set to `true`, inverts the mask so that the behavior changes as follows:\n\n* **Raster data cube**: Parallel pixels among `data` and `mask` are compared and those pixels in `data` are replaced, which are **zero** (for numbers) or **`false`** (for boolean values) in `mask`.\n* **GeoJSON or vector data cube**: All pixels for which the point at the pixel center does **not** intersect with the corresponding polygon (as defined in the Simple Features standard by the OGC) are replaced.",
+            "schema": {
+                "type": "boolean"
+            },
+            "default": false
         }
     },
     "returns": {

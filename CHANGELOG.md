@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `array_find`
     - `drop_dimension`
     - `rename_labels`
+- New parameters:
+    - `invert` for process `mask` [#103](https://github.com/Open-EO/openeo-processes/issues/103)
 - Added further examples
 
 ### Changed
