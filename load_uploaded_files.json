@@ -1,7 +1,7 @@
 {
     "id": "load_uploaded_files",
     "summary": "Load files from the user workspace.",
-    "description": "Loads user-uploaded files from the local user workspace / data store. The files must have been stored by the authenticated user on the back-end currently connected to.",
+    "description": "Loads one or more user-uploaded files from the local user workspace / data store and returns them as a single data cube. The files must have been stored by the authenticated user on the back-end currently connected to.",
     "categories": [
         "cubes",
         "import"
@@ -13,7 +13,7 @@
     ],
     "parameters": {
         "paths": {
-            "description": "The file(s) and folder(s) to read.",
+            "description": "The files and/or folders to read.\n\nAll files in the specified folders will be read, which includes recursively reading all sub-folders. Implementations may skip files in folders that clearly can't be read using the specified format, but there's no guarantee for it.\n\nAn error is thrown if a file can't be read.",
             "schema": {
 				"type": "array",
 				"subtype": "file-folder-paths",
