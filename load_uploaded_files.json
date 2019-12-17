@@ -13,22 +13,14 @@
     ],
     "parameters": {
         "paths": {
-            "description": "The files and/or folders to read.\n\nAll files in the specified folders will be read, which includes recursively reading all sub-folders. Implementations may skip files in folders that clearly can't be read using the specified format, but there's no guarantee for it.\n\nAn error is thrown if a file can't be read.",
+            "description": "The files to read. Folders can't be specified, instead specify all files. An error is thrown if a file can't be read.",
             "schema": {
 				"type": "array",
-				"subtype": "file-folder-paths",
+				"subtype": "file-paths",
 				"items": {
-					"anyOf": [
-						{
-							"type": "string",
-							"subtype": "file-path"
-						},
-						{
-							"type": "string",
-							"subtype": "folder-path"
-						}
-					]
-				}
+                    "type": "string",
+                    "subtype": "file-path"
+                }
 			},
             "required": true
         },
@@ -41,7 +33,7 @@
             "required": true
         },
         "options": {
-            "description": "The file format options to be used to read the file(s). Must correspond to the options that the server reports as supported options for the chosen `format`. The option names and valid values usually correspond to the GDAL/OGR format options.",
+            "description": "The file format options to be used to read the files. Must correspond to the options that the server reports as supported options for the chosen `format`. The option names and valid values usually correspond to the GDAL/OGR format options.",
             "schema": {
                 "type": "object",
                 "subtype": "input-format-options"
