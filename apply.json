@@ -1,7 +1,7 @@
 {
     "id": "apply",
-    "summary": "Applies a unary process to each pixel",
-    "description": "Applies a **unary** process which takes a single value such as `abs` or `sqrt` to each pixel value in the data cube (i.e. a local operation). In contrast, the process ``apply_dimension()`` applies an n-ary process to a particular dimension.",
+    "summary": "Applies a process to each pixel",
+    "description": "Applies a *unary* process to all pixel values in the data cube (i.e. a local operation). A unary process takes a single value and returns a single value, for example ``abs()`` or ``linear_scale_range()``. In contrast, the process ``apply_dimension()`` applies a process to all pixels along a particular dimension.",
     "categories": [
         "cubes"
     ],
@@ -19,7 +19,7 @@
             "required": true
         },
         "process": {
-            "description": "A process to be applied on each value, may consist of multiple sub-processes. The specified process must be unary meaning that it must work on a single value.",
+            "description": "A unary process to be applied on each value, may consist of multiple sub-processes.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
