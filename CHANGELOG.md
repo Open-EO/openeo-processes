@@ -44,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Several clarifications in written texts. [#86](https://github.com/Open-EO/openeo-processes/issues/86)
 - `filter_bbox`, `load_collection`: The schema for the property `crs` in the parameters `extent`/`spatial_extent` contained invalid JSON Schema.
+- `merge_cubes`: Clarified merging behavior with several examples.
 
 ## [0.4.2] - 2019-06-11
 
