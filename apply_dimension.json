@@ -45,7 +45,7 @@
             "required": true
         },
         "target_dimension": {
-            "description": "The name of the target dimension or `null` to replace the dimension labels and pixel values in the original dimension (default).\n\nIf a target dimension is specified, a new dimension with the specified name and the type `other` (see ``add_dimension()``) is created. If a dimension with the specified name exists, the dimension is replaced, but keeps the original type.\n\nThe resulting target dimension has as many dimension labels as the array returned by the process has values. For example, a process returning an array with four elements results in a dimension with four labels.",
+            "description": "The name of the target dimension or `null` (default).\n\n1. The default behavior is to replace the pixel values (and dimension labels if the number of pixel values and dimension labels doesn't match) in the original dimension.\n2. If a target dimension is specified, a new dimension with the specified name and the type `other` (see ``add_dimension()``) is created. If a dimension with the specified name exists, the dimension is replaced, but keeps the original name, type, reference system (and dimension labels if the number of values matches the number of dimension labels).\n\nAfterwards, the dimension has as many dimension labels as the array returned by the process has values. For example, a process returning an array with four elements results in a dimension with four labels.",
             "schema": {
                 "type": [
                     "string",
