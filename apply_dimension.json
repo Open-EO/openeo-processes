@@ -1,7 +1,7 @@
 {
     "id": "apply_dimension",
     "summary": "Applies a process to pixels along a dimension",
-    "description": "Applies a process to all pixel values along a dimension of a raster data cube. For example, if the temporal dimension is specified the process will work on a time series of pixel values.\n\nBy default, the dimension is replaced with a new dimension of the same type. The new dimension will have as many enumerated dimension labels as array elements are available after applying the process. Enumerated dimension labels start from zero.\n\nThe process ``reduce()`` also applies a process to pixel values along a dimension, but removes the dimension afterwards. The process ``apply()`` applies a process to each pixel value in the data cube.",
+    "description": "Applies a process to all pixel values along a dimension of a raster data cube. For example, if the temporal dimension is specified the process will work on a time series of pixel values.\n\nBy default, the target dimension is the source dimension so that the source dimension gets modified. By specifying a target dimension, the source dimension is removed and the target dimension gets modified. If the target dimension doesn't exist it is created beforehand. See the parameter `target_dimension` for more details.\n\nThe process ``reduce()`` also applies a process to pixel values along a dimension, but removes the dimension afterwards. The process ``apply()`` applies a process to each pixel value in the data cube.",
     "categories": [
         "cubes"
     ],
@@ -38,14 +38,14 @@
             "required": true
         },
         "dimension": {
-            "description": "The name of the dimension to apply the process on. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+            "description": "The name of the source dimension to apply the process on. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
             "schema": {
                 "type": "string"
             },
             "required": true
         },
         "target_dimension": {
-            "description": "The name of the target dimension or `null` (default).\n\n1. The default behavior is to replace the pixel values (and dimension labels if the number of pixel values and dimension labels doesn't match) in the original dimension.\n2. If a target dimension is specified, a new dimension with the specified name and the type `other` (see ``add_dimension()``) is created. If a dimension with the specified name exists, the dimension is replaced, but keeps the original name, type, reference system (and dimension labels if the number of values matches the number of dimension labels).\n\nAfterwards, the dimension has as many dimension labels as the array returned by the process has values. For example, a process returning an array with four elements results in a dimension with four labels.",
+            "description": "The name of the target dimension or `null` (the default) to use the source dimension specified in the parameter `dimension`.\n\n* The default is that the target dimension is the source dimension so that the pixel values are replaced in the source dimension. The original name, type and reference system are preserved.\n* By specifying a target dimension, the source dimension is removed and the target dimension is populated with the computed pixel values.\n  * If the target dimension *does not exist*, a new dimension with the specified name and the type `other` (see ``add_dimension()``) is created.\n  * If the target dimension *does exist*, the pixel values are replaced in the target dimension. The original name, type and reference system are preserved. This case is meant to be used to populate a new dimension added with ``add_dimension()``.\n\nIn general, the target dimension will have as many dimension labels as values are available after applying the process. The dimension labels are preserved when the number of pixel values in the source dimension is equal to the number of values computed by the process. Otherwise, the dimension labels will be incrementing integers starting from zero, which can be changed using ``rename_labels()`` afterwards.",
             "schema": {
                 "type": [
                     "string",
@@ -56,7 +56,7 @@
         }
     },
     "returns": {
-        "description": "A data cube with the newly computed values for the specified . The resolution, cardinality and the number of dimensions are the same as for the original data cube.",
+        "description": "A data cube with the newly computed values for the specified. The resolution, cardinality and the number of dimensions are the same as for the original data cube.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"
