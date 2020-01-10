@@ -130,6 +130,13 @@
         },
         {
             "arguments": {
+                "x": 0,
+                "y": false
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
                 "x": 1.02,
                 "y": 1,
                 "delta": 0.01

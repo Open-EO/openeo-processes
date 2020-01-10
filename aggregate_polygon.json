@@ -73,7 +73,7 @@
             "required": true
         },
         "name": {
-            "description": "The property name (for GeoJSON) or the new dimension name (for vector cubes) to be used for storing the results. Defaults to `result`.",
+            "description": "The new dimension name to be used for storing the results. Defaults to `result`.",
             "schema": {
                 "type": "string"
             },
@@ -88,17 +88,11 @@
         }
     },
     "returns": {
-        "description": "A vector data cube or a GeoJSON object, depending on the input of the `polygons` parameter.\n\nThe computed value is stored in a property (GeoJSON) or dimension (vector cube) with the name that was specified in the parameter `name`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) in each geometry. In GeoJSON these are stored as properties with the names `{name}_total_count` and `{name}_valid_count` (replace `{name}` with the value of the `name` parameter). In a vector data cube, these values are stored as attributes of the result value with the attribute names `total_count` and `valid_count`.\n\nIf the input was GeoJSON and the therefore the return value is also a GeoJSON object, the geometries (`Polygon` or `GeometryCollection`) get wrapped in a `Feature` or `FeatureCollection` respectively. The results of the computations are stored in the `properties` of each GeoJSON `Feature`.",
-        "schema": [
-            {
-                "type": "object",
-                "subtype": "geojson"
-            },
-            {
-                "type": "object",
-                "subtype": "vector-cube"
-            }
-        ]
+        "description": "A vector data cube with the computed results. The vector data cube implicitly gets restricted to the bounds of the polygons as if ``filter_polygon()`` would have been used with the same values for the corresponding parameters immediately before this process.\n\nThe computed value is stored in dimension with the name that was specified in the parameter `name`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) in each geometry. These values are stored as attributes of the result value with the attribute names `total_count` and `valid_count`.",
+        "schema": {
+            "type": "object",
+            "subtype": "vector-cube"
+        }
     },
     "exceptions": {
         "TooManyDimensions": {
