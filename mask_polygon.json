@@ -1,5 +1,5 @@
 {
-    "id": "mask",
+    "id": "mask_polygon",
     "summary": "Apply a polygon mask",
     "description": "Applies a polygon mask to a raster data cube. All pixels for which the point at the pixel center **does not** intersect with any polygon (as defined in the Simple Features standard by the OGC) are replaced. This behaviour can be inverted by setting the parameter `inside` to `true`.\n\nThe pixel values are replaced with the value specified for `replacement`, which defaults to `null` (no data). No data values in `data` will be left untouched by the masking operation.",
     "categories": [
