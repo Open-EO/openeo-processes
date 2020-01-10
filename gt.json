@@ -123,6 +123,13 @@
                 "y": "2018-01-01T12:00:00Z"
             },
             "returns": false
+        },
+        {
+            "arguments": {
+                "x": true,
+                "y": 0
+            },
+            "returns": false
         }
     ]
 }
