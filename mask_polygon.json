@@ -1,0 +1,71 @@
+{
+    "id": "mask_polygon",
+    "summary": "Apply a polygon mask",
+    "description": "Applies a polygon mask to a raster data cube. To apply a raster mask use ``mask()``.\n\nAll pixels for which the point at the pixel center **does not** intersect with any polygon (as defined in the Simple Features standard by the OGC) are replaced. This behaviour can be inverted by setting the parameter `inside` to `true`.\n\nThe pixel values are replaced with the value specified for `replacement`, which defaults to `null` (no data). No data values in `data` will be left untouched by the masking operation.",
+    "categories": [
+        "masks"
+    ],
+    "parameter_order": [
+        "data",
+        "mask",
+        "replacement",
+        "inside"
+    ],
+    "parameters": {
+        "data": {
+            "description": "A raster data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            },
+            "required": true
+        },
+        "mask": {
+            "description": "A GeoJSON object or a vector data cube containing a polygon. The provided feature types can be one of the following:\n\n* A `Polygon` geometry,\n* a `GeometryCollection` containing Polygons,\n* a `Feature` with a `Polygon` geometry or\n* a `FeatureCollection` containing `Feature`s with a `Polygon` geometry.",
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "geojson"
+                },
+                {
+                    "type": "object",
+                    "subtype": "vector-cube"
+                }
+            ],
+            "required": true
+        },
+        "replacement": {
+            "description": "The value used to replace masked values with.",
+            "schema": {
+                "type": [
+                    "number",
+                    "boolean",
+                    "string",
+                    "null"
+                ]
+            },
+            "default": null
+        },
+        "inside": {
+            "description": "If set to `true` all pixels for which the point at the pixel center **does** intersect with any polygon are replaced.",
+            "schema": {
+                "type": "boolean"
+            },
+            "default": false
+        }
+    },
+    "returns": {
+        "description": "The masked raster data cube.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "links": [
+        {
+            "href": "http://www.opengeospatial.org/standards/sfa",
+            "rel": "about",
+            "title": "Simple Features standard by the OGC"
+        }
+    ]
+}

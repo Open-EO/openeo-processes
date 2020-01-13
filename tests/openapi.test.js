@@ -343,8 +343,8 @@ function checkDescription(text, p = null, commonmark = true) {
 			config: {
 				"line-length": false, // Nobody cares in JSON files anyway
 				"first-line-h1": false, // Usually no headings in descriptions
-				"first-heading-h1": false, // Usually not required for descriptions
-				"fenced-code-language": false // Usually no languages available anyway
+				"fenced-code-language": false, // Usually no languages available anyway
+				"single-trailing-newline": false, // New lines at end of a JSON string doesn't make sense. We don't have files here.
 			}
 		};
 		const result = markdownlint.sync(options);
