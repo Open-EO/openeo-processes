@@ -1446,7 +1446,7 @@
   {
     "id": "array_contains",
     "summary": "List contains an element",
-    "description": "Checks whether the array specified for `data` contains the value specified in `value`. Returns `true` if there's a match, otherwise `false`.\n\n**Remarks:**\n\n* To get the index of the element found, use ``array_find()``.\n* Data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.",
+    "description": "Checks whether the array specified for `data` contains the value specified in `value`. Returns `true` if there's a match, otherwise `false`.\n\n**Remarks:**\n\n* To get the index of the element found, use ``array_find()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. This includes that data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.",
     "categories": [
       "arrays",
       "comparison"
@@ -1553,7 +1553,7 @@
             2
           ]
         },
-        "returns": true
+        "returns": false
       },
       {
         "arguments": {
@@ -1585,7 +1585,7 @@
             "a": "b"
           }
         },
-        "returns": true
+        "returns": false
       }
     ]
   },
@@ -1676,7 +1676,7 @@
   {
     "id": "array_find",
     "summary": "Get the index of an element in an array",
-    "description": "Checks whether the array specified for `data` contains the value specified in `value` and returns the zero-based index for the first match. If there's no match, `-1` is returned.\n\n**Remarks:**\n\n* To get a boolean value returned use ``array_contains()``.\n* Data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.",
+    "description": "Checks whether the array specified for `data` contains the value specified in `value` and returns the zero-based index for the first match. If there's no match, `-1` is returned.\n\n**Remarks:**\n\n* To get a boolean value returned use ``array_contains()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. This includes that data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.",
     "categories": [
       "arrays"
     ],
@@ -1773,7 +1773,7 @@
             2
           ]
         },
-        "returns": 0
+        "returns": -1
       },
       {
         "arguments": {
@@ -1805,7 +1805,7 @@
             "a": "b"
           }
         },
-        "returns": 0
+        "returns": -1
       }
     ]
   },
@@ -1940,7 +1940,7 @@
   {
     "id": "between",
     "summary": "Between comparison",
-    "description": "By default this process checks whether `x` is greater than or equal to `min` and lower than or equal to `max`. Therefore, this process is an alias for `and([gte(x, min), lte(x, max)])` and all definitions from these processes apply here as well.\n\nIf `exclude_max` is set to `true` the upper bound is excluded so that the process checks whether `x` is greater than or equal to `min` and lower than `max`. In this case the process works the same as executing `and([gte(x, min), lt(x, max)])`.\n\nLower and upper bounds are not allowed to be swapped. So `min` MUST be lower than or equal to `max` or otherwise the process always returns `false`.",
+    "description": "By default this process checks whether `x` is greater than or equal to `min` and lower than or equal to `max`. Therefore, this process is an alias for `and([gte(x, min), lte(x, max)])` and all definitions from ``and()``, ``gte()`` and ``lte()`` apply here as well.\n\nIf `exclude_max` is set to `true` the upper bound is excluded so that the process checks whether `x` is greater than or equal to `min` and lower than `max`. In this case the process works the same as executing `and([gte(x, min), lt(x, max)])`.\n\nLower and upper bounds are not allowed to be swapped. So `min` MUST be lower than or equal to `max` or otherwise the process always returns `false`.",
     "categories": [
       "comparison"
     ],
@@ -1953,29 +1953,9 @@
     "parameters": {
       "x": {
         "description": "The value to check.",
-        "schema": [
-          {
-            "type": "number"
-          },
-          {
-            "type": "null"
-          },
-          {
-            "type": "string",
-            "format": "date-time",
-            "subtype": "date-time"
-          },
-          {
-            "type": "string",
-            "format": "date",
-            "subtype": "date"
-          },
-          {
-            "type": "string",
-            "format": "time",
-            "subtype": "time"
-          }
-        ],
+        "schema": {
+          "description": "Any data type is allowed."
+        },
         "required": true
       },
       "min": {
@@ -2037,7 +2017,10 @@
     "returns": {
       "description": "`true` if `x` is between the specified bounds, otherwise `false`.",
       "schema": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       }
     },
     "examples": [
@@ -3143,7 +3126,7 @@
   {
     "id": "eq",
     "summary": "Equal to comparison",
-    "description": "Compares whether `x` is strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`.\n* If any of the operands is `null`, the return value is `null`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings MUST be compared differently than other strings and MUST NOT be compared based on their string representation due to different possible representations. For example, the UTC time zone representation `Z` has the same meaning as `+00:00`.",
+    "description": "Compares whether `x` is strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings MUST be compared differently than other strings and MUST NOT be compared based on their string representation due to different possible representations. For example, the UTC time zone representation `Z` has the same meaning as `+00:00`.",
     "categories": [
       "texts",
       "comparison"
@@ -3157,68 +3140,16 @@
     "parameters": {
       "x": {
         "description": "First operand.",
-        "schema": [
-          {
-            "type": "number"
-          },
-          {
-            "type": "boolean"
-          },
-          {
-            "type": "null"
-          },
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "format": "date-time",
-            "subtype": "date-time"
-          },
-          {
-            "type": "string",
-            "format": "date",
-            "subtype": "date"
-          },
-          {
-            "type": "string",
-            "format": "time",
-            "subtype": "time"
-          }
-        ],
+        "schema": {
+          "description": "Any data type is allowed."
+        },
         "required": true
       },
       "y": {
         "description": "Second operand.",
-        "schema": [
-          {
-            "type": "number"
-          },
-          {
-            "type": "boolean"
-          },
-          {
-            "type": "null"
-          },
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "format": "date-time",
-            "subtype": "date-time"
-          },
-          {
-            "type": "string",
-            "format": "date",
-            "subtype": "date"
-          },
-          {
-            "type": "string",
-            "format": "time",
-            "subtype": "time"
-          }
-        ],
+        "schema": {
+          "description": "Any data type is allowed."
+        },
         "required": true
       },
       "delta": {
@@ -3240,7 +3171,7 @@
       }
     },
     "returns": {
-      "description": "Returns `true` if `x` is equal to `y`, `null` if any of the operands is `null`, otherwise `false`.",
+      "description": "Returns `true` if `x` is equal to `y`, `null` if any operand is `null`, otherwise `false`.",
       "schema": {
         "type": [
           "boolean",
@@ -3267,6 +3198,13 @@
         "arguments": {
           "x": 1,
           "y": "1"
+        },
+        "returns": false
+      },
+      {
+        "arguments": {
+          "x": 0,
+          "y": false
         },
         "returns": false
       },
@@ -3339,6 +3277,21 @@
           "y": "2018-01-01T01:00:00+01:00"
         },
         "returns": true
+      },
+      {
+        "arguments": {
+          "x": [
+            1,
+            2,
+            3
+          ],
+          "y": [
+            1,
+            2,
+            3
+          ]
+        },
+        "returns": false
       }
     ]
   },
@@ -4083,7 +4036,7 @@
   {
     "id": "gt",
     "summary": "Greater than comparison",
-    "description": "Compares whether `x` is strictly greater than `y`.\n\n**Remarks:**\n\n* If any of the operands is `null`, the return value is `null`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.\n* Comparing strings is currently not supported, but is planned to be added in the future.",
+    "description": "Compares whether `x` is strictly greater than `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* If any operand is not a `number` or temporal string (`date`, `time` or `date-time`), the process returns `false`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
     "categories": [
       "comparison"
     ],
@@ -4094,61 +4047,21 @@
     "parameters": {
       "x": {
         "description": "First operand.",
-        "schema": [
-          {
-            "type": "number"
-          },
-          {
-            "type": "null"
-          },
-          {
-            "type": "string",
-            "format": "date-time",
-            "subtype": "date-time"
-          },
-          {
-            "type": "string",
-            "format": "date",
-            "subtype": "date"
-          },
-          {
-            "type": "string",
-            "format": "time",
-            "subtype": "time"
-          }
-        ],
+        "schema": {
+          "description": "Any data type is allowed."
+        },
         "required": true
       },
       "y": {
         "description": "Second operand.",
-        "schema": [
-          {
-            "type": "number"
-          },
-          {
-            "type": "null"
-          },
-          {
-            "type": "string",
-            "format": "date-time",
-            "subtype": "date-time"
-          },
-          {
-            "type": "string",
-            "format": "date",
-            "subtype": "date"
-          },
-          {
-            "type": "string",
-            "format": "time",
-            "subtype": "time"
-          }
-        ],
+        "schema": {
+          "description": "Any data type is allowed."
+        },
         "required": true
       }
     },
     "returns": {
-      "description": "`true` if `x` is strictly greater than `y` or `null` if any of the operands is `null`, otherwise `false`.",
+      "description": "`true` if `x` is strictly greater than `y` or `null` if any operand is `null`, otherwise `false`.",
       "schema": {
         "type": [
           "boolean",
@@ -4205,13 +4118,27 @@
           "y": "2018-01-01T12:00:00Z"
         },
         "returns": false
+      },
+      {
+        "arguments": {
+          "x": true,
+          "y": 0
+        },
+        "returns": false
+      },
+      {
+        "arguments": {
+          "x": true,
+          "y": false
+        },
+        "returns": false
       }
     ]
   },
   {
     "id": "gte",
     "summary": "Greater than or equal to comparison",
-    "description": "Compares whether `x` is greater than or equal to `y`.\n\n**Remarks:**\n\n* If any of the operands is `null`, the return value is `null`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.\n* Comparing strings is currently not supported, but is planned to be added in the future.",
+    "description": "Compares whether `x` is greater than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* If the operands are not equal (see process ``eq()``) and any of them is not a `number` or temporal string (`date`, `time` or `date-time`), the process returns `false`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
     "categories": [
       "comparison"
     ],
@@ -4222,61 +4149,21 @@
     "parameters": {
       "x": {
         "description": "First operand.",
-        "schema": [
-          {
-            "type": "number"
-          },
-          {
-            "type": "null"
-          },
-          {
-            "type": "string",
-            "format": "date-time",
-            "subtype": "date-time"
-          },
-          {
-            "type": "string",
-            "format": "date",
-            "subtype": "date"
-          },
-          {
-            "type": "string",
-            "format": "time",
-            "subtype": "time"
-          }
-        ],
+        "schema": {
+          "description": "Any data type is allowed."
+        },
         "required": true
       },
       "y": {
         "description": "Second operand.",
-        "schema": [
-          {
-            "type": "number"
-          },
-          {
-            "type": "null"
-          },
-          {
-            "type": "string",
-            "format": "date-time",
-            "subtype": "date-time"
-          },
-          {
-            "type": "string",
-            "format": "date",
-            "subtype": "date"
-          },
-          {
-            "type": "string",
-            "format": "time",
-            "subtype": "time"
-          }
-        ],
+        "schema": {
+          "description": "Any data type is allowed."
+        },
         "required": true
       }
     },
     "returns": {
-      "description": "`true` if `x` is greater than or equal to `y` or `null` if any of the operands is `null`, otherwise `false`.",
+      "description": "`true` if `x` is greater than or equal to `y`, `null` if any operand is `null`, otherwise `false`.",
       "schema": {
         "type": [
           "boolean",
@@ -4333,6 +4220,28 @@
           "y": "2018-01-01T12:00:00Z"
         },
         "returns": true
+      },
+      {
+        "arguments": {
+          "x": true,
+          "y": false
+        },
+        "returns": false
+      },
+      {
+        "arguments": {
+          "x": [
+            1,
+            2,
+            3
+          ],
+          "y": [
+            1,
+            2,
+            3
+          ]
+        },
+        "returns": false
       }
     ]
   },
@@ -5352,7 +5261,7 @@
   {
     "id": "lt",
     "summary": "Less than comparison",
-    "description": "Compares whether `x` is strictly less than `y`.\n\n**Remarks:**\n\n* If any of the operands is `null`, the return value is `null`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.\n* Comparing strings is currently not supported, but is planned to be added in the future.",
+    "description": "Compares whether `x` is strictly less than `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* If any operand is not a `number` or temporal string (`date`, `time` or `date-time`), the process returns `false`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
     "categories": [
       "comparison"
     ],
@@ -5363,61 +5272,21 @@
     "parameters": {
       "x": {
         "description": "First operand.",
-        "schema": [
-          {
-            "type": "number"
-          },
-          {
-            "type": "null"
-          },
-          {
-            "type": "string",
-            "format": "date-time",
-            "subtype": "date-time"
-          },
-          {
-            "type": "string",
-            "format": "date",
-            "subtype": "date"
-          },
-          {
-            "type": "string",
-            "format": "time",
-            "subtype": "time"
-          }
-        ],
+        "schema": {
+          "description": "Any data type is allowed."
+        },
         "required": true
       },
       "y": {
         "description": "Second operand.",
-        "schema": [
-          {
-            "type": "number"
-          },
-          {
-            "type": "null"
-          },
-          {
-            "type": "string",
-            "format": "date-time",
-            "subtype": "date-time"
-          },
-          {
-            "type": "string",
-            "format": "date",
-            "subtype": "date"
-          },
-          {
-            "type": "string",
-            "format": "time",
-            "subtype": "time"
-          }
-        ],
+        "schema": {
+          "description": "Any data type is allowed."
+        },
         "required": true
       }
     },
     "returns": {
-      "description": "`true` if `x` is strictly less than `y`, `null` if any of the operands is `null`, otherwise `false`.",
+      "description": "`true` if `x` is strictly less than `y`, `null` if any operand is `null`, otherwise `false`.",
       "schema": {
         "type": [
           "boolean",
@@ -5472,6 +5341,20 @@
         "arguments": {
           "x": "2018-01-01T12:00:00+00:00",
           "y": "2018-01-01T12:00:00Z"
+        },
+        "returns": false
+      },
+      {
+        "arguments": {
+          "x": 0,
+          "y": true
+        },
+        "returns": false
+      },
+      {
+        "arguments": {
+          "x": false,
+          "y": true
         },
         "returns": false
       }
@@ -5480,7 +5363,7 @@
   {
     "id": "lte",
     "summary": "Less than or equal to comparison",
-    "description": "Compares whether `x` is less than or equal to `y`.\n\n**Remarks:**\n\n* If any of the operands is `null`, the return value is `null`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.\n* Comparing strings is currently not supported, but is planned to be added in the future.",
+    "description": "Compares whether `x` is less than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* If the operands are not equal (see process ``eq()``) and any of them is not a `number` or temporal string (`date`, `time` or `date-time`), the process returns `false`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
     "categories": [
       "comparison"
     ],
@@ -5491,61 +5374,21 @@
     "parameters": {
       "x": {
         "description": "First operand.",
-        "schema": [
-          {
-            "type": "number"
-          },
-          {
-            "type": "null"
-          },
-          {
-            "type": "string",
-            "format": "date-time",
-            "subtype": "date-time"
-          },
-          {
-            "type": "string",
-            "format": "date",
-            "subtype": "date"
-          },
-          {
-            "type": "string",
-            "format": "time",
-            "subtype": "time"
-          }
-        ],
+        "schema": {
+          "description": "Any data type is allowed."
+        },
         "required": true
       },
       "y": {
         "description": "Second operand.",
-        "schema": [
-          {
-            "type": "number"
-          },
-          {
-            "type": "null"
-          },
-          {
-            "type": "string",
-            "format": "date-time",
-            "subtype": "date-time"
-          },
-          {
-            "type": "string",
-            "format": "date",
-            "subtype": "date"
-          },
-          {
-            "type": "string",
-            "format": "time",
-            "subtype": "time"
-          }
-        ],
+        "schema": {
+          "description": "Any data type is allowed."
+        },
         "required": true
       }
     },
     "returns": {
-      "description": "`true` if `x` is less than or equal to `y`, `null` if any of the operands is `null`, otherwise `false`.",
+      "description": "`true` if `x` is less than or equal to `y`, `null` if any operand is `null`, otherwise `false`.",
       "schema": {
         "type": [
           "boolean",
@@ -5602,6 +5445,28 @@
           "y": "2018-01-01T12:00:00Z"
         },
         "returns": true
+      },
+      {
+        "arguments": {
+          "x": false,
+          "y": true
+        },
+        "returns": false
+      },
+      {
+        "arguments": {
+          "x": [
+            1,
+            2,
+            3
+          ],
+          "y": [
+            1,
+            2,
+            3
+          ]
+        },
+        "returns": false
       }
     ]
   },
@@ -5974,7 +5839,7 @@
   {
     "id": "merge_cubes",
     "summary": "Merging two data cubes",
-    "description": "The data cubes have to be compatible. A merge is the inverse of a split if there is no overlap. If data overlaps the parameter `overlap_resolver` must be specified to resolve the overlap. It doesn't add dimensions.",
+    "description": "The data cubes have to be compatible. A merge operation without overlap should be reversible with (a set of) `filter` operations for each of the two cubes. The process doesn't add dimensions.\n\nThis means that the data cubes must have the same dimensions. Each dimension must be available in both data cubes and have the same name, type, reference system and resolution. One of the dimensions can have different labels, for all other dimensions the labels must be equal. If data overlaps, the parameter `overlap_resolver` must be specified to resolve the overlap.\n\n**Examples for merging two data cubes:**\n\n1. Data cubes with the dimensions `x`, `y`, `t` and `bands` have the same dimension labels in `x`,`y` and `t`, but the labels for the dimension `bands` are `B1` and `B2` for the first cube and `B3` and `B4`. An overlap resolver is *not needed*. The merged data cube has the dimensions `x`, `y`, `t` and `bands` and the dimension `bands` has four dimension labels: `B1`, `B2`, `B3`, `B4`.\n2. Data cubes with the dimensions `x`, `y`, `t` and `bands` have the same dimension labels in `x`,`y` and `t`, but the labels for the dimension `bands` are `B1` and `B2` for the first data cube and `B2` and `B3` for the second. An overlap resolver is *required* to resolve overlap in band `B2`. The merged data cube has the dimensions `x`, `y`, `t` and `bands` and the dimension `bands` has three dimension labels: `B1`, `B2`, `B3`.\n3. Data cubes with the dimensions `x`, `y` and `t` have the same dimension labels in `x`,`y` and `t`. There are two options:\n   1. Keep the overlapping values separately in the merged data cube: An overlap resolver is *not needed*, but for each data cube you need to add a new dimension using ``add_dimension()``. The new dimensions must be equal, except that the labels for the new dimensions must differ by name. The merged data cube has the same dimensions and labels as the original data cubes, plus the dimension added with ``add_dimension()``, which has the two dimension labels after the merge.\n   2. Combine the overlapping values into a single value: An overlap resolver is *required* to resolve the overlap for all pixels. The merged data cube has the same dimensions and labels as the original data cubes, but all pixel values have been processed by the overlap resolver.",
     "categories": [
       "cubes"
     ],
@@ -6057,7 +5922,7 @@
     },
     "exceptions": {
       "OverlapResolverMissing": {
-        "message": "Two data cubes with overlap but without an overlap resolver have been specified."
+        "message": "Overlapping data cubes, but no overlap resolver has been specified."
       }
     },
     "links": [
@@ -6434,7 +6299,7 @@
   {
     "id": "neq",
     "summary": "Not equal to comparison",
-    "description": "Compares whether `x` is *not* strictly equal to `y`. This process is an alias for: `not(eq(val1, val2))`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`.\n* If any of the operands is `null`, the return value is `null`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings MUST be compared differently than other strings and MUST NOT be compared based on their string representation due to different possible representations. For example, the UTC time zone representation `Z` has the same meaning as `+00:00`.",
+    "description": "Compares whether `x` is *not* strictly equal to `y`. This process is an alias for: `not(eq(val1, val2))`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings MUST be compared differently than other strings and MUST NOT be compared based on their string representation due to different possible representations. For example, the UTC time zone representation `Z` has the same meaning as `+00:00`.",
     "categories": [
       "texts",
       "comparison"
@@ -6448,68 +6313,16 @@
     "parameters": {
       "x": {
         "description": "First operand.",
-        "schema": [
-          {
-            "type": "number"
-          },
-          {
-            "type": "boolean"
-          },
-          {
-            "type": "null"
-          },
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "format": "date-time",
-            "subtype": "date-time"
-          },
-          {
-            "type": "string",
-            "format": "date",
-            "subtype": "date"
-          },
-          {
-            "type": "string",
-            "format": "time",
-            "subtype": "time"
-          }
-        ],
+        "schema": {
+          "description": "Any data type is allowed."
+        },
         "required": true
       },
       "y": {
         "description": "Second operand.",
-        "schema": [
-          {
-            "type": "number"
-          },
-          {
-            "type": "boolean"
-          },
-          {
-            "type": "null"
-          },
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "format": "date-time",
-            "subtype": "date-time"
-          },
-          {
-            "type": "string",
-            "format": "date",
-            "subtype": "date"
-          },
-          {
-            "type": "string",
-            "format": "time",
-            "subtype": "time"
-          }
-        ],
+        "schema": {
+          "description": "Any data type is allowed."
+        },
         "required": true
       },
       "delta": {
@@ -6531,7 +6344,7 @@
       }
     },
     "returns": {
-      "description": "Returns `true` if `x` is *not* equal to `y`, `null` if any of the operands is `null`, otherwise `false`.",
+      "description": "Returns `true` if `x` is *not* equal to `y`, `null` if any operand is `null`, otherwise `false`.",
       "schema": {
         "type": [
           "boolean",
@@ -6558,6 +6371,13 @@
         "arguments": {
           "x": 1,
           "y": "1"
+        },
+        "returns": true
+      },
+      {
+        "arguments": {
+          "x": 0,
+          "y": false
         },
         "returns": true
       },
@@ -6628,6 +6448,21 @@
         "arguments": {
           "x": "2018-01-01T00:00:00Z",
           "y": "2018-01-01T01:00:00+01:00"
+        },
+        "returns": false
+      },
+      {
+        "arguments": {
+          "x": [
+            1,
+            2,
+            3
+          ],
+          "y": [
+            1,
+            2,
+            3
+          ]
         },
         "returns": false
       }
@@ -9425,7 +9260,7 @@
   {
     "id": "text_begins",
     "summary": "Text begins with another text",
-    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern` at the very beginning. Both are expected to be encoded in UTF-8 by default. Regular expressions are not supported.",
+    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern` at the beginning. Both are expected to be encoded in UTF-8 by default. The no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "texts",
       "comparison"
@@ -9439,12 +9274,15 @@
       "data": {
         "description": "Text in which to find something at the beginning.",
         "schema": {
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "required": true
       },
       "pattern": {
-        "description": "Text to find at the beginning of `data`.",
+        "description": "Text to find at the beginning of `data`. Regular expressions are not supported.",
         "schema": {
           "type": "string"
         },
@@ -9461,7 +9299,10 @@
     "returns": {
       "description": "`true` if `data` begins with `pattern`, false` otherwise.",
       "schema": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       }
     },
     "examples": [
@@ -9501,13 +9342,20 @@
           "case_sensitive": false
         },
         "returns": true
+      },
+      {
+        "arguments": {
+          "data": null,
+          "pattern": "null"
+        },
+        "returns": null
       }
     ]
   },
   {
     "id": "text_contains",
     "summary": "Text contains another text",
-    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern`. Both are expected to be encoded in UTF-8 by default. Regular expressions are not supported.",
+    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern`. Both are expected to be encoded in UTF-8 by default. The no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "texts",
       "comparison"
@@ -9521,12 +9369,15 @@
       "data": {
         "description": "Text in which to find something in.",
         "schema": {
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "required": true
       },
       "pattern": {
-        "description": "Text to find in `data`.",
+        "description": "Text to find in `data`. Regular expressions are not supported.",
         "schema": {
           "type": "string"
         },
@@ -9543,7 +9394,10 @@
     "returns": {
       "description": "`true` if `data` contains the `pattern`, false` otherwise.",
       "schema": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       }
     },
     "examples": [
@@ -9583,13 +9437,20 @@
           "case_sensitive": false
         },
         "returns": true
+      },
+      {
+        "arguments": {
+          "data": null,
+          "pattern": "null"
+        },
+        "returns": null
       }
     ]
   },
   {
     "id": "text_ends",
     "summary": "Text ends with another text",
-    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern` at the very end. Both are expected to be encoded in UTF-8 by default. Regular expressions are not supported.",
+    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern` at the end. Both are expected to be encoded in UTF-8 by default. The no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "texts",
       "comparison"
@@ -9603,12 +9464,15 @@
       "data": {
         "description": "Text in which to find something at the end.",
         "schema": {
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "required": true
       },
       "pattern": {
-        "description": "Text to find at the end of `data`.",
+        "description": "Text to find at the end of `data`. Regular expressions are not supported.",
         "schema": {
           "type": "string"
         },
@@ -9625,7 +9489,10 @@
     "returns": {
       "description": "`true` if `data` ends with `pattern`, false` otherwise.",
       "schema": {
-        "type": "boolean"
+        "type": [
+          "boolean",
+          "null"
+        ]
       }
     },
     "examples": [
@@ -9665,6 +9532,13 @@
           "case_sensitive": false
         },
         "returns": true
+      },
+      {
+        "arguments": {
+          "data": null,
+          "pattern": "null"
+        },
+        "returns": null
       }
     ]
   },
