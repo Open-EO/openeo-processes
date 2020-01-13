@@ -1,7 +1,7 @@
 {
     "id": "text_contains",
     "summary": "Text contains another text",
-    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern`. Both are expected to be encoded in UTF-8 by default. Regular expressions are not supported.",
+    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern`. Both are expected to be encoded in UTF-8 by default. The no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
         "texts",
         "comparison"
@@ -15,12 +15,15 @@
         "data": {
             "description": "Text in which to find something in.",
             "schema": {
-                "type": "string"
+                "type": [
+                    "string",
+                    "null"
+                ]
             },
             "required": true
         },
         "pattern": {
-            "description": "Text to find in `data`.",
+            "description": "Text to find in `data`. Regular expressions are not supported.",
             "schema": {
                 "type": "string"
             },
@@ -37,7 +40,10 @@
     "returns": {
         "description": "`true` if `data` contains the `pattern`, false` otherwise.",
         "schema": {
-            "type": "boolean"
+            "type": [
+                "boolean",
+                "null"
+            ]
         }
     },
     "examples": [
@@ -77,6 +83,13 @@
                 "case_sensitive": false
             },
             "returns": true
+        },
+        {
+            "arguments": {
+                "data": null,
+                "pattern": "null"
+            },
+            "returns": null
         }
     ]
 }

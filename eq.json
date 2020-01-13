@@ -1,7 +1,7 @@
 {
     "id": "eq",
     "summary": "Equal to comparison",
-    "description": "Compares whether `x` is strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`.\n* If any of the operands is `null`, the return value is `null`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings MUST be compared differently than other strings and MUST NOT be compared based on their string representation due to different possible representations. For example, the UTC time zone representation `Z` has the same meaning as `+00:00`.",
+    "description": "Compares whether `x` is strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings MUST be compared differently than other strings and MUST NOT be compared based on their string representation due to different possible representations. For example, the UTC time zone representation `Z` has the same meaning as `+00:00`.",
     "categories": [
         "texts",
         "comparison"
@@ -15,68 +15,16 @@
     "parameters": {
         "x": {
             "description": "First operand.",
-            "schema": [
-                {
-                    "type": "number"
-                },
-                {
-                    "type": "boolean"
-                },
-                {
-                    "type": "null"
-                },
-                {
-                    "type": "string"
-                },
-                {
-                    "type": "string",
-                    "format": "date-time",
-                    "subtype": "date-time"
-                },
-                {
-                    "type": "string",
-                    "format": "date",
-                    "subtype": "date"
-                },
-                {
-                    "type": "string",
-                    "format": "time",
-                    "subtype": "time"
-                }
-            ],
+            "schema": {
+                "description": "Any data type is allowed."
+            },
             "required": true
         },
         "y": {
             "description": "Second operand.",
-            "schema": [
-                {
-                    "type": "number"
-                },
-                {
-                    "type": "boolean"
-                },
-                {
-                    "type": "null"
-                },
-                {
-                    "type": "string"
-                },
-                {
-                    "type": "string",
-                    "format": "date-time",
-                    "subtype": "date-time"
-                },
-                {
-                    "type": "string",
-                    "format": "date",
-                    "subtype": "date"
-                },
-                {
-                    "type": "string",
-                    "format": "time",
-                    "subtype": "time"
-                }
-            ],
+            "schema": {
+                "description": "Any data type is allowed."
+            },
             "required": true
         },
         "delta": {
@@ -98,7 +46,7 @@
         }
     },
     "returns": {
-        "description": "Returns `true` if `x` is equal to `y`, `null` if any of the operands is `null`, otherwise `false`.",
+        "description": "Returns `true` if `x` is equal to `y`, `null` if any operand is `null`, otherwise `false`.",
         "schema": {
             "type": [
                 "boolean",
@@ -204,6 +152,13 @@
                 "y": "2018-01-01T01:00:00+01:00"
             },
             "returns": true
+        },
+        {
+            "arguments": {
+                "x": [1,2,3],
+                "y": [1,2,3]
+            },
+            "returns": false
         }
     ]
 }
