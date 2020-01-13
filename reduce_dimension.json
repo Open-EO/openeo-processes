@@ -1,5 +1,5 @@
 {
-    "id": "reduce",
+    "id": "reduce_dimension",
     "summary": "Reduce dimensions",
     "description": "Applies a reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer. The dimension is dropped. To avoid dropping the dimension, use ``apply_dimension()`` instead.\n\nA reducer is a single process or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.\n\nThe process can also work on two values by setting the parameter `binary` to `true`. In this case, the reducer doesn't get executed on a single value.",
     "categories": [

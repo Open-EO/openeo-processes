@@ -13,8 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `any`
     - `array_find`
     - `drop_dimension`
-    - `mask_polygon`
+    - `filter_dimension`
     - `load_uploaded_files`
+    - `mask_polygon`
+    - `reduce_dimension`
     - `rename_labels`
 - Added further examples
 
@@ -32,7 +34,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `filter_bands`: Merged parameters `bands` and `common_names`. [#77](https://github.com/Open-EO/openeo-processes/issues/77)
 - `load_collection`: Parameter `bands` accepts common band names. [#77](https://github.com/Open-EO/openeo-processes/issues/77)
 - `ndvi` and `normalized_difference`: Rewrite of the processes with a completely new behavior. [#60](https://github.com/Open-EO/openeo-processes/issues/60)
-- `reduce`: Reducers can't return multiple values any longer. Parameter `target_dimension` was therefore removed. [#73](https://github.com/Open-EO/openeo-processes/issues/73)
 - `resample_spatial`: Default value of parameter `align` changed from `lower-left` to `upper-left`. [#61](https://github.com/Open-EO/openeo-processes/issues/61)
 - The following operations work on two values instead on a sequence of values: `and`, `divide`, `multiply`, `or`, `subtract`, `xor`. [#85](https://github.com/Open-EO/openeo-processes/issues/85)
 - `product` works as before, but is not an alias of `multiply` any longer. [#85](https://github.com/Open-EO/openeo-processes/issues/85)
@@ -45,10 +46,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The following operations don't support `ignore_nodata` any longer: `and`, `divide`, `multiply`, `or`, `subtract`, `xor`. [#85](https://github.com/Open-EO/openeo-processes/issues/85)
 - `aggregate_polygon`: Doesn't allow returning a GeoJSON any longer.
 - `mask`: The mask parameter doesn't accept vectors (polygons) any longer. Use process `mask_polygon` instead. [#110](https://github.com/Open-EO/openeo-processes/issues/110)
-- `reduce`: The `null` (no-operation) reducer has been removed. Use the process `drop_dimension` instead. [#57](https://github.com/Open-EO/openeo-processes/issues/57)
 - Removed processes:
     - `find_collections`: Use `load_collection` and manual data discovery through the clients. [API#52](https://github.com/Open-EO/openeo-api/issues/52)
+    - `filter`: Use `filter_dimension` instead.
     - `output`: Use `debug` instead.
+    - `reduce`: Use `reduce_dimension` or `drop_dimension` instead.
 
 ### Fixed
 - Several clarifications in written texts. [#86](https://github.com/Open-EO/openeo-processes/issues/86)
