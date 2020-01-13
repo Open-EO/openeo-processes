@@ -98,7 +98,7 @@
                     2
                 ]
             },
-            "returns": 0
+            "returns": -1
         },
         {
             "arguments": {
@@ -130,7 +130,7 @@
                     "a": "b"
                 }
             },
-            "returns": 0
+            "returns": -1
         }
     ]
 }
