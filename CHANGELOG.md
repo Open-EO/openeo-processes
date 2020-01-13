@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `any`
     - `array_find`
     - `drop_dimension`
+    - `mask_polygon`
     - `load_uploaded_files`
     - `rename_labels`
 - Added further examples
@@ -27,8 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `aggregate_polygon`: The data cube implicitly gets restricted to the bounds of the polygons as if `filter_polygon` would have been used beforehand. [#101](https://github.com/Open-EO/openeo-processes/issues/101)
 - `clip`: Works on a single value instead on arrays (replaced parameter `data` with `x`). [#75](https://github.com/Open-EO/openeo-processes/issues/75)
 - `debug`: Replaced with a completely new definition. [#82](https://github.com/Open-EO/openeo-processes/issues/71), [API#100](https://github.com/Open-EO/openeo-api/issues/100), [API#214](https://github.com/Open-EO/openeo-api/issues/214)
-- `filter_bands`: Merged parameters `bands` and `common_names`. [#77]( https://github.com/Open-EO/openeo-processes/issues/77)
-- `load_collection`: Parameter `bands` accepts common band names. [#77]( https://github.com/Open-EO/openeo-processes/issues/77)
+- `filter_bands`: Merged parameters `bands` and `common_names`. [#77](https://github.com/Open-EO/openeo-processes/issues/77)
+- `load_collection`: Parameter `bands` accepts common band names. [#77](https://github.com/Open-EO/openeo-processes/issues/77)
 - `ndvi` and `normalized_difference`: Rewrite of the processes with a completely new behavior. [#60](https://github.com/Open-EO/openeo-processes/issues/60)
 - `resample_spatial`: Default value of parameter `align` changed from `lower-left` to `upper-left`. [#61](https://github.com/Open-EO/openeo-processes/issues/61)
 - The following operations work on two values instead on a sequence of values: `and`, `divide`, `multiply`, `or`, `subtract`, `xor`. [#85](https://github.com/Open-EO/openeo-processes/issues/85)
@@ -39,9 +40,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `filter_bbox`, `load_collection`, `resample_spatial`: PROJ definitions are deprecated in favor of EPSG codes, WKT2 and PROJJSON. [#58](https://github.com/Open-EO/openeo-processes/issues/58)
 
 ### Removed
-- `reduce`: The `null` (no-operation) reducer has been removed. Use the process `drop_dimension` instead. [#57](https://github.com/Open-EO/openeo-processes/issues/57)
 - The following operations don't support `ignore_nodata` any longer: `and`, `divide`, `multiply`, `or`, `subtract`, `xor`. [#85](https://github.com/Open-EO/openeo-processes/issues/85)
 - `aggregate_polygon`: Doesn't allow returning a GeoJSON any longer.
+- `mask`: The mask parameter doesn't accept vectors (polygons) any longer. Use process `mask_polygon` instead. [#110](https://github.com/Open-EO/openeo-processes/issues/110)
+- `reduce`: The `null` (no-operation) reducer has been removed. Use the process `drop_dimension` instead. [#57](https://github.com/Open-EO/openeo-processes/issues/57)
 - Removed processes:
     - `find_collections`: Use `load_collection` and manual data discovery through the clients. [API#52](https://github.com/Open-EO/openeo-api/issues/52)
     - `output`: Use `debug` instead.
