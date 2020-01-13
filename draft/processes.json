@@ -1041,7 +1041,8 @@
     "parameter_order": [
       "data",
       "kernel",
-      "factor"
+      "factor",
+      "process"
     ],
     "parameters": {
       "data": {
@@ -1069,6 +1070,31 @@
           "type": "number"
         },
         "default": 1
+      },
+      "process": {
+        "description": "Process to be applied on the kernel. The specified process needs to accept an array as parameter and must return as many elements in the returned array as there are in the input array. A process may consist of multiple sub-processes.",
+        "schema": [
+          {
+            "type": "object",
+            "subtype": "process-graph",
+            "parameters": {
+              "data": {
+                "description": "An array with elements of any data type.",
+                "type": "array",
+                "subtype": "kernel",
+                "items": {
+                  "description": "Usually a multi-dimensional array of numbers."
+                }
+              }
+            }
+          },
+          {
+            "title": "No filter",
+            "description": "Don't apply further processing.",
+            "type": "null"
+          }
+        ],
+        "default": null
       }
     },
     "returns": {
