@@ -1,7 +1,7 @@
 {
     "id": "lte",
     "summary": "Less than or equal to comparison",
-    "description": "Compares whether `x` is less than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`. If the operands are not equal (see process ``eq()``) and any of them is not a `number` or temporal string (`date`, `time` or `date-time`), the process returns `false`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
+    "description": "Compares whether `x` is less than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* If the operands are not equal (see process ``eq()``) and any of them is not a `number` or temporal string (`date`, `time` or `date-time`), the process returns `false`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
     "categories": [
         "comparison"
     ],
@@ -88,6 +88,13 @@
             "arguments": {
                 "x": false,
                 "y": true
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "x": [1,2,3],
+                "y": [1,2,3]
             },
             "returns": false
         }
