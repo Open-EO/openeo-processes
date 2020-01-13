@@ -1,7 +1,7 @@
 {
     "id": "mask",
     "summary": "Apply a raster mask",
-    "description": "Applies a mask to a raster data cube. A mask here is a raster data cube for which parallel pixels among `data` and `mask` are compared and those pixels in `data` are replaced for which a condition in `mask` is fulfilled (see parameter `expression`).\n\nThe pixel values are replaced with the value specified for `replacement`, which defaults to `null` (no data). No data values in `data` or `mask` will be left untouched by the masking operation.",
+    "description": "Applies a mask to a raster data cube. A mask here is a raster data cube for which parallel pixels among `data` and `mask` are compared and those pixels in `data` are replaced for which a condition in `mask` is fulfilled (see parameter `expression`). The pixel values are replaced with the value specified for `replacement`, which defaults to `null` (no data).",
     "categories": [
         "masks"
     ],
@@ -41,7 +41,7 @@
             "default": null
         },
         "expression": {
-            "description": "An expression that is evaluated against each pixel in `mask`. A pixel is replaced in `data` if the expression returns `true`.\n\nThe default behaviour is that all pixels in the mask that are non-zero (for numbers) or `true` (for boolean values) get replaced in `data`. This is equivalent to the following expression: `or(gt(value, 0), eq(value, true))`.",
+            "description": "An expression that is evaluated against each pixel in `mask`. A pixel is replaced in `data` if the expression returns `true`, otherwise (this includes `null`) the pixel will be left untouched by the masking operation.\n\nThe default behaviour is that all pixels in the mask that are non-zero (for numbers) or `true` (for boolean values) get replaced in `data`. This is equivalent to the following expression: `or(gt(value, 0), eq(value, true))`.",
             "schema": [
                 {
                     "title": "Default",
