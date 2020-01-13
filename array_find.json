@@ -1,7 +1,7 @@
 {
     "id": "array_find",
     "summary": "Get the index of an element in an array",
-    "description": "Checks whether the array specified for `data` contains the value specified in `value` and returns the zero-based index for the first match. If there's no match, `-1` is returned.\n\n**Remarks:**\n\n* To get a boolean value returned use ``array_contains()``.\n* Data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.",
+    "description": "Checks whether the array specified for `data` contains the value specified in `value` and returns the zero-based index for the first match. If there's no match, `-1` is returned.\n\n**Remarks:**\n\n* To get a boolean value returned use ``array_contains()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. This includes that data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.",
     "categories": [
         "arrays"
     ],
