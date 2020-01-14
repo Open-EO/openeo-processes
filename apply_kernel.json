@@ -1,7 +1,7 @@
 {
     "id": "apply_kernel",
     "summary": "Applies a kernel to compute pixel-wise values",
-    "description": "Applies a focal operation based on a weighted kernel to each value of the specified dimensions in the data cube.",
+    "description": "Applies a 2D convolution (i.e. a focal operation with a weighted kernel) on the horizontal spatial dimensions (axes `x` and `y`) of the data cube.\n\nEach value in the kernel is multiplied with the corresponding pixel value and all products are summed up afterwards. The sum is then multiplied with the factor.",
     "categories": [
         "cubes",
         "math > image filter"
@@ -21,18 +21,22 @@
             "required": true
         },
         "kernel": {
-            "description": "The kernel to be applied on the data cube. The kernel has to be as many dimensions as the data cube has dimensions.",
+            "description": "A two-dimensional weighted kernel. Each dimension of the kernel must have an uneven number of elements, otherwise the process throws a `KernelDimensionsUneven` error.",
             "schema": {
+                "description": "A two-dimensional array of numbers.",
                 "type": "array",
                 "subtype": "kernel",
                 "items": {
-                    "description": "Usually a multi-dimensional array of numbers."
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
                 }
             },
             "required": true
         },
         "factor": {
-            "description": "A factor that is multiplied to each value computed by the focal operation.\n\nThis is basically a shortcut for explicitly multiplying each value by a factor afterwards, which is often required for some kernel-based algorithms such as the Gaussian blur.",
+            "description": "A factor that is multiplied to each value after the kernel has been applied.\n\nThis is basically a shortcut for explicitly multiplying each value by a factor afterwards, which is often required for some kernel-based algorithms such as the Gaussian blur.",
             "schema": {
                 "type": "number"
             },
@@ -45,5 +49,22 @@
             "type": "object",
             "subtype": "raster-cube"
         }
-    }
+    },
+    "exceptions": {
+        "KernelDimensionsUneven": {
+            "message": "Each dimension of the kernel must have an uneven number of elements."
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://www.songho.ca/dsp/convolution/convolution.html",
+            "title": "Convolutions explained"
+        },
+        {
+            "rel": "about",
+            "href": "http://www.songho.ca/dsp/convolution/convolution2d_example.html",
+            "title": "Example of 2D Convolution"
+        }
+    ]
 }
