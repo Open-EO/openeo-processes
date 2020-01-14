@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `any`
     - `array_find`
     - `drop_dimension`
-    - `filter_dimension`
+    - `filter_labels`
     - `load_uploaded_files`
     - `mask_polygon`
     - `reduce_dimension`
@@ -48,7 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `mask`: The mask parameter doesn't accept vectors (polygons) any longer. Use process `mask_polygon` instead. [#110](https://github.com/Open-EO/openeo-processes/issues/110)
 - Removed processes:
     - `find_collections`: Use `load_collection` and manual data discovery through the clients. [API#52](https://github.com/Open-EO/openeo-api/issues/52)
-    - `filter`: Use `filter_dimension` instead.
+    - `filter`: Use `filter_labels` instead.
     - `output`: Use `debug` instead.
     - `reduce`: Use `reduce_dimension` or `drop_dimension` instead.
 
