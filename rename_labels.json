@@ -13,12 +13,10 @@
     "parameters": {
         "data": {
             "description": "The data cube.",
-            "schema": [
-                {
-                    "type": "object",
-                    "subtype": "raster-cube"
-                }
-            ],
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            },
             "required": true
         },
         "dimension": {
@@ -49,12 +47,10 @@
     },
     "returns": {
         "description": "The data cube with the renamed labels. The old labels can not be referenced any longer.",
-        "schema": [
-            {
-                "type": "object",
-                "subtype": "raster-cube"
-            }
-        ]
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
     },
     "exceptions": {
         "LabelsNotEnumerated": {
