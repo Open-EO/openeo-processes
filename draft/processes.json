@@ -7728,7 +7728,7 @@
         "required": true
       },
       "labels": {
-        "description": "The new names for the labels.\n\nIf an **array** is passed, the dimension labels in the data cube are expected to be enumerated with zero-based numbering (0,1,2,3,...) so that the dimension labels map to the array indices and get replaced. If the dimension labels are not enumerated, a `LabelsNotEnumerated` is thrown. The number of dimension labels must be equal to the number of array elements, otherwise the error `LabelMismatch` is thrown.\n\nIf an **object** is passed, the object defines a (potentially incomplete) mapping of the source dimension labels to the target dimension labels. If one of the source dimension labels doesn't exist, a `LabelNotAvailable` error is thrown. If a target dimension label already exists in the data cube, a `LabelExists` error is thrown.",
+        "description": "The new names for the labels.\n\nIf an **array** is passed, the dimension labels in the data cube are expected to be enumerated with zero-based numbering (0,1,2,3,...) so that the dimension labels map to the array indices and get replaced. If the dimension labels are not enumerated, a `LabelsNotEnumerated` is thrown. The number of dimension labels must be equal to the number of array elements, otherwise the error `LabelMismatch` is thrown.\n\nIf an **object** is passed, the object defines an unsorted and potentially incomplete mapping of the source dimension labels to the target dimension labels. If one of the source dimension labels doesn't exist, a `LabelNotAvailable` error is thrown. If a target dimension label already exists in the data cube, a `LabelExists` error is thrown.",
         "schema": [
           {
             "type": "array",
