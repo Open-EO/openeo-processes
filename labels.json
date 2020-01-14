@@ -1,0 +1,38 @@
+{
+    "id": "labels",
+    "summary": "Get the dimension labels",
+    "description": "Returns the labels for a dimension in the data cube.",
+    "categories": [
+        "cubes"
+    ],
+    "parameter_order": [
+        "data",
+        "dimension"
+    ],
+    "parameters": {
+        "data": {
+            "description": "The data cube.",
+            "schema": {
+				"type": "object",
+				"subtype": "raster-cube"
+			},
+            "required": true
+        },
+        "dimension": {
+            "description": "The name of the dimension to get the labels for.",
+            "schema": {
+                "type": "string"
+            },
+            "required": true
+        }
+    },
+    "returns": {
+        "description": "The labels as array.",
+        "schema": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		}
+    }
+}
