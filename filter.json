@@ -1,6 +1,6 @@
 {
     "id": "filter",
-    "summary": "Filter based on a logical expression.",
+    "summary": "Filter based on a logical expression",
     "description": "Filters the dimension labels based on a logical expression so that afterwards each dimension label in the data cube conforms to the expression.",
     "categories": [
         "cubes",
@@ -26,7 +26,7 @@
                 "type": "object",
                 "subtype": "process-graph",
                 "parameters": {
-                    "value": {
+                    "x": {
                         "description": "A single dimension label to compare against.",
                         "anyOf": [
                             {
