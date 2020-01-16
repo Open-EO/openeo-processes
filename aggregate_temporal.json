@@ -86,7 +86,7 @@
             "required": true
         },
         "reducer": {
-            "description": "A reducer to be applied on all values along the specified dimension. The reducer may be a single process such as ``mean()`` or consist of multiple sub-processes that accepts an array as input.",
+            "description": "A reducer to be applied on all values along the specified dimension. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",

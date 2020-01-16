@@ -1,11 +1,12 @@
 {
     "id": "reduce_dimension",
     "summary": "Reduce dimensions",
-    "description": "Applies a unary reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer. This process passes a list of values to the reducer. In contrast, ``reduce_dimension_binary()`` passes two values, which may be better suited for UDFs.\n\nThe dimension is dropped. To avoid this, use ``apply_dimension()`` instead.",
+    "description": "Applies a binary reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer. This process passes a list of values to the reducer. In contrast, ``reduce_dimension()`` passes a list of values.\n\nThe dimension is dropped. To avoid this, use ``apply_dimension()`` instead.",
     "categories": [
         "cubes",
         "reducer"
     ],
+    "experimental": true,
     "parameter_order": [
         "data",
         "reducer",
@@ -21,17 +22,16 @@
             "required": true
         },
         "reducer": {
-            "description": "A reducer to apply on the specified dimension. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
+            "description": "A reduction operator to be applied consecutively on tuples of values. It must be both associative and commutative as the execution may be executed in parallel and therefore the order of execution is arbitrary. The reduction operator may be a single process such as ``multiply()`` or consist of multiple sub-processes.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
                 "parameters": {
-                    "data": {
-                        "description": "An array with elements of any data type.",
-                        "type": "array",
-                        "items": {
-                            "description": "Any data type."
-                        }
+                    "x": {
+                        "description": "The first value. Any data type could be passed."
+                    },
+                    "y": {
+                        "description": "The second value. Any data type could be passed."
                     }
                 }
             },
@@ -56,5 +56,12 @@
         "DimensionNotAvailable": {
             "message": "A dimension with the specified name does not exist."
         }
-    }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://en.wikipedia.org/wiki/Reduction_Operator",
+            "title": "Background information on reduction operators (binary reducers) by Wikipedia"
+        }
+    ]
 }
