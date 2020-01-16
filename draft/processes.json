@@ -970,15 +970,16 @@
   },
   {
     "id": "apply_dimension",
-    "summary": "Applies an n-ary process to all pixels",
-    "description": "Applies an **n-ary** process (i.e. takes an array of pixel values instead of a single pixel value) to a raster data cube. In contrast, the process ``apply()`` applies an unary process to all pixel values.\n\nBy default, `apply_dimension` applies the process on all pixel values in the data cube as ``apply()`` does, but the parameter `dimension` can be specified to work only on a particular dimension only. For example, if the temporal dimension is specified the process will work on a time series of pixel values.\n\nThe n-ary process must return as many elements in the returned array as there are in the input array. Otherwise a `CardinalityChanged` error must be returned.",
+    "summary": "Applies a process to pixels along a dimension",
+    "description": "Applies a process to all pixel values along a dimension of a raster data cube. For example, if the temporal dimension is specified the process will work on a time series of pixel values.\n\nThe process ``reduce_dimension()`` also applies a process to pixel values along a dimension, but removes the dimension afterwards. The process ``apply()`` applies a process to each pixel value in the data cube.\n\nThe target dimension is the source dimension if not specified otherwise in the `target_dimension` parameter. The pixel values in the target dimension get replaced by the computed pixel values. The name, type and reference system are preserved.\n\nThe dimension labels are preserved when the target dimension is the source dimension and the number of pixel values in the source dimension is equal to the number of values computed by the process. Otherwise, the dimension labels will be incrementing integers starting from zero, which can be changed using ``rename_labels()`` afterwards. The number of labels will equal to the number of values computed by the process.",
     "categories": [
       "cubes"
     ],
     "parameter_order": [
       "data",
       "process",
-      "dimension"
+      "dimension",
+      "target_dimension"
     ],
     "parameters": {
       "data": {
@@ -990,7 +991,7 @@
         "required": true
       },
       "process": {
-        "description": "Process to be applied on each dimension. The specified process needs to accept an array as parameter and must return as many elements in the returned array as there are in the input array. A process may consist of multiple sub-processes.",
+        "description": "Process to be applied on all pixel values. The specified process needs to accept an array as parameter and must return an array with least one element. A process may consist of multiple sub-processes.",
         "schema": {
           "type": "object",
           "subtype": "process-graph",
@@ -1007,7 +1008,14 @@
         "required": true
       },
       "dimension": {
-        "description": "The name of the dimension to apply the process on. By default, applies the process on all pixel values (as ``apply()`` does).",
+        "description": "The name of the source dimension to apply the process on. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "target_dimension": {
+        "description": "The name of the target dimension or `null` (the default) to use the source dimension specified in the parameter `dimension`.\n\nBy specifying a target dimension, the source dimension is removed. The target dimension with the specified name and the type `other` (see ``add_dimension()``) is created, if if doesn't exist yet.",
         "schema": {
           "type": [
             "string",
@@ -1018,16 +1026,13 @@
       }
     },
     "returns": {
-      "description": "A data cube with the newly computed values for the specified . The resolution, cardinality and the number of dimensions are the same as for the original data cube.",
+      "description": "A data cube with the newly computed values for the specified. The resolution and the number of dimensions are the same as for the original data cube.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
       }
     },
     "exceptions": {
-      "CardinalityChanged": {
-        "message": "The process specified for parameter 'process' returned less or more elements than it received."
-      },
       "DimensionNotAvailable": {
         "message": "A dimension with the specified name does not exist."
       }
@@ -1084,8 +1089,8 @@
   },
   {
     "id": "apply",
-    "summary": "Applies a unary process to each pixel",
-    "description": "Applies a **unary** process which takes a single value such as `abs` or `sqrt` to each pixel value in the data cube (i.e. a local operation). In contrast, the process ``apply_dimension()`` applies an n-ary process to a particular dimension.",
+    "summary": "Applies a process to each pixel",
+    "description": "Applies a *unary* process to each pixel value in the data cube (i.e. a local operation). A unary process takes a single value and returns a single value, for example ``abs()`` or ``linear_scale_range()``. In contrast, the process ``apply_dimension()`` applies a process to all pixel values along a particular dimension.",
     "categories": [
       "cubes"
     ],
@@ -1103,7 +1108,7 @@
         "required": true
       },
       "process": {
-        "description": "A process to be applied on each value, may consist of multiple sub-processes. The specified process must be unary meaning that it must work on a single value.",
+        "description": "A unary process to be applied on each value, may consist of multiple sub-processes.",
         "schema": {
           "type": "object",
           "subtype": "process-graph",
@@ -3041,7 +3046,7 @@
   {
     "id": "drop_dimension",
     "summary": "Removes a dimension",
-    "description": "Drops a dimension from the data cube.\n\nDropping a dimension only works on dimensions with a single dimension label left, otherwise the process fails with a `DimensionLabelCountMismatch` error. Dimension values can be reduced to a single value with a filter such as ``filter_bands()`` or the ``reduce()`` process. If a dimension with the specified name does not exist, the process fails with a `DimensionNotAvailable` error.",
+    "description": "Drops a dimension from the data cube.\n\nDropping a dimension only works on dimensions with a single dimension label left, otherwise the process fails with a `DimensionLabelCountMismatch` error. Dimension values can be reduced to a single value with a filter such as ``filter_bands()`` or the ``reduce_dimension()`` process. If a dimension with the specified name does not exist, the process fails with a `DimensionNotAvailable` error.",
     "categories": [
       "cubes"
     ],
@@ -3353,8 +3358,7 @@
     "summary": "Minimum and maximum values",
     "description": "Two element array containing the minimum and the maximum values of `data`.\n\nThis process is basically an alias for calling both ``min()`` and ``max()``, but may be implemented more performant by back-ends as it only needs to iterate over the data once instead of twice.",
     "categories": [
-      "math",
-      "reducer"
+      "math"
     ],
     "parameter_order": [
       "data",
@@ -3677,6 +3681,85 @@
     ]
   },
   {
+    "id": "filter_labels",
+    "summary": "Filter the dimension labels based on a logical expression.",
+    "description": "Filters the dimension labels based on a logical expression so that afterwards each dimension label in the data cube conforms to the expression.",
+    "categories": [
+      "cubes",
+      "filter"
+    ],
+    "parameter_order": [
+      "data",
+      "expression",
+      "dimension"
+    ],
+    "parameters": {
+      "data": {
+        "description": "A data cube.",
+        "schema": {
+          "type": "object",
+          "subtype": "raster-cube"
+        },
+        "required": true
+      },
+      "expression": {
+        "description": "An expression that is evaluated against each dimension label in the specified dimension. A dimension label is dropped from the data cube if the expression returns `false`. The data type of the parameter depends on the dimension labels stored for the dimension.",
+        "schema": {
+          "type": "object",
+          "subtype": "process-graph",
+          "parameters": {
+            "value": {
+              "description": "A single dimension label to compare against.",
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time",
+                  "subtype": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date",
+                  "subtype": "date"
+                },
+                {
+                  "type": "string",
+                  "format": "time",
+                  "subtype": "time"
+                }
+              ]
+            }
+          }
+        },
+        "required": true
+      },
+      "dimension": {
+        "description": "The name of the dimension to filter on. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Remarks:**\n\n* The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.\n* There could be multiple spatial dimensions such as `x`, `y` or `z`.\n* For multi-spectral imagery there is usually a separate dimension of type `bands` for the bands.",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      }
+    },
+    "returns": {
+      "description": "A data cube restricted by the specified expression. Therefore, the cardinality is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
+      "schema": {
+        "type": "object",
+        "subtype": "raster-cube"
+      }
+    },
+    "exceptions": {
+      "DimensionNotAvailable": {
+        "message": "A dimension with the specified name does not exist."
+      }
+    }
+  },
+  {
     "id": "filter_polygon",
     "summary": "Spatial filter using polygons",
     "description": "Limits the data cube over the spatial dimensions to the specified polygons.\n\nThe filter retains a pixel in the data cube if the point at the pixel center intersects with at least one of the polygons (as defined in the Simple Features standard by the OGC).",
@@ -3813,85 +3896,6 @@
       },
       "TooManyDimensions": {
         "message": "The number of temporal dimensions must be reduced to one for 'filter_temporal'."
-      }
-    }
-  },
-  {
-    "id": "filter",
-    "summary": "Filter based on a logical expression.",
-    "description": "Filters the dimension labels based on a logical expression so that afterwards each dimension label in the data cube conforms to the expression.",
-    "categories": [
-      "cubes",
-      "filter"
-    ],
-    "parameter_order": [
-      "data",
-      "expression",
-      "dimension"
-    ],
-    "parameters": {
-      "data": {
-        "description": "A data cube.",
-        "schema": {
-          "type": "object",
-          "subtype": "raster-cube"
-        },
-        "required": true
-      },
-      "expression": {
-        "description": "An expression that is evaluated against each dimension label in the specified dimension. A dimension label is dropped from the data cube if the expression returns `false`. The data type of the parameter depends on the dimension labels stored for the dimension.",
-        "schema": {
-          "type": "object",
-          "subtype": "process-graph",
-          "parameters": {
-            "value": {
-              "description": "A single dimension label to compare against.",
-              "anyOf": [
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "string",
-                  "format": "date-time",
-                  "subtype": "date-time"
-                },
-                {
-                  "type": "string",
-                  "format": "date",
-                  "subtype": "date"
-                },
-                {
-                  "type": "string",
-                  "format": "time",
-                  "subtype": "time"
-                }
-              ]
-            }
-          }
-        },
-        "required": true
-      },
-      "dimension": {
-        "description": "The name of the dimension to filter on. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Remarks:**\n\n* The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.\n* There could be multiple spatial dimensions such as `x`, `y` or `z`.\n* For multi-spectral imagery there is usually a separate dimension of type `bands` for the bands.",
-        "schema": {
-          "type": "string"
-        },
-        "required": true
-      }
-    },
-    "returns": {
-      "description": "A data cube restricted by the specified expression. Therefore, the cardinality is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
-      "schema": {
-        "type": "object",
-        "subtype": "raster-cube"
-      }
-    },
-    "exceptions": {
-      "DimensionNotAvailable": {
-        "message": "A dimension with the specified name does not exist."
       }
     }
   },
@@ -5896,7 +5900,7 @@
   {
     "id": "merge_cubes",
     "summary": "Merging two data cubes",
-    "description": "The data cubes have to be compatible. A merge operation without overlap should be reversible with (a set of) `filter` operations for each of the two cubes. The process doesn't add dimensions.\n\nThis means that the data cubes must have the same dimensions. Each dimension must be available in both data cubes and have the same name, type, reference system and resolution. One of the dimensions can have different labels, for all other dimensions the labels must be equal. If data overlaps, the parameter `overlap_resolver` must be specified to resolve the overlap.\n\n**Examples for merging two data cubes:**\n\n1. Data cubes with the dimensions `x`, `y`, `t` and `bands` have the same dimension labels in `x`,`y` and `t`, but the labels for the dimension `bands` are `B1` and `B2` for the first cube and `B3` and `B4`. An overlap resolver is *not needed*. The merged data cube has the dimensions `x`, `y`, `t` and `bands` and the dimension `bands` has four dimension labels: `B1`, `B2`, `B3`, `B4`.\n2. Data cubes with the dimensions `x`, `y`, `t` and `bands` have the same dimension labels in `x`,`y` and `t`, but the labels for the dimension `bands` are `B1` and `B2` for the first data cube and `B2` and `B3` for the second. An overlap resolver is *required* to resolve overlap in band `B2`. The merged data cube has the dimensions `x`, `y`, `t` and `bands` and the dimension `bands` has three dimension labels: `B1`, `B2`, `B3`.\n3. Data cubes with the dimensions `x`, `y` and `t` have the same dimension labels in `x`,`y` and `t`. There are two options:\n   1. Keep the overlapping values separately in the merged data cube: An overlap resolver is *not needed*, but for each data cube you need to add a new dimension using ``add_dimension()``. The new dimensions must be equal, except that the labels for the new dimensions must differ by name. The merged data cube has the same dimensions and labels as the original data cubes, plus the dimension added with ``add_dimension()``, which has the two dimension labels after the merge.\n   2. Combine the overlapping values into a single value: An overlap resolver is *required* to resolve the overlap for all pixels. The merged data cube has the same dimensions and labels as the original data cubes, but all pixel values have been processed by the overlap resolver.",
+    "description": "The data cubes have to be compatible. A merge operation without overlap should be reversible with (a set of) filter operations for each of the two cubes. The process doesn't add dimensions.\n\nThis means that the data cubes must have the same dimensions. Each dimension must be available in both data cubes and have the same name, type, reference system and resolution. One of the dimensions can have different labels, for all other dimensions the labels must be equal. If data overlaps, the parameter `overlap_resolver` must be specified to resolve the overlap.\n\n**Examples for merging two data cubes:**\n\n1. Data cubes with the dimensions `x`, `y`, `t` and `bands` have the same dimension labels in `x`,`y` and `t`, but the labels for the dimension `bands` are `B1` and `B2` for the first cube and `B3` and `B4`. An overlap resolver is *not needed*. The merged data cube has the dimensions `x`, `y`, `t` and `bands` and the dimension `bands` has four dimension labels: `B1`, `B2`, `B3`, `B4`.\n2. Data cubes with the dimensions `x`, `y`, `t` and `bands` have the same dimension labels in `x`,`y` and `t`, but the labels for the dimension `bands` are `B1` and `B2` for the first data cube and `B2` and `B3` for the second. An overlap resolver is *required* to resolve overlap in band `B2`. The merged data cube has the dimensions `x`, `y`, `t` and `bands` and the dimension `bands` has three dimension labels: `B1`, `B2`, `B3`.\n3. Data cubes with the dimensions `x`, `y` and `t` have the same dimension labels in `x`,`y` and `t`. There are two options:\n   1. Keep the overlapping values separately in the merged data cube: An overlap resolver is *not needed*, but for each data cube you need to add a new dimension using ``add_dimension()``. The new dimensions must be equal, except that the labels for the new dimensions must differ by name. The merged data cube has the same dimensions and labels as the original data cubes, plus the dimension added with ``add_dimension()``, which has the two dimension labels after the merge.\n   2. Combine the overlapping values into a single value: An overlap resolver is *required* to resolve the overlap for all pixels. The merged data cube has the same dimensions and labels as the original data cubes, but all pixel values have been processed by the overlap resolver.",
     "categories": [
       "cubes"
     ],
@@ -7239,8 +7243,7 @@
     "summary": "Quantiles",
     "description": "Calculates quantiles, which are cut points dividing the range of a probability distribution into either\n\n* intervals corresponding to the given `probabilities` or\n* (nearly) equal-sized intervals (q-quantiles based on the parameter `q`).\n\nEither the parameter `probabilites` or `q` must be specified, otherwise the `QuantilesParameterMissing` exception must be thrown. If both parameters are set the `QuantilesParameterConflict` exception must be thrown.",
     "categories": [
-      "math",
-      "reducer"
+      "math"
     ],
     "parameter_order": [
       "data",
@@ -7530,9 +7533,9 @@
     ]
   },
   {
-    "id": "reduce",
+    "id": "reduce_dimension",
     "summary": "Reduce dimensions",
-    "description": "Applies a reducer to a data cube dimension by collapsing all the input values along the specified dimension into an output value computed by the reducer.\n\nBy default the dimension is dropped, but this behaviour can be influenced with the parameter `target_dimension` The parameter must be specified, if a reducer such as ``extrema()`` returns multiple values.\n\nBy default, a reducer must accept an array as input. The process can also work on two values by setting the parameter `binary` to `true`. The reducer doesn't get executed on a single value.",
+    "description": "Applies a reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer. The dimension is dropped. To avoid dropping the dimension, use ``apply_dimension()`` instead.\n\nA reducer is a single process or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.\n\nThe process can also work on two values by setting the parameter `binary` to `true`. In this case, the reducer doesn't get executed on a single value.",
     "categories": [
       "cubes",
       "reducer"
@@ -7541,7 +7544,6 @@
       "data",
       "reducer",
       "dimension",
-      "target_dimension",
       "binary"
     ],
     "parameters": {
@@ -7554,7 +7556,7 @@
         "required": true
       },
       "reducer": {
-        "description": "A reducer to apply on the specified dimension.\n\nThe reducer may be a single process such as ``mean()`` or consist of multiple sub-processes. By default, a reducer must accept an array as input, but the reducer can also work on two values by setting the parameter `binary` to `true`.\n\nThe reducer must compute either a single value or multiple return values. Multiple values returned by a reducer must be wrapped in an array and will result in as many enumerated dimension labels as array elements are available. Enumerated dimension labels start from zero.",
+        "description": "A reducer to apply on the specified dimension.\n\nThe reducer may be a single process such as ``mean()`` or consist of multiple sub-processes. By default, a reducer must accept an array as input, but the reducer can also work on two values by setting the parameter `binary` to `true`.\n\nThe reducer must compute a single value.",
         "required": true,
         "schema": [
           {
@@ -7595,16 +7597,6 @@
         },
         "required": true
       },
-      "target_dimension": {
-        "description": "The name of the target dimension or `null` to drop the dimension (default).\n\nIf a target dimension is specified, a new dimension with the specified name and the type `other` (see ``add_dimension()``) is created and the old dimension is dropped. If a dimension with the specified name exists, the dimension is replaced, but keeps the original type.\n\nThe resulting target dimension has as many dimension labels as the reducer returned values. For example, a reducer returning a single scalar results in a dimension with a single label, a reducer returning an array with four elements results in a dimension with four labels.\n\nIf a reducer returns multiple values, this parameter is required to be a string. Otherwise the process produces the error `TargetDimensionMissing`.",
-        "schema": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "default": null
-      },
       "binary": {
         "description": "Specifies whether the process should pass two values to the reducer (binary mode) or a list of values (default).\n\nIf the process passes two values to the reducer, the reducer must be both associative and commutative as the execution may be executed in parallel and therefore the order of execution is arbitrary.\n\nThis parameter is especially useful for UDFs passed as reducers. Back-ends may still optimize and parallelize processes that work on list of values.",
         "schema": {
@@ -7614,7 +7606,7 @@
       }
     },
     "returns": {
-      "description": "A data cube with the newly computed values. The number of dimensions is reduced by one, except if a target dimension is specified. The resolution and cardinality are the same as for the original data cube.",
+      "description": "A data cube with the newly computed values. It has one dimension less than the original data cube, but the remaining dimensions have their resolution and cardinality preserved.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -7623,9 +7615,6 @@
     "exceptions": {
       "DimensionNotAvailable": {
         "message": "A dimension with the specified name does not exist."
-      },
-      "TargetDimensionMissing": {
-        "message": "The reducer returned multiple values. A target dimension must be specified."
       }
     },
     "links": [
@@ -7817,7 +7806,7 @@
             }
           },
           "reduce1": {
-            "process_id": "reduce",
+            "process_id": "reduce_dimension",
             "arguments": {
               "data": {
                 "from_node": "loadco1"
@@ -8326,7 +8315,7 @@
   {
     "id": "run_udf_externally",
     "summary": "Run an externally hosted UDF container",
-    "description": "Runs a compatible UDF container that is either externally hosted by a service provider or running on a local machine of the user. The UDF container must follow the [openEO UDF specification](https://open-eo.github.io/openeo-udf/).\n\nThe referenced UDF service can be executed in several processes such as ``aggregate_temporal()``, ``apply()``, ``apply_dimension()``, ``filter()`` and ``reduce()``. In this case an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
+    "description": "Runs a compatible UDF container that is either externally hosted by a service provider or running on a local machine of the user. The UDF container must follow the [openEO UDF specification](https://open-eo.github.io/openeo-udf/).\n\nThe referenced UDF service can be executed in several processes such as ``aggregate_polygon()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
     "categories": [
       "import",
       "udf"
@@ -8408,7 +8397,7 @@
   {
     "id": "run_udf",
     "summary": "Run an UDF",
-    "description": "Runs an UDF in one of the supported runtime environments.\n\nThe process can either:\n\n1. load and run a locally stored UDF from a file in the workspace of the authenticated user. The path to the UDF file must be relative to the root directory of the user's workspace.\n2. fetch and run a remotely stored and published UDF by absolute URI, for example from [openEO Hub](https://hub.openeo.org)).\n3. run the source code specified inline as string.\n\nThe loaded UDF can be executed in several processes such as ``aggregate_temporal()``, ``apply()``, ``apply_dimension()``, ``filter()`` and ``reduce()``. In this case an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
+    "description": "Runs an UDF in one of the supported runtime environments.\n\nThe process can either:\n\n1. load and run a locally stored UDF from a file in the workspace of the authenticated user. The path to the UDF file must be relative to the root directory of the user's workspace.\n2. fetch and run a remotely stored and published UDF by absolute URI, for example from [openEO Hub](https://hub.openeo.org)).\n3. run the source code specified inline as string.\n\nThe loaded UDF can be executed in several processes such as ``aggregate_polygon()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
     "categories": [
       "import",
       "udf"
