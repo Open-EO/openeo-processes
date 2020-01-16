@@ -1,7 +1,7 @@
 {
     "id": "rename_dimension",
-    "summary": "Renames a dimension",
-    "description": "Renames a dimension in the data cube.",
+    "summary": "Rename a dimension",
+    "description": "Renames a dimension in the data cube while preserving all other properties.",
     "categories": [
         "cubes"
     ],
