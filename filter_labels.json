@@ -1,6 +1,6 @@
 {
-    "id": "filter",
-    "summary": "Filter based on a logical expression",
+    "id": "filter_labels",
+    "summary": "Filter dimension labels based on a condition",
     "description": "Filters the dimension labels based on a logical expression so that afterwards each dimension label in the data cube conforms to the expression.",
     "categories": [
         "cubes",

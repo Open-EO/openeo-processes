@@ -1,7 +1,7 @@
 {
     "id": "rename_labels",
     "summary": "Rename dimension labels",
-    "description": "Renames the labels of a dimension in the data cube.",
+    "description": "Renames the labels of a dimension in the data cube. Doesn't change the order of the labels and the corresponding data.",
     "categories": [
         "cubes"
     ],
@@ -115,7 +115,7 @@
                     }
                 },
                 "reduce1": {
-                    "process_id": "reduce",
+                    "process_id": "reduce_dimension",
                     "arguments": {
                         "data": {
                             "from_node": "loadco1"

@@ -1,7 +1,7 @@
 {
     "id": "create_raster_cube",
     "summary": "Create an empty raster data cube",
-    "description": "Creates a new raster data cube without dimensions.",
+    "description": "Creates a new raster data cube without dimensions. Dimensions can be added with ``add_dimension()``.",
     "categories": [
         "cubes"
     ],
