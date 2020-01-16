@@ -1,6 +1,6 @@
 {
     "id": "reduce_dimension_binary",
-    "summary": "Reduce dimensions",
+    "summary": "Reduce dimensions using binary reduction",
     "description": "Applies a binary reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer. This process passes a list of values to the reducer. In contrast, ``reduce_dimension()`` passes a list of values.\n\nThe dimension is dropped. To avoid this, use ``apply_dimension()`` instead.",
     "categories": [
         "cubes",
