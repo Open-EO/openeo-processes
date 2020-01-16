@@ -44,7 +44,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `filter_bbox`, `load_collection`, `resample_spatial`: PROJ definitions are deprecated in favor of EPSG codes, WKT2 and PROJJSON. [#58](https://github.com/Open-EO/openeo-processes/issues/58)
 
 ### Removed
-- The following operations don't support `ignore_nodata` any longer: `and`, `divide`, `multiply`, `or`, `subtract`, `xor`. [#85](https://github.com/Open-EO/openeo-processes/issues/85)
+- The following processes don't support `ignore_nodata` any longer: `and`, `divide`, `multiply`, `or`, `subtract`, `xor`. [#85](https://github.com/Open-EO/openeo-processes/issues/85)
+- The following processes don't support `binary` any longer: `aggregate_temporal`, `resample_cube_temporal`. [#94](https://github.com/Open-EO/openeo-processes/issues/94)
 - `aggregate_polygon`: Doesn't allow returning a GeoJSON any longer.
 - `mask`: The mask parameter doesn't accept vectors (polygons) any longer. Use process `mask_polygon` instead. [#110](https://github.com/Open-EO/openeo-processes/issues/110)
 - Removed processes:
