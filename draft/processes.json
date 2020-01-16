@@ -970,7 +970,7 @@
   },
   {
     "id": "apply_dimension",
-    "summary": "Applies a process to pixels along a dimension",
+    "summary": "Apply a process to pixels along a dimension",
     "description": "Applies a process to all pixel values along a dimension of a raster data cube. For example, if the temporal dimension is specified the process will work on a time series of pixel values.\n\nThe process ``reduce_dimension()`` also applies a process to pixel values along a dimension, but removes the dimension afterwards. The process ``apply()`` applies a process to each pixel value in the data cube.\n\nThe target dimension is the source dimension if not specified otherwise in the `target_dimension` parameter. The pixel values in the target dimension get replaced by the computed pixel values. The name, type and reference system are preserved.\n\nThe dimension labels are preserved when the target dimension is the source dimension and the number of pixel values in the source dimension is equal to the number of values computed by the process. Otherwise, the dimension labels will be incrementing integers starting from zero, which can be changed using ``rename_labels()`` afterwards. The number of labels will equal to the number of values computed by the process.",
     "categories": [
       "cubes"
@@ -1040,7 +1040,7 @@
   },
   {
     "id": "apply_kernel",
-    "summary": "Applies a kernel to compute pixel-wise values",
+    "summary": "Apply a kernel to compute pixel-wise values",
     "description": "Applies a focal operation based on a weighted kernel to each value of the specified dimensions in the data cube.",
     "categories": [
       "cubes",
@@ -1089,7 +1089,7 @@
   },
   {
     "id": "apply",
-    "summary": "Applies a process to each pixel",
+    "summary": "Apply a process to each pixel",
     "description": "Applies a *unary* process to each pixel value in the data cube (i.e. a local operation). A unary process takes a single value and returns a single value, for example ``abs()`` or ``linear_scale_range()``. In contrast, the process ``apply_dimension()`` applies a process to all pixel values along a particular dimension.",
     "categories": [
       "cubes"
@@ -1387,7 +1387,7 @@
   },
   {
     "id": "arctan2",
-    "summary": "Inverse tangent of two numbers.",
+    "summary": "Inverse tangent of two numbers",
     "description": "Computes the arc tangent of two numbers `x` and `y`. It is similar to calculating the arc tangent of *y / x*, except that the signs of both arguments are used to determine the quadrant of the result.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated if any of the arguments is `null`.",
     "categories": [
       "math > trigonometric"
@@ -2181,7 +2181,7 @@
   },
   {
     "id": "clip",
-    "summary": "Clips a value between a minimum and a maximum value.",
+    "summary": "Clip a value between a minimum and a maximum",
     "description": "Clips a number between specified minimum and maximum values. A value larger than the maximal value will have the maximal value, a value lower than minimal value will have the minimal value.",
     "categories": [
       "math"
@@ -2474,7 +2474,7 @@
   {
     "id": "create_raster_cube",
     "summary": "Create an empty raster data cube",
-    "description": "Creates a new raster data cube without dimensions.",
+    "description": "Creates a new raster data cube without dimensions. Dimensions can be added with ``add_dimension()``.",
     "categories": [
       "cubes"
     ],
@@ -3045,7 +3045,7 @@
   },
   {
     "id": "drop_dimension",
-    "summary": "Removes a dimension",
+    "summary": "Remove a dimension",
     "description": "Drops a dimension from the data cube.\n\nDropping a dimension only works on dimensions with a single dimension label left, otherwise the process fails with a `DimensionLabelCountMismatch` error. Dimension values can be reduced to a single value with a filter such as ``filter_bands()`` or the ``reduce_dimension()`` process. If a dimension with the specified name does not exist, the process fails with a `DimensionNotAvailable` error.",
     "categories": [
       "cubes"
@@ -3682,7 +3682,7 @@
   },
   {
     "id": "filter_labels",
-    "summary": "Filter the dimension labels based on a logical expression.",
+    "summary": "Filter dimension labels based on a condition",
     "description": "Filters the dimension labels based on a logical expression so that afterwards each dimension label in the data cube conforms to the expression.",
     "categories": [
       "cubes",
@@ -4549,7 +4549,7 @@
   {
     "id": "labels",
     "summary": "Get the dimension labels",
-    "description": "Returns the labels for a dimension in the data cube.",
+    "description": "Returns all labels for a dimension in the data cube. The labels have the same order as in the data cube.",
     "categories": [
       "cubes"
     ],
@@ -5163,7 +5163,7 @@
   },
   {
     "id": "load_uploaded_files",
-    "summary": "Load files from the user workspace.",
+    "summary": "Load files from the user workspace",
     "description": "Loads one or more user-uploaded files from the local user workspace / data store and returns them as a single data cube. The files must have been stored by the authenticated user on the back-end currently connected to.",
     "categories": [
       "cubes",
@@ -7105,7 +7105,7 @@
   },
   {
     "id": "product",
-    "summary": "Compute the product by multiplying a sequence of numbers",
+    "summary": "Compute the product by multiplying numbers",
     "description": "Multiplies all elements in a sequential array of numbers and returns the computed product.\n\nBy default no-data values are ignored. Setting `ignore_nodata` to `false` considers no-data values so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it.",
     "categories": [
       "math",
@@ -7456,8 +7456,8 @@
   },
   {
     "id": "rearrange",
-    "summary": "Rearranges an array based on a permutation",
-    "description": "Rearranges an array based on a permutation.",
+    "summary": "Rearrange an array based on a permutation",
+    "description": "Rearranges an array based on a permutation, i.e. a ranked list of element positions in the original list. The positions must be zero-based.",
     "categories": [
       "arrays",
       "sorting"
@@ -7468,7 +7468,7 @@
     ],
     "parameters": {
       "data": {
-        "description": "An array to rearrange.",
+        "description": "The array to rearrange.",
         "schema": {
           "type": "array",
           "items": {
@@ -7478,7 +7478,7 @@
         "required": true
       },
       "order": {
-        "description": "A permutation used for rearranging, i.e. a ranked list of element positions in the original list. The positions must be zero-based.",
+        "description": "The permutation used for rearranging.",
         "schema": {
           "type": "array",
           "items": {
@@ -7665,8 +7665,8 @@
   },
   {
     "id": "rename_dimension",
-    "summary": "Renames a dimension",
-    "description": "Renames a dimension in the data cube.",
+    "summary": "Rename a dimension",
+    "description": "Renames a dimension in the data cube while preserving all other properties.",
     "categories": [
       "cubes"
     ],
@@ -7730,7 +7730,7 @@
   {
     "id": "rename_labels",
     "summary": "Rename dimension labels",
-    "description": "Renames the labels of a dimension in the data cube.",
+    "description": "Renames the labels of a dimension in the data cube. Doesn't change the order of the labels and the corresponding data.",
     "categories": [
       "cubes"
     ],
@@ -8205,7 +8205,7 @@
   },
   {
     "id": "round",
-    "summary": "Rounds to a specified precision",
+    "summary": "Round to a specified precision",
     "description": "Rounds a real number `x` to specified precision `p`.\n\nIf the fractional part of `x` is halfway between two integers, one of which is even and the other odd, then the even number is returned.\nThis behaviour follows [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229). This kind of rounding is also called \"rounding to nearest\" or \"banker's rounding\". It minimizes rounding errors that result from consistently rounding a midpoint value in a single direction.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "math > rounding"
@@ -9141,7 +9141,7 @@
   },
   {
     "id": "sum",
-    "summary": "Compute the sum by adding up a sequence of numbers",
+    "summary": "Compute the sum by adding up numbers",
     "description": "Sums up all elements in a sequential array of numbers and returns the computed sum.\n\nBy default no-data values are ignored. Setting `ignore_nodata` to `false` considers no-data values so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it.",
     "categories": [
       "math",
