@@ -115,7 +115,7 @@
                     }
                 },
                 "reduce1": {
-                    "process_id": "reduce",
+                    "process_id": "reduce_dimension",
                     "arguments": {
                         "data": {
                             "from_node": "loadco1"
