@@ -1,6 +1,6 @@
 # openEO processes
 
-openEO develops interoperable processes for to big Earth observation cloud processing. This repository contains the process specifications. Each process is specified in a separate JSON file, which conforms to the corresponding API process schema.
+openEO develops interoperable processes for big Earth observation cloud processing. This repository contains the process specifications. Each process is specified in a separate JSON file, which conforms to the corresponding API process schema.
 
 ## Versions
 
