@@ -1,6 +1,6 @@
 {
     "id": "apply_kernel",
-    "summary": "Applies a kernel to compute pixel-wise values",
+    "summary": "Apply a kernel to compute pixel-wise values",
     "description": "Applies a focal operation based on a weighted kernel to each value of the specified dimensions in the data cube.",
     "categories": [
         "cubes",

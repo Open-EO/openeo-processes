@@ -1,6 +1,6 @@
 {
     "id": "apply_dimension",
-    "summary": "Applies a process to pixels along a dimension",
+    "summary": "Apply a process to pixels along a dimension",
     "description": "Applies a process to all pixel values along a dimension of a raster data cube. For example, if the temporal dimension is specified the process will work on a time series of pixel values.\n\nThe process ``reduce_dimension()`` also applies a process to pixel values along a dimension, but drops the dimension afterwards. The process ``apply()`` applies a process to each pixel value in the data cube.\n\nThe target dimension is the source dimension if not specified otherwise in the `target_dimension` parameter. The pixel values in the target dimension get replaced by the computed pixel values. The name, type and reference system are preserved.\n\nThe dimension labels are preserved when the target dimension is the source dimension and the number of pixel values in the source dimension is equal to the number of values computed by the process. Otherwise, the dimension labels will be incrementing integers starting from zero, which can be changed using ``rename_labels()`` afterwards. The number of labels will equal to the number of values computed by the process.",
     "categories": [
         "cubes"
