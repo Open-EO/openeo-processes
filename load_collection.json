@@ -182,8 +182,7 @@
             "default": null
         },
         "properties": {
-            "description": "Limits the data by metadata properties to include only data in the data cube which all given expressions return `true` for (AND operation).\n\nSpecify key-value-pairs with the keys being the name of the metadata property, which can be retrieved with the openEO Data Discovery for Collections. The values must be expressions to be evaluated against the collection metadata, see the example.\n\n**Note:** Back-ends may not pass the actual value to the expressions, but pass a proprietary index or a placeholder so that they can use the expressions to query against another data source. So debugging on the process parameter `value` may lead to unexpected results.",
-            "experimental": true,
+            "description": "Limits the data by metadata properties to include only data in the data cube which all given conditions return `true` for (AND operation).\n\nSpecify key-value-pairs with the keys being the name of the metadata property, which can be retrieved with the openEO Data Discovery for Collections. The values must be conditions to be evaluated against the collection metadata, see the example.",
             "schema": [
                 {
                     "type": "object",
@@ -221,7 +220,7 @@
     },
     "examples": [
         {
-            "description": "Loading `Sentinel-2B` data from a `Sentinel-2` collection for 2018, but only with cloud cover between 0 and 10%.",
+            "description": "Loading `Sentinel-2B` data from a `Sentinel-2` collection for 2018, but only with cloud cover between 0 and 50%.",
             "process_graph": {
                 "loadco1": {
                     "process_id": "load_collection",
@@ -247,13 +246,13 @@
                                                 "from_argument": "value"
                                             },
                                             "min": 0,
-                                            "max": 10
+                                            "max": 50
                                         },
                                         "result": true
                                     }
                                 }
                             },
-                            "eo:platform": {
+                            "platform": {
                                 "callback": {
                                     "pf": {
                                         "process_id": "eq",
