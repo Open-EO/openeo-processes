@@ -1,6 +1,6 @@
 {
     "id": "load_uploaded_files",
-    "summary": "Load files from the user workspace.",
+    "summary": "Load files from the user workspace",
     "description": "Loads one or more user-uploaded files from the local user workspace / data store and returns them as a single data cube. The files must have been stored by the authenticated user on the back-end currently connected to.",
     "categories": [
         "cubes",

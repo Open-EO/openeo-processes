@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `array_find`
     - `drop_dimension`
     - `filter_labels`
+    - `labels`
     - `load_uploaded_files`
     - `mask_polygon`
     - `reduce_dimension`

@@ -1,7 +1,7 @@
 {
     "id": "filter_labels",
     "summary": "Filter dimension labels based on a condition",
-    "description": "Removes all dimension labels in the data cube that do not match the specified condition. Afterwards each dimension label in the data cube conforms to the condition.",
+    "description": "Removes all dimension labels from the data cube that do not match the specified condition. Afterwards each dimension label in the data cube conforms to the condition.",
     "categories": [
         "cubes",
         "filter"
