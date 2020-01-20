@@ -22,16 +22,10 @@
         },
         "mask": {
             "description": "A GeoJSON object or a vector data cube containing a polygon. The provided feature types can be one of the following:\n\n* A `Polygon` geometry,\n* a `GeometryCollection` containing Polygons,\n* a `Feature` with a `Polygon` geometry or\n* a `FeatureCollection` containing `Feature`s with a `Polygon` geometry.",
-            "schema": [
-                {
-                    "type": "object",
-                    "subtype": "geojson"
-                },
-                {
-                    "type": "object",
-                    "subtype": "vector-cube"
-                }
-            ],
+            "schema": {
+                "type": "object",
+                "subtype": "geojson"
+            },
             "required": true
         },
         "replacement": {
