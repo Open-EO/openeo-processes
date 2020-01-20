@@ -1,0 +1,49 @@
+{
+    "id": "array_apply",
+    "summary": "Applies a unary process to each array element",
+    "description": "Applies a **unary** process which takes a single value such as `abs` or `sqrt` to each value in the array. This is basically what other languages call either a `for each` loop or a `map` function.",
+    "categories": [
+        "arrays"
+    ],
+    "parameter_order": [
+        "data",
+        "process"
+    ],
+    "parameters": {
+        "data": {
+            "description": "An array.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
+            },
+            "required": true
+        },
+        "process": {
+            "description": "A process to be applied on each value, may consist of multiple sub-processes. The specified process must be unary meaning that it must work on a single value.",
+            "schema": {
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": {
+                    "x": {
+                        "description": "A value of any type could be passed."
+                    },
+                    "index": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "required": true
+        }
+    },
+    "returns": {
+        "description": "An array with the newly computed values. The number of elements are the same as for the original array.",
+        "schema": {
+            "type": "array",
+            "items": {
+                "description": "Any data type is allowed."
+            }
+        }
+    }
+}

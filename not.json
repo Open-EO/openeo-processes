@@ -1,12 +1,12 @@
 {
     "id": "not",
-    "summary": "Inverting a boolean",
-    "description": "Inverts a single boolean so that `true` gets `false` and `false` gets `true`.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "summary": "Logical negation (NOT)",
+    "description": "Inverts a single boolean value so that `true` gets `false` and `false` gets `true`. The no-data value `null` is passed through.",
     "categories": [
         "logic"
     ],
     "parameters": {
-        "expression": {
+        "x": {
             "description": "Boolean value to invert.",
             "schema": {
                 "type": [
@@ -29,19 +29,19 @@
     "examples": [
         {
             "arguments": {
-                "expression": null
+                "x": null
             },
             "returns": null
         },
         {
             "arguments": {
-                "expression": false
+                "x": false
             },
             "returns": true
         },
         {
             "arguments": {
-                "expression": true
+                "x": true
             },
             "returns": false
         }

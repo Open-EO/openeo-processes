@@ -1,7 +1,7 @@
 {
     "id": "rearrange",
-    "summary": "Rearranges an array based on a permutation",
-    "description": "Rearranges an array based on a permutation.",
+    "summary": "Rearrange an array based on a permutation",
+    "description": "Rearranges an array based on a permutation, i.e. a ranked list of element positions in the original list. The positions must be zero-based.",
     "categories": [
         "arrays",
         "sorting"
@@ -12,7 +12,7 @@
     ],
     "parameters": {
         "data": {
-            "description": "An array to rearrange.",
+            "description": "The array to rearrange.",
             "schema": {
                 "type": "array",
                 "items": {
@@ -22,7 +22,7 @@
             "required": true
         },
         "order": {
-            "description": "A permutation used for rearranging, i.e. a ranked list of element positions in the original list. The positions must be zero-based.",
+            "description": "The permutation used for rearranging.",
             "schema": {
                 "type": "array",
                 "items": {

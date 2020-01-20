@@ -1,15 +1,14 @@
 {
     "id": "merge_cubes",
     "summary": "Merging two data cubes",
-    "description": "The data cubes have to be compatible. A merge is the inverse of a split if there is no overlap. If data overlaps the parameter `overlap_resolver` must be specified to resolve the overlap. It doesn't add dimensions.",
+    "description": "The data cubes have to be compatible. A merge operation without overlap should be reversible with (a set of) filter operations for each of the two cubes. The process doesn't add dimensions.\n\nThis means that the data cubes must have the same dimensions. Each dimension must be available in both data cubes and have the same name, type, reference system and resolution. One of the dimensions can have different labels, for all other dimensions the labels must be equal. If data overlaps, the parameter `overlap_resolver` must be specified to resolve the overlap.\n\n**Examples for merging two data cubes:**\n\n1. Data cubes with the dimensions `x`, `y`, `t` and `bands` have the same dimension labels in `x`,`y` and `t`, but the labels for the dimension `bands` are `B1` and `B2` for the first cube and `B3` and `B4`. An overlap resolver is *not needed*. The merged data cube has the dimensions `x`, `y`, `t` and `bands` and the dimension `bands` has four dimension labels: `B1`, `B2`, `B3`, `B4`.\n2. Data cubes with the dimensions `x`, `y`, `t` and `bands` have the same dimension labels in `x`,`y` and `t`, but the labels for the dimension `bands` are `B1` and `B2` for the first data cube and `B2` and `B3` for the second. An overlap resolver is *required* to resolve overlap in band `B2`. The merged data cube has the dimensions `x`, `y`, `t` and `bands` and the dimension `bands` has three dimension labels: `B1`, `B2`, `B3`.\n3. Data cubes with the dimensions `x`, `y` and `t` have the same dimension labels in `x`,`y` and `t`. There are two options:\n   1. Keep the overlapping values separately in the merged data cube: An overlap resolver is *not needed*, but for each data cube you need to add a new dimension using ``add_dimension()``. The new dimensions must be equal, except that the labels for the new dimensions must differ by name. The merged data cube has the same dimensions and labels as the original data cubes, plus the dimension added with ``add_dimension()``, which has the two dimension labels after the merge.\n   2. Combine the overlapping values into a single value: An overlap resolver is *required* to resolve the overlap for all pixels. The merged data cube has the same dimensions and labels as the original data cubes, but all pixel values have been processed by the overlap resolver.",
     "categories": [
         "cubes"
     ],
     "parameter_order": [
         "cube1",
         "cube2",
-        "overlap_resolver",
-        "binary"
+        "overlap_resolver"
     ],
     "parameters": {
         "cube1": {
@@ -29,50 +28,20 @@
             "required": true
         },
         "overlap_resolver": {
-            "description": "A reducer that resolves the conflict if the data overlaps. The reducer may be a single process such as ``mean()`` or consist of multiple sub-processes. By default, a reducer must accept an array as input. The process can also work on two values by setting the parameter `binary` to `true`. The reducer must return a value of the same data type as the input values in the array. `null` (default) can be specified if no overlap resolver is required.",
-            "schema": [
-                {
-                    "title": "Unary behaviour",
-                    "description": "Passes an array to the reducer.",
-                    "type": "object",
-                    "subtype": "process-graph",
-                    "parameters": {
-                        "data": {
-                            "description": "An array with elements of any data type.",
-                            "type": "array",
-                            "items": {
-                                "description": "Any data type."
-                            }
-                        }
-                    }
-                },
-                {
-                    "title": "Binary behaviour",
-                    "description": "Passes two values to the reducer.",
-                    "type": "object",
-                    "subtype": "process-graph",
-                    "parameters": {
-                        "x": {
-                            "description": "The first value. Any data type could be passed."
-                        },
-                        "y": {
-                            "description": "The second value. Any data type could be passed."
-                        }
-                    }
-                },
-                {
-                    "title": "No overlap resolver",
-                    "type": "null"
-                }
-            ],
-            "default": null
-        },
-        "binary": {
-            "description": "Specifies whether the process should pass two values to the reducer or a list of values (default).\n\nIf the process passes two values, the reducer must be both associative and commutative as the execution may be executed in parallel and therefore the order of execution is arbitrary.\n\nThis parameter is especially useful for UDFs passed as reducers. Back-ends may still optimize and parallelize processes that work on list of values.",
+            "description": "A reduction operator that resolves the conflict if the data overlaps. The reducer must return a value of the same data type as the input values are. The reduction operator may be a single process such as ``multiply()`` or consist of multiple sub-processes. `null` (the default) can be specified if no overlap resolver is required.",
             "schema": {
-                "type": "boolean"
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": {
+                    "x": {
+                        "description": "The first value. Any data type could be passed."
+                    },
+                    "y": {
+                        "description": "The second value. Any data type could be passed."
+                    }
+                }
             },
-            "default": false
+            "default": null
         }
     },
     "returns": {
@@ -84,7 +53,7 @@
     },
     "exceptions": {
         "OverlapResolverMissing": {
-            "message": "Two data cubes with overlap but without an overlap resolver have been specified."
+            "message": "Overlapping data cubes, but no overlap resolver has been specified."
         }
     },
     "links": [

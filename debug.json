@@ -5,7 +5,6 @@
     "categories": [
         "development"
     ],
-    "experimental": true,
     "parameter_order": [
         "data",
         "code",
@@ -28,7 +27,7 @@
             "default": ""
         },
         "level": {
-            "description": "The severity level of this message. Note that the level `error` forces the computation to be stopped!",
+            "description": "The severity level of this message, defaults to `info`. Note that the level `error` forces the computation to be stopped!",
             "schema": {
                 "type": "string",
                 "enum": [
@@ -38,7 +37,7 @@
                     "debug"
                 ]
             },
-            "default": "debug"
+            "default": "info"
         },
         "message": {
             "description": "A message to send in addition to the data.",

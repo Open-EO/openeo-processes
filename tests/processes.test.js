@@ -1,5 +1,6 @@
 const glob = require('glob');
 const fs = require('fs');
+const path = require('path');
 const markdownlint = require('markdownlint');
 const ajv = require('ajv');
 const spellcheck = require('markdown-spellcheck').default;
@@ -7,6 +8,7 @@ const spellcheck = require('markdown-spellcheck').default;
 var idRegExp = /^[A-Za-z0-9_]+$/;
 var paramKeyRegExp = /^[A-Za-z0-9_]+$/; 
 var exceptionNameRegExp = /^[A-Za-z0-9_]+$/;
+var summaryDotRegexp = /[^\.]$/;
 
 var files = glob.sync("../*.json", {realpath: true});
 
@@ -25,7 +27,11 @@ var subtypes = {
 	'bounding-box': {type: 'object'},
 	'collection-id': {type: 'string'},
 	'epsg-code': {type: 'integer'},
+	'file-paths': {type: 'array'},
+	'file-path': {type: 'string'},
 	'geojson': {type: 'object'},
+	'input-format': {type: 'string'},
+	'input-format-options': {type: 'object'},
 	'job-id': {type: 'string'},
 	'kernel': {type: 'array'},
 	'output-format': {type: 'string'},
@@ -38,6 +44,9 @@ var subtypes = {
 	'raster-cube': {type: 'object'},
 	'temporal-interval': {type: 'array'},
 	'temporal-intervals': {type: 'array'},
+	'udf-code': {type: 'string'},
+	'udf-runtime': {type: 'string'},
+	'udf-runtime-version': {type: 'string'},
 	'vector-cube': {type: 'object'},
 	'wkt2-definition': {type: 'string'}
 }
@@ -80,14 +89,12 @@ jsv.addKeyword("subtype", {
 		type: "string",
 		enum: Object.keys(subtypes)
 	},
-// Doesn't work yet, see https://github.com/epoberezkin/ajv/issues/1049
-/*	compile: function (subtype, schema) {
+	compile: function (subtype, schema) {
 		if (schema.type != subtypes[subtype].type) {
-			return false;
-//			throw "Subtype '"+subtype+"' not allowed for type '"+schema.type+"'.";
+			throw "Subtype '"+subtype+"' not allowed for type '"+schema.type+"'."
 		}
-		return true;
-	}, */
+		return () => true;
+	},
 	errors: false
 });
 
@@ -99,10 +106,11 @@ for(let i in words) {
 
 var processes = [];
 
-files.forEach((file) => {
+files.forEach(file => {
 	try {
+		var fileContent = fs.readFileSync(file);
 		// Check JSON structure for faults
-		var p = JSON.parse(fs.readFileSync(file));
+		var p = JSON.parse(fileContent);
 
 		// Add process name to dictionary
 		if (typeof p.id === 'string') {
@@ -110,36 +118,54 @@ files.forEach((file) => {
 		}
 
 		// Prepare for tests
-		processes.push([file, p]);
+		processes.push([file, p, fileContent.toString()]);
 	} catch(err) {
-		processes.push([file, null]);
+		processes.push([file, {}, ""]);
 		console.error(err);
 		expect(err).toBeUndefined();
 	}
 });
 
-describe.each(processes)("%s", (file, p) => {
+describe.each(processes)("%s", (file, p, fileContent) => {
+
+	test("File / JSON", () => {
+		const ext = path.extname(file);
+		// Check that the process file has a lower-case json extension
+		expect(ext).toEqual(".json");
+		// Check that the process name is also the file name
+		expect(path.basename(file, ext)).toEqual(p.id);
+		// lint: Check whether the file is correctly JSON formatted
+		// expect(JSON.stringify(p, null, 4).trim()).toEqual(fileContent.trim());
+	});
 
 	test("ID", () => {
 		expect(typeof p.id).toBe('string');
-		expect(idRegExp.test(p.id)).toBe(true);
+		expect(idRegExp.test(p.id)).toBeTruthy();
 	});
 
 
 	test("Summary", () => {
 		expect(typeof p.summary === 'undefined' || typeof p.summary === 'string').toBeTruthy();
+		// lint: Summary should be short
+		expect(p.summary.length).toBeLessThan(55);
+		// lint: Summary should not end with a dot
+		expect(summaryDotRegexp.test(p.summary)).toBeTruthy();
 		checkSpelling(p.summary, p);
 	});
 
 	test("Description", () => {
 		// description
 		expect(typeof p.description).toBe('string');
+		// lint: Description should be longer than a summary
+		expect(p.description.length).toBeGreaterThan(55);
 		checkDescription(p.description, p);
 	});
 
 	test("Categories", () => {
 		// categories
-		expect(typeof p.categories === 'undefined' || Array.isArray(p.categories)).toBeTruthy();
+		expect(Array.isArray(p.categories)).toBeTruthy();
+		// lint: There should be at least one category assigned
+		expect(p.categories.length).toBeGreaterThan(0);
 		if (Array.isArray(p.categories)) {
 			for(let i in p.categories) {
 				expect(typeof p.categories[i]).toBe('string');
@@ -147,9 +173,8 @@ describe.each(processes)("%s", (file, p) => {
 		}
 	});
 
-	test("Deprecated", () => {
-		// deprecated
-		expect(typeof p.deprecated === 'undefined' || typeof p.deprecated === 'boolean').toBeTruthy();
+	test("Flags", () => {
+		checkFlags(p);
 	});
 
 	test("Parameters", () => {
@@ -160,7 +185,7 @@ describe.each(processes)("%s", (file, p) => {
 	var params = o2a(p.parameters);
 	if (params.length > 0) {
 		test.each(params)("Parameters > %s", (key, param) => {
-			expect(paramKeyRegExp.test(key)).toBe(true);
+			expect(paramKeyRegExp.test(key)).toBeTruthy();
 
 			// parameter description
 			expect(typeof param.description).toBe('string');
@@ -168,19 +193,19 @@ describe.each(processes)("%s", (file, p) => {
 
 			// Parameter flags
 			expect(typeof param.required === 'undefined' || typeof param.required === 'boolean').toBeTruthy();
-			expect(typeof param.deprecated === 'undefined' || typeof param.deprecated === 'boolean').toBeTruthy();
-
-			// Parameter media type
-			expect(typeof param.media_type === 'undefined' || typeof param.media_type === 'string').toBeTruthy();
+			// lint: don't specify defaults
+			expect(typeof param.required === 'undefined' || param.required === true).toBeTruthy();
+			// Check flags (recommended / experimental)
+			checkFlags(param);
 
 			// Parameter schema
 			expect(typeof param.schema).toBe('object');
 			expect(param.schema).not.toBeNull();
 			checkJsonSchema(param.schema);
 
-			// Parameters that are not required should define a default value - just a warning for now
-			if(param.required !== true && typeof param.default === 'undefined' && !anyOfRequired.includes(p.id)) {
-				console.warn(p.id + ": Optional parameter '" + key + "' should define a default value.");
+			// Parameters that are not required should define a default value
+			if(param.required !== true && !anyOfRequired.includes(p.id)) {
+				expect(param.default).toBeDefined();
 			}
 
 			// Checking that callbacks (process-graphs) define their parameters
@@ -215,9 +240,6 @@ describe.each(processes)("%s", (file, p) => {
 		expect(typeof p.returns.description).toBe('string');
 		checkDescription(p.returns.description, p);
 
-		// return value media type
-		expect(typeof p.returns.media_type === 'undefined' || typeof p.returns.media_type === 'string').toBeTruthy();
-
 		// return value schema
 		expect(typeof p.returns.schema).toBe('object');
 		expect(p.returns.schema).not.toBeNull();
@@ -231,7 +253,7 @@ describe.each(processes)("%s", (file, p) => {
 	var exceptions = o2a(p.exceptions);
 	if (exceptions.length > 0) {
 		test.each(exceptions)("Exceptions > %s", (key, e) => {
-			expect(exceptionNameRegExp.test(key)).toBe(true);
+			expect(exceptionNameRegExp.test(key)).toBeTruthy();
 
 			// exception message
 			expect(typeof e.message).toBe('string');
@@ -330,6 +352,17 @@ function array_diff(arr1, arr2) {
 	return arr1.filter(x => !arr2.includes(x)).concat(arr2.filter(x => !arr1.includes(x)));
 }
 
+function checkFlags(p) {
+	// deprecated
+	expect(typeof p.deprecated === 'undefined' || typeof p.deprecated === 'boolean').toBeTruthy();
+	// lint: don't specify defaults
+	expect(typeof p.deprecated === 'undefined' || p.deprecated === true).toBeTruthy();
+	// experimental
+	expect(typeof p.experimental === 'undefined' || typeof p.experimental === 'boolean').toBeTruthy();
+	// lint: don't specify defaults
+	expect(typeof p.experimental === 'undefined' || p.experimental === true).toBeTruthy();
+}
+
 function checkDescription(text, p = null, commonmark = true) {
 	if (!text) {
 		return;
@@ -344,8 +377,8 @@ function checkDescription(text, p = null, commonmark = true) {
 			config: {
 				"line-length": false, // Nobody cares in JSON files anyway
 				"first-line-h1": false, // Usually no headings in descriptions
-				"first-heading-h1": false, // Usually not required for descriptions
-				"fenced-code-language": false // Usually no languages available anyway
+				"fenced-code-language": false, // Usually no languages available anyway
+				"single-trailing-newline": false, // New lines at end of a JSON string doesn't make sense. We don't have files here.
 			}
 		};
 		const result = markdownlint.sync(options);
@@ -393,6 +426,11 @@ function prepareSchema(schema) {
 }
 
 function checkJsonSchema(schema) {
+	if (Array.isArray(schema)) {
+		// lint: For array schemas there should be more than one schema specified, otherwise use directly the schema object
+		expect(schema.length).toBeGreaterThan(1);
+	}
+
 	let result = jsv.compile(prepareSchema(schema));
 	expect(result.errors).toBeNull();
 

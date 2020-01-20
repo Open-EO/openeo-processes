@@ -1,18 +1,16 @@
 {
     "id": "aggregate_polygon",
-    "summary": "Compute zonal statistics for polygons",
-    "description": "Aggregates zonal statistics for one or multiple polygons over the spatial dimensions.\n\nThe process considers all pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n\nThe data cube must have been reduced to only contain two raster dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise this process fails with the `TooManyDimensions` error.\n\nThe number of total and valid pixels is returned together with the calculated values.",
+    "summary": "Zonal statistics for polygons",
+    "description": "Aggregates zonal statistics for one or multiple polygons over the spatial dimensions. This process passes a list of values to the reducer. In contrast, ``aggregate_polygon_binary()`` passes two values, which may be better suited for UDFs.\n\nThe process considers all pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n\nThe data cube must have been reduced to only contain two spatial dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise this process fails with the `TooManyDimensions` error.\n\nThe number of total and valid pixels is returned together with the calculated values.",
     "categories": [
         "cubes",
         "aggregate & resample"
     ],
-    "experimental": true,
     "parameter_order": [
         "data",
         "polygons",
         "reducer",
-        "name",
-        "binary"
+        "name"
     ],
     "parameters": {
         "data": {
@@ -38,67 +36,36 @@
             "required": true
         },
         "reducer": {
-            "description": "A reducer to be applied on all values of each geometry. The reducer may be a single process such as ``mean()`` or consist of multiple sub-processes. By default, a reducer must accept an array as input. The process can also work on two values by setting the parameter `binary` to `true`.",
-            "schema": [
-                {
-                    "title": "Unary behaviour",
-                    "description": "Passes an array to the reducer.",
-                    "type": "object",
-                    "subtype": "process-graph",
-                    "parameters": {
-                        "data": {
-                            "description": "An array with elements of any data type.",
-                            "type": "array",
-                            "items": {
-                                "description": "Any data type."
-                            }
-                        }
-                    }
-                },
-                {
-                    "title": "Binary behaviour",
-                    "description": "Passes two values to the reducer.",
-                    "type": "object",
-                    "subtype": "process-graph",
-                    "parameters": {
-                        "x": {
-                            "description": "The first value. Any data type could be passed."
-                        },
-                        "y": {
-                            "description": "The second value. Any data type could be passed."
+            "description": "A reducer to be applied on all values of each geometry. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
+            "schema": {
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": {
+                    "data": {
+                        "description": "An array with elements of any data type.",
+                        "type": "array",
+                        "items": {
+                            "description": "Any data type."
                         }
                     }
                 }
-            ],
+            },
             "required": true
         },
         "name": {
-            "description": "The property name (for GeoJSON) or the new dimension name (for vector cubes) to be used for storing the results. Defaults to `result`.",
+            "description": "The new dimension name to be used for storing the results. Defaults to `result`.",
             "schema": {
                 "type": "string"
             },
             "default": "result"
-        },
-        "binary": {
-            "description": "Specifies whether the process should pass two values to the reducer or a list of values (default).\n\nIf the process passes two values, the reducer must be both associative and commutative as the execution may be executed in parallel and therefore the order of execution is arbitrary.\n\nThis parameter is especially useful for UDFs passed as reducers. Back-ends may still optimize and parallelize processes that work on list of values.",
-            "schema": {
-                "type": "boolean"
-            },
-            "default": false
         }
     },
     "returns": {
-        "description": "A vector data cube or a GeoJSON object, depending on the input of the `polygons` parameter.\n\nThe computed value is stored in a property (GeoJSON) or dimension (vector cube) with the name that was specified in the parameter `name`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) in each geometry. In GeoJSON these are stored as properties with the names `{name}_total_count` and `{name}_valid_count` (replace `{name}` with the value of the `name` parameter). In a vector data cube, these values are stored as attributes of the result value with the attribute names `total_count` and `valid_count`.\n\nIf the input was GeoJSON and the therefore the return value is also a GeoJSON object, the geometries (`Polygon` or `GeometryCollection`) get wrapped in a `Feature` or `FeatureCollection` respectively. The results of the computations are stored in the `properties` of each GeoJSON `Feature`.",
-        "schema": [
-            {
-                "type": "object",
-                "subtype": "geojson"
-            },
-            {
-                "type": "object",
-                "subtype": "vector-cube"
-            }
-        ]
+        "description": "A vector data cube with the computed results. The vector data cube implicitly gets restricted to the bounds of the polygons as if ``filter_polygon()`` would have been used with the same values for the corresponding parameters immediately before this process.\n\nThe computed value is stored in dimension with the name that was specified in the parameter `name`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) in each geometry. These values are stored as attributes of the result value with the attribute names `total_count` and `valid_count`.",
+        "schema": {
+            "type": "object",
+            "subtype": "vector-cube"
+        }
     },
     "exceptions": {
         "TooManyDimensions": {
@@ -106,11 +73,6 @@
         }
     },
     "links": [
-        {
-            "href": "https://github.com/Open-EO/openeo-processes/issues/2",
-            "rel": "experimental",
-            "title": "More information about the experimental status of the process"
-        },
         {
             "href": "https://open-eo.github.io/openeo-api/glossary/#aggregation-and-resampling",
             "rel": "about",
@@ -120,11 +82,6 @@
             "href": "http://www.opengeospatial.org/standards/sfa",
             "rel": "about",
             "title": "Simple Features standard by the OGC"
-        },
-        {
-            "rel": "about",
-            "href": "https://en.wikipedia.org/wiki/Reduction_Operator",
-            "title": "Background information on reduction operators (binary reducers) by Wikipedia"
         }
     ]
 }

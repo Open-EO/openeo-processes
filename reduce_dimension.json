@@ -1,0 +1,60 @@
+{
+    "id": "reduce_dimension",
+    "summary": "Reduce dimensions",
+    "description": "Applies a unary reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer. This process passes a list of values to the reducer. In contrast, ``reduce_dimension_binary()`` passes two values, which may be better suited for UDFs.\n\nThe dimension is dropped. To avoid this, use ``apply_dimension()`` instead.",
+    "categories": [
+        "cubes",
+        "reducer"
+    ],
+    "parameter_order": [
+        "data",
+        "reducer",
+        "dimension"
+    ],
+    "parameters": {
+        "data": {
+            "description": "A data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            },
+            "required": true
+        },
+        "reducer": {
+            "description": "A reducer to apply on the specified dimension. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
+            "schema": {
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": {
+                    "data": {
+                        "description": "An array with elements of any data type.",
+                        "type": "array",
+                        "items": {
+                            "description": "Any data type."
+                        }
+                    }
+                }
+            },
+            "required": true
+        },
+        "dimension": {
+            "description": "The name of the dimension over which to reduce. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Remarks:**\n\n* The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.\n* There could be multiple spatial dimensions such as `x`, `y` or `z`.\n* For multi-spectral imagery there is usually a separate dimension of type `bands` for the bands.",
+            "schema": {
+                "type": "string"
+            },
+            "required": true
+        }
+    },
+    "returns": {
+        "description": "A data cube with the newly computed values. It has one dimension less than the original data cube, but the remaining dimensions have their resolution and cardinality preserved.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
+        }
+    }
+}

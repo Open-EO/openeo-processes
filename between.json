@@ -1,7 +1,7 @@
 {
     "id": "between",
     "summary": "Between comparison",
-    "description": "By default this process checks whether `x` is greater than or equal to `min` and lower than or equal to `max`. Therefore, this process is an alias for `and([gte(x, min), lte(x, max)])` and all definitions from these processes apply here as well.\n\nIf `exclude_max` is set to `true` the upper bound is excluded so that the process checks whether `x` is greater than or equal to `min` and lower than `max`. In this case the process works the same as executing `and([gte(x, min), lt(x, max)])`.\n\nLower and upper bounds are not allowed to be swapped. So `min` MUST be lower than or equal to `max` or otherwise the process always returns `false`.",
+    "description": "By default this process checks whether `x` is greater than or equal to `min` and lower than or equal to `max`. Therefore, this process is an alias for `and([gte(x, min), lte(x, max)])` and all definitions from ``and()``, ``gte()`` and ``lte()`` apply here as well.\n\nIf `exclude_max` is set to `true` the upper bound is excluded so that the process checks whether `x` is greater than or equal to `min` and lower than `max`. In this case the process works the same as executing `and([gte(x, min), lt(x, max)])`.\n\nLower and upper bounds are not allowed to be swapped. So `min` MUST be lower than or equal to `max` or otherwise the process always returns `false`.",
     "categories": [
         "comparison"
     ],
@@ -13,30 +13,10 @@
     ],
     "parameters": {
         "x": {
-            "description": "",
-            "schema": [
-                {
-                    "type": "number"
-                },
-                {
-                    "type": "null"
-                },
-                {
-                    "type": "string",
-                    "format": "date-time",
-                    "subtype": "date-time"
-                },
-                {
-                    "type": "string",
-                    "format": "date",
-                    "subtype": "date"
-                },
-                {
-                    "type": "string",
-                    "format": "time",
-                    "subtype": "time"
-                }
-            ],
+            "description": "The value to check.",
+            "schema": {
+                "description": "Any data type is allowed."
+            },
             "required": true
         },
         "min": {
@@ -98,7 +78,10 @@
     "returns": {
         "description": "`true` if `x` is between the specified bounds, otherwise `false`.",
         "schema": {
-            "type": "boolean"
+            "type": [
+                "boolean",
+                "null"
+            ]
         }
     },
     "examples": [

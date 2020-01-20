@@ -6,8 +6,55 @@ node_js:
 sudo: false
 
 install:
-  - cd tests
-  - npm install
+- cd tests
+- npm install
+- npm install -g concat-json-files
 
 script:
-  - npm run test
+- npm run test
+- cd ..
+
+before_deploy:
+- concat-json-files "*.json" -t "processes.json"
+- git clone --branch gh-pages https://$GITHUB_TOKEN@github.com/Open-EO/openeo-processes.git gh-pages
+- cd gh-pages
+- |
+  if [[ $TRAVIS_BRANCH == 'master' ]] ; then
+    cp ../index.html index.html
+    cp ../processes.json processes.json
+  fi
+- |
+  if [[ $TRAVIS_BRANCH == 'draft' ]] ; then
+    rm -rf draft
+    mkdir -p draft
+    cp ../index.html draft/index.html
+    cp ../processes.json draft/processes.json
+  fi
+- |
+  if [ -n "$TRAVIS_TAG" ] ; then
+    rm -rf $TRAVIS_TAG
+    mkdir -p $TRAVIS_TAG
+    cp ../index.html $TRAVIS_TAG/index.html
+    cp ../processes.json $TRAVIS_TAG/processes.json
+  fi
+
+deploy:
+  - provider: pages
+    skip-cleanup: true
+    github-token: $GITHUB_TOKEN
+    local-dir: gh-pages
+    keep-history: true
+    name: openEO CI
+    email: openeo.ci@uni-muenster.de
+    on:
+      tags: true
+  - provider: pages
+    skip-cleanup: true
+    github-token: $GITHUB_TOKEN
+    local-dir: gh-pages
+    keep-history: true
+    name: openEO CI
+    email: openeo.ci@uni-muenster.de
+    on:
+      all_branches: true
+      condition: $TRAVIS_BRANCH =~ ^(master|draft)$

@@ -1,19 +1,19 @@
 {
     "id": "if",
     "summary": "If-Then-Else conditional",
-    "description": "Returns the value of the `accept` parameter if the expression is `true` or the value of the `reject` parameter if the expression is `false`. This works similar to an if-then-else construct.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "If the value passed is `true`, returns the value of the `accept` parameter, otherwise returns the value of the `reject` parameter.\n\nThis is basically an if-then-else construct as in other programming languages.",
     "categories": [
         "logic",
         "comparison",
         "masks"
     ],
     "parameter_order": [
-        "expression",
+        "value",
         "accept",
         "reject"
     ],
     "parameters": {
-        "expression": {
+        "value": {
             "description": "A boolean value.",
             "schema": {
                 "type": [
@@ -24,22 +24,22 @@
             "required": true
         },
         "accept": {
-            "description": "A value that is returned if the boolean expression is `true`. Defaults to `true`.",
+            "description": "A value that is returned if the boolean value is `true`.",
             "schema": {
                 "description": "Any data type is allowed."
             },
-            "default": true
+            "required": true
         },
         "reject": {
-            "description": "A value that is returned if the boolean expression is `false`. Defaults to `false`.",
+            "description": "A value that is returned if the boolean value is **not** `true`. Defaults to `null`.",
             "schema": {
                 "description": "Any data type is allowed."
             },
-            "default": false
+            "default": null
         }
     },
     "returns": {
-        "description": "Either the `accept` or `reject` argument depending on the given boolean expression.",
+        "description": "Either the `accept` or `reject` argument depending on the given boolean value.",
         "schema": {
             "description": "Any data type is allowed."
         }
@@ -47,32 +47,23 @@
     "examples": [
         {
             "arguments": {
-                "expression": true
-            },
-            "returns": true
-        },
-        {
-            "arguments": {
-                "expression": null
-            },
-            "returns": null
-        },
-        {
-            "arguments": {
-                "expression": false
-            },
-            "returns": false
-        },
-        {
-            "arguments": {
-                "expression": true,
-                "accept": "A"
+                "value": true,
+                "accept": "A",
+                "reject": "B"
             },
             "returns": "A"
         },
         {
             "arguments": {
-                "expression": false,
+                "value": null,
+                "accept": "A",
+                "reject": "B"
+            },
+            "returns": "B"
+        },
+        {
+            "arguments": {
+                "value": false,
                 "accept": [
                     1,
                     2,
@@ -89,6 +80,20 @@
                 5,
                 6
             ]
+        },
+        {
+            "arguments": {
+                "value": true,
+                "accept": 123
+            },
+            "returns": 123
+        },
+        {
+            "arguments": {
+                "value": false,
+                "accept": 1
+            },
+            "returns": null
         }
     ]
 }

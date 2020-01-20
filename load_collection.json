@@ -1,7 +1,7 @@
 {
     "id": "load_collection",
     "summary": "Load a collection",
-    "description": "Loads a collection from the current back-end by its id and returns it as processable data cube. The data that is added to the data cube can be restricted with the additional `spatial_extent`, `temporal_extent`, `bands` and `properties`.\n\n**Remarks:**\n\n* The bands (and all dimensions that specify nominal dimension values) are expected to be ordered as specified in the metadata if the `bands` parameter is set to `null`.\n* If no additional parameter is specified this would imply that the whole data set is expected to be loaded. Due to the large size of many data sets this is not recommended and may be optimized by back-ends to only load the data that is actually required after evaluating subsequent processes such as filters. This means that the pixel values should be processed only after the data has been limited to the required extents and as a consequence also to a manageable size.",
+    "description": "Loads a collection from the current back-end by its id and returns it as processable data cube. The data that is added to the data cube can be restricted with the additional `spatial_extent`, `temporal_extent`, `bands` and `properties`.\n\n**Remarks:**\n\n* The bands (and all dimensions that specify nominal dimension labels) are expected to be ordered as specified in the metadata if the `bands` parameter is set to `null`.\n* If no additional parameter is specified this would imply that the whole data set is expected to be loaded. Due to the large size of many data sets this is not recommended and may be optimized by back-ends to only load the data that is actually required after evaluating subsequent processes such as filters. This means that the pixel values should be processed only after the data has been limited to the required extents and as a consequence also to a manageable size.",
     "categories": [
         "cubes",
         "import"
@@ -71,35 +71,33 @@
                         },
                         "crs": {
                             "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html), [PROJJSON](https://proj.org/projjson.html) or [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
-                            "schema": {
-                                "anyOf": [
-                                    {
-                                        "title": "EPSG Code",
-                                        "type": "integer",
-                                        "subtype": "epsg-code",
-                                        "examples": [
-                                            7099
-                                        ]
-                                    },
-                                    {
-                                        "title": "WKT2",
-                                        "type": "string",
-                                        "subtype": "wkt2-definition"
-                                    },
-                                    {
-                                        "title": "PROJ definition",
-                                        "type": "string",
-                                        "subtype": "proj-definition",
-                                        "deprecated": true
-                                    },
-                                    {
-                                        "title": "PROJJSON",
-                                        "type": "object",
-                                        "subtype": "projjson-definition"
-                                    }
-                                ],
-                                "default": 4326
-                            }
+                            "anyOf": [
+                                {
+                                    "title": "EPSG Code",
+                                    "type": "integer",
+                                    "subtype": "epsg-code",
+                                    "examples": [
+                                        7099
+                                    ]
+                                },
+                                {
+                                    "title": "WKT2",
+                                    "type": "string",
+                                    "subtype": "wkt2-definition"
+                                },
+                                {
+                                    "title": "PROJ definition",
+                                    "type": "string",
+                                    "subtype": "proj-definition",
+                                    "deprecated": true
+                                },
+                                {
+                                    "title": "PROJJSON",
+                                    "type": "object",
+                                    "subtype": "projjson-definition"
+                                }
+                            ],
+                            "default": 4326
                         }
                     }
                 },
@@ -109,13 +107,15 @@
                     "subtype": "geojson"
                 },
                 {
+                    "title": "No filter",
+                    "description": "Don't filter spatially. All data is included in the data cube.",
                     "type": "null"
                 }
             ],
             "required": true
         },
         "temporal_extent": {
-            "description": "Limits the data to load from the collection to the specified left-closed temporal interval. Applies to all temporal dimensions if there are multiple of them. The interval has to be specified as an array with exactly two elements:\n\n1. The first element is the start of the date and/or time interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the date and/or time interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://tools.ietf.org/html/rfc3339). Although [RFC 3339 prohibits the hour to be '24'](https://tools.ietf.org/html/rfc3339#section-5.7), **this process allows the value '24' for the hour** of an end time in order to make it possible that left-closed time intervals can fully cover the day.\n\nAlso supports open intervals by setting one of the boundaries to `null`, but never both.\n\nSet this parameter to `null` to set no limit for the spatial extent. Be careful with this when loading large datasets!",
+            "description": "Limits the data to load from the collection to the specified left-closed temporal interval. Applies to all temporal dimensions. The interval has to be specified as an array with exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://tools.ietf.org/html/rfc3339). Also supports open intervals by setting one of the boundaries to `null`, but never both.\n\nSet this parameter to `null` to set no limit for the spatial extent. Be careful with this when loading large datasets!",
             "schema": [
                 {
                     "type": "array",
@@ -135,34 +135,31 @@
                                 "subtype": "date"
                             },
                             {
-                                "type": "string",
-                                "format": "time",
-                                "subtype": "time"
-                            },
-                            {
                                 "type": "null"
                             }
                         ]
                     },
                     "examples": [
                         [
-                            "2015-01-01",
-                            "2016-01-01"
+                            "2015-01-01T00:00:00Z",
+                            "2016-01-01T00:00:00Z"
                         ],
                         [
-                            "12:00:00Z",
-                            "24:00:00Z"
+                            "2015-01-01",
+                            "2016-01-01"
                         ]
                     ]
                 },
                 {
+                    "title": "No filter",
+                    "description": "Don't filter temporally. All data is included in the data cube.",
                     "type": "null"
                 }
             ],
             "required": true
         },
         "bands": {
-            "description": "Only adds the specified bands into the data cube so that bands that don't match the list of band names are not available. Applies to all dimensions of type `bands` if there are multiple of them.\n\nThe order of the specified array defines the order of the bands in the data cube.",
+            "description": "Only adds the specified bands into the data cube so that bands that don't match the list of band names are not available. Applies to all dimensions of type `bands`.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If unique band name and common name conflict, the unique band name has higher priority.\n\nThe order of the specified array defines the order of the bands in the data cube. f multiple bands match a common name, all matched bands are included in the original order.",
             "schema": [
                 {
                     "type": "array",
@@ -172,14 +169,15 @@
                     }
                 },
                 {
+                    "title": "No Filter",
+                    "description": "Don't filter bands. All bands are included in the data cube.",
                     "type": "null"
                 }
             ],
             "default": null
         },
         "properties": {
-            "description": "Limits the data by metadata properties to include only data in the data cube which all given expressions return `true` for (AND operation).\n\nSpecify key-value-pairs with the keys being the name of the metadata property, which can be retrieved with the openEO Data Discovery for Collections. The values must be expressions to be evaluated against the collection metadata, see the example.\n\n**Note:** Back-ends may not pass the actual value to the expressions, but pass a proprietary index or a placeholder so that they can use the expressions to query against another data source. So debugging on the process parameter `value` may lead to unexpected results.",
-            "experimental": true,
+            "description": "Limits the data by metadata properties to include only data in the data cube which all given conditions return `true` for (AND operation).\n\nSpecify key-value-pairs with the keys being the name of the metadata property, which can be retrieved with the openEO Data Discovery for Collections. The values must be conditions to be evaluated against the collection metadata, see the example.",
             "schema": [
                 {
                     "type": "object",
@@ -187,13 +185,15 @@
                         "type": "object",
                         "subtype": "process-graph",
                         "parameters": {
-                            "value": {
+                            "x": {
                                 "description": "The property value. Any data type could be passed."
                             }
                         }
                     }
                 },
                 {
+                    "title": "No filter",
+                    "description": "Don't filter by metadata properties.",
                     "type": "null"
                 }
             ],
@@ -202,20 +202,14 @@
     },
     "returns": {
         "description": "A data cube for further processing.",
-        "schema": [
-            {
-                "type": "object",
-                "subtype": "raster-cube"
-            },
-            {
-                "type": "object",
-                "subtype": "vector-cube"
-            }
-        ]
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
     },
     "examples": [
         {
-            "description": "Loading `Sentinel-2B` data from a `Sentinel-2` collection for 2018, but only with cloud cover between 0 and 10%.",
+            "description": "Loading `Sentinel-2B` data from a `Sentinel-2` collection for 2018, but only with cloud cover between 0 and 50%.",
             "process_graph": {
                 "loadco1": {
                     "process_id": "load_collection",
@@ -238,22 +232,22 @@
                                         "process_id": "between",
                                         "arguments": {
                                             "x": {
-                                                "from_argument": "value"
+                                                "from_argument": "x"
                                             },
                                             "min": 0,
-                                            "max": 10
+                                            "max": 50
                                         },
                                         "result": true
                                     }
                                 }
                             },
-                            "eo:platform": {
+                            "platform": {
                                 "callback": {
                                     "pf": {
                                         "process_id": "eq",
                                         "arguments": {
                                             "x": {
-                                                "from_argument": "value"
+                                                "from_argument": "x"
                                             },
                                             "y": "Sentinel-2B",
                                             "case_sensitive": false
@@ -289,6 +283,11 @@
             "href": "http://www.opengeospatial.org/standards/sfa",
             "rel": "about",
             "title": "Simple Features standard by the OGC"
+        },
+        {
+            "rel": "about",
+            "href": "https://github.com/radiantearth/stac-spec/tree/master/extensions/eo#common-band-names",
+            "title": "List of common band names as specified by the STAC specification"
         }
     ]
 }
