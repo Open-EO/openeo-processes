@@ -5,12 +5,9 @@
     "categories": [
         "texts"
     ],
-    "parameter_order": [
-        "data",
-        "separator"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "A set of elements. Numbers, boolean values and null values get converted to their (lower case) string representation. For example: `1` (integer), `-1.5` (number), `true` / `false` (boolean values)",
             "schema": {
                 "type": "array",
@@ -25,7 +22,8 @@
             },
             "required": true
         },
-        "separator": {
+        {
+            "name": "separator",
             "description": "A separator to put between each of the individual texts. Defaults to an empty string.",
             "schema": {
                 "type": [
@@ -37,7 +35,7 @@
             },
             "default": ""
         }
-    },
+    ],
     "returns": {
         "description": "Returns a string containing a string representation of all the array elements in the same order, with the separator between each element.",
         "schema": {

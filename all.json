@@ -6,12 +6,9 @@
         "logic",
         "reducer"
     ],
-    "parameter_order": [
-        "values",
-        "ignore_nodata"
-    ],
-    "parameters": {
-        "values": {
+    "parameters": [
+        {
+            "name": "values",
             "description": "A set of boolean values.",
             "schema": {
                 "type": "array",
@@ -24,14 +21,15 @@
             },
             "required": true
         },
-        "ignore_nodata": {
+        {
+            "name": "ignore_nodata",
             "description": "Indicates whether no-data values are ignored or not and ignores them by default.",
             "schema": {
                 "type": "boolean"
             },
             "default": true
         }
-    },
+    ],
     "returns": {
         "description": "Boolean result of the logical operation.",
         "schema": {

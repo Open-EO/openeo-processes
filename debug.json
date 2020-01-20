@@ -5,28 +5,25 @@
     "categories": [
         "development"
     ],
-    "parameter_order": [
-        "data",
-        "code",
-        "level",
-        "message"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "Data to publish.",
             "schema": {
                 "description": "Any data type is allowed."
             },
             "required": true
         },
-        "code": {
+        {
+            "name": "code",
             "description": "An identifier to help identify the log entry in a bunch of other log entries.",
             "schema": {
                 "type": "string"
             },
             "default": ""
         },
-        "level": {
+        {
+            "name": "level",
             "description": "The severity level of this message, defaults to `info`. Note that the level `error` forces the computation to be stopped!",
             "schema": {
                 "type": "string",
@@ -39,14 +36,15 @@
             },
             "default": "info"
         },
-        "message": {
+        {
+            "name": "message",
             "description": "A message to send in addition to the data.",
             "schema": {
                 "type": "string"
             },
             "default": ""
         }
-    },
+    ],
     "returns": {
         "description": "Returns the data as passed to the `data` parameter.",
         "schema": {

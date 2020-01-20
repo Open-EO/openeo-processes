@@ -6,12 +6,9 @@
         "arrays",
         "comparison"
     ],
-    "parameter_order": [
-        "data",
-        "value"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "List to find the value in.",
             "schema": {
                 "type": "array",
@@ -21,14 +18,15 @@
             },
             "required": true
         },
-        "value": {
+        {
+            "name": "value",
             "description": "Value to find in `data`.",
             "schema": {
                 "description": "Any data type is allowed."
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "Returns `true` if the list contains the value, false` otherwise.",
         "schema": {

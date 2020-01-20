@@ -6,13 +6,9 @@
         "cubes",
         "export"
     ],
-    "parameter_order": [
-        "data",
-        "format",
-        "options"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "The data to save.",
             "schema": [
                 {
@@ -26,7 +22,8 @@
             ],
             "required": true
         },
-        "format": {
+        {
+            "name": "format",
             "description": "The file format to save to. It must be one of the values that the server reports as supported output file formats, which usually correspond to the short GDAL/OGR codes. This parameter is *case insensitive*.",
             "schema": {
                 "type": "string",
@@ -34,7 +31,8 @@
             },
             "required": true
         },
-        "options": {
+        {
+            "name": "options",
             "description": "The file format options to be used to create the file(s). Must correspond to the options that the server reports as supported options for the chosen `format`. The option names and valid values usually correspond to the GDAL/OGR format options.",
             "schema": {
                 "type": "object",
@@ -42,7 +40,7 @@
             },
             "default": {}
         }
-    },
+    ],
     "returns": {
         "description": "`false` if saving failed, `true` otherwise.",
         "schema": {

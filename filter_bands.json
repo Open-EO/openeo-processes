@@ -5,13 +5,9 @@
     "categories": [
         "filter"
     ],
-    "parameter_order": [
-        "data",
-        "bands",
-        "wavelengths"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "A data cube with bands.",
             "schema": {
                 "type": "object",
@@ -19,7 +15,8 @@
             },
             "required": true
         },
-        "bands": {
+        {
+            "name": "bands",
             "description": "A list of band names. Either the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands). If unique band name and common name conflict, the unique band name has higher priority.\n\nThe order of the specified array defines the order of the bands in the data cube. If multiple bands match a common name, all matched bands are included in the original order.",
             "schema": {
                 "type": "array",
@@ -30,7 +27,8 @@
             },
             "default": []
         },
-        "wavelengths": {
+        {
+            "name": "wavelengths",
             "description": "A list of sub-lists with each sub-list consisting of two elements. The first element is the minimum wavelength and the second element is the maximum wavelength. Wavelengths are specified in micrometres (μm).\n\nThe order of the specified array defines the order of the bands in the data cube. If multiple bands match the wavelengths, all matched bands are included in the original order.",
             "schema": {
                 "type": "array",
@@ -57,7 +55,7 @@
             },
             "default": []
         }
-    },
+    ],
     "returns": {
         "description": "A data cube limited to a subset of its original bands. Therefore, the cardinality is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
         "schema": {

@@ -6,12 +6,9 @@
         "import"
     ],
     "experimental": true,
-    "parameter_order": [
-        "id",
-        "variables"
-    ],
-    "parameters": {
-        "id": {
+    "parameters": [
+        {
+            "name": "id",
             "description": "A process graph id or an absolute URI to an externally hosted process graph.",
             "schema": [
                 {
@@ -29,7 +26,8 @@
             ],
             "required": true
         },
-        "variables": {
+        {
+            "name": "variables",
             "description": "Key-value-pairs with values for variables that are defined by the process graph. The key of the pair has to be the corresponding `variable_id` for the value specified. The replacement for the variable is the value of the pair.",
             "schema": {
                 "type": "object",
@@ -37,7 +35,7 @@
             },
             "default": {}
         }
-    },
+    ],
     "returns": {
         "description": "The result of processing the process graph.",
         "schema": {

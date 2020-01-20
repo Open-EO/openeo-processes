@@ -6,12 +6,9 @@
         "arrays",
         "sorting"
     ],
-    "parameter_order": [
-        "data",
-        "order"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "The array to rearrange.",
             "schema": {
                 "type": "array",
@@ -21,7 +18,8 @@
             },
             "required": true
         },
-        "order": {
+        {
+            "name": "order",
             "description": "The permutation used for rearranging.",
             "schema": {
                 "type": "array",
@@ -32,7 +30,7 @@
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "The rearranged array.",
         "schema": {

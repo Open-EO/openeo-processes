@@ -7,13 +7,9 @@
         "reducer"
     ],
     "experimental": true,
-    "parameter_order": [
-        "data",
-        "reducer",
-        "dimension"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "A data cube.",
             "schema": {
                 "type": "object",
@@ -21,30 +17,42 @@
             },
             "required": true
         },
-        "reducer": {
+        {
+            "name": "reducer",
             "description": "A reduction operator to be applied consecutively on pairs of values. It must be both associative and commutative as the execution may be executed in parallel and therefore the order of execution is arbitrary. The reduction operator may be a single process such as ``multiply()`` or consist of multiple sub-processes.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
-                "parameters": {
-                    "x": {
-                        "description": "The first value. Any data type could be passed."
+                "parameters": [
+                    {
+                        "name": "x",
+                        "description": "The first value.",
+                        "required": true,
+                        "schema": {
+                            "description": "Any data type."
+                        }
                     },
-                    "y": {
-                        "description": "The second value. Any data type could be passed."
+                    {
+                        "name": "y",
+                        "description": "The second value.",
+                        "required": true,
+                        "schema": {
+                            "description": "Any data type."
+                        }
                     }
-                }
+                ]
             },
             "required": true
         },
-        "dimension": {
+        {
+            "name": "dimension",
             "description": "The name of the dimension over which to reduce. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Remarks:**\n\n* The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.\n* There could be multiple spatial dimensions such as `x`, `y` or `z`.\n* For multi-spectral imagery there is usually a separate dimension of type `bands` for the bands.",
             "schema": {
                 "type": "string"
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "A data cube with the newly computed values. It has one dimension less than the original data cube, but the remaining dimensions have their resolution and cardinality preserved.",
         "schema": {

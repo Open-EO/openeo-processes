@@ -6,12 +6,9 @@
         "arrays",
         "filter"
     ],
-    "parameter_order": [
-        "data",
-        "condition"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "An array.",
             "schema": {
                 "type": "array",
@@ -21,24 +18,34 @@
             },
             "required": true
         },
-        "condition": {
+        {
+            "name": "condition",
             "description": "A condition that is evaluated against each value in the array. Only the array elements where the condition returns `true` are preserved.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
-                "parameters": {
-                    "x": {
-                        "description": "A value of any type could be passed."
+                "parameters": [
+                    {
+                        "name": "x",
+                        "description": "The value of the current element being processed.",
+                        "required": true,
+                        "schema": {
+                            "description": "Any data type."
+                        }
                     },
-                    "index": {
+                    {
+                        "name": "index",
                         "description": "The zero-based index of the current element being processed.",
-                        "type": "integer"
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
                     }
-                }
+                ]
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "An array filtered by the specified condition. The number of elements are less than or equal compared to the original array.",
         "schema": {

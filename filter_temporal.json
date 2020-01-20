@@ -5,13 +5,9 @@
     "categories": [
         "filter"
     ],
-    "parameter_order": [
-        "data",
-        "extent",
-        "dimension"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "A data cube.",
             "schema": {
                 "type": "object",
@@ -19,7 +15,8 @@
             },
             "required": true
         },
-        "extent": {
+        {
+            "name": "extent",
             "description": "Left-closed temporal interval, i.e. an array with exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://tools.ietf.org/html/rfc3339). Also supports open intervals by setting one of the boundaries to `null`, but never both.",
             "schema": {
                 "type": "array",
@@ -56,7 +53,8 @@
             },
             "required": true
         },
-        "dimension": {
+        {
+            "name": "dimension",
             "description": "The name of the temporal dimension to filter on. If the dimension is not set or is set to `null`, the filter applies to all temporal dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Note:** The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.",
             "schema": {
                 "type": [
@@ -66,7 +64,7 @@
             },
             "default": null
         }
-    },
+    ],
     "returns": {
         "description": "A data cube restricted to the specified temporal extent. Therefore, the cardinality is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
         "schema": {

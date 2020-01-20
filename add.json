@@ -5,12 +5,9 @@
     "categories": [
         "math"
     ],
-    "parameter_order": [
-        "x",
-        "y"
-    ],
-    "parameters": {
-        "x": {
+    "parameters": [
+        {
+            "name": "x",
             "description": "The first summand.",
             "schema": {
                 "type": [
@@ -20,7 +17,8 @@
             },
             "required": true
         },
-        "y": {
+        {
+            "name": "y",
             "description": "The second summand.",
             "schema": {
                 "type": [
@@ -30,7 +28,7 @@
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "The computed sum of the two numbers.",
         "schema": {

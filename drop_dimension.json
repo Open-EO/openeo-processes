@@ -5,12 +5,9 @@
     "categories": [
         "cubes"
     ],
-    "parameter_order": [
-        "data",
-        "name"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "The data cube to drop a dimension from.",
             "schema": {
                 "type": "object",
@@ -18,14 +15,15 @@
             },
             "required": true
         },
-        "name": {
+        {
+            "name": "name",
             "description": "Name of the dimension to drop.",
             "schema": {
                 "type": "string"
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "The data cube with one dimension less.",
         "schema": {

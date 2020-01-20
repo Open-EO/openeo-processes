@@ -5,12 +5,9 @@
     "categories": [
         "math > trigonometric"
     ],
-    "parameter_order": [
-        "y",
-        "x"
-    ],
-    "parameters": {
-        "y": {
+    "parameters": [
+        {
+            "name": "y",
             "description": "A number to be used as dividend.",
             "schema": {
                 "type": [
@@ -20,7 +17,8 @@
             },
             "required": true
         },
-        "x": {
+        {
+            "name": "x",
             "description": "A number to be used as divisor.",
             "schema": {
                 "type": [
@@ -30,7 +28,7 @@
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "The computed angle in radians.",
         "schema": {

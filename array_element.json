@@ -5,13 +5,9 @@
     "categories": [
         "arrays"
     ],
-    "parameter_order": [
-        "data",
-        "index",
-        "return_nodata"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "An array.",
             "schema": {
                 "type": "array",
@@ -21,21 +17,23 @@
             },
             "required": true
         },
-        "index": {
+        {
+            "name": "index",
             "description": "The zero-based index of the element to retrieve.",
             "schema": {
                 "type": "integer"
             },
             "required": true
         },
-        "return_nodata": {
+        {
+            "name": "return_nodata",
             "description": "By default this process throws an `IndexOutOfBounds` exception if the index is invalid. If you want to return `null` instead, set this flag to `true`.",
             "schema": {
                 "type": "boolean"
             },
             "default": false
         }
-    },
+    ],
     "returns": {
         "description": "The value of the requested element.",
         "schema": {

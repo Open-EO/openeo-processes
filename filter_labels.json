@@ -6,13 +6,9 @@
         "cubes",
         "filter"
     ],
-    "parameter_order": [
-        "data",
-        "condition",
-        "dimension"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "A data cube.",
             "schema": {
                 "type": "object",
@@ -20,50 +16,34 @@
             },
             "required": true
         },
-        "condition": {
+        {
+            "name": "condition",
             "description": "A condition that is evaluated against each dimension label in the specified dimension. A dimension label and the corresponding data is preserved for the given dimension, if the condition returns `true`.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
-                "parameters": {
-                    "value": {
+                "parameters": [
+                    {
+                        "name": "value",
                         "description": "A single dimension label to compare against. The data type of the parameter depends on the dimension labels stored for the dimension.",
-                        "anyOf": [
-                            {
-                                "type": "number"
-                            },
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "string",
-                                "format": "date-time",
-                                "subtype": "date-time"
-                            },
-                            {
-                                "type": "string",
-                                "format": "date",
-                                "subtype": "date"
-                            },
-                            {
-                                "type": "string",
-                                "format": "time",
-                                "subtype": "time"
-                            }
-                        ]
+                        "required": true,
+                        "schema": {
+                            "description": "Any data type."
+                        }
                     }
-                }
+                ]
             },
             "required": true
         },
-        "dimension": {
+        {
+            "name": "dimension",
             "description": "The name of the dimension to filter on. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Remarks:**\n\n* The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.\n* There could be multiple spatial dimensions such as `x`, `y` or `z`.\n* For multi-spectral imagery there is usually a separate dimension of type `bands` for the bands.",
             "schema": {
                 "type": "string"
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "The filtered data cube. Therefore, the cardinality of the dimension is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
         "schema": {

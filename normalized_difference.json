@@ -6,26 +6,24 @@
         "math > indices",
         "vegetation indices"
     ],
-    "parameter_order": [
-        "x",
-        "y"
-    ],
-    "parameters": {
-        "x": {
+    "parameters": [
+        {
+            "name": "x",
             "description": "The value for the first band.",
             "schema": {
                 "type": "number"
             },
             "required": true
         },
-        "y": {
+        {
+            "name": "y",
             "description": "The value for the second band.",
             "schema": {
                 "type": "number"
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "The computed normalized difference.",
         "schema": {

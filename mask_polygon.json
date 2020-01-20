@@ -5,14 +5,9 @@
     "categories": [
         "masks"
     ],
-    "parameter_order": [
-        "data",
-        "mask",
-        "replacement",
-        "inside"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "A raster data cube.",
             "schema": {
                 "type": "object",
@@ -20,7 +15,8 @@
             },
             "required": true
         },
-        "mask": {
+        {
+            "name": "mask",
             "description": "A GeoJSON object or a vector data cube containing a polygon. The provided feature types can be one of the following:\n\n* A `Polygon` geometry,\n* a `GeometryCollection` containing Polygons,\n* a `Feature` with a `Polygon` geometry or\n* a `FeatureCollection` containing `Feature`s with a `Polygon` geometry.",
             "schema": {
                 "type": "object",
@@ -28,7 +24,8 @@
             },
             "required": true
         },
-        "replacement": {
+        {
+            "name": "replacement",
             "description": "The value used to replace masked values with.",
             "schema": {
                 "type": [
@@ -40,14 +37,15 @@
             },
             "default": null
         },
-        "inside": {
+        {
+            "name": "inside",
             "description": "If set to `true` all pixels for which the point at the pixel center **does** intersect with any polygon are replaced.",
             "schema": {
                 "type": "boolean"
             },
             "default": false
         }
-    },
+    ],
     "returns": {
         "description": "The masked raster data cube.",
         "schema": {

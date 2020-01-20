@@ -5,12 +5,9 @@
     "categories": [
         "arrays"
     ],
-    "parameter_order": [
-        "data",
-        "value"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "List to find the value in.",
             "schema": {
                 "type": "array",
@@ -20,14 +17,15 @@
             },
             "required": true
         },
-        "value": {
+        {
+            "name": "value",
             "description": "Value to find in `data`.",
             "schema": {
                 "description": "Any data type is allowed."
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "Returns the index of the first element with the specified value. If no element was found, `-1` is returned.",
         "schema": {

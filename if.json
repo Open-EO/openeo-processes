@@ -7,13 +7,9 @@
         "comparison",
         "masks"
     ],
-    "parameter_order": [
-        "value",
-        "accept",
-        "reject"
-    ],
-    "parameters": {
-        "value": {
+    "parameters": [
+        {
+            "name": "value",
             "description": "A boolean value.",
             "schema": {
                 "type": [
@@ -23,21 +19,23 @@
             },
             "required": true
         },
-        "accept": {
+        {
+            "name": "accept",
             "description": "A value that is returned if the boolean value is `true`.",
             "schema": {
                 "description": "Any data type is allowed."
             },
             "required": true
         },
-        "reject": {
+        {
+            "name": "reject",
             "description": "A value that is returned if the boolean value is **not** `true`. Defaults to `null`.",
             "schema": {
                 "description": "Any data type is allowed."
             },
             "default": null
         }
-    },
+    ],
     "returns": {
         "description": "Either the `accept` or `reject` argument depending on the given boolean value.",
         "schema": {

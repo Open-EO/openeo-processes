@@ -5,8 +5,9 @@
     "categories": [
         "math > exponential & logarithmic"
     ],
-    "parameters": {
-        "p": {
+    "parameters": [
+        {
+            "name": "p",
             "description": "The numerical exponent.",
             "schema": {
                 "type": [
@@ -16,7 +17,7 @@
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "The computed value for *e* raised to the power of `p`.",
         "schema": {
