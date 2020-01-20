@@ -186,7 +186,7 @@
                         "type": "object",
                         "subtype": "process-graph",
                         "parameters": {
-                            "value": {
+                            "x": {
                                 "description": "The property value. Any data type could be passed."
                             }
                         }
@@ -233,7 +233,7 @@
                                         "process_id": "between",
                                         "arguments": {
                                             "x": {
-                                                "from_argument": "value"
+                                                "from_argument": "x"
                                             },
                                             "min": 0,
                                             "max": 10
@@ -248,7 +248,7 @@
                                         "process_id": "eq",
                                         "arguments": {
                                             "x": {
-                                                "from_argument": "value"
+                                                "from_argument": "x"
                                             },
                                             "y": "Sentinel-2B",
                                             "case_sensitive": false

@@ -1,14 +1,14 @@
 {
     "id": "array_contains",
-    "summary": "List contains an element",
-    "description": "Checks whether the array specified for `data` contains the value specified in `value`. Returns `true` if there's a match, otherwise `false`.\n\n**Remarks:**\n\n* To get the index of the element found, use ``array_find()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. This includes that data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.",
+    "summary": "Check whether the array contains a given value",
+    "description": "Checks whether the array specified for `data` contains the value specified in `value`. Returns `true` if there's a match, otherwise `false`.\n\n**Remarks:**\n\n* To get the index of the value found, use ``array_find()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. This includes that data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.",
     "categories": [
         "arrays",
         "comparison"
     ],
     "parameter_order": [
         "data",
-        "element"
+        "value"
     ],
     "parameters": {
         "data": {
@@ -21,7 +21,7 @@
             },
             "required": true
         },
-        "element": {
+        "value": {
             "description": "Value to find in `data`.",
             "schema": {
                 "description": "Any data type is allowed."
@@ -43,7 +43,7 @@
                     2,
                     3
                 ],
-                "element": 2
+                "value": 2
             },
             "returns": true
         },
@@ -54,7 +54,7 @@
                     "B",
                     "C"
                 ],
-                "element": "b"
+                "value": "b"
             },
             "returns": false
         },
@@ -65,7 +65,7 @@
                     2,
                     3
                 ],
-                "element": "2"
+                "value": "2"
             },
             "returns": false
         },
@@ -76,7 +76,7 @@
                     2,
                     3
                 ],
-                "element": 2
+                "value": 2
             },
             "returns": true
         },
@@ -87,7 +87,7 @@
                     2,
                     null
                 ],
-                "element": null
+                "value": null
             },
             "returns": true
         },
@@ -103,7 +103,7 @@
                         4
                     ]
                 ],
-                "element": [
+                "value": [
                     1,
                     2
                 ]
@@ -122,7 +122,7 @@
                         4
                     ]
                 ],
-                "element": 2
+                "value": 2
             },
             "returns": false
         },
@@ -136,7 +136,7 @@
                         "c": "d"
                     }
                 ],
-                "element": {
+                "value": {
                     "a": "b"
                 }
             },
