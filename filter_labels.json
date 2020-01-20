@@ -1,7 +1,7 @@
 {
     "id": "filter_labels",
     "summary": "Filter dimension labels based on a condition",
-    "description": "Removes all dimension labels from the data cube that do not match the specified condition. Afterwards each dimension label in the data cube conforms to the condition.",
+    "description": "Filters the dimension labels in the data cube for the given dimension. Only the dimension labels that match the specified condition are preserved, all other labels with their corresponding data get removed.",
     "categories": [
         "cubes",
         "filter"
@@ -21,13 +21,13 @@
             "required": true
         },
         "condition": {
-            "description": "A condition that is evaluated against each dimension label in the specified dimension. A dimension label is dropped from the data cube if the condition returns `false`. The data type of the parameter depends on the dimension labels stored for the dimension.",
+            "description": "A condition that is evaluated against each dimension label in the specified dimension. A dimension label and the corresponding data is preserved for the given dimension, if the condition returns `true`.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
                 "parameters": {
                     "value": {
-                        "description": "A single dimension label to compare against.",
+                        "description": "A single dimension label to compare against. The data type of the parameter depends on the dimension labels stored for the dimension.",
                         "anyOf": [
                             {
                                 "type": "number"
@@ -65,7 +65,7 @@
         }
     },
     "returns": {
-        "description": "The filtered data cube. Therefore, the cardinality is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
+        "description": "The filtered data cube. Therefore, the cardinality of the dimension is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"
