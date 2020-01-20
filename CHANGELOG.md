@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `array_find`
     - `drop_dimension`
     - `filter_labels`
+    - `filter_spatial`
     - `labels`
     - `load_uploaded_files`
     - `mask_polygon`
@@ -69,8 +70,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `filter_temporal` and `load_collection`: Temporal extents don't support time-only intervals any longer. [#88](https://github.com/Open-EO/openeo-processes/issues/88)
 - `mask`: The mask parameter doesn't accept vectors (polygons) any longer. Use process `mask_polygon` instead. [#110](https://github.com/Open-EO/openeo-processes/issues/110)
 - Processes:
+    - `aggregate_polygon`. Use `aggregate_spatial` or `aggregate_spatial_binary` instead. [#62](https://github.com/Open-EO/openeo-processes/issues/62)
     - `find_collections`: Use `load_collection` and manual data discovery through the clients. [API#52](https://github.com/Open-EO/openeo-api/issues/52)
     - `filter`: Use `filter_labels` instead.
+    - `filter_polygon`. Use `filter_spatial` instead. [#37](https://github.com/Open-EO/openeo-processes/issues/37)
     - `output`: Use `debug` instead.
     - `property` [#84](https://github.com/Open-EO/openeo-processes/issues/84)
     - `reduce`: Use `reduce_dimension` or `drop_dimension` instead.
