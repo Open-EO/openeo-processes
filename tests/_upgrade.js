@@ -1,7 +1,14 @@
+// Upgrade script to migrate 0.4 processes to 1.0-rc1
+// Usage: put files in the parent folder and run 
+// > npm install
+// > node _upgrade.js
+
 const glob = require('glob');
 const fs = require('fs');
 
-var files = glob.sync("../*.json", {realpath: true});
+const PROCESSES_PATH = '../*.json';
+
+var files = glob.sync(PROCESSES_PATH, {realpath: true});
 
 console.log(files);
 
@@ -22,8 +29,8 @@ files.forEach(file => {
 			var param = p.parameter_order[i];
 			newParams.push(upgrade(p.parameters[param], p, param));
 		}
-
 		delete p.parameter_order;
+		p.parameters = newParams;
 
 		p.returns = upgrade(p.returns, p);
 
