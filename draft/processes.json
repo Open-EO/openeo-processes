@@ -224,9 +224,9 @@
     ]
   },
   {
-    "id": "aggregate_polygon",
-    "summary": "Compute zonal statistics for polygons",
-    "description": "Aggregates zonal statistics for one or multiple polygons over the spatial dimensions.\n\nThe process considers all pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n\nThe data cube must have been reduced to only contain two raster dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise this process fails with the `TooManyDimensions` error.\n\nThe number of total and valid pixels is returned together with the calculated values.",
+    "id": "aggregate_polygon_binary",
+    "summary": "Zonal statistics for polygons using binary aggregation",
+    "description": "Aggregates zonal statistics for one or multiple polygons over the spatial dimensions. This process passes two values to the reducer. In contrast, ``aggregate_polygon()`` passes a list of values.\n\nThe process considers all pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n\nThe data cube must have been reduced to only contain two raster dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise this process fails with the `TooManyDimensions` error.\n\nThe number of total and valid pixels is returned together with the calculated values.",
     "categories": [
       "cubes",
       "aggregate & resample"
@@ -236,8 +236,7 @@
       "data",
       "polygons",
       "reducer",
-      "name",
-      "binary"
+      "name"
     ],
     "parameters": {
       "data": {
@@ -263,38 +262,19 @@
         "required": true
       },
       "reducer": {
-        "description": "A reducer to be applied on all values of each geometry. The reducer may be a single process such as ``mean()`` or consist of multiple sub-processes. By default, a reducer must accept an array as input. The process can also work on two values by setting the parameter `binary` to `true`.",
-        "schema": [
-          {
-            "title": "Unary behaviour",
-            "description": "Passes an array to the reducer.",
-            "type": "object",
-            "subtype": "process-graph",
-            "parameters": {
-              "data": {
-                "description": "An array with elements of any data type.",
-                "type": "array",
-                "items": {
-                  "description": "Any data type."
-                }
-              }
-            }
-          },
-          {
-            "title": "Binary behaviour",
-            "description": "Passes two values to the reducer.",
-            "type": "object",
-            "subtype": "process-graph",
-            "parameters": {
-              "x": {
-                "description": "The first value. Any data type could be passed."
-              },
-              "y": {
-                "description": "The second value. Any data type could be passed."
-              }
+        "description": "A reduction operator to be applied consecutively on tuples of values. It must be both associative and commutative as the execution may be executed in parallel and therefore the order of execution is arbitrary. The reduction operator may be a single process such as ``multiply()`` or consist of multiple sub-processes.",
+        "schema": {
+          "type": "object",
+          "subtype": "process-graph",
+          "parameters": {
+            "x": {
+              "description": "The first value. Any data type could be passed."
+            },
+            "y": {
+              "description": "The second value. Any data type could be passed."
             }
           }
-        ],
+        },
         "required": true
       },
       "name": {
@@ -303,13 +283,6 @@
           "type": "string"
         },
         "default": "result"
-      },
-      "binary": {
-        "description": "Specifies whether the process should pass two values to the reducer or a list of values (default).\n\nIf the process passes two values, the reducer must be both associative and commutative as the execution may be executed in parallel and therefore the order of execution is arbitrary.\n\nThis parameter is especially useful for UDFs passed as reducers. Back-ends may still optimize and parallelize processes that work on list of values.",
-        "schema": {
-          "type": "boolean"
-        },
-        "default": false
       }
     },
     "returns": {
@@ -325,11 +298,6 @@
       }
     },
     "links": [
-      {
-        "href": "https://github.com/Open-EO/openeo-processes/issues/2",
-        "rel": "experimental",
-        "title": "More information about the experimental status of the process"
-      },
       {
         "href": "https://open-eo.github.io/openeo-api/glossary/#aggregation-and-resampling",
         "rel": "about",
@@ -348,6 +316,93 @@
     ]
   },
   {
+    "id": "aggregate_polygon",
+    "summary": "Zonal statistics for polygons",
+    "description": "Aggregates zonal statistics for one or multiple polygons over the spatial dimensions. This process passes a list of values to the reducer. In contrast, ``aggregate_polygon_binary()`` passes two values, which may be better suited for UDFs.\n\nThe process considers all pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n\nThe data cube must have been reduced to only contain two spatial dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise this process fails with the `TooManyDimensions` error.\n\nThe number of total and valid pixels is returned together with the calculated values.",
+    "categories": [
+      "cubes",
+      "aggregate & resample"
+    ],
+    "parameter_order": [
+      "data",
+      "polygons",
+      "reducer",
+      "name"
+    ],
+    "parameters": {
+      "data": {
+        "description": "A data cube.",
+        "schema": {
+          "type": "object",
+          "subtype": "raster-cube"
+        },
+        "required": true
+      },
+      "polygons": {
+        "description": "One or more polygons to calculate zonal statistics for. Either specified as GeoJSON or vector data cube.\n\nFor GeoJSON this can be one of the following GeoJSON types:\n\n* A `Polygon` geometry,\n* a `GeometryCollection` containing Polygons,\n* a `Feature` with a `Polygon` geometry or\n* a `FeatureCollection` containing `Feature`s with a `Polygon` geometry.",
+        "schema": [
+          {
+            "type": "object",
+            "subtype": "geojson"
+          },
+          {
+            "type": "object",
+            "subtype": "vector-cube"
+          }
+        ],
+        "required": true
+      },
+      "reducer": {
+        "description": "A reducer to be applied on all values of each geometry. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
+        "schema": {
+          "type": "object",
+          "subtype": "process-graph",
+          "parameters": {
+            "data": {
+              "description": "An array with elements of any data type.",
+              "type": "array",
+              "items": {
+                "description": "Any data type."
+              }
+            }
+          }
+        },
+        "required": true
+      },
+      "name": {
+        "description": "The new dimension name to be used for storing the results. Defaults to `result`.",
+        "schema": {
+          "type": "string"
+        },
+        "default": "result"
+      }
+    },
+    "returns": {
+      "description": "A vector data cube with the computed results. The vector data cube implicitly gets restricted to the bounds of the polygons as if ``filter_polygon()`` would have been used with the same values for the corresponding parameters immediately before this process.\n\nThe computed value is stored in dimension with the name that was specified in the parameter `name`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) in each geometry. These values are stored as attributes of the result value with the attribute names `total_count` and `valid_count`.",
+      "schema": {
+        "type": "object",
+        "subtype": "vector-cube"
+      }
+    },
+    "exceptions": {
+      "TooManyDimensions": {
+        "message": "The number of dimensions must be reduced to three for 'aggregate_polygon'."
+      }
+    },
+    "links": [
+      {
+        "href": "https://open-eo.github.io/openeo-api/glossary/#aggregation-and-resampling",
+        "rel": "about",
+        "title": "Aggregation explained in the openEO glossary"
+      },
+      {
+        "href": "http://www.opengeospatial.org/standards/sfa",
+        "rel": "about",
+        "title": "Simple Features standard by the OGC"
+      }
+    ]
+  },
+  {
     "id": "aggregate_temporal",
     "summary": "Temporal aggregations",
     "description": "Computes a temporal aggregation based on an array of temporal intervals.\n\nCalendar hierarchies such as year, month, week etc. must be transformed into specific intervals by the clients. For each interval, all data along the dimension will be passed through the reducer.\n\nThe computed values will be projected to the labels. If no labels are specified, the start of the temporal interval will be used as label for the corresponding values. In case of a conflict (i.e. the user-specified values for the start times of the temporal intervals are not distinct), the user-defined labels must be specified in the parameter `labels` as otherwise a `DistinctDimensionLabelsRequired` error would be thrown. The number of user-defined labels and the number of intervals need to be equal.\n\nIf the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension.",
@@ -361,8 +416,7 @@
       "intervals",
       "reducer",
       "labels",
-      "dimension",
-      "binary"
+      "dimension"
     ],
     "parameters": {
       "data": {
@@ -436,38 +490,20 @@
         "required": true
       },
       "reducer": {
-        "description": "A reducer to be applied on all values along the specified dimension. The reducer may be a single process such as ``mean()`` or consist of multiple sub-processes. By default, a reducer must accept an array as input. The process can also work on two values by setting the parameter `binary` to `true`.",
-        "schema": [
-          {
-            "title": "Unary behaviour",
-            "description": "Passes an array to the reducer.",
-            "type": "object",
-            "subtype": "process-graph",
-            "parameters": {
-              "data": {
-                "description": "An array with elements of any data type.",
-                "type": "array",
-                "items": {
-                  "description": "Any data type."
-                }
-              }
-            }
-          },
-          {
-            "title": "Binary behaviour",
-            "description": "Passes two values to the reducer.",
-            "type": "object",
-            "subtype": "process-graph",
-            "parameters": {
-              "x": {
-                "description": "The first value. Any data type could be passed."
-              },
-              "y": {
-                "description": "The second value. Any data type could be passed."
+        "description": "A reducer to be applied on all values along the specified dimension. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
+        "schema": {
+          "type": "object",
+          "subtype": "process-graph",
+          "parameters": {
+            "data": {
+              "description": "An array with elements of any data type.",
+              "type": "array",
+              "items": {
+                "description": "Any data type."
               }
             }
           }
-        ],
+        },
         "required": true
       },
       "labels": {
@@ -508,13 +544,6 @@
           ]
         },
         "default": null
-      },
-      "binary": {
-        "description": "Specifies whether the process should pass two values to the reducer or a list of values (default).\n\nIf the process passes two values, the reducer must be both associative and commutative as the execution may be executed in parallel and therefore the order of execution is arbitrary.\n\nThis parameter is especially useful for UDFs passed as reducers. Back-ends may still optimize and parallelize processes that work on list of values.",
-        "schema": {
-          "type": "boolean"
-        },
-        "default": false
       }
     },
     "returns": {
@@ -608,11 +637,6 @@
         "href": "https://open-eo.github.io/openeo-api/glossary/#aggregation-and-resampling",
         "rel": "about",
         "title": "Aggregation explained in the openEO glossary"
-      },
-      {
-        "rel": "about",
-        "href": "https://en.wikipedia.org/wiki/Reduction_Operator",
-        "title": "Background information on reduction operators (binary reducers) by Wikipedia"
       }
     ]
   },
@@ -971,7 +995,7 @@
   {
     "id": "apply_dimension",
     "summary": "Apply a process to pixels along a dimension",
-    "description": "Applies a process to all pixel values along a dimension of a raster data cube. For example, if the temporal dimension is specified the process will work on a time series of pixel values.\n\nThe process ``reduce_dimension()`` also applies a process to pixel values along a dimension, but removes the dimension afterwards. The process ``apply()`` applies a process to each pixel value in the data cube.\n\nThe target dimension is the source dimension if not specified otherwise in the `target_dimension` parameter. The pixel values in the target dimension get replaced by the computed pixel values. The name, type and reference system are preserved.\n\nThe dimension labels are preserved when the target dimension is the source dimension and the number of pixel values in the source dimension is equal to the number of values computed by the process. Otherwise, the dimension labels will be incrementing integers starting from zero, which can be changed using ``rename_labels()`` afterwards. The number of labels will equal to the number of values computed by the process.",
+    "description": "Applies a process to all pixel values along a dimension of a raster data cube. For example, if the temporal dimension is specified the process will work on a time series of pixel values.\n\nThe process ``reduce_dimension()`` also applies a process to pixel values along a dimension, but drops the dimension afterwards. The process ``apply()`` applies a process to each pixel value in the data cube.\n\nThe target dimension is the source dimension if not specified otherwise in the `target_dimension` parameter. The pixel values in the target dimension get replaced by the computed pixel values. The name, type and reference system are preserved.\n\nThe dimension labels are preserved when the target dimension is the source dimension and the number of pixel values in the source dimension is equal to the number of values computed by the process. Otherwise, the dimension labels will be incrementing integers starting from zero, which can be changed using ``rename_labels()`` afterwards. The number of labels will equal to the number of values computed by the process.",
     "categories": [
       "cubes"
     ],
@@ -3009,7 +3033,6 @@
     "categories": [
       "development"
     ],
-    "experimental": true,
     "parameter_order": [
       "data",
       "code",
@@ -6001,8 +6024,7 @@
     "parameter_order": [
       "cube1",
       "cube2",
-      "overlap_resolver",
-      "binary"
+      "overlap_resolver"
     ],
     "parameters": {
       "cube1": {
@@ -6022,50 +6044,20 @@
         "required": true
       },
       "overlap_resolver": {
-        "description": "A reducer that resolves the conflict if the data overlaps. The reducer may be a single process such as ``mean()`` or consist of multiple sub-processes. By default, a reducer must accept an array as input. The process can also work on two values by setting the parameter `binary` to `true`. The reducer must return a value of the same data type as the input values in the array. `null` (default) can be specified if no overlap resolver is required.",
-        "schema": [
-          {
-            "title": "Unary behaviour",
-            "description": "Passes an array to the reducer.",
-            "type": "object",
-            "subtype": "process-graph",
-            "parameters": {
-              "data": {
-                "description": "An array with elements of any data type.",
-                "type": "array",
-                "items": {
-                  "description": "Any data type."
-                }
-              }
-            }
-          },
-          {
-            "title": "Binary behaviour",
-            "description": "Passes two values to the reducer.",
-            "type": "object",
-            "subtype": "process-graph",
-            "parameters": {
-              "x": {
-                "description": "The first value. Any data type could be passed."
-              },
-              "y": {
-                "description": "The second value. Any data type could be passed."
-              }
-            }
-          },
-          {
-            "title": "No overlap resolver",
-            "type": "null"
-          }
-        ],
-        "default": null
-      },
-      "binary": {
-        "description": "Specifies whether the process should pass two values to the reducer or a list of values (default).\n\nIf the process passes two values, the reducer must be both associative and commutative as the execution may be executed in parallel and therefore the order of execution is arbitrary.\n\nThis parameter is especially useful for UDFs passed as reducers. Back-ends may still optimize and parallelize processes that work on list of values.",
+        "description": "A reduction operator that resolves the conflict if the data overlaps. The reducer must return a value of the same data type as the input values are. The reduction operator may be a single process such as ``multiply()`` or consist of multiple sub-processes. `null` (the default) can be specified if no overlap resolver is required.",
         "schema": {
-          "type": "boolean"
+          "type": "object",
+          "subtype": "process-graph",
+          "parameters": {
+            "x": {
+              "description": "The first value. Any data type could be passed."
+            },
+            "y": {
+              "description": "The second value. Any data type could be passed."
+            }
+          }
         },
-        "default": false
+        "default": null
       }
     },
     "returns": {
@@ -7627,18 +7619,18 @@
     ]
   },
   {
-    "id": "reduce_dimension",
-    "summary": "Reduce dimensions",
-    "description": "Applies a reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer. The dimension is dropped. To avoid dropping the dimension, use ``apply_dimension()`` instead.\n\nA reducer is a single process or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.\n\nThe process can also work on two values by setting the parameter `binary` to `true`. In this case, the reducer doesn't get executed on a single value.",
+    "id": "reduce_dimension_binary",
+    "summary": "Reduce dimensions using binary reduction",
+    "description": "Applies a binary reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer. This process consecutively passes a pair of values to the reducer. In contrast, ``reduce_dimension()`` passes a list of values.\n\nThe dimension is dropped. To avoid this, use ``apply_dimension()`` instead.",
     "categories": [
       "cubes",
       "reducer"
     ],
+    "experimental": true,
     "parameter_order": [
       "data",
       "reducer",
-      "dimension",
-      "binary"
+      "dimension"
     ],
     "parameters": {
       "data": {
@@ -7650,39 +7642,20 @@
         "required": true
       },
       "reducer": {
-        "description": "A reducer to apply on the specified dimension.\n\nThe reducer may be a single process such as ``mean()`` or consist of multiple sub-processes. By default, a reducer must accept an array as input, but the reducer can also work on two values by setting the parameter `binary` to `true`.\n\nThe reducer must compute a single value.",
-        "required": true,
-        "schema": [
-          {
-            "title": "Unary behaviour",
-            "description": "Passes an array to the reducer.",
-            "type": "object",
-            "subtype": "process-graph",
-            "parameters": {
-              "data": {
-                "description": "An array with elements of any data type.",
-                "type": "array",
-                "items": {
-                  "description": "Any data type."
-                }
-              }
-            }
-          },
-          {
-            "title": "Binary behaviour",
-            "description": "Passes two values to the reducer.",
-            "type": "object",
-            "subtype": "process-graph",
-            "parameters": {
-              "x": {
-                "description": "The first value. Any data type could be passed."
-              },
-              "y": {
-                "description": "The second value. Any data type could be passed."
-              }
+        "description": "A reduction operator to be applied consecutively on pairs of values. It must be both associative and commutative as the execution may be executed in parallel and therefore the order of execution is arbitrary. The reduction operator may be a single process such as ``multiply()`` or consist of multiple sub-processes.",
+        "schema": {
+          "type": "object",
+          "subtype": "process-graph",
+          "parameters": {
+            "x": {
+              "description": "The first value. Any data type could be passed."
+            },
+            "y": {
+              "description": "The second value. Any data type could be passed."
             }
           }
-        ]
+        },
+        "required": true
       },
       "dimension": {
         "description": "The name of the dimension over which to reduce. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Remarks:**\n\n* The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.\n* There could be multiple spatial dimensions such as `x`, `y` or `z`.\n* For multi-spectral imagery there is usually a separate dimension of type `bands` for the bands.",
@@ -7690,13 +7663,6 @@
           "type": "string"
         },
         "required": true
-      },
-      "binary": {
-        "description": "Specifies whether the process should pass two values to the reducer (binary mode) or a list of values (default).\n\nIf the process passes two values to the reducer, the reducer must be both associative and commutative as the execution may be executed in parallel and therefore the order of execution is arbitrary.\n\nThis parameter is especially useful for UDFs passed as reducers. Back-ends may still optimize and parallelize processes that work on list of values.",
-        "schema": {
-          "type": "boolean"
-        },
-        "default": false
       }
     },
     "returns": {
@@ -7718,6 +7684,66 @@
         "title": "Background information on reduction operators (binary reducers) by Wikipedia"
       }
     ]
+  },
+  {
+    "id": "reduce_dimension",
+    "summary": "Reduce dimensions",
+    "description": "Applies a unary reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer. This process passes a list of values to the reducer. In contrast, ``reduce_dimension_binary()`` passes two values, which may be better suited for UDFs.\n\nThe dimension is dropped. To avoid this, use ``apply_dimension()`` instead.",
+    "categories": [
+      "cubes",
+      "reducer"
+    ],
+    "parameter_order": [
+      "data",
+      "reducer",
+      "dimension"
+    ],
+    "parameters": {
+      "data": {
+        "description": "A data cube.",
+        "schema": {
+          "type": "object",
+          "subtype": "raster-cube"
+        },
+        "required": true
+      },
+      "reducer": {
+        "description": "A reducer to apply on the specified dimension. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
+        "schema": {
+          "type": "object",
+          "subtype": "process-graph",
+          "parameters": {
+            "data": {
+              "description": "An array with elements of any data type.",
+              "type": "array",
+              "items": {
+                "description": "Any data type."
+              }
+            }
+          }
+        },
+        "required": true
+      },
+      "dimension": {
+        "description": "The name of the dimension over which to reduce. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Remarks:**\n\n* The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.\n* There could be multiple spatial dimensions such as `x`, `y` or `z`.\n* For multi-spectral imagery there is usually a separate dimension of type `bands` for the bands.",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      }
+    },
+    "returns": {
+      "description": "A data cube with the newly computed values. It has one dimension less than the original data cube, but the remaining dimensions have their resolution and cardinality preserved.",
+      "schema": {
+        "type": "object",
+        "subtype": "raster-cube"
+      }
+    },
+    "exceptions": {
+      "DimensionNotAvailable": {
+        "message": "A dimension with the specified name does not exist."
+      }
+    }
   },
   {
     "id": "rename_dimension",
@@ -8007,8 +8033,7 @@
       "data",
       "target",
       "method",
-      "dimension",
-      "binary"
+      "dimension"
     ],
     "parameters": {
       "data": {
@@ -8028,38 +8053,20 @@
         "required": true
       },
       "method": {
-        "description": "A resampling method to be applied, could be a reducer for downsampling or other methods for upsampling. The reducer may be a single process such as ``mean()`` or consist of multiple sub-processes. By default, a reducer must accept an array as input. The process can also work on two values by setting the parameter `binary` to `true`.",
-        "schema": [
-          {
-            "title": "Unary behaviour",
-            "description": "Passes an array to the reducer.",
-            "type": "object",
-            "subtype": "process-graph",
-            "parameters": {
-              "data": {
-                "description": "An array with elements of any data type.",
-                "type": "array",
-                "items": {
-                  "description": "Any data type."
-                }
-              }
-            }
-          },
-          {
-            "title": "Binary behaviour",
-            "description": "Passes two values to the reducer.",
-            "type": "object",
-            "subtype": "process-graph",
-            "parameters": {
-              "x": {
-                "description": "The first value. Any data type could be passed."
-              },
-              "y": {
-                "description": "The second value. Any data type could be passed."
+        "description": "A resampling method to be applied, could be a reducer for downsampling or other methods for upsampling. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
+        "schema": {
+          "type": "object",
+          "subtype": "process-graph",
+          "parameters": {
+            "data": {
+              "description": "An array with elements of any data type.",
+              "type": "array",
+              "items": {
+                "description": "Any data type."
               }
             }
           }
-        ],
+        },
         "required": true
       },
       "dimension": {
@@ -8071,13 +8078,6 @@
           ]
         },
         "default": null
-      },
-      "binary": {
-        "description": "Specifies whether the process should pass two values to the reducer specified as resampling method or a list of values (default).\n\nIf the process passes two values, the reducer must be both associative and commutative as the execution may be executed in parallel and therefore the order of execution is arbitrary.\n\nThis parameter is especially useful for UDFs passed as reducers. Back-ends may still optimize and parallelize processes that work on list of values.",
-        "schema": {
-          "type": "boolean"
-        },
-        "default": false
       }
     },
     "returns": {
@@ -8100,11 +8100,6 @@
         "href": "https://open-eo.github.io/openeo-api/glossary/#aggregation-and-resampling",
         "rel": "about",
         "title": "Resampling explained in the openEO glossary"
-      },
-      {
-        "rel": "about",
-        "href": "https://en.wikipedia.org/wiki/Reduction_Operator",
-        "title": "Background information on reduction operators (binary reducers) by Wikipedia"
       }
     ]
   },
