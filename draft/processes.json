@@ -1452,16 +1452,65 @@
     ]
   },
   {
+    "id": "array_apply",
+    "summary": "Applies a unary process to each array element",
+    "description": "Applies a **unary** process which takes a single value such as `abs` or `sqrt` to each value in the array. This is basically what other languages call either a `for each` loop or a `map` function.",
+    "categories": [
+      "arrays"
+    ],
+    "parameter_order": [
+      "data",
+      "process"
+    ],
+    "parameters": {
+      "data": {
+        "description": "An array.",
+        "schema": {
+          "type": "array",
+          "items": {
+            "description": "Any data type is allowed."
+          }
+        },
+        "required": true
+      },
+      "process": {
+        "description": "A process to be applied on each value, may consist of multiple sub-processes. The specified process must be unary meaning that it must work on a single value.",
+        "schema": {
+          "type": "object",
+          "subtype": "process-graph",
+          "parameters": {
+            "x": {
+              "description": "A value of any type could be passed."
+            },
+            "index": {
+              "type": "integer"
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    "returns": {
+      "description": "An array with the newly computed values. The number of elements are the same as for the original array.",
+      "schema": {
+        "type": "array",
+        "items": {
+          "description": "Any data type is allowed."
+        }
+      }
+    }
+  },
+  {
     "id": "array_contains",
-    "summary": "List contains an element",
-    "description": "Checks whether the array specified for `data` contains the value specified in `value`. Returns `true` if there's a match, otherwise `false`.\n\n**Remarks:**\n\n* To get the index of the element found, use ``array_find()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. This includes that data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.",
+    "summary": "Check whether the array contains a given value",
+    "description": "Checks whether the array specified for `data` contains the value specified in `value`. Returns `true` if there's a match, otherwise `false`.\n\n**Remarks:**\n\n* To get the index of the value found, use ``array_find()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. This includes that data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.",
     "categories": [
       "arrays",
       "comparison"
     ],
     "parameter_order": [
       "data",
-      "element"
+      "value"
     ],
     "parameters": {
       "data": {
@@ -1474,7 +1523,7 @@
         },
         "required": true
       },
-      "element": {
+      "value": {
         "description": "Value to find in `data`.",
         "schema": {
           "description": "Any data type is allowed."
@@ -1496,7 +1545,7 @@
             2,
             3
           ],
-          "element": 2
+          "value": 2
         },
         "returns": true
       },
@@ -1507,7 +1556,7 @@
             "B",
             "C"
           ],
-          "element": "b"
+          "value": "b"
         },
         "returns": false
       },
@@ -1518,7 +1567,7 @@
             2,
             3
           ],
-          "element": "2"
+          "value": "2"
         },
         "returns": false
       },
@@ -1529,7 +1578,7 @@
             2,
             3
           ],
-          "element": 2
+          "value": 2
         },
         "returns": true
       },
@@ -1540,7 +1589,7 @@
             2,
             null
           ],
-          "element": null
+          "value": null
         },
         "returns": true
       },
@@ -1556,7 +1605,7 @@
               4
             ]
           ],
-          "element": [
+          "value": [
             1,
             2
           ]
@@ -1575,7 +1624,7 @@
               4
             ]
           ],
-          "element": 2
+          "value": 2
         },
         "returns": false
       },
@@ -1589,7 +1638,7 @@
               "c": "d"
             }
           ],
-          "element": {
+          "value": {
             "a": "b"
           }
         },
@@ -1682,8 +1731,58 @@
     ]
   },
   {
+    "id": "array_filter",
+    "summary": "Filter an array based on a condition",
+    "description": "Filters the array elements based on a logical expression so that afterwards an array is returned that only contains the values conforming to the condition.",
+    "categories": [
+      "arrays",
+      "filter"
+    ],
+    "parameter_order": [
+      "data",
+      "condition"
+    ],
+    "parameters": {
+      "data": {
+        "description": "An array.",
+        "schema": {
+          "type": "array",
+          "items": {
+            "description": "Any data type is allowed."
+          }
+        },
+        "required": true
+      },
+      "condition": {
+        "description": "A condition that is evaluated against each value in the array. Only the array elements where the condition returns `true` are preserved.",
+        "schema": {
+          "type": "object",
+          "subtype": "process-graph",
+          "parameters": {
+            "x": {
+              "description": "A value of any type could be passed."
+            },
+            "index": {
+              "type": "integer"
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    "returns": {
+      "description": "An array filtered by the specified condition. The number of elements are less than or equal compared to the original array.",
+      "schema": {
+        "type": "array",
+        "items": {
+          "description": "Any data type is allowed."
+        }
+      }
+    }
+  },
+  {
     "id": "array_find",
-    "summary": "Get the index of an element in an array",
+    "summary": "Get the index for a value in an array",
     "description": "Checks whether the array specified for `data` contains the value specified in `value` and returns the zero-based index for the first match. If there's no match, `-1` is returned.\n\n**Remarks:**\n\n* To get a boolean value returned use ``array_contains()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. This includes that data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.",
     "categories": [
       "arrays"
@@ -3708,7 +3807,7 @@
           "type": "object",
           "subtype": "process-graph",
           "parameters": {
-            "value": {
+            "x": {
               "description": "A single dimension label to compare against.",
               "anyOf": [
                 {
@@ -4997,7 +5096,7 @@
               "type": "object",
               "subtype": "process-graph",
               "parameters": {
-                "value": {
+                "x": {
                   "description": "The property value. Any data type could be passed."
                 }
               }
@@ -5044,7 +5143,7 @@
                       "process_id": "between",
                       "arguments": {
                         "x": {
-                          "from_argument": "value"
+                          "from_argument": "x"
                         },
                         "min": 0,
                         "max": 10
@@ -5059,7 +5158,7 @@
                       "process_id": "eq",
                       "arguments": {
                         "x": {
-                          "from_argument": "value"
+                          "from_argument": "x"
                         },
                         "y": "Sentinel-2B",
                         "case_sensitive": false
