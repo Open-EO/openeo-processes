@@ -643,17 +643,17 @@
   {
     "id": "all",
     "summary": "Are all of the values true?",
-    "description": "Checks if **all** of the values are true. Evaluates each expression from the first to the last element and stops once the outcome is unambiguous.\n\nIf only one value is given, the process evaluates to the given value. If no value is given (i.e. the array is empty) the process returns `null`.\n\nBy default all no-data values are ignored so that the process returns `null` if all values are no-data, `true` if all other values are true and `false` otherwise. Setting the `ignore_nodata` flag to `false` considers no-data values so that `null` is a valid logical object. If a component is `null`, the result will be `null` if the outcome is ambiguous. See the following truth table:\n\n```\n      || null  | false | true\n----- || ----- | ----- | -----\nnull  || null  | false | null\nfalse || false | false | false\ntrue  || null  | false | true\n```",
+    "description": "Checks if **all** of the values are true. Evaluates all values from the first to the last element and stops once the outcome is unambiguous.\n\nIf only one value is given, the process evaluates to the given value. If no value is given (i.e. the array is empty) the process returns `null`.\n\nBy default all no-data values are ignored so that the process returns `null` if all values are no-data, `true` if all other values are true and `false` otherwise. Setting the `ignore_nodata` flag to `false` considers no-data values so that `null` is a valid logical object. If a component is `null`, the result will be `null` if the outcome is ambiguous. See the following truth table:\n\n```\n      || null  | false | true\n----- || ----- | ----- | -----\nnull  || null  | false | null\nfalse || false | false | false\ntrue  || null  | false | true\n```",
     "categories": [
       "logic",
       "reducer"
     ],
     "parameter_order": [
-      "expressions",
+      "values",
       "ignore_nodata"
     ],
     "parameters": {
-      "expressions": {
+      "values": {
         "description": "A set of boolean values.",
         "schema": {
           "type": "array",
@@ -675,7 +675,7 @@
       }
     },
     "returns": {
-      "description": "Boolean result of the logical expressions.",
+      "description": "Boolean result of the logical operation.",
       "schema": {
         "type": [
           "boolean",
@@ -686,7 +686,7 @@
     "examples": [
       {
         "arguments": {
-          "expressions": [
+          "values": [
             false,
             null
           ]
@@ -695,7 +695,7 @@
       },
       {
         "arguments": {
-          "expressions": [
+          "values": [
             true,
             null
           ]
@@ -704,7 +704,7 @@
       },
       {
         "arguments": {
-          "expressions": [
+          "values": [
             false,
             null
           ],
@@ -714,7 +714,7 @@
       },
       {
         "arguments": {
-          "expressions": [
+          "values": [
             true,
             null
           ],
@@ -724,7 +724,7 @@
       },
       {
         "arguments": {
-          "expressions": [
+          "values": [
             true,
             false,
             true,
@@ -735,7 +735,7 @@
       },
       {
         "arguments": {
-          "expressions": [
+          "values": [
             true,
             false
           ]
@@ -744,7 +744,7 @@
       },
       {
         "arguments": {
-          "expressions": [
+          "values": [
             true,
             true
           ]
@@ -753,7 +753,7 @@
       },
       {
         "arguments": {
-          "expressions": [
+          "values": [
             true
           ]
         },
@@ -761,7 +761,7 @@
       },
       {
         "arguments": {
-          "expressions": [
+          "values": [
             null
           ],
           "ignore_nodata": false
@@ -770,7 +770,7 @@
       },
       {
         "arguments": {
-          "expressions": []
+          "values": []
         },
         "returns": null
       }
@@ -859,17 +859,17 @@
   {
     "id": "any",
     "summary": "Is at least one value true?",
-    "description": "Checks if **any** (i.e. at least one) value is `true`. Evaluates each expression from the first to the last element and stops once the outcome is unambiguous.\n\nIf only one value is given, the process evaluates to the given value. If no value is given (i.e. the array is empty) the process returns `null`.\n\nBy default all no-data values are ignored so that the process returns `null` if all values are no-data, `true` if at least one of the other values is true and `false` otherwise. Setting the `ignore_nodata` flag to `false` considers no-data values so that `null` is a valid logical object. If a component is `null`, the result will be `null` if the outcome is ambiguous. See the following truth table:\n\n```\n      || null | false | true\n----- || ---- | ----- | ----\nnull  || null | null  | true\nfalse || null | false | true\ntrue  || true | true  | true\n```",
+    "description": "Checks if **any** (i.e. at least one) value is `true`. Evaluates all values from the first to the last element and stops once the outcome is unambiguous.\n\nIf only one value is given, the process evaluates to the given value. If no value is given (i.e. the array is empty) the process returns `null`.\n\nBy default all no-data values are ignored so that the process returns `null` if all values are no-data, `true` if at least one of the other values is true and `false` otherwise. Setting the `ignore_nodata` flag to `false` considers no-data values so that `null` is a valid logical object. If a component is `null`, the result will be `null` if the outcome is ambiguous. See the following truth table:\n\n```\n      || null | false | true\n----- || ---- | ----- | ----\nnull  || null | null  | true\nfalse || null | false | true\ntrue  || true | true  | true\n```",
     "categories": [
       "logic",
       "reducer"
     ],
     "parameter_order": [
-      "expressions",
+      "values",
       "ignore_nodata"
     ],
     "parameters": {
-      "expressions": {
+      "values": {
         "description": "A set of boolean values.",
         "schema": {
           "type": "array",
@@ -891,7 +891,7 @@
       }
     },
     "returns": {
-      "description": "Boolean result of the logical expressions.",
+      "description": "Boolean result of the logical operation.",
       "schema": {
         "type": [
           "boolean",
@@ -902,7 +902,7 @@
     "examples": [
       {
         "arguments": {
-          "expressions": [
+          "values": [
             false,
             null
           ]
@@ -911,7 +911,7 @@
       },
       {
         "arguments": {
-          "expressions": [
+          "values": [
             true,
             null
           ]
@@ -920,7 +920,7 @@
       },
       {
         "arguments": {
-          "expressions": [
+          "values": [
             false,
             null
           ],
@@ -930,7 +930,7 @@
       },
       {
         "arguments": {
-          "expressions": [
+          "values": [
             true,
             null
           ],
@@ -940,7 +940,7 @@
       },
       {
         "arguments": {
-          "expressions": [
+          "values": [
             true,
             false,
             true,
@@ -951,7 +951,7 @@
       },
       {
         "arguments": {
-          "expressions": [
+          "values": [
             true,
             false
           ]
@@ -960,7 +960,7 @@
       },
       {
         "arguments": {
-          "expressions": [
+          "values": [
             false,
             false
           ]
@@ -969,7 +969,7 @@
       },
       {
         "arguments": {
-          "expressions": [
+          "values": [
             true
           ]
         },
@@ -977,7 +977,7 @@
       },
       {
         "arguments": {
-          "expressions": [
+          "values": [
             null
           ],
           "ignore_nodata": false
@@ -986,7 +986,7 @@
       },
       {
         "arguments": {
-          "expressions": []
+          "values": []
         },
         "returns": null
       }
@@ -2475,14 +2475,14 @@
   {
     "id": "count",
     "summary": "Count the number of elements",
-    "description": "Gives the number of elements in an array that matches a certain criterion / expression.\n\n**Remarks:**\n\n* By default counts the number of valid elements. A valid element is every element for which ``is_valid()`` returns `true`.\n* To count all elements in a list set the `expression` parameter to boolean `true`.",
+    "description": "Gives the number of elements in an array that matches the specified condition.\n\n**Remarks:**\n\n* Counts the number of valid elements by default (`condition` is set to `null`). A valid element is every element for which ``is_valid()`` returns `true`.\n* To count all elements in a list set the `condition` parameter to boolean `true`.",
     "categories": [
       "arrays",
       "reducer"
     ],
     "parameter_order": [
       "data",
-      "expression"
+      "condition"
     ],
     "parameters": {
       "data": {
@@ -2495,11 +2495,12 @@
         },
         "required": true
       },
-      "expression": {
-        "description": "An expression consists of one ore more processes, which in the end return a boolean value. It is evaluated against each element in the array. An element is counted only if the expression returns `true`. Defaults to count valid elements in a list (see ``is_valid()``). Setting this parameter to boolean `true` counts all elements in the list.",
+      "condition": {
+        "description": "A condition consists of one ore more processes, which in the end return a boolean value. It is evaluated against each element in the array. An element is counted only if the condition returns `true`. Defaults to count valid elements in a list (see ``is_valid()``). Setting this parameter to boolean `true` counts all elements in the list.",
         "schema": [
           {
-            "description": "An expression that is evaluated against each element in the array.",
+            "title": "Condition",
+            "description": "A logical expression that is evaluated against each element in the array.",
             "type": "object",
             "subtype": "process-graph",
             "parameters": {
@@ -2509,13 +2510,13 @@
             }
           },
           {
-            "title": "Count all elements",
+            "title": "All elements",
             "description": "Boolean `true` counts all elements in the list.",
             "type": "boolean",
             "const": true
           },
           {
-            "title": "Count valid elements",
+            "title": "Valid elements",
             "description": "`null` counts valid elements in the list.",
             "type": "null"
           }
@@ -2562,7 +2563,7 @@
             false,
             null
           ],
-          "expression": true
+          "condition": true
         },
         "returns": 2
       },
@@ -2577,7 +2578,7 @@
             5,
             null
           ],
-          "expression": {
+          "condition": {
             "gt": {
               "process_id": "gt",
               "arguments": {
@@ -3805,14 +3806,14 @@
   {
     "id": "filter_labels",
     "summary": "Filter dimension labels based on a condition",
-    "description": "Filters the dimension labels based on a logical expression so that afterwards each dimension label in the data cube conforms to the expression.",
+    "description": "Filters the dimension labels in the data cube for the given dimension. Only the dimension labels that match the specified condition are preserved, all other labels with their corresponding data get removed.",
     "categories": [
       "cubes",
       "filter"
     ],
     "parameter_order": [
       "data",
-      "expression",
+      "condition",
       "dimension"
     ],
     "parameters": {
@@ -3824,14 +3825,14 @@
         },
         "required": true
       },
-      "expression": {
-        "description": "An expression that is evaluated against each dimension label in the specified dimension. A dimension label is dropped from the data cube if the expression returns `false`. The data type of the parameter depends on the dimension labels stored for the dimension.",
+      "condition": {
+        "description": "A condition that is evaluated against each dimension label in the specified dimension. A dimension label and the corresponding data is preserved for the given dimension, if the condition returns `true`.",
         "schema": {
           "type": "object",
           "subtype": "process-graph",
           "parameters": {
-            "x": {
-              "description": "A single dimension label to compare against.",
+            "value": {
+              "description": "A single dimension label to compare against. The data type of the parameter depends on the dimension labels stored for the dimension.",
               "anyOf": [
                 {
                   "type": "number"
@@ -3869,7 +3870,7 @@
       }
     },
     "returns": {
-      "description": "A data cube restricted by the specified expression. Therefore, the cardinality is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
+      "description": "The filtered data cube. Therefore, the cardinality of the dimension is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -3879,7 +3880,47 @@
       "DimensionNotAvailable": {
         "message": "A dimension with the specified name does not exist."
       }
-    }
+    },
+    "examples": [
+      {
+        "description": "This example is loading the Sentinel-2 collection into a data cube and filters the data cube to only contain data from platform Sentinel-2A. This example assumes that the data cube has a dimension `platform` so that computations can distinguish between Sentinel-2A and Sentinel-2B data.",
+        "process_graph": {
+          "load": {
+            "process_id": "load_collection",
+            "arguments": {
+              "id": "Sentinel-2",
+              "spatial_extent": null,
+              "temporal_extent": null
+            }
+          },
+          "filter": {
+            "process_id": "filter_labels",
+            "arguments": {
+              "data": {
+                "from_node": "load"
+              },
+              "condition": {
+                "callback": {
+                  "eq": {
+                    "process_id": "eq",
+                    "arguments": {
+                      "x": {
+                        "from_argument": "value"
+                      },
+                      "y": "Sentinel-2A",
+                      "case_sensitive": false
+                    },
+                    "result": true
+                  }
+                }
+              },
+              "dimension": "platform"
+            },
+            "result": true
+          }
+        }
+      }
+    ]
   },
   {
     "id": "filter_polygon",
@@ -4363,19 +4404,19 @@
   {
     "id": "if",
     "summary": "If-Then-Else conditional",
-    "description": "Returns the value of the `accept` parameter if the expression is `true` or the value of the `reject` parameter if the expression is `false`. This works similar to an if-then-else construct.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "If the value passed is `true`, returns the value of the `accept` parameter, otherwise returns the value of the `reject` parameter.\n\nThis is basically an if-then-else construct as in other programming languages.",
     "categories": [
       "logic",
       "comparison",
       "masks"
     ],
     "parameter_order": [
-      "expression",
+      "value",
       "accept",
       "reject"
     ],
     "parameters": {
-      "expression": {
+      "value": {
         "description": "A boolean value.",
         "schema": {
           "type": [
@@ -4386,22 +4427,22 @@
         "required": true
       },
       "accept": {
-        "description": "A value that is returned if the boolean expression is `true`. Defaults to `true`.",
+        "description": "A value that is returned if the boolean value is `true`.",
         "schema": {
           "description": "Any data type is allowed."
         },
-        "default": true
+        "required": true
       },
       "reject": {
-        "description": "A value that is returned if the boolean expression is `false`. Defaults to `false`.",
+        "description": "A value that is returned if the boolean value is **not** `true`. Defaults to `null`.",
         "schema": {
           "description": "Any data type is allowed."
         },
-        "default": false
+        "default": null
       }
     },
     "returns": {
-      "description": "Either the `accept` or `reject` argument depending on the given boolean expression.",
+      "description": "Either the `accept` or `reject` argument depending on the given boolean value.",
       "schema": {
         "description": "Any data type is allowed."
       }
@@ -4409,32 +4450,23 @@
     "examples": [
       {
         "arguments": {
-          "expression": true
-        },
-        "returns": true
-      },
-      {
-        "arguments": {
-          "expression": null
-        },
-        "returns": null
-      },
-      {
-        "arguments": {
-          "expression": false
-        },
-        "returns": false
-      },
-      {
-        "arguments": {
-          "expression": true,
-          "accept": "A"
+          "value": true,
+          "accept": "A",
+          "reject": "B"
         },
         "returns": "A"
       },
       {
         "arguments": {
-          "expression": false,
+          "value": null,
+          "accept": "A",
+          "reject": "B"
+        },
+        "returns": "B"
+      },
+      {
+        "arguments": {
+          "value": false,
           "accept": [
             1,
             2,
@@ -4451,6 +4483,20 @@
           5,
           6
         ]
+      },
+      {
+        "arguments": {
+          "value": true,
+          "accept": 123
+        },
+        "returns": 123
+      },
+      {
+        "arguments": {
+          "value": false,
+          "accept": 1
+        },
+        "returns": null
       }
     ]
   },
@@ -5110,8 +5156,7 @@
         "default": null
       },
       "properties": {
-        "description": "Limits the data by metadata properties to include only data in the data cube which all given expressions return `true` for (AND operation).\n\nSpecify key-value-pairs with the keys being the name of the metadata property, which can be retrieved with the openEO Data Discovery for Collections. The values must be expressions to be evaluated against the collection metadata, see the example.\n\n**Note:** Back-ends may not pass the actual value to the expressions, but pass a proprietary index or a placeholder so that they can use the expressions to query against another data source. So debugging on the process parameter `value` may lead to unexpected results.",
-        "experimental": true,
+        "description": "Limits the data by metadata properties to include only data in the data cube which all given conditions return `true` for (AND operation).\n\nSpecify key-value-pairs with the keys being the name of the metadata property, which can be retrieved with the openEO Data Discovery for Collections. The values must be conditions to be evaluated against the collection metadata, see the example.",
         "schema": [
           {
             "type": "object",
@@ -5143,7 +5188,7 @@
     },
     "examples": [
       {
-        "description": "Loading `Sentinel-2B` data from a `Sentinel-2` collection for 2018, but only with cloud cover between 0 and 10%.",
+        "description": "Loading `Sentinel-2B` data from a `Sentinel-2` collection for 2018, but only with cloud cover between 0 and 50%.",
         "process_graph": {
           "loadco1": {
             "process_id": "load_collection",
@@ -5169,13 +5214,13 @@
                           "from_argument": "x"
                         },
                         "min": 0,
-                        "max": 10
+                        "max": 50
                       },
                       "result": true
                     }
                   }
                 },
-                "eo:platform": {
+                "platform": {
                   "callback": {
                     "pf": {
                       "process_id": "eq",
@@ -6677,7 +6722,7 @@
       "logic"
     ],
     "parameters": {
-      "expression": {
+      "x": {
         "description": "Boolean value to invert.",
         "schema": {
           "type": [
@@ -6700,19 +6745,19 @@
     "examples": [
       {
         "arguments": {
-          "expression": null
+          "x": null
         },
         "returns": null
       },
       {
         "arguments": {
-          "expression": false
+          "x": false
         },
         "returns": true
       },
       {
         "arguments": {
-          "expression": true
+          "x": true
         },
         "returns": false
       }
@@ -7260,69 +7305,6 @@
         "title": "IEEE Standard 754-2019 for Floating-Point Arithmetic"
       }
     ]
-  },
-  {
-    "id": "property",
-    "summary": "Get metadata for data cubes or collections",
-    "description": "Retrieves metadata properties for a data cube (if a `raster-cube` or `vector-cube` is passed) or a collection (if a collection id is passed). Properties for a single dimension can be queried with the `dimension` parameter.\n\nAvailable metadata properties can be retrieved with the openEO Data Discovery for Collections, but for data cubes only a subset may be available after processing.",
-    "categories": [
-      "cubes"
-    ],
-    "parameter_order": [
-      "data",
-      "name",
-      "dimension"
-    ],
-    "parameters": {
-      "data": {
-        "description": "A data cube.",
-        "schema": [
-          {
-            "type": "object",
-            "subtype": "raster-cube"
-          },
-          {
-            "type": "object",
-            "subtype": "vector-cube"
-          },
-          {
-            "description": "A collection id.",
-            "type": "string",
-            "subtype": "collection-id",
-            "pattern": "^[A-Za-z0-9_\\-\\.~/]+$"
-          }
-        ],
-        "required": true
-      },
-      "name": {
-        "description": "Name of the metadata property.",
-        "schema": {
-          "type": "string"
-        },
-        "required": true
-      },
-      "dimension": {
-        "description": "Optionally, the name of a dimension to get the property for. `null` by default, which gets a property globally for the collection/data cube. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
-        "schema": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "default": null
-      }
-    },
-    "returns": {
-      "description": "The value for the metadata property or `null` if no information are available.",
-      "schema": {
-        "description": "Any data type is allowed."
-      }
-    },
-    "exceptions": {
-      "DimensionNotAvailable": {
-        "message": "A dimension with the specified name does not exist."
-      }
-    }
   },
   {
     "id": "quantiles",
