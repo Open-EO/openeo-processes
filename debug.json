@@ -5,7 +5,6 @@
     "categories": [
         "development"
     ],
-    "experimental": true,
     "parameter_order": [
         "data",
         "code",

@@ -1,11 +1,12 @@
 {
-    "id": "aggregate_polygon",
-    "summary": "Zonal statistics for polygons",
-    "description": "Aggregates zonal statistics for one or multiple polygons over the spatial dimensions. This process passes a list of values to the reducer. In contrast, ``aggregate_polygon_binary()`` passes two values, which may be better suited for UDFs.\n\nThe process considers all pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n\nThe data cube must have been reduced to only contain two spatial dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise this process fails with the `TooManyDimensions` error.\n\nThe number of total and valid pixels is returned together with the calculated values.",
+    "id": "aggregate_polygon_binary",
+    "summary": "Zonal statistics for polygons using binary aggregation",
+    "description": "Aggregates zonal statistics for one or multiple polygons over the spatial dimensions. This process passes two values to the reducer. In contrast, ``aggregate_polygon()`` passes a list of values.\n\nThe process considers all pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n\nThe data cube must have been reduced to only contain two raster dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise this process fails with the `TooManyDimensions` error.\n\nThe number of total and valid pixels is returned together with the calculated values.",
     "categories": [
         "cubes",
         "aggregate & resample"
     ],
+    "experimental": true,
     "parameter_order": [
         "data",
         "polygons",
@@ -36,17 +37,16 @@
             "required": true
         },
         "reducer": {
-            "description": "A reducer to be applied on all values of each geometry. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
+            "description": "A reduction operator to be applied consecutively on tuples of values. It must be both associative and commutative as the execution may be executed in parallel and therefore the order of execution is arbitrary. The reduction operator may be a single process such as ``multiply()`` or consist of multiple sub-processes.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
                 "parameters": {
-                    "data": {
-                        "description": "An array with elements of any data type.",
-                        "type": "array",
-                        "items": {
-                            "description": "Any data type."
-                        }
+                    "x": {
+                        "description": "The first value. Any data type could be passed."
+                    },
+                    "y": {
+                        "description": "The second value. Any data type could be passed."
                     }
                 }
             },
@@ -82,6 +82,11 @@
             "href": "http://www.opengeospatial.org/standards/sfa",
             "rel": "about",
             "title": "Simple Features standard by the OGC"
+        },
+        {
+            "rel": "about",
+            "href": "https://en.wikipedia.org/wiki/Reduction_Operator",
+            "title": "Background information on reduction operators (binary reducers) by Wikipedia"
         }
     ]
 }
