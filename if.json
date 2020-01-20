@@ -1,7 +1,7 @@
 {
     "id": "if",
     "summary": "If-Then-Else conditional",
-    "description": "If the value passed is `true`, returns the value of the `accept` parameter.\nIf the value passed is `false`, returns the value of the `reject` parameter.\nThe no-data value `null` is passed through and therefore gets propagated.\n\nThis is basically an if-then-else construct as in other programming languages.",
+    "description": "If the value passed is `true`, returns the value of the `accept` parameter, otherwise returns the value of the `reject` parameter.\n\nThis is basically an if-then-else construct as in other programming languages.",
     "categories": [
         "logic",
         "comparison",
@@ -31,7 +31,7 @@
             "required": true
         },
         "reject": {
-            "description": "A value that is returned if the boolean value is `false`. Defaults to `null`.",
+            "description": "A value that is returned if the boolean value is **not** `true`. Defaults to `null`.",
             "schema": {
                 "description": "Any data type is allowed."
             },
@@ -59,7 +59,7 @@
                 "accept": "A",
                 "reject": "B"
             },
-            "returns": null
+            "returns": "B"
         },
         {
             "arguments": {

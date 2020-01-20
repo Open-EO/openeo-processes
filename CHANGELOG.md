@@ -36,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `debug`: Replaced with a completely new definition. [#82](https://github.com/Open-EO/openeo-processes/issues/71), [API#100](https://github.com/Open-EO/openeo-api/issues/100), [API#214](https://github.com/Open-EO/openeo-api/issues/214)
 - `filter_bands`: Merged parameters `bands` and `common_names`. [#77](https://github.com/Open-EO/openeo-processes/issues/77)
 - `if`:
+    - Doesn't pass through `null`, but instead `null` leads to rejecting the condition.
     - Parameter `expression` renamed to `value`.
     - Parameter `accept` is required.
     - Parameter `reject` defaults to `null`.
