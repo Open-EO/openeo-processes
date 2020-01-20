@@ -5,13 +5,9 @@
     "categories": [
         "masks"
     ],
-    "parameter_order": [
-        "data",
-        "mask",
-        "replacement"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "A raster data cube.",
             "schema": {
                 "type": "object",
@@ -19,7 +15,8 @@
             },
             "required": true
         },
-        "mask": {
+        {
+            "name": "mask",
             "description": "A mask as raster data cube. Every pixel in `data` must have a corresponding element in `mask`.",
             "schema": {
                 "type": "object",
@@ -27,7 +24,8 @@
             },
             "required": true
         },
-        "replacement": {
+        {
+            "name": "replacement",
             "description": "The value used to replace masked values with.",
             "schema": {
                 "type": [
@@ -39,7 +37,7 @@
             },
             "default": null
         }
-    },
+    ],
     "returns": {
         "description": "The masked raster data cube.",
         "schema": {

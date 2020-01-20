@@ -5,14 +5,9 @@
     "categories": [
         "cubes"
     ],
-    "parameter_order": [
-        "data",
-        "name",
-        "label",
-        "type"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "A data cube to add the dimension to.",
             "schema": {
                 "type": "object",
@@ -20,14 +15,16 @@
             },
             "required": true
         },
-        "name": {
+        {
+            "name": "name",
             "description": "Name for the dimension.",
             "schema": {
                 "type": "string"
             },
             "required": true
         },
-        "label": {
+        {
+            "name": "label",
             "description": "A dimension label.",
             "schema": [
                 {
@@ -54,7 +51,8 @@
             ],
             "required": true
         },
-        "type": {
+        {
+            "name": "type",
             "description": "The type of dimension, defaults to `other`.",
             "schema": {
                 "type": "string",
@@ -67,7 +65,7 @@
             },
             "default": "other"
         }
-    },
+    ],
     "returns": {
         "description": "The data cube with a newly added dimension.",
         "schema": {

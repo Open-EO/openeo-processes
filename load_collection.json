@@ -6,15 +6,9 @@
         "cubes",
         "import"
     ],
-    "parameter_order": [
-        "id",
-        "spatial_extent",
-        "temporal_extent",
-        "bands",
-        "properties"
-    ],
-    "parameters": {
-        "id": {
+    "parameters": [
+        {
+            "name": "id",
             "description": "The collection id.",
             "schema": {
                 "type": "string",
@@ -23,7 +17,8 @@
             },
             "required": true
         },
-        "spatial_extent": {
+        {
+            "name": "spatial_extent",
             "description": "Limits the data to load from the collection to the specified bounding box or polygons.\n\nThe process puts a pixel into the data cube if the point at the pixel center intersects with the bounding box or any of the polygons (as defined in the Simple Features standard by the OGC).\n\nThe GeoJSON can be one of the following GeoJSON types:\n\n* A `Polygon` geometry,\n* a `GeometryCollection` containing Polygons,\n* a `Feature` with a `Polygon` geometry or\n* a `FeatureCollection` containing `Feature`s with a `Polygon` geometry.\n\nSet this parameter to `null` to set no limit for the spatial extent. Be careful with this when loading large datasets!",
             "schema": [
                 {
@@ -114,7 +109,8 @@
             ],
             "required": true
         },
-        "temporal_extent": {
+        {
+            "name": "temporal_extent",
             "description": "Limits the data to load from the collection to the specified left-closed temporal interval. Applies to all temporal dimensions. The interval has to be specified as an array with exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://tools.ietf.org/html/rfc3339). Also supports open intervals by setting one of the boundaries to `null`, but never both.\n\nSet this parameter to `null` to set no limit for the spatial extent. Be careful with this when loading large datasets!",
             "schema": [
                 {
@@ -158,7 +154,8 @@
             ],
             "required": true
         },
-        "bands": {
+        {
+            "name": "bands",
             "description": "Only adds the specified bands into the data cube so that bands that don't match the list of band names are not available. Applies to all dimensions of type `bands`.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If unique band name and common name conflict, the unique band name has higher priority.\n\nThe order of the specified array defines the order of the bands in the data cube. f multiple bands match a common name, all matched bands are included in the original order.",
             "schema": [
                 {
@@ -176,7 +173,8 @@
             ],
             "default": null
         },
-        "properties": {
+        {
+            "name": "properties",
             "description": "Limits the data by metadata properties to include only data in the data cube which all given conditions return `true` for (AND operation).\n\nSpecify key-value-pairs with the keys being the name of the metadata property, which can be retrieved with the openEO Data Discovery for Collections. The values must be conditions to be evaluated against the collection metadata, see the example.",
             "schema": [
                 {
@@ -184,11 +182,16 @@
                     "additionalProperties": {
                         "type": "object",
                         "subtype": "process-graph",
-                        "parameters": {
-                            "x": {
-                                "description": "The property value. Any data type could be passed."
+                        "parameters": [
+                            {
+                                "name": "value",
+                                "description": "The property value to be checked against.",
+                                "required": true,
+                                "schema": {
+                                    "description": "Any data type."
+                                }
                             }
-                        }
+                        ]
                     }
                 },
                 {
@@ -199,7 +202,7 @@
             ],
             "default": null
         }
-    },
+    ],
     "returns": {
         "description": "A data cube for further processing.",
         "schema": {
@@ -232,7 +235,7 @@
                                         "process_id": "between",
                                         "arguments": {
                                             "x": {
-                                                "from_argument": "x"
+                                                "from_argument": "value"
                                             },
                                             "min": 0,
                                             "max": 50
@@ -247,7 +250,7 @@
                                         "process_id": "eq",
                                         "arguments": {
                                             "x": {
-                                                "from_argument": "x"
+                                                "from_argument": "value"
                                             },
                                             "y": "Sentinel-2B",
                                             "case_sensitive": false

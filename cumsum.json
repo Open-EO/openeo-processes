@@ -5,12 +5,9 @@
     "categories": [
         "math > cumulative"
     ],
-    "parameter_order": [
-        "data",
-        "ignore_nodata"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "An array of numbers.",
             "schema": {
                 "type": "array",
@@ -23,14 +20,15 @@
             },
             "required": true
         },
-        "ignore_nodata": {
+        {
+            "name": "ignore_nodata",
             "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
             "schema": {
                 "type": "boolean"
             },
             "default": true
         }
-    },
+    ],
     "returns": {
         "description": "An array with the computed cumulative sums.",
         "schema": {

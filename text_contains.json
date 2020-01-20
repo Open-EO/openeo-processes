@@ -6,13 +6,9 @@
         "texts",
         "comparison"
     ],
-    "parameter_order": [
-        "data",
-        "pattern",
-        "case_sensitive"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "Text in which to find something in.",
             "schema": {
                 "type": [
@@ -22,21 +18,23 @@
             },
             "required": true
         },
-        "pattern": {
+        {
+            "name": "pattern",
             "description": "Text to find in `data`. Regular expressions are not supported.",
             "schema": {
                 "type": "string"
             },
             "required": true
         },
-        "case_sensitive": {
+        {
+            "name": "case_sensitive",
             "description": "Case sensitive comparison can be disabled by setting this parameter to `false`.",
             "schema": {
                 "type": "boolean"
             },
             "default": true
         }
-    },
+    ],
     "returns": {
         "description": "`true` if `data` contains the `pattern`, false` otherwise.",
         "schema": {

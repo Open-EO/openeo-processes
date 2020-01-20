@@ -6,13 +6,9 @@
         "arrays",
         "sorting"
     ],
-    "parameter_order": [
-        "data",
-        "asc",
-        "nodata"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "An array to compute the order for.",
             "schema": {
                 "type": "array",
@@ -44,14 +40,16 @@
             },
             "required": true
         },
-        "asc": {
+        {
+            "name": "asc",
             "description": "The default sort order is ascending, with smallest values first. To sort in reverse (descending) order, set this parameter to `false`.",
             "schema": {
                 "type": "boolean"
             },
             "default": true
         },
-        "nodata": {
+        {
+            "name": "nodata",
             "description": "Controls the handling of no-data values (`null`). By default they are removed. If `true`, missing values in the data are put last; if `false`, they are put first.",
             "schema": {
                 "type": [
@@ -61,7 +59,7 @@
             },
             "default": null
         }
-    },
+    ],
     "returns": {
         "description": "The computed permutation.",
         "schema": {

@@ -5,7 +5,7 @@
     "categories": [
         "cubes"
     ],
-    "parameters": {},
+    "parameters": [],
     "returns": {
         "description": "An empty raster data cube.",
         "schema": {

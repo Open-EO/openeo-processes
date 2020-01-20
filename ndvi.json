@@ -6,14 +6,9 @@
         "math > indices",
         "vegetation indices"
     ],
-    "parameter_order": [
-        "data",
-        "nir",
-        "red",
-        "target_band"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "A raster data cube with two bands that have the common names `red` and `nir` assigned.",
             "schema": {
                 "type": "object",
@@ -21,7 +16,8 @@
             },
             "required": true
         },
-        "nir": {
+        {
+            "name": "nir",
             "description": "The name of the NIR band. Defaults to the band that has the common name `nir` assigned.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If unique band name and common name conflict, the unique band name has higher priority.",
             "schema": {
                 "type": "string",
@@ -29,7 +25,8 @@
             },
             "default": "nir"
         },
-        "red": {
+        {
+            "name": "red",
             "description": "The name of the red band. Defaults to the band that has the common name `red` assigned.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If unique band name and common name conflict, the unique band name has higher priority.",
             "schema": {
                 "type": "string",
@@ -37,7 +34,8 @@
             },
             "default": "red"
         },
-        "target_band": {
+        {
+            "name": "target_band",
             "description": "By default, the dimension of type `bands` is dropped. To keep the dimension specify a new band name in this parameter so that a new dimension label with the specified name will be added for the computed values.",
             "schema": [
                 {
@@ -50,7 +48,7 @@
             ],
             "default": null
         }
-    },
+    ],
     "returns": {
         "description": "A raster data cube containing the computed NDVI values.",
         "schema": {

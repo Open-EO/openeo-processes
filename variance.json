@@ -6,12 +6,9 @@
         "math",
         "reducer"
     ],
-    "parameter_order": [
-        "data",
-        "ignore_nodata"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "An array of numbers. An empty array resolves always with `null`.",
             "schema": {
                 "type": "array",
@@ -24,14 +21,15 @@
             },
             "required": true
         },
-        "ignore_nodata": {
+        {
+            "name": "ignore_nodata",
             "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is returned if any value is such a value.",
             "schema": {
                 "type": "boolean"
             },
             "default": true
         }
-    },
+    ],
     "returns": {
         "description": "The computed sample variance.",
         "schema": {

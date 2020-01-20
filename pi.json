@@ -6,7 +6,7 @@
         "math > constants",
         "math > trigonometric"
     ],
-    "parameters": {},
+    "parameters": [],
     "returns": {
         "description": "The numerical value of Pi.",
         "schema": {

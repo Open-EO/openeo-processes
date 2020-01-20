@@ -5,12 +5,9 @@
     "categories": [
         "math"
     ],
-    "parameter_order": [
-        "data",
-        "ignore_nodata"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "An array of numbers.",
             "schema": {
                 "type": "array",
@@ -23,14 +20,15 @@
             },
             "required": true
         },
-        "ignore_nodata": {
+        {
+            "name": "ignore_nodata",
             "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that an array with two `null` values is returned if any value is such a value.",
             "schema": {
                 "type": "boolean"
             },
             "default": true
         }
-    },
+    ],
     "returns": {
         "description": "An array containing the minimum and maximum values for the specified numbers. The first element is the minimum, the second element is the maximum. If the input array is empty both elements are set to `null`.",
         "schema": [

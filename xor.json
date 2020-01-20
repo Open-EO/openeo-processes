@@ -5,12 +5,9 @@
     "categories": [
         "logic"
     ],
-    "parameter_order": [
-        "x",
-        "y"
-    ],
-    "parameters": {
-        "x": {
+    "parameters": [
+        {
+            "name": "x",
             "description": "A boolean value.",
             "schema": {
                 "type": [
@@ -20,7 +17,8 @@
             },
             "required": true
         },
-        "y": {
+        {
+            "name": "y",
             "description": "A boolean value.",
             "schema": {
                 "type": [
@@ -30,7 +28,7 @@
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "Boolean result of the logical XOR.",
         "schema": {

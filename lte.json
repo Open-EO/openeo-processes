@@ -5,26 +5,24 @@
     "categories": [
         "comparison"
     ],
-    "parameter_order": [
-        "x",
-        "y"
-    ],
-    "parameters": {
-        "x": {
+    "parameters": [
+        {
+            "name": "x",
             "description": "First operand.",
             "schema": {
                 "description": "Any data type is allowed."
             },
             "required": true
         },
-        "y": {
+        {
+            "name": "y",
             "description": "Second operand.",
             "schema": {
                 "description": "Any data type is allowed."
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "`true` if `x` is less than or equal to `y`, `null` if any operand is `null`, otherwise `false`.",
         "schema": {
@@ -93,8 +91,16 @@
         },
         {
             "arguments": {
-                "x": [1,2,3],
-                "y": [1,2,3]
+                "x": [
+                    1,
+                    2,
+                    3
+                ],
+                "y": [
+                    1,
+                    2,
+                    3
+                ]
             },
             "returns": false
         }

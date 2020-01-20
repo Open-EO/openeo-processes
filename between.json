@@ -5,21 +5,17 @@
     "categories": [
         "comparison"
     ],
-    "parameter_order": [
-        "x",
-        "min",
-        "max",
-        "exclude_max"
-    ],
-    "parameters": {
-        "x": {
+    "parameters": [
+        {
+            "name": "x",
             "description": "The value to check.",
             "schema": {
                 "description": "Any data type is allowed."
             },
             "required": true
         },
-        "min": {
+        {
+            "name": "min",
             "description": "Lower boundary (inclusive) to check against.",
             "schema": [
                 {
@@ -43,7 +39,8 @@
             ],
             "required": true
         },
-        "max": {
+        {
+            "name": "max",
             "description": "Upper boundary (inclusive) to check against.",
             "schema": [
                 {
@@ -67,14 +64,15 @@
             ],
             "required": true
         },
-        "exclude_max": {
+        {
+            "name": "exclude_max",
             "description": "Exclude the upper boundary `max` if set to `true`. Defaults to `false`.",
             "schema": {
                 "type": "boolean"
             },
             "default": false
         }
-    },
+    ],
     "returns": {
         "description": "`true` if `x` is between the specified bounds, otherwise `false`.",
         "schema": {

@@ -6,13 +6,9 @@
         "cubes",
         "math > image filter"
     ],
-    "parameter_order": [
-        "data",
-        "kernel",
-        "factor"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "A data cube.",
             "schema": {
                 "type": "object",
@@ -20,7 +16,8 @@
             },
             "required": true
         },
-        "kernel": {
+        {
+            "name": "kernel",
             "description": "A two-dimensional weighted kernel. Each dimension of the kernel must have an uneven number of elements, otherwise the process throws a `KernelDimensionsUneven` error.",
             "schema": {
                 "description": "A two-dimensional array of numbers.",
@@ -35,14 +32,15 @@
             },
             "required": true
         },
-        "factor": {
+        {
+            "name": "factor",
             "description": "A factor that is multiplied to each value after the kernel has been applied.\n\nThis is basically a shortcut for explicitly multiplying each value by a factor afterwards, which is often required for some kernel-based algorithms such as the Gaussian blur.",
             "schema": {
                 "type": "number"
             },
             "default": 1
         }
-    },
+    ],
     "returns": {
         "description": "A data cube with the newly computed values. The resolution, cardinality and the number of dimensions are the same as for the original data cube.",
         "schema": {

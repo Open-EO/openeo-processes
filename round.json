@@ -5,12 +5,9 @@
     "categories": [
         "math > rounding"
     ],
-    "parameter_order": [
-        "x",
-        "p"
-    ],
-    "parameters": {
-        "x": {
+    "parameters": [
+        {
+            "name": "x",
             "description": "A number to round.",
             "schema": {
                 "type": [
@@ -20,14 +17,15 @@
             },
             "required": true
         },
-        "p": {
+        {
+            "name": "p",
             "description": "A positive number specifies the number of digits after the decimal point to round to. A negative number means rounding to a power of ten, so for example *-2* rounds to the nearest hundred. Defaults to *0*.",
             "schema": {
                 "type": "integer"
             },
             "default": 0
         }
-    },
+    ],
     "returns": {
         "description": "The rounded number.",
         "schema": {

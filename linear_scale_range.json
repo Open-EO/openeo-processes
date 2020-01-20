@@ -5,15 +5,9 @@
     "categories": [
         "math"
     ],
-    "parameter_order": [
-        "x",
-        "inputMin",
-        "inputMax",
-        "outputMin",
-        "outputMax"
-    ],
-    "parameters": {
-        "x": {
+    "parameters": [
+        {
+            "name": "x",
             "description": "A number to transform.",
             "schema": {
                 "type": [
@@ -23,35 +17,39 @@
             },
             "required": true
         },
-        "inputMin": {
+        {
+            "name": "inputMin",
             "description": "Minimum value the input can obtain.",
             "schema": {
                 "type": "number"
             },
             "required": true
         },
-        "inputMax": {
+        {
+            "name": "inputMax",
             "description": "Maximum value the input can obtain.",
             "schema": {
                 "type": "number"
             },
             "required": true
         },
-        "outputMin": {
+        {
+            "name": "outputMin",
             "description": "Minimum value of the desired output range.",
             "schema": {
                 "type": "number"
             },
             "default": 0
         },
-        "outputMax": {
+        {
+            "name": "outputMax",
             "description": "Maximum value of the desired output range.",
             "schema": {
                 "type": "number"
             },
             "default": 1
         }
-    },
+    ],
     "returns": {
         "description": "The transformed number.",
         "schema": {

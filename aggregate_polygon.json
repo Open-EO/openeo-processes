@@ -6,14 +6,9 @@
         "cubes",
         "aggregate & resample"
     ],
-    "parameter_order": [
-        "data",
-        "polygons",
-        "reducer",
-        "name"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "A data cube.",
             "schema": {
                 "type": "object",
@@ -21,7 +16,8 @@
             },
             "required": true
         },
-        "polygons": {
+        {
+            "name": "polygons",
             "description": "One or more polygons to calculate zonal statistics for. Either specified as GeoJSON or vector data cube.\n\nFor GeoJSON this can be one of the following GeoJSON types:\n\n* A `Polygon` geometry,\n* a `GeometryCollection` containing Polygons,\n* a `Feature` with a `Polygon` geometry or\n* a `FeatureCollection` containing `Feature`s with a `Polygon` geometry.",
             "schema": [
                 {
@@ -35,31 +31,37 @@
             ],
             "required": true
         },
-        "reducer": {
+        {
+            "name": "reducer",
             "description": "A reducer to be applied on all values of each geometry. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
-                "parameters": {
-                    "data": {
-                        "description": "An array with elements of any data type.",
-                        "type": "array",
-                        "items": {
-                            "description": "Any data type."
+                "parameters": [
+                    {
+                        "name": "data",
+                        "description": "An array with elements of any type.",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "description": "Any data type."
+                            }
                         }
                     }
-                }
+                ]
             },
             "required": true
         },
-        "name": {
+        {
+            "name": "name",
             "description": "The new dimension name to be used for storing the results. Defaults to `result`.",
             "schema": {
                 "type": "string"
             },
             "default": "result"
         }
-    },
+    ],
     "returns": {
         "description": "A vector data cube with the computed results. The vector data cube implicitly gets restricted to the bounds of the polygons as if ``filter_polygon()`` would have been used with the same values for the corresponding parameters immediately before this process.\n\nThe computed value is stored in dimension with the name that was specified in the parameter `name`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) in each geometry. These values are stored as attributes of the result value with the attribute names `total_count` and `valid_count`.",
         "schema": {

@@ -6,14 +6,9 @@
         "cubes",
         "aggregate & resample"
     ],
-    "parameter_order": [
-        "data",
-        "target",
-        "method",
-        "dimension"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "A data cube.",
             "schema": {
                 "type": "object",
@@ -21,7 +16,8 @@
             },
             "required": true
         },
-        "target": {
+        {
+            "name": "target",
             "description": "A data cube that describes the temporal target resolution.",
             "schema": {
                 "type": "object",
@@ -29,24 +25,30 @@
             },
             "required": true
         },
-        "method": {
+        {
+            "name": "method",
             "description": "A resampling method to be applied, could be a reducer for downsampling or other methods for upsampling. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
-                "parameters": {
-                    "data": {
-                        "description": "An array with elements of any data type.",
-                        "type": "array",
-                        "items": {
-                            "description": "Any data type."
+                "parameters": [
+                    {
+                        "name": "data",
+                        "description": "An array with elements of any type.",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "description": "Any data type."
+                            }
                         }
                     }
-                }
+                ]
             },
             "required": true
         },
-        "dimension": {
+        {
+            "name": "dimension",
             "description": "The name of the temporal dimension to resample, which must exist with this name in both data cubes. If the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` error if it has more dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Note:** The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.",
             "schema": {
                 "type": [
@@ -56,7 +58,7 @@
             },
             "default": null
         }
-    },
+    ],
     "returns": {
         "description": "A data cube with potentially lower temporal resolution and potentially lower cardinality, but the same number of dimensions as the original data cube.",
         "schema": {

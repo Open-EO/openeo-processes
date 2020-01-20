@@ -5,8 +5,9 @@
     "categories": [
         "math > rounding"
     ],
-    "parameters": {
-        "x": {
+    "parameters": [
+        {
+            "name": "x",
             "description": "A number to round down.",
             "schema": {
                 "type": [
@@ -16,7 +17,7 @@
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "The number rounded down.",
         "schema": {

@@ -74,9 +74,39 @@ jsv.addKeyword("parameters", {
 		"subtype"
 	],
 	metaSchema: {
-		type: "object",
-		additionalProperties: {
-			type: "object"
+		type: "array",
+		items: {
+			type: "object",
+			required: [
+				"name",
+				"description",
+				"schema"
+			],
+			properties: {
+				name: {
+					type: "string",
+					pattern: "^[A-Za-z0-9_]+$"
+				},
+				description: {
+					type: "string"
+				},
+				required: {
+					type: "boolean"
+				},
+				deprecated: {
+					type: "boolean"
+				},
+				experimental: {
+					type: "boolean"
+				},
+				default: {
+					// Any type
+				},
+				schema: {
+					type: "object"
+					// ToDo: Check Schema
+				}
+			}
 		}
 	},
 	valid: true
@@ -178,59 +208,15 @@ describe.each(processes)("%s", (file, p, fileContent) => {
 	});
 
 	test("Parameters", () => {
-		expect(typeof p.parameters).toBe('object');
-		expect(p.parameters).not.toBeNull();
+		expect(Array.isArray(p.parameters)).toBeTruthy();
 	});
 	
 	var params = o2a(p.parameters);
 	if (params.length > 0) {
 		test.each(params)("Parameters > %s", (key, param) => {
-			expect(paramKeyRegExp.test(key)).toBeTruthy();
-
-			// parameter description
-			expect(typeof param.description).toBe('string');
-			checkDescription(param.description, p);
-
-			// Parameter flags
-			expect(typeof param.required === 'undefined' || typeof param.required === 'boolean').toBeTruthy();
-			// lint: don't specify defaults
-			expect(typeof param.required === 'undefined' || param.required === true).toBeTruthy();
-			// Check flags (recommended / experimental)
-			checkFlags(param);
-
-			// Parameter schema
-			expect(typeof param.schema).toBe('object');
-			expect(param.schema).not.toBeNull();
-			checkJsonSchema(param.schema);
-
-			// Parameters that are not required should define a default value
-			if(param.required !== true && !anyOfRequired.includes(p.id)) {
-				expect(param.default).toBeDefined();
-			}
-
-			// Checking that callbacks (process-graphs) define their parameters
-			if (typeof param.schema === 'object' && param.schema.subtype === 'process-graph') {
-				expect(typeof param.schema.parameters === 'object' && Object.keys(param.schema.parameters).length).toBeTruthy();
-			}
+			checkParam(param, p);
 		});
 	}
-
-	test("Parameter Order", () => {
-		let paramKeys = Object.keys(p.parameters);
-		let paramCount = paramKeys.length;
-
-		expect(typeof p.parameter_order === 'undefined' || Array.isArray(p.parameter_order)).toBeTruthy();
-		expect(typeof p.parameter_order === 'undefined' || p.parameter_order.length === paramCount).toBeTruthy();
-
-		if (Array.isArray(p.parameter_order)) {
-			let difference = array_diff(p.parameter_order, paramKeys);
-			expect(difference.length).toBe(0);
-		}
-
-		if (paramCount >= 2) {
-			expect(typeof p.parameter_order !== 'undefined' && p.parameter_order.length === paramCount).toBeTruthy();
-		}
-	});
 
 	test("Return Value", () => {
 		expect(typeof p.returns).toBe('object');
@@ -276,8 +262,14 @@ describe.each(processes)("%s", (file, p, fileContent) => {
 	});
 
 	if (Array.isArray(p.examples) && p.examples.length > 0) {
+		// Make an object for easier access later
+		p.parametersObj = {};
+		for(var i in p.parameters) {
+			p.parametersObj[p.parameters[i].name] = p.parameters[i];
+		}
+
 		test.each(p.examples)("Examples > %#", (example) => {
-			let paramKeys = Object.keys(p.parameters);
+			let paramKeys = Object.keys(p.parametersObj);
 
 			expect(typeof example).toBe('object');
 			expect(example).not.toBeNull();
@@ -309,11 +301,11 @@ describe.each(processes)("%s", (file, p, fileContent) => {
 					// Does parameter with this name exist?
 					
 					expect(paramKeys).toContain(argName);
-					checkJsonSchemaValue(p.parameters[argName].schema, example.arguments[argName]);
+					checkJsonSchemaValue(p.parametersObj[argName].schema, example.arguments[argName]);
 				}
 				// Check whether all required parameters are set
-				for(let key in p.parameters) {
-					if (p.parameters[key].required) {
+				for(let key in p.parametersObj) {
+					if (p.parametersObj[key].required) {
 						expect(example.arguments[key]).toBeDefined();
 					}
 				}
@@ -348,10 +340,6 @@ describe.each(processes)("%s", (file, p, fileContent) => {
 	}
 });
 
-function array_diff(arr1, arr2) {
-	return arr1.filter(x => !arr2.includes(x)).concat(arr2.filter(x => !arr1.includes(x)));
-}
-
 function checkFlags(p) {
 	// deprecated
 	expect(typeof p.deprecated === 'undefined' || typeof p.deprecated === 'boolean').toBeTruthy();
@@ -361,6 +349,47 @@ function checkFlags(p) {
 	expect(typeof p.experimental === 'undefined' || typeof p.experimental === 'boolean').toBeTruthy();
 	// lint: don't specify defaults
 	expect(typeof p.experimental === 'undefined' || p.experimental === true).toBeTruthy();
+}
+
+function checkParam(param, p, checkCbParams = true) {
+	// parameter name
+	expect(typeof param.name).toBe('string');
+	expect(paramKeyRegExp.test(param.name)).toBeTruthy();
+
+	// parameter description
+	expect(typeof param.description).toBe('string');
+	checkDescription(param.description, p);
+
+	// Parameter flags
+	expect(typeof param.required === 'undefined' || typeof param.required === 'boolean').toBeTruthy();
+	// lint: don't specify defaults
+	expect(typeof param.required === 'undefined' || param.required === true).toBeTruthy();
+	// Check flags (recommended / experimental)
+	checkFlags(param);
+
+	// Parameter schema
+	expect(typeof param.schema).toBe('object');
+	expect(param.schema).not.toBeNull();
+	checkJsonSchema(param.schema);
+
+	if (!checkCbParams) {
+		// Parameters that are not required should define a default value
+		if(param.required !== true && !anyOfRequired.includes(p.id)) {
+			expect(param.default).toBeDefined();
+		}
+	}
+	else {
+		// Checking that callbacks (process-graphs) define their parameters
+		if (typeof param.schema === 'object' && param.schema.subtype === 'process-graph') {
+			// lint: A callback without parameters is not very useful
+			expect(Array.isArray(param.schema.parameters) && param.schema.parameters.length > 0).toBeTruthy();
+
+			// Check all callback params
+			for(var i in param.schema.parameters) {
+				checkParam(param.schema.parameters[i], p, false);
+			}
+		}
+	}
 }
 
 function checkDescription(text, p = null, commonmark = true) {
@@ -469,7 +498,10 @@ function o2a(o) {
 	}
 	var a = [];
 	for(var k in o) {
-		a.push([k, o[k]]);
+		a.push([
+			o[k].name ? o[k].name : k, // name
+			o[k] // obj
+		]);
 	}
 	return a;
 }

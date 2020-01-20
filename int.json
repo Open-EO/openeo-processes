@@ -6,8 +6,9 @@
         "math",
         "math > rounding"
     ],
-    "parameters": {
-        "x": {
+    "parameters": [
+        {
+            "name": "x",
             "description": "A number.",
             "schema": {
                 "type": [
@@ -17,7 +18,7 @@
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "Integer part of the number.",
         "schema": {

@@ -5,13 +5,9 @@
     "categories": [
         "math"
     ],
-    "parameter_order": [
-        "x",
-        "min",
-        "max"
-    ],
-    "parameters": {
-        "x": {
+    "parameters": [
+        {
+            "name": "x",
             "description": "A number.",
             "schema": {
                 "type": [
@@ -21,21 +17,23 @@
             },
             "required": true
         },
-        "min": {
+        {
+            "name": "min",
             "description": "Minimum value. If the value is lower than this value, the process will return the value of this parameter.",
             "schema": {
                 "type": "number"
             },
             "required": true
         },
-        "max": {
+        {
+            "name": "max",
             "description": "Maximum value. If the value is greater than this value, the process will return the value of this parameter.",
             "schema": {
                 "type": "number"
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "The value clipped to the specified range.",
         "schema": {

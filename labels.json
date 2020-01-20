@@ -5,34 +5,32 @@
     "categories": [
         "cubes"
     ],
-    "parameter_order": [
-        "data",
-        "dimension"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "The data cube.",
             "schema": {
-				"type": "object",
-				"subtype": "raster-cube"
-			},
+                "type": "object",
+                "subtype": "raster-cube"
+            },
             "required": true
         },
-        "dimension": {
+        {
+            "name": "dimension",
             "description": "The name of the dimension to get the labels for.",
             "schema": {
                 "type": "string"
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "The labels as array.",
         "schema": {
-			"type": "array",
-			"items": {
-				"type": "string"
-			}
-		}
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
     }
 }

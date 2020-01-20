@@ -5,14 +5,9 @@
     "categories": [
         "math"
     ],
-    "parameter_order": [
-        "data",
-        "probabilities",
-        "q",
-        "ignore_nodata"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "An array of numbers.",
             "schema": {
                 "type": "array",
@@ -25,7 +20,8 @@
             },
             "required": true
         },
-        "probabilities": {
+        {
+            "name": "probabilities",
             "description": "A list of probabilities to calculate quantiles for. The probabilities must be between 0 and 1.",
             "schema": {
                 "type": "array",
@@ -36,21 +32,23 @@
                 }
             }
         },
-        "q": {
+        {
+            "name": "q",
             "description": "A number of intervals to calculate quantiles for. Calculates q-quantiles with (nearly) equal-sized intervals.",
             "schema": {
                 "type": "integer",
                 "minimum": 2
             }
         },
-        "ignore_nodata": {
+        {
+            "name": "ignore_nodata",
             "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that an array with `null` values is returned if any element is such a value.",
             "schema": {
                 "type": "boolean"
             },
             "default": true
         }
-    },
+    ],
     "returns": {
         "description": "An array with the computed quantiles. The list has either\n\n* as many elements as the given list of `probabilities` had or\n* *`q`-1* elements.\n\nIf the input array is empty the resulting array is filled with as many `null` values as required according to the list above. For an example, see the 'Empty array example'.",
         "schema": {

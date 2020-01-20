@@ -5,8 +5,9 @@
     "categories": [
         "cubes"
     ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "A raster data cube to trim.",
             "schema": {
                 "type": "object",
@@ -14,7 +15,7 @@
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "A trimmed raster data cube.",
         "schema": {

@@ -6,8 +6,9 @@
         "cubes",
         "import"
     ],
-    "parameters": {
-        "id": {
+    "parameters": [
+        {
+            "name": "id",
             "description": "The id of a batch job with results.",
             "schema": {
                 "type": "string",
@@ -16,7 +17,7 @@
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "A data cube for further processing.",
         "schema": {

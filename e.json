@@ -6,7 +6,7 @@
         "math > constants",
         "math > exponential & logarithmic"
     ],
-    "parameters": {},
+    "parameters": [],
     "returns": {
         "description": "The numerical value of Euler's number.",
         "schema": {

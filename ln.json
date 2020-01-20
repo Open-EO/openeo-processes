@@ -5,8 +5,9 @@
     "categories": [
         "math > exponential & logarithmic"
     ],
-    "parameters": {
-        "x": {
+    "parameters": [
+        {
+            "name": "x",
             "description": "A number to compute the natural logarithm for.",
             "schema": {
                 "type": [
@@ -16,7 +17,7 @@
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "The computed natural logarithm.",
         "schema": {

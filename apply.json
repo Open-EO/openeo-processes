@@ -5,12 +5,9 @@
     "categories": [
         "cubes"
     ],
-    "parameter_order": [
-        "data",
-        "process"
-    ],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "A data cube.",
             "schema": {
                 "type": "object",
@@ -18,20 +15,26 @@
             },
             "required": true
         },
-        "process": {
+        {
+            "name": "process",
             "description": "A unary process to be applied on each value, may consist of multiple sub-processes.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
-                "parameters": {
-                    "x": {
-                        "description": "A value of any type could be passed."
+                "parameters": [
+                    {
+                        "name": "x",
+                        "description": "The value to process.",
+                        "required": true,
+                        "schema": {
+                            "description": "Any data type."
+                        }
                     }
-                }
+                ]
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "A data cube with the newly computed values. The resolution, cardinality and the number of dimensions are the same as for the original data cube.",
         "schema": {

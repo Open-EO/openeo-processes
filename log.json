@@ -5,12 +5,9 @@
     "categories": [
         "math > exponential & logarithmic"
     ],
-    "parameter_order": [
-        "x",
-        "base"
-    ],
-    "parameters": {
-        "x": {
+    "parameters": [
+        {
+            "name": "x",
             "description": "A number to compute the logarithm for.",
             "schema": {
                 "type": [
@@ -20,7 +17,8 @@
             },
             "required": true
         },
-        "base": {
+        {
+            "name": "base",
             "description": "The numerical base.",
             "schema": {
                 "type": [
@@ -30,7 +28,7 @@
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "The computed logarithm.",
         "schema": {

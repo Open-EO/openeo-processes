@@ -5,8 +5,9 @@
     "categories": [
         "logic"
     ],
-    "parameters": {
-        "x": {
+    "parameters": [
+        {
+            "name": "x",
             "description": "Boolean value to invert.",
             "schema": {
                 "type": [
@@ -16,7 +17,7 @@
             },
             "required": true
         }
-    },
+    ],
     "returns": {
         "description": "Inverted boolean value.",
         "schema": {
