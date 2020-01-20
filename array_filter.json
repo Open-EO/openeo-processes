@@ -31,6 +31,7 @@
                         "description": "A value of any type could be passed."
                     },
                     "index": {
+                        "description": "The zero-based index of the current element being processed.",
                         "type": "integer"
                     }
                 }
