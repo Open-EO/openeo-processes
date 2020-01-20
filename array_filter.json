@@ -1,14 +1,14 @@
 {
     "id": "array_filter",
-    "summary": "Filter an array based on a logical expression",
-    "description": "Filters the array elements based on a logical expression so that afterwards an array is returned that only contains the values conforming to the expression.",
+    "summary": "Filter an array based on a condition",
+    "description": "Filters the array elements based on a logical expression so that afterwards an array is returned that only contains the values conforming to the condition.",
     "categories": [
         "arrays",
         "filter"
     ],
     "parameter_order": [
         "data",
-        "expression"
+        "condition"
     ],
     "parameters": {
         "data": {
@@ -21,8 +21,8 @@
             },
             "required": true
         },
-        "expression": {
-            "description": "An expression that is evaluated against each value in the array. An array element is dropped if the expression returns `false`.",
+        "condition": {
+            "description": "A condition that is evaluated against each value in the array. Only the array elements where the condition returns `true` are preserved.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
@@ -39,7 +39,7 @@
         }
     },
     "returns": {
-        "description": "An array filtered by the specified expression. The number of elements are less than or equal compared to the original array.",
+        "description": "An array filtered by the specified condition. The number of elements are less than or equal compared to the original array.",
         "schema": {
             "type": "array",
             "items": {
