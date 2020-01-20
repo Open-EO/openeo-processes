@@ -24,18 +24,18 @@
             "required": true
         },
         "accept": {
-            "description": "A value that is returned if the boolean value is `true`. Defaults to `true`.",
+            "description": "A value that is returned if the boolean value is `true`.",
             "schema": {
                 "description": "Any data type is allowed."
             },
-            "default": true
+            "required": true
         },
         "reject": {
-            "description": "A value that is returned if the boolean value is `false`. Defaults to `false`.",
+            "description": "A value that is returned if the boolean value is `false`. Defaults to `null`.",
             "schema": {
                 "description": "Any data type is allowed."
             },
-            "default": false
+            "default": null
         }
     },
     "returns": {
@@ -47,28 +47,19 @@
     "examples": [
         {
             "arguments": {
-                "value": true
-            },
-            "returns": true
-        },
-        {
-            "arguments": {
-                "value": null
-            },
-            "returns": null
-        },
-        {
-            "arguments": {
-                "value": false
-            },
-            "returns": false
-        },
-        {
-            "arguments": {
                 "value": true,
-                "accept": "A"
+                "accept": "A",
+                "reject": "B"
             },
             "returns": "A"
+        },
+        {
+            "arguments": {
+                "value": null,
+                "accept": "A",
+                "reject": "B"
+            },
+            "returns": null
         },
         {
             "arguments": {
@@ -89,6 +80,20 @@
                 5,
                 6
             ]
+        },
+        {
+            "arguments": {
+                "value": true,
+                "accept": 123
+            },
+            "returns": 123
+        },
+        {
+            "arguments": {
+                "value": false,
+                "accept": 1
+            },
+            "returns": null
         }
     ]
 }

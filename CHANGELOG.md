@@ -35,7 +35,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `count`: Renamed parameter `expression` to `condition`.
 - `debug`: Replaced with a completely new definition. [#82](https://github.com/Open-EO/openeo-processes/issues/71), [API#100](https://github.com/Open-EO/openeo-api/issues/100), [API#214](https://github.com/Open-EO/openeo-api/issues/214)
 - `filter_bands`: Merged parameters `bands` and `common_names`. [#77](https://github.com/Open-EO/openeo-processes/issues/77)
-- `if`: Parameter `expression` renamed to `value`.
+- `if`:
+    - Parameter `expression` renamed to `value`.
+    - Parameter `accept` is required.
+    - Parameter `reject` defaults to `null`.
 - `load_collection`: Parameter `bands` accepts common band names. [#77](https://github.com/Open-EO/openeo-processes/issues/77)
 - `ndvi` and `normalized_difference`: Rewrite of the processes with a completely new behavior. [#60](https://github.com/Open-EO/openeo-processes/issues/60)
 - `not`: Parameter `expression` renamed to `x`.
