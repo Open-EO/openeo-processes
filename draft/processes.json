@@ -3781,16 +3781,10 @@
       },
       "polygons": {
         "description": "One or more polygons used for filtering, either specified as GeoJSON or vector data cube.\n\nFor GeoJSON this can be one of the following GeoJSON types:\n\n* A `Polygon` geometry,\n* a `GeometryCollection` containing Polygons,\n* a `Feature` with a `Polygon` geometry or\n* a `FeatureCollection` containing `Feature`s with a `Polygon` geometry.",
-        "schema": [
-          {
-            "type": "object",
-            "subtype": "geojson"
-          },
-          {
-            "type": "object",
-            "subtype": "vector-cube"
-          }
-        ],
+        "schema": {
+          "type": "object",
+          "subtype": "geojson"
+        },
         "required": true
       }
     },
@@ -5020,16 +5014,10 @@
     },
     "returns": {
       "description": "A data cube for further processing.",
-      "schema": [
-        {
-          "type": "object",
-          "subtype": "raster-cube"
-        },
-        {
-          "type": "object",
-          "subtype": "vector-cube"
-        }
-      ]
+      "schema": {
+        "type": "object",
+        "subtype": "raster-cube"
+      }
     },
     "examples": [
       {
@@ -5136,16 +5124,10 @@
     },
     "returns": {
       "description": "A data cube for further processing.",
-      "schema": [
-        {
-          "type": "object",
-          "subtype": "raster-cube"
-        },
-        {
-          "type": "object",
-          "subtype": "vector-cube"
-        }
-      ]
+      "schema": {
+        "type": "object",
+        "subtype": "raster-cube"
+      }
     }
   },
   {
@@ -5193,16 +5175,10 @@
     },
     "returns": {
       "description": "A data cube for further processing.",
-      "schema": [
-        {
-          "type": "object",
-          "subtype": "raster-cube"
-        },
-        {
-          "type": "object",
-          "subtype": "vector-cube"
-        }
-      ]
+      "schema": {
+        "type": "object",
+        "subtype": "raster-cube"
+      }
     }
   },
   {
@@ -5526,16 +5502,10 @@
       },
       "mask": {
         "description": "A GeoJSON object or a vector data cube containing a polygon. The provided feature types can be one of the following:\n\n* A `Polygon` geometry,\n* a `GeometryCollection` containing Polygons,\n* a `Feature` with a `Polygon` geometry or\n* a `FeatureCollection` containing `Feature`s with a `Polygon` geometry.",
-        "schema": [
-          {
-            "type": "object",
-            "subtype": "geojson"
-          },
-          {
-            "type": "object",
-            "subtype": "vector-cube"
-          }
-        ],
+        "schema": {
+          "type": "object",
+          "subtype": "geojson"
+        },
         "required": true
       },
       "replacement": {
@@ -7665,16 +7635,10 @@
     "parameters": {
       "data": {
         "description": "The data cube.",
-        "schema": [
-          {
-            "type": "object",
-            "subtype": "raster-cube"
-          },
-          {
-            "type": "object",
-            "subtype": "vector-cube"
-          }
-        ],
+        "schema": {
+          "type": "object",
+          "subtype": "raster-cube"
+        },
         "required": true
       },
       "old": {
@@ -7694,16 +7658,10 @@
     },
     "returns": {
       "description": "The data cube with the renamed dimension. The old name can not be referenced any longer.",
-      "schema": [
-        {
-          "type": "object",
-          "subtype": "raster-cube"
-        },
-        {
-          "type": "object",
-          "subtype": "vector-cube"
-        }
-      ]
+      "schema": {
+        "type": "object",
+        "subtype": "raster-cube"
+      }
     },
     "exceptions": {
       "DimensionNotAvailable": {
