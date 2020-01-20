@@ -1,14 +1,14 @@
 {
     "id": "filter_labels",
     "summary": "Filter dimension labels based on a condition",
-    "description": "Filters the dimension labels based on a logical expression so that afterwards each dimension label in the data cube conforms to the expression.",
+    "description": "Filters the dimension labels in the data cube for the given dimension. Only the dimension labels that match the specified condition are preserved, all other labels with their corresponding data get removed.",
     "categories": [
         "cubes",
         "filter"
     ],
     "parameter_order": [
         "data",
-        "expression",
+        "condition",
         "dimension"
     ],
     "parameters": {
@@ -20,14 +20,14 @@
             },
             "required": true
         },
-        "expression": {
-            "description": "An expression that is evaluated against each dimension label in the specified dimension. A dimension label is dropped from the data cube if the expression returns `false`. The data type of the parameter depends on the dimension labels stored for the dimension.",
+        "condition": {
+            "description": "A condition that is evaluated against each dimension label in the specified dimension. A dimension label and the corresponding data is preserved for the given dimension, if the condition returns `true`.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
                 "parameters": {
-                    "x": {
-                        "description": "A single dimension label to compare against.",
+                    "value": {
+                        "description": "A single dimension label to compare against. The data type of the parameter depends on the dimension labels stored for the dimension.",
                         "anyOf": [
                             {
                                 "type": "number"
@@ -65,7 +65,7 @@
         }
     },
     "returns": {
-        "description": "A data cube restricted by the specified expression. Therefore, the cardinality is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
+        "description": "The filtered data cube. Therefore, the cardinality of the dimension is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"
@@ -75,5 +75,45 @@
         "DimensionNotAvailable": {
             "message": "A dimension with the specified name does not exist."
         }
-    }
+    },
+    "examples": [
+        {
+            "description": "This example is loading the Sentinel-2 collection into a data cube and filters the data cube to only contain data from platform Sentinel-2A. This example assumes that the data cube has a dimension `platform` so that computations can distinguish between Sentinel-2A and Sentinel-2B data.",
+            "process_graph": {
+                "load": {
+                    "process_id": "load_collection",
+                    "arguments": {
+                        "id": "Sentinel-2",
+                        "spatial_extent": null,
+                        "temporal_extent": null
+                    }
+                },
+                "filter": {
+                    "process_id": "filter_labels",
+                    "arguments": {
+                        "data": {
+                            "from_node": "load"
+                        },
+                        "condition": {
+                            "callback": {
+                                "eq": {
+                                    "process_id": "eq",
+                                    "arguments": {
+                                        "x": {
+                                            "from_argument": "value"
+                                        },
+                                        "y": "Sentinel-2A",
+                                        "case_sensitive": false
+                                    },
+                                    "result": true
+                                }
+                            }
+                        },
+                        "dimension": "platform"
+                    },
+                    "result": true
+                }
+            }
+        }
+    ]
 }
