@@ -29,7 +29,14 @@
         "schema": {
             "type": "array",
             "items": {
-                "type": "string"
+                "anyOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ]
             }
         }
     }

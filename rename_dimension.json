@@ -16,7 +16,7 @@
             "required": true
         },
         {
-            "name": "old",
+            "name": "source",
             "description": "The current name of the dimension. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
             "schema": {
                 "type": "string"
@@ -24,7 +24,7 @@
             "required": true
         },
         {
-            "name": "new",
+            "name": "target",
             "description": "A new Name for the dimension. Fails with a `DimensionExists` error if a dimension with the specified name exists.",
             "schema": {
                 "type": "string"
