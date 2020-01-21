@@ -102,8 +102,19 @@ jsv.addKeyword("parameters", {
 					// Any type
 				},
 				schema: {
-					type: "object"
-					// ToDo: Check Schema
+					oneOf: [
+						{
+							type: "object",
+							// ToDo: Check Schema
+						},
+						{
+							type: "array",
+							items: {
+								type: "object"
+								// ToDo: Check Schema
+							}
+						}
+					]
 				}
 			}
 		}
