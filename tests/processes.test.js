@@ -40,7 +40,6 @@ var subtypes = {
 	'process-graph-id': {type: 'string'},
 	'process-graph-variables': {type: 'object'},
 	'proj-definition': {type: 'string'},
-	'projjson-definition': {type: 'object'},
 	'raster-cube': {type: 'object'},
 	'temporal-interval': {type: 'array'},
 	'temporal-intervals': {type: 'array'},
