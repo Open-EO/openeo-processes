@@ -97,21 +97,6 @@
           },
           {
             "type": "string"
-          },
-          {
-            "type": "string",
-            "format": "date-time",
-            "subtype": "date-time"
-          },
-          {
-            "type": "string",
-            "format": "date",
-            "subtype": "date"
-          },
-          {
-            "type": "string",
-            "format": "time",
-            "subtype": "time"
           }
         ],
         "required": true
@@ -521,19 +506,7 @@
           "items": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "date-time",
-                "subtype": "date-time"
-              },
-              {
-                "type": "string",
-                "format": "date",
-                "subtype": "date"
-              },
-              {
-                "type": "string",
-                "format": "time",
-                "subtype": "time"
+                "type": "number"
               },
               {
                 "type": "string"
@@ -3762,7 +3735,7 @@
               "default": null
             },
             "crs": {
-              "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html), [PROJJSON](https://proj.org/projjson.html) or [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
+              "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html) or [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
               "anyOf": [
                 {
                   "title": "EPSG Code",
@@ -3782,11 +3755,6 @@
                   "type": "string",
                   "subtype": "proj-definition",
                   "deprecated": true
-                },
-                {
-                  "title": "PROJJSON",
-                  "type": "object",
-                  "subtype": "projjson-definition"
                 }
               ],
               "default": 4326
@@ -3854,9 +3822,14 @@
               "name": "value",
               "description": "A single dimension label to compare against. The data type of the parameter depends on the dimension labels stored for the dimension.",
               "required": true,
-              "schema": {
-                "description": "Any data type."
-              }
+              "schema": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
             }
           ]
         },
@@ -4726,7 +4699,14 @@
       "schema": {
         "type": "array",
         "items": {
-          "type": "string"
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ]
         }
       }
     }
@@ -5034,7 +5014,7 @@
                 "default": null
               },
               "crs": {
-                "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html), [PROJJSON](https://proj.org/projjson.html) or [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
+                "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html) or [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
                 "anyOf": [
                   {
                     "title": "EPSG Code",
@@ -5054,11 +5034,6 @@
                     "type": "string",
                     "subtype": "proj-definition",
                     "deprecated": true
-                  },
-                  {
-                    "title": "PROJJSON",
-                    "type": "object",
-                    "subtype": "projjson-definition"
                   }
                 ],
                 "default": 4326
@@ -7716,7 +7691,7 @@
         "required": true
       },
       {
-        "name": "old",
+        "name": "source",
         "description": "The current name of the dimension. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
         "schema": {
           "type": "string"
@@ -7724,7 +7699,7 @@
         "required": true
       },
       {
-        "name": "new",
+        "name": "target",
         "description": "A new Name for the dimension. Fails with a `DimensionExists` error if a dimension with the specified name exists.",
         "schema": {
           "type": "string"
@@ -7751,7 +7726,7 @@
   {
     "id": "rename_labels",
     "summary": "Rename dimension labels",
-    "description": "Renames the labels of a dimension in the data cube. Doesn't change the order of the labels and the corresponding data.",
+    "description": "Renames the labels of the specified dimension in the data cube from `source` to `target`.\n\nIf the array for the source labels is empty (the default), the dimension labels are expected to be enumerated with zero-based numbering (0,1,2,3,...) so that the dimension labels directly map to the indices of the array specified for the parameter `target`. If the dimension labels are not enumerated and the `target` parameter is not specified, a `LabelsNotEnumerated` is thrown. The number of source and target labels must be equal, otherwise the error `LabelMismatch` is thrown.\n\nThis process doesn't change the order of the labels and their corresponding data.",
     "categories": [
       "cubes"
     ],
@@ -7774,23 +7749,40 @@
         "required": true
       },
       {
-        "name": "labels",
-        "description": "The new names for the labels.\n\nIf an **array** is passed, the dimension labels in the data cube are expected to be enumerated with zero-based numbering (0,1,2,3,...) so that the dimension labels map to the array indices and get replaced. If the dimension labels are not enumerated, a `LabelsNotEnumerated` is thrown. The number of dimension labels must be equal to the number of array elements, otherwise the error `LabelMismatch` is thrown.\n\nIf an **object** is passed, the object defines an unsorted and potentially incomplete mapping of the source dimension labels to the target dimension labels. If one of the source dimension labels doesn't exist, a `LabelNotAvailable` error is thrown. If a target dimension label already exists in the data cube, a `LabelExists` error is thrown.",
-        "schema": [
-          {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
+        "name": "target",
+        "description": "The new names for the labels. The dimension labels in the data cube are expected to be enumerated, if the parameter `target` is not specified. If a target dimension label already exists in the data cube, a `LabelExists` error is thrown.",
+        "schema": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ]
           }
-        ],
+        },
         "required": true
+      },
+      {
+        "name": "source",
+        "description": "The names of the labels as they are currently in the data cube. The array defines an unsorted and potentially incomplete list of labels that should be renamed to the names available in the corresponding array elements in the parameter `target`. If one of the source dimension labels doesn't exist, a `LabelNotAvailable` error is thrown. By default, the array is empty so that the dimension labels in the data cube are expected to be enumerated.",
+        "schema": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "default": []
       }
     ],
     "returns": {
@@ -7805,13 +7797,13 @@
         "message": "The dimension labels are not enumerated."
       },
       "LabelMismatch": {
-        "message": "The number of labels specified doesn't match the actual number of labels."
+        "message": "The number of labels in the parameters `source` and `target` don't match."
       },
       "LabelNotAvailable": {
         "message": "A label with the specified name does not exist."
       },
       "LabelExists": {
-        "message": "A label with the specified name already exists."
+        "message": "A label with the specified name exists."
       }
     },
     "examples": [
@@ -7840,11 +7832,16 @@
                 "from_node": "loadco1"
               },
               "dimension": "bands",
-              "labels": {
-                "B1": "red",
-                "B2": "green",
-                "B3": "blue"
-              }
+              "source": [
+                "B1",
+                "B2",
+                "B3"
+              ],
+              "target": [
+                "red",
+                "green",
+                "blue"
+              ]
             },
             "result": true
           }
@@ -7892,7 +7889,7 @@
                 "from_node": "reduce1"
               },
               "dimension": "bands",
-              "labels": [
+              "target": [
                 "min",
                 "max"
               ]
@@ -8094,7 +8091,7 @@
       },
       {
         "name": "projection",
-        "description": "Warps the data cube to the target projection, specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html), [PROJJSON](https://proj.org/projjson.html) or [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html). By default (`null`), the projection is not changed.",
+        "description": "Warps the data cube to the target projection, specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html), [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html). By default (`null`), the projection is not changed.",
         "schema": [
           {
             "title": "EPSG Code",
@@ -8114,11 +8111,6 @@
             "type": "string",
             "subtype": "proj-definition",
             "deprecated": true
-          },
-          {
-            "title": "PROJJSON",
-            "type": "object",
-            "subtype": "projjson-definition"
           },
           {
             "title": "Don't change projection",
