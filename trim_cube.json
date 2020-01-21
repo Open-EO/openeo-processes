@@ -1,5 +1,5 @@
 {
-    "id": "trim",
+    "id": "trim_cube",
     "summary": "Remove slices with no-data values",
     "description": "Removes slices solely containing no-data values. If the dimension is irregular categorical then slices in the middle can be removed.",
     "categories": [

@@ -15,9 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `array_apply`
     - `array_filter`
     - `array_find`
+    - `array_labels`
+    - `dimension_labels`
     - `drop_dimension`
     - `filter_labels`
-    - `labels`
     - `load_uploaded_files`
     - `mask_polygon`
     - `reduce_dimension`
@@ -58,6 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The following operations work on two values instead on a sequence of values: `and`, `divide`, `multiply`, `or`, `subtract`, `xor`. [#85](https://github.com/Open-EO/openeo-processes/issues/85)
 - `product` works as before, but is not an alias of `multiply` any longer. [#85](https://github.com/Open-EO/openeo-processes/issues/85)
 - `text_begins`, `text_contains`, `text_ends`: `null` values are supported and get passed through.
+- `trim`: Renamed to `trim_cube`.
 
 ### Deprecated
 - `filter_bbox`, `load_collection`, `resample_spatial`: PROJ definitions are deprecated in favor of EPSG codes and WKT2. [#58](https://github.com/Open-EO/openeo-processes/issues/58)

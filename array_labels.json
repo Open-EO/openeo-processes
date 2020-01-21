@@ -1,0 +1,35 @@
+{
+    "id": "array_labels",
+    "summary": "Get the labels for an array",
+    "description": "Returns all labels for a labeled array in the data cube. The labels have the same order as in the array.",
+    "categories": [
+        "arrays"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "An array with labels.",
+            "schema": {
+                "type": "array",
+                "subtype": "labeled-array"
+            },
+            "required": true
+        }
+    ],
+    "returns": {
+        "description": "The labels as array.",
+        "schema": {
+            "type": "array",
+            "items": {
+                "anyOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ]
+            }
+        }
+    }
+}
