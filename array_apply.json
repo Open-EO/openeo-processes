@@ -34,11 +34,16 @@
                     },
                     {
                         "name": "index",
-                        "description": "The zero-based index of the current element being processed.",
+                        "description": "The zero-based index or the label of the current element being processed. Labels take preference over indices.",
                         "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "schema": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
                     }
                 ]
             },

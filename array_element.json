@@ -1,7 +1,7 @@
 {
     "id": "array_element",
     "summary": "Get an element from an array",
-    "description": "Returns the element at the specified zero-based index from the array.",
+    "description": "Returns the element with the specified index or label from the array.",
     "categories": [
         "arrays"
     ],
@@ -19,15 +19,20 @@
         },
         {
             "name": "index",
-            "description": "The zero-based index of the element to retrieve.",
-            "schema": {
-                "type": "integer"
-            },
+            "description": "The zero-based index or the label of the element to retrieve. Labels take preference over indices.",
+            "schema": [
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "string"
+                }
+            ],
             "required": true
         },
         {
             "name": "return_nodata",
-            "description": "By default this process throws an `IndexOutOfBounds` exception if the index is invalid. If you want to return `null` instead, set this flag to `true`.",
+            "description": "By default this process throws an `ArrayElementNotAvailable` exception if the index or label is invalid. If you want to return `null` instead, set this flag to `true`.",
             "schema": {
                 "type": "boolean"
             },
@@ -41,8 +46,8 @@
         }
     },
     "exceptions": {
-        "IndexOutOfBounds": {
-            "message": "The array has no element with the specified index."
+        "ArrayElementNotAvailable": {
+            "message": "The array has no element with the specified index or label."
         }
     },
     "examples": [

@@ -89,10 +89,11 @@
                 "parameters": [
                     {
                         "name": "data",
-                        "description": "An array with elements of any type.",
+                        "description": "A labeled array with elements of any type.",
                         "required": true,
                         "schema": {
                             "type": "array",
+                            "subtype": "labeled-array",
                             "items": {
                                 "description": "Any data type."
                             }
