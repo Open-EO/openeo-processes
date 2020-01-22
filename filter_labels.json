@@ -80,12 +80,12 @@
                             "from_node": "load"
                         },
                         "condition": {
-                            "callback": {
+                            "process_graph": {
                                 "eq": {
                                     "process_id": "eq",
                                     "arguments": {
                                         "x": {
-                                            "from_argument": "value"
+                                            "from_parameter": "value"
                                         },
                                         "y": "Sentinel-2A",
                                         "case_sensitive": false

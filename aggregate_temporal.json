@@ -189,12 +189,12 @@
                             ]
                         ],
                         "reducer": {
-                            "callback": {
+                            "process_graph": {
                                 "median1": {
                                     "process_id": "median",
                                     "arguments": {
                                         "data": {
-                                            "from_argument": "data"
+                                            "from_parameter": "data"
                                         }
                                     },
                                     "result": true

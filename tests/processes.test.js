@@ -37,8 +37,6 @@ var subtypes = {
 	'output-format': {type: 'string'},
 	'output-format-options': {type: 'object'},
 	'process-graph': {type: 'object'},
-	'process-graph-id': {type: 'string'},
-	'process-graph-variables': {type: 'object'},
 	'proj-definition': {type: 'string'},
 	'raster-cube': {type: 'object'},
 	'temporal-interval': {type: 'array'},

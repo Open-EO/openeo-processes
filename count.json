@@ -112,7 +112,7 @@
                         "process_id": "gt",
                         "arguments": {
                             "x": {
-                                "from_argument": "element"
+                                "from_parameter": "element"
                             },
                             "y": 2
                         },
