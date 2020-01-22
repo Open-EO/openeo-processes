@@ -75,6 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `output`: Use `debug` instead.
     - `property` [#84](https://github.com/Open-EO/openeo-processes/issues/84)
     - `reduce`: Use `reduce_dimension` or `drop_dimension` instead.
+    - `run_process_graph`: Use user-defined processes directly in the process graph instead.
 
 ### Fixed
 - Several clarifications in written texts. [#86](https://github.com/Open-EO/openeo-processes/issues/86)
