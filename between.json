@@ -11,8 +11,7 @@
             "description": "The value to check.",
             "schema": {
                 "description": "Any data type is allowed."
-            },
-            "required": true
+            }
         },
         {
             "name": "min",
@@ -36,8 +35,7 @@
                     "format": "time",
                     "subtype": "time"
                 }
-            ],
-            "required": true
+            ]
         },
         {
             "name": "max",
@@ -61,8 +59,7 @@
                     "format": "time",
                     "subtype": "time"
                 }
-            ],
-            "required": true
+            ]
         },
         {
             "name": "exclude_max",
@@ -70,7 +67,8 @@
             "schema": {
                 "type": "boolean"
             },
-            "default": false
+            "default": false,
+            "optional": true
         }
     ],
     "returns": {

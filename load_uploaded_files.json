@@ -17,8 +17,7 @@
                     "type": "string",
                     "subtype": "file-path"
                 }
-            },
-            "required": true
+            }
         },
         {
             "name": "format",
@@ -26,8 +25,7 @@
             "schema": {
                 "type": "string",
                 "subtype": "input-format"
-            },
-            "required": true
+            }
         },
         {
             "name": "options",
@@ -36,7 +34,8 @@
                 "type": "object",
                 "subtype": "input-format-options"
             },
-            "default": {}
+            "default": {},
+            "optional": true
         }
     ],
     "returns": {

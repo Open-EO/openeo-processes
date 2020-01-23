@@ -12,8 +12,7 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "process",
@@ -25,7 +24,6 @@
                     {
                         "name": "data",
                         "description": "An array with elements of any type.",
-                        "required": true,
                         "schema": {
                             "type": "array",
                             "items": {
@@ -34,16 +32,14 @@
                         }
                     }
                 ]
-            },
-            "required": true
+            }
         },
         {
             "name": "dimension",
             "description": "The name of the source dimension to apply the process on. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
             "schema": {
                 "type": "string"
-            },
-            "required": true
+            }
         },
         {
             "name": "target_dimension",
@@ -54,7 +50,8 @@
                     "null"
                 ]
             },
-            "default": null
+            "default": null,
+            "optional": true
         }
     ],
     "returns": {

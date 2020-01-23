@@ -13,8 +13,7 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "target",
@@ -22,8 +21,7 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "method",
@@ -45,7 +43,8 @@
                     "q3"
                 ]
             },
-            "default": "near"
+            "default": "near",
+            "optional": true
         }
     ],
     "returns": {

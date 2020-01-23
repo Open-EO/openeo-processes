@@ -12,16 +12,14 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "dimension",
             "description": "The name of the dimension to rename the labels for.",
             "schema": {
                 "type": "string"
-            },
-            "required": true
+            }
         },
         {
             "name": "target",
@@ -38,8 +36,7 @@
                         }
                     ]
                 }
-            },
-            "required": true
+            }
         },
         {
             "name": "source",
@@ -57,7 +54,8 @@
                     ]
                 }
             },
-            "default": []
+            "default": [],
+            "optional": true
         }
     ],
     "returns": {

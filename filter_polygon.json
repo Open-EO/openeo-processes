@@ -12,8 +12,7 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "polygons",
@@ -21,8 +20,7 @@
             "schema": {
                 "type": "object",
                 "subtype": "geojson"
-            },
-            "required": true
+            }
         }
     ],
     "returns": {

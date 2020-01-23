@@ -87,7 +87,7 @@ jsv.addKeyword("parameters", {
 				description: {
 					type: "string"
 				},
-				required: {
+				optional: {
 					type: "boolean"
 				},
 				deprecated: {
@@ -313,7 +313,7 @@ describe.each(processes)("%s", (file, p, fileContent) => {
 				}
 				// Check whether all required parameters are set
 				for(let key in parametersObj) {
-					if (parametersObj[key].required) {
+					if (!parametersObj[key].optional) {
 						expect(example.arguments[key]).toBeDefined();
 					}
 				}
@@ -369,9 +369,11 @@ function checkParam(param, p, checkCbParams = true) {
 	checkDescription(param.description, p);
 
 	// Parameter flags
-	expect(typeof param.required === 'undefined' || typeof param.required === 'boolean').toBeTruthy();
+	expect(typeof param.optional === 'undefined' || typeof param.optional === 'boolean').toBeTruthy();
 	// lint: don't specify defaults
-	expect(typeof param.required === 'undefined' || param.required === true).toBeTruthy();
+	expect(typeof param.optional === 'undefined' || param.optional === true).toBeTruthy();
+	// lint: make sure there's no old required flag
+	expect(typeof param.required === 'undefined').toBeTruthy();
 	// Check flags (recommended / experimental)
 	checkFlags(param);
 
@@ -382,7 +384,7 @@ function checkParam(param, p, checkCbParams = true) {
 
 	if (!checkCbParams) {
 		// Parameters that are not required should define a default value
-		if(param.required !== true && !anyOfRequired.includes(p.id)) {
+		if(param.optional === true && !anyOfRequired.includes(p.id)) {
 			expect(param.default).toBeDefined();
 		}
 	}

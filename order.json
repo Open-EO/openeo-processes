@@ -37,8 +37,7 @@
                         }
                     ]
                 }
-            },
-            "required": true
+            }
         },
         {
             "name": "asc",
@@ -46,7 +45,8 @@
             "schema": {
                 "type": "boolean"
             },
-            "default": true
+            "default": true,
+            "optional": true
         },
         {
             "name": "nodata",
@@ -57,7 +57,8 @@
                     "null"
                 ]
             },
-            "default": null
+            "default": null,
+            "optional": true
         }
     ],
     "returns": {

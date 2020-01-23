@@ -16,16 +16,14 @@
                     "boolean",
                     "null"
                 ]
-            },
-            "required": true
+            }
         },
         {
             "name": "accept",
             "description": "A value that is returned if the boolean value is `true`.",
             "schema": {
                 "description": "Any data type is allowed."
-            },
-            "required": true
+            }
         },
         {
             "name": "reject",
@@ -33,7 +31,8 @@
             "schema": {
                 "description": "Any data type is allowed."
             },
-            "default": null
+            "default": null,
+            "optional": true
         }
     ],
     "returns": {

@@ -17,8 +17,7 @@
                         "null"
                     ]
                 }
-            },
-            "required": true
+            }
         },
         {
             "name": "probabilities",
@@ -30,7 +29,8 @@
                     "minimum": 0,
                     "maximum": 1
                 }
-            }
+            },
+            "optional": true
         },
         {
             "name": "q",
@@ -38,7 +38,8 @@
             "schema": {
                 "type": "integer",
                 "minimum": 2
-            }
+            },
+            "optional": true
         },
         {
             "name": "ignore_nodata",
@@ -46,7 +47,8 @@
             "schema": {
                 "type": "boolean"
             },
-            "default": true
+            "default": true,
+            "optional": true
         }
     ],
     "returns": {

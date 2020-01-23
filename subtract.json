@@ -14,8 +14,7 @@
                     "number",
                     "null"
                 ]
-            },
-            "required": true
+            }
         },
         {
             "name": "y",
@@ -25,8 +24,7 @@
                     "number",
                     "null"
                 ]
-            },
-            "required": true
+            }
         }
     ],
     "returns": {

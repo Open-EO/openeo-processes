@@ -12,13 +12,11 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "extent",
             "description": "A bounding box, which may include a vertical axis (see `base` and `height`).",
-            "required": true,
             "schema": {
                 "type": "object",
                 "subtype": "bounding-box",

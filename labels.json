@@ -12,16 +12,14 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "dimension",
             "description": "The name of the dimension to get the labels for.",
             "schema": {
                 "type": "string"
-            },
-            "required": true
+            }
         }
     ],
     "returns": {

@@ -15,16 +15,14 @@
                 "items": {
                     "description": "Any data type is allowed."
                 }
-            },
-            "required": true
+            }
         },
         {
             "name": "value",
             "description": "Value to find in `data`.",
             "schema": {
                 "description": "Any data type is allowed."
-            },
-            "required": true
+            }
         }
     ],
     "returns": {

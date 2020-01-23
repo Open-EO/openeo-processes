@@ -12,8 +12,7 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "bands",
@@ -25,7 +24,8 @@
                     "subtype": "band-name"
                 }
             },
-            "default": []
+            "default": [],
+            "optional": true
         },
         {
             "name": "wavelengths",
@@ -53,7 +53,8 @@
                     ]
                 }
             },
-            "default": []
+            "default": [],
+            "optional": true
         }
     ],
     "returns": {

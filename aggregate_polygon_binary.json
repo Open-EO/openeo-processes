@@ -14,8 +14,7 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "polygons",
@@ -29,8 +28,7 @@
                     "type": "object",
                     "subtype": "vector-cube"
                 }
-            ],
-            "required": true
+            ]
         },
         {
             "name": "reducer",
@@ -42,7 +40,6 @@
                     {
                         "name": "x",
                         "description": "The first value.",
-                        "required": true,
                         "schema": {
                             "description": "Any data type."
                         }
@@ -50,14 +47,12 @@
                     {
                         "name": "y",
                         "description": "The second value.",
-                        "required": true,
                         "schema": {
                             "description": "Any data type."
                         }
                     }
                 ]
-            },
-            "required": true
+            }
         },
         {
             "name": "name",
@@ -65,7 +60,8 @@
             "schema": {
                 "type": "string"
             },
-            "default": "result"
+            "default": "result",
+            "optional": true
         }
     ],
     "returns": {

@@ -12,8 +12,7 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "mask",
@@ -21,8 +20,7 @@
             "schema": {
                 "type": "object",
                 "subtype": "geojson"
-            },
-            "required": true
+            }
         },
         {
             "name": "replacement",
@@ -35,7 +33,8 @@
                     "null"
                 ]
             },
-            "default": null
+            "default": null,
+            "optional": true
         },
         {
             "name": "inside",
@@ -43,7 +42,8 @@
             "schema": {
                 "type": "boolean"
             },
-            "default": false
+            "default": false,
+            "optional": true
         }
     ],
     "returns": {
