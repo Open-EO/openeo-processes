@@ -419,6 +419,7 @@
         "schema": {
           "type": "array",
           "subtype": "temporal-intervals",
+          "minItems": 1,
           "items": {
             "type": "array",
             "subtype": "temporal-interval",
@@ -3741,6 +3742,7 @@
                   "title": "EPSG Code",
                   "type": "integer",
                   "subtype": "epsg-code",
+                  "minimum": 1000,
                   "examples": [
                     7099
                   ]
@@ -5020,6 +5022,7 @@
                     "title": "EPSG Code",
                     "type": "integer",
                     "subtype": "epsg-code",
+                    "minimum": 1000,
                     "examples": [
                       7099
                     ]
@@ -5041,7 +5044,7 @@
             }
           },
           {
-            "title": "GeoJSON Polygon(s)",
+            "title": "GeoJSON",
             "type": "object",
             "subtype": "geojson"
           },
@@ -8097,6 +8100,7 @@
             "title": "EPSG Code",
             "type": "integer",
             "subtype": "epsg-code",
+            "minimum": 1000,
             "examples": [
               7099
             ]
