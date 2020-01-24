@@ -71,6 +71,7 @@
                                     "title": "EPSG Code",
                                     "type": "integer",
                                     "subtype": "epsg-code",
+                                    "minimum": 1000,
                                     "examples": [
                                         7099
                                     ]
@@ -92,7 +93,7 @@
                     }
                 },
                 {
-                    "title": "GeoJSON Polygon(s)",
+                    "title": "GeoJSON",
                     "type": "object",
                     "subtype": "geojson"
                 },

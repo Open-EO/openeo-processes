@@ -23,6 +23,7 @@
             "schema": {
                 "type": "array",
                 "subtype": "temporal-intervals",
+                "minItems": 1,
                 "items": {
                     "type": "array",
                     "subtype": "temporal-interval",
