@@ -13,7 +13,8 @@ var summaryDotRegexp = /[^\.]$/;
 var files = glob.sync("../*.json", {realpath: true});
 
 var anyOfRequired = [
-  "quantiles"
+  "quantiles",
+  "array_element"
 ];
 
 var subtypes = {
