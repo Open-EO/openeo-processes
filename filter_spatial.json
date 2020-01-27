@@ -1,7 +1,7 @@
 {
     "id": "filter_spatial",
     "summary": "Spatial filter using geometries",
-    "description": "Limits the data cube over the spatial dimensions to the specified geometries.\n\n- For **polygons**, the filter retains a pixel in the data cube if the point at the pixel center intersects with at least one of the polygons (as defined in the Simple Features standard by the OGC).\n- For **points** and **lines** (line strings), the filter retains all the pixel centers closest to any of the geometries.",
+    "description": "Limits the data cube over the spatial dimensions to the specified geometries.\n\n- For **polygons**, the filter retains a pixel in the data cube if the point at the pixel center intersects with at least one of the polygons (as defined in the Simple Features standard by the OGC).\n- For **points** and **lines** (line strings), the filter retains all the pixel centers closest to any of the geometries.\n\nMore specifically, pixels outside of the bounding box of the given geometry will not be available after filtering. All pixels inside the bounding box that are not retained will be set to `null` (no data).",
     "categories": [
         "filter"
     ],
