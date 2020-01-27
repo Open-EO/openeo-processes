@@ -336,9 +336,10 @@
           "parameters": [
             {
               "name": "data",
-              "description": "An array with elements of any type.",
+              "description": "A labeled array with values of any type.",
               "schema": {
                 "type": "array",
+                "subtype": "labeled-array",
                 "items": {
                   "description": "Any data type."
                 }
@@ -472,9 +473,10 @@
           "parameters": [
             {
               "name": "data",
-              "description": "An array with elements of any type.",
+              "description": "A labeled array with elements of any type.",
               "schema": {
                 "type": "array",
+                "subtype": "labeled-array",
                 "items": {
                   "description": "Any data type."
                 }
@@ -978,9 +980,10 @@
           "parameters": [
             {
               "name": "data",
-              "description": "An array with elements of any type.",
+              "description": "A labeled array with elements of any type.",
               "schema": {
                 "type": "array",
+                "subtype": "labeled-array",
                 "items": {
                   "description": "Any data type."
                 }
@@ -1487,6 +1490,23 @@
               "schema": {
                 "type": "integer"
               }
+            },
+            {
+              "name": "label",
+              "description": "The label of the current element being processed. Only populated for labeled arrays.",
+              "schema": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "optional": true
             }
           ]
         }
@@ -1505,7 +1525,7 @@
   {
     "id": "array_contains",
     "summary": "Check whether the array contains a given value",
-    "description": "Checks whether the array specified for `data` contains the value specified in `value`. Returns `true` if there's a match, otherwise `false`.\n\n**Remarks:**\n\n* To get the index of the value found, use ``array_find()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. This includes that data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.",
+    "description": "Checks whether the array specified for `data` contains the value specified in `value`. Returns `true` if there's a match, otherwise `false`.\n\n**Remarks:**\n\n* To get the index or the label of the value found, use ``array_find()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. This includes that data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.",
     "categories": [
       "arrays",
       "comparison"
@@ -1647,7 +1667,7 @@
   {
     "id": "array_element",
     "summary": "Get an element from an array",
-    "description": "Returns the element at the specified zero-based index from the array.",
+    "description": "Returns the element with the specified index or label from the array.\n\nEither the parameter `index` or `label` must be specified, otherwise the `ArrayElementParameterMissing` exception is thrown. If both parameters are set the `ArrayElementParameterConflict` exception is thrown.",
     "categories": [
       "arrays"
     ],
@@ -1667,11 +1687,25 @@
         "description": "The zero-based index of the element to retrieve.",
         "schema": {
           "type": "integer"
-        }
+        },
+        "optional": true
+      },
+      {
+        "name": "label",
+        "description": "The label of the element to retrieve.",
+        "schema": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "optional": true
       },
       {
         "name": "return_nodata",
-        "description": "By default this process throws an `IndexOutOfBounds` exception if the index is invalid. If you want to return `null` instead, set this flag to `true`.",
+        "description": "By default this process throws an `ArrayElementNotAvailable` exception if the index or label is invalid. If you want to return `null` instead, set this flag to `true`.",
         "schema": {
           "type": "boolean"
         },
@@ -1686,8 +1720,14 @@
       }
     },
     "exceptions": {
-      "IndexOutOfBounds": {
-        "message": "The array has no element with the specified index."
+      "ArrayElementNotAvailable": {
+        "message": "The array has no element with the specified index or label."
+      },
+      "ArrayElementParameterMissing": {
+        "message": "The process 'array_element' requires either the 'index' or 'labels' parameter to be set."
+      },
+      "ArrayElementParameterConflict": {
+        "message": "The process 'array_element' only allows that either the 'index' or the 'labels' parameter is set."
       }
     },
     "examples": [
@@ -1764,6 +1804,23 @@
               "schema": {
                 "type": "integer"
               }
+            },
+            {
+              "name": "label",
+              "description": "The label of the current element being processed. Only populated for labeled arrays.",
+              "schema": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "optional": true
             }
           ]
         }
@@ -1782,7 +1839,7 @@
   {
     "id": "array_find",
     "summary": "Get the index for a value in an array",
-    "description": "Checks whether the array specified for `data` contains the value specified in `value` and returns the zero-based index for the first match. If there's no match, `-1` is returned.\n\n**Remarks:**\n\n* To get a boolean value returned use ``array_contains()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. This includes that data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.",
+    "description": "Checks whether the array specified for `data` contains the value specified in `value` and returns the zero-based index for the first match. If there's no match, `null` is returned.\n\n**Remarks:**\n\n* To get a boolean value returned use ``array_contains()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. This includes that data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.",
     "categories": [
       "arrays"
     ],
@@ -1806,11 +1863,16 @@
       }
     ],
     "returns": {
-      "description": "Returns the index of the first element with the specified value. If no element was found, `-1` is returned.",
-      "schema": {
-        "type": "integer",
-        "minimum": -1
-      }
+      "description": "Returns the index of the first element with the specified value. If no element was found, `null` is returned.",
+      "schema": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "integer",
+          "minimum": 0
+        }
+      ]
     },
     "examples": [
       {
@@ -1833,7 +1895,7 @@
           ],
           "value": "b"
         },
-        "returns": -1
+        "returns": null
       },
       {
         "arguments": {
@@ -1844,7 +1906,7 @@
           ],
           "value": "2"
         },
-        "returns": -1
+        "returns": null
       },
       {
         "arguments": {
@@ -1875,7 +1937,7 @@
             2
           ]
         },
-        "returns": -1
+        "returns": null
       },
       {
         "arguments": {
@@ -1891,7 +1953,7 @@
           ],
           "value": 2
         },
-        "returns": -1
+        "returns": null
       },
       {
         "arguments": {
@@ -1907,9 +1969,43 @@
             "a": "b"
           }
         },
-        "returns": -1
+        "returns": null
       }
     ]
+  },
+  {
+    "id": "array_labels",
+    "summary": "Get the labels for an array",
+    "description": "Returns all labels for a labeled array in the data cube. The labels have the same order as in the array.",
+    "categories": [
+      "arrays"
+    ],
+    "parameters": [
+      {
+        "name": "data",
+        "description": "An array with labels.",
+        "schema": {
+          "type": "array",
+          "subtype": "labeled-array"
+        }
+      }
+    ],
+    "returns": {
+      "description": "The labels as array.",
+      "schema": {
+        "type": "array",
+        "items": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      }
+    }
   },
   {
     "id": "arsinh",
@@ -3036,6 +3132,47 @@
       "description": "Returns the data as passed to the `data` parameter.",
       "schema": {
         "description": "Any data type is allowed."
+      }
+    }
+  },
+  {
+    "id": "dimension_labels",
+    "summary": "Get the dimension labels",
+    "description": "Returns all labels for a dimension in the data cube. The labels have the same order as in the data cube.",
+    "categories": [
+      "cubes"
+    ],
+    "parameters": [
+      {
+        "name": "data",
+        "description": "The data cube.",
+        "schema": {
+          "type": "object",
+          "subtype": "raster-cube"
+        }
+      },
+      {
+        "name": "dimension",
+        "description": "The name of the dimension to get the labels for.",
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "returns": {
+      "description": "The labels as array.",
+      "schema": {
+        "type": "array",
+        "items": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
       }
     }
   },
@@ -4595,47 +4732,6 @@
         "title": "IEEE Standard 754-2019 for Floating-Point Arithmetic"
       }
     ]
-  },
-  {
-    "id": "labels",
-    "summary": "Get the dimension labels",
-    "description": "Returns all labels for a dimension in the data cube. The labels have the same order as in the data cube.",
-    "categories": [
-      "cubes"
-    ],
-    "parameters": [
-      {
-        "name": "data",
-        "description": "The data cube.",
-        "schema": {
-          "type": "object",
-          "subtype": "raster-cube"
-        }
-      },
-      {
-        "name": "dimension",
-        "description": "The name of the dimension to get the labels for.",
-        "schema": {
-          "type": "string"
-        }
-      }
-    ],
-    "returns": {
-      "description": "The labels as array.",
-      "schema": {
-        "type": "array",
-        "items": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "string"
-            }
-          ]
-        }
-      }
-    }
   },
   {
     "id": "last",
@@ -7153,7 +7249,7 @@
   {
     "id": "quantiles",
     "summary": "Quantiles",
-    "description": "Calculates quantiles, which are cut points dividing the range of a probability distribution into either\n\n* intervals corresponding to the given `probabilities` or\n* (nearly) equal-sized intervals (q-quantiles based on the parameter `q`).\n\nEither the parameter `probabilites` or `q` must be specified, otherwise the `QuantilesParameterMissing` exception must be thrown. If both parameters are set the `QuantilesParameterConflict` exception must be thrown.",
+    "description": "Calculates quantiles, which are cut points dividing the range of a probability distribution into either\n\n* intervals corresponding to the given `probabilities` or\n* (nearly) equal-sized intervals (q-quantiles based on the parameter `q`).\n\nEither the parameter `probabilites` or `q` must be specified, otherwise the `QuantilesParameterMissing` exception is thrown. If both parameters are set the `QuantilesParameterConflict` exception is thrown.",
     "categories": [
       "math"
     ],
@@ -7536,9 +7632,10 @@
           "parameters": [
             {
               "name": "data",
-              "description": "An array with elements of any type.",
+              "description": "A labeled array with elements of any type.",
               "schema": {
                 "type": "array",
+                "subtype": "labeled-array",
                 "items": {
                   "description": "Any data type."
                 }
@@ -7888,9 +7985,10 @@
           "parameters": [
             {
               "name": "data",
-              "description": "An array with elements of any type.",
+              "description": "A labeled array with elements of any type.",
               "schema": {
                 "type": "array",
+                "subtype": "labeled-array",
                 "items": {
                   "description": "Any data type."
                 }
@@ -9512,7 +9610,7 @@
     ]
   },
   {
-    "id": "trim",
+    "id": "trim_cube",
     "summary": "Remove slices with no-data values",
     "description": "Removes slices solely containing no-data values. If the dimension is irregular categorical then slices in the middle can be removed.",
     "categories": [
