@@ -12,16 +12,14 @@
             "description": "The value for the first band.",
             "schema": {
                 "type": "number"
-            },
-            "required": true
+            }
         },
         {
             "name": "y",
             "description": "The value for the second band.",
             "schema": {
                 "type": "number"
-            },
-            "required": true
+            }
         }
     ],
     "returns": {

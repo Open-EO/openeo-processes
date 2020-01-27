@@ -15,8 +15,7 @@
                     "number",
                     "null"
                 ]
-            },
-            "required": true
+            }
         },
         {
             "name": "p",
@@ -26,8 +25,7 @@
                     "number",
                     "null"
                 ]
-            },
-            "required": true
+            }
         }
     ],
     "returns": {

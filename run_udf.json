@@ -28,8 +28,7 @@
                     "title": "Single Value",
                     "description": "A single value of any data type."
                 }
-            ],
-            "required": true
+            ]
         },
         {
             "name": "udf",
@@ -51,8 +50,7 @@
                     "type": "string",
                     "subtype": "udf-code"
                 }
-            ],
-            "required": true
+            ]
         },
         {
             "name": "runtime",
@@ -60,8 +58,7 @@
             "schema": {
                 "type": "string",
                 "subtype": "udf-runtime"
-            },
-            "required": true
+            }
         },
         {
             "name": "version",
@@ -76,7 +73,8 @@
                     "type": "null"
                 }
             ],
-            "default": null
+            "default": null,
+            "optional": true
         },
         {
             "name": "context",
@@ -84,7 +82,8 @@
             "schema": {
                 "type": "object"
             },
-            "default": {}
+            "default": {},
+            "optional": true
         }
     ],
     "exceptions": {

@@ -12,8 +12,7 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "cube2",
@@ -21,8 +20,7 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "overlap_resolver",
@@ -34,7 +32,6 @@
                     {
                         "name": "x",
                         "description": "The first value.",
-                        "required": true,
                         "schema": {
                             "description": "Any data type."
                         }
@@ -42,14 +39,14 @@
                     {
                         "name": "y",
                         "description": "The second value.",
-                        "required": true,
                         "schema": {
                             "description": "Any data type."
                         }
                     }
                 ]
             },
-            "default": null
+            "default": null,
+            "optional": true
         }
     ],
     "returns": {

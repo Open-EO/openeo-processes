@@ -11,8 +11,7 @@
             "description": "Data to publish.",
             "schema": {
                 "description": "Any data type is allowed."
-            },
-            "required": true
+            }
         },
         {
             "name": "code",
@@ -20,7 +19,8 @@
             "schema": {
                 "type": "string"
             },
-            "default": ""
+            "default": "",
+            "optional": true
         },
         {
             "name": "level",
@@ -34,7 +34,8 @@
                     "debug"
                 ]
             },
-            "default": "info"
+            "default": "info",
+            "optional": true
         },
         {
             "name": "message",
@@ -42,7 +43,8 @@
             "schema": {
                 "type": "string"
             },
-            "default": ""
+            "default": "",
+            "optional": true
         }
     ],
     "returns": {

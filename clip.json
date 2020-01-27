@@ -14,24 +14,21 @@
                     "number",
                     "null"
                 ]
-            },
-            "required": true
+            }
         },
         {
             "name": "min",
             "description": "Minimum value. If the value is lower than this value, the process will return the value of this parameter.",
             "schema": {
                 "type": "number"
-            },
-            "required": true
+            }
         },
         {
             "name": "max",
             "description": "Maximum value. If the value is greater than this value, the process will return the value of this parameter.",
             "schema": {
                 "type": "number"
-            },
-            "required": true
+            }
         }
     ],
     "returns": {

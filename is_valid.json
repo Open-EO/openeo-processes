@@ -11,8 +11,7 @@
             "description": "The data to check.",
             "schema": {
                 "description": "Any data type is allowed."
-            },
-            "required": true
+            }
         }
     ],
     "returns": {

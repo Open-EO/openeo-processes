@@ -15,16 +15,14 @@
                     "string",
                     "null"
                 ]
-            },
-            "required": true
+            }
         },
         {
             "name": "pattern",
             "description": "Text to find at the beginning of `data`. Regular expressions are not supported.",
             "schema": {
                 "type": "string"
-            },
-            "required": true
+            }
         },
         {
             "name": "case_sensitive",
@@ -32,7 +30,8 @@
             "schema": {
                 "type": "boolean"
             },
-            "default": true
+            "default": true,
+            "optional": true
         }
     ],
     "returns": {

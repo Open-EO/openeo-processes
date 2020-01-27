@@ -14,8 +14,7 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "intervals",
@@ -78,8 +77,7 @@
                         ]
                     ]
                 ]
-            },
-            "required": true
+            }
         },
         {
             "name": "reducer",
@@ -91,7 +89,6 @@
                     {
                         "name": "data",
                         "description": "An array with elements of any type.",
-                        "required": true,
                         "schema": {
                             "type": "array",
                             "items": {
@@ -100,8 +97,7 @@
                         }
                     }
                 ]
-            },
-            "required": true
+            }
         },
         {
             "name": "labels",
@@ -119,7 +115,8 @@
                     ]
                 }
             },
-            "default": []
+            "default": [],
+            "optional": true
         },
         {
             "name": "dimension",
@@ -130,7 +127,8 @@
                     "null"
                 ]
             },
-            "default": null
+            "default": null,
+            "optional": true
         }
     ],
     "returns": {
@@ -190,12 +188,12 @@
                             ]
                         ],
                         "reducer": {
-                            "callback": {
+                            "process_graph": {
                                 "median1": {
                                     "process_id": "median",
                                     "arguments": {
                                         "data": {
-                                            "from_argument": "data"
+                                            "from_parameter": "data"
                                         }
                                     },
                                     "result": true

@@ -12,16 +12,14 @@
             "description": "First operand.",
             "schema": {
                 "description": "Any data type is allowed."
-            },
-            "required": true
+            }
         },
         {
             "name": "y",
             "description": "Second operand.",
             "schema": {
                 "description": "Any data type is allowed."
-            },
-            "required": true
+            }
         },
         {
             "name": "delta",
@@ -32,7 +30,8 @@
                     "null"
                 ]
             },
-            "default": null
+            "default": null,
+            "optional": true
         },
         {
             "name": "case_sensitive",
@@ -40,7 +39,8 @@
             "schema": {
                 "type": "boolean"
             },
-            "default": true
+            "default": true,
+            "optional": true
         }
     ],
     "returns": {
