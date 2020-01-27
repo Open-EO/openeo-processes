@@ -1,5 +1,5 @@
 {
-    "id": "labels",
+    "id": "dimension_labels",
     "summary": "Get the dimension labels",
     "description": "Returns all labels for a dimension in the data cube. The labels have the same order as in the data cube.",
     "categories": [
@@ -27,7 +27,14 @@
         "schema": {
             "type": "array",
             "items": {
-                "type": "string"
+                "anyOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ]
             }
         }
     }

@@ -10,8 +10,6 @@ const PROCESSES_PATH = '../*.json';
 
 var files = glob.sync(PROCESSES_PATH, {realpath: true});
 
-console.log(files);
-
 files.forEach(file => {
 	try {
 		// Check JSON structure for faults
@@ -34,7 +32,8 @@ files.forEach(file => {
 
 		p.returns = upgrade(p.returns, p);
 
-		fs.writeFileSync(file, JSON.stringify(p, null, 4))
+		fs.writeFileSync(file, JSON.stringify(p, null, 4));
+		console.log(file + " OK");
 	} catch(err) {
 		console.error(file, err);
 	}
@@ -43,7 +42,7 @@ files.forEach(file => {
 function upgrade(o, process, paramName = null) {
 	// Add param name
 	if (paramName) {
-		o = Object.assign({name: paramName}, o); // Make sure is name is the "first" element
+		o = Object.assign({name: paramName}, invertRequired(o)); // Make sure is name is the "first" element
 	}
 
 	// Upgrade schema structure
@@ -68,33 +67,46 @@ function upgrade(o, process, paramName = null) {
 		// Upgrade callback parameters
 		if (paramName && typeof schemas[i].parameters !== 'undefined' && Object.keys(schemas[i].parameters).length > 0) {
 			var newCbParams = [];
+			var isArray = Array.isArray(schemas[i].parameters);
 			for(var cbParamName in schemas[i].parameters) {
 				var cbParam = schemas[i].parameters[cbParamName];
-				var newParam = {
-					name: cbParamName,
-					description: cbParam.description || "",
-					required: true
-				};
-				if (newParam.description.length < 1) {
-					console.warn(process.id, paramName, 'Callback parameter has no description.');
+				if (!isArray) {
+					newParam = {
+						name: cbParamName,
+						description: cbParam.description || ""
+					};
+					if (newParam.description.length < 1) {
+						console.warn(process.id, paramName, 'Callback parameter has no description.');
+					}
+					delete cbParam.description;
+					if (Object.keys(cbParam).length === 0) {
+						console.info(process.id, paramName, 'Any type schema');
+						cbParam.description = "Any data type.";
+					}
+					newParam.schema = convertAnyOf(cbParam);
 				}
-				delete cbParam.description;
-				if (Object.keys(cbParam).length === 0) {
-					console.info(process.id, paramName, 'Any type schema');
-					cbParam.description = "Any data type.";
+				else {
+					newParam = cbParam;
 				}
-				newParam.schema = convertAnyOf(cbParam);
-				newCbParams.push(newParam);
+				newCbParams.push(invertRequired(newParam));
 			}
 			schemas[i].parameters = newCbParams;
 		}
 
 	}
-	if (paramName && !o.required && typeof o.default === 'undefined') {
+	if (paramName && o.optional && typeof o.default === 'undefined') {
 		console.warn(process.id, paramName, 'Parameter has no default value.');
 	}
 
 
+	return o;
+}
+
+function invertRequired(o) {
+	if (!o.required) {
+		o.optional = true;
+	}
+	delete o.required;
 	return o;
 }
 

@@ -22,6 +22,7 @@
             "schema": {
                 "type": "array",
                 "subtype": "temporal-intervals",
+                "minItems": 1,
                 "items": {
                     "type": "array",
                     "subtype": "temporal-interval",
@@ -87,9 +88,10 @@
                 "parameters": [
                     {
                         "name": "data",
-                        "description": "An array with elements of any type.",
+                        "description": "A labeled array with elements of any type.",
                         "schema": {
                             "type": "array",
+                            "subtype": "labeled-array",
                             "items": {
                                 "description": "Any data type."
                             }
@@ -106,19 +108,7 @@
                 "items": {
                     "anyOf": [
                         {
-                            "type": "string",
-                            "format": "date-time",
-                            "subtype": "date-time"
-                        },
-                        {
-                            "type": "string",
-                            "format": "date",
-                            "subtype": "date"
-                        },
-                        {
-                            "type": "string",
-                            "format": "time",
-                            "subtype": "time"
+                            "type": "number"
                         },
                         {
                             "type": "string"
@@ -199,12 +189,12 @@
                             ]
                         ],
                         "reducer": {
-                            "callback": {
+                            "process_graph": {
                                 "median1": {
                                     "process_id": "median",
                                     "arguments": {
                                         "data": {
-                                            "from_argument": "data"
+                                            "from_parameter": "data"
                                         }
                                     },
                                     "result": true

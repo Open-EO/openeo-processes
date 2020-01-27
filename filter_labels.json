@@ -25,9 +25,14 @@
                     {
                         "name": "value",
                         "description": "A single dimension label to compare against. The data type of the parameter depends on the dimension labels stored for the dimension.",
-                        "schema": {
-                            "description": "Any data type."
-                        }
+                        "schema": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
                     }
                 ]
             }
@@ -71,12 +76,12 @@
                             "from_node": "load"
                         },
                         "condition": {
-                            "callback": {
+                            "process_graph": {
                                 "eq": {
                                     "process_id": "eq",
                                     "arguments": {
                                         "x": {
-                                            "from_argument": "value"
+                                            "from_parameter": "value"
                                         },
                                         "y": "Sentinel-2A",
                                         "case_sensitive": false

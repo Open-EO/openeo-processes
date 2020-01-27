@@ -36,6 +36,23 @@
                         "schema": {
                             "type": "integer"
                         }
+                    },
+                    {
+                        "name": "label",
+                        "description": "The label of the current element being processed. Only populated for labeled arrays.",
+                        "schema": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "default": null,
+                        "optional": true
                     }
                 ]
             }
