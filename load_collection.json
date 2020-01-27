@@ -70,6 +70,7 @@
                                     "title": "EPSG Code",
                                     "type": "integer",
                                     "subtype": "epsg-code",
+                                    "minimum": 1000,
                                     "examples": [
                                         7099
                                     ]
@@ -91,7 +92,7 @@
                     }
                 },
                 {
-                    "title": "GeoJSON Polygon(s)",
+                    "title": "GeoJSON",
                     "type": "object",
                     "subtype": "geojson"
                 },
@@ -224,12 +225,12 @@
                         ],
                         "properties": {
                             "eo:cloud_cover": {
-                                "callback": {
+                                "process_graph": {
                                     "cc": {
                                         "process_id": "between",
                                         "arguments": {
                                             "x": {
-                                                "from_argument": "value"
+                                                "from_parameter": "value"
                                             },
                                             "min": 0,
                                             "max": 50
@@ -239,12 +240,12 @@
                                 }
                             },
                             "platform": {
-                                "callback": {
+                                "process_graph": {
                                     "pf": {
                                         "process_id": "eq",
                                         "arguments": {
                                             "x": {
-                                                "from_argument": "value"
+                                                "from_parameter": "value"
                                             },
                                             "y": "Sentinel-2B",
                                             "case_sensitive": false

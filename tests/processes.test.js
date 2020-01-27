@@ -39,8 +39,6 @@ var subtypes = {
 	'output-format': {type: 'string'},
 	'output-format-options': {type: 'object'},
 	'process-graph': {type: 'object'},
-	'process-graph-id': {type: 'string'},
-	'process-graph-variables': {type: 'object'},
 	'proj-definition': {type: 'string'},
 	'raster-cube': {type: 'object'},
 	'temporal-interval': {type: 'array'},
@@ -91,7 +89,7 @@ jsv.addKeyword("parameters", {
 				description: {
 					type: "string"
 				},
-				required: {
+				optional: {
 					type: "boolean"
 				},
 				deprecated: {
@@ -177,7 +175,7 @@ describe.each(processes)("%s", (file, p, fileContent) => {
 		// Check that the process name is also the file name
 		expect(path.basename(file, ext)).toEqual(p.id);
 		// lint: Check whether the file is correctly JSON formatted
-		// expect(JSON.stringify(p, null, 4).trim()).toEqual(fileContent.trim());
+		expect(normalizeString(JSON.stringify(p, null, 4))).toEqual(normalizeString(fileContent));
 	});
 
 	test("ID", () => {
@@ -274,14 +272,14 @@ describe.each(processes)("%s", (file, p, fileContent) => {
 	});
 
 	if (Array.isArray(p.examples) && p.examples.length > 0) {
-		// Make an object for easier access later
-		p.parametersObj = {};
-		for(var i in p.parameters) {
-			p.parametersObj[p.parameters[i].name] = p.parameters[i];
-		}
 
 		test.each(p.examples)("Examples > %#", (example) => {
-			let paramKeys = Object.keys(p.parametersObj);
+			// Make an object for easier access later
+			var parametersObj = {};
+			for(var i in p.parameters) {
+				parametersObj[p.parameters[i].name] = p.parameters[i];
+			}
+			var paramKeys = Object.keys(parametersObj);
 
 			expect(typeof example).toBe('object');
 			expect(example).not.toBeNull();
@@ -313,11 +311,11 @@ describe.each(processes)("%s", (file, p, fileContent) => {
 					// Does parameter with this name exist?
 					
 					expect(paramKeys).toContain(argName);
-					checkJsonSchemaValue(p.parametersObj[argName].schema, example.arguments[argName]);
+					checkJsonSchemaValue(parametersObj[argName].schema, example.arguments[argName]);
 				}
 				// Check whether all required parameters are set
-				for(let key in p.parametersObj) {
-					if (p.parametersObj[key].required) {
+				for(let key in parametersObj) {
+					if (!parametersObj[key].optional) {
 						expect(example.arguments[key]).toBeDefined();
 					}
 				}
@@ -373,9 +371,11 @@ function checkParam(param, p, checkCbParams = true) {
 	checkDescription(param.description, p);
 
 	// Parameter flags
-	expect(typeof param.required === 'undefined' || typeof param.required === 'boolean').toBeTruthy();
+	expect(typeof param.optional === 'undefined' || typeof param.optional === 'boolean').toBeTruthy();
 	// lint: don't specify defaults
-	expect(typeof param.required === 'undefined' || param.required === true).toBeTruthy();
+	expect(typeof param.optional === 'undefined' || param.optional === true).toBeTruthy();
+	// lint: make sure there's no old required flag
+	expect(typeof param.required === 'undefined').toBeTruthy();
 	// Check flags (recommended / experimental)
 	checkFlags(param);
 
@@ -386,7 +386,7 @@ function checkParam(param, p, checkCbParams = true) {
 
 	if (!checkCbParams) {
 		// Parameters that are not required should define a default value
-		if(param.required !== true && !anyOfRequired.includes(p.id)) {
+		if(param.optional === true && !anyOfRequired.includes(p.id)) {
 			expect(param.default).toBeDefined();
 		}
 	}
@@ -402,6 +402,10 @@ function checkParam(param, p, checkCbParams = true) {
 			}
 		}
 	}
+}
+
+function normalizeString(str) {
+	return str.replace(/\r\n|\r|\n/g, "\n").trim();
 }
 
 function checkDescription(text, p = null, commonmark = true) {

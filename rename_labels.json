@@ -139,12 +139,12 @@
                             "from_node": "loadco1"
                         },
                         "reducer": {
-                            "callback": {
+                            "process_graph": {
                                 "extrem1": {
                                     "process_id": "extrema",
                                     "arguments": {
                                         "data": {
-                                            "from_argument": "data"
+                                            "from_parameter": "data"
                                         }
                                     },
                                     "result": true

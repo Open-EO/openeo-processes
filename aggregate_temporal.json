@@ -22,6 +22,7 @@
             "schema": {
                 "type": "array",
                 "subtype": "temporal-intervals",
+                "minItems": 1,
                 "items": {
                     "type": "array",
                     "subtype": "temporal-interval",
@@ -188,12 +189,12 @@
                             ]
                         ],
                         "reducer": {
-                            "callback": {
+                            "process_graph": {
                                 "median1": {
                                     "process_id": "median",
                                     "arguments": {
                                         "data": {
-                                            "from_argument": "data"
+                                            "from_parameter": "data"
                                         }
                                     },
                                     "result": true
