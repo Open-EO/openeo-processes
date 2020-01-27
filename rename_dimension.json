@@ -12,24 +12,21 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "old",
             "description": "The current name of the dimension. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
             "schema": {
                 "type": "string"
-            },
-            "required": true
+            }
         },
         {
             "name": "new",
             "description": "A new Name for the dimension. Fails with a `DimensionExists` error if a dimension with the specified name exists.",
             "schema": {
                 "type": "string"
-            },
-            "required": true
+            }
         }
     ],
     "returns": {

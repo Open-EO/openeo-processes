@@ -14,8 +14,7 @@
                 "type": "string",
                 "subtype": "collection-id",
                 "pattern": "^[A-Za-z0-9_\\-\\.~/]+$"
-            },
-            "required": true
+            }
         },
         {
             "name": "spatial_extent",
@@ -106,8 +105,7 @@
                     "description": "Don't filter spatially. All data is included in the data cube.",
                     "type": "null"
                 }
-            ],
-            "required": true
+            ]
         },
         {
             "name": "temporal_extent",
@@ -151,8 +149,7 @@
                     "description": "Don't filter temporally. All data is included in the data cube.",
                     "type": "null"
                 }
-            ],
-            "required": true
+            ]
         },
         {
             "name": "bands",
@@ -171,7 +168,8 @@
                     "type": "null"
                 }
             ],
-            "default": null
+            "default": null,
+            "optional": true
         },
         {
             "name": "properties",
@@ -200,7 +198,8 @@
                     "type": "null"
                 }
             ],
-            "default": null
+            "default": null,
+            "optional": true
         }
     ],
     "returns": {

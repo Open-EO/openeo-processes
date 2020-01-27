@@ -23,8 +23,7 @@
                     "subtype": "process-graph-id",
                     "pattern": "^[A-Za-z0-9_\\-\\.~]+$"
                 }
-            ],
-            "required": true
+            ]
         },
         {
             "name": "variables",
@@ -33,7 +32,8 @@
                 "type": "object",
                 "subtype": "process-graph-variables"
             },
-            "default": {}
+            "default": {},
+            "optional": true
         }
     ],
     "returns": {

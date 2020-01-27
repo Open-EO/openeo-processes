@@ -13,8 +13,7 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "kernel",
@@ -29,8 +28,7 @@
                         "type": "number"
                     }
                 }
-            },
-            "required": true
+            }
         },
         {
             "name": "factor",
@@ -38,7 +36,8 @@
             "schema": {
                 "type": "number"
             },
-            "default": 1
+            "default": 1,
+            "optional": true
         }
     ],
     "returns": {

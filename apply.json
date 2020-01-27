@@ -12,8 +12,7 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "process",
@@ -25,14 +24,12 @@
                     {
                         "name": "x",
                         "description": "The value to process.",
-                        "required": true,
                         "schema": {
                             "description": "Any data type."
                         }
                     }
                 ]
-            },
-            "required": true
+            }
         }
     ],
     "returns": {

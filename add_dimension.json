@@ -12,16 +12,14 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "name",
             "description": "Name for the dimension.",
             "schema": {
                 "type": "string"
-            },
-            "required": true
+            }
         },
         {
             "name": "label",
@@ -48,8 +46,7 @@
                     "format": "time",
                     "subtype": "time"
                 }
-            ],
-            "required": true
+            ]
         },
         {
             "name": "type",
@@ -63,7 +60,8 @@
                     "other"
                 ]
             },
-            "default": "other"
+            "default": "other",
+            "optional": true
         }
     ],
     "returns": {

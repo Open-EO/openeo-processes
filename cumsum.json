@@ -17,8 +17,7 @@
                         "null"
                     ]
                 }
-            },
-            "required": true
+            }
         },
         {
             "name": "ignore_nodata",
@@ -26,7 +25,8 @@
             "schema": {
                 "type": "boolean"
             },
-            "default": true
+            "default": true,
+            "optional": true
         }
     ],
     "returns": {

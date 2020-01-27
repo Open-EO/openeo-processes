@@ -11,16 +11,14 @@
             "description": "First operand.",
             "schema": {
                 "description": "Any data type is allowed."
-            },
-            "required": true
+            }
         },
         {
             "name": "y",
             "description": "Second operand.",
             "schema": {
                 "description": "Any data type is allowed."
-            },
-            "required": true
+            }
         }
     ],
     "returns": {

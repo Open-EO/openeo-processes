@@ -14,8 +14,7 @@
                     "boolean",
                     "null"
                 ]
-            },
-            "required": true
+            }
         }
     ],
     "returns": {
