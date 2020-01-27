@@ -1,7 +1,7 @@
 {
     "id": "array_find",
     "summary": "Get the index for a value in an array",
-    "description": "Checks whether the array specified for `data` contains the value specified in `value` and returns the zero-based index for the first match. If there's no match, `-1` is returned.\n\n**Remarks:**\n\n* To get a boolean value returned use ``array_contains()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. This includes that data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.",
+    "description": "Checks whether the array specified for `data` contains the value specified in `value` and returns the zero-based index for the first match. If there's no match, `null` is returned.\n\n**Remarks:**\n\n* To get a boolean value returned use ``array_contains()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. This includes that data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.",
     "categories": [
         "arrays"
     ],
@@ -25,11 +25,16 @@
         }
     ],
     "returns": {
-        "description": "Returns the index of the first element with the specified value. If no element was found, `-1` is returned.",
-        "schema": {
-            "type": "integer",
-            "minimum": -1
-        }
+        "description": "Returns the index of the first element with the specified value. If no element was found, `null` is returned.",
+        "schema": [
+            {
+                "type": "null"
+            },
+            {
+                "type": "integer",
+                "minimum": 0
+            }
+        ]
     },
     "examples": [
         {
@@ -52,7 +57,7 @@
                 ],
                 "value": "b"
             },
-            "returns": -1
+            "returns": null
         },
         {
             "arguments": {
@@ -63,7 +68,7 @@
                 ],
                 "value": "2"
             },
-            "returns": -1
+            "returns": null
         },
         {
             "arguments": {
@@ -94,7 +99,7 @@
                     2
                 ]
             },
-            "returns": -1
+            "returns": null
         },
         {
             "arguments": {
@@ -110,7 +115,7 @@
                 ],
                 "value": 2
             },
-            "returns": -1
+            "returns": null
         },
         {
             "arguments": {
@@ -126,7 +131,7 @@
                     "a": "b"
                 }
             },
-            "returns": -1
+            "returns": null
         }
     ]
 }
