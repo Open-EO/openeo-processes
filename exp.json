@@ -14,8 +14,7 @@
                     "number",
                     "null"
                 ]
-            },
-            "required": true
+            }
         }
     ],
     "returns": {

@@ -13,8 +13,7 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "target",
@@ -22,8 +21,7 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "method",
@@ -35,7 +33,6 @@
                     {
                         "name": "data",
                         "description": "A labeled array with elements of any type.",
-                        "required": true,
                         "schema": {
                             "type": "array",
                             "subtype": "labeled-array",
@@ -45,8 +42,7 @@
                         }
                     }
                 ]
-            },
-            "required": true
+            }
         },
         {
             "name": "dimension",
@@ -57,7 +53,8 @@
                     "null"
                 ]
             },
-            "default": null
+            "default": null,
+            "optional": true
         }
     ],
     "returns": {

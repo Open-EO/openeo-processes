@@ -19,8 +19,7 @@
                     "type": "object",
                     "subtype": "vector-cube"
                 }
-            ],
-            "required": true
+            ]
         },
         {
             "name": "format",
@@ -28,8 +27,7 @@
             "schema": {
                 "type": "string",
                 "subtype": "output-format"
-            },
-            "required": true
+            }
         },
         {
             "name": "options",
@@ -38,7 +36,8 @@
                 "type": "object",
                 "subtype": "output-format-options"
             },
-            "default": {}
+            "default": {},
+            "optional": true
         }
     ],
     "returns": {

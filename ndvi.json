@@ -13,8 +13,7 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "nir",
@@ -23,7 +22,8 @@
                 "type": "string",
                 "subtype": "band-name"
             },
-            "default": "nir"
+            "default": "nir",
+            "optional": true
         },
         {
             "name": "red",
@@ -32,7 +32,8 @@
                 "type": "string",
                 "subtype": "band-name"
             },
-            "default": "red"
+            "default": "red",
+            "optional": true
         },
         {
             "name": "target_band",
@@ -46,7 +47,8 @@
                     "type": "null"
                 }
             ],
-            "default": null
+            "default": null,
+            "optional": true
         }
     ],
     "returns": {

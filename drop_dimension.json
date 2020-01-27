@@ -12,16 +12,14 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "name",
             "description": "Name of the dimension to drop.",
             "schema": {
                 "type": "string"
-            },
-            "required": true
+            }
         }
     ],
     "returns": {

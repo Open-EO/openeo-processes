@@ -29,8 +29,7 @@
                     "title": "Single Value",
                     "description": "A single value of any data type."
                 }
-            ],
-            "required": true
+            ]
         },
         {
             "name": "url",
@@ -39,8 +38,7 @@
                 "type": "string",
                 "format": "uri",
                 "subtype": "uri"
-            },
-            "required": true
+            }
         },
         {
             "name": "context",
@@ -48,7 +46,8 @@
             "schema": {
                 "type": "object"
             },
-            "default": {}
+            "default": {},
+            "optional": true
         }
     ],
     "returns": {

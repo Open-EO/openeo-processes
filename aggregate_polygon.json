@@ -13,8 +13,7 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "polygons",
@@ -28,8 +27,7 @@
                     "type": "object",
                     "subtype": "vector-cube"
                 }
-            ],
-            "required": true
+            ]
         },
         {
             "name": "reducer",
@@ -41,7 +39,6 @@
                     {
                         "name": "data",
                         "description": "A labeled array with values of any type.",
-                        "required": true,
                         "schema": {
                             "type": "array",
                             "subtype": "labeled-array",
@@ -51,8 +48,7 @@
                         }
                     }
                 ]
-            },
-            "required": true
+            }
         },
         {
             "name": "name",
@@ -60,7 +56,8 @@
             "schema": {
                 "type": "string"
             },
-            "default": "result"
+            "default": "result",
+            "optional": true
         }
     ],
     "returns": {

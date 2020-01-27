@@ -12,8 +12,7 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "extent",
@@ -50,8 +49,7 @@
                         "2016-01-01"
                     ]
                 ]
-            },
-            "required": true
+            }
         },
         {
             "name": "dimension",
@@ -62,7 +60,8 @@
                     "null"
                 ]
             },
-            "default": null
+            "default": null,
+            "optional": true
         }
     ],
     "returns": {

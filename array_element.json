@@ -14,15 +14,15 @@
                 "items": {
                     "description": "Any data type is allowed."
                 }
-            },
-            "required": true
+            }
         },
         {
             "name": "index",
             "description": "The zero-based index of the element to retrieve.",
             "schema": {
                 "type": "integer"
-            }
+            },
+            "optional": true
         },
         {
             "name": "label",
@@ -34,7 +34,8 @@
                 {
                     "type": "string"
                 }
-            ]
+            ],
+            "optional": true
         },
         {
             "name": "return_nodata",
@@ -42,7 +43,8 @@
             "schema": {
                 "type": "boolean"
             },
-            "default": false
+            "default": false,
+            "optional": true
         }
     ],
     "returns": {

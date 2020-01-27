@@ -14,8 +14,7 @@
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
-            },
-            "required": true
+            }
         },
         {
             "name": "intervals",
@@ -77,8 +76,7 @@
                         ]
                     ]
                 ]
-            },
-            "required": true
+            }
         },
         {
             "name": "reducer",
@@ -90,7 +88,6 @@
                     {
                         "name": "data",
                         "description": "A labeled array with elements of any type.",
-                        "required": true,
                         "schema": {
                             "type": "array",
                             "subtype": "labeled-array",
@@ -100,8 +97,7 @@
                         }
                     }
                 ]
-            },
-            "required": true
+            }
         },
         {
             "name": "labels",
@@ -119,7 +115,8 @@
                     ]
                 }
             },
-            "default": []
+            "default": [],
+            "optional": true
         },
         {
             "name": "dimension",
@@ -130,7 +127,8 @@
                     "null"
                 ]
             },
-            "default": null
+            "default": null,
+            "optional": true
         }
     ],
     "returns": {

@@ -15,8 +15,7 @@
                 "items": {
                     "description": "Any data type is allowed."
                 }
-            },
-            "required": true
+            }
         },
         {
             "name": "condition",
@@ -28,7 +27,6 @@
                     {
                         "name": "x",
                         "description": "The value of the current element being processed.",
-                        "required": true,
                         "schema": {
                             "description": "Any data type."
                         }
@@ -36,7 +34,6 @@
                     {
                         "name": "index",
                         "description": "The zero-based index of the current element being processed.",
-                        "required": true,
                         "schema": {
                             "type": "integer"
                         }
@@ -55,11 +52,11 @@
                                 "type": "null"
                             }
                         ],
-                        "default": null
+                        "default": null,
+                        "optional": true
                     }
                 ]
-            },
-            "required": true
+            }
         }
     ],
     "returns": {
