@@ -209,7 +209,7 @@
     ],
     "exceptions": {
         "TooManyDimensions": {
-            "message": "The number of dimensions must be reduced to three for 'aggregate_spatial'."
+            "message": "The number of dimensions must be reduced to three for 'aggregate_temporal'."
         },
         "DimensionNotAvailable": {
             "message": "A dimension with the specified name does not exist."
