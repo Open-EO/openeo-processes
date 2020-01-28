@@ -77,5 +77,28 @@
             "href": "http://mathworld.wolfram.com/StandardDeviation.html",
             "title": "Standard deviation explained by Wolfram MathWorld"
         }
-    ]
+    ],
+    "process_graph": {
+        "variance": {
+            "process_id": "variance",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "ignore_nodata": {
+                    "from_parameter": "ignore_nodata"
+                }
+            }
+        },
+        "power": {
+            "process_id": "power",
+            "arguments": {
+                "base": {
+                    "from_node": "variance"
+                },
+                "p": 0.5
+            },
+            "result": true
+        }
+    }
 }

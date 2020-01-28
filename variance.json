@@ -90,5 +90,28 @@
             "href": "http://mathworld.wolfram.com/Variance.html",
             "title": "Variance explained by Wolfram MathWorld"
         }
-    ]
+    ],
+    "process_graph": {
+        "sd": {
+            "process_id": "sd",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "ignore_nodata": {
+                    "from_parameter": "ignore_nodata"
+                }
+            }
+        },
+        "power": {
+            "process_id": "power",
+            "arguments": {
+                "base": {
+                    "from_node": "sd"
+                },
+                "p": 2
+            },
+            "result": true
+        }
+    }
 }

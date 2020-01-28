@@ -59,5 +59,26 @@
             "href": "http://mathworld.wolfram.com/AbsoluteValue.html",
             "title": "Absolute value explained by Wolfram MathWorld"
         }
-    ]
+    ],
+    "process_graph": {
+        "power2": {
+            "process_id": "power",
+            "arguments": {
+                "base": {
+                    "from_parameter": "x"
+                },
+                "p": 2
+            }
+        },
+        "power05": {
+            "process_id": "power",
+            "arguments": {
+                "base": {
+                    "from_node": "power2"
+                },
+                "p": 0.5
+            },
+            "result": true
+        }
+    }
 }

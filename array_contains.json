@@ -138,5 +138,35 @@
             },
             "returns": false
         }
-    ]
+    ],
+    "process_graph": {
+        "find": {
+            "process_id": "array_find",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "value": {
+                    "from_parameter": "value"
+                }
+            }
+        },
+        "is_nodata": {
+            "process_id": "is_nodata",
+            "arguments": {
+                "x": {
+                    "from_node": "find"
+                }
+            }
+        },
+        "not": {
+            "process_id": "not",
+            "arguments": {
+                "x": {
+                    "from_node": "is_nodata"
+                }
+            },
+            "result": true
+        }
+    }
 }

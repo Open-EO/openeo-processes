@@ -72,5 +72,22 @@
             },
             "returns": null
         }
-    ]
+    ],
+    "process_graph": {
+        "all": {
+            "process_id": "all",
+            "arguments": {
+                "data": [
+                    {
+                        "from_parameter": "x"
+                    },
+                    {
+                        "from_parameter": "y"
+                    }
+                ],
+                "ignore_nodata": false
+            },
+            "result": true
+        }
+    }
 }

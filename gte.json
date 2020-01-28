@@ -102,5 +102,41 @@
             },
             "returns": false
         }
-    ]
+    ],
+    "process_graph": {
+        "eq": {
+            "process_id": "eq",
+            "arguments": {
+                "x": {
+                    "from_parameter": "x"
+                },
+                "y": {
+                    "from_parameter": "y"
+                }
+            }
+        },
+        "gt": {
+            "process_id": "gt",
+            "arguments": {
+                "x": {
+                    "from_parameter": "x"
+                },
+                "y": {
+                    "from_parameter": "y"
+                }
+            }
+        },
+        "or": {
+            "process_id": "or",
+            "arguments": {
+                "x": {
+                    "from_node": "gt"
+                },
+                "y": {
+                    "from_node": "eq"
+                }
+            },
+            "result": true
+        }
+    }
 }

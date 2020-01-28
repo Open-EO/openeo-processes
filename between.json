@@ -1,7 +1,7 @@
 {
     "id": "between",
     "summary": "Between comparison",
-    "description": "By default this process checks whether `x` is greater than or equal to `min` and lower than or equal to `max`. Therefore, this process is an alias for `and([gte(x, min), lte(x, max)])` and all definitions from ``and()``, ``gte()`` and ``lte()`` apply here as well.\n\nIf `exclude_max` is set to `true` the upper bound is excluded so that the process checks whether `x` is greater than or equal to `min` and lower than `max`. In this case the process works the same as executing `and([gte(x, min), lt(x, max)])`.\n\nLower and upper bounds are not allowed to be swapped. So `min` MUST be lower than or equal to `max` or otherwise the process always returns `false`.",
+    "description": "By default this process checks whether `x` is greater than or equal to `min` and lower than or equal to `max`, which is the same es computing `and(gte(x, min), lte(x, max))`. Therefore, all definitions from ``and()``, ``gte()`` and ``lte()`` apply here as well.\n\nIf `exclude_max` is set to `true` the upper bound is excluded so that the process checks whether `x` is greater than or equal to `min` and lower than `max`. In this case the process works the same as computing `and(gte(x, min), lt(x, max))`.\n\nLower and upper bounds are not allowed to be swapped. So `min` MUST be lower than or equal to `max` or otherwise the process always returns `false`.",
     "categories": [
         "comparison"
     ],
@@ -164,5 +164,66 @@
             },
             "returns": false
         }
-    ]
+    ],
+    "process_graph": {
+        "gte": {
+            "process_id": "gte",
+            "arguments": {
+                "x": {
+                    "from_parameter": "x"
+                },
+                "y": {
+                    "from_parameter": "min"
+                }
+            }
+        },
+        "lte": {
+            "process_id": "lte",
+            "arguments": {
+                "x": {
+                    "from_parameter": "x"
+                },
+                "y": {
+                    "from_parameter": "max"
+                }
+            }
+        },
+        "lt": {
+            "process_id": "lt",
+            "arguments": {
+                "x": {
+                    "from_parameter": "x"
+                },
+                "y": {
+                    "from_parameter": "max"
+                }
+            }
+        },
+        "if": {
+            "process_id": "if",
+            "arguments": {
+                "value": {
+                    "from_parameter": "exclude_max"
+                },
+                "accept": {
+                    "from_node": "lte"
+                },
+                "reject": {
+                    "from_node": "lt"
+                }
+            }
+        },
+        "and": {
+            "process_id": "and",
+            "arguments": {
+                "x": {
+                    "from_node": "gte"
+                },
+                "y": {
+                    "from_node": "if"
+                }
+            },
+            "result": true
+        }
+    }
 }

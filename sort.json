@@ -1,7 +1,7 @@
 {
     "id": "sort",
     "summary": "Sort data",
-    "description": "Sorts an array into ascending (default) or descending order.\n\nThis process is an alias to call ``order()`` and ``rearrange()`` consecutively: `rearrange(data, order(data, nodata))`. This process could be faster though. See ``order()`` for more information on sorting behaviour.",
+    "description": "Sorts an array into ascending (default) or descending order.\n\n**Remarks:**\n\n* Ties will be left in their original ordering.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
     "categories": [
         "arrays",
         "sorting"
@@ -153,5 +153,33 @@
                 null
             ]
         }
-    ]
+    ],
+    "process_graph": {
+        "order": {
+            "process_id": "order",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "asc": {
+                    "from_parameter": "asc"
+                },
+                "nodata": {
+                    "from_parameter": "nodata"
+                }
+            }
+        },
+        "rearrange": {
+            "process_id": "rearrange",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "order": {
+                    "from_node": "order"
+                }
+            },
+            "result": true
+        }
+    }
 }
