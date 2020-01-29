@@ -4174,7 +4174,7 @@
   {
     "id": "floor",
     "summary": "Round fractions down",
-    "description": "The greatest integer less than or equal to the number `x`.\n\nThis process is *not* an alias for the `int` process as defined by some mathematicians, see the examples for negative numbers in both processes for differences.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "The greatest integer less than or equal to the number `x`.\n\nThis process is *not* an alias for the ``int()`` process as defined by some mathematicians, see the examples for negative numbers in both processes for differences.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "math > rounding"
     ],
@@ -4536,7 +4536,7 @@
   {
     "id": "int",
     "summary": "Integer part of a number",
-    "description": "The integer part of the real number `x`.\n\nThis process is *not* an alias for the `floor` process as defined by some mathematicians, see the examples for negative numbers in both processes for differences.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "The integer part of the real number `x`.\n\nThis process is *not* an alias for the ``floor()`` process as defined by some mathematicians, see the examples for negative numbers in both processes for differences.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "math",
       "math > rounding"
