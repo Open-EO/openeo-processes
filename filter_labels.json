@@ -59,21 +59,13 @@
     },
     "examples": [
         {
-            "description": "This example is loading the Sentinel-2 collection into a data cube and filters the data cube to only contain data from platform Sentinel-2A. This example assumes that the data cube has a dimension `platform` so that computations can distinguish between Sentinel-2A and Sentinel-2B data.",
+            "description": "Filters the data cube to only contain data from platform Sentinel-2A. This example assumes that the data cube has a dimension `platform` so that computations can distinguish between Sentinel-2A and Sentinel-2B data.",
             "process_graph": {
-                "load": {
-                    "process_id": "load_collection",
-                    "arguments": {
-                        "id": "Sentinel-2",
-                        "spatial_extent": null,
-                        "temporal_extent": null
-                    }
-                },
                 "filter": {
                     "process_id": "filter_labels",
                     "arguments": {
                         "data": {
-                            "from_node": "load"
+                            "from_parameter": "sentinel2_data"
                         },
                         "condition": {
                             "process_graph": {
