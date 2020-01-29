@@ -530,9 +530,14 @@
           "loadco1": {
             "process_id": "load_collection",
             "arguments": {
-              "id": "S2B",
-              "spatial_extent": null,
-              "temporal_extent": null
+              "id": "Sentinel-2",
+              "spatial_extent": {
+                "from_parameter": "spatial_extent"
+              },
+              "temporal_extent": [
+                "2015-01-01",
+                "2019-01-01"
+              ]
             }
           },
           "aggreg1": {
@@ -560,23 +565,15 @@
                 ]
               ],
               "labels": [
-                [
-                  "2015-01-01"
-                ],
-                [
-                  "2016-01-01"
-                ],
-                [
-                  "2017-01-01"
-                ],
-                [
-                  "2018-01-01"
-                ]
+                "2015",
+                "2016",
+                "2017",
+                "2018"
               ],
               "reducer": {
                 "process_graph": {
                   "median1": {
-                    "process_id": "median",
+                    "process_id": "mean",
                     "arguments": {
                       "data": {
                         "from_parameter": "data"
@@ -3936,21 +3933,13 @@
     },
     "examples": [
       {
-        "description": "This example is loading the Sentinel-2 collection into a data cube and filters the data cube to only contain data from platform Sentinel-2A. This example assumes that the data cube has a dimension `platform` so that computations can distinguish between Sentinel-2A and Sentinel-2B data.",
+        "description": "Filters the data cube to only contain data from platform Sentinel-2A. This example assumes that the data cube has a dimension `platform` so that computations can distinguish between Sentinel-2A and Sentinel-2B data.",
         "process_graph": {
-          "load": {
-            "process_id": "load_collection",
-            "arguments": {
-              "id": "Sentinel-2",
-              "spatial_extent": null,
-              "temporal_extent": null
-            }
-          },
           "filter": {
             "process_id": "filter_labels",
             "arguments": {
               "data": {
-                "from_node": "load"
+                "from_parameter": "sentinel2_data"
               },
               "condition": {
                 "process_graph": {
@@ -7836,7 +7825,7 @@
       },
       {
         "title": "Rename enumerated labels",
-        "description": "The reducer creates a new dimension `min_max` with enumerated labels. The first label refers to the minimum values, the second label refers to the maximum values. After the reducer, the dimension labels are renamed to `min` and `max` respectively.",
+        "description": "The process replaces the temporal dimension with a new dimension `min_max` with enumerated labels. The first label refers to the minimum values, the second label refers to the maximum values. Afterwards, the dimension labels are renamed to `min` and `max` respectively.",
         "process_graph": {
           "loadco1": {
             "process_id": "load_collection",
@@ -7846,13 +7835,13 @@
               "temporal_extent": null
             }
           },
-          "reduce1": {
-            "process_id": "reduce_dimension",
+          "apply1": {
+            "process_id": "apply_dimension",
             "arguments": {
               "data": {
                 "from_node": "loadco1"
               },
-              "reducer": {
+              "process": {
                 "process_graph": {
                   "extrem1": {
                     "process_id": "extrema",
@@ -7865,7 +7854,7 @@
                   }
                 }
               },
-              "dimension": "temporal",
+              "dimension": "t",
               "target_dimension": "min_max"
             }
           },
@@ -7873,7 +7862,7 @@
             "process_id": "rename_labels",
             "arguments": {
               "data": {
-                "from_node": "reduce1"
+                "from_node": "apply1"
               },
               "dimension": "bands",
               "target": [
