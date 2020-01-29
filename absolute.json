@@ -61,22 +61,36 @@
         }
     ],
     "process_graph": {
-        "power2": {
-            "process_id": "power",
+        "lt": {
+            "process_id": "lt",
             "arguments": {
-                "base": {
+                "x": {
                     "from_parameter": "x"
                 },
-                "p": 2
+                "y": 0
             }
         },
-        "power05": {
-            "process_id": "power",
+        "multiply": {
+            "process_id": "multiply",
             "arguments": {
-                "base": {
-                    "from_node": "power2"
+                "x": {
+                    "from_parameter": "x"
                 },
-                "p": 0.5
+                "y": -1
+            }
+        },
+        "if": {
+            "process_id": "if",
+            "arguments": {
+                "value": {
+                    "from_node": "lt"
+                },
+                "accept": {
+                    "from_node": "multiply"
+                },
+                "reject": {
+                    "from_parameter": "x"
+                }
             },
             "result": true
         }
