@@ -1,7 +1,7 @@
 {
     "id": "array_contains",
     "summary": "Check whether the array contains a given value",
-    "description": "Checks whether the array specified for `data` contains the value specified in `value`. Returns `true` if there's a match, otherwise `false`.\n\n**Remarks:**\n\n* To get the index or the label of the value found, use ``array_find()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. This includes that data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.",
+    "description": "Checks whether the array specified for `data` contains the value specified in `value`. Returns `true` if there's a match, otherwise `false`.\n\n**Remarks:**\n\n* To get the index or the label of the value found, use ``array_find()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. A `null` return value from ``eq()`` is handled exactly as `false` (no match).\n* Data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.\n* If the specified value is an array, object or null, the process always returns `false`. See the examples for one to check for `null` values.",
     "categories": [
         "arrays",
         "comparison"
@@ -32,6 +32,41 @@
         }
     },
     "examples": [
+        {
+            "title": "Check for `null` values",
+            "description": "Check whether the array contains a `null` value.",
+            "process_graph": {
+                "apply": {
+                    "process_id": "array_apply",
+                    "arguments": {
+                        "data": {
+                            "from_parameter": "data"
+                        },
+                        "process": {
+                            "process-graph": {
+                                "is_null": {
+                                    "process_id": "is_nodata",
+                                    "arguments": {
+                                        "from_parameter": "x"
+                                    },
+                                    "result": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "find": {
+                    "process_id": "array_contains",
+                    "arguments": {
+                        "data": {
+                            "from_node": "apply"
+                        },
+                        "value": true
+                    },
+                    "result": true
+                }
+            }
+        },
         {
             "arguments": {
                 "data": [
