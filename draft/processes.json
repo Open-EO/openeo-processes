@@ -201,9 +201,9 @@
     ]
   },
   {
-    "id": "aggregate_polygon_binary",
-    "summary": "Zonal statistics for polygons using binary aggregation",
-    "description": "Aggregates zonal statistics for one or multiple polygons over the spatial dimensions. This process passes two values to the reducer. In contrast, ``aggregate_polygon()`` passes a list of values.\n\nThe process considers all pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n\nThe data cube must have been reduced to only contain two raster dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise this process fails with the `TooManyDimensions` error.\n\nThe number of total and valid pixels is returned together with the calculated values.",
+    "id": "aggregate_spatial_binary",
+    "summary": "Zonal statistics for geometries by binary aggregation",
+    "description": "Aggregates statistics for one or more geometries (e.g. zonal statistics for polygons) over the spatial dimensions. This process consecutively passes a pair of values to the reducer. This may be better suited especially for UDFs in case the number of values gets too large to be processed at once. In contrast, ``aggregate_spatial()`` passes a list of values.\n\n- For **polygons**, the process considers all pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n- For **points**, the process considers the closest pixel center.\n- For **lines** (line strings), the process considers all the pixels whose centers are closest to at least one point on the line.\n\nThe data cube must have been reduced to only contain two raster dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise this process fails with the `TooManyDimensions` error.\n\nThe number of total and valid pixels is returned together with the calculated values.",
     "categories": [
       "cubes",
       "aggregate & resample"
@@ -212,25 +212,19 @@
     "parameters": [
       {
         "name": "data",
-        "description": "A data cube.",
+        "description": "A raster data cube. The data cube implicitly gets restricted to the bounds of the geometries as if ``filter_spatial()`` would have been used with the same values for the corresponding parameters immediately before this process.",
         "schema": {
           "type": "object",
           "subtype": "raster-cube"
         }
       },
       {
-        "name": "polygons",
-        "description": "One or more polygons to calculate zonal statistics for. Either specified as GeoJSON or vector data cube.\n\nFor GeoJSON this can be one of the following GeoJSON types:\n\n* A `Polygon` geometry,\n* a `GeometryCollection` containing Polygons,\n* a `Feature` with a `Polygon` geometry or\n* a `FeatureCollection` containing `Feature`s with a `Polygon` geometry.",
-        "schema": [
-          {
-            "type": "object",
-            "subtype": "geojson"
-          },
-          {
-            "type": "object",
-            "subtype": "vector-cube"
-          }
-        ]
+        "name": "geometries",
+        "description": "Geometries as GeoJSON on which the aggregation will be based.",
+        "schema": {
+          "type": "object",
+          "subtype": "geojson"
+        }
       },
       {
         "name": "reducer",
@@ -257,7 +251,7 @@
         }
       },
       {
-        "name": "name",
+        "name": "target_dimension",
         "description": "The new dimension name to be used for storing the results. Defaults to `result`.",
         "schema": {
           "type": "string"
@@ -267,7 +261,7 @@
       }
     ],
     "returns": {
-      "description": "A vector data cube with the computed results. The vector data cube implicitly gets restricted to the bounds of the polygons as if ``filter_polygon()`` would have been used with the same values for the corresponding parameters immediately before this process.\n\nThe computed value is stored in dimension with the name that was specified in the parameter `name`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) in each geometry. These values are stored as attributes of the result value with the attribute names `total_count` and `valid_count`.",
+      "description": "A vector data cube with the computed results and restricted to the bounds of the geometries.\n\nThe computed value is stored in dimension with the name that was specified in the parameter `target_dimension`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) for each geometry. These values are stored as new dimension with a dimension name derived from `target_dimension` by adding the suffix `_meta`. The new dimension has the dimension labels `total_count` and `valid_count`.",
       "schema": {
         "type": "object",
         "subtype": "vector-cube"
@@ -275,7 +269,7 @@
     },
     "exceptions": {
       "TooManyDimensions": {
-        "message": "The number of dimensions must be reduced to three for 'aggregate_polygon'."
+        "message": "The number of dimensions must be reduced to three for 'aggregate_spatial_binary'."
       }
     },
     "links": [
@@ -297,9 +291,9 @@
     ]
   },
   {
-    "id": "aggregate_polygon",
-    "summary": "Zonal statistics for polygons",
-    "description": "Aggregates zonal statistics for one or multiple polygons over the spatial dimensions. This process passes a list of values to the reducer. In contrast, ``aggregate_polygon_binary()`` passes two values, which may be better suited for UDFs.\n\nThe process considers all pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n\nThe data cube must have been reduced to only contain two spatial dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise this process fails with the `TooManyDimensions` error.\n\nThe number of total and valid pixels is returned together with the calculated values.",
+    "id": "aggregate_spatial",
+    "summary": "Zonal statistics for geometries",
+    "description": "Aggregates statistics for one or more geometries (e.g. zonal statistics for polygons) over the spatial dimensions. This process passes a list of values to the reducer. In contrast, ``aggregate_spatial_binary()`` passes two values, which may be better suited especially for UDFs in case the number of values gets too large to be processed at once.\n\n- For **polygons**, the process considers all pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n- For **points**, the process considers the closest pixel center.\n- For **lines** (line strings), the process considers all the pixels whose centers are closest to at least one point on the line.\n\nThus, pixels may be part of multiple geometries and be part of multiple aggregations.\n\nThe data cube must have been reduced to only contain two spatial dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise this process fails with the `TooManyDimensions` error.\n\nThe number of total and valid pixels is returned together with the calculated values.",
     "categories": [
       "cubes",
       "aggregate & resample"
@@ -307,25 +301,19 @@
     "parameters": [
       {
         "name": "data",
-        "description": "A data cube.",
+        "description": "A raster data cube. The data cube implicitly gets restricted to the bounds of the geometries as if ``filter_spatial()`` would have been used with the same values for the corresponding parameters immediately before this process.",
         "schema": {
           "type": "object",
           "subtype": "raster-cube"
         }
       },
       {
-        "name": "polygons",
-        "description": "One or more polygons to calculate zonal statistics for. Either specified as GeoJSON or vector data cube.\n\nFor GeoJSON this can be one of the following GeoJSON types:\n\n* A `Polygon` geometry,\n* a `GeometryCollection` containing Polygons,\n* a `Feature` with a `Polygon` geometry or\n* a `FeatureCollection` containing `Feature`s with a `Polygon` geometry.",
-        "schema": [
-          {
-            "type": "object",
-            "subtype": "geojson"
-          },
-          {
-            "type": "object",
-            "subtype": "vector-cube"
-          }
-        ]
+        "name": "geometries",
+        "description": "Geometries as GeoJSON on which the aggregation will be based.",
+        "schema": {
+          "type": "object",
+          "subtype": "geojson"
+        }
       },
       {
         "name": "reducer",
@@ -336,10 +324,9 @@
           "parameters": [
             {
               "name": "data",
-              "description": "A labeled array with values of any type.",
+              "description": "An array with elements of any type.",
               "schema": {
                 "type": "array",
-                "subtype": "labeled-array",
                 "items": {
                   "description": "Any data type."
                 }
@@ -349,7 +336,7 @@
         }
       },
       {
-        "name": "name",
+        "name": "target_dimension",
         "description": "The new dimension name to be used for storing the results. Defaults to `result`.",
         "schema": {
           "type": "string"
@@ -359,7 +346,7 @@
       }
     ],
     "returns": {
-      "description": "A vector data cube with the computed results. The vector data cube implicitly gets restricted to the bounds of the polygons as if ``filter_polygon()`` would have been used with the same values for the corresponding parameters immediately before this process.\n\nThe computed value is stored in dimension with the name that was specified in the parameter `name`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) in each geometry. These values are stored as attributes of the result value with the attribute names `total_count` and `valid_count`.",
+      "description": "A vector data cube with the computed results and restricted to the bounds of the geometries.\n\nThe computed value is stored in dimension with the name that was specified in the parameter `target_dimension`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) for each geometry. These values are stored as new dimension with a dimension name derived from `target_dimension` by adding the suffix `_meta`. The new dimension has the dimension labels `total_count` and `valid_count`.",
       "schema": {
         "type": "object",
         "subtype": "vector-cube"
@@ -367,7 +354,7 @@
     },
     "exceptions": {
       "TooManyDimensions": {
-        "message": "The number of dimensions must be reduced to three for 'aggregate_polygon'."
+        "message": "The number of dimensions must be reduced to three for 'aggregate_spatial'."
       }
     },
     "links": [
@@ -591,7 +578,7 @@
     ],
     "exceptions": {
       "TooManyDimensions": {
-        "message": "The number of dimensions must be reduced to three for 'aggregate_polygon'."
+        "message": "The number of dimensions must be reduced to three for 'aggregate_temporal'."
       },
       "DimensionNotAvailable": {
         "message": "A dimension with the specified name does not exist."
@@ -3965,9 +3952,9 @@
     ]
   },
   {
-    "id": "filter_polygon",
-    "summary": "Spatial filter using polygons",
-    "description": "Limits the data cube over the spatial dimensions to the specified polygons.\n\nThe filter retains a pixel in the data cube if the point at the pixel center intersects with at least one of the polygons (as defined in the Simple Features standard by the OGC).",
+    "id": "filter_spatial",
+    "summary": "Spatial filter using geometries",
+    "description": "Limits the data cube over the spatial dimensions to the specified geometries.\n\n- For **polygons**, the filter retains a pixel in the data cube if the point at the pixel center intersects with at least one of the polygons (as defined in the Simple Features standard by the OGC).\n- For **points**, the process considers the closest pixel center.\n- For **lines** (line strings), the process considers all the pixels whose centers are closest to at least one point on the line.\n\nMore specifically, pixels outside of the bounding box of the given geometry will not be available after filtering. All pixels inside the bounding box that are not retained will be set to `null` (no data).",
     "categories": [
       "filter"
     ],
@@ -3981,8 +3968,8 @@
         }
       },
       {
-        "name": "polygons",
-        "description": "One or more polygons used for filtering, either specified as GeoJSON or vector data cube.\n\nFor GeoJSON this can be one of the following GeoJSON types:\n\n* A `Polygon` geometry,\n* a `GeometryCollection` containing Polygons,\n* a `Feature` with a `Polygon` geometry or\n* a `FeatureCollection` containing `Feature`s with a `Polygon` geometry.",
+        "name": "geometries",
+        "description": "One or more geometries used for filtering, specified as GeoJSON.",
         "schema": {
           "type": "object",
           "subtype": "geojson"
@@ -3990,7 +3977,7 @@
       }
     ],
     "returns": {
-      "description": "A data cube restricted to the specified polygons. Therefore, the cardinality is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
+      "description": "A data cube restricted to the specified geometries. Therefore, the cardinality is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -7528,7 +7515,7 @@
   {
     "id": "reduce_dimension_binary",
     "summary": "Reduce dimensions using binary reduction",
-    "description": "Applies a binary reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer. This process consecutively passes a pair of values to the reducer. In contrast, ``reduce_dimension()`` passes a list of values.\n\nThe dimension is dropped. To avoid this, use ``apply_dimension()`` instead.",
+    "description": "Applies a binary reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer. This process consecutively passes a pair of values to the reducer. This may be better suited especially for UDFs in case the number of values gets too large to be processed at once. In contrast, ``reduce_dimension()`` passes a list of values.\n\nThe dimension is dropped. To avoid this, use ``apply_dimension()`` instead.",
     "categories": [
       "cubes",
       "reducer"
@@ -7598,7 +7585,7 @@
   {
     "id": "reduce_dimension",
     "summary": "Reduce dimensions",
-    "description": "Applies a unary reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer. This process passes a list of values to the reducer. In contrast, ``reduce_dimension_binary()`` passes two values, which may be better suited for UDFs.\n\nThe dimension is dropped. To avoid this, use ``apply_dimension()`` instead.",
+    "description": "Applies a unary reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer. This process passes a list of values to the reducer. In contrast, ``reduce_dimension_binary()`` passes two values, which may be better suited especially for UDFs in case the number of values gets too large to be processed at once.\n\nThe dimension is dropped. To avoid this, use ``apply_dimension()`` instead.",
     "categories": [
       "cubes",
       "reducer"
@@ -8252,7 +8239,7 @@
   {
     "id": "run_udf_externally",
     "summary": "Run an externally hosted UDF container",
-    "description": "Runs a compatible UDF container that is either externally hosted by a service provider or running on a local machine of the user. The UDF container must follow the [openEO UDF specification](https://open-eo.github.io/openeo-udf/).\n\nThe referenced UDF service can be executed in several processes such as ``aggregate_polygon()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
+    "description": "Runs a compatible UDF container that is either externally hosted by a service provider or running on a local machine of the user. The UDF container must follow the [openEO UDF specification](https://open-eo.github.io/openeo-udf/).\n\nThe referenced UDF service can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
     "categories": [
       "import",
       "udf"
@@ -8331,7 +8318,7 @@
   {
     "id": "run_udf",
     "summary": "Run an UDF",
-    "description": "Runs an UDF in one of the supported runtime environments.\n\nThe process can either:\n\n1. load and run a locally stored UDF from a file in the workspace of the authenticated user. The path to the UDF file must be relative to the root directory of the user's workspace.\n2. fetch and run a remotely stored and published UDF by absolute URI, for example from [openEO Hub](https://hub.openeo.org)).\n3. run the source code specified inline as string.\n\nThe loaded UDF can be executed in several processes such as ``aggregate_polygon()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
+    "description": "Runs an UDF in one of the supported runtime environments.\n\nThe process can either:\n\n1. load and run a locally stored UDF from a file in the workspace of the authenticated user. The path to the UDF file must be relative to the root directory of the user's workspace.\n2. fetch and run a remotely stored and published UDF by absolute URI, for example from [openEO Hub](https://hub.openeo.org)).\n3. run the source code specified inline as string.\n\nThe loaded UDF can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
     "categories": [
       "import",
       "udf"
