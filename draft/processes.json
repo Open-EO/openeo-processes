@@ -246,6 +246,15 @@
               "schema": {
                 "description": "Any data type."
               }
+            },
+            {
+              "name": "context",
+              "description": "Additional data passed by the user.",
+              "schema": {
+                "description": "Any data type."
+              },
+              "optional": true,
+              "default": null
             }
           ]
         }
@@ -258,6 +267,15 @@
         },
         "default": "result",
         "optional": true
+      },
+      {
+        "name": "context",
+        "description": "Additional data to be passed to the reducer.",
+        "schema": {
+          "description": "Any data type."
+        },
+        "optional": true,
+        "default": null
       }
     ],
     "returns": {
@@ -331,6 +349,15 @@
                   "description": "Any data type."
                 }
               }
+            },
+            {
+              "name": "context",
+              "description": "Additional data passed by the user.",
+              "schema": {
+                "description": "Any data type."
+              },
+              "optional": true,
+              "default": null
             }
           ]
         }
@@ -343,6 +370,15 @@
         },
         "default": "result",
         "optional": true
+      },
+      {
+        "name": "context",
+        "description": "Additional data to be passed to the reducer.",
+        "schema": {
+          "description": "Any data type."
+        },
+        "optional": true,
+        "default": null
       }
     ],
     "returns": {
@@ -468,6 +504,15 @@
                   "description": "Any data type."
                 }
               }
+            },
+            {
+              "name": "context",
+              "description": "Additional data passed by the user.",
+              "schema": {
+                "description": "Any data type."
+              },
+              "optional": true,
+              "default": null
             }
           ]
         }
@@ -502,6 +547,15 @@
         },
         "default": null,
         "optional": true
+      },
+      {
+        "name": "context",
+        "description": "Additional data to be passed to the reducer.",
+        "schema": {
+          "description": "Any data type."
+        },
+        "optional": true,
+        "default": null
       }
     ],
     "returns": {
@@ -972,6 +1026,15 @@
                   "description": "Any data type."
                 }
               }
+            },
+            {
+              "name": "context",
+              "description": "Additional data passed by the user.",
+              "schema": {
+                "description": "Any data type."
+              },
+              "optional": true,
+              "default": null
             }
           ]
         }
@@ -994,6 +1057,15 @@
         },
         "default": null,
         "optional": true
+      },
+      {
+        "name": "context",
+        "description": "Additional data to be passed to the process.",
+        "schema": {
+          "description": "Any data type."
+        },
+        "optional": true,
+        "default": null
       }
     ],
     "returns": {
@@ -1105,9 +1177,27 @@
               "schema": {
                 "description": "Any data type."
               }
+            },
+            {
+              "name": "context",
+              "description": "Additional data passed by the user.",
+              "schema": {
+                "description": "Any data type."
+              },
+              "optional": true,
+              "default": null
             }
           ]
         }
+      },
+      {
+        "name": "context",
+        "description": "Additional data to be passed to the process.",
+        "schema": {
+          "description": "Any data type."
+        },
+        "optional": true,
+        "default": null
       }
     ],
     "returns": {
@@ -1491,9 +1581,27 @@
               ],
               "default": null,
               "optional": true
+            },
+            {
+              "name": "context",
+              "description": "Additional data passed by the user.",
+              "schema": {
+                "description": "Any data type."
+              },
+              "optional": true,
+              "default": null
             }
           ]
         }
+      },
+      {
+        "name": "context",
+        "description": "Additional data to be passed to the process.",
+        "schema": {
+          "description": "Any data type."
+        },
+        "optional": true,
+        "default": null
       }
     ],
     "returns": {
@@ -1840,9 +1948,27 @@
               ],
               "default": null,
               "optional": true
+            },
+            {
+              "name": "context",
+              "description": "Additional data passed by the user.",
+              "schema": {
+                "description": "Any data type."
+              },
+              "optional": true,
+              "default": null
             }
           ]
         }
+      },
+      {
+        "name": "context",
+        "description": "Additional data to be passed to the condition.",
+        "schema": {
+          "description": "Any data type."
+        },
+        "optional": true,
+        "default": null
       }
     ],
     "returns": {
@@ -2619,6 +2745,15 @@
                 "schema": {
                   "description": "Any data type."
                 }
+              },
+              {
+                "name": "context",
+                "description": "Additional data passed by the user.",
+                "schema": {
+                  "description": "Any data type."
+                },
+                "optional": true,
+                "default": null
               }
             ]
           },
@@ -2636,6 +2771,15 @@
         ],
         "default": null,
         "optional": true
+      },
+      {
+        "name": "context",
+        "description": "Additional data to be passed to the condition.",
+        "schema": {
+          "description": "Any data type."
+        },
+        "optional": true,
+        "default": null
       }
     ],
     "returns": {
@@ -3971,6 +4115,15 @@
                   "type": "string"
                 }
               ]
+            },
+            {
+              "name": "context",
+              "description": "Additional data passed by the user.",
+              "schema": {
+                "description": "Any data type."
+              },
+              "optional": true,
+              "default": null
             }
           ]
         }
@@ -3981,6 +4134,15 @@
         "schema": {
           "type": "string"
         }
+      },
+      {
+        "name": "context",
+        "description": "Additional data to be passed to the condition.",
+        "schema": {
+          "description": "Any data type."
+        },
+        "optional": true,
+        "default": null
       }
     ],
     "returns": {
@@ -6118,11 +6280,29 @@
               "schema": {
                 "description": "Any data type."
               }
+            },
+            {
+              "name": "context",
+              "description": "Additional data passed by the user.",
+              "schema": {
+                "description": "Any data type."
+              },
+              "optional": true,
+              "default": null
             }
           ]
         },
         "default": null,
         "optional": true
+      },
+      {
+        "name": "context",
+        "description": "Additional data to be passed to the overlap resolver.",
+        "schema": {
+          "description": "Any data type."
+        },
+        "optional": true,
+        "default": null
       }
     ],
     "returns": {
@@ -7627,6 +7807,15 @@
               "schema": {
                 "description": "Any data type."
               }
+            },
+            {
+              "name": "context",
+              "description": "Additional data passed by the user.",
+              "schema": {
+                "description": "Any data type."
+              },
+              "optional": true,
+              "default": null
             }
           ]
         }
@@ -7637,6 +7826,15 @@
         "schema": {
           "type": "string"
         }
+      },
+      {
+        "name": "context",
+        "description": "Additional data to be passed to the reducer.",
+        "schema": {
+          "description": "Any data type."
+        },
+        "optional": true,
+        "default": null
       }
     ],
     "returns": {
@@ -7693,6 +7891,15 @@
                   "description": "Any data type."
                 }
               }
+            },
+            {
+              "name": "context",
+              "description": "Additional data passed by the user.",
+              "schema": {
+                "description": "Any data type."
+              },
+              "optional": true,
+              "default": null
             }
           ]
         }
@@ -7703,6 +7910,15 @@
         "schema": {
           "type": "string"
         }
+      },
+      {
+        "name": "context",
+        "description": "Additional data to be passed to the reducer.",
+        "schema": {
+          "description": "Any data type."
+        },
+        "optional": true,
+        "default": null
       }
     ],
     "returns": {
@@ -8046,6 +8262,15 @@
                   "description": "Any data type."
                 }
               }
+            },
+            {
+              "name": "context",
+              "description": "Additional data passed by the user.",
+              "schema": {
+                "description": "Any data type."
+              },
+              "optional": true,
+              "default": null
             }
           ]
         }
@@ -8061,6 +8286,15 @@
         },
         "default": null,
         "optional": true
+      },
+      {
+        "name": "context",
+        "description": "Additional data to be passed to the process specified for the parameter `method`.",
+        "schema": {
+          "description": "Any data type."
+        },
+        "optional": true,
+        "default": null
       }
     ],
     "returns": {
