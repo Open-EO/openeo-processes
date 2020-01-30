@@ -1509,7 +1509,7 @@
   {
     "id": "array_contains",
     "summary": "Check whether the array contains a given value",
-    "description": "Checks whether the array specified for `data` contains the value specified in `value`. Returns `true` if there's a match, otherwise `false`.\n\n**Remarks:**\n\n* To get the index or the label of the value found, use ``array_find()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. This includes that data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.",
+    "description": "Checks whether the array specified for `data` contains the value specified in `value`. Returns `true` if there's a match, otherwise `false`.\n\n**Remarks:**\n\n* To get the index or the label of the value found, use ``array_find()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. A `null` return value from ``eq()`` is handled exactly as `false` (no match).\n* Data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.\n* If the specified value is an array, object or null, the process always returns `false`. See the examples for one to check for `null` values.",
     "categories": [
       "arrays",
       "comparison"
@@ -1540,6 +1540,41 @@
       }
     },
     "examples": [
+      {
+        "title": "Check for `null` values",
+        "description": "Check whether the array contains a `null` value.",
+        "process_graph": {
+          "apply": {
+            "process_id": "array_apply",
+            "arguments": {
+              "data": {
+                "from_parameter": "data"
+              },
+              "process": {
+                "process-graph": {
+                  "is_null": {
+                    "process_id": "is_nodata",
+                    "arguments": {
+                      "from_parameter": "x"
+                    },
+                    "result": true
+                  }
+                }
+              }
+            }
+          },
+          "find": {
+            "process_id": "array_contains",
+            "arguments": {
+              "data": {
+                "from_node": "apply"
+              },
+              "value": true
+            },
+            "result": true
+          }
+        }
+      },
       {
         "arguments": {
           "data": [
@@ -1823,7 +1858,7 @@
   {
     "id": "array_find",
     "summary": "Get the index for a value in an array",
-    "description": "Checks whether the array specified for `data` contains the value specified in `value` and returns the zero-based index for the first match. If there's no match, `null` is returned.\n\n**Remarks:**\n\n* To get a boolean value returned use ``array_contains()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. This includes that data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.",
+    "description": "Checks whether the array specified for `data` contains the value specified in `value` and returns the zero-based index for the first match. If there's no match, `null` is returned.\n\n**Remarks:**\n\n* To get a boolean value returned use ``array_contains()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. A `null` return value from ``eq()`` is handled exactly as `false` (no match).\n* Data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.\n* If the specified value is an array, object or null, the process always returns `null`. See the examples for one to find `null` values.",
     "categories": [
       "arrays"
     ],
@@ -1859,6 +1894,41 @@
       ]
     },
     "examples": [
+      {
+        "title": "Find `null` values",
+        "description": "Get the index of the first `null` value in an array.",
+        "process_graph": {
+          "apply": {
+            "process_id": "array_apply",
+            "arguments": {
+              "data": {
+                "from_parameter": "data"
+              },
+              "process": {
+                "process-graph": {
+                  "is_null": {
+                    "process_id": "is_nodata",
+                    "arguments": {
+                      "from_parameter": "x"
+                    },
+                    "result": true
+                  }
+                }
+              }
+            }
+          },
+          "find": {
+            "process_id": "array_find",
+            "arguments": {
+              "data": {
+                "from_node": "apply"
+              },
+              "value": true
+            },
+            "result": true
+          }
+        }
+      },
       {
         "arguments": {
           "data": [
@@ -3326,7 +3396,7 @@
   {
     "id": "eq",
     "summary": "Equal to comparison",
-    "description": "Compares whether `x` is strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings MUST be compared differently than other strings and MUST NOT be compared based on their string representation due to different possible representations. For example, the UTC time zone representation `Z` has the same meaning as `+00:00`.",
+    "description": "Compares whether `x` is strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`. Therefore, `eq(null, null)` returns `null` instead of `true`.\n* If any operand is an array or object, the return value is `false`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings MUST be compared differently than other strings and MUST NOT be compared based on their string representation due to different possible representations. For example, the UTC time zone representation `Z` has the same meaning as `+00:00`.",
     "categories": [
       "texts",
       "comparison"
@@ -3381,6 +3451,13 @@
       {
         "arguments": {
           "x": 1,
+          "y": null
+        },
+        "returns": null
+      },
+      {
+        "arguments": {
+          "x": null,
           "y": null
         },
         "returns": null
@@ -4310,7 +4387,7 @@
   {
     "id": "gte",
     "summary": "Greater than or equal to comparison",
-    "description": "Compares whether `x` is greater than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* If the operands are not equal (see process ``eq()``) and any of them is not a `number` or temporal string (`date`, `time` or `date-time`), the process returns `false`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
+    "description": "Compares whether `x` is greater than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`. Therefore, `gte(null, null)` returns `null` instead of `true`.\n* If any operand is an array or object, the return value is `false`.\n* If the operands are not equal (see process ``eq()``) and any of them is not a `number` or temporal string (`date`, `time` or `date-time`), the process returns `false`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
     "categories": [
       "comparison"
     ],
@@ -5491,7 +5568,7 @@
   {
     "id": "lte",
     "summary": "Less than or equal to comparison",
-    "description": "Compares whether `x` is less than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* If the operands are not equal (see process ``eq()``) and any of them is not a `number` or temporal string (`date`, `time` or `date-time`), the process returns `false`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
+    "description": "Compares whether `x` is less than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`. Therefore, `lte(null, null)` returns `null` instead of `true`.\n* If any operand is an array or object, the return value is `false`.\n* If the operands are not equal (see process ``eq()``) and any of them is not a `number` or temporal string (`date`, `time` or `date-time`), the process returns `false`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
     "categories": [
       "comparison"
     ],
@@ -6424,7 +6501,7 @@
   {
     "id": "neq",
     "summary": "Not equal to comparison",
-    "description": "Compares whether `x` is *not* strictly equal to `y`. This process is an alias for: `not(eq(val1, val2))`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings MUST be compared differently than other strings and MUST NOT be compared based on their string representation due to different possible representations. For example, the UTC time zone representation `Z` has the same meaning as `+00:00`.",
+    "description": "Compares whether `x` is *not* strictly equal to `y`. This process is an alias for: `not(eq(val1, val2))`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`. Therefore, `neq(null, null)` returns `null` instead of `false`.\n* If any operand is an array or object, the return value is `false`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings MUST be compared differently than other strings and MUST NOT be compared based on their string representation due to different possible representations. For example, the UTC time zone representation `Z` has the same meaning as `+00:00`.",
     "categories": [
       "texts",
       "comparison"
