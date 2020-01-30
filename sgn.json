@@ -61,16 +61,22 @@
     ],
     "process_graph": {
         "gt0": {
-            "x": {
-                "from_parameter": "x"
-            },
-            "y": 0
+            "process_id": "gt",
+            "arguments": {
+                "x": {
+                    "from_parameter": "x"
+                },
+                "y": 0
+            }
         },
         "lt0": {
-            "x": {
-                "from_parameter": "x"
-            },
-            "y": 0
+            "process_id": "lt",
+            "arguments": {
+                "x": {
+                    "from_parameter": "x"
+                },
+                "y": 0
+            }
         },
         "if_gt0": {
             "process_id": "if",
