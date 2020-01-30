@@ -145,9 +145,14 @@
                 "loadco1": {
                     "process_id": "load_collection",
                     "arguments": {
-                        "id": "S2B",
-                        "spatial_extent": null,
-                        "temporal_extent": null
+                        "id": "Sentinel-2",
+                        "spatial_extent": {
+                            "from_parameter": "spatial_extent"
+                        },
+                        "temporal_extent": [
+                            "2015-01-01",
+                            "2019-01-01"
+                        ]
                     }
                 },
                 "aggreg1": {
@@ -175,23 +180,15 @@
                             ]
                         ],
                         "labels": [
-                            [
-                                "2015-01-01"
-                            ],
-                            [
-                                "2016-01-01"
-                            ],
-                            [
-                                "2017-01-01"
-                            ],
-                            [
-                                "2018-01-01"
-                            ]
+                            "2015",
+                            "2016",
+                            "2017",
+                            "2018"
                         ],
                         "reducer": {
                             "process_graph": {
                                 "median1": {
-                                    "process_id": "median",
+                                    "process_id": "mean",
                                     "arguments": {
                                         "data": {
                                             "from_parameter": "data"
