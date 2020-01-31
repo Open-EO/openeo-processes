@@ -5047,7 +5047,7 @@
   {
     "id": "is_nan",
     "summary": "Value is not a number",
-    "description": "Checks whether the specified value `x` is not a number (often abbreviated as `NaN`). The definition of `NaN` follows the [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229). All non-numeric data types MUST also return `true`.",
+    "description": "Checks whether the specified value `x` is not a number (often abbreviated as `NaN`). The definition of `NaN` follows the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935). All non-numeric data types MUST also return `true`.",
     "categories": [
       "comparison"
     ],
@@ -5083,8 +5083,8 @@
     "links": [
       {
         "rel": "about",
-        "href": "https://ieeexplore.ieee.org/document/8766229",
-        "title": "IEEE Standard 754-2019 for Floating-Point Arithmetic"
+        "href": "https://ieeexplore.ieee.org/document/4610935",
+        "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
       }
     ]
   },
@@ -5134,7 +5134,7 @@
   {
     "id": "is_valid",
     "summary": "Value is valid data",
-    "description": "Checks whether the specified value `x` is valid. A value is considered valid if it is\n\n1. not a no-data value (`null`) and\n2. a finite number (only if `x` is a number). The definition of finite and infinite numbers follows the [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229).",
+    "description": "Checks whether the specified value `x` is valid. A value is considered valid if it is\n\n1. not a no-data value (`null`) and\n2. a finite number (only if `x` is a number). The definition of finite and infinite numbers follows the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935).",
     "categories": [
       "comparison"
     ],
@@ -5176,8 +5176,8 @@
     "links": [
       {
         "rel": "about",
-        "href": "https://ieeexplore.ieee.org/document/8766229",
-        "title": "IEEE Standard 754-2019 for Floating-Point Arithmetic"
+        "href": "https://ieeexplore.ieee.org/document/4610935",
+        "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
       }
     ]
   },
@@ -7337,8 +7337,8 @@
   },
   {
     "id": "not",
-    "summary": "Logical negation (NOT)",
-    "description": "Inverts a single boolean value so that `true` gets `false` and `false` gets `true`. The no-data value `null` is passed through.",
+    "summary": "Inverting a boolean",
+    "description": "Inverts a single boolean so that `true` gets `false` and `false` gets `true`.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "logic"
     ],
