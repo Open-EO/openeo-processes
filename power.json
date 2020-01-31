@@ -6,29 +6,28 @@
         "math",
         "math > exponential & logarithmic"
     ],
-    "parameter_order": ["base", "p"],
-    "parameters": {
-        "base": {
+    "parameters": [
+        {
+            "name": "base",
             "description": "The numerical base.",
             "schema": {
                 "type": [
                     "number",
                     "null"
                 ]
-            },
-            "required": true
+            }
         },
-        "p": {
+        {
+            "name": "p",
             "description": "The numerical exponent.",
             "schema": {
                 "type": [
                     "number",
                     "null"
                 ]
-            },
-            "required": true
+            }
         }
-    },
+    ],
     "returns": {
         "description": "The computed value for `base` raised to the power of `p`.",
         "schema": {

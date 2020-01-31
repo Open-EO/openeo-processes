@@ -5,15 +5,15 @@
     "categories": [
         "comparison"
     ],
-    "parameters": {
-        "x": {
+    "parameters": [
+        {
+            "name": "x",
             "description": "The data to check.",
             "schema": {
                 "description": "Any data type is allowed."
-            },
-            "required": true
+            }
         }
-    },
+    ],
     "returns": {
         "description": "`true` if the data is not a number, otherwise `false`",
         "schema": {

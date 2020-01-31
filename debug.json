@@ -1,39 +1,56 @@
 {
     "id": "debug",
-    "summary": "Send debugging information to subscribed clients",
-    "description": "Sends debugging information about the data to clients, which are subscribed to the topic `openeo.jobs.debug`.",
+    "summary": "Publish debugging information",
+    "description": "Sends debugging information about the data to the log output. Passes the data through.",
     "categories": [
         "development"
     ],
-    "experimental": true,
-    "parameter_order": ["data", "id"],
-    "parameters": {
-        "data": {
-            "description": "Data to send.",
+    "parameters": [
+        {
+            "name": "data",
+            "description": "Data to publish.",
             "schema": {
                 "description": "Any data type is allowed."
-            },
-            "required": true
+            }
         },
-        "id": {
-            "description": "An identifier to help identify the message in a bunch of other messages.",
+        {
+            "name": "code",
+            "description": "An identifier to help identify the log entry in a bunch of other log entries.",
+            "schema": {
+                "type": "string"
+            },
+            "default": "",
+            "optional": true
+        },
+        {
+            "name": "level",
+            "description": "The severity level of this message, defaults to `info`. Note that the level `error` forces the computation to be stopped!",
             "schema": {
                 "type": "string",
-                "default": ""
-            }
-        }
-    },
-    "returns": {
-        "description": "`false` if the information could not be sent, `true` otherwise.",
-        "schema": {
-            "type": "boolean"
-        }
-    },
-    "links": [
+                "enum": [
+                    "error",
+                    "warning",
+                    "info",
+                    "debug"
+                ]
+            },
+            "default": "info",
+            "optional": true
+        },
         {
-            "rel": "about",
-            "href": "https://open-eo.github.io/openeo-api/apireference-subscriptions/#publish-openeojobsdebug",
-            "title": "Information about the openEO API for Subscriptions"
+            "name": "message",
+            "description": "A message to send in addition to the data.",
+            "schema": {
+                "type": "string"
+            },
+            "default": "",
+            "optional": true
         }
-    ]
+    ],
+    "returns": {
+        "description": "Returns the data as passed to the `data` parameter.",
+        "schema": {
+            "description": "Any data type is allowed."
+        }
+    }
 }

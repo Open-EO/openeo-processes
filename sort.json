@@ -1,14 +1,14 @@
 {
     "id": "sort",
     "summary": "Sort data",
-    "description": "Sorts an array into ascending (default) or descending order.\n\nThis process is an alias to call ``order()`` and ``rearrange()`` consecutively: `rearrange(data, order(data, nodata))`. This process could be faster though. See ``order()`` for more information on sorting behaviour.",
+    "description": "Sorts an array into ascending (default) or descending order.\n\n**Remarks:**\n\n* Ties will be left in their original ordering.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
     "categories": [
         "arrays",
         "sorting"
     ],
-    "parameter_order": ["data", "asc", "nodata"],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "An array with data to sort.",
             "schema": {
                 "type": "array",
@@ -22,39 +22,45 @@
                         },
                         {
                             "type": "string",
-                            "format": "date-time"
+                            "format": "date-time",
+                            "subtype": "date-time"
                         },
                         {
                             "type": "string",
-                            "format": "date"
+                            "format": "date",
+                            "subtype": "date"
                         },
                         {
                             "type": "string",
-                            "format": "time"
+                            "format": "time",
+                            "subtype": "time"
                         }
                     ]
                 }
-            },
-            "required": true
-        },
-        "asc": {
-            "description": "The default sort order is ascending, with smallest values first. To sort in reverse (descending) order, set this parameter to `false`.",
-            "schema": {
-                "type": "boolean",
-                "default": true
             }
         },
-        "nodata": {
+        {
+            "name": "asc",
+            "description": "The default sort order is ascending, with smallest values first. To sort in reverse (descending) order, set this parameter to `false`.",
+            "schema": {
+                "type": "boolean"
+            },
+            "default": true,
+            "optional": true
+        },
+        {
+            "name": "nodata",
             "description": "Controls the handling of no-data values (`null`). By default they are removed. If `true`, missing values in the data are put last; if `false`, they are put first.",
             "schema": {
                 "type": [
                     "boolean",
                     "null"
-                ],
-                "default": null
-            }
+                ]
+            },
+            "default": null,
+            "optional": true
         }
-    },
+    ],
     "returns": {
         "description": "The sorted array.",
         "schema": {
@@ -69,15 +75,18 @@
                     },
                     {
                         "type": "string",
-                        "format": "date-time"
+                        "format": "date-time",
+                        "subtype": "date-time"
                     },
                     {
                         "type": "string",
-                        "format": "date"
+                        "format": "date",
+                        "subtype": "date"
                     },
                     {
                         "type": "string",
-                        "format": "time"
+                        "format": "time",
+                        "subtype": "time"
                     }
                 ]
             }
@@ -86,17 +95,91 @@
     "examples": [
         {
             "arguments": {
-                "data": [6,-1,2,null,7,4,null,8,3,9,9]
+                "data": [
+                    6,
+                    -1,
+                    2,
+                    null,
+                    7,
+                    4,
+                    null,
+                    8,
+                    3,
+                    9,
+                    9
+                ]
             },
-            "returns": [-1,2,3,4,6,7,8,9,9]
+            "returns": [
+                -1,
+                2,
+                3,
+                4,
+                6,
+                7,
+                8,
+                9,
+                9
+            ]
         },
         {
             "arguments": {
-                "data": [6,-1,2,null,7,4,null,8,3,9,9],
+                "data": [
+                    6,
+                    -1,
+                    2,
+                    null,
+                    7,
+                    4,
+                    null,
+                    8,
+                    3,
+                    9,
+                    9
+                ],
                 "asc": false,
                 "nodata": true
             },
-            "returns": [9,9,8,7,6,4,3,2,-1,null,null]
+            "returns": [
+                9,
+                9,
+                8,
+                7,
+                6,
+                4,
+                3,
+                2,
+                -1,
+                null,
+                null
+            ]
         }
-    ]
+    ],
+    "process_graph": {
+        "order": {
+            "process_id": "order",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "asc": {
+                    "from_parameter": "asc"
+                },
+                "nodata": {
+                    "from_parameter": "nodata"
+                }
+            }
+        },
+        "rearrange": {
+            "process_id": "rearrange",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "order": {
+                    "from_node": "order"
+                }
+            },
+            "result": true
+        }
+    }
 }

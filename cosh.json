@@ -5,18 +5,18 @@
     "categories": [
         "math > trigonometric"
     ],
-    "parameters": {
-        "x": {
+    "parameters": [
+        {
+            "name": "x",
             "description": "An angle in radians.",
             "schema": {
                 "type": [
                     "number",
                     "null"
                 ]
-            },
-            "required": true
+            }
         }
-    },
+    ],
     "returns": {
         "description": "The computed hyperbolic cosine of `x`.",
         "schema": {

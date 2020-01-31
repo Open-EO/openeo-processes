@@ -6,30 +6,22 @@
         "cubes",
         "import"
     ],
-    "parameters": {
-        "id": {
+    "parameters": [
+        {
+            "name": "id",
             "description": "The id of a batch job with results.",
             "schema": {
                 "type": "string",
-                "format": "job-id",
+                "subtype": "job-id",
                 "pattern": "^[A-Za-z0-9_\\-\\.~]+$"
-            },
-            "required": true
+            }
         }
-    },
+    ],
     "returns": {
         "description": "A data cube for further processing.",
         "schema": {
-            "anyOf": [
-                {
-                    "type": "object",
-                    "format": "raster-cube"
-                },
-                {
-                    "type": "object",
-                    "format": "vector-cube"
-                }
-            ]
+            "type": "object",
+            "subtype": "raster-cube"
         }
     }
 }

@@ -5,18 +5,18 @@
     "categories": [
         "math > rounding"
     ],
-    "parameters": {
-        "x": {
+    "parameters": [
+        {
+            "name": "x",
             "description": "A number to round up.",
             "schema": {
                 "type": [
                     "number",
                     "null"
                 ]
-            },
-            "required": true
+            }
         }
-    },
+    ],
     "returns": {
         "description": "The number rounded up.",
         "schema": {

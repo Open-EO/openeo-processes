@@ -1,37 +1,34 @@
 {
     "id": "multiply",
-    "summary": "Multiplication of a sequence of numbers",
-    "description": "Multiplies all elements in a sequential array of numbers and returns the computed product.\n\nThe computations should follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) whenever the processing environment supports it. Otherwise an exception must the thrown for incomputable results.\n\nBy default no-data values are ignored. Setting `ignore_nodata` to `false` considers no-data values so that `null` is returned if any element is such a value.",
+    "summary": "Multiplication of two numbers",
+    "description": "Multiplies the two numbers `x` and `y` (*x * y*) and returns the computed product.\n\nNo-data values are taken into account so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it.",
     "categories": [
-        "math",
-        "reducer"
+        "math"
     ],
-    "parameter_order": ["data", "ignore_nodata"],
-    "parameters": {
-        "data": {
-            "description": "An array of numbers with at least two elements.",
+    "parameters": [
+        {
+            "name": "x",
+            "description": "The multiplier.",
             "schema": {
-                "type": "array",
-                "items": {
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                },
-                "minItems": 2
-            },
-            "required": true
+                "type": [
+                    "number",
+                    "null"
+                ]
+            }
         },
-        "ignore_nodata": {
-            "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is returned if any value is such a value.",
+        {
+            "name": "y",
+            "description": "The multiplicand.",
             "schema": {
-                "type": "boolean",
-                "default": true
+                "type": [
+                    "number",
+                    "null"
+                ]
             }
         }
-    },
+    ],
     "returns": {
-        "description": "The computed product of the sequence of numbers.",
+        "description": "The computed product of the two numbers.",
         "schema": {
             "type": [
                 "number",
@@ -47,20 +44,22 @@
     "examples": [
         {
             "arguments": {
-                "data": [5,0]
+                "x": 5,
+                "y": 2.5
             },
-            "returns": 0
+            "returns": 12.5
         },
         {
             "arguments": {
-                "data": [-2,4,2.5]
+                "x": -2,
+                "y": -4
             },
-            "returns": -20
+            "returns": 8
         },
         {
             "arguments": {
-                "data": [1,null],
-                "ignore_nodata": false
+                "x": 1,
+                "y": null
             },
             "returns": null
         }
@@ -73,8 +72,25 @@
         },
         {
             "rel": "about",
-            "href": "https://ieeexplore.ieee.org/document/4610935",
-            "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
+            "href": "https://ieeexplore.ieee.org/document/8766229",
+            "title": "IEEE Standard 754-2019 for Floating-Point Arithmetic"
         }
-    ]
+    ],
+    "process_graph": {
+        "product": {
+            "process_id": "product",
+            "arguments": {
+                "data": [
+                    {
+                        "from_parameter": "x"
+                    },
+                    {
+                        "from_parameter": "y"
+                    }
+                ],
+                "ignore_nodata": false
+            },
+            "result": true
+        }
+    }
 }

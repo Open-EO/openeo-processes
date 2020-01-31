@@ -1,67 +1,28 @@
 {
     "id": "gt",
     "summary": "Greater than comparison",
-    "description": "Compares whether `x` is strictly greater than `y`.\n\n**Remarks:**\n\n* If any of the operands is `null`, the return value is `null`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.\n* Comparing strings is currently not supported, but is planned to be added in the future.",
+    "description": "Compares whether `x` is strictly greater than `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* If any operand is not a `number` or temporal string (`date`, `time` or `date-time`), the process returns `false`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
     "categories": [
         "comparison"
     ],
-    "parameter_order": ["x", "y"],
-    "parameters": {
-        "x": {
+    "parameters": [
+        {
+            "name": "x",
             "description": "First operand.",
             "schema": {
-                "anyOf": [
-                    {
-                        "type": "number"
-                    },
-                    {
-                        "type": "null"
-                    },
-                    {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    {
-                        "type": "string",
-                        "format": "time"
-                    }
-                ]
-            },
-            "required": true
+                "description": "Any data type is allowed."
+            }
         },
-        "y": {
+        {
+            "name": "y",
             "description": "Second operand.",
             "schema": {
-                "anyOf": [
-                    {
-                        "type": "number"
-                    },
-                    {
-                        "type": "null"
-                    },
-                    {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    {
-                        "type": "string",
-                        "format": "time"
-                    }
-                ]
-            },
-            "required": true
+                "description": "Any data type is allowed."
+            }
         }
-    },
+    ],
     "returns": {
-        "description": "`true` if `x` is strictly greater than `y` or `null` if any of the operands is `null`, otherwise `false`.",
+        "description": "`true` if `x` is strictly greater than `y` or `null` if any operand is `null`, otherwise `false`.",
         "schema": {
             "type": [
                 "boolean",
@@ -118,13 +79,20 @@
                 "y": "2018-01-01T12:00:00Z"
             },
             "returns": false
-        }
-    ],
-    "links": [
+        },
         {
-            "rel": "about",
-            "href": "https://open-eo.github.io/openeo-api/processes/#openeo-specific-formats",
-            "title": "Information about the supported temporal formats."
+            "arguments": {
+                "x": true,
+                "y": 0
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "x": true,
+                "y": false
+            },
+            "returns": false
         }
     ]
 }

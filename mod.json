@@ -5,29 +5,28 @@
     "categories": [
         "math"
     ],
-    "parameter_order": ["x", "y"],
-    "parameters": {
-        "x": {
+    "parameters": [
+        {
+            "name": "x",
             "description": "A number to be used as dividend.",
             "schema": {
                 "type": [
                     "number",
                     "null"
                 ]
-            },
-            "required": true
+            }
         },
-        "y": {
+        {
+            "name": "y",
             "description": "A number to be used as divisor.",
             "schema": {
                 "type": [
                     "number",
                     "null"
                 ]
-            },
-            "required": true
+            }
         }
-    },
+    ],
     "returns": {
         "description": "The remainder after division.",
         "schema": {

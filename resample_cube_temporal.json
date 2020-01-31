@@ -6,84 +6,80 @@
         "cubes",
         "aggregate & resample"
     ],
-    "parameter_order": ["data", "target", "method", "dimension", "binary"],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "A data cube.",
             "schema": {
                 "type": "object",
-                "format": "raster-cube"
-            },
-            "required": true
+                "subtype": "raster-cube"
+            }
         },
-        "target": {
+        {
+            "name": "target",
             "description": "A data cube that describes the temporal target resolution.",
             "schema": {
                 "type": "object",
-                "format": "raster-cube"
-            },
-            "required": true
+                "subtype": "raster-cube"
+            }
         },
-        "method": {
-            "description": "A resampling method to be applied, could be a reducer for downsampling or other methods for upsampling. The reducer must be a callable process (or a set of processes as process graph) such as ``mean()`` that accepts by default array as input. The process can also work on two values by setting the parameter `binary` to `true`.",
+        {
+            "name": "method",
+            "description": "A resampling method to be applied, could be a reducer for downsampling or other methods for upsampling. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
             "schema": {
-                "anyOf": [
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": [
                     {
-                        "title": "Unary behaviour",
-                        "description": "Passes an array to the reducer.",
-                        "type": "object",
-                        "format": "callback",
-                        "parameters": {
-                            "data": {
-                                "description": "An array with elements of any data type.",
-                                "type": "array",
-                                "items": {
-                                    "description": "Any data type."
-                                }
+                        "name": "data",
+                        "description": "A labeled array with elements of any type.",
+                        "schema": {
+                            "type": "array",
+                            "subtype": "labeled-array",
+                            "items": {
+                                "description": "Any data type."
                             }
-                        } 
+                        }
                     },
                     {
-                        "title": "Binary behaviour",
-                        "description": "Passes two values to the reducer.",
-                        "type": "object",
-                        "format": "callback",
-                        "parameters": {
-                            "x": {
-                                "description": "The first value. Any data type could be passed."
-                            },
-                            "y": {
-                                "description": "The second value. Any data type could be passed."
-                            }
-                        } 
+                        "name": "context",
+                        "description": "Additional data passed by the user.",
+                        "schema": {
+                            "description": "Any data type."
+                        },
+                        "optional": true,
+                        "default": null
                     }
                 ]
-            },
-            "required": true
+            }
         },
-        "dimension": {
-            "description": "The temporal dimension to resample, which must exist with this name in both data cubes. If the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` error if it has more dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Note:** The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.",
+        {
+            "name": "dimension",
+            "description": "The name of the temporal dimension to resample, which must exist with this name in both data cubes. If the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` error if it has more dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Note:** The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.",
             "schema": {
                 "type": [
                     "string",
                     "null"
-                ],
-                "default": null
-            }
+                ]
+            },
+            "default": null,
+            "optional": true
         },
-        "binary": {
-            "description": "Specifies whether the process should pass two values to the reducer specified as resampling method or a list of values (default).\n\nIf the process passes two values, the reducer must be both associative and commutative as the execution may be executed in parallel and therefore the order of execution is arbitrary.\n\nThis parameter is especially useful for UDFs passed as reducers. Back-ends may still optimize and parallelize processes that work on list of values.",
+        {
+            "name": "context",
+            "description": "Additional data to be passed to the process specified for the parameter `method`.",
             "schema": {
-                "type": "boolean",
-                "default": false
-            }
+                "description": "Any data type."
+            },
+            "optional": true,
+            "default": null
         }
-    },
+    ],
     "returns": {
         "description": "A data cube with potentially lower temporal resolution and potentially lower cardinality, but the same number of dimensions as the original data cube.",
         "schema": {
             "type": "object",
-            "format": "raster-cube"
+            "subtype": "raster-cube"
         }
     },
     "exceptions": {
@@ -96,19 +92,9 @@
     },
     "links": [
         {
-            "rel": "about",
-            "href": "https://open-eo.github.io/openeo-api/processes/#openeo-specific-formats",
-            "title": "Information about the supported temporal formats."
-        },
-        {
             "href": "https://open-eo.github.io/openeo-api/glossary/#aggregation-and-resampling",
             "rel": "about",
             "title": "Resampling explained in the openEO glossary"
-        },
-        {
-            "rel": "about",
-            "href": "https://en.wikipedia.org/wiki/Reduction_Operator",
-            "title": "Background information on reduction operators (binary reducers) by Wikipedia"
         }
     ]
 }

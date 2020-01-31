@@ -1,54 +1,40 @@
 {
     "id": "add_dimension",
     "summary": "Add a new dimension",
-    "description": "Adds a new named dimension to the data cube.\n\nAfterwards, the dimension can be referenced with the specified `name`. If a dimension with the specified name exists, the process fails with a `DimensionExists` error. The dimension value of the dimension is set to the specified `value`.",
+    "description": "Adds a new named dimension to the data cube.\n\nAfterwards, the dimension can be referenced with the specified `name`. If a dimension with the specified name exists, the process fails with a `DimensionExists` error. The dimension label of the dimension is set to the specified `label`.",
     "categories": [
         "cubes"
     ],
-    "parameter_order": ["data", "name", "value", "type"],
-    "parameters": {
-        "data": {
+    "parameters": [
+        {
+            "name": "data",
             "description": "A data cube to add the dimension to.",
             "schema": {
                 "type": "object",
-                "format": "raster-cube"
-            },
-            "required": true
+                "subtype": "raster-cube"
+            }
         },
-        "name": {
+        {
+            "name": "name",
             "description": "Name for the dimension.",
             "schema": {
                 "type": "string"
-            },
-            "required": true
+            }
         },
-        "value": {
-            "description": "A dimension value (**not** a pixel value).",
-            "schema": {
-                "anyOf": [
-                    {
-                        "type": "number"
-                    },
-                    {
-                        "type": "string"
-                    },
-                    {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    {
-                        "type": "string",
-                        "format": "time"
-                    }
-                ]
-            },
-            "required": true
+        {
+            "name": "label",
+            "description": "A dimension label.",
+            "schema": [
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "string"
+                }
+            ]
         },
-        "type": {
+        {
+            "name": "type",
             "description": "The type of dimension, defaults to `other`.",
             "schema": {
                 "type": "string",
@@ -57,16 +43,17 @@
                     "temporal",
                     "bands",
                     "other"
-                ],
-                "default": "other"
-            }
+                ]
+            },
+            "default": "other",
+            "optional": true
         }
-    },
+    ],
     "returns": {
         "description": "The data cube with a newly added dimension.",
         "schema": {
             "type": "object",
-            "format": "raster-cube"
+            "subtype": "raster-cube"
         }
     },
     "exceptions": {
