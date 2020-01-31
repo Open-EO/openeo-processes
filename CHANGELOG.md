@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 1.0.0-rc.1 - 2020-01-31
+
 ### Added
 - Processes:
     - `add`
@@ -21,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `dimension_labels`
     - `drop_dimension`
     - `filter_labels`
-    - `filter_spatial
+    - `filter_spatial`
     - `load_uploaded_files`
     - `mask_polygon`
     - `reduce_dimension`
