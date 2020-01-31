@@ -92,24 +92,59 @@
         }
     ],
     "process_graph": {
-        "sd": {
-            "process_id": "sd",
+        "mean": {
+            "process_id": "mean",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                }
+            }
+        },
+        "apply": {
+            "process_id": "apply",
             "arguments": {
                 "data": {
                     "from_parameter": "data"
                 },
-                "ignore_nodata": {
-                    "from_parameter": "ignore_nodata"
+                "process": {
+                    "process-graph": {
+                        "subtract": {
+                            "process_id": "subtract",
+                            "arguments": {
+                                "x": {
+                                    "from_parameter": "x"
+                                },
+                                "y": {
+                                    "from_parameter": "context"
+                                }
+                            }
+                        },
+                        "power": {
+                            "process_id": "power",
+                            "arguments": {
+                                "base": {
+                                    "from_node": "subtract"
+                                },
+                                "p": 2
+                            },
+                            "result": true
+                        }
+                    }
+                },
+                "context": {
+                    "from_node": "mean"
                 }
             }
         },
-        "power": {
-            "process_id": "power",
+        "mean2": {
+            "process_id": "mean",
             "arguments": {
-                "base": {
-                    "from_node": "sd"
+                "data": {
+                    "from_node": "apply"
                 },
-                "p": 2
+                "ignore_nodata": {
+                    "from_parameter": "ignore_nodata"
+                }
             },
             "result": true
         }
