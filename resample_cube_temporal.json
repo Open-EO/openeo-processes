@@ -40,6 +40,15 @@
                                 "description": "Any data type."
                             }
                         }
+                    },
+                    {
+                        "name": "context",
+                        "description": "Additional data passed by the user.",
+                        "schema": {
+                            "description": "Any data type."
+                        },
+                        "optional": true,
+                        "default": null
                     }
                 ]
             }
@@ -55,6 +64,15 @@
             },
             "default": null,
             "optional": true
+        },
+        {
+            "name": "context",
+            "description": "Additional data to be passed to the process specified for the parameter `method`.",
+            "schema": {
+                "description": "Any data type."
+            },
+            "optional": true,
+            "default": null
         }
     ],
     "returns": {
