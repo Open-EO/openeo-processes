@@ -75,5 +75,22 @@
             "href": "https://ieeexplore.ieee.org/document/8766229",
             "title": "IEEE Standard 754-2019 for Floating-Point Arithmetic"
         }
-    ]
+    ],
+    "process_graph": {
+        "product": {
+            "process_id": "product",
+            "arguments": {
+                "data": [
+                    {
+                        "from_parameter": "x"
+                    },
+                    {
+                        "from_parameter": "y"
+                    }
+                ],
+                "ignore_nodata": false
+            },
+            "result": true
+        }
+    }
 }

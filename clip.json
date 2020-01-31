@@ -73,5 +73,36 @@
             },
             "returns": null
         }
-    ]
+    ],
+    "process_graph": {
+        "min": {
+            "process_id": "min",
+            "arguments": {
+                "data": [
+                    {
+                        "from_parameter": "max"
+                    },
+                    {
+                        "from_parameter": "x"
+                    }
+                ],
+                "ignore_nodata": false
+            }
+        },
+        "max": {
+            "process_id": "max",
+            "arguments": {
+                "data": [
+                    {
+                        "from_parameter": "min"
+                    },
+                    {
+                        "from_node": "min"
+                    }
+                ],
+                "ignore_nodata": false
+            },
+            "result": true
+        }
+    }
 }

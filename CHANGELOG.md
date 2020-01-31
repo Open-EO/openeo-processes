@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `reduce_dimension_binary`
     - `rename_labels`
 - Support for labeled arrays. [API#245](https://github.com/Open-EO/openeo-api/issues/245)
+- Process graphs for processes that can be implemented using other pre-defined processes. [#137](https://github.com/Open-EO/openeo-processes/issues/137)
 - `context` parameters to all processes which support passing process graphs (callbacks) as parameters. [#25](https://github.com/Open-EO/openeo-processes/issues/25)
 - Added further examples.
 

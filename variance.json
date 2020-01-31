@@ -90,5 +90,63 @@
             "href": "http://mathworld.wolfram.com/Variance.html",
             "title": "Variance explained by Wolfram MathWorld"
         }
-    ]
+    ],
+    "process_graph": {
+        "mean": {
+            "process_id": "mean",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                }
+            }
+        },
+        "apply": {
+            "process_id": "apply",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "process": {
+                    "process-graph": {
+                        "subtract": {
+                            "process_id": "subtract",
+                            "arguments": {
+                                "x": {
+                                    "from_parameter": "x"
+                                },
+                                "y": {
+                                    "from_parameter": "context"
+                                }
+                            }
+                        },
+                        "power": {
+                            "process_id": "power",
+                            "arguments": {
+                                "base": {
+                                    "from_node": "subtract"
+                                },
+                                "p": 2
+                            },
+                            "result": true
+                        }
+                    }
+                },
+                "context": {
+                    "from_node": "mean"
+                }
+            }
+        },
+        "mean2": {
+            "process_id": "mean",
+            "arguments": {
+                "data": {
+                    "from_node": "apply"
+                },
+                "ignore_nodata": {
+                    "from_parameter": "ignore_nodata"
+                }
+            },
+            "result": true
+        }
+    }
 }

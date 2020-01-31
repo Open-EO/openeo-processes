@@ -85,5 +85,74 @@
             },
             "returns": null
         }
-    ]
+    ],
+    "process_graph": {
+        "subtract1": {
+            "process_id": "subtract",
+            "arguments": {
+                "x": {
+                    "from_parameter": "x"
+                },
+                "y": {
+                    "from_parameter": "inputMin"
+                }
+            }
+        },
+        "subtract2": {
+            "process_id": "subtract",
+            "arguments": {
+                "x": {
+                    "from_parameter": "inputMax"
+                },
+                "y": {
+                    "from_parameter": "inputMin"
+                }
+            }
+        },
+        "subtract3": {
+            "process_id": "subtract",
+            "arguments": {
+                "x": {
+                    "from_parameter": "outputMax"
+                },
+                "y": {
+                    "from_parameter": "outputMin"
+                }
+            }
+        },
+        "divide": {
+            "process_id": "divide",
+            "arguments": {
+                "x": {
+                    "from_node": "subtract1"
+                },
+                "y": {
+                    "from_node": "subtract2"
+                }
+            }
+        },
+        "multiply": {
+            "process_id": "multiply",
+            "arguments": {
+                "x": {
+                    "from_node": "divide"
+                },
+                "y": {
+                    "from_node": "subtract3"
+                }
+            }
+        },
+        "add": {
+            "process_id": "add",
+            "arguments": {
+                "x": {
+                    "from_node": "multiply"
+                },
+                "y": {
+                    "from_parameter": "outputMin"
+                }
+            },
+            "result": true
+        }
+    }
 }

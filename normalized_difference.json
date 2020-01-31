@@ -46,5 +46,41 @@
             "href": "https://eos.com/ndsi/",
             "title": "NDSI explained by EOS"
         }
-    ]
+    ],
+    "process_graph": {
+        "subtract": {
+            "process_id": "subtract",
+            "arguments": {
+                "x": {
+                    "from_parameter": "x"
+                },
+                "y": {
+                    "from_parameter": "y"
+                }
+            }
+        },
+        "add": {
+            "process_id": "add",
+            "arguments": {
+                "x": {
+                    "from_parameter": "x"
+                },
+                "y": {
+                    "from_parameter": "y"
+                }
+            }
+        },
+        "divide": {
+            "process_id": "divide",
+            "arguments": {
+                "x": {
+                    "from_node": "subtract"
+                },
+                "y": {
+                    "from_node": "add"
+                }
+            },
+            "result": true
+        }
+    }
 }
