@@ -180,7 +180,6 @@
                             {
                                 "name": "value",
                                 "description": "The property value to be checked against.",
-                                "required": true,
                                 "schema": {
                                     "description": "Any data type."
                                 }
