@@ -72,7 +72,7 @@
                                     "subtype": "epsg-code",
                                     "minimum": 1000,
                                     "examples": [
-                                        7099
+                                        3857
                                     ]
                                 },
                                 {

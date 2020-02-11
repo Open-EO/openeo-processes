@@ -7,7 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Fixed
--  `load_collection`: Removed outdated `require` property from `value` callback parameter in process parameter `properties`.
+- `load_collection`: Removed outdated `require` property from `value` callback parameter in process parameter `properties`.
+- `filter_bbox`, `load_collection`, `resample_spatial`: Fixed invalid EPSG code examples.
 
 ## 1.0.0-rc.1 - 2020-01-31
 
