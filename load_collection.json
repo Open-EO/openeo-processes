@@ -13,7 +13,7 @@
             "schema": {
                 "type": "string",
                 "subtype": "collection-id",
-                "pattern": "^[A-Za-z0-9_\\-\\.~/]+$"
+                "pattern": "^[\\w\\-\\.~/]+$"
             }
         },
         {
