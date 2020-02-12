@@ -5517,7 +5517,7 @@
         "schema": {
           "type": "string",
           "subtype": "collection-id",
-          "pattern": "^[A-Za-z0-9_\\-\\.~/]+$"
+          "pattern": "^[\\w\\-\\.~/]+$"
         }
       },
       {
@@ -5807,7 +5807,7 @@
         "schema": {
           "type": "string",
           "subtype": "job-id",
-          "pattern": "^[A-Za-z0-9_\\-\\.~]+$"
+          "pattern": "^[\\w\\-\\.~]+$"
         }
       }
     ],
@@ -7001,7 +7001,7 @@
         "schema": [
           {
             "type": "string",
-            "pattern": "^[A-Za-z0-9_]+$"
+            "pattern": "^\\w+$"
           },
           {
             "type": "null"
