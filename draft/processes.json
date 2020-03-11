@@ -683,7 +683,7 @@
     ],
     "exceptions": {
       "TooManyDimensions": {
-        "message": "The number of dimensions must be reduced to three for 'aggregate_temporal'."
+        "message": "The data cube contains multiple temporal dimensions. The parameter `dimension` must be specified."
       },
       "DimensionNotAvailable": {
         "message": "A dimension with the specified name does not exist."
