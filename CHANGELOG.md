@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Processes:
+    - `aggregate_temporal_frequency`
+    - `anomaly`
+    - `climatological_normal`
+
 ### Fixed
 - `load_collection`: Removed outdated `require` property from `value` callback parameter in process parameter `properties`.
 - `filter_bbox`, `load_collection`, `resample_spatial`: Fixed invalid EPSG code examples.

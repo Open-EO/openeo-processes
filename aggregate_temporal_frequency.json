@@ -1,0 +1,112 @@
+{
+	"id": "aggregate_temporal_frequency",
+	"summary": "Temporal aggregations based on frequencies",
+	"description": "Computes a temporal aggregation based on calendar hierarchies such as year, month, week or seasons. For other calendar hierarchies ``aggregate_temporal()`` can be used.\r\n\r\nFor each interval, all data along the dimension will be passed through the reducer.\n\nIf the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension.",
+	"categories": [
+	  "aggregate & resample",
+	  "climatology",
+	  "cubes"
+	],
+	"parameters": [
+	  {
+		"name": "data",
+		"description": "A data cube.",
+		"schema": {
+		  "type": "object",
+		  "subtype": "raster-cube"
+		}
+	  },
+	  {
+		  "name": "frequency",
+		  "description": "The time intervals to aggregate. The following pre-defined frequencies are supported:\r\n\r\n* `hourly`: Hour of the day. Dimension labels: `0` - `23`\r\n* `daily`: Day of the year. Dimension labels: `0` - `365`\r\n* `weekly`: Week of the year. Dimension labels: `1` - `52`\r\n* `monthly`: Month of the year. Dimension labels: `1` - `12`\r\n* `yearly`: Number of the year. Dimension labels are the four-digit year numbers.\r\n* `seasons`: Refers to three month periods of the calendar seasons (winter, spring, summer, autumn). Dimension labels: `djf` (December - February), `mam` (March - May), `jja` (June - August), `son` (September - November).\r\n* `tropical_seasons`: Refers to the 6 month periods of the tropical seasons (dry, wet). Dimension labels: `ndjfma` (November - April), `mjjaso` (May - October).",
+		  "schema": {
+			  "type": "string",
+			  "enum": [
+					"hourly",
+					"daily",
+					"weekly",
+					"monthly",
+					"yearly",
+					"seasons",
+					"tropical_seasons"
+			  ]
+		  }
+	  },
+	  {
+		"name": "reducer",
+		"description": "A reducer to be applied on all values along the specified dimension. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
+		"schema": {
+		  "type": "object",
+		  "subtype": "process-graph",
+		  "parameters": [
+			{
+			  "name": "data",
+			  "description": "A labeled array with elements of any type.",
+			  "schema": {
+				"type": "array",
+				"subtype": "labeled-array",
+				"items": {
+				  "description": "Any data type."
+				}
+			  }
+			},
+			{
+			  "name": "context",
+			  "description": "Additional data passed by the user.",
+			  "schema": {
+				"description": "Any data type."
+			  },
+			  "optional": true,
+			  "default": null
+			}
+		  ]
+		}
+	  },
+	  {
+		"name": "dimension",
+		"description": "The name of the temporal dimension for aggregation. All data along the dimension will be passed through the specified reducer. If the dimension is not set or set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` error if it has more dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Note:** The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.",
+		"schema": {
+		  "type": [
+			"string",
+			"null"
+		  ]
+		},
+		"default": null,
+		"optional": true
+	  },
+	  {
+		"name": "context",
+		"description": "Additional data to be passed to the reducer.",
+		"schema": {
+		  "description": "Any data type."
+		},
+		"optional": true,
+		"default": null
+	  }
+	],
+	"returns": {
+	  "description": "A data cube with potentially lower resolution and potentially lower cardinality, but the same number of dimensions as the original data cube.",
+	  "schema": {
+		"type": "object",
+		"subtype": "raster-cube"
+	  }
+	},
+	"exceptions": {
+	  "TooManyDimensions": {
+	    "message": "The data cube contains multiple temporal dimensions. The parameter `dimension` must be specified."
+	  },
+	  "DimensionNotAvailable": {
+		"message": "A dimension with the specified name does not exist."
+	  },
+	  "DistinctDimensionLabelsRequired": {
+		"message": "The dimension labels have duplicate values. Distinct labels must be specified."
+	  }
+	},
+	"links": [
+	  {
+		"href": "https://open-eo.github.io/openeo-api/glossary/#aggregation-and-resampling",
+		"rel": "about",
+		"title": "Aggregation explained in the openEO glossary"
+	  }
+	]
+  }
