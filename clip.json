@@ -85,8 +85,7 @@
                     {
                         "from_parameter": "x"
                     }
-                ],
-                "ignore_nodata": false
+                ]
             }
         },
         "max": {
@@ -99,8 +98,7 @@
                     {
                         "from_node": "min"
                     }
-                ],
-                "ignore_nodata": false
+                ]
             },
             "result": true
         }
