@@ -26,18 +26,19 @@
         },
         {
             "name": "frequency",
-            "description": "The time intervals to aggregate. The following pre-defined frequencies are supported:\r\n\r\n* `hourly`: Hour of the day. Dimension labels: `0` - `23`\r\n* `daily`: Day of the year. Dimension labels: `0` - `365`\r\n* `weekly`: Week of the year. Dimension labels: `1` - `52`\r\n* `monthly`: Month of the year. Dimension labels: `1` - `12`\r\n* `yearly`: Number of the year. Dimension labels are the four-digit year numbers.\r\n* `climatology_period`: The average of the period specified in the `climatology_period`. Dimension label: `climatology_period`.\r\n* `seasons`: Refers to three month periods of the calendar seasons (winter, spring, summer, autumn). Dimension labels: `djf` (December - February), `mam` (March - May), `jja` (June - August), `son` (September - November).\r\n* `tropical_seasons`: Refers to the 6 month periods of the tropical seasons (dry, wet). Dimension labels: `ndjfma` (November - April), `mjjaso` (May - October).",
+            "description": "Specifies the time intervals available in the `normals` data cube. The following pre-defined frequencies are supported with their expected dimension labels in the normals data cube:\r\n\r\n* `hourly`: Hour of the day. Dimension labels: `0` - `23`\r\n* `daily`: Day of the year. Dimension labels: `1` - `365`\r\n* `weekly`: Week of the year. Dimension labels: `1` - `52`\r\n* `monthly`: Month of the year. Dimension labels: `1` - `12`\r\n* `yearly`: Number of the year. Dimension labels are the four-digit year numbers.\r\n* `single_period` / `climatology_period`: A single period, e.g. the climatology period. A single dimension label with any name is expected.\r\n* `seasons`: Refers to three month periods of the calendar seasons (winter, spring, summer, autumn). Dimension labels: `djf` (December - February), `mam` (March - May), `jja` (June - August), `son` (September - November).\r\n* `tropical_seasons`: Refers to the 6 month periods of the tropical seasons (dry, wet). Dimension labels: `ndjfma` (November - April), `mjjaso` (May - October).",
             "schema": {
                 "type": "string",
                 "enum": [
-                      "hourly",
-                      "daily",
-                      "weekly",
-                      "monthly",
-                      "yearly",
-                      "climatology_period",
-                      "seasons",
-                      "tropical_seasons"
+                    "hourly",
+                    "daily",
+                    "weekly",
+                    "monthly",
+                    "yearly",
+                    "single_period",
+                    "climatology_period",
+                    "seasons",
+                    "tropical_seasons"
                 ]
             }
         }
