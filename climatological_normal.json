@@ -8,7 +8,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "A data cube with exactly one temporal dimension. The datacube must span at least the temporal interval specified in the parameter `climatology_period`.\r\n\r\nSeasonal periods may span two years, e.g. temporal winter that includes months December, January and February. If the required months before the actual climate period is available, the season is taken into account. If not available, the first season is not taken into account and the seasonal mean is based on one year less than other seasonal normals. The incomplete season at the end of the last year is never taken into account.",
+            "description": "A data cube with exactly one temporal dimension. The datacube must span at least the temporal interval specified in the parameter `climatology_period`.\n\nSeasonal periods may span two consecutive years, e.g. temporal winter that includes months December, January and February. If the required months before the actual climate period are available, the season is taken into account. If not available, the first season is not taken into account and the seasonal mean is based on one year less than the other seasonal normals. The incomplete season at the end of the last year is never taken into account.",
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
@@ -16,7 +16,7 @@
         },
         {
             "name": "frequency",
-            "description": "The time intervals to aggregate. The following pre-defined frequencies are supported:\r\n\r\n* `daily`: Day of the year. Dimension labels: `1` - `365`\r\n* `monthly`: Month of the year. Dimension labels: `1` - `12`\r\n* `climatology_period`: The average of the period specified in the `climatology_period`. Dimension label: `climatology_period`.\r\n* `seasons`: Refers to three month periods of the calendar seasons (winter, spring, summer, autumn). Dimension labels: `djf` (December - February), `mam` (March - May), `jja` (June - August), `son` (September - November).\r\n* `tropical_seasons`: Refers to the 6 month periods of the tropical seasons (dry, wet). Dimension labels: `ndjfma` (November - April), `mjjaso` (May - October).",
+            "description": "The time intervals to aggregate the average value for. The following pre-defined frequencies are supported:\n\n* `daily`: Day of the year\n* `monthly`: Month of the year\n* `climatology_period`: The period specified in the `climatology_period`.\n* `seasons`: Refers to three month periods of the calendar seasons (December - February, March - May, June - August, September - November).\n* `tropical_seasons`: Refers to the six month periods of the tropical seasons (November - April, Mai - October).",
             "schema": {
                 "type": "string",
                 "enum": [
@@ -49,7 +49,7 @@
         }
     ],
     "returns": {
-        "description": "A data cube. The cardinality is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
+        "description": "A data cube with potentially cardinality, but the same resolution and number of dimensions as the original data cube. The temporal dimension has the following dimension labels:\n\n* `daily`: `1` - `365`\n* `monthly`: `1` - `12`\n* `climatology_period`: `climatology_period`\n* `seasons`: `djf` (December - February), `mam` (March - May), `jja` (June - August), `son` (September - November)\n* `tropical_seasons`: `ndjfma` (November - April), `mjjaso` (May - October)",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"
