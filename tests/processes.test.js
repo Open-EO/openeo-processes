@@ -23,7 +23,7 @@ var subtypes = {
 	'date-time': {type: 'string'},
 	'time': {type: 'string'},
 	'uri': {type: 'string'},
-	// Custom subtypes
+	// Custom subtypes defined by the API
 	'band-name': {type: 'string'},
 	'bounding-box': {type: 'object'},
 	'collection-id': {type: 'string'},
@@ -47,7 +47,9 @@ var subtypes = {
 	'udf-runtime': {type: 'string'},
 	'udf-runtime-version': {type: 'string'},
 	'vector-cube': {type: 'object'},
-	'wkt2-definition': {type: 'string'}
+	'wkt2-definition': {type: 'string'},
+	// Proprietary extensions to the API
+	'year': {type: 'string'} 
 }
 
 var ajvOptions = {

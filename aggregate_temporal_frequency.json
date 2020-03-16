@@ -85,7 +85,7 @@
         }
     ],
     "returns": {
-        "description": "A data cube with potentially lower resolution and cardinality, but the same number of dimensions as the original data cube. The specified temporal dimension has the following dimension labels (`YYYY = four-digit year, `MM` = two-digit month, `DD` two-digit day of month):\n\n* `hourly`: `YYYY-MM-DD-0` - `YYYY-MM-DD-23`\n* `daily`: `YYYY-1` - `YYYY-365`\n* `weekly`: `YYYY-1` - `YYYY-52`\n* `monthly`: `YYYY-1` - `YYYY-12`\n* `yearly`: `YYYY`\n* `seasons`: `YYYY-djf` (December - February), `YYYY-mam` (March - May), `YYYY-jja` (June - August), `YYYY-son` (September - November).\n* `tropical_seasons`: `YYYY-ndjfma` (November - April), `YYYY-mjjaso` (May - October).",
+        "description": "A data cube with potentially lower resolution and cardinality, but the same number of dimensions as the original data cube. The specified temporal dimension has the following dimension labels (`YYYY` = four-digit year, `MM` = two-digit month, `DD` two-digit day of month):\n\n* `hourly`: `YYYY-MM-DD-0` - `YYYY-MM-DD-23`\n* `daily`: `YYYY-1` - `YYYY-365`\n* `weekly`: `YYYY-1` - `YYYY-52`\n* `monthly`: `YYYY-1` - `YYYY-12`\n* `yearly`: `YYYY`\n* `seasons`: `YYYY-djf` (December - February), `YYYY-mam` (March - May), `YYYY-jja` (June - August), `YYYY-son` (September - November).\n* `tropical_seasons`: `YYYY-ndjfma` (November - April), `YYYY-mjjaso` (May - October).",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"

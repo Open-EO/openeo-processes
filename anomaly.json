@@ -10,7 +10,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "A data cube with exactly one temporal dimension and the following dimension labels for the given frequency (`YYYY = four-digit year, `MM` = two-digit month, `DD` two-digit day of month):\n\n* `hourly`: `YYYY-MM-DD-0` - `YYYY-MM-DD-23`\n* `daily`: `YYYY-1` - `YYYY-365`\n* `weekly`: `YYYY-1` - `YYYY-52`\n* `monthly`: `YYYY-1` - `YYYY-12`\n* `yearly`: `YYYY`\n* `single_period` / `climatology_period`: A single dimension label with any name is expected.\n* `seasons`: `YYYY-djf` (December - February), `YYYY-mam` (March - May), `YYYY-jja` (June - August), `YYYY-son` (September - November)\n* `tropical_seasons`: `YYYY-ndjfma` (November - April), `YYYY-mjjaso` (May - October)\n\n``aggregate_temporal_frequency()`` can compute such a data cube.",
+            "description": "A data cube with exactly one temporal dimension and the following dimension labels for the given frequency (`YYYY` = four-digit year, `MM` = two-digit month, `DD` two-digit day of month):\n\n* `hourly`: `YYYY-MM-DD-0` - `YYYY-MM-DD-23`\n* `daily`: `YYYY-1` - `YYYY-365`\n* `weekly`: `YYYY-1` - `YYYY-52`\n* `monthly`: `YYYY-1` - `YYYY-12`\n* `yearly`: `YYYY`\n* `single_period` / `climatology_period`: A single dimension label with any name is expected.\n* `seasons`: `YYYY-djf` (December - February), `YYYY-mam` (March - May), `YYYY-jja` (June - August), `YYYY-son` (September - November)\n* `tropical_seasons`: `YYYY-ndjfma` (November - April), `YYYY-mjjaso` (May - October)\n\n``aggregate_temporal_frequency()`` can compute such a data cube.",
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
