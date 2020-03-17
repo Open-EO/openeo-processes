@@ -1,7 +1,7 @@
 {
     "id": "resample_cube_spatial",
-    "summary": "Resample the spatial dimensions to a target data cube",
-    "description": "Resamples the spatial dimensions (x,y) from a source data cube to a target data cube and return the results as a new data cube.",
+    "summary": "Resample the spatial dimensions to match a target data cube",
+    "description": "Resamples the spatial dimensions (x,y) from a source data cube to align with the corresponding dimensions of the given target data cube. Returns a new data cube with the resampled dimensions.\n\nTo resample a data cube based to a specific resolution or projection without creating a target data cube upfront, refer to ``resample_spatial()``.",
     "categories": [
         "cubes",
         "aggregate & resample"

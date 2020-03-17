@@ -1,7 +1,7 @@
 {
     "id": "resample_cube_temporal",
-    "summary": "Resample a temporal dimension to a target data cube",
-    "description": "Resamples a temporal dimension from a source data cube to a target data cube and return the results as a new data cube.\n\nIf the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension.",
+    "summary": "Resample a temporal dimension to match a target data cube",
+    "description": "Resamples the given temporal dimension from a source data cube to align with the corresponding dimension of the given target data cube. Returns a new data cube with the resampled dimension.\n\nIf the dimension is not set or is set to `null`, the data cube is expected to have one temporal dimension only.",
     "categories": [
         "cubes",
         "aggregate & resample"
