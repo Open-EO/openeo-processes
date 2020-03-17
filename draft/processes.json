@@ -8609,8 +8609,8 @@
   },
   {
     "id": "resample_cube_spatial",
-    "summary": "Resample the spatial dimensions to a target data cube",
-    "description": "Resamples the spatial dimensions (x,y) from a source data cube to a target data cube and return the results as a new data cube.",
+    "summary": "Resample the spatial dimensions to match a target data cube",
+    "description": "Resamples the spatial dimensions (x,y) from a source data cube to align with the corresponding dimensions of the given target data cube. Returns a new data cube with the resampled dimensions.\n\nTo resample a data cube to a specific resolution or projection regardless of an existing target data cube, refer to ``resample_spatial()``.",
     "categories": [
       "cubes",
       "aggregate & resample"
@@ -8673,8 +8673,8 @@
   },
   {
     "id": "resample_cube_temporal",
-    "summary": "Resample a temporal dimension to a target data cube",
-    "description": "Resamples a temporal dimension from a source data cube to a target data cube and return the results as a new data cube.\n\nIf the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension.",
+    "summary": "Resample a temporal dimension to match a target data cube",
+    "description": "Resamples the given temporal dimension from a source data cube to align with the corresponding dimension of the given target data cube. Returns a new data cube with the resampled dimension.\n\nIf the dimension is not set or is set to `null`, the data cube is expected to have one temporal dimension only.",
     "categories": [
       "cubes",
       "aggregate & resample"
@@ -8774,7 +8774,7 @@
   {
     "id": "resample_spatial",
     "summary": "Resample and warp the spatial dimensions",
-    "description": "Resamples the spatial dimensions (x,y) of the data cube to a specified resolution and/or warps the data cube to the target projection. At least `resolution` or `projection` must be specified.\n\nUse ``filter_bbox()`` to set the target spatial extent.",
+    "description": "Resamples the spatial dimensions (x,y) of the data cube to a specified resolution and/or warps the data cube to the target projection. At least `resolution` or `projection` must be specified.\n\nRelated processes:\n\n* Use ``filter_bbox()`` to set the target spatial extent.\n* To spatially align two data cubes with each other (e.g. for merging), better use the process ``resample_cube_spatial()``.",
     "categories": [
       "cubes",
       "aggregate & resample"
