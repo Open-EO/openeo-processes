@@ -187,7 +187,7 @@ describe.each(processes)("%s", (file, p, fileContent) => {
 	test("Summary", () => {
 		expect(typeof p.summary === 'undefined' || typeof p.summary === 'string').toBeTruthy();
 		// lint: Summary should be short
-		expect(p.summary.length).toBeLessThan(55);
+		expect(p.summary.length).toBeLessThan(60);
 		// lint: Summary should not end with a dot
 		expect(summaryDotRegexp.test(p.summary)).toBeTruthy();
 		checkSpelling(p.summary, p);

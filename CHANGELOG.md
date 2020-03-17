@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `filter_bbox`, `load_collection`, `resample_spatial`: Fixed invalid EPSG code examples.
 - `aggregate_temporal`: Fixed outdated message for exception `TooManyDimensions`.
 - `clip`: Fixed examples.
+- `resample_*`: Clarified behaviour.
 
 ## 1.0.0-rc.1 - 2020-01-31
 
