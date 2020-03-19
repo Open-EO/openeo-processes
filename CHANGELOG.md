@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Processes:
-    - `aggregate_temporal_frequency`
+    - `aggregate_temporal_period`
     - `anomaly`
     - `climatological_normal`
 

@@ -1,36 +1,36 @@
 {
     "id": "climatological_normal",
     "summary": "Computes climatology normals",
-    "description": "Climatological normal period is a usually 30-year average of a weather variable. Climatological normals are used as an average or baseline to evaluate climate events and provide context for yearly, monthly, daily or seasonal variability. The default climatology period is from 1981 until 2010 (both inclusive).",
+    "description": "Climatological normal period is a usually 30 year average of a weather variable. Climatological normals are used as an average or baseline to evaluate climate events and provide context for yearly, monthly, daily or seasonal variability. The default climatology period is from 1981 until 2010 (both inclusive).",
     "categories": [
         "climatology"
     ],
     "parameters": [
         {
             "name": "data",
-            "description": "A data cube with exactly one temporal dimension. The datacube must span at least the temporal interval specified in the parameter `climatology_period`.\n\nSeasonal periods may span two consecutive years, e.g. temporal winter that includes months December, January and February. If the required months before the actual climate period are available, the season is taken into account. If not available, the first season is not taken into account and the seasonal mean is based on one year less than the other seasonal normals. The incomplete season at the end of the last year is never taken into account.",
+            "description": "A data cube with exactly one temporal dimension. The data cube must span at least the temporal interval specified in the parameter `climatology_period`.\n\nSeasonal periods may span two consecutive years, e.g. temporal winter that includes months December, January and February. If the required months before the actual climate period are available, the season is taken into account. If not available, the first season is not taken into account and the seasonal mean is based on one year less than the other seasonal normals. The incomplete season at the end of the last year is never taken into account.",
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
             }
         },
         {
-            "name": "frequency",
-            "description": "The time intervals to aggregate the average value for. The following pre-defined frequencies are supported:\n\n* `daily`: Day of the year\n* `monthly`: Month of the year\n* `climatology_period`: The period specified in the `climatology_period`.\n* `seasons`: Refers to three month periods of the calendar seasons (December - February, March - May, June - August, September - November).\n* `tropical_seasons`: Refers to the six month periods of the tropical seasons (November - April, Mai - October).",
+            "name": "period",
+            "description": "The time intervals to aggregate the average value for. The following pre-defined frequencies are supported:\n\n* `day`: Day of the year\n* `month`: Month of the year\n* `climatology_period`: The period specified in the `climatology_period`.\n* `season`: Refers to three month periods of the calendar seasons (December - February, March - May, June - August, September - November).\n* `tropical_season`: Refers to the six month periods of the tropical seasons (November - April, May - October).",
             "schema": {
                 "type": "string",
                 "enum": [
-                    "daily",
-                    "monthly",
-                    "seasons",
-                    "tropical_seasons",
+                    "day",
+                    "month",
+                    "season",
+                    "tropical_season",
                     "climatology_period"
                 ]
             }
         },
         {
             "name": "climatology_period",
-            "description": "Closed temporal interval. The first element of the array is the first year to be fully included in the temporal interval. The second element is the last year to be fully included in the temporal interval. The default period is from 1981 until 2010 (both inclusive).",
+            "description": "The climatology period as closed temporal interval. The first element of the array is the first year to be fully included in the temporal interval. The second element is the last year to be fully included in the temporal interval. The default period is from 1981 until 2010 (both inclusive).",
             "schema": {
                 "type": "array",
                 "subtype": "temporal-interval",
@@ -52,7 +52,7 @@
         }
     ],
     "returns": {
-        "description": "A data cube with potentially cardinality, but the same resolution and number of dimensions as the original data cube. The temporal dimension has the following dimension labels:\n\n* `daily`: `1` - `365`\n* `monthly`: `1` - `12`\n* `climatology_period`: `climatology_period`\n* `seasons`: `djf` (December - February), `mam` (March - May), `jja` (June - August), `son` (September - November)\n* `tropical_seasons`: `ndjfma` (November - April), `mjjaso` (May - October)",
+        "description": "A data cube with potentially cardinality, but the same resolution and number of dimensions as the original data cube. The temporal dimension has the following dimension labels:\n\n* `day`: `001` - `365`\n* `month`: `01` - `12`\n* `climatology_period`: `climatology_period`\n* `season`: `djf` (December - February), `mam` (March - May), `jja` (June - August), `son` (September - November)\n* `tropical_season`: `ndjfma` (November - April), `mjjaso` (May - October)",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"
