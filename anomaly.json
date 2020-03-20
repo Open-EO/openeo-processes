@@ -1,7 +1,7 @@
 {
     "id": "anomaly",
     "summary": "Computes anomalies",
-    "description": "Computes anomalies based on normals for temporal periods.",
+    "description": "Computes anomalies based on normals for temporal periods. It compares the data for each label in the temporal dimension with the corresponding data in the normals data cube by subtracting the normal from the data.",
     "categories": [
         "climatology",
         "cube",
@@ -10,7 +10,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "A data cube with exactly one temporal dimension and the following dimension labels for the given period (`YYYY` = four-digit year, `MM` = two-digit month, `DD` two-digit day of month):\n\n* `hour`: `YYYY-MM-DD-00` - `YYYY-MM-DD-23`\n* `day`: `YYYY-001` - `YYYY-365`\n* `week`: `YYYY-01` - `YYYY-52`\n* `month`: `YYYY-1` - `YYYY-12`\n* `year`: `YYYY`\n* `decade`: `YYY0` (first year of the decade)\n* `single_period` / `climatology_period`: A single dimension label with any name is expected.\n* `season`: `YYYY-djf` (December - February), `YYYY-mam` (March - May), `YYYY-jja` (June - August), `YYYY-son` (September - November)\n* `tropical_season`: `YYYY-ndjfma` (November - April), `YYYY-mjjaso` (May - October)\n\n``aggregate_temporal_period()`` can compute such a data cube.",
+            "description": "A data cube with exactly one temporal dimension and the following dimension labels for the given period (`YYYY` = four-digit year, `MM` = two-digit month, `DD` two-digit day of month):\n\n* `hour`: `YYYY-MM-DD-00` - `YYYY-MM-DD-23`\n* `day`: `YYYY-001` - `YYYY-365`\n* `week`: `YYYY-01` - `YYYY-52`\n* `month`: `YYYY-01` - `YYYY-12`\n* `year`: `YYYY`\n* `decade`: `YYY0` (first year of the decade)\n* `season`: `YYYY-djf` (December - February), `YYYY-mam` (March - May), `YYYY-jja` (June - August), `YYYY-son` (September - November)\n* `tropical_season`: `YYYY-ndjfma` (November - April), `YYYY-mjjaso` (May - October)\n\n``aggregate_temporal_period()`` can compute such a data cube.",
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
