@@ -18,7 +18,7 @@
         },
         {
             "name": "period",
-            "description": "The time intervals to aggregate. The following pre-defined values are available:\n\n* `hour`: Hour of the day\n* `day`: Day of the year\n* `week`: Week of the year\n* `month`: Month of the year\n* `year`: Proleptic years\n* `decade`: 10 year period, starting from years ending in a 0 to years ending in a 9 (e.g. 1990 - 1999).\n* `season`: Refers to three month periods of the calendar seasons (December - February, March - May, June - August, September - November).\n* `tropical_season`: Refers to the six month periods of the tropical seasons (November - April, May - October).",
+            "description": "The time intervals to aggregate. The following pre-defined values are available:\n\n* `hour`: Hour of the day\n* `day`: Day of the year\n* `week`: Week of the year\n* `month`: Month of the year\n* `year`: Proleptic years\n* `season`: Refers to three month periods of the calendar seasons (December - February, March - May, June - August, September - November).\n* `tropical-season`: Refers to the six month periods of the tropical seasons (November - April, May - October).",
             "schema": {
                 "type": "string",
                 "enum": [
@@ -27,9 +27,8 @@
                     "week",
                     "month",
                     "year",
-                    "decade",
                     "season",
-                    "tropical_season"
+                    "tropical-season"
                 ]
             }
         },
@@ -86,7 +85,7 @@
         }
     ],
     "returns": {
-        "description": "A data cube with potentially lower resolution and cardinality, but the same number of dimensions as the original data cube. The specified temporal dimension has the following dimension labels (`YYYY` = four-digit year, `MM` = two-digit month, `DD` two-digit day of month):\n\n* `hour`: `YYYY-MM-DD-00` - `YYYY-MM-DD-23`\n* `day`: `YYYY-001` - `YYYY-365`\n* `week`: `YYYY-01` - `YYYY-52`\n* `month`: `YYYY-01` - `YYYY-12`\n* `year`: `YYYY`\n* `decade`: `YYY0` (first year of the decade)\n* `season`: `YYYY-djf` (December - February), `YYYY-mam` (March - May), `YYYY-jja` (June - August), `YYYY-son` (September - November).\n* `tropical_season`: `YYYY-ndjfma` (November - April), `YYYY-mjjaso` (May - October).",
+        "description": "A data cube with potentially lower resolution and cardinality, but the same number of dimensions as the original data cube. The specified temporal dimension has the following dimension labels (`YYYY` = four-digit year, `MM` = two-digit month, `DD` two-digit day of month):\n\n* `hour`: `YYYY-MM-DD-00` - `YYYY-MM-DD-23`\n* `day`: `YYYY-001` - `YYYY-365`\n* `week`: `YYYY-01` - `YYYY-52`\n* `month`: `YYYY-01` - `YYYY-12`\n* `year`: `YYYY`\n* `season`: `YYYY-djf` (December - February), `YYYY-mam` (March - May), `YYYY-jja` (June - August), `YYYY-son` (September - November).\n* `tropical-season`: `YYYY-ndjfma` (November - April), `YYYY-mjjaso` (May - October).",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"
