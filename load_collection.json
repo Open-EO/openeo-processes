@@ -159,7 +159,7 @@
                     }
                 },
                 {
-                    "title": "No Filter",
+                    "title": "No filter",
                     "description": "Don't filter bands. All bands are included in the data cube.",
                     "type": "null"
                 }
