@@ -78,32 +78,26 @@
     "examples": [
         {
             "description": "Filters the data cube to only contain data from platform Sentinel-2A. This example assumes that the data cube has a dimension `platform` so that computations can distinguish between Sentinel-2A and Sentinel-2B data.",
-            "process_graph": {
-                "filter": {
-                    "process_id": "filter_labels",
-                    "arguments": {
-                        "data": {
-                            "from_parameter": "sentinel2_data"
-                        },
-                        "condition": {
-                            "process_graph": {
-                                "eq": {
-                                    "process_id": "eq",
-                                    "arguments": {
-                                        "x": {
-                                            "from_parameter": "value"
-                                        },
-                                        "y": "Sentinel-2A",
-                                        "case_sensitive": false
-                                    },
-                                    "result": true
-                                }
-                            }
-                        },
-                        "dimension": "platform"
-                    },
-                    "result": true
-                }
+            "arguments": {
+                "data": {
+                    "from_parameter": "sentinel2_data"
+                },
+                "condition": {
+                    "process_graph": {
+                        "eq": {
+                            "process_id": "eq",
+                            "arguments": {
+                                "x": {
+                                    "from_parameter": "value"
+                                },
+                                "y": "Sentinel-2A",
+                                "case_sensitive": false
+                            },
+                            "result": true
+                        }
+                    }
+                },
+                "dimension": "platform"
             }
         }
     ]
