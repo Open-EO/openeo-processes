@@ -32,26 +32,6 @@
                 "x": 0
             },
             "returns": 0
-        },
-        {
-            "process_graph": {
-                "sinh1": {
-                    "process_id": "sinh",
-                    "arguments": {
-                        "x": 0.5
-                    }
-                },
-                "arcsinh1": {
-                    "process_id": "arsinh",
-                    "arguments": {
-                        "x": {
-                            "from_node": "sinh1"
-                        }
-                    },
-                    "result": true
-                }
-            },
-            "returns": 0.5
         }
     ],
     "links": [

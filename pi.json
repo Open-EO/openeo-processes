@@ -13,27 +13,6 @@
             "type": "number"
         }
     },
-    "examples": [
-        {
-            "title": "Test for sin(π) = 0",
-            "process_graph": {
-                "pi1": {
-                    "process_id": "pi",
-                    "arguments": {}
-                },
-                "sin1": {
-                    "process_id": "sin",
-                    "arguments": {
-                        "data": {
-                            "from_node": "pi1"
-                        }
-                    },
-                    "result": true
-                }
-            },
-            "returns": 0
-        }
-    ],
     "links": [
         {
             "rel": "about",

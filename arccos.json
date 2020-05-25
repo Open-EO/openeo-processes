@@ -32,26 +32,6 @@
                 "x": 1
             },
             "returns": 0
-        },
-        {
-            "process_graph": {
-                "cos1": {
-                    "process_id": "cos",
-                    "arguments": {
-                        "x": 0.5
-                    }
-                },
-                "arccos1": {
-                    "process_id": "arccos",
-                    "arguments": {
-                        "x": {
-                            "from_node": "cos1"
-                        }
-                    },
-                    "result": true
-                }
-            },
-            "returns": 0.5
         }
     ],
     "links": [
