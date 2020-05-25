@@ -125,6 +125,13 @@
                                 "subtype": "date"
                             },
                             {
+                                "type": "string",
+                                "subtype": "year",
+                                "minLength": 4,
+                                "maxLength": 4,
+                                "pattern": "^\\d{4}$"
+                            },
+                            {
                                 "type": "null"
                             }
                         ]
