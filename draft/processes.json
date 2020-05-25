@@ -737,65 +737,46 @@
     },
     "examples": [
       {
-        "process_graph": {
-          "loadco1": {
-            "process_id": "load_collection",
-            "arguments": {
-              "id": "Sentinel-2",
-              "spatial_extent": {
-                "from_parameter": "spatial_extent"
-              },
-              "temporal_extent": [
-                "2015-01-01",
-                "2019-01-01"
-              ]
-            }
+        "arguments": {
+          "data": {
+            "from_parameter": "data"
           },
-          "aggreg1": {
-            "process_id": "aggregate_temporal",
-            "arguments": {
-              "data": {
-                "from_node": "loadco1"
-              },
-              "intervals": [
-                [
-                  "2015-01-01",
-                  "2016-01-01"
-                ],
-                [
-                  "2016-01-01",
-                  "2017-01-01"
-                ],
-                [
-                  "2017-01-01",
-                  "2018-01-01"
-                ],
-                [
-                  "2018-01-01",
-                  "2019-01-01"
-                ]
-              ],
-              "labels": [
-                "2015",
-                "2016",
-                "2017",
-                "2018"
-              ],
-              "reducer": {
-                "process_graph": {
-                  "median1": {
-                    "process_id": "mean",
-                    "arguments": {
-                      "data": {
-                        "from_parameter": "data"
-                      }
-                    },
-                    "result": true
+          "intervals": [
+            [
+              "2015-01-01",
+              "2016-01-01"
+            ],
+            [
+              "2016-01-01",
+              "2017-01-01"
+            ],
+            [
+              "2017-01-01",
+              "2018-01-01"
+            ],
+            [
+              "2018-01-01",
+              "2019-01-01"
+            ]
+          ],
+          "labels": [
+            "2015",
+            "2016",
+            "2017",
+            "2018"
+          ],
+          "reducer": {
+            "process_graph": {
+              "mean1": {
+                "process_id": "mean",
+                "arguments": {
+                  "data": {
+                    "from_parameter": "data"
                   }
-                }
+                },
+                "result": true
               }
-            },
-            "result": true
+            }
           }
         }
       }
@@ -4595,32 +4576,26 @@
     "examples": [
       {
         "description": "Filters the data cube to only contain data from platform Sentinel-2A. This example assumes that the data cube has a dimension `platform` so that computations can distinguish between Sentinel-2A and Sentinel-2B data.",
-        "process_graph": {
-          "filter": {
-            "process_id": "filter_labels",
-            "arguments": {
-              "data": {
-                "from_parameter": "sentinel2_data"
-              },
-              "condition": {
-                "process_graph": {
-                  "eq": {
-                    "process_id": "eq",
-                    "arguments": {
-                      "x": {
-                        "from_parameter": "value"
-                      },
-                      "y": "Sentinel-2A",
-                      "case_sensitive": false
-                    },
-                    "result": true
-                  }
-                }
-              },
-              "dimension": "platform"
-            },
-            "result": true
-          }
+        "arguments": {
+          "data": {
+            "from_parameter": "sentinel2_data"
+          },
+          "condition": {
+            "process_graph": {
+              "eq": {
+                "process_id": "eq",
+                "arguments": {
+                  "x": {
+                    "from_parameter": "value"
+                  },
+                  "y": "Sentinel-2A",
+                  "case_sensitive": false
+                },
+                "result": true
+              }
+            }
+          },
+          "dimension": "platform"
         }
       }
     ]
