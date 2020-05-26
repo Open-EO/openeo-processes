@@ -132,8 +132,8 @@
         {
             "rel": "example",
             "type": "application/json",
-            "href": "https://processes.openeo.org/draft/examples/array_contains_null.json",
-            "title": "Check for `null` values in arrays"
+            "href": "https://processes.openeo.org/draft/examples/array_contains_nodata.json",
+            "title": "Check for no-data values in arrays"
         }
     ],
     "process_graph": {

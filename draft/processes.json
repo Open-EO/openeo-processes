@@ -1773,7 +1773,21 @@
           "description": "Any data type is allowed."
         }
       }
-    }
+    },
+    "links": [
+      {
+        "rel": "example",
+        "type": "application/json",
+        "href": "https://processes.openeo.org/draft/examples/array_find_nodata.json",
+        "title": "Find no-data values in arrays"
+      },
+      {
+        "rel": "example",
+        "type": "application/json",
+        "href": "https://processes.openeo.org/draft/examples/array_contains_nodata.json",
+        "title": "Check for no-data values in arrays"
+      }
+    ]
   },
   {
     "id": "array_contains",
@@ -1909,8 +1923,8 @@
       {
         "rel": "example",
         "type": "application/json",
-        "href": "https://processes.openeo.org/draft/examples/array_contains_null.json",
-        "title": "Check for `null` values in arrays"
+        "href": "https://processes.openeo.org/draft/examples/array_contains_nodata.json",
+        "title": "Check for no-data values in arrays"
       }
     ],
     "process_graph": {
@@ -2274,8 +2288,8 @@
       {
         "rel": "example",
         "type": "application/json",
-        "href": "https://processes.openeo.org/draft/examples/array_find_null.json",
-        "title": "Find `null` values in arrays"
+        "href": "https://processes.openeo.org/draft/examples/array_find_nodata.json",
+        "title": "Find no-data values in arrays"
       }
     ]
   },
