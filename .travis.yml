@@ -21,13 +21,20 @@ before_deploy:
   if [[ $TRAVIS_BRANCH == 'draft' ]] ; then
     rm -rf gh-pages/draft
     mkdir -p gh-pages/draft
-    rsync -rv --exclude=gh-pages --exclude=tests . gh-pages/draft/
+    rsync -vrm --include='*.json' --include='*.html' --include='examples/***' --exclude='*' . gh-pages/draft
+  fi
+- |
+  if [[ $TRAVIS_BRANCH == 'master' ]] ; then
+    find gh-pages -maxdepth 1 -type f -delete
+    rm -rf gh-pages/examples/
+    mkdir -p gh-pages
+    rsync -vrm --include='*.json' --include='*.html' --include='examples/***' --exclude='*' . gh-pages
   fi
 - |
   if [ -n "$TRAVIS_TAG" ] ; then
     rm -rf gh-pages/$TRAVIS_TAG
     mkdir -p gh-pages/$TRAVIS_TAG
-    rsync -rv --exclude=gh-pages --exclude=tests . gh-pages/$TRAVIS_TAG/
+    rsync -vrm --include='*.json' --include='*.html' --include='examples/***' --exclude='*' . gh-pages/$TRAVIS_TAG
   fi
 
 deploy:
