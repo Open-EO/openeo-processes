@@ -1,0 +1,128 @@
+{
+    "id": "xor",
+    "summary": "Logical XOR (exclusive or)",
+    "description": "Checks if **exactly one** of the values is true. If a component is `null`, the result will be `null` if the outcome is ambiguous.\n\n**Truth table:**\n\n```\na \\ b || null | false | true\n----- || ---- | ----- | -----\nnull  || null | null  | null\nfalse || null | false | true\ntrue  || null | true  | false\n```",
+    "categories": [
+        "logic"
+    ],
+    "parameters": [
+        {
+            "name": "x",
+            "description": "A boolean value.",
+            "schema": {
+                "type": [
+                    "boolean",
+                    "null"
+                ]
+            }
+        },
+        {
+            "name": "y",
+            "description": "A boolean value.",
+            "schema": {
+                "type": [
+                    "boolean",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "Boolean result of the logical XOR.",
+        "schema": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "x": true,
+                "y": true
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "x": false,
+                "y": false
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "x": true,
+                "y": false
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "x": true,
+                "y": null
+            },
+            "returns": null
+        },
+        {
+            "arguments": {
+                "x": false,
+                "y": null
+            },
+            "returns": null
+        }
+    ],
+    "process_graph": {
+        "not_x": {
+            "process_id": "not",
+            "arguments": {
+                "x": {
+                    "from_parameter": "x"
+                }
+            }
+        },
+        "not_y": {
+            "process_id": "not",
+            "arguments": {
+                "x": {
+                    "from_parameter": "y"
+                }
+            }
+        },
+        "and1": {
+            "process_id": "and",
+            "arguments": {
+                "x": {
+                    "from_node": "not_x"
+                },
+                "y": {
+                    "from_parameter": "y"
+                }
+            }
+        },
+        "and2": {
+            "process_id": "and",
+            "arguments": {
+                "x": {
+                    "from_parameter": "x"
+                },
+                "y": {
+                    "from_node": "not_y"
+                }
+            }
+        },
+        "or": {
+            "process_id": "or",
+            "arguments": {
+                "x": {
+                    "from_node": "and1"
+                },
+                "y": {
+                    "from_node": "and2"
+                }
+            },
+            "result": true
+        }
+    }
+}
