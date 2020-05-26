@@ -11,6 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `aggregate_temporal_period`
     - `anomaly`
     - `climatological_normal`
+- Folder with examples (`examples/`). [#136](https://github.com/Open-EO/openeo-processes/issues/136)
+
+### Changed
+- Examples adapted to latest API version for `aggregate_temporal`, `array_contains`, `array_find`, `filter_labels`, `load_collection` and `rename_labels`. [#136](https://github.com/Open-EO/openeo-processes/issues/136), [API#285](https://github.com/Open-EO/openeo-api/issues/285)
+
+### Removed
+- Process graph examples from `arccos`, `arcsin`, `arctan`, `arsinh`, `artanh`, `e`, `ln` and `pi`. [API#285](https://github.com/Open-EO/openeo-api/issues/285)
 
 ### Fixed
 - `load_collection`: Removed outdated `require` property from `value` callback parameter in process parameter `properties`.

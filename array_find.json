@@ -38,41 +38,6 @@
     },
     "examples": [
         {
-            "title": "Find `null` values",
-            "description": "Get the index of the first `null` value in an array.",
-            "process_graph": {
-                "apply": {
-                    "process_id": "array_apply",
-                    "arguments": {
-                        "data": {
-                            "from_parameter": "data"
-                        },
-                        "process": {
-                            "process-graph": {
-                                "is_null": {
-                                    "process_id": "is_nodata",
-                                    "arguments": {
-                                        "from_parameter": "x"
-                                    },
-                                    "result": true
-                                }
-                            }
-                        }
-                    }
-                },
-                "find": {
-                    "process_id": "array_find",
-                    "arguments": {
-                        "data": {
-                            "from_node": "apply"
-                        },
-                        "value": true
-                    },
-                    "result": true
-                }
-            }
-        },
-        {
             "arguments": {
                 "data": [
                     1,
@@ -167,6 +132,14 @@
                 }
             },
             "returns": null
+        }
+    ],
+    "links": [
+        {
+            "rel": "example",
+            "type": "application/json",
+            "href": "https://processes.openeo.org/draft/examples/array_find_null.json",
+            "title": "Find `null` values in arrays"
         }
     ]
 }

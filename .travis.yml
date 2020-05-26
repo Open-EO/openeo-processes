@@ -17,25 +17,17 @@ script:
 before_deploy:
 - concat-json-files "*.json" -t "processes.json"
 - git clone --branch gh-pages https://$GITHUB_TOKEN@github.com/Open-EO/openeo-processes.git gh-pages
-- cd gh-pages
-- |
-  if [[ $TRAVIS_BRANCH == 'master' ]] ; then
-    cp ../index.html index.html
-    cp ../processes.json processes.json
-  fi
 - |
   if [[ $TRAVIS_BRANCH == 'draft' ]] ; then
-    rm -rf draft
-    mkdir -p draft
-    cp ../index.html draft/index.html
-    cp ../processes.json draft/processes.json
+    rm -rf gh-pages/draft
+    mkdir -p gh-pages/draft
+    rsync -rv --exclude=gh-pages --exclude=tests . gh-pages/draft/
   fi
 - |
   if [ -n "$TRAVIS_TAG" ] ; then
-    rm -rf $TRAVIS_TAG
-    mkdir -p $TRAVIS_TAG
-    cp ../index.html $TRAVIS_TAG/index.html
-    cp ../processes.json $TRAVIS_TAG/processes.json
+    rm -rf gh-pages/$TRAVIS_TAG
+    mkdir -p gh-pages/$TRAVIS_TAG
+    rsync -rv --exclude=gh-pages --exclude=tests . gh-pages/$TRAVIS_TAG/
   fi
 
 deploy:

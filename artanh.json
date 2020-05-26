@@ -32,26 +32,6 @@
                 "x": 0
             },
             "returns": 0
-        },
-        {
-            "process_graph": {
-                "cosh1": {
-                    "process_id": "tanh",
-                    "arguments": {
-                        "x": 0.5
-                    }
-                },
-                "arctanh1": {
-                    "process_id": "artanh",
-                    "arguments": {
-                        "x": {
-                            "from_node": "tanh1"
-                        }
-                    },
-                    "result": true
-                }
-            },
-            "returns": 0.5
         }
     ],
     "links": [
