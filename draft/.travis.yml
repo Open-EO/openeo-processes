@@ -1,0 +1,52 @@
+language: node_js
+
+node_js:
+  - stable
+
+sudo: false
+
+install:
+- cd tests
+- npm install
+- npm install -g concat-json-files
+
+script:
+- npm run test
+- cd ..
+
+before_deploy:
+- concat-json-files "*.json" -t "processes.json"
+- git clone --branch gh-pages https://$GITHUB_TOKEN@github.com/Open-EO/openeo-processes.git gh-pages
+- |
+  if [[ $TRAVIS_BRANCH == 'draft' ]] ; then
+    rm -rf gh-pages/draft
+    mkdir -p gh-pages/draft
+    rsync -rv --exclude=gh-pages --exclude=tests . gh-pages/draft/
+  fi
+- |
+  if [ -n "$TRAVIS_TAG" ] ; then
+    rm -rf gh-pages/$TRAVIS_TAG
+    mkdir -p gh-pages/$TRAVIS_TAG
+    rsync -rv --exclude=gh-pages --exclude=tests . gh-pages/$TRAVIS_TAG/
+  fi
+
+deploy:
+  - provider: pages
+    skip-cleanup: true
+    github-token: $GITHUB_TOKEN
+    local-dir: gh-pages
+    keep-history: true
+    name: openEO CI
+    email: openeo.ci@uni-muenster.de
+    on:
+      tags: true
+  - provider: pages
+    skip-cleanup: true
+    github-token: $GITHUB_TOKEN
+    local-dir: gh-pages
+    keep-history: true
+    name: openEO CI
+    email: openeo.ci@uni-muenster.de
+    on:
+      all_branches: true
+      condition: $TRAVIS_BRANCH =~ ^(master|draft)$

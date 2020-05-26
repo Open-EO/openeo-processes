@@ -1,0 +1,68 @@
+{
+    "id": "exp",
+    "summary": "Exponentiation to the base e",
+    "description": "Exponential function to the base *e* raised to the power of `p`.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "categories": [
+        "math > exponential & logarithmic"
+    ],
+    "parameters": [
+        {
+            "name": "p",
+            "description": "The numerical exponent.",
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "The computed value for *e* raised to the power of `p`.",
+        "schema": {
+            "type": [
+                "number",
+                "null"
+            ]
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "p": 0
+            },
+            "returns": 1
+        },
+        {
+            "arguments": {
+                "p": null
+            },
+            "returns": null
+        }
+    ],
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://mathworld.wolfram.com/ExponentialFunction.html",
+            "title": "Exponential function explained by Wolfram MathWorld"
+        }
+    ],
+    "process_graph": {
+        "e": {
+            "process_id": "e",
+            "arguments": {}
+        },
+        "power": {
+            "process_id": "power",
+            "arguments": {
+                "base": {
+                    "from_node": "e"
+                },
+                "p": {
+                    "from_parameter": "p"
+                }
+            },
+            "result": true
+        }
+    }
+}

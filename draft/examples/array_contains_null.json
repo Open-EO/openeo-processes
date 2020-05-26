@@ -1,0 +1,35 @@
+{
+	"summary": "Check for `null` values",
+	"description": "Check whether the array contains a `null` value.",
+	"process_graph": {
+		"apply": {
+			"process_id": "array_apply",
+			"arguments": {
+				"data": {
+					"from_parameter": "data"
+				},
+				"process": {
+					"process-graph": {
+						"is_null": {
+							"process_id": "is_nodata",
+							"arguments": {
+								"from_parameter": "x"
+							},
+							"result": true
+						}
+					}
+				}
+			}
+		},
+		"find": {
+			"process_id": "array_contains",
+			"arguments": {
+				"data": {
+					"from_node": "apply"
+				},
+				"value": true
+			},
+			"result": true
+		}
+	}
+}

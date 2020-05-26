@@ -1463,26 +1463,6 @@
           "x": 1
         },
         "returns": 0
-      },
-      {
-        "process_graph": {
-          "cos1": {
-            "process_id": "cos",
-            "arguments": {
-              "x": 0.5
-            }
-          },
-          "arccos1": {
-            "process_id": "arccos",
-            "arguments": {
-              "x": {
-                "from_node": "cos1"
-              }
-            },
-            "result": true
-          }
-        },
-        "returns": 0.5
       }
     ],
     "links": [
@@ -1591,26 +1571,6 @@
           "x": 0
         },
         "returns": 0
-      },
-      {
-        "process_graph": {
-          "sin1": {
-            "process_id": "sin",
-            "arguments": {
-              "x": 0.5
-            }
-          },
-          "arcsin1": {
-            "process_id": "arcsin",
-            "arguments": {
-              "x": {
-                "from_node": "sin1"
-              }
-            },
-            "result": true
-          }
-        },
-        "returns": 0.5
       }
     ],
     "links": [
@@ -1655,26 +1615,6 @@
           "x": 0
         },
         "returns": 0
-      },
-      {
-        "process_graph": {
-          "tan1": {
-            "process_id": "tan",
-            "arguments": {
-              "x": 0.5
-            }
-          },
-          "arctan1": {
-            "process_id": "arctan",
-            "arguments": {
-              "x": {
-                "from_node": "tan1"
-              }
-            },
-            "result": true
-          }
-        },
-        "returns": 0.5
       }
     ],
     "links": [
@@ -1870,41 +1810,6 @@
     },
     "examples": [
       {
-        "title": "Check for `null` values",
-        "description": "Check whether the array contains a `null` value.",
-        "process_graph": {
-          "apply": {
-            "process_id": "array_apply",
-            "arguments": {
-              "data": {
-                "from_parameter": "data"
-              },
-              "process": {
-                "process-graph": {
-                  "is_null": {
-                    "process_id": "is_nodata",
-                    "arguments": {
-                      "from_parameter": "x"
-                    },
-                    "result": true
-                  }
-                }
-              }
-            }
-          },
-          "find": {
-            "process_id": "array_contains",
-            "arguments": {
-              "data": {
-                "from_node": "apply"
-              },
-              "value": true
-            },
-            "result": true
-          }
-        }
-      },
-      {
         "arguments": {
           "data": [
             1,
@@ -1998,6 +1903,14 @@
           }
         },
         "returns": false
+      }
+    ],
+    "links": [
+      {
+        "rel": "example",
+        "type": "application/json",
+        "href": "https://processes.openeo.org/draft/examples/array_contains_null.json",
+        "title": "Check for `null` values in arrays"
       }
     ],
     "process_graph": {
@@ -2261,41 +2174,6 @@
     },
     "examples": [
       {
-        "title": "Find `null` values",
-        "description": "Get the index of the first `null` value in an array.",
-        "process_graph": {
-          "apply": {
-            "process_id": "array_apply",
-            "arguments": {
-              "data": {
-                "from_parameter": "data"
-              },
-              "process": {
-                "process-graph": {
-                  "is_null": {
-                    "process_id": "is_nodata",
-                    "arguments": {
-                      "from_parameter": "x"
-                    },
-                    "result": true
-                  }
-                }
-              }
-            }
-          },
-          "find": {
-            "process_id": "array_find",
-            "arguments": {
-              "data": {
-                "from_node": "apply"
-              },
-              "value": true
-            },
-            "result": true
-          }
-        }
-      },
-      {
         "arguments": {
           "data": [
             1,
@@ -2391,6 +2269,14 @@
         },
         "returns": null
       }
+    ],
+    "links": [
+      {
+        "rel": "example",
+        "type": "application/json",
+        "href": "https://processes.openeo.org/draft/examples/array_find_null.json",
+        "title": "Find `null` values in arrays"
+      }
     ]
   },
   {
@@ -2461,26 +2347,6 @@
           "x": 0
         },
         "returns": 0
-      },
-      {
-        "process_graph": {
-          "sinh1": {
-            "process_id": "sinh",
-            "arguments": {
-              "x": 0.5
-            }
-          },
-          "arcsinh1": {
-            "process_id": "arsinh",
-            "arguments": {
-              "x": {
-                "from_node": "sinh1"
-              }
-            },
-            "result": true
-          }
-        },
-        "returns": 0.5
       }
     ],
     "links": [
@@ -2525,26 +2391,6 @@
           "x": 0
         },
         "returns": 0
-      },
-      {
-        "process_graph": {
-          "cosh1": {
-            "process_id": "tanh",
-            "arguments": {
-              "x": 0.5
-            }
-          },
-          "arctanh1": {
-            "process_id": "artanh",
-            "arguments": {
-              "x": {
-                "from_node": "tanh1"
-              }
-            },
-            "result": true
-          }
-        },
-        "returns": 0.5
       }
     ],
     "links": [
@@ -3906,27 +3752,6 @@
         "type": "number"
       }
     },
-    "examples": [
-      {
-        "title": "Test for ln(e) = 1",
-        "process_graph": {
-          "e1": {
-            "process_id": "e",
-            "arguments": {}
-          },
-          "ln1": {
-            "process_id": "ln",
-            "arguments": {
-              "data": {
-                "from_node": "e1"
-              }
-            },
-            "result": true
-          }
-        },
-        "returns": 1
-      }
-    ],
     "links": [
       {
         "rel": "about",
@@ -5665,25 +5490,6 @@
       }
     },
     "examples": [
-      {
-        "title": "Example for ln(e) = 1",
-        "process_graph": {
-          "e1": {
-            "process_id": "e",
-            "arguments": {}
-          },
-          "ln1": {
-            "process_id": "ln",
-            "arguments": {
-              "data": {
-                "from_node": "e1"
-              }
-            },
-            "result": true
-          }
-        },
-        "returns": 1
-      },
       {
         "arguments": {
           "x": 1
@@ -7918,27 +7724,6 @@
         "type": "number"
       }
     },
-    "examples": [
-      {
-        "title": "Test for sin(π) = 0",
-        "process_graph": {
-          "pi1": {
-            "process_id": "pi",
-            "arguments": {}
-          },
-          "sin1": {
-            "process_id": "sin",
-            "arguments": {
-              "data": {
-                "from_node": "pi1"
-              }
-            },
-            "result": true
-          }
-        },
-        "returns": 0
-      }
-    ],
     "links": [
       {
         "rel": "about",
@@ -8739,94 +8524,31 @@
     "examples": [
       {
         "title": "Rename named labels",
-        "description": "Renaming the bands from `B1` to `red`, from `B2` to `green` and from `B3` to `blue`. Doesn't rename the band `QA`.",
-        "process_graph": {
-          "loadco1": {
-            "process_id": "load_collection",
-            "arguments": {
-              "id": "S2-RGB",
-              "spatial_extent": null,
-              "temporal_extent": null,
-              "bands": [
-                "B1",
-                "B2",
-                "B3",
-                "QA"
-              ]
-            }
+        "description": "Renaming the bands from `B1` to `red`, from `B2` to `green` and from `B3` to `blue`.",
+        "arguments": {
+          "data": {
+            "from_parameter": "data"
           },
-          "rename1": {
-            "process_id": "rename_labels",
-            "arguments": {
-              "data": {
-                "from_node": "loadco1"
-              },
-              "dimension": "bands",
-              "source": [
-                "B1",
-                "B2",
-                "B3"
-              ],
-              "target": [
-                "red",
-                "green",
-                "blue"
-              ]
-            },
-            "result": true
-          }
+          "dimension": "bands",
+          "source": [
+            "B1",
+            "B2",
+            "B3"
+          ],
+          "target": [
+            "red",
+            "green",
+            "blue"
+          ]
         }
-      },
+      }
+    ],
+    "links": [
       {
-        "title": "Rename enumerated labels",
-        "description": "The process replaces the temporal dimension with a new dimension `min_max` with enumerated labels. The first label refers to the minimum values, the second label refers to the maximum values. Afterwards, the dimension labels are renamed to `min` and `max` respectively.",
-        "process_graph": {
-          "loadco1": {
-            "process_id": "load_collection",
-            "arguments": {
-              "id": "S2-RGB",
-              "spatial_extent": null,
-              "temporal_extent": null
-            }
-          },
-          "apply1": {
-            "process_id": "apply_dimension",
-            "arguments": {
-              "data": {
-                "from_node": "loadco1"
-              },
-              "process": {
-                "process_graph": {
-                  "extrem1": {
-                    "process_id": "extrema",
-                    "arguments": {
-                      "data": {
-                        "from_parameter": "data"
-                      }
-                    },
-                    "result": true
-                  }
-                }
-              },
-              "dimension": "t",
-              "target_dimension": "min_max"
-            }
-          },
-          "rename1": {
-            "process_id": "rename_labels",
-            "arguments": {
-              "data": {
-                "from_node": "apply1"
-              },
-              "dimension": "bands",
-              "target": [
-                "min",
-                "max"
-              ]
-            },
-            "result": true
-          }
-        }
+        "rel": "example",
+        "type": "application/json",
+        "href": "https://processes.openeo.org/draft/examples/rename-enumerated-labels.json",
+        "title": "Rename enumerated labels"
       }
     ]
   },
