@@ -1,0 +1,57 @@
+{
+	"id": "array_contains_nodata",
+	"summary": "Check for no-data values",
+	"description": "Check whether the array contains a no-data (`null`) value.",
+    "categories": [
+        "arrays"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "List to find the value in.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
+            }
+        }
+    ],
+    "returns": {
+        "description": "Returns `true` if the list contains a no-data value, false` otherwise.",
+        "schema": {
+            "type": "boolean"
+        }
+    },
+	"process_graph": {
+		"apply": {
+			"process_id": "array_apply",
+			"arguments": {
+				"data": {
+					"from_parameter": "data"
+				},
+				"process": {
+					"process-graph": {
+						"is_null": {
+							"process_id": "is_nodata",
+							"arguments": {
+								"from_parameter": "x"
+							},
+							"result": true
+						}
+					}
+				}
+			}
+		},
+		"find": {
+			"process_id": "array_contains",
+			"arguments": {
+				"data": {
+					"from_node": "apply"
+				},
+				"value": true
+			},
+			"result": true
+		}
+	}
+}
