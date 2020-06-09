@@ -1033,7 +1033,6 @@
     "description": "Computes anomalies based on normals for temporal periods. It compares the data for each label in the temporal dimension with the corresponding data in the normals data cube by subtracting the normal from the data.",
     "categories": [
       "climatology",
-      "cube",
       "math"
     ],
     "parameters": [
@@ -4140,6 +4139,7 @@
     "summary": "Filter the bands by name",
     "description": "Filters the bands in the data cube so that bands that don't match any of the criteria are dropped from the data cube. The data cube is expected to have only one dimension of type `bands`. Fails with a `DimensionMissing` error if no such dimension exists.\n\nThe following criteria can be used to select bands:\n\n* `bands`: band name or common band name (e.g. `B01`, `B8A`, `red` or `nir`)\n* `wavelengths`: ranges of wavelengths in micrometres (μm) (e.g. 0.5 - 0.6)\n\nAll these information are exposed in the band metadata of the collection. To keep algorithms interoperable it is recommended to prefer the common bands names or the wavelengths over collection and/or back-end specific band names.\n\nIf multiple criteria are specified, any of them must match and not all of them, i.e. they are combined with an OR-operation. If no criteria is specified, the `BandFilterParameterMissing` exception must be thrown.\n\n**Important:** The order of the specified array defines the order of the bands in the data cube, which can be important for subsequent processes. If multiple bands are matched by a single criterion (e.g. a range of wavelengths), they stay in the original order.",
     "categories": [
+      "cubes",
       "filter"
     ],
     "parameters": [
@@ -4222,6 +4222,7 @@
     "summary": "Spatial filter using a bounding box",
     "description": "Limits the data cube to the specified bounding box.\n\nThe filter retains a pixel in the data cube if the point at the pixel center intersects with the bounding box (as defined in the Simple Features standard by the OGC).",
     "categories": [
+      "cubes",
       "filter"
     ],
     "parameters": [
@@ -4447,6 +4448,7 @@
     "summary": "Spatial filter using geometries",
     "description": "Limits the data cube over the spatial dimensions to the specified geometries.\n\n- For **polygons**, the filter retains a pixel in the data cube if the point at the pixel center intersects with at least one of the polygons (as defined in the Simple Features standard by the OGC).\n- For **points**, the process considers the closest pixel center.\n- For **lines** (line strings), the process considers all the pixels whose centers are closest to at least one point on the line.\n\nMore specifically, pixels outside of the bounding box of the given geometry will not be available after filtering. All pixels inside the bounding box that are not retained will be set to `null` (no data).",
     "categories": [
+      "cubes",
       "filter"
     ],
     "parameters": [
@@ -4487,6 +4489,7 @@
     "summary": "Temporal filter for a temporal intervals",
     "description": "Limits the data cube to the specified interval of dates and/or times.\n\nMore precisely, the filter checks whether the temporal dimension label is greater than or equal to the lower boundary (start date/time) and the temporal dimension label is less than the value of the upper boundary (end date/time). This corresponds to a left-closed interval, which contains the lower boundary but not the upper boundary.\n\nIf the dimension is set to `null` (it's the default value), the data cube is expected to only have one temporal dimension.",
     "categories": [
+      "cubes",
       "filter"
     ],
     "parameters": [
@@ -6237,6 +6240,7 @@
     "summary": "Apply a polygon mask",
     "description": "Applies a polygon mask to a raster data cube. To apply a raster mask use ``mask()``.\n\nAll pixels for which the point at the pixel center **does not** intersect with any polygon (as defined in the Simple Features standard by the OGC) are replaced. This behaviour can be inverted by setting the parameter `inside` to `true`.\n\nThe pixel values are replaced with the value specified for `replacement`, which defaults to `null` (no data). No data values in `data` will be left untouched by the masking operation.",
     "categories": [
+      "cubes",
       "masks"
     ],
     "parameters": [
@@ -8965,6 +8969,7 @@
     "summary": "Run an externally hosted UDF container",
     "description": "Runs a compatible UDF container that is either externally hosted by a service provider or running on a local machine of the user. The UDF container must follow the [openEO UDF specification](https://open-eo.github.io/openeo-udf/).\n\nThe referenced UDF service can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
     "categories": [
+      "cubes",
       "import",
       "udf"
     ],
@@ -9044,6 +9049,7 @@
     "summary": "Run an UDF",
     "description": "Runs an UDF in one of the supported runtime environments.\n\nThe process can either:\n\n1. load and run a locally stored UDF from a file in the workspace of the authenticated user. The path to the UDF file must be relative to the root directory of the user's workspace.\n2. fetch and run a remotely stored and published UDF by absolute URI, for example from [openEO Hub](https://hub.openeo.org)).\n3. run the source code specified inline as string.\n\nThe loaded UDF can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
     "categories": [
+      "cubes",
       "import",
       "udf"
     ],
