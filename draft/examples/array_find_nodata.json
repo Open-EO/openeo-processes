@@ -1,5 +1,5 @@
 {
-	"id": "array_find_nodata",
+    "id": "array_find_nodata",
     "summary": "Find no-data values",
     "description": "Get the index of the first no-data (`null`) value in an array.",
     "categories": [
