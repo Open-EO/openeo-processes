@@ -1,7 +1,7 @@
 {
     "id": "constant",
     "summary": "Define a constant value",
-    "description": "Define a constant value that can be reused in multiple places of the process graph",
+    "description": "Defines a constant value that can be reused in multiple places of a process.",
     "categories": [
         "math > constants"
     ],
@@ -10,46 +10,14 @@
             "name": "x",
             "description": "The value of the constant.",
             "schema": {
-                "type": "number"
+                "description": "Any data type."
             }
         }
     ],
     "returns": {
         "description": "The value of the constant.",
         "schema": {
-            "type": "number"
+            "description": "Any data type."
         }
-    },
-    "examples": [
-        {
-            "title": "Reuse of a constant value",
-            "process_graph": {
-                "margin1": {
-                    "process_id": "constant",
-                    "arguments": {
-                        "x": 0.1
-                    }
-                },
-                "west1": {
-                    "process_id": "subtract",
-                    "arguments": {
-                        "x": 3.5,
-                        "y": {
-                            "from_node": "margin"
-                        }
-                    }
-                },
-                "east1": {
-                    "process_id": "add",
-                    "arguments": {
-                        "x": 3.8,
-                        "y": {
-                            "from_node": "margin"
-                        }
-                    }
-                }
-            }
-        }
-    ],
-    "links": []
+    }
 }

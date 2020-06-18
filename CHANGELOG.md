@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `aggregate_temporal_period`
     - `anomaly`
     - `climatological_normal`
+    - `constant`
 - Folder with examples (`examples/`). [#136](https://github.com/Open-EO/openeo-processes/issues/136)
 
 ### Changed
