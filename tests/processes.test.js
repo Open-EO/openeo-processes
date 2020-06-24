@@ -36,6 +36,7 @@ var subtypes = {
 	'job-id': {type: 'string'},
 	'kernel': {type: 'array'},
 	'labeled-array': {type: 'array'},
+	'metadata-filter': {type: 'object'},
 	'output-format': {type: 'string'},
 	'output-format-options': {type: 'object'},
 	'process-graph': {type: 'object'},
