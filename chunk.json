@@ -1,0 +1,44 @@
+{
+    "id": "chunk",
+    "summary": "Define how to chunk the datacube, for subsequent processes that can operate on chunks.",
+    "description": "Data cubes can not be loaded into memory, so various processes need to work on smaller subsets of the data. While some processes can work on all values for one dimension, this might still be too much. This process defines how the larger datacube should be divided into smaller chunks, without modifying the data. Subsequent processes will then take this into account.\n Chunks are also allowed to overlap, by specifying a 'padding'.",
+    "categories": [
+        "cubes"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "chunksize",
+            "description": "Chunk sizes along each dimension. Default is to provide only one value.\n This object maps dimension names to either a physical measure, (e.g. 100m,10days), or pixels (e.g. 32px).",
+            "schema": {
+                "type": "object"
+            }
+        },
+        {
+            "name": "chunk-padding",
+            "description": "Padding of chunks along each dimension. This allows chunks to overlap. For instance a temporal dimension can add 1 month before and after a chunk. In the spatial dimensions, this is often a number of pixels. Modifying padded data in subsequent operations should have no effect.",
+            "schema": {
+                "type": "object"
+            }
+        }
+    ],
+    "returns": {
+        "description": "A data cube with chunking specified. The resolution and the number of dimensions are the same as for the original data cube.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
+        }
+    }
+}
