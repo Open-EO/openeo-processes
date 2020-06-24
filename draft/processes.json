@@ -5753,6 +5753,7 @@
         "schema": [
           {
             "type": "object",
+            "subtype": "metadata-filter",
             "additionalProperties": {
               "type": "object",
               "subtype": "process-graph",
