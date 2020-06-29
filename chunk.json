@@ -1,7 +1,7 @@
 {
-    "id": "chunk",
-    "summary": "Define how to chunk the datacube, for subsequent processes that can operate on chunks.",
-    "description": "Data cubes can not be loaded into memory, so various processes need to work on smaller subsets of the data. While some processes can work on all values for one dimension, this might still be too much. This process defines how the larger datacube should be divided into smaller chunks, without modifying the data. Subsequent processes will then take this into account.\n Chunks are also allowed to overlap, by specifying a 'padding'.",
+    "id": "apply_neighbourhood",
+    "summary": "Apply a process to pixels in a multidimensional neighbourhood. Multiple neighbourhoods can be processed independently.",
+    "description": "Apply a focal process to a datacube. A focal process is a process that works on a 'neighbourhood' of pixels. The neighbourhood can extend into multiple dimensions. A padding can be specified so that neighbourhoods have overlapping boundaries. This allows for continuity of the output.\n\n The process should not add new dimensions, or remove entire dimensions, but the result can use different dimension labels.",
     "categories": [
         "cubes"
     ],
@@ -14,23 +14,53 @@
                 "subtype": "raster-cube"
             }
         },
+         {
+            "name": "process",
+            "description": "Process to be applied on all neighbourhoods. The specified process needs to accept an array as parameter and must return an array with least one element. A process may consist of multiple sub-processes.",
+            "schema": {
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "description": "A labeled array with elements of any type.",
+                        "schema": {
+                            "type": "array",
+                            "subtype": "labeled-array",
+                            "items": {
+                                "description": "Any data type."
+                            }
+                        }
+                    },
+                    {
+                        "name": "context",
+                        "description": "Additional data passed by the user.",
+                        "schema": {
+                            "description": "Any data type."
+                        },
+                        "optional": true,
+                        "default": null
+                    }
+                ]
+            }
+        },
         {
-            "name": "chunksize",
-            "description": "Chunk sizes along each dimension. Default is to provide only one value.\n This object maps dimension names to either a physical measure, (e.g. 100m,10days), or pixels (e.g. 32px).",
+            "name": "neighbourhood_size",
+            "description": "Chunk sizes along each dimension. Default is to provide only one value.\n This object maps dimension names to either a physical measure, (e.g. 100m,10days), or pixels (e.g. 32px).\n To include all values along a dimension, use 'all'. This may result in an exception if the dimension is too large to be fully included. \n ",
             "schema": {
                 "type": "object"
             }
         },
         {
-            "name": "chunk-padding",
-            "description": "Padding of chunks along each dimension. This allows chunks to overlap. For instance a temporal dimension can add 1 month before and after a chunk. In the spatial dimensions, this is often a number of pixels. Modifying padded data in subsequent operations should have no effect.",
+            "name": "neighbourhood_padding",
+            "description": "Padding of chunks along each dimension. This allows neighbourhoods to overlap. For instance a temporal dimension can add 1 month before and after a neighbourhood. In the spatial dimensions, this is often a number of pixels. Modifying padded data in subsequent operations should have no effect.",
             "schema": {
                 "type": "object"
             }
         }
     ],
     "returns": {
-        "description": "A data cube with chunking specified. The resolution and the number of dimensions are the same as for the original data cube.",
+        "description": "A data cube with the newly computed values. The resolution and the number of dimensions are the same as for the original data cube.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"
