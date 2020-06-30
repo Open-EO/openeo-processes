@@ -115,7 +115,7 @@
                     "from_parameter": "data"
                 },
                 "condition": {
-                    "from_parameter": "count_condition"
+                    "from_node": "count_condition"
                 }
             }
         },
