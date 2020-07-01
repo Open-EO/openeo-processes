@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `clip`: Fixed examples.
 - `resample_*`: Clarified behaviour.
 - `mean`: Clarify behavior for arrays with `null`-values only.
+- `apply_kernel`: Clarify orientation of the 2D kernel array [#165](https://github.com/Open-EO/openeo-processes/issues/165)
 
 ## 1.0.0-rc.1 - 2020-01-31
 
