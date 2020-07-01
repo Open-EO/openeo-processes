@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "An array of numbers. An empty array resolves always with `null`.",
+            "description": "An array of numbers. An array without non-`null` elements resolves always with `null`.",
             "schema": {
                 "type": "array",
                 "items": {
@@ -78,6 +78,16 @@
                 "data": []
             },
             "returns": null
+        },
+        {
+            "description": "The input array has only `null` elements: return `null`.",
+            "arguments": {
+                "data": [
+                    null,
+                    null
+                ]
+            },
+            "returns": null
         }
     ],
     "links": [
@@ -86,5 +96,71 @@
             "href": "http://mathworld.wolfram.com/ArithmeticMean.html",
             "title": "Arithmetic mean explained by Wolfram MathWorld"
         }
-    ]
+    ],
+    "process_graph": {
+        "count_condition": {
+            "process_id": "if",
+            "arguments": {
+                "value": {
+                    "from_parameter": "ignore_nodata"
+                },
+                "accept": null,
+                "reject": true
+            }
+        },
+        "count": {
+            "process_id": "count",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "condition": {
+                    "from_node": "count_condition"
+                }
+            }
+        },
+        "sum": {
+            "process_id": "sum",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "ignore_nodata": {
+                    "from_parameter": "ignore_nodata"
+                }
+            }
+        },
+        "divide": {
+            "process_id": "divide",
+            "arguments": {
+                "x": {
+                    "from_node": "sum"
+                },
+                "y": {
+                    "from_node": "count"
+                }
+            }
+        },
+        "neq": {
+            "process_id": "neq",
+            "arguments": {
+                "x": {
+                    "from_node": "count"
+                },
+                "y": 0
+            }
+        },
+        "if": {
+            "process_id": "if",
+            "arguments": {
+                "value": {
+                    "from_node": "neq"
+                },
+                "accept": {
+                    "from_node": "divide"
+                }
+            },
+            "result": true
+        }
+    }
 }
