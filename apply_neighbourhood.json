@@ -16,7 +16,7 @@
         },
         {
             "name": "process",
-            "description": "Process to be applied on all neighbourhoods. The specified process needs to accept an array as parameter and must return an array with least one element. A process may consist of multiple sub-processes.",
+            "description": "Process to be applied on all neighbourhoods.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
