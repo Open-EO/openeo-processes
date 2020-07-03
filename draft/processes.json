@@ -4597,7 +4597,7 @@
   {
     "id": "first",
     "summary": "First element",
-    "description": "Gives the first element of an array. For an empty array `null` is returned.",
+    "description": "Gives the first element of an array.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
       "arrays",
       "reducer"
@@ -4605,7 +4605,7 @@
     "parameters": [
       {
         "name": "data",
-        "description": "An array with elements of any data type. An empty array resolves always with `null`.",
+        "description": "An array with elements of any data type.",
         "schema": {
           "type": "array",
           "items": {
@@ -5272,7 +5272,7 @@
   {
     "id": "last",
     "summary": "Last element",
-    "description": "Gives the last element of an array. For an empty array `null` is returned.",
+    "description": "Gives the last element of an array.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
       "arrays",
       "reducer"
@@ -5280,7 +5280,7 @@
     "parameters": [
       {
         "name": "data",
-        "description": "An array with elements of any data type. An empty array resolves always with `null`.",
+        "description": "An array with elements of any data type.",
         "schema": {
           "type": "array",
           "items": {
@@ -6375,7 +6375,7 @@
   {
     "id": "max",
     "summary": "Maximum value",
-    "description": "Computes the largest value of an array of numbers, which is is equal to the first element of a sorted (i.e., ordered) version the array.",
+    "description": "Computes the largest value of an array of numbers, which is is equal to the first element of a sorted (i.e., ordered) version the array.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
       "math",
       "reducer"
@@ -6383,7 +6383,7 @@
     "parameters": [
       {
         "name": "data",
-        "description": "An array of numbers. An empty array resolves always with `null`.",
+        "description": "An array of numbers.",
         "schema": {
           "type": "array",
           "items": {
@@ -6468,7 +6468,7 @@
   {
     "id": "mean",
     "summary": "Arithmetic mean (average)",
-    "description": "The arithmetic mean of an array of numbers is the quantity commonly called the average. It is defined as the sum of all elements divided by the number of elements.",
+    "description": "The arithmetic mean of an array of numbers is the quantity commonly called the average. It is defined as the sum of all elements divided by the number of elements.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
       "math",
       "reducer"
@@ -6476,7 +6476,7 @@
     "parameters": [
       {
         "name": "data",
-        "description": "An array of numbers. An array without non-`null` elements resolves always with `null`.",
+        "description": "An array of numbers.",
         "schema": {
           "type": "array",
           "items": {
@@ -6634,7 +6634,7 @@
   {
     "id": "median",
     "summary": "Statistical median",
-    "description": "The statistical median of an array of numbers is the value separating the higher half from the lower half of the data.\n\n**Remarks:**\n\n* For a symmetric arrays, the result is equal to the ``mean()``.\n* The median can also be calculated by computing the quantile (see process ``quantiles()``) with the probability of *0.5*: `quantiles(data, [0.5])`.\n* An empty input array returns `null`.",
+    "description": "The statistical median of an array of numbers is the value separating the higher half from the lower half of the data.\n\nAn array without non-`null` elements resolves always with `null`.\n\n**Remarks:**\n\n* For a symmetric arrays, the result is equal to the ``mean()``.\n* The median can also be calculated by computing the ``quantiles()`` with a probability of *0.5*.",
     "categories": [
       "math",
       "reducer"
@@ -6642,7 +6642,7 @@
     "parameters": [
       {
         "name": "data",
-        "description": "An array of numbers. An empty array resolves always with `null`.",
+        "description": "An array of numbers.",
         "schema": {
           "type": "array",
           "items": {
@@ -6731,6 +6731,16 @@
           "data": []
         },
         "returns": null
+      },
+      {
+        "description": "The input array has only `null` elements: return `null`.",
+        "arguments": {
+          "data": [
+            null,
+            null
+          ]
+        },
+        "returns": null
       }
     ],
     "links": [
@@ -6739,7 +6749,34 @@
         "href": "http://mathworld.wolfram.com/StatisticalMedian.html",
         "title": "Statistical Median explained by Wolfram MathWorld"
       }
-    ]
+    ],
+    "process_graph": {
+      "quantiles": {
+        "process_id": "quantiles",
+        "arguments": {
+          "data": {
+            "from_parameter": "data"
+          },
+          "probabilities": [
+            0.5
+          ],
+          "ignore_nodata": {
+            "from_parameter": "ignore_nodata"
+          }
+        }
+      },
+      "array_element": {
+        "process_id": "array_element",
+        "arguments": {
+          "data": {
+            "from_node": "quantiles"
+          },
+          "return_nodata": true,
+          "index": 0
+        },
+        "result": true
+      }
+    }
   },
   {
     "id": "merge_cubes",
@@ -6833,7 +6870,7 @@
   {
     "id": "min",
     "summary": "Minimum value",
-    "description": "Computes the smallest value of an array of numbers, which is is equal to the last element of a sorted (i.e., ordered) version the array.",
+    "description": "Computes the smallest value of an array of numbers, which is is equal to the last element of a sorted (i.e., ordered) version the array.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
       "math",
       "reducer"
@@ -6841,7 +6878,7 @@
     "parameters": [
       {
         "name": "data",
-        "description": "An array of numbers. An empty array resolves always with `null`.",
+        "description": "An array of numbers.",
         "schema": {
           "type": "array",
           "items": {
@@ -9319,7 +9356,7 @@
   {
     "id": "sd",
     "summary": "Standard deviation",
-    "description": "Computes the sample standard deviation, which quantifies the amount of variation of an array of numbers. It is defined to be the square root of the corresponding variance (see ``variance()``).\n\nA low standard deviation indicates that the values tend to be close to the expected value, while a high standard deviation indicates that the values are spread out over a wider range.",
+    "description": "Computes the sample standard deviation, which quantifies the amount of variation of an array of numbers. It is defined to be the square root of the corresponding variance (see ``variance()``).\n\nA low standard deviation indicates that the values tend to be close to the expected value, while a high standard deviation indicates that the values are spread out over a wider range.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
       "math",
       "reducer"
@@ -9327,7 +9364,7 @@
     "parameters": [
       {
         "name": "data",
-        "description": "An array of numbers. An empty array resolves always with `null`.",
+        "description": "An array of numbers.",
         "schema": {
           "type": "array",
           "items": {
@@ -10553,7 +10590,7 @@
   {
     "id": "variance",
     "summary": "Variance",
-    "description": "Computes the sample variance of an array of numbers by calculating the square of the standard deviation (see ``sd()``). It is defined to be the expectation of the squared deviation of a random variable from its expected value. Basically, it measures how far the numbers in the array are spread out from their average value.",
+    "description": "Computes the sample variance of an array of numbers by calculating the square of the standard deviation (see ``sd()``). It is defined to be the expectation of the squared deviation of a random variable from its expected value. Basically, it measures how far the numbers in the array are spread out from their average value.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
       "math",
       "reducer"
@@ -10561,7 +10598,7 @@
     "parameters": [
       {
         "name": "data",
-        "description": "An array of numbers. An empty array resolves always with `null`.",
+        "description": "An array of numbers.",
         "schema": {
           "type": "array",
           "items": {

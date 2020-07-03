@@ -1,7 +1,7 @@
 {
     "id": "mean",
     "summary": "Arithmetic mean (average)",
-    "description": "The arithmetic mean of an array of numbers is the quantity commonly called the average. It is defined as the sum of all elements divided by the number of elements.",
+    "description": "The arithmetic mean of an array of numbers is the quantity commonly called the average. It is defined as the sum of all elements divided by the number of elements.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
         "math",
         "reducer"
@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "An array of numbers. An array without non-`null` elements resolves always with `null`.",
+            "description": "An array of numbers.",
             "schema": {
                 "type": "array",
                 "items": {
