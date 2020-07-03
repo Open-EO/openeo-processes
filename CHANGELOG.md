@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `constant`
 - Process graphs added to:
     - `mean`
+    - `median`
 - Folder with examples (`examples/`). [#136](https://github.com/Open-EO/openeo-processes/issues/136)
 
 ### Changed
@@ -31,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `aggregate_temporal`: Fixed outdated message for exception `TooManyDimensions`.
 - `clip`: Fixed examples.
 - `resample_*`: Clarified behaviour.
-- `mean`: Clarify behavior for arrays with `null`-values only.
+- `first`, `last`, `max`, `mean`, `median`, `min`, `sd`, `variance`: Clarify behavior for arrays with `null`-values only.
 
 ## 1.0.0-rc.1 - 2020-01-31
 
