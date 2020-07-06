@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `filter_bbox`, `load_collection`, `resample_spatial`: Fixed invalid EPSG code examples.
 - `aggregate_temporal`: Fixed outdated message for exception `TooManyDimensions`.
 - `clip`: Fixed examples.
+- `linear_scale_range`: Clarify that the process implicitly clips the values. [#159](https://github.com/Open-EO/openeo-processes/issues/159)
 - `mean`: Clarify behaviour for arrays with `null`-values only.
 - `mod`: Clarified behaviour. [#168](https://github.com/Open-EO/openeo-processes/issues/168)
 - `resample_*`: Clarified behaviour.
