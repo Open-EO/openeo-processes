@@ -1,7 +1,7 @@
 {
     "id": "first",
     "summary": "First element",
-    "description": "Gives the first element of an array. For an empty array `null` is returned.",
+    "description": "Gives the first element of an array.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
         "arrays",
         "reducer"
@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "An array with elements of any data type. An empty array resolves always with `null`.",
+            "description": "An array with elements of any data type.",
             "schema": {
                 "type": "array",
                 "items": {
