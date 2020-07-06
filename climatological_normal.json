@@ -16,7 +16,7 @@
         },
         {
             "name": "period",
-            "description": "The time intervals to aggregate the average value for. The following pre-defined frequencies are supported:\n\n* `day`: Day of the year\n* `month`: Month of the year\n* `climatology-period`: The period specified in the `climatology-period`.\n* `season`: Refers to three month periods of the calendar seasons (December - February, March - May, June - August, September - November).\n* `tropical-season`: Refers to the six month periods of the tropical seasons (November - April, May - October).",
+            "description": "The time intervals to aggregate the average value for. The following pre-defined frequencies are supported:\n\n* `day`: Day of the year\n* `month`: Month of the year\n* `climatology-period`: The period specified in the `climatology-period`.\n* `season`: Three month periods of the calendar seasons (December - February, March - May, June - August, September - November).\n* `tropical-season`: Six month periods of the tropical seasons (November - April, May - October).",
             "schema": {
                 "type": "string",
                 "enum": [

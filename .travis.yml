@@ -8,33 +8,33 @@ sudo: false
 install:
 - cd tests
 - npm install
-- npm install -g concat-json-files
 
 script:
 - npm run test
-- cd ..
 
 before_deploy:
-- concat-json-files "*.json" -t "processes.json"
+- npm run generate
+- cd ..
 - git clone --branch gh-pages https://$GITHUB_TOKEN@github.com/Open-EO/openeo-processes.git gh-pages
+- cp tests/docs.html index.html
 - |
   if [[ $TRAVIS_BRANCH == 'draft' ]] ; then
     rm -rf gh-pages/draft
     mkdir -p gh-pages/draft
-    rsync -vrm --include='*.json' --include='*.html' --include='examples/***' --exclude='*' . gh-pages/draft
+    rsync -vrm --include='*.json' --include='*.html' --include='examples/***' --include='meta/***' --exclude='*' . gh-pages/draft
   fi
 - |
   if [[ $TRAVIS_BRANCH == 'master' ]] ; then
     find gh-pages -maxdepth 1 -type f -delete
     rm -rf gh-pages/examples/
     mkdir -p gh-pages
-    rsync -vrm --include='*.json' --include='*.html' --include='examples/***' --exclude='*' . gh-pages
+    rsync -vrm --include='*.json' --include='*.html' --include='examples/***' --include='meta/***' --exclude='*' . gh-pages
   fi
 - |
   if [ -n "$TRAVIS_TAG" ] ; then
     rm -rf gh-pages/$TRAVIS_TAG
     mkdir -p gh-pages/$TRAVIS_TAG
-    rsync -vrm --include='*.json' --include='*.html' --include='examples/***' --exclude='*' . gh-pages/$TRAVIS_TAG
+    rsync -vrm --include='*.json' --include='*.html' --include='examples/***' --include='meta/***' --exclude='*' . gh-pages/$TRAVIS_TAG
   fi
 
 deploy:
