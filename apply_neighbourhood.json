@@ -43,7 +43,7 @@
         },
         {
             "name": "size",
-            "description": "Neighbourhood sizes along each dimension. \n This object maps dimension names to either a physical measure, (e.g. 100 m, 10 days), or pixels (e.g. 32 pixels).\n Default is to provide all values. This may result in an exception if the dimension is too large to be fully included.",
+            "description": "Neighbourhood sizes along each dimension.\nThis object maps dimension names to either a physical measure, (e.g. 100 m, 10 days), or pixels (e.g. 32 pixels).\nFor dimensions not specified, the default is to provide all values. This may result in an exception if the dimension is too large to be fully included.",
             "schema": {
                 "type": "array",
                 "items": {
@@ -90,9 +90,8 @@
         },
         {
             "name": "overlap",
-            "description": "Overlap of chunks along each dimension. This allows neighbourhoods to overlap. For instance a temporal dimension can add 1 month before and after a neighbourhood. In the spatial dimensions, this is often a number of pixels. The overlap specified is added before and after, so an overlap of 8 pixels will add 8 pixels on both sides of the window, so 16 in total.\n Modifying overlapping data in subsequent operations should have no effect.",
+            "description": "Overlap of chunks along each dimension. This allows neighbourhoods to overlap. For instance a temporal dimension can add 1 month before and after a neighbourhood. In the spatial dimensions, this is often a number of pixels. The overlap specified is added before and after, so an overlap of 8 pixels will add 8 pixels on both sides of the window, so 16 in total.\nModifying overlapping data in subsequent operations should have no effect.\nFor dimensions not specified, the default is to provide no overlap.",
             "optional": true,
-            "default": {},
             "schema": {
                 "type": "array",
                 "items": {
@@ -157,19 +156,59 @@
     "examples": [
         {
             "arguments": {
-                "size":[
-                    {"dimension" : "x", "size": 128, "unit": "px"},
-                    {"dimension" : "y", "size": 128, "unit": "px"},
-                    {"dimension" : "t", "size": "P5D"}
+                "data": {
+                    "from_parameter": "data"
+                },
+                "process": {
+                    "process_graph": {
+                        "udf": {
+                            "process_id": "run_udf",
+                            "arguments": {
+                                "data": {
+                                    "from_parameter": "data"
+                                },
+                                "udf": "ml.py",
+                                "runtime": "Python"
+                            },
+                            "result": true
+                        }
+                    }
+                },
+                "size": [
+                    {
+                        "dimension": "x",
+                        "value": 128,
+                        "unit": "px"
+                    },
+                    {
+                        "dimension": "y",
+                        "value": 128,
+                        "unit": "px"
+                    },
+                    {
+                        "dimension": "t",
+                        "value": "P5D"
+                    }
                 ],
                 "overlap": [
-                    {"dimension" : "x", "size": 16, "unit": "px"},
-                    {"dimension" : "y", "size": 16, "unit": "px"},
-                    {"dimension" : "t", "size": "P3D"}
+                    {
+                        "dimension": "x",
+                        "value": 16,
+                        "unit": "px"
+                    },
+                    {
+                        "dimension": "y",
+                        "value": 16,
+                        "unit": "px"
+                    },
+                    {
+                        "dimension": "t",
+                        "value": "P3D"
+                    }
                 ]
             }
         }
-        ],
+    ],
     "exceptions": {
         "DimensionNotAvailable": {
             "message": "A dimension with the specified name does not exist."
