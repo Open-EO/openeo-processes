@@ -1,7 +1,7 @@
 {
     "id": "apply_neighbourhood",
     "summary": "Apply a process to pixels in a n-dimensional neighbourhood",
-    "description": "Apply a focal process to a data cube. A focal process is a process that works on a 'neighbourhood' of pixels. The neighbourhood can extend into multiple dimensions. A padding can be specified so that neighbourhoods have overlapping boundaries. This allows for continuity of the output.\n\nThe process must not add new dimensions, or remove entire dimensions, but the result can use different dimension labels.\n\nFor the special case of 2D convolution, it is recommended to use ``apply_kernel()``.",
+    "description": "Apply a focal process to a data cube. A focal process is a process that works on a 'neighbourhood' of pixels. The neighbourhood can extend into multiple dimensions. An overlap can be specified so that neighbourhoods can have overlapping boundaries. This allows for continuity of the output.\n\nThe process must not add new dimensions, or remove entire dimensions, but the result can use different dimension labels.\n\nFor the special case of 2D convolution, it is recommended to use ``apply_kernel()``.",
     "categories": [
         "cubes"
     ],
@@ -43,7 +43,7 @@
         },
         {
             "name": "size",
-            "description": "Neighbourhood sizes along each dimension. Default is to provide only one value.\n This object maps dimension names to either a physical measure, (e.g. 100 m, 10 days), or pixels (e.g. 32 pixels).\nTo include all values along a dimension, use `all`. This may result in an exception if the dimension is too large to be fully included.",
+            "description": "Neighbourhood sizes along each dimension. \n This object maps dimension names to either a physical measure, (e.g. 100 m, 10 days), or pixels (e.g. 32 pixels).\n Default is to provide all values. This may result in an exception if the dimension is too large to be fully included.",
             "schema": {
                 "type": "array",
                 "items": {
@@ -90,7 +90,7 @@
         },
         {
             "name": "overlap",
-            "description": "Overlap of chunks along each dimension. This allows neighbourhoods to overlap. For instance a temporal dimension can add 1 month before and after a neighbourhood. In the spatial dimensions, this is often a number of pixels. Modifying overlapping data in subsequent operations should have no effect.",
+            "description": "Overlap of chunks along each dimension. This allows neighbourhoods to overlap. For instance a temporal dimension can add 1 month before and after a neighbourhood. In the spatial dimensions, this is often a number of pixels. The overlap specified is added before and after, so an overlap of 8 pixels will add 8 pixels on both sides of the window, so 16 in total.\n Modifying overlapping data in subsequent operations should have no effect.",
             "optional": true,
             "default": {},
             "schema": {
@@ -154,6 +154,22 @@
             "subtype": "raster-cube"
         }
     },
+    "examples": [
+        {
+            "arguments": {
+                "size":[
+                    {"dimension" : "x", "size": 128, "unit": "px"},
+                    {"dimension" : "y", "size": 128, "unit": "px"},
+                    {"dimension" : "t", "size": "P5D"}
+                ],
+                "overlap": [
+                    {"dimension" : "x", "size": 16, "unit": "px"},
+                    {"dimension" : "y", "size": 16, "unit": "px"},
+                    {"dimension" : "t", "size": "P3D"}
+                ]
+            }
+        }
+        ],
     "exceptions": {
         "DimensionNotAvailable": {
             "message": "A dimension with the specified name does not exist."
