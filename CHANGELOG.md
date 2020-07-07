@@ -28,7 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Process graph examples from `arccos`, `arcsin`, `arctan`, `arsinh`, `artanh`, `e`, `ln` and `pi`. [API#285](https://github.com/Open-EO/openeo-api/issues/285)
 
 ### Fixed
-- `apply_kernel`: Clarify orientation of the 2D kernel array [#165](https://github.com/Open-EO/openeo-processes/issues/165)
+- `apply_kernel`:
+    - Clarify orientation of the 2D kernel array- [#165](https://github.com/Open-EO/openeo-processes/issues/165)
+    - Clarify no-datta handling. [#170](https://github.com/Open-EO/openeo-processes/issues/170)
 - `load_collection`: Removed outdated `require` property from `value` callback parameter in process parameter `properties`.
 - `filter_bbox`, `load_collection`, `resample_spatial`: Fixed invalid EPSG code examples.
 - `aggregate_temporal`: Fixed outdated message for exception `TooManyDimensions`.
