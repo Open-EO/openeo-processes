@@ -38,6 +38,26 @@
             },
             "default": 1,
             "optional": true
+        },
+        {
+            "name": "border",
+            "description": "Determines how the data is extended when the filter overlaps the borders. Defaults to fill the border with zeroes.\n\nThe following options are available:\n\n* *numeric value* - fill with a user-defined constant number `n`: `nnnnnn|abcdefgh|nnnnnn` (default, with `n` = 0)\n* `replicate` - repeat the value from the pixel at the border: `aaaaaa|abcdefgh|hhhhhh`\n* `reflect` - mirror/reflect from the border: `fedcba|abcdefgh|hgfedc`\n* `reflect_pixel` - mirror/reflect from the center of the pixel at the border: `gfedcb|abcdefgh|gfedcb`\n* `wrap` - repeat/wrap the image: `cdefgh|abcdefgh|abcdef`",
+            "schema": [
+                {
+                    "type": "string",
+                    "enum": [
+                        "replicate",
+                        "reflect",
+                        "reflect_pixel",
+                        "wrap"
+                    ]
+                },
+                {
+                    "type": "number"
+                }
+            ],
+            "default": 0,
+            "optional": true
         }
     ],
     "returns": {
