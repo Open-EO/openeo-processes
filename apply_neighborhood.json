@@ -1,5 +1,5 @@
 {
-    "id": "apply_neighbourhood",
+    "id": "apply_neighborhood",
     "summary": "Apply a process to pixels in a n-dimensional neighbourhood",
     "description": "Applies a focal process to a data cube.\n\nA focal process is a process that works on a 'neighbourhood' of pixels. The neighbourhood can extend into multiple dimensions, this extent is specified by the `size` argument. It is not only (part of) the size of the input window, but also the size of the output for a given position of the sliding window. The sliding window moves with multiples of `size`.\n\nAn overlap can be specified so that neighbourhoods can have overlapping boundaries. This allows for continuity of the output. The values included in the data cube as overlap can't be modified by the given `process`.\n\nThe neighbourhood size should be kept small enough, to avoid running beyond computational resources, but a too small size will result in a larger number of process invocations, which may slow down processing. Window sizes for spatial dimensions typically are in the range of 64 to 512 pixels, while overlaps of 8 to 32 pixels are common.\n\nThe process must not add new dimensions, or remove entire dimensions, but the result can have different dimension labels.\n\nFor the special case of 2D convolution, it is recommended to use ``apply_kernel()``.",
     "categories": [
