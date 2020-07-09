@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Process graphs added to:
     - `mean`
     - `median`
-- `apply_kernel`: Added parameter `border` [#170](https://github.com/Open-EO/openeo-processes/issues/170)
+- `apply_kernel`: Added parameters `border` and `replace_nodata` [#170](https://github.com/Open-EO/openeo-processes/issues/170)
 - Folder with examples (`examples/`). [#136](https://github.com/Open-EO/openeo-processes/issues/136)
 
 ### Changed
