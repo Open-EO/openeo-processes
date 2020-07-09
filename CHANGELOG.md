@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Processes:
     - `aggregate_temporal_period`
     - `anomaly`
+    - `apply_neighborhood`
     - `climatological_normal`
     - `constant`
 - Process graphs added to:

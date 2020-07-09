@@ -26,7 +26,9 @@ var subtypes = {
 	// Custom subtypes defined by the API
 	'band-name': {type: 'string'},
 	'bounding-box': {type: 'object'},
+	'chunk-size': {type: 'object'},
 	'collection-id': {type: 'string'},
+	'duration': {type: 'string'},
 	'epsg-code': {type: 'integer'},
 	'file-paths': {type: 'array'},
 	'file-path': {type: 'string'},
