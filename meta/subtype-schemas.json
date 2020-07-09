@@ -71,6 +71,38 @@
         }
       }
     },
+    "chunk-size": {
+      "type": "object",
+      "subtype": "chunk-size",
+      "required": [
+        "dimension",
+        "value"
+      ],
+      "properties": {
+        "dimension": {
+          "type": "string"
+        },
+        "value": {
+          "default": null,
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "$ref": "#/definitions/duration"
+            }
+          ]
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit the values are given in. If no unit is given, uses the unit specified for the dimension or otherwise the default unit of the reference system."
+        }
+      }
+    },
     "collection-id": {
       "type": "string",
       "subtype": "collection-id",
@@ -91,6 +123,12 @@
       "format": "date-time",
       "title": "Date with Time",
       "description": "Date and time representation, as defined for `date-time` by [RFC 3339 in section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6)."
+    },
+    "duration": {
+      "type": "string",
+      "subtype": "duration",
+      "description": "[ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations), e.g. `P1D` for one day.",
+      "pattern": "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
     },
     "epsg-code": {
       "type": "integer",
