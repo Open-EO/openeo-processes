@@ -1,7 +1,7 @@
 {
     "id": "apply_kernel",
     "summary": "Apply a spatial convolution with a kernel",
-    "description": "Applies a 2D convolution (i.e. a focal operation with a weighted kernel) on the horizontal spatial dimensions (axes `x` and `y`) of the data cube.\n\nEach value in the kernel is multiplied with the corresponding pixel value and all products are summed up afterwards. The sum is then multiplied with the factor.",
+    "description": "Applies a 2D convolution (i.e. a focal operation with a weighted kernel) on the horizontal spatial dimensions (axes `x` and `y`) of the data cube.\n\nEach value in the kernel is multiplied with the corresponding pixel value and all products are summed up afterwards. The sum is then multiplied with the factor.\n\nThe process can't handle non-numerical or infinite numerical values in the data cube. Boolean values are casted to integers (`false` = 0, `true` = 1), but all other non-numerical or infinite values are replaced with zeroes by default (see parameter `replace_invalid`).",
     "categories": [
         "cubes",
         "math > image filter"
@@ -60,16 +60,11 @@
             "optional": true
         },
         {
-            "name": "replace_nodata",
-            "description": "This parameter can specify to replace no-data values with another number. By default, no-data values are replaced with zeroes. If set to `null`, no-data values are not replaced, but the needed computational resources may increase by far.",
-            "schema": [
-                {
-                    "type": "number"
-                },
-                {
-                    "type": "null"
-                }
-            ],
+            "name": "replace_invalid",
+            "description": "This parameter specifies the value to replace non-numerical or infinite numerical values with. By default, those values are replaced with zeroes.",
+            "schema": {
+                "type": "number"
+            },
             "default": 0,
             "optional": true
         }
