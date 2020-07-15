@@ -30,7 +30,7 @@
             }
         },
         {
-            "name": "parameters",
+            "name": "options",
             "description": "The file format parameters to be used to create the file(s). Must correspond to the parameters that the server reports as supported parameters for the chosen `format`. The parameter names and valid values usually correspond to the GDAL/OGR format options. If invalid parameters are given, a `ProcessParameterInvalid` exception will be thrown.",
             "schema": {
                 "type": "object",
