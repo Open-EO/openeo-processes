@@ -21,7 +21,7 @@
         },
         {
             "name": "format",
-            "description": "The file format to read from. It must be one of the values that the server reports as supported input file formats, which usually correspond to the short GDAL/OGR codes. Otherwise a `ProcessParameterInvalid` exception will be thrown. If the format is not suitable for loading the data, a `FormatUnsuitable` exception will be thrown. This parameter is *case insensitive*.",
+            "description": "The file format to read from. It must be one of the values that the server reports as supported input file formats, which usually correspond to the short GDAL/OGR codes. If the format is not suitable for loading the data, a `FormatUnsuitable` exception will be thrown. This parameter is *case insensitive*.",
             "schema": {
                 "type": "string",
                 "subtype": "input-format"
@@ -29,7 +29,7 @@
         },
         {
             "name": "options",
-            "description": "The file format parameters to be used to read the files. Must correspond to the parameters that the server reports as supported parameters for the chosen `format`. The option names and valid values usually correspond to the GDAL/OGR format options. If invalid parameters are given, a `ProcessParameterInvalid` exception will be thrown.",
+            "description": "The file format parameters to be used to read the files. Must correspond to the parameters that the server reports as supported parameters for the chosen `format`. The parameter names and valid values usually correspond to the GDAL/OGR format options.",
             "schema": {
                 "type": "object",
                 "subtype": "input-format-options"
@@ -47,7 +47,7 @@
     },
     "exceptions": {
         "FormatUnsuitable": {
-            "message": "Data can't be loaded from requested input format."
+            "message": "Data can't be loaded with the requested input format."
         }
     }
 }
