@@ -46,6 +46,20 @@
             "type": "boolean"
         }
     },
+    "exceptions": {
+        "FormatUnsupported": {
+            "message": "Output format is not supported."
+        },
+        "FormatOptionRequired": {
+            "message": "Format option '{option}' is required."
+        },
+        "FormatOptionInvalid": {
+            "message": "The value passed for '{option}' is invalid: {reason}."
+        },
+        "FormatUnsuitable": {
+            "message": "Data can't be transformed into the requested output format."
+        }
+    },
     "links": [
         {
             "rel": "about",

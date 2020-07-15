@@ -44,5 +44,19 @@
             "type": "object",
             "subtype": "raster-cube"
         }
+    },
+    "exceptions": {
+        "FormatUnsupported": {
+            "message": "Input format is not supported."
+        },
+        "FormatOptionRequired": {
+            "message": "Format option '{option}' is required."
+        },
+        "FormatOptionInvalid": {
+            "message": "The value passed for '{option}' is invalid: {reason}."
+        },
+        "FormatUnsuitable": {
+            "message": "Data can't be loaded from requested input format."
+        }
     }
 }
