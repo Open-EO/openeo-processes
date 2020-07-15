@@ -23,7 +23,7 @@
         },
         {
             "name": "format",
-            "description": "The file format to save to. It must be one of the values that the server reports as supported output file formats, which usually correspond to the short GDAL/OGR codes. This parameter is *case insensitive*.",
+            "description": "The file format to save to. It must be one of the values that the server reports as supported output file formats, which usually correspond to the short GDAL/OGR codes. Otherwise a `ProcessParameterInvalid` exception will be thrown. If the format is not suitable for storing the underlying data structure, a `FormatUnsuitable` exception will be thrown. This parameter is *case insensitive*.",
             "schema": {
                 "type": "string",
                 "subtype": "output-format"
@@ -31,7 +31,7 @@
         },
         {
             "name": "options",
-            "description": "The file format options to be used to create the file(s). Must correspond to the options that the server reports as supported options for the chosen `format`. The option names and valid values usually correspond to the GDAL/OGR format options.",
+            "description": "The file format options to be used to create the file(s). Must correspond to the options that the server reports as supported options for the chosen `format`. The option names and valid values usually correspond to the GDAL/OGR format options. If invalid options are given, a `ProcessParameterInvalid` exception will be thrown.",
             "schema": {
                 "type": "object",
                 "subtype": "output-format-options"
@@ -47,15 +47,6 @@
         }
     },
     "exceptions": {
-        "FormatUnsupported": {
-            "message": "Output format is not supported."
-        },
-        "FormatOptionRequired": {
-            "message": "Format option '{option}' is required."
-        },
-        "FormatOptionInvalid": {
-            "message": "The value passed for '{option}' is invalid: {reason}."
-        },
         "FormatUnsuitable": {
             "message": "Data can't be transformed into the requested output format."
         }
