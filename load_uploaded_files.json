@@ -28,8 +28,8 @@
             }
         },
         {
-            "name": "options",
-            "description": "The file format options to be used to read the files. Must correspond to the options that the server reports as supported options for the chosen `format`. The option names and valid values usually correspond to the GDAL/OGR format options. If invalid options are given, a `ProcessParameterInvalid` exception will be thrown.",
+            "name": "parameters",
+            "description": "The file format parameters to be used to read the files. Must correspond to the parameters that the server reports as supported parameters for the chosen `format`. The option names and valid values usually correspond to the GDAL/OGR format options. If invalid parameters are given, a `ProcessParameterInvalid` exception will be thrown.",
             "schema": {
                 "type": "object",
                 "subtype": "input-format-options"
