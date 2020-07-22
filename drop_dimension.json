@@ -23,7 +23,7 @@
         }
     ],
     "returns": {
-        "description": "A data cube without the specified dimension. The number of dimensions decreased by one, but the dimension properties for all other dimensions (name, type, labels, reference system and resolution) have not changed.",
+        "description": "A data cube without the specified dimension. The number of dimensions decreased by one, but the dimension properties (name, type, labels, reference system and resolution) for all other dimensions have not changed.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"

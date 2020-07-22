@@ -61,7 +61,7 @@
         },
         {
             "name": "dimension",
-            "description": "The name of the temporal dimension to filter on. If the dimension is not set or is set to `null`, the filter applies to all temporal dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Note:** The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.",
+            "description": "The name of the temporal dimension to filter on. If the dimension is not set or is set to `null`, the filter applies to all temporal dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
             "schema": {
                 "type": [
                     "string",
