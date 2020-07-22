@@ -50,7 +50,7 @@
         }
     ],
     "returns": {
-        "description": "The data cube with a newly added dimension.",
+        "description": "The data cube with a newly added dimension. The new dimension has exactly one dimension label. All other dimensions have not changed.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"

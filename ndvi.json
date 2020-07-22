@@ -52,7 +52,7 @@
         }
     ],
     "returns": {
-        "description": "A raster data cube containing the computed NDVI values.",
+        "description": "A raster data cube containing the computed NDVI values. Depending on the value passed to `target_band` the data cube has changed differently:\n\n* `target_band` is `null`: The data cube is missing the dimension of type `bands`, the number of dimensions decreased by one. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions have not changed.\n* `target_band` is a string: The data cube has the same dimensions. The dimension properties have not changed, but  the number of dimension labels for the dimension of type `bands` has increased by one. The additional label has the name specified in `target_band`.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"

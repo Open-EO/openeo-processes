@@ -76,7 +76,7 @@
         }
     ],
     "returns": {
-        "description": "A data cube with potentially lower temporal resolution and potentially lower cardinality, but the same number of dimensions as the original data cube.",
+        "description": "A raster data cube with the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-temporal dimensions. For the temporal dimension the name and type have not changed, but the reference system has changed and the labels and resolution may have changed.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"

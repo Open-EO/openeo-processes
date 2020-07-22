@@ -59,7 +59,7 @@
         }
     ],
     "returns": {
-        "description": "The data cube with the renamed labels. The old labels can not be referenced any longer.",
+        "description": "The data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) have not changed, except that for the given dimension the labels have been changed. The old labels can not be referred to any longer. The number of labels has not changed.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"

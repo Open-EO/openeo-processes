@@ -46,7 +46,7 @@
         }
     ],
     "returns": {
-        "description": "A data cube. The cardinality, resolution, the number of dimensions and the dimension labels are the same as for the original data cube.",
+        "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) have not changed.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"

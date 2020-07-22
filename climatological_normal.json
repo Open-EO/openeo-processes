@@ -52,7 +52,7 @@
         }
     ],
     "returns": {
-        "description": "A data cube with potentially cardinality, but the same resolution and number of dimensions as the original data cube. The temporal dimension has the following dimension labels:\n\n* `day`: `001` - `365`\n* `month`: `01` - `12`\n* `climatology-period`: `climatology-period`\n* `season`: `djf` (December - February), `mam` (March - May), `jja` (June - August), `son` (September - November)\n* `tropical-season`: `ndjfma` (November - April), `mjjaso` (May - October)",
+        "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) have not changed, except for the resolution and dimension labels of the temporal dimension. The temporal dimension has the following dimension labels:\n\n* `day`: `001` - `365`\n* `month`: `01` - `12`\n* `climatology-period`: `climatology-period`\n* `season`: `djf` (December - February), `mam` (March - May), `jja` (June - August), `son` (September - November)\n* `tropical-season`: `ndjfma` (November - April), `mjjaso` (May - October)",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"
