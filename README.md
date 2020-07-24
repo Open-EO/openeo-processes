@@ -6,8 +6,6 @@ openEO develops interoperable processes for big Earth observation cloud processi
 
 The openEO processes are currently released as version [**1.0.0 RC1**](http://processes.openeo.org).
 
-**This branch is the development branch!**
-
 | Version / Branch                                             | Status                    | openEO API versions |
 | ------------------------------------------------------------ | ------------------------- | ------------------- |
 | [unreleased / draft](https://processes.openeo.org/draft)     | in development            | next                |
