@@ -41,6 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `mod`: Clarified behaviour. [#168](https://github.com/Open-EO/openeo-processes/issues/168)
 - `resample_*`: Clarified behaviour.
 - `first`, `last`, `max`, `mean`, `median`, `min`, `sd`, `variance`: Clarify behavior for arrays with `null`-values only.
+- Clarified (and fixed if necessary) for all processes in the "cubes" category the descriptions for the returned data cube. [#149](https://github.com/Open-EO/openeo-processes/issues/149)
 
 ## 1.0.0-rc.1 - 2020-01-31
 
