@@ -149,7 +149,7 @@
       }
     ],
     "returns": {
-      "description": "The data cube with a newly added dimension.",
+      "description": "The data cube with a newly added dimension. The new dimension has exactly one dimension label. All other dimensions remain unchanged.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -527,7 +527,7 @@
       },
       {
         "name": "dimension",
-        "description": "The name of the temporal dimension for aggregation. All data along the dimension will be passed through the specified reducer. If the dimension is not set or set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` error if it has more dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Note:** The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.",
+        "description": "The name of the temporal dimension for aggregation. All data along the dimension is passed through the specified reducer. If the dimension is not set or set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` error if it has more dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
         "schema": {
           "type": [
             "string",
@@ -548,7 +548,7 @@
       }
     ],
     "returns": {
-      "description": "A data cube with potentially lower resolution and cardinality, but the same number of dimensions as the original data cube. The specified temporal dimension has the following dimension labels (`YYYY` = four-digit year, `MM` = two-digit month, `DD` two-digit day of month):\n\n* `hour`: `YYYY-MM-DD-00` - `YYYY-MM-DD-23`\n* `day`: `YYYY-001` - `YYYY-365`\n* `week`: `YYYY-01` - `YYYY-52`\n* `dekad`: `YYYY-00` - `YYYY-36`\n* `month`: `YYYY-01` - `YYYY-12`\n* `season`: `YYYY-djf` (December - February), `YYYY-mam` (March - May), `YYYY-jja` (June - August), `YYYY-son` (September - November).\n* `tropical-season`: `YYYY-ndjfma` (November - April), `YYYY-mjjaso` (May - October).\n* `year`: `YYYY`\n* `decade`: `YYY0`\n* `decade-ad`: `YYY1`",
+      "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except for the resolution and dimension labels of the given temporal dimension. The specified temporal dimension has the following dimension labels (`YYYY` = four-digit year, `MM` = two-digit month, `DD` two-digit day of month):\n\n* `hour`: `YYYY-MM-DD-00` - `YYYY-MM-DD-23`\n* `day`: `YYYY-001` - `YYYY-365`\n* `week`: `YYYY-01` - `YYYY-52`\n* `dekad`: `YYYY-00` - `YYYY-36`\n* `month`: `YYYY-01` - `YYYY-12`\n* `season`: `YYYY-djf` (December - February), `YYYY-mam` (March - May), `YYYY-jja` (June - August), `YYYY-son` (September - November).\n* `tropical-season`: `YYYY-ndjfma` (November - April), `YYYY-mjjaso` (May - October).\n* `year`: `YYYY`\n* `decade`: `YYY0`\n* `decade-ad`: `YYY1`",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -711,7 +711,7 @@
       },
       {
         "name": "dimension",
-        "description": "The name of the temporal dimension for aggregation. All data along the dimension will be passed through the specified reducer. If the dimension is not set or set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` error if it has more dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Note:** The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.",
+        "description": "The name of the temporal dimension for aggregation. All data along the dimension is passed through the specified reducer. If the dimension is not set or set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` error if it has more dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
         "schema": {
           "type": [
             "string",
@@ -732,7 +732,7 @@
       }
     ],
     "returns": {
-      "description": "A data cube with potentially lower resolution and potentially lower cardinality, but the same number of dimensions as the original data cube.",
+      "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except for the resolution and dimension labels of the given temporal dimension.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -1078,7 +1078,7 @@
       }
     ],
     "returns": {
-      "description": "A data cube. The cardinality, resolution, the number of dimensions and the dimension labels are the same as for the original data cube.",
+      "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -1295,7 +1295,7 @@
       }
     ],
     "returns": {
-      "description": "A data cube with the newly computed values for the specified. The resolution and the number of dimensions are the same as for the original data cube.",
+      "description": "A data cube with the newly computed values. All dimensions stay the same, except for the dimensions specified in corresponding parameters. There are three cases how the data cube changes:\n\n1. The source dimension **is** the target dimension:\n   * The (number of) dimensions remain unchanged.\n   * The source dimension properties name, type and reference system remain unchanged.\n   * The dimension labels and the resolution are preserved when the number of pixel values in the source dimension is equal to the number of values computed by the process. The other case is described below.\n2. The source dimension **is not** the target dimension and the latter **exists**:\n   * The number of dimensions decreases by one as the source dimension is dropped.\n   * The target dimension properties name, type and reference system remain unchanged.\n   * The resolution changes, the number of dimension labels is equal to the number of values computed by the process and the dimension labels are incrementing integers starting from zero\n3. The source dimension **is not** the target dimension and the latter **does not exist**:\n   * The number of dimensions remain unchanged, but the source dimension is replaced with the target dimension.\n   * The target dimension has the specified name and the type other. The reference system is not changed.\n   * The resolution changes, the number of dimension labels is equal to the number of values computed by the process and the dimension labels are incrementing integers starting from zero\n\nFor all three cases except for the exception in the first case, the resolution changes, the number of dimension labels is equal to the number of values computed by the process and the dimension labels are incrementing integers starting from zero.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -1379,7 +1379,7 @@
       }
     ],
     "returns": {
-      "description": "A data cube with the newly computed values. The resolution, cardinality and the number of dimensions are the same as for the original data cube.",
+      "description": "A data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -1554,7 +1554,7 @@
       }
     ],
     "returns": {
-      "description": "A data cube with the newly computed values. The cardinality, resolution and the number of dimensions are the same as for the original data cube.",
+      "description": "A data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -1675,7 +1675,7 @@
       }
     ],
     "returns": {
-      "description": "A data cube with the newly computed values. The resolution, cardinality and the number of dimensions are the same as for the original data cube.",
+      "description": "A data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -2996,7 +2996,7 @@
       }
     ],
     "returns": {
-      "description": "A data cube with potentially cardinality, but the same resolution and number of dimensions as the original data cube. The temporal dimension has the following dimension labels:\n\n* `day`: `001` - `365`\n* `month`: `01` - `12`\n* `climatology-period`: `climatology-period`\n* `season`: `djf` (December - February), `mam` (March - May), `jja` (June - August), `son` (September - November)\n* `tropical-season`: `ndjfma` (November - April), `mjjaso` (May - October)",
+      "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except for the resolution and dimension labels of the temporal dimension. The temporal dimension has the following dimension labels:\n\n* `day`: `001` - `365`\n* `month`: `01` - `12`\n* `climatology-period`: `climatology-period`\n* `season`: `djf` (December - February), `mam` (March - May), `jja` (June - August), `son` (September - November)\n* `tropical-season`: `ndjfma` (November - April), `mjjaso` (May - October)",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -3379,7 +3379,7 @@
     ],
     "parameters": [],
     "returns": {
-      "description": "An empty raster data cube.",
+      "description": "An empty raster data cube with zero dimensions.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -3995,7 +3995,7 @@
       }
     ],
     "returns": {
-      "description": "The data cube with one dimension less.",
+      "description": "A data cube without the specified dimension. The number of dimensions decreases by one, but the dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -4452,7 +4452,7 @@
       }
     ],
     "returns": {
-      "description": "A data cube limited to a subset of its original bands. Therefore, the cardinality is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
+      "description": "A data cube limited to a subset of its original bands. The dimensions and dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the dimension of type `bands` has less (or the same) dimension labels.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -4567,7 +4567,7 @@
       }
     ],
     "returns": {
-      "description": "A data cube restricted to the bounding box. Therefore, the cardinality is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
+      "description": "A data cube restricted to the bounding box. The dimensions and dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the spatial dimensions have less (or the same) dimension labels.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -4646,7 +4646,7 @@
       },
       {
         "name": "dimension",
-        "description": "The name of the dimension to filter on. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Remarks:**\n\n* The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.\n* There could be multiple spatial dimensions such as `x`, `y` or `z`.\n* For multi-spectral imagery there is usually a separate dimension of type `bands` for the bands.",
+        "description": "The name of the dimension to filter on. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
         "schema": {
           "type": "string"
         }
@@ -4662,7 +4662,7 @@
       }
     ],
     "returns": {
-      "description": "The filtered data cube. Therefore, the cardinality of the dimension is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
+      "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the given dimension has less (or the same) dimension labels.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -4727,7 +4727,7 @@
       }
     ],
     "returns": {
-      "description": "A data cube restricted to the specified geometries. Therefore, the cardinality is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
+      "description": "A data cube restricted to the specified geometries. The dimensions and dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the spatial dimensions have less (or the same) dimension labels.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -4804,7 +4804,7 @@
       },
       {
         "name": "dimension",
-        "description": "The name of the temporal dimension to filter on. If the dimension is not set or is set to `null`, the filter applies to all temporal dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Note:** The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.",
+        "description": "The name of the temporal dimension to filter on. If the dimension is not set or is set to `null`, the filter applies to all temporal dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
         "schema": {
           "type": [
             "string",
@@ -4816,7 +4816,7 @@
       }
     ],
     "returns": {
-      "description": "A data cube restricted to the specified temporal extent. Therefore, the cardinality is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
+      "description": "A data cube restricted to the specified temporal extent. The dimensions and dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the given temporal dimension(s) have less (or the same) dimension labels.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -6026,7 +6026,7 @@
       }
     ],
     "returns": {
-      "description": "A data cube for further processing.",
+      "description": "A data cube for further processing. The dimensions and dimension properties (name, type, labels, reference system and resolution) correspond to the collection's metadata, but the dimension labels are restricted as specified in the parameters.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -6561,7 +6561,7 @@
       }
     ],
     "returns": {
-      "description": "The masked raster data cube.",
+      "description": "A masked raster data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -6615,7 +6615,7 @@
       }
     ],
     "returns": {
-      "description": "The masked raster data cube.",
+      "description": "A masked raster data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -7098,7 +7098,7 @@
       }
     ],
     "returns": {
-      "description": "The merged data cube.",
+      "description": "The merged data cube. See the process description for details regarding the dimensions and dimension properties (name, type, labels, reference system and resolution).",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -7454,7 +7454,7 @@
       }
     ],
     "returns": {
-      "description": "A raster data cube containing the computed NDVI values.",
+      "description": "A raster data cube containing the computed NDVI values. The structure of the data cube differs depending on the value passed to `target_band`:\n\n* `target_band` is `null`: The data cube does not contain the dimension of type `bands` anymore, the number of dimensions decreases by one. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.\n* `target_band` is a string: The data cube keeps the same dimensions. The dimension properties remain unchanged, but the number of dimension labels for the dimension of type `bands` increases by one. The additional label is named as specified in `target_band`.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -8696,7 +8696,7 @@
       },
       {
         "name": "dimension",
-        "description": "The name of the dimension over which to reduce. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Remarks:**\n\n* The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.\n* There could be multiple spatial dimensions such as `x`, `y` or `z`.\n* For multi-spectral imagery there is usually a separate dimension of type `bands` for the bands.",
+        "description": "The name of the dimension over which to reduce. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
         "schema": {
           "type": "string"
         }
@@ -8712,7 +8712,7 @@
       }
     ],
     "returns": {
-      "description": "A data cube with the newly computed values. It has one dimension less than the original data cube, but the remaining dimensions have their resolution and cardinality preserved.",
+      "description": "A data cube with the newly computed values. It is missing the given dimension, the number of dimensions decreases by one. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -8780,7 +8780,7 @@
       },
       {
         "name": "dimension",
-        "description": "The name of the dimension over which to reduce. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Remarks:**\n\n* The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.\n* There could be multiple spatial dimensions such as `x`, `y` or `z`.\n* For multi-spectral imagery there is usually a separate dimension of type `bands` for the bands.",
+        "description": "The name of the dimension over which to reduce. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
         "schema": {
           "type": "string"
         }
@@ -8796,7 +8796,7 @@
       }
     ],
     "returns": {
-      "description": "A data cube with the newly computed values. It has one dimension less than the original data cube, but the remaining dimensions have their resolution and cardinality preserved.",
+      "description": "A data cube with the newly computed values. It is missing the given dimension, the number of dimensions decreases by one. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -8840,7 +8840,7 @@
       }
     ],
     "returns": {
-      "description": "The data cube with the renamed dimension. The old name can not be referenced any longer.",
+      "description": "A data cube with the same dimensions, but the name of one of the dimensions changes. The old name can not be referred to any longer. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -8916,7 +8916,7 @@
       }
     ],
     "returns": {
-      "description": "The data cube with the renamed labels. The old labels can not be referenced any longer.",
+      "description": "The data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that for the given dimension the labels change. The old labels can not be referred to any longer. The number of labels remains the same.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -9017,7 +9017,7 @@
       }
     ],
     "returns": {
-      "description": "A data cube with potentially lower spatial resolution and potentially lower cardinality, but the same number of dimensions as the original data cube.",
+      "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except for the resolution and dimension labels of the spatial dimensions.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -9088,7 +9088,7 @@
       },
       {
         "name": "dimension",
-        "description": "The name of the temporal dimension to resample, which must exist with this name in both data cubes. If the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` error if it has more dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Note:** The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.",
+        "description": "The name of the temporal dimension to resample, which must exist with this name in both data cubes. If the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` error if it has more dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
         "schema": {
           "type": [
             "string",
@@ -9109,7 +9109,7 @@
       }
     ],
     "returns": {
-      "description": "A data cube with potentially lower temporal resolution and potentially lower cardinality, but the same number of dimensions as the original data cube.",
+      "description": "A raster data cube with the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-temporal dimensions. For the temporal dimension the name and type remain unchanged, but the reference system changes and the labels and resolution may change.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -9243,7 +9243,7 @@
       }
     ],
     "returns": {
-      "description": "A raster data cube with values warped onto the new projection.",
+      "description": "A raster data cube with values warped onto the new projection. It has the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-spatial or vertical spatial dimensions. For the horizontal spatial dimensions the name and type remain unchanged, but reference system, labels and resolution may change depending on the given parameters.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -9412,7 +9412,7 @@
       }
     ],
     "returns": {
-      "description": "The data processed by the UDF service. Returns a raster data cube if a raster data cube was passed for `data`. If an array was passed for `data`, the returned value is defined by the context and is exactly what the UDF returned.",
+      "description": "The data processed by the UDF service.\n\n* Returns a raster data cube, if a raster data cube is passed for `data`. Details on the dimensions and dimension properties (name, type, labels, reference system and resolution) depend on the UDF.\n* If an array is passed for `data`, the returned value can be of any data type, but is exactly what the UDF returns.",
       "schema": [
         {
           "title": "Raster data cube",
@@ -9533,7 +9533,7 @@
       }
     },
     "returns": {
-      "description": "The data processed by the UDF. Returns a raster data cube if a raster data cube was passed for `data`. If an array was passed for `data`, the returned value is defined by the context and is exactly what the UDF returned.",
+      "description": "The data processed by the UDF.\n\n* Returns a raster data cube, if a raster data cube is passed for `data`. Details on the dimensions and dimension properties (name, type, labels, reference system and resolution) depend on the UDF.\n* If an array is passed for `data`, the returned value can be of any data type, but is exactly what the UDF returns.",
       "schema": [
         {
           "title": "Raster data cube",
@@ -10824,8 +10824,8 @@
   },
   {
     "id": "trim_cube",
-    "summary": "Remove slices with no-data values",
-    "description": "Removes slices solely containing no-data values. If the dimension is irregular categorical then slices in the middle can be removed.",
+    "summary": "Remove dimension labels with no-data values",
+    "description": "Removes dimension labels solely containing no-data values. If the dimension is irregular categorical then dimension labels in the middle can be removed.",
     "categories": [
       "cubes"
     ],
@@ -10840,7 +10840,7 @@
       }
     ],
     "returns": {
-      "description": "A trimmed raster data cube.",
+      "description": "A trimmed raster data cube with the same dimensions. The dimension properties name, type, reference system and resolution remain unchanged. The number of dimension labels may decrease.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
