@@ -48,7 +48,7 @@
         }
     ],
     "returns": {
-        "description": "A masked raster data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) have not changed.",
+        "description": "A masked raster data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"

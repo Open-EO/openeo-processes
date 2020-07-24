@@ -208,7 +208,7 @@
         }
     ],
     "returns": {
-        "description": "A data cube for further processing. The dimensions and dimension properties (name, type, labels, reference system and resolution) correspond to the collection's metadata, but the dimension labels got restricted as specified in the parameters.",
+        "description": "A data cube for further processing. The dimensions and dimension properties (name, type, labels, reference system and resolution) correspond to the collection's metadata, but the dimension labels are restricted as specified in the parameters.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"

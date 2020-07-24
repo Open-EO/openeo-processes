@@ -76,7 +76,7 @@
         }
     ],
     "returns": {
-        "description": "A raster data cube with the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-temporal dimensions. For the temporal dimension the name and type have not changed, but the reference system has changed and the labels and resolution may have changed.",
+        "description": "A raster data cube with the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-temporal dimensions. For the temporal dimension the name and type remain unchanged, but the reference system changes and the labels and resolution may change.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"

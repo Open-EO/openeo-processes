@@ -16,7 +16,7 @@
         }
     ],
     "returns": {
-        "description": "A trimmed raster data cube with the same dimensions. The dimension properties name, type, reference system and resolution have not changed. The number of dimension labels may have decreased.",
+        "description": "A trimmed raster data cube with the same dimensions. The dimension properties name, type, reference system and resolution remain unchanged. The number of dimension labels may decrease.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"

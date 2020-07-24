@@ -110,7 +110,7 @@
         }
     ],
     "returns": {
-        "description": "A raster data cube with values warped onto the new projection. It has the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-spatial or vertical spatial dimensions. For the horizontal spatial dimensions the name and type have not changed, but the reference system has changed and the labels and resolution may have changed.",
+        "description": "A raster data cube with values warped onto the new projection. It has the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-spatial or vertical spatial dimensions. For the horizontal spatial dimensions the name and type remain unchanged, but reference system, labels and resolution may change depending on the given parameters.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"

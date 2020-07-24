@@ -30,7 +30,7 @@
         }
     ],
     "returns": {
-        "description": "A data cube with the same dimensions, but the name of one of the dimensions has changed. The old name can not be referred to any longer. The dimension properties (name, type, labels, reference system and resolution) have not changed.",
+        "description": "A data cube with the same dimensions, but the name of one of the dimensions changes. The old name can not be referred to any longer. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"

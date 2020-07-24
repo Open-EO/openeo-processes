@@ -63,7 +63,7 @@
         }
     ],
     "returns": {
-        "description": "A data cube with the newly computed values. It is missing the given dimension, the number of dimensions decreased by one. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions have not changed.",
+        "description": "A data cube with the newly computed values. It is missing the given dimension, the number of dimensions decreases by one. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"
