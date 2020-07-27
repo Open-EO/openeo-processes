@@ -344,7 +344,7 @@
     },
     "links": [
       {
-        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregation-and-resampling",
+        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregate-reducing-resolution",
         "rel": "about",
         "title": "Aggregation explained in the openEO glossary"
       },
@@ -447,7 +447,7 @@
     },
     "links": [
       {
-        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregation-and-resampling",
+        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregate-reducing-resolution",
         "rel": "about",
         "title": "Aggregation explained in the openEO glossary"
       },
@@ -567,7 +567,7 @@
     },
     "links": [
       {
-        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregation-and-resampling",
+        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregate-reducing-resolution",
         "rel": "about",
         "title": "Aggregation explained in the openEO glossary"
       }
@@ -802,7 +802,7 @@
     },
     "links": [
       {
-        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregation-and-resampling",
+        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregate-reducing-resolution",
         "rel": "about",
         "title": "Aggregation explained in the openEO glossary"
       }
@@ -9030,7 +9030,7 @@
     },
     "links": [
       {
-        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregation-and-resampling",
+        "href": "https://openeo.org/documentation/1.0/glossary.html#resample-changing-data-cube-geometry",
         "rel": "about",
         "title": "Resampling explained in the openEO glossary"
       }
@@ -9130,7 +9130,7 @@
     },
     "links": [
       {
-        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregation-and-resampling",
+        "href": "https://openeo.org/documentation/1.0/glossary.html#resample-changing-data-cube-geometry",
         "rel": "about",
         "title": "Resampling explained in the openEO glossary"
       }
