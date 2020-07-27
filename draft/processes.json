@@ -344,7 +344,7 @@
     },
     "links": [
       {
-        "href": "https://open-eo.github.io/openeo-api/glossary/#aggregation-and-resampling",
+        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregation-and-resampling",
         "rel": "about",
         "title": "Aggregation explained in the openEO glossary"
       },
@@ -447,7 +447,7 @@
     },
     "links": [
       {
-        "href": "https://open-eo.github.io/openeo-api/glossary/#aggregation-and-resampling",
+        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregation-and-resampling",
         "rel": "about",
         "title": "Aggregation explained in the openEO glossary"
       },
@@ -534,8 +534,8 @@
             "null"
           ]
         },
-        "default": null,
-        "optional": true
+        "optional": true,
+        "default": null
       },
       {
         "name": "context",
@@ -567,7 +567,7 @@
     },
     "links": [
       {
-        "href": "https://open-eo.github.io/openeo-api/glossary/#aggregation-and-resampling",
+        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregation-and-resampling",
         "rel": "about",
         "title": "Aggregation explained in the openEO glossary"
       }
@@ -760,13 +760,18 @@
             [
               "2018-01-01",
               "2019-01-01"
+            ],
+            [
+              "2019-01-01",
+              "2020-01-01"
             ]
           ],
           "labels": [
             "2015",
             "2016",
             "2017",
-            "2018"
+            "2018",
+            "2019"
           ],
           "reducer": {
             "process_graph": {
@@ -797,7 +802,7 @@
     },
     "links": [
       {
-        "href": "https://open-eo.github.io/openeo-api/glossary/#aggregation-and-resampling",
+        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregation-and-resampling",
         "rel": "about",
         "title": "Aggregation explained in the openEO glossary"
       }
@@ -9025,7 +9030,7 @@
     },
     "links": [
       {
-        "href": "https://open-eo.github.io/openeo-api/glossary/#aggregation-and-resampling",
+        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregation-and-resampling",
         "rel": "about",
         "title": "Resampling explained in the openEO glossary"
       }
@@ -9125,7 +9130,7 @@
     },
     "links": [
       {
-        "href": "https://open-eo.github.io/openeo-api/glossary/#aggregation-and-resampling",
+        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregation-and-resampling",
         "rel": "about",
         "title": "Resampling explained in the openEO glossary"
       }
@@ -9361,7 +9366,7 @@
   {
     "id": "run_udf_externally",
     "summary": "Run an externally hosted UDF container",
-    "description": "Runs a compatible UDF container that is either externally hosted by a service provider or running on a local machine of the user. The UDF container must follow the [openEO UDF specification](https://open-eo.github.io/openeo-udf/).\n\nThe referenced UDF service can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
+    "description": "Runs a compatible UDF container that is either externally hosted by a service provider or running on a local machine of the user. The UDF container must follow the [openEO UDF specification](https://openeo.org/documentation/1.0/udfs.html).\n\nThe referenced UDF service can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
     "categories": [
       "cubes",
       "import",
@@ -9428,7 +9433,7 @@
     "links": [
       {
         "rel": "about",
-        "href": "https://open-eo.github.io/openeo-udf/",
+        "href": "https://openeo.org/documentation/1.0/udfs.html",
         "title": "openEO UDF specification"
       },
       {

@@ -92,7 +92,7 @@
     },
     "links": [
         {
-            "href": "https://open-eo.github.io/openeo-api/glossary/#aggregation-and-resampling",
+            "href": "https://openeo.org/documentation/1.0/glossary.html#aggregation-and-resampling",
             "rel": "about",
             "title": "Resampling explained in the openEO glossary"
         }

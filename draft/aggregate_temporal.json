@@ -185,13 +185,18 @@
                     [
                         "2018-01-01",
                         "2019-01-01"
+                    ],
+                    [
+                        "2019-01-01",
+                        "2020-01-01"
                     ]
                 ],
                 "labels": [
                     "2015",
                     "2016",
                     "2017",
-                    "2018"
+                    "2018",
+                    "2019"
                 ],
                 "reducer": {
                     "process_graph": {
@@ -222,7 +227,7 @@
     },
     "links": [
         {
-            "href": "https://open-eo.github.io/openeo-api/glossary/#aggregation-and-resampling",
+            "href": "https://openeo.org/documentation/1.0/glossary.html#aggregation-and-resampling",
             "rel": "about",
             "title": "Aggregation explained in the openEO glossary"
         }
