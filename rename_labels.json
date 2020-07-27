@@ -105,7 +105,7 @@
         {
             "rel": "example",
             "type": "application/json",
-            "href": "https://processes.openeo.org/draft/examples/rename-enumerated-labels.json",
+            "href": "https://processes.openeo.org/1.0.0/examples/rename-enumerated-labels.json",
             "title": "Rename enumerated labels"
         }
     ]
