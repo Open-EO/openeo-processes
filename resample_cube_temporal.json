@@ -1,7 +1,7 @@
 {
     "id": "resample_cube_temporal",
-    "summary": "Resample a temporal dimension to a target data cube",
-    "description": "Resamples a temporal dimension from a source data cube to a target data cube and return the results as a new data cube.\n\nIf the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension.",
+    "summary": "Resample a temporal dimension to match a target data cube",
+    "description": "Resamples the given temporal dimension from a source data cube to align with the corresponding dimension of the given target data cube. Returns a new data cube with the resampled dimension.\n\nIf the dimension is not set or is set to `null`, the data cube is expected to have one temporal dimension only.",
     "categories": [
         "cubes",
         "aggregate & resample"
@@ -55,7 +55,7 @@
         },
         {
             "name": "dimension",
-            "description": "The name of the temporal dimension to resample, which must exist with this name in both data cubes. If the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` error if it has more dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Note:** The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.",
+            "description": "The name of the temporal dimension to resample, which must exist with this name in both data cubes. If the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` error if it has more dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
             "schema": {
                 "type": [
                     "string",
@@ -76,7 +76,7 @@
         }
     ],
     "returns": {
-        "description": "A data cube with potentially lower temporal resolution and potentially lower cardinality, but the same number of dimensions as the original data cube.",
+        "description": "A raster data cube with the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-temporal dimensions. For the temporal dimension the name and type remain unchanged, but the reference system changes and the labels and resolution may change.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"
@@ -92,7 +92,7 @@
     },
     "links": [
         {
-            "href": "https://open-eo.github.io/openeo-api/glossary/#aggregation-and-resampling",
+            "href": "https://openeo.org/documentation/1.0/glossary.html#resample-changing-data-cube-geometry",
             "rel": "about",
             "title": "Resampling explained in the openEO glossary"
         }

@@ -3,7 +3,8 @@
     "summary": "Get the index for a value in an array",
     "description": "Checks whether the array specified for `data` contains the value specified in `value` and returns the zero-based index for the first match. If there's no match, `null` is returned.\n\n**Remarks:**\n\n* To get a boolean value returned use ``array_contains()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. A `null` return value from ``eq()`` is handled exactly as `false` (no match).\n* Data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.\n* If the specified value is an array, object or null, the process always returns `null`. See the examples for one to find `null` values.",
     "categories": [
-        "arrays"
+        "arrays",
+        "reducer"
     ],
     "parameters": [
         {
@@ -37,41 +38,6 @@
         ]
     },
     "examples": [
-        {
-            "title": "Find `null` values",
-            "description": "Get the index of the first `null` value in an array.",
-            "process_graph": {
-                "apply": {
-                    "process_id": "array_apply",
-                    "arguments": {
-                        "data": {
-                            "from_parameter": "data"
-                        },
-                        "process": {
-                            "process-graph": {
-                                "is_null": {
-                                    "process_id": "is_nodata",
-                                    "arguments": {
-                                        "from_parameter": "x"
-                                    },
-                                    "result": true
-                                }
-                            }
-                        }
-                    }
-                },
-                "find": {
-                    "process_id": "array_find",
-                    "arguments": {
-                        "data": {
-                            "from_node": "apply"
-                        },
-                        "value": true
-                    },
-                    "result": true
-                }
-            }
-        },
         {
             "arguments": {
                 "data": [
@@ -167,6 +133,14 @@
                 }
             },
             "returns": null
+        }
+    ],
+    "links": [
+        {
+            "rel": "example",
+            "type": "application/json",
+            "href": "https://processes.openeo.org/1.0.0/examples/array_find_nodata.json",
+            "title": "Find no-data values in arrays"
         }
     ]
 }

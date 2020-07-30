@@ -59,7 +59,7 @@
         }
     ],
     "returns": {
-        "description": "The data cube with the renamed labels. The old labels can not be referenced any longer.",
+        "description": "The data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that for the given dimension the labels change. The old labels can not be referred to any longer. The number of labels remains the same.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"
@@ -82,94 +82,31 @@
     "examples": [
         {
             "title": "Rename named labels",
-            "description": "Renaming the bands from `B1` to `red`, from `B2` to `green` and from `B3` to `blue`. Doesn't rename the band `QA`.",
-            "process_graph": {
-                "loadco1": {
-                    "process_id": "load_collection",
-                    "arguments": {
-                        "id": "S2-RGB",
-                        "spatial_extent": null,
-                        "temporal_extent": null,
-                        "bands": [
-                            "B1",
-                            "B2",
-                            "B3",
-                            "QA"
-                        ]
-                    }
+            "description": "Renaming the bands from `B1` to `red`, from `B2` to `green` and from `B3` to `blue`.",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
                 },
-                "rename1": {
-                    "process_id": "rename_labels",
-                    "arguments": {
-                        "data": {
-                            "from_node": "loadco1"
-                        },
-                        "dimension": "bands",
-                        "source": [
-                            "B1",
-                            "B2",
-                            "B3"
-                        ],
-                        "target": [
-                            "red",
-                            "green",
-                            "blue"
-                        ]
-                    },
-                    "result": true
-                }
+                "dimension": "bands",
+                "source": [
+                    "B1",
+                    "B2",
+                    "B3"
+                ],
+                "target": [
+                    "red",
+                    "green",
+                    "blue"
+                ]
             }
-        },
+        }
+    ],
+    "links": [
         {
-            "title": "Rename enumerated labels",
-            "description": "The process replaces the temporal dimension with a new dimension `min_max` with enumerated labels. The first label refers to the minimum values, the second label refers to the maximum values. Afterwards, the dimension labels are renamed to `min` and `max` respectively.",
-            "process_graph": {
-                "loadco1": {
-                    "process_id": "load_collection",
-                    "arguments": {
-                        "id": "S2-RGB",
-                        "spatial_extent": null,
-                        "temporal_extent": null
-                    }
-                },
-                "apply1": {
-                    "process_id": "apply_dimension",
-                    "arguments": {
-                        "data": {
-                            "from_node": "loadco1"
-                        },
-                        "process": {
-                            "process_graph": {
-                                "extrem1": {
-                                    "process_id": "extrema",
-                                    "arguments": {
-                                        "data": {
-                                            "from_parameter": "data"
-                                        }
-                                    },
-                                    "result": true
-                                }
-                            }
-                        },
-                        "dimension": "t",
-                        "target_dimension": "min_max"
-                    }
-                },
-                "rename1": {
-                    "process_id": "rename_labels",
-                    "arguments": {
-                        "data": {
-                            "from_node": "apply1"
-                        },
-                        "dimension": "bands",
-                        "target": [
-                            "min",
-                            "max"
-                        ]
-                    },
-                    "result": true
-                }
-            }
+            "rel": "example",
+            "type": "application/json",
+            "href": "https://processes.openeo.org/1.0.0/examples/rename-enumerated-labels.json",
+            "title": "Rename enumerated labels"
         }
     ]
 }

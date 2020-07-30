@@ -68,7 +68,7 @@
         }
     ],
     "returns": {
-        "description": "The merged data cube.",
+        "description": "The merged data cube. See the process description for details regarding the dimensions and dimension properties (name, type, labels, reference system and resolution).",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"

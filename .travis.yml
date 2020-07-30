@@ -8,34 +8,34 @@ sudo: false
 install:
 - cd tests
 - npm install
-- npm install -g concat-json-files
 
 script:
 - npm run test
-- cd ..
 
 before_deploy:
-- concat-json-files "*.json" -t "processes.json"
+- npm run generate
+- cd ..
 - git clone --branch gh-pages https://$GITHUB_TOKEN@github.com/Open-EO/openeo-processes.git gh-pages
-- cd gh-pages
-- |
-  if [[ $TRAVIS_BRANCH == 'master' ]] ; then
-    cp ../index.html index.html
-    cp ../processes.json processes.json
-  fi
+- cp tests/docs.html index.html
+- cp tests/processes.json processes.json
 - |
   if [[ $TRAVIS_BRANCH == 'draft' ]] ; then
-    rm -rf draft
-    mkdir -p draft
-    cp ../index.html draft/index.html
-    cp ../processes.json draft/processes.json
+    rm -rf gh-pages/draft
+    mkdir -p gh-pages/draft
+    rsync -vrm --include='*.json' --include='*.html' --include='examples/***' --include='meta/***' --exclude='*' . gh-pages/draft
+  fi
+- |
+  if [[ $TRAVIS_BRANCH == 'master' ]] ; then
+    find gh-pages -maxdepth 1 -type f -delete
+    rm -rf gh-pages/examples/
+    mkdir -p gh-pages
+    rsync -vrm --include='*.json' --include='*.html' --include='examples/***' --include='meta/***' --exclude='*' . gh-pages
   fi
 - |
   if [ -n "$TRAVIS_TAG" ] ; then
-    rm -rf $TRAVIS_TAG
-    mkdir -p $TRAVIS_TAG
-    cp ../index.html $TRAVIS_TAG/index.html
-    cp ../processes.json $TRAVIS_TAG/processes.json
+    rm -rf gh-pages/$TRAVIS_TAG
+    mkdir -p gh-pages/$TRAVIS_TAG
+    rsync -vrm --include='*.json' --include='*.html' --include='examples/***' --include='meta/***' --exclude='*' . gh-pages/$TRAVIS_TAG
   fi
 
 deploy:

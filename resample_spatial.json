@@ -1,7 +1,7 @@
 {
     "id": "resample_spatial",
     "summary": "Resample and warp the spatial dimensions",
-    "description": "Resamples the spatial dimensions (x,y) of the data cube to a specified resolution and/or warps the data cube to the target projection. At least `resolution` or `projection` must be specified.\n\nUse ``filter_bbox()`` to set the target spatial extent.",
+    "description": "Resamples the spatial dimensions (x,y) of the data cube to a specified resolution and/or warps the data cube to the target projection. At least `resolution` or `projection` must be specified.\n\nRelated processes:\n\n* Use ``filter_bbox()`` to set the target spatial extent.\n* To spatially align two data cubes with each other (e.g. for merging), better use the process ``resample_cube_spatial()``.",
     "categories": [
         "cubes",
         "aggregate & resample"
@@ -48,7 +48,7 @@
                     "subtype": "epsg-code",
                     "minimum": 1000,
                     "examples": [
-                        7099
+                        3857
                     ]
                 },
                 {
@@ -110,7 +110,7 @@
         }
     ],
     "returns": {
-        "description": "A raster data cube with values warped onto the new projection.",
+        "description": "A raster data cube with values warped onto the new projection. It has the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-spatial or vertical spatial dimensions. For the horizontal spatial dimensions the name and type remain unchanged, but reference system, labels and resolution may change depending on the given parameters.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"

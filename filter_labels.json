@@ -48,7 +48,7 @@
         },
         {
             "name": "dimension",
-            "description": "The name of the dimension to filter on. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.\n\n**Remarks:**\n\n* The default dimensions a data cube provides are described in the collection's metadata field `cube:dimensions`.\n* There could be multiple spatial dimensions such as `x`, `y` or `z`.\n* For multi-spectral imagery there is usually a separate dimension of type `bands` for the bands.",
+            "description": "The name of the dimension to filter on. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
             "schema": {
                 "type": "string"
             }
@@ -64,7 +64,7 @@
         }
     ],
     "returns": {
-        "description": "The filtered data cube. Therefore, the cardinality of the dimension is potentially lower, but the resolution and the number of dimensions are the same as for the original data cube.",
+        "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the given dimension has less (or the same) dimension labels.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"
@@ -78,32 +78,26 @@
     "examples": [
         {
             "description": "Filters the data cube to only contain data from platform Sentinel-2A. This example assumes that the data cube has a dimension `platform` so that computations can distinguish between Sentinel-2A and Sentinel-2B data.",
-            "process_graph": {
-                "filter": {
-                    "process_id": "filter_labels",
-                    "arguments": {
-                        "data": {
-                            "from_parameter": "sentinel2_data"
-                        },
-                        "condition": {
-                            "process_graph": {
-                                "eq": {
-                                    "process_id": "eq",
-                                    "arguments": {
-                                        "x": {
-                                            "from_parameter": "value"
-                                        },
-                                        "y": "Sentinel-2A",
-                                        "case_sensitive": false
-                                    },
-                                    "result": true
-                                }
-                            }
-                        },
-                        "dimension": "platform"
-                    },
-                    "result": true
-                }
+            "arguments": {
+                "data": {
+                    "from_parameter": "sentinel2_data"
+                },
+                "condition": {
+                    "process_graph": {
+                        "eq": {
+                            "process_id": "eq",
+                            "arguments": {
+                                "x": {
+                                    "from_parameter": "value"
+                                },
+                                "y": "Sentinel-2A",
+                                "case_sensitive": false
+                            },
+                            "result": true
+                        }
+                    }
+                },
+                "dimension": "platform"
             }
         }
     ]

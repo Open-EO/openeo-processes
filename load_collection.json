@@ -13,7 +13,7 @@
             "schema": {
                 "type": "string",
                 "subtype": "collection-id",
-                "pattern": "^[A-Za-z0-9_\\-\\.~/]+$"
+                "pattern": "^[\\w\\-\\.~/]+$"
             }
         },
         {
@@ -72,7 +72,7 @@
                                     "subtype": "epsg-code",
                                     "minimum": 1000,
                                     "examples": [
-                                        7099
+                                        3857
                                     ]
                                 },
                                 {
@@ -125,6 +125,13 @@
                                 "subtype": "date"
                             },
                             {
+                                "type": "string",
+                                "subtype": "year",
+                                "minLength": 4,
+                                "maxLength": 4,
+                                "pattern": "^\\d{4}$"
+                            },
+                            {
                                 "type": "null"
                             }
                         ]
@@ -159,7 +166,7 @@
                     }
                 },
                 {
-                    "title": "No Filter",
+                    "title": "No filter",
                     "description": "Don't filter bands. All bands are included in the data cube.",
                     "type": "null"
                 }
@@ -169,10 +176,13 @@
         },
         {
             "name": "properties",
-            "description": "Limits the data by metadata properties to include only data in the data cube which all given conditions return `true` for (AND operation).\n\nSpecify key-value-pairs with the keys being the name of the metadata property, which can be retrieved with the openEO Data Discovery for Collections. The values must be conditions to be evaluated against the collection metadata, see the example.",
+            "description": "Limits the data by metadata properties to include only data in the data cube which all given conditions return `true` for (AND operation).\n\nSpecify key-value-pairs with the key being the name of the metadata property, which can be retrieved with the openEO Data Discovery for Collections. The value must a condition (user-defined process) to be evaluated against the collection metadata, see the example.",
             "schema": [
                 {
                     "type": "object",
+                    "subtype": "metadata-filter",
+                    "title": "Filters",
+                    "description": "A list of filters to check against. Specify key-value-pairs with the key being the name of the metadata property name and the value being a process evaluated against the metadata values.",
                     "additionalProperties": {
                         "type": "object",
                         "subtype": "process-graph",
@@ -180,7 +190,6 @@
                             {
                                 "name": "value",
                                 "description": "The property value to be checked against.",
-                                "required": true,
                                 "schema": {
                                     "description": "Any data type."
                                 }
@@ -199,7 +208,7 @@
         }
     ],
     "returns": {
-        "description": "A data cube for further processing.",
+        "description": "A data cube for further processing. The dimensions and dimension properties (name, type, labels, reference system and resolution) correspond to the collection's metadata, but the dimension labels are restricted as specified in the parameters.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"
@@ -208,55 +217,49 @@
     "examples": [
         {
             "description": "Loading `Sentinel-2B` data from a `Sentinel-2` collection for 2018, but only with cloud cover between 0 and 50%.",
-            "process_graph": {
-                "loadco1": {
-                    "process_id": "load_collection",
-                    "arguments": {
-                        "id": "Sentinel-2",
-                        "spatial_extent": {
-                            "west": 16.1,
-                            "east": 16.6,
-                            "north": 48.6,
-                            "south": 47.2
-                        },
-                        "temporal_extent": [
-                            "2018-01-01",
-                            "2019-01-01"
-                        ],
-                        "properties": {
-                            "eo:cloud_cover": {
-                                "process_graph": {
-                                    "cc": {
-                                        "process_id": "between",
-                                        "arguments": {
-                                            "x": {
-                                                "from_parameter": "value"
-                                            },
-                                            "min": 0,
-                                            "max": 50
-                                        },
-                                        "result": true
-                                    }
-                                }
-                            },
-                            "platform": {
-                                "process_graph": {
-                                    "pf": {
-                                        "process_id": "eq",
-                                        "arguments": {
-                                            "x": {
-                                                "from_parameter": "value"
-                                            },
-                                            "y": "Sentinel-2B",
-                                            "case_sensitive": false
-                                        },
-                                        "result": true
-                                    }
-                                }
+            "arguments": {
+                "id": "Sentinel-2",
+                "spatial_extent": {
+                    "west": 16.1,
+                    "east": 16.6,
+                    "north": 48.6,
+                    "south": 47.2
+                },
+                "temporal_extent": [
+                    "2018-01-01",
+                    "2019-01-01"
+                ],
+                "properties": {
+                    "eo:cloud_cover": {
+                        "process_graph": {
+                            "cc": {
+                                "process_id": "between",
+                                "arguments": {
+                                    "x": {
+                                        "from_parameter": "value"
+                                    },
+                                    "min": 0,
+                                    "max": 50
+                                },
+                                "result": true
                             }
                         }
                     },
-                    "result": true
+                    "platform": {
+                        "process_graph": {
+                            "pf": {
+                                "process_id": "eq",
+                                "arguments": {
+                                    "x": {
+                                        "from_parameter": "value"
+                                    },
+                                    "y": "Sentinel-2B",
+                                    "case_sensitive": false
+                                },
+                                "result": true
+                            }
+                        }
+                    }
                 }
             }
         }

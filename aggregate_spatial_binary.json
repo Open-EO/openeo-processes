@@ -90,7 +90,7 @@
     },
     "links": [
         {
-            "href": "https://open-eo.github.io/openeo-api/glossary/#aggregation-and-resampling",
+            "href": "https://openeo.org/documentation/1.0/glossary.html#aggregate-reducing-resolution",
             "rel": "about",
             "title": "Aggregation explained in the openEO glossary"
         },

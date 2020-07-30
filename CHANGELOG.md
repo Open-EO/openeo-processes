@@ -4,7 +4,48 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## Unreleased / Draft
+
+
+## 1.0.0 - 2020-07-31
+
+### Added
+- `subtype-schemas.json`: A list of predefined subtypes is available as JSON Schema; Moved over from openeo-api.
+- Processes:
+    - `aggregate_temporal_period`
+    - `anomaly`
+    - `apply_neighborhood`
+    - `climatological_normal`
+    - `constant`
+- Process graphs added to:
+    - `mean`
+    - `median`
+- `apply_kernel`: Added parameters `border` and `replace_invalid` [#170](https://github.com/Open-EO/openeo-processes/issues/170)
+- Folder with examples (`examples/`). [#136](https://github.com/Open-EO/openeo-processes/issues/136)
+
+### Changed
+- `any` and `all`: Renamed parameter `values` to `data`. [#147](https://github.com/Open-EO/openeo-processes/issues/147)
+- `load_collection`: Parameter `properties` has subtype `metdata-filter`.
+- Examples adapted to latest API version for `aggregate_temporal`, `array_contains`, `array_find`, `filter_labels`, `load_collection` and `rename_labels`. [#136](https://github.com/Open-EO/openeo-processes/issues/136), [API#285](https://github.com/Open-EO/openeo-api/issues/285)
+- Some processes were assigned to different categories.
+
+### Removed
+- Process graph examples from `arccos`, `arcsin`, `arctan`, `arsinh`, `artanh`, `e`, `ln` and `pi`. [API#285](https://github.com/Open-EO/openeo-api/issues/285)
+
+### Fixed
+- `apply_kernel`:
+    - Clarify orientation of the 2D kernel array- [#165](https://github.com/Open-EO/openeo-processes/issues/165)
+    - Clarify no-data handling. [#170](https://github.com/Open-EO/openeo-processes/issues/170)
+- `load_collection`: Removed outdated `require` property from `value` callback parameter in process parameter `properties`.
+- `filter_bbox`, `load_collection`, `resample_spatial`: Fixed invalid EPSG code examples.
+- `aggregate_temporal`: Fixed outdated message for exception `TooManyDimensions`.
+- `clip`: Fixed examples.
+- `linear_scale_range`: Clarify that the process implicitly clips the values. [#159](https://github.com/Open-EO/openeo-processes/issues/159)
+- `mean`: Clarify behaviour for arrays with `null`-values only.
+- `mod`: Clarified behaviour. [#168](https://github.com/Open-EO/openeo-processes/issues/168)
+- `resample_*`: Clarified behaviour.
+- `first`, `last`, `max`, `mean`, `median`, `min`, `sd`, `variance`: Clarify behavior for arrays with `null`-values only.
+- Clarified (and fixed if necessary) for all processes in the "cubes" category the descriptions for the returned data cube. [#149](https://github.com/Open-EO/openeo-processes/issues/149)
 
 ## 1.0.0-rc.1 - 2020-01-31
 
