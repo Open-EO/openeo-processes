@@ -1,166 +1,25 @@
 const glob = require('glob');
 const fs = require('fs');
 const path = require('path');
-const markdownlint = require('markdownlint');
-const ajv = require('ajv');
-const spellcheck = require('markdown-spellcheck').default;
+const { normalizeString, checkDescription, checkSpelling, checkJsonSchema, getAjv, prepareSchema } = require('./testHelpers');
 
-var idRegExp = /^[A-Za-z0-9_]+$/;
-var paramKeyRegExp = /^[A-Za-z0-9_]+$/; 
-var exceptionNameRegExp = /^[A-Za-z0-9_]+$/;
-var summaryDotRegexp = /[^\.]$/;
-
-var files = glob.sync("../*.json", {realpath: true});
-
-var anyOfRequired = [
+const anyOfRequired = [
   "quantiles",
   "array_element"
 ];
 
-var subtypes = {
-	// Inherited from JSON Schema format
-	'date': {type: 'string'},
-	'date-time': {type: 'string'},
-	'time': {type: 'string'},
-	'uri': {type: 'string'},
-	// Custom subtypes defined by the API
-	'band-name': {type: 'string'},
-	'bounding-box': {type: 'object'},
-	'chunk-size': {type: 'object'},
-	'collection-id': {type: 'string'},
-	'duration': {type: 'string'},
-	'epsg-code': {type: 'integer'},
-	'file-paths': {type: 'array'},
-	'file-path': {type: 'string'},
-	'geojson': {type: 'object'},
-	'input-format': {type: 'string'},
-	'input-format-options': {type: 'object'},
-	'job-id': {type: 'string'},
-	'kernel': {type: 'array'},
-	'labeled-array': {type: 'array'},
-	'metadata-filter': {type: 'object'},
-	'output-format': {type: 'string'},
-	'output-format-options': {type: 'object'},
-	'process-graph': {type: 'object'},
-	'proj-definition': {type: 'string'},
-	'raster-cube': {type: 'object'},
-	'temporal-interval': {type: 'array'},
-	'temporal-intervals': {type: 'array'},
-	'udf-code': {type: 'string'},
-	'udf-runtime': {type: 'string'},
-	'udf-runtime-version': {type: 'string'},
-	'vector-cube': {type: 'object'},
-	'wkt2-definition': {type: 'string'},
-	// Proprietary extensions to the API
-	'year': {type: 'string'} 
-}
-
-var ajvOptions = {
-	schemaId: 'auto',
-	format: 'full'
-};
-
-var spellcheckOptions = {
-	ignoreAcronyms: true,
-	ignoreNumbers: true,
-	suggestions: false,
-	relativeSpellingFiles: true,
-	dictionary: {
-		language: "en-us"
-	}
-};
-
-// Init JSON Schema validator
-var jsv = new ajv(ajvOptions);
-jsv.addKeyword("parameters", {
-	dependencies: [
-		"type",
-		"subtype"
-	],
-	metaSchema: {
-		type: "array",
-		items: {
-			type: "object",
-			required: [
-				"name",
-				"description",
-				"schema"
-			],
-			properties: {
-				name: {
-					type: "string",
-					pattern: "^[A-Za-z0-9_]+$"
-				},
-				description: {
-					type: "string"
-				},
-				optional: {
-					type: "boolean"
-				},
-				deprecated: {
-					type: "boolean"
-				},
-				experimental: {
-					type: "boolean"
-				},
-				default: {
-					// Any type
-				},
-				schema: {
-					oneOf: [
-						{
-							type: "object",
-							// ToDo: Check Schema
-						},
-						{
-							type: "array",
-							items: {
-								type: "object"
-								// ToDo: Check Schema
-							}
-						}
-					]
-				}
-			}
-		}
-	},
-	valid: true
+var jsv = null;
+beforeAll(async () => {
+	jsv = await getAjv();
 });
-jsv.addKeyword("subtype", {
-	dependencies: [
-		"type"
-	],
-	metaSchema: {
-		type: "string",
-		enum: Object.keys(subtypes)
-	},
-	compile: function (subtype, schema) {
-		if (schema.type != subtypes[subtype].type) {
-			throw "Subtype '"+subtype+"' not allowed for type '"+schema.type+"'."
-		}
-		return () => true;
-	},
-	errors: false
-});
-
-// Read custom dictionary for spell check
-var words = fs.readFileSync('.words').toString().split(/\r\n|\n|\r/);
-for(let i in words) {
-	spellcheck.spellcheck.addWord(words[i]);
-}
 
 var processes = [];
-
+const files = glob.sync("../*.json", {realpath: true});
 files.forEach(file => {
 	try {
 		var fileContent = fs.readFileSync(file);
 		// Check JSON structure for faults
 		var p = JSON.parse(fileContent);
-
-		// Add process name to dictionary
-		if (typeof p.id === 'string') {
-			spellcheck.spellcheck.addWord(p.id);
-		}
 
 		// Prepare for tests
 		processes.push([file, p, fileContent.toString()]);
@@ -185,16 +44,15 @@ describe.each(processes)("%s", (file, p, fileContent) => {
 
 	test("ID", () => {
 		expect(typeof p.id).toBe('string');
-		expect(idRegExp.test(p.id)).toBeTruthy();
+		expect(/^\w+$/.test(p.id)).toBeTruthy();
 	});
-
 
 	test("Summary", () => {
 		expect(typeof p.summary === 'undefined' || typeof p.summary === 'string').toBeTruthy();
 		// lint: Summary should be short
 		expect(p.summary.length).toBeLessThan(60);
 		// lint: Summary should not end with a dot
-		expect(summaryDotRegexp.test(p.summary)).toBeTruthy();
+		expect(/[^\.]$/.test(p.summary)).toBeTruthy();
 		checkSpelling(p.summary, p);
 	});
 
@@ -244,7 +102,7 @@ describe.each(processes)("%s", (file, p, fileContent) => {
 		// return value schema
 		expect(typeof p.returns.schema).toBe('object');
 		expect(p.returns.schema).not.toBeNull();
-		checkJsonSchema(p.returns.schema);
+		checkJsonSchema(jsv, p.returns.schema);
 	});
 
 	test("Exceptions", () => {
@@ -254,7 +112,7 @@ describe.each(processes)("%s", (file, p, fileContent) => {
 	var exceptions = o2a(p.exceptions);
 	if (exceptions.length > 0) {
 		test.each(exceptions)("Exceptions > %s", (key, e) => {
-			expect(exceptionNameRegExp.test(key)).toBeTruthy();
+			expect(/^\w+$/.test(key)).toBeTruthy();
 
 			// exception message
 			expect(typeof e.message).toBe('string');
@@ -297,32 +155,23 @@ describe.each(processes)("%s", (file, p, fileContent) => {
 			expect(typeof example.description === 'undefined' || typeof example.description === 'string').toBeTruthy();
 			checkDescription(example.description, p);
 
-			// Is either process_graph or arguments set?
-			expect((example.process_graph || example.arguments) && !(example.process_graph && example.arguments)).toBeTruthy();
-
 			// example process graph
-			if (typeof example.process_graph !== 'undefined') {
-				expect(typeof example.process_graph).toBe('object');
-				expect(example.process_graph).not.toBeNull();
-				checkProcessGraph(example.process_graph);
-			}
+			expect(example.process_graph).toBeUndefined();
 
 			// example arguments
-			if (typeof example.arguments !== 'undefined') {
-				expect(typeof example.arguments).toBe('object');
-				expect(example.arguments).not.toBeNull();
-				// Check argument values
-				for(let argName in example.arguments) {
-					// Does parameter with this name exist?
-					
-					expect(paramKeys).toContain(argName);
-					checkJsonSchemaValue(parametersObj[argName].schema, example.arguments[argName]);
-				}
-				// Check whether all required parameters are set
-				for(let key in parametersObj) {
-					if (!parametersObj[key].optional) {
-						expect(example.arguments[key]).toBeDefined();
-					}
+			expect(typeof example.arguments).toBe('object');
+			expect(example.arguments).not.toBeNull();
+			// Check argument values
+			for(let argName in example.arguments) {
+				// Does parameter with this name exist?
+				
+				expect(paramKeys).toContain(argName);
+				checkJsonSchemaValue(parametersObj[argName].schema, example.arguments[argName]);
+			}
+			// Check whether all required parameters are set
+			for(let key in parametersObj) {
+				if (!parametersObj[key].optional) {
+					expect(example.arguments[key]).toBeDefined();
 				}
 			}
 
@@ -369,7 +218,7 @@ function checkFlags(p) {
 function checkParam(param, p, checkCbParams = true) {
 	// parameter name
 	expect(typeof param.name).toBe('string');
-	expect(paramKeyRegExp.test(param.name)).toBeTruthy();
+	expect(/^\w+$/.test(param.name)).toBeTruthy();
 
 	// parameter description
 	expect(typeof param.description).toBe('string');
@@ -387,7 +236,7 @@ function checkParam(param, p, checkCbParams = true) {
 	// Parameter schema
 	expect(typeof param.schema).toBe('object');
 	expect(param.schema).not.toBeNull();
-	checkJsonSchema(param.schema);
+	checkJsonSchema(jsv, param.schema);
 
 	if (!checkCbParams) {
 		// Parameters that are not required should define a default value
@@ -405,105 +254,6 @@ function checkParam(param, p, checkCbParams = true) {
 			for(var i in param.schema.parameters) {
 				checkParam(param.schema.parameters[i], p, false);
 			}
-		}
-	}
-}
-
-function normalizeString(str) {
-	return str.replace(/\r\n|\r|\n/g, "\n").trim();
-}
-
-function checkDescription(text, p = null, commonmark = true) {
-	if (!text) {
-		return;
-	}
-
-	// Check markdown
-	if (commonmark) {
-		const options = {
-			strings: {
-			description: text
-			},
-			config: {
-				"line-length": false, // Nobody cares in JSON files anyway
-				"first-line-h1": false, // Usually no headings in descriptions
-				"fenced-code-language": false, // Usually no languages available anyway
-				"single-trailing-newline": false, // New lines at end of a JSON string doesn't make sense. We don't have files here.
-			}
-		};
-		const result = markdownlint.sync(options);
-		expect(result).toEqual({description: []});
-	}
-
-	// Check spelling
-	checkSpelling(text, p);
-}
-
-function checkSpelling(text, p = null) {
-	if (!text) {
-		return;
-	}
-
-	const errors = spellcheck.spell(text, spellcheckOptions);
-	if (errors.length > 0) {
-		let pre = "Misspelled word";
-		if (p && p.id) {
-			pre += " in " + p.id;
-		}
-		console.warn(pre + ": " + JSON.stringify(errors));
-	}
-}
-
-function checkProcessGraph(pg) {
-	if (!pg) {
-		return;
-	}
-	
-	// ToDo: Validate process graph
-}
-
-function prepareSchema(schema) {
-	if (typeof schema["$schema"] === 'undefined') {
-		// Set applicable JSON SChema draft version if not already set
-		schema["$schema"] = "http://json-schema.org/draft-07/schema#";
-	}
-	if (Array.isArray(schema)) {
-		schema = {
-			anyOf: schema
-		};
-	}
-	return schema;
-}
-
-function checkJsonSchema(schema) {
-	if (Array.isArray(schema)) {
-		// lint: For array schemas there should be more than one schema specified, otherwise use directly the schema object
-		expect(schema.length).toBeGreaterThan(1);
-	}
-
-	let result = jsv.compile(prepareSchema(schema));
-	expect(result.errors).toBeNull();
-
-	checkSchemaRecursive(schema);
-}
-
-function checkSchemaRecursive(schema) {
-	for(var i in schema) {
-		var val = schema[i];
-		if (typeof val === 'object' && val !== null) {
-			checkSchemaRecursive(val);
-		}
-
-		switch(i) {
-			case 'title':
-			case 'description':
-				checkSpelling(val);
-				break;
-			case 'format':
-				if (schema.subtype !== val) {
-					throw "format '"+val+"' has no corresponding subtype.";
-				}
-				break;
 		}
 	}
 }

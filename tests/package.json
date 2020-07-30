@@ -1,6 +1,6 @@
 {
   "name": "@openeo/processes-validator",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "openEO Consortium",
   "contributors": [
     {
@@ -18,6 +18,8 @@
     "url": "git+https://github.com/Open-EO/openeo-processes.git"
   },
   "devDependencies": {
+    "@apidevtools/json-schema-ref-parser": "^9.0.6",
+    "@openeo/js-processgraphs": "^1.0.0-beta.3",
     "ajv": "^6.10.2",
     "concat-json-files": "^1.1.0",
     "glob": "^7.1.6",
