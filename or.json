@@ -1,0 +1,93 @@
+{
+    "id": "or",
+    "summary": "Logical OR",
+    "description": "Checks if **at least one** of the values is true. Evaluates parameter `x` before `y` and stops once the outcome is unambiguous. If a component is `null`, the result will be `null` if the outcome is ambiguous.\n\n**Truth table:**\n\n```\na \\ b || null | false | true\n----- || ---- | ----- | ----\nnull  || null | null  | true\nfalse || null | false | true\ntrue  || true | true  | true\n```",
+    "categories": [
+        "logic"
+    ],
+    "parameters": [
+        {
+            "name": "x",
+            "description": "A boolean value.",
+            "schema": {
+                "type": [
+                    "boolean",
+                    "null"
+                ]
+            }
+        },
+        {
+            "name": "y",
+            "description": "A boolean value.",
+            "schema": {
+                "type": [
+                    "boolean",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "Boolean result of the logical OR.",
+        "schema": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "x": true,
+                "y": true
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "x": false,
+                "y": false
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "x": true,
+                "y": null
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "x": null,
+                "y": true
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "x": false,
+                "y": null
+            },
+            "returns": null
+        }
+    ],
+    "process_graph": {
+        "any": {
+            "process_id": "any",
+            "arguments": {
+                "data": [
+                    {
+                        "from_parameter": "x"
+                    },
+                    {
+                        "from_parameter": "y"
+                    }
+                ],
+                "ignore_nodata": false
+            },
+            "result": true
+        }
+    }
+}

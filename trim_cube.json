@@ -1,0 +1,25 @@
+{
+    "id": "trim_cube",
+    "summary": "Remove dimension labels with no-data values",
+    "description": "Removes dimension labels solely containing no-data values. If the dimension is irregular categorical then dimension labels in the middle can be removed.",
+    "categories": [
+        "cubes"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A raster data cube to trim.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        }
+    ],
+    "returns": {
+        "description": "A trimmed raster data cube with the same dimensions. The dimension properties name, type, reference system and resolution remain unchanged. The number of dimension labels may decrease.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    }
+}
