@@ -25,7 +25,7 @@ See also the [changelog](CHANGELOG.md) for the changes between versions and the 
 
 This repository contains a set of files formally describing the openEO Processes:
 
-* The [`*.json`](examples/) files provide the process specifications as defined by the openEO API.
+* The `*.json` files provide the process specifications as defined by the openEO API.
 * [subtype-schemas.json](meta/subtype-schemas.json) in the `meta` folder defines common data types (`subtype`s) for JSON Schema used in openEO processes.
 * The [`examples`](examples/) folder contains some useful examples that the processes link to. All of these are non-binding additions.
 * The [`tests`](tests/) folder can be used to test the process specification for validity and and consistent "style". It also allows to render the processes in a web browser.
