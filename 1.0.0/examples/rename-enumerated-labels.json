@@ -1,0 +1,51 @@
+{
+    "summary": "Rename enumerated labels",
+    "description": "The process replaces the temporal dimension with a new dimension `min_max` with enumerated labels. The first label refers to the minimum values, the second label refers to the maximum values. Afterwards, the dimension labels are renamed to `min` and `max` respectively.",
+    "process_graph": {
+        "loadco1": {
+            "process_id": "load_collection",
+            "arguments": {
+                "id": "S2-RGB",
+                "spatial_extent": null,
+                "temporal_extent": null
+            }
+        },
+        "apply1": {
+            "process_id": "apply_dimension",
+            "arguments": {
+                "data": {
+                    "from_node": "loadco1"
+                },
+                "process": {
+                    "process_graph": {
+                        "extrem1": {
+                            "process_id": "extrema",
+                            "arguments": {
+                                "data": {
+                                    "from_parameter": "data"
+                                }
+                            },
+                            "result": true
+                        }
+                    }
+                },
+                "dimension": "t",
+                "target_dimension": "min_max"
+            }
+        },
+        "rename1": {
+            "process_id": "rename_labels",
+            "arguments": {
+                "data": {
+                    "from_node": "apply1"
+                },
+                "dimension": "bands",
+                "target": [
+                    "min",
+                    "max"
+                ]
+            },
+            "result": true
+        }
+    }
+}
