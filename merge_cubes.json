@@ -31,14 +31,14 @@
                 "parameters": [
                     {
                         "name": "x",
-                        "description": "The first value.",
+                        "description": "The overlapping value from the first data cube `cube1`.",
                         "schema": {
                             "description": "Any data type."
                         }
                     },
                     {
                         "name": "y",
-                        "description": "The second value.",
+                        "description": "The overlapping value from the second data cube `cube2`.",
                         "schema": {
                             "description": "Any data type."
                         }
