@@ -38,6 +38,12 @@
                 "x": null
             },
             "returns": false
+        },
+        {
+            "arguments": {
+                "x": [null, null]
+            },
+            "returns": true
         }
     ],
     "links": [
