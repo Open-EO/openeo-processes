@@ -15,7 +15,7 @@
                 "subtype": "raster-cube"
             }
         },
-        {
+		{
             "name": "reducer",
             "description": "A reducer to be applied on all values of each geometry. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
             "schema": {
