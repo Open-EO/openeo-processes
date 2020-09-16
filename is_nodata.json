@@ -41,7 +41,10 @@
         },
         {
             "arguments": {
-                "x": [null, null]
+                "x": [
+                    null,
+                    null
+                ]
             },
             "returns": false
         }

@@ -20,26 +20,6 @@
             "type": "boolean"
         }
     },
-    "examples": [
-        {
-            "arguments": {
-                "x": 1
-            },
-            "returns": false
-        },
-        {
-            "arguments": {
-                "x": "Test"
-            },
-            "returns": false
-        },
-        {
-            "arguments": {
-                "x": null
-            },
-            "returns": false
-        }
-    ],
     "links": [
         {
             "rel": "about",

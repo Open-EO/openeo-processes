@@ -1,7 +1,7 @@
 {
     "id": "is_valid",
     "summary": "Value is valid data",
-    "description": "Checks whether the specified value `x` is valid. The following values are considered valid:\n\n* Any finite numerical value (integers and floating point numbers). The definition of finite numbers follows the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) and excludes the special value `NaN` (not a number).\n* Any other value that is not a no-data value according to ``is_nodata()``. All arrays and objects are valid.",
+    "description": "Checks whether the specified value `x` is valid. The following values are considered valid:\n\n* Any finite numerical value (integers and floating point numbers). The definition of finite numbers follows the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) and excludes the special value `NaN` (not a number).\n* Any other value that is not a no-data value according to ``is_nodata()`. Thus all arrays, objects and strings are valid, regardless of their content.",
     "categories": [
         "comparison"
     ],
@@ -41,7 +41,10 @@
         },
         {
             "arguments": {
-                "x": [null, null]
+                "x": [
+                    null,
+                    null
+                ]
             },
             "returns": true
         }
