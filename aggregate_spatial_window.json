@@ -39,12 +39,12 @@
             "name": "boundary",
             "description": "Operation to apply if X/Y are not multiple of xDim/yDim. Options are:\n\n- trim: trim the datacube to fit window dimensions. \n\n- pad: pad the datacube with NaNs to fit window dimensions.",
             "schema": [
-				{
-                "title":"trim",
-				},
-				{
-				"title":"pad",
-				}
+		{
+                "title":"trim"
+		},
+		{
+		"title":"pad"
+		}
                 ]
         },
         {
