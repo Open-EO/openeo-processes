@@ -1,7 +1,7 @@
 {
     "id": "aggregate_spatial_window",
     "summary": "Zonal statistics for rectangular windows",
-    "description": "Aggregates statistics over the spatial dimensions. This process passes a list of values to the reducer. \n\n The results are computed dividing the input X/Y grid into xDim/yDim non-overlapping windows and applying the reducer process to each window.\n If X and Y are not multiple of xDim/yDim NaNs padding before the computation is applied.",
+    "description": "Aggregates statistics over the spatial dimensions. This process passes a list of values to the reducer.\n\nThe results are computed dividing the input X/Y grid into x_size/y_size non-overlapping windows and applying the reducer process to each window.\nIf X and Y are not multiple of x_size/y_size NaNs padding before the computation is applied.",
     "categories": [
         "cubes",
         "aggregate & resample"
@@ -14,38 +14,6 @@
                 "type": "object",
                 "subtype": "raster-cube"
             }
-        },
-        {
-            "name": "xDim",
-            "description": "Window x dimension.",
-            "schema": {
-                "type": [
-                    "number",
-                    "null"
-                ]
-            }
-        },
-        {
-            "name": "yDim",
-            "description": "Window y dimension.",
-            "schema": {
-                "type": [
-                    "number",
-                    "null"
-                ]
-            }
-        },
-        {
-            "name": "boundary",
-            "description": "Operation to apply if X/Y are not multiple of xDim/yDim. Options are:\n\n- trim: trim the datacube to fit window dimensions. \n\n- pad: pad the datacube with NaNs to fit window dimensions.",
-            "schema": [
-				{
-                "title":"trim",
-				},
-				{
-				"title":"pad",
-				}
-                ]
         },
         {
             "name": "reducer",
@@ -75,6 +43,43 @@
                     }
                 ]
             }
+        },
+		        {
+            "name": "x_size",
+            "description": "Window size along X or Longitude. The number of values used as input to the reducer along X dimension.",
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            },
+			"optional": true,
+            "default": null
+        },
+        {
+            "name": "y_size",
+            "description": "Window size along Y or Latitude. The number of values used as input to the reducer along Y dimension.",
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            },
+			"optional": true,
+            "default": null
+        },
+		{
+            "name": "boundary",
+            "description": "Operation to apply if X/Y are not multiple of x_size/y_size. Options are:\n\n- pad (default): pad the datacube with NaNs to fit window dimensions.\n\n- trim: trim the datacube to fit window dimensions.",
+			"schema": {
+			  "type": "string",
+			  "enum": [
+				"pad",
+				"trim"
+			  ]
+			},
+			"optional": true,
+            "default": "pad"
         },
         {
             "name": "context",
