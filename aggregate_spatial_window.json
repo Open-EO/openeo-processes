@@ -1,0 +1,96 @@
+{
+    "id": "aggregate_spatial_window",
+    "summary": "Zonal statistics for rectangular windows",
+    "description": "Aggregates statistics over the spatial dimensions. This process passes a list of values to the reducer. \n\n The results are computed dividing the input X/Y grid into xDim/yDim non-overlapping windows and applying the reducer process to each window.\n If X and Y are not multiple of xDim/yDim NaNs padding before the computation is applied.",
+    "categories": [
+        "cubes",
+        "aggregate & resample"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A raster data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "xDim",
+            "description": "Window x dimension.",
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            }
+        },
+        {
+            "name": "yDim",
+            "description": "Window y dimension.",
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            }
+        },
+        {
+            "name": "boundary",
+            "description": "Operation to apply if X/Y are not multiple of xDim/yDim. Options are:\n\n- trim: trim the datacube to fit window dimensions. \n\n- pad: pad the datacube with NaNs to fit window dimensions.",
+            "schema": [
+				{
+                "title":"trim",
+				},
+				{
+				"title":"pad",
+				}
+                ]
+        },
+        {
+            "name": "reducer",
+            "description": "A reducer to be applied on all values of each geometry. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
+            "schema": {
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "description": "An array with elements of any type.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "description": "Any data type."
+                            }
+                        }
+                    },
+                    {
+                        "name": "context",
+                        "description": "Additional data passed by the user.",
+                        "schema": {
+                            "description": "Any data type."
+                        },
+                        "optional": true,
+                        "default": null
+                    }
+                ]
+            }
+        },
+        {
+            "name": "context",
+            "description": "Additional data to be passed to the reducer.",
+            "schema": {
+                "description": "Any data type."
+            },
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "A vector data cube with the computed results.\n\nX and Y dimensions will be smaller compared to the input datacube.",
+        "schema": {
+            "type": "object",
+            "subtype": "vector-cube"
+        }
+    }
+}
