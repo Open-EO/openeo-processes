@@ -50,11 +50,10 @@
             "schema": {
                 "type": [
                     "number",
-                    "null"
                 ]
             },
 			"optional": true,
-            "default": null
+            "default": 1
         },
         {
             "name": "y_size",
@@ -62,11 +61,10 @@
             "schema": {
                 "type": [
                     "number",
-                    "null"
                 ]
             },
 			"optional": true,
-            "default": null
+            "default": 1
         },
 		{
             "name": "boundary",
