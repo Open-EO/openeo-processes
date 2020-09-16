@@ -5372,9 +5372,9 @@
     ]
   },
   {
-    "id": "is_nan",
-    "summary": "Value is not a number",
-    "description": "Checks whether the specified value `x` is not a number (often abbreviated as `NaN`). The definition of `NaN` follows the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935). All non-numeric data types MUST also return `true`.",
+    "id": "is_infinite",
+    "summary": "Value is an infinite number",
+    "description": "Checks whether the specified value `x` is an infinite number. The definition of infinite numbers follows the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935). The special numerical value `NaN` (not a number) as defined by the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) is not an infinite number and must return `false`.",
     "categories": [
       "comparison"
     ],
@@ -5388,7 +5388,38 @@
       }
     ],
     "returns": {
-      "description": "`true` if the data is not a number, otherwise `false`",
+      "description": "`true` if the data is an infinite number, otherwise `false`.",
+      "schema": {
+        "type": "boolean"
+      }
+    },
+    "links": [
+      {
+        "rel": "about",
+        "href": "https://ieeexplore.ieee.org/document/4610935",
+        "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
+      }
+    ]
+  },
+  {
+    "id": "is_nan",
+    "summary": "Value is not a number",
+    "description": "Checks whether the specified value `x` is not a number. Returns `true` for numeric values (integers and floating point numbers), except for the special value `NaN` as defined by the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935). All non-numeric data types MUST also return `true`, including arrays that contain `NaN` values.",
+    "categories": [
+      "comparison",
+      "math > constants"
+    ],
+    "parameters": [
+      {
+        "name": "x",
+        "description": "The data to check.",
+        "schema": {
+          "description": "Any data type is allowed."
+        }
+      }
+    ],
+    "returns": {
+      "description": "`true` if the data is not a number, otherwise `false`.",
       "schema": {
         "type": "boolean"
       }
@@ -5405,6 +5436,12 @@
           "x": "Test"
         },
         "returns": true
+      },
+      {
+        "arguments": {
+          "x": null
+        },
+        "returns": true
       }
     ],
     "links": [
@@ -5412,13 +5449,18 @@
         "rel": "about",
         "href": "https://ieeexplore.ieee.org/document/4610935",
         "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
+      },
+      {
+        "rel": "about",
+        "href": "http://mathworld.wolfram.com/NaN.html",
+        "title": "NaN explained by Wolfram MathWorld"
       }
     ]
   },
   {
     "id": "is_nodata",
     "summary": "Value is not a no-data value",
-    "description": "Checks whether the specified data is a missing data, i.e. equals to any of the no-data values / `null`.",
+    "description": "Checks whether the specified data is a missing data, i.e. equals to `null` or any of the no-data values specified in the metadata. The special numerical value `NaN` (not a number) as defined by the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) is not considered no-data and must return `false`.",
     "categories": [
       "comparison"
     ],
@@ -5432,7 +5474,7 @@
       }
     ],
     "returns": {
-      "description": "`true` if the data is a no-data value, otherwise `false`",
+      "description": "`true` if the data is a no-data value, otherwise `false`.",
       "schema": {
         "type": "boolean"
       }
@@ -5455,13 +5497,22 @@
           "x": null
         },
         "returns": true
+      },
+      {
+        "arguments": {
+          "x": [
+            null,
+            null
+          ]
+        },
+        "returns": false
       }
     ]
   },
   {
     "id": "is_valid",
     "summary": "Value is valid data",
-    "description": "Checks whether the specified value `x` is valid. A value is considered valid if it is\n\n1. not a no-data value (`null`) and\n2. a finite number (only if `x` is a number). The definition of finite and infinite numbers follows the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935).",
+    "description": "Checks whether the specified value `x` is valid. The following values are considered valid:\n\n* Any finite numerical value (integers and floating point numbers). The definition of finite numbers follows the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) and excludes the special value `NaN` (not a number).\n* Any other value that is not a no-data value according to ``is_nodata()`. Thus all arrays, objects and strings are valid, regardless of their content.",
     "categories": [
       "comparison"
     ],
@@ -5498,6 +5549,15 @@
           "x": null
         },
         "returns": false
+      },
+      {
+        "arguments": {
+          "x": [
+            null,
+            null
+          ]
+        },
+        "returns": true
       }
     ],
     "links": [
@@ -7404,6 +7464,33 @@
         "result": true
       }
     }
+  },
+  {
+    "id": "nan",
+    "summary": "Not a Number (NaN)",
+    "description": "NaN (not a number) is a symbolic floating-point representation which is neither a signed infinity nor a finite number.",
+    "categories": [
+      "math > constants"
+    ],
+    "parameters": [],
+    "returns": {
+      "description": "Returns NaN.",
+      "schema": {
+        "description": "Returns NaN.\n\nJSON Schema can't represent NaN, thus a schema can't be specified."
+      }
+    },
+    "links": [
+      {
+        "rel": "about",
+        "href": "https://ieeexplore.ieee.org/document/4610935",
+        "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
+      },
+      {
+        "rel": "about",
+        "href": "http://mathworld.wolfram.com/NaN.html",
+        "title": "NaN explained by Wolfram MathWorld"
+      }
+    ]
   },
   {
     "id": "ndvi",
