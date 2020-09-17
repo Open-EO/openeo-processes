@@ -1,0 +1,95 @@
+{
+  "id": "aggregate_spatial_window",
+  "summary": "Zonal statistics for rectangular windows",
+  "description": "Aggregates statistics over the spatial dimensions. This process passes a list of values to the reducer.\n\nThe results are computed dividing the input X/Y grid into x_size/y_size non-overlapping windows and applying the reducer process to each window.\nIf X and Y are not multiple of x_size/y_size NaNs padding before the computation is applied.",
+  "categories": [
+    "cubes",
+    "aggregate & resample"
+  ],
+  "parameters": [
+    {
+      "name": "data",
+      "description": "A raster data cube.",
+      "schema": {
+        "type": "object",
+        "subtype": "raster-cube"
+      }
+    },
+    {
+      "name": "reducer",
+      "description": "A reducer to be applied on all values of each geometry. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
+      "schema": {
+        "type": "object",
+        "subtype": "process-graph",
+        "parameters": [
+          {
+            "name": "data",
+            "description": "An array with elements of any type.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "description": "Any data type."
+              }
+            }
+          },
+          {
+            "name": "context",
+            "description": "Additional data passed by the user.",
+            "schema": {
+              "description": "Any data type."
+            },
+            "optional": true,
+            "default": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "x_size",
+      "description": "Window size along X or Longitude. The number of values used as input to the reducer along X dimension.",
+      "schema": {
+        "type": "number"
+      },
+      "optional": true,
+      "default": 1
+    },
+    {
+      "name": "y_size",
+      "description": "Window size along Y or Latitude. The number of values used as input to the reducer along Y dimension.",
+      "schema": {
+        "type": "number"
+      },
+      "optional": true,
+      "default": 1
+    },
+    {
+      "name": "boundary",
+      "description": "Operation to apply if X/Y are not multiple of x_size/y_size. Options are:\n\n- pad (default): pad the datacube with NaNs to fit window dimensions.\n\n- trim: trim the datacube to fit window dimensions.",
+      "schema": {
+        "type": "string",
+        "enum": [
+          "pad",
+          "trim"
+        ]
+      },
+      "optional": true,
+      "default": "pad"
+    },
+    {
+      "name": "context",
+      "description": "Additional data to be passed to the reducer.",
+      "schema": {
+        "description": "Any data type."
+      },
+      "optional": true,
+      "default": null
+    }
+  ],
+  "returns": {
+    "description": "A vector data cube with the computed results.\n\nX and Y dimensions will be smaller compared to the input datacube.",
+    "schema": {
+      "type": "object",
+      "subtype": "vector-cube"
+    }
+  }
+}
