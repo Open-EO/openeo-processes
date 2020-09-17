@@ -48,7 +48,8 @@
       "name": "x_size",
       "description": "Window size along X or Longitude. The number of values used as input to the reducer along X dimension.",
       "schema": {
-        "type": "number"
+        "type": "integer",
+        "minimum": 1
       },
       "optional": true,
       "default": 1
