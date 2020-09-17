@@ -89,7 +89,7 @@
     "description": "A vector data cube with the computed results.\n\nX and Y dimensions will be smaller compared to the input datacube.",
     "schema": {
       "type": "object",
-      "subtype": "vector-cube"
+      "subtype": "raster-cube"
     }
   }
 }
