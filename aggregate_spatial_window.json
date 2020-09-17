@@ -58,7 +58,8 @@
       "name": "y_size",
       "description": "Window size along Y or Latitude. The number of values used as input to the reducer along Y dimension.",
       "schema": {
-        "type": "number"
+        "type": "integer",
+        "minimum": 1
       },
       "optional": true,
       "default": 1
