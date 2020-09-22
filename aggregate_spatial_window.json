@@ -1,11 +1,12 @@
 {
     "id": "aggregate_spatial_window",
     "summary": "Zonal statistics for rectangular windows",
-    "description": "Aggregates statistics over the horizontal spatial dimensions (axes `x` and `y`) of the data cube.\n\nThe pixel grid for the axes `x` and `y` is divided into non-overlapping windows with the size specified in the parameter `size`. If the number of values for the axes `x` and `y` is not a multiple of the window size, the behaviour specified in `boundary` parameter is applied.\nFor each of these windows, the reducer process computes the result.",
+    "description": "Aggregates statistics over the horizontal spatial dimensions (axes `x` and `y`) of the data cube.\n\nThe pixel grid for the axes `x` and `y` is divided into non-overlapping windows with the size specified in the parameter `size`. If the number of values for the axes `x` and `y` is not a multiple of the corresponding window size, the behaviour specified in `boundary` parameter is applied.\nFor each of these windows, the reducer process computes the result.",
     "categories": [
         "cubes",
         "aggregate & resample"
     ],
+    "experimental": true,
     "parameters": [
         {
             "name": "data",
@@ -17,7 +18,7 @@
         },
         {
             "name": "reducer",
-            "description": "A reducer to be applied on all values of each geometry. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
+            "description": "A reducer to be applied on the list of values, which contain all pixels covered by the window. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
@@ -49,25 +50,17 @@
             "description": "Window sizes in pixels along the horizontal spatial dimensions.\n\nThe first value corresponds to the `x` axis, the second values corresponds to the `y` axis.",
             "schema": {
                 "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
                 "items": {
-                    "type": "object",
-                    "subtype": "chunk-size",
-                    "required": [
-                        "value"
-                    ],
-                    "properties": {
-                        "value": {
-                            "type": "number",
-                            "minimum": 1,
-                            "description": "The unit the values are given in pixels (`px`)"
-                        }
-                    }
+                    "type": "integer",
+                    "minimum": 1
                 }
             }
         },
         {
             "name": "boundary",
-            "description": "Behavior to apply if the number of values for the axes `x` and `y` is not a multiple of the corresponding value in the `size` parameter. Options are:\n\n- `pad` (default): pad the data cube with `NaN` (not a number) values to fit the required window size.\n\n- `trim`: trim the data cube to fit the required window size.",
+            "description": "Behaviour to apply if the number of values for the axes `x` and `y` is not a multiple of the corresponding value in the `size` parameter. Options are:\n\n- `pad` (default): pad the data cube with the no-data value `null` to fit the required window size.\n\n- `trim`: trim the data cube to fit the required window size.",
             "schema": {
                 "type": "string",
                 "enum": [
@@ -89,7 +82,7 @@
         }
     ],
     "returns": {
-        "description": "A data cube with the newly computed values and the same dimensions.\n\nThe resolution will change, depending on the chosen parameters. It decreases for the dimensions which have the corresponding parameter `size` = [`x_size`,`y_size`] set to values greater than 1.\n\nThe dimension labels will be set to the center of the window. The other dimension properties (name, type and reference system) remain unchanged.",
+        "description": "A data cube with the newly computed values and the same dimensions.\n\nThe resolution will change depending on the chosen values for the `size` and `boundary` parameter. It usually decreases for the dimensions which have the corresponding parameter `size` set to values greater than 1.\n\nThe dimension labels will be set to the coordinate at the center of the window. The other dimension properties (name, type and reference system) remain unchanged.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"
