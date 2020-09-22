@@ -92,7 +92,7 @@
         "description": "A data cube with the newly computed values and the same dimensions.\n\nThe resolution will change, depending on the chosen parameters. It decreases for the dimensions which have the corresponding parameter `size` = [`x_size`,`y_size`] set to values greater than 1.\n\nThe dimension labels will be set to the center of the window. The other dimension properties (name, type and reference system) remain unchanged.",
         "schema": {
             "type": "object",
-            "subtype": "vector-cube"
+            "subtype": "raster-cube"
         }
     }
 }
