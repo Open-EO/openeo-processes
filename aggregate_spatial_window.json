@@ -67,7 +67,7 @@
         },
         {
             "name": "boundary",
-            "description": "Behavior to apply if the number of values for the axes `x` and `y` is not a multiple of the corresponding `size` = [`x_size`,`y_size`] parameter. Options are:\n\n- `pad` (default): pad the data cube with `NaN` (not a number) values to fit the required window size.\n\n- `trim`: trim the data cube to fit the required window size.",
+            "description": "Behavior to apply if the number of values for the axes `x` and `y` is not a multiple of the corresponding value in the `size` parameter. Options are:\n\n- `pad` (default): pad the data cube with `NaN` (not a number) values to fit the required window size.\n\n- `trim`: trim the data cube to fit the required window size.",
             "schema": {
                 "type": "string",
                 "enum": [
