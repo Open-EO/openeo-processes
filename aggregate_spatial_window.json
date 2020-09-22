@@ -1,6 +1,7 @@
 {
   "id": "aggregate_spatial_window",
   "summary": "Zonal statistics for rectangular windows",
+  "description": "Aggregates statistics over the spatial dimensions. This process passes a list of values to the reducer.\n\nThe results are computed dividing the input X/Y grid into x_size/y_size non-overlapping windows and applying the reducer process to each window.\nIf X and Y are not multiple of x_size/y_size NaNs padding before the computation is applied.",
   "categories": [
     "cubes",
     "aggregate & resample"
@@ -16,6 +17,7 @@
     },
     {
       "name": "reducer",
+      "description": "A reducer to be applied on all values of each geometry. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
       "schema": {
         "type": "object",
         "subtype": "process-graph",
@@ -42,7 +44,6 @@
         ]
       }
     },
-<<<<<<< HEAD
 	{
 		"name": "size",
 		"description": "Window sizes (pixels) along each dimension.\n\nFirst value correspond to Window size along X or Longitude and second to Window size along Y or Latitude.",
@@ -65,28 +66,6 @@
 			}
 		}
 	},
-=======
-    {
-      "name": "x_size",
-      "description": "Window size along X or Longitude. The number of values used as input to the reducer along X dimension.",
-      "schema": {
-        "type": "integer",
-        "minimum": 1
-      },
-      "optional": true,
-      "default": 1
-    },
-    {
-      "name": "y_size",
-      "description": "Window size along Y or Latitude. The number of values used as input to the reducer along Y dimension.",
-      "schema": {
-        "type": "integer",
-        "minimum": 1
-      },
-      "optional": true,
-      "default": 1
-    },
->>>>>>> e2fa4060c12f133096b332df2d10f37e0503b365
     {
       "name": "boundary",
       "description": "Operation to apply if X/Y are not multiple of x_size/y_size. Options are:\n\n- pad (default): pad the datacube with NaNs to fit window dimensions.\n\n- trim: trim the datacube to fit window dimensions.",
@@ -114,5 +93,7 @@
     "description": "A data cube with the newly computed values and the same dimensions.\n\nThe resolution will change, depending on the chosen parameters. It decreases for the dimensions which have the corresponding parameter `size` = [`x_size`,`y_size`] set to values greater than 1.\n\nThe dimension labels will be set to the center of the window. The other dimension properties (name, type and reference system) remain unchanged.",
     "schema": {
       "type": "object",
+      "subtype": "vector-cube"
     }
   }
+}
