@@ -46,7 +46,7 @@
         },
         {
             "name": "size",
-            "description": "Window sizes (pixels) along each dimension.\n\nFirst value correspond to Window size along X or Longitude and second to Window size along Y or Latitude.",
+            "description": "Window sizes in pixels along the horizontal spatial dimensions.\n\nThe first value corresponds to the `x` axis, the second values corresponds to the `y` axis.",
             "schema": {
                 "type": "array",
                 "items": {
