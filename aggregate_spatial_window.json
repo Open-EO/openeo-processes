@@ -44,24 +44,28 @@
         ]
       }
     },
-    {
-      "name": "x_size",
-      "description": "Window size along X or Longitude. The number of values used as input to the reducer along X dimension.",
-      "schema": {
-        "type": "number"
-      },
-      "optional": true,
-      "default": 1
-    },
-    {
-      "name": "y_size",
-      "description": "Window size along Y or Latitude. The number of values used as input to the reducer along Y dimension.",
-      "schema": {
-        "type": "number"
-      },
-      "optional": true,
-      "default": 1
-    },
+	{
+		"name": "size",
+		"description": "Window sizes (pixels) along each dimension.\n\nFirst value correspond to Window size along X or Longitude and second to Window size along Y or Latitude.",
+		"schema": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"subtype": "chunk-size",
+				"required": [
+					"value"
+				],
+				"properties": {
+					"value": {
+							"type": "number",
+							"minimum": 1,
+							"description": "The unit the values are given in pixels (`px`)"
+						]
+					}
+				}
+			}
+		}
+	},
     {
       "name": "boundary",
       "description": "Operation to apply if X/Y are not multiple of x_size/y_size. Options are:\n\n- pad (default): pad the datacube with NaNs to fit window dimensions.\n\n- trim: trim the datacube to fit window dimensions.",
@@ -86,7 +90,7 @@
     }
   ],
   "returns": {
-    "description": "A vector data cube with the computed results.\n\nX and Y dimensions will be smaller compared to the input datacube.",
+    "description": "A data cube with the newly computed values and the same dimensions.\n\nThe resolution will change, depending on the chosen parameters. It decreases for the dimensions which have the corresponding parameter `size` = [`x_size`,`y_size`] set to values greater than 1.\n\nThe dimension labels will be set to the center of the window. The other dimension properties (name, type and reference system) remain unchanged.",
     "schema": {
       "type": "object",
       "subtype": "vector-cube"
