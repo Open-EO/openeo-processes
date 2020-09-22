@@ -60,7 +60,6 @@
 							"type": "number",
 							"minimum": 1,
 							"description": "The unit the values are given in pixels (`px`)"
-						]
 					}
 				}
 			}
