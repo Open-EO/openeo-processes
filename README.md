@@ -27,7 +27,7 @@ See also the [changelog](CHANGELOG.md) for the changes between versions and the 
 
 This repository contains a set of files formally describing the openEO Processes:
 
-* The `*.json` files provide the stable process specifications as defined by openEO. New processes need at least two implementations.
+* The `*.json` files provide the stable process specifications as defined by openEO. New processes need at least two implementations or consensus from the openEO PSC.
 * The `*.json` files in the [`proposals`](proposals/) folder provide proposed new process specifications that are only implemented by one organization and may still change. Everyone is encouraged to base their work on the proposals and give feedback so that eventually the processes evolve into stable proces specifications.
 * [subtype-schemas.json](meta/subtype-schemas.json) in the `meta` folder defines common data types (`subtype`s) for JSON Schema used in openEO processes.
 * The [`examples`](examples/) folder contains some useful examples that the processes link to. All of these are non-binding additions.
