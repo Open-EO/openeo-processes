@@ -253,114 +253,6 @@
     }
   },
   {
-    "id": "aggregate_spatial_binary",
-    "summary": "Zonal statistics for geometries by binary aggregation",
-    "description": "Aggregates statistics for one or more geometries (e.g. zonal statistics for polygons) over the spatial dimensions. This process consecutively passes a pair of values to the reducer. This may be better suited especially for UDFs in case the number of values gets too large to be processed at once. In contrast, ``aggregate_spatial()`` passes a list of values.\n\n- For **polygons**, the process considers all pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n- For **points**, the process considers the closest pixel center.\n- For **lines** (line strings), the process considers all the pixels whose centers are closest to at least one point on the line.\n\nThe data cube must have been reduced to only contain two raster dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise this process fails with the `TooManyDimensions` error.\n\nThe number of total and valid pixels is returned together with the calculated values.",
-    "categories": [
-      "cubes",
-      "aggregate & resample"
-    ],
-    "experimental": true,
-    "parameters": [
-      {
-        "name": "data",
-        "description": "A raster data cube. The data cube implicitly gets restricted to the bounds of the geometries as if ``filter_spatial()`` would have been used with the same values for the corresponding parameters immediately before this process.",
-        "schema": {
-          "type": "object",
-          "subtype": "raster-cube"
-        }
-      },
-      {
-        "name": "geometries",
-        "description": "Geometries as GeoJSON on which the aggregation will be based.",
-        "schema": {
-          "type": "object",
-          "subtype": "geojson"
-        }
-      },
-      {
-        "name": "reducer",
-        "description": "A reduction operator to be applied consecutively on tuples of values. It must be both associative and commutative as the execution may be executed in parallel and therefore the order of execution is arbitrary. The reduction operator may be a single process such as ``multiply()`` or consist of multiple sub-processes.",
-        "schema": {
-          "type": "object",
-          "subtype": "process-graph",
-          "parameters": [
-            {
-              "name": "x",
-              "description": "The first value.",
-              "schema": {
-                "description": "Any data type."
-              }
-            },
-            {
-              "name": "y",
-              "description": "The second value.",
-              "schema": {
-                "description": "Any data type."
-              }
-            },
-            {
-              "name": "context",
-              "description": "Additional data passed by the user.",
-              "schema": {
-                "description": "Any data type."
-              },
-              "optional": true,
-              "default": null
-            }
-          ]
-        }
-      },
-      {
-        "name": "target_dimension",
-        "description": "The new dimension name to be used for storing the results. Defaults to `result`.",
-        "schema": {
-          "type": "string"
-        },
-        "default": "result",
-        "optional": true
-      },
-      {
-        "name": "context",
-        "description": "Additional data to be passed to the reducer.",
-        "schema": {
-          "description": "Any data type."
-        },
-        "optional": true,
-        "default": null
-      }
-    ],
-    "returns": {
-      "description": "A vector data cube with the computed results and restricted to the bounds of the geometries.\n\nThe computed value is stored in dimension with the name that was specified in the parameter `target_dimension`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) for each geometry. These values are stored as new dimension with a dimension name derived from `target_dimension` by adding the suffix `_meta`. The new dimension has the dimension labels `total_count` and `valid_count`.",
-      "schema": {
-        "type": "object",
-        "subtype": "vector-cube"
-      }
-    },
-    "exceptions": {
-      "TooManyDimensions": {
-        "message": "The number of dimensions must be reduced to three for 'aggregate_spatial_binary'."
-      }
-    },
-    "links": [
-      {
-        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregate-reducing-resolution",
-        "rel": "about",
-        "title": "Aggregation explained in the openEO glossary"
-      },
-      {
-        "href": "http://www.opengeospatial.org/standards/sfa",
-        "rel": "about",
-        "title": "Simple Features standard by the OGC"
-      },
-      {
-        "rel": "about",
-        "href": "https://en.wikipedia.org/wiki/Reduction_Operator",
-        "title": "Background information on reduction operators (binary reducers) by Wikipedia"
-      }
-    ]
-  },
-  {
     "id": "aggregate_spatial",
     "summary": "Zonal statistics for geometries",
     "description": "Aggregates statistics for one or more geometries (e.g. zonal statistics for polygons) over the spatial dimensions. This process passes a list of values to the reducer. In contrast, ``aggregate_spatial_binary()`` passes two values, which may be better suited especially for UDFs in case the number of values gets too large to be processed at once.\n\n- For **polygons**, the process considers all pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n- For **points**, the process considers the closest pixel center.\n- For **lines** (line strings), the process considers all the pixels whose centers are closest to at least one point on the line.\n\nThus, pixels may be part of multiple geometries and be part of multiple aggregations.\n\nThe data cube must have been reduced to only contain two spatial dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise this process fails with the `TooManyDimensions` error.\n\nThe number of total and valid pixels is returned together with the calculated values.",
@@ -8446,6 +8338,282 @@
     ]
   },
   {
+    "id": "aggregate_spatial_binary",
+    "summary": "Zonal statistics for geometries by binary aggregation",
+    "description": "Aggregates statistics for one or more geometries (e.g. zonal statistics for polygons) over the spatial dimensions. This process consecutively passes a pair of values to the reducer. This may be better suited especially for UDFs in case the number of values gets too large to be processed at once. In contrast, ``aggregate_spatial()`` passes a list of values.\n\n- For **polygons**, the process considers all pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n- For **points**, the process considers the closest pixel center.\n- For **lines** (line strings), the process considers all the pixels whose centers are closest to at least one point on the line.\n\nThe data cube must have been reduced to only contain two raster dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise this process fails with the `TooManyDimensions` error.\n\nThe number of total and valid pixels is returned together with the calculated values.",
+    "categories": [
+      "cubes",
+      "aggregate & resample"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "A raster data cube. The data cube implicitly gets restricted to the bounds of the geometries as if ``filter_spatial()`` would have been used with the same values for the corresponding parameters immediately before this process.",
+        "schema": {
+          "type": "object",
+          "subtype": "raster-cube"
+        }
+      },
+      {
+        "name": "geometries",
+        "description": "Geometries as GeoJSON on which the aggregation will be based.",
+        "schema": {
+          "type": "object",
+          "subtype": "geojson"
+        }
+      },
+      {
+        "name": "reducer",
+        "description": "A reduction operator to be applied consecutively on tuples of values. It must be both associative and commutative as the execution may be executed in parallel and therefore the order of execution is arbitrary. The reduction operator may be a single process such as ``multiply()`` or consist of multiple sub-processes.",
+        "schema": {
+          "type": "object",
+          "subtype": "process-graph",
+          "parameters": [
+            {
+              "name": "x",
+              "description": "The first value.",
+              "schema": {
+                "description": "Any data type."
+              }
+            },
+            {
+              "name": "y",
+              "description": "The second value.",
+              "schema": {
+                "description": "Any data type."
+              }
+            },
+            {
+              "name": "context",
+              "description": "Additional data passed by the user.",
+              "schema": {
+                "description": "Any data type."
+              },
+              "optional": true,
+              "default": null
+            }
+          ]
+        }
+      },
+      {
+        "name": "target_dimension",
+        "description": "The new dimension name to be used for storing the results. Defaults to `result`.",
+        "schema": {
+          "type": "string"
+        },
+        "default": "result",
+        "optional": true
+      },
+      {
+        "name": "context",
+        "description": "Additional data to be passed to the reducer.",
+        "schema": {
+          "description": "Any data type."
+        },
+        "optional": true,
+        "default": null
+      }
+    ],
+    "returns": {
+      "description": "A vector data cube with the computed results and restricted to the bounds of the geometries.\n\nThe computed value is stored in dimension with the name that was specified in the parameter `target_dimension`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) for each geometry. These values are stored as new dimension with a dimension name derived from `target_dimension` by adding the suffix `_meta`. The new dimension has the dimension labels `total_count` and `valid_count`.",
+      "schema": {
+        "type": "object",
+        "subtype": "vector-cube"
+      }
+    },
+    "exceptions": {
+      "TooManyDimensions": {
+        "message": "The number of dimensions must be reduced to three for 'aggregate_spatial_binary'."
+      }
+    },
+    "links": [
+      {
+        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregate-reducing-resolution",
+        "rel": "about",
+        "title": "Aggregation explained in the openEO glossary"
+      },
+      {
+        "href": "http://www.opengeospatial.org/standards/sfa",
+        "rel": "about",
+        "title": "Simple Features standard by the OGC"
+      },
+      {
+        "rel": "about",
+        "href": "https://en.wikipedia.org/wiki/Reduction_Operator",
+        "title": "Background information on reduction operators (binary reducers) by Wikipedia"
+      }
+    ]
+  },
+  {
+    "id": "reduce_dimension_binary",
+    "summary": "Reduce dimensions using binary reduction",
+    "description": "Applies a binary reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer. This process consecutively passes a pair of values to the reducer. This may be better suited especially for UDFs in case the number of values gets too large to be processed at once. In contrast, ``reduce_dimension()`` passes a list of values.\n\nThe dimension is dropped. To avoid this, use ``apply_dimension()`` instead.",
+    "categories": [
+      "cubes",
+      "reducer"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "A data cube.",
+        "schema": {
+          "type": "object",
+          "subtype": "raster-cube"
+        }
+      },
+      {
+        "name": "reducer",
+        "description": "A reduction operator to be applied consecutively on pairs of values. It must be both associative and commutative as the execution may be executed in parallel and therefore the order of execution is arbitrary. The reduction operator may be a single process such as ``multiply()`` or consist of multiple sub-processes.",
+        "schema": {
+          "type": "object",
+          "subtype": "process-graph",
+          "parameters": [
+            {
+              "name": "x",
+              "description": "The first value.",
+              "schema": {
+                "description": "Any data type."
+              }
+            },
+            {
+              "name": "y",
+              "description": "The second value.",
+              "schema": {
+                "description": "Any data type."
+              }
+            },
+            {
+              "name": "context",
+              "description": "Additional data passed by the user.",
+              "schema": {
+                "description": "Any data type."
+              },
+              "optional": true,
+              "default": null
+            }
+          ]
+        }
+      },
+      {
+        "name": "dimension",
+        "description": "The name of the dimension over which to reduce. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "context",
+        "description": "Additional data to be passed to the reducer.",
+        "schema": {
+          "description": "Any data type."
+        },
+        "optional": true,
+        "default": null
+      }
+    ],
+    "returns": {
+      "description": "A data cube with the newly computed values. It is missing the given dimension, the number of dimensions decreases by one. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.",
+      "schema": {
+        "type": "object",
+        "subtype": "raster-cube"
+      }
+    },
+    "exceptions": {
+      "DimensionNotAvailable": {
+        "message": "A dimension with the specified name does not exist."
+      }
+    },
+    "links": [
+      {
+        "rel": "about",
+        "href": "https://en.wikipedia.org/wiki/Reduction_Operator",
+        "title": "Background information on reduction operators (binary reducers) by Wikipedia"
+      }
+    ]
+  },
+  {
+    "id": "run_udf_externally",
+    "summary": "Run an externally hosted UDF container",
+    "description": "Runs a compatible UDF container that is either externally hosted by a service provider or running on a local machine of the user. The UDF container must follow the [openEO UDF specification](https://openeo.org/documentation/1.0/udfs.html).\n\nThe referenced UDF service can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
+    "categories": [
+      "cubes",
+      "import",
+      "udf"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "The data to be passed to the UDF as array or raster data cube.",
+        "schema": [
+          {
+            "title": "Raster data cube",
+            "type": "object",
+            "subtype": "raster-cube"
+          },
+          {
+            "title": "Array",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "description": "Any data type."
+            }
+          },
+          {
+            "title": "Single Value",
+            "description": "A single value of any data type."
+          }
+        ]
+      },
+      {
+        "name": "url",
+        "description": "URL to a remote UDF service.",
+        "schema": {
+          "type": "string",
+          "format": "uri",
+          "subtype": "uri"
+        }
+      },
+      {
+        "name": "context",
+        "description": "Additional data such as configuration options that should be passed to the UDF.",
+        "schema": {
+          "type": "object"
+        },
+        "default": {},
+        "optional": true
+      }
+    ],
+    "returns": {
+      "description": "The data processed by the UDF service.\n\n* Returns a raster data cube, if a raster data cube is passed for `data`. Details on the dimensions and dimension properties (name, type, labels, reference system and resolution) depend on the UDF.\n* If an array is passed for `data`, the returned value can be of any data type, but is exactly what the UDF returns.",
+      "schema": [
+        {
+          "title": "Raster data cube",
+          "type": "object",
+          "subtype": "raster-cube"
+        },
+        {
+          "title": "Any",
+          "description": "Any data type."
+        }
+      ]
+    },
+    "links": [
+      {
+        "rel": "about",
+        "href": "https://openeo.org/documentation/1.0/udfs.html",
+        "title": "openEO UDF specification"
+      },
+      {
+        "rel": "about",
+        "href": "https://github.com/Open-EO/openeo-udf",
+        "title": "openEO UDF repository"
+      }
+    ]
+  },
+  {
     "id": "quantiles",
     "summary": "Quantiles",
     "description": "Calculates quantiles, which are cut points dividing the range of a probability distribution into either\n\n* intervals corresponding to the given `probabilities` or\n* (nearly) equal-sized intervals (q-quantiles based on the parameter `q`).\n\nEither the parameter `probabilites` or `q` must be specified, otherwise the `QuantilesParameterMissing` exception is thrown. If both parameters are set the `QuantilesParameterConflict` exception is thrown.",
@@ -8732,94 +8900,6 @@
         "rel": "about",
         "href": "http://mathworld.wolfram.com/Permutation.html",
         "title": "Permutation explained by Wolfram MathWorld"
-      }
-    ]
-  },
-  {
-    "id": "reduce_dimension_binary",
-    "summary": "Reduce dimensions using binary reduction",
-    "description": "Applies a binary reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer. This process consecutively passes a pair of values to the reducer. This may be better suited especially for UDFs in case the number of values gets too large to be processed at once. In contrast, ``reduce_dimension()`` passes a list of values.\n\nThe dimension is dropped. To avoid this, use ``apply_dimension()`` instead.",
-    "categories": [
-      "cubes",
-      "reducer"
-    ],
-    "experimental": true,
-    "parameters": [
-      {
-        "name": "data",
-        "description": "A data cube.",
-        "schema": {
-          "type": "object",
-          "subtype": "raster-cube"
-        }
-      },
-      {
-        "name": "reducer",
-        "description": "A reduction operator to be applied consecutively on pairs of values. It must be both associative and commutative as the execution may be executed in parallel and therefore the order of execution is arbitrary. The reduction operator may be a single process such as ``multiply()`` or consist of multiple sub-processes.",
-        "schema": {
-          "type": "object",
-          "subtype": "process-graph",
-          "parameters": [
-            {
-              "name": "x",
-              "description": "The first value.",
-              "schema": {
-                "description": "Any data type."
-              }
-            },
-            {
-              "name": "y",
-              "description": "The second value.",
-              "schema": {
-                "description": "Any data type."
-              }
-            },
-            {
-              "name": "context",
-              "description": "Additional data passed by the user.",
-              "schema": {
-                "description": "Any data type."
-              },
-              "optional": true,
-              "default": null
-            }
-          ]
-        }
-      },
-      {
-        "name": "dimension",
-        "description": "The name of the dimension over which to reduce. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
-        "schema": {
-          "type": "string"
-        }
-      },
-      {
-        "name": "context",
-        "description": "Additional data to be passed to the reducer.",
-        "schema": {
-          "description": "Any data type."
-        },
-        "optional": true,
-        "default": null
-      }
-    ],
-    "returns": {
-      "description": "A data cube with the newly computed values. It is missing the given dimension, the number of dimensions decreases by one. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.",
-      "schema": {
-        "type": "object",
-        "subtype": "raster-cube"
-      }
-    },
-    "exceptions": {
-      "DimensionNotAvailable": {
-        "message": "A dimension with the specified name does not exist."
-      }
-    },
-    "links": [
-      {
-        "rel": "about",
-        "href": "https://en.wikipedia.org/wiki/Reduction_Operator",
-        "title": "Background information on reduction operators (binary reducers) by Wikipedia"
       }
     ]
   },
@@ -9447,86 +9527,6 @@
         "rel": "about",
         "href": "https://ieeexplore.ieee.org/document/8766229",
         "title": "IEEE Standard 754-2019 for Floating-Point Arithmetic"
-      }
-    ]
-  },
-  {
-    "id": "run_udf_externally",
-    "summary": "Run an externally hosted UDF container",
-    "description": "Runs a compatible UDF container that is either externally hosted by a service provider or running on a local machine of the user. The UDF container must follow the [openEO UDF specification](https://openeo.org/documentation/1.0/udfs.html).\n\nThe referenced UDF service can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
-    "categories": [
-      "cubes",
-      "import",
-      "udf"
-    ],
-    "experimental": true,
-    "parameters": [
-      {
-        "name": "data",
-        "description": "The data to be passed to the UDF as array or raster data cube.",
-        "schema": [
-          {
-            "title": "Raster data cube",
-            "type": "object",
-            "subtype": "raster-cube"
-          },
-          {
-            "title": "Array",
-            "type": "array",
-            "minItems": 1,
-            "items": {
-              "description": "Any data type."
-            }
-          },
-          {
-            "title": "Single Value",
-            "description": "A single value of any data type."
-          }
-        ]
-      },
-      {
-        "name": "url",
-        "description": "URL to a remote UDF service.",
-        "schema": {
-          "type": "string",
-          "format": "uri",
-          "subtype": "uri"
-        }
-      },
-      {
-        "name": "context",
-        "description": "Additional data such as configuration options that should be passed to the UDF.",
-        "schema": {
-          "type": "object"
-        },
-        "default": {},
-        "optional": true
-      }
-    ],
-    "returns": {
-      "description": "The data processed by the UDF service.\n\n* Returns a raster data cube, if a raster data cube is passed for `data`. Details on the dimensions and dimension properties (name, type, labels, reference system and resolution) depend on the UDF.\n* If an array is passed for `data`, the returned value can be of any data type, but is exactly what the UDF returns.",
-      "schema": [
-        {
-          "title": "Raster data cube",
-          "type": "object",
-          "subtype": "raster-cube"
-        },
-        {
-          "title": "Any",
-          "description": "Any data type."
-        }
-      ]
-    },
-    "links": [
-      {
-        "rel": "about",
-        "href": "https://openeo.org/documentation/1.0/udfs.html",
-        "title": "openEO UDF specification"
-      },
-      {
-        "rel": "about",
-        "href": "https://github.com/Open-EO/openeo-udf",
-        "title": "openEO UDF repository"
       }
     ]
   },
