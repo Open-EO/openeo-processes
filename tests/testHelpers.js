@@ -27,7 +27,7 @@ for(let i in words) {
 	spellcheck.spellcheck.addWord(words[i]);
 }
 // Add the process IDs to the word list
-const files = glob.sync("../*.json", {realpath: true});
+const files = glob.sync("../{*,proposals/*}.json", {realpath: true});
 for(let i in files) {
 	spellcheck.spellcheck.addWord(path.basename(files[i], path.extname(files[i])));
 }

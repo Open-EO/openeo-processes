@@ -30,7 +30,7 @@
   },
   "scripts": {
     "test": "jest",
-    "generate": "concat-json-files \"../*.json\" -t \"processes.json\"",
+    "generate": "concat-json-files \"../{*,proposals/*}.json\" -t \"processes.json\"",
     "render": "npm run generate && http-server -p 9876 -o docs.html -c-1"
   }
 }
