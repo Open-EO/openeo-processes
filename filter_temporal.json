@@ -1,7 +1,7 @@
 {
     "id": "filter_temporal",
     "summary": "Temporal filter for a temporal intervals",
-    "description": "Limits the data cube to the specified interval of dates and/or times.\n\nMore precisely, the filter checks whether the temporal dimension label is greater than or equal to the lower boundary (start date/time) and the temporal dimension label is less than the value of the upper boundary (end date/time). This corresponds to a left-closed interval, which contains the lower boundary but not the upper boundary.\n\nIf the dimension is set to `null` (it's the default value), the data cube is expected to only have one temporal dimension.",
+    "description": "Limits the data cube to the specified interval of dates and/or times.\n\nMore precisely, the filter checks whether each of the temporal dimension labels is greater than or equal to the lower boundary (start date/time) and less than the value of the upper boundary (end date/time). This corresponds to a left-closed interval, which contains the lower boundary but not the upper boundary.",
     "categories": [
         "cubes",
         "filter"
@@ -61,7 +61,7 @@
         },
         {
             "name": "dimension",
-            "description": "The name of the temporal dimension to filter on. If the dimension is not set or is set to `null`, the filter applies to all temporal dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+            "description": "The name of the temporal dimension to filter on. If no specific dimension is specified or it is set to `null`, the filter applies to all temporal dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
             "schema": {
                 "type": [
                     "string",
@@ -73,7 +73,7 @@
         }
     ],
     "returns": {
-        "description": "A data cube restricted to the specified temporal extent. The dimensions and dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the given temporal dimension(s) have less (or the same) dimension labels.",
+        "description": "A data cube restricted to the specified temporal extent. The dimensions and dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the temporal dimensions (determined by `dimensions` parameter) may have less dimension labels.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"
