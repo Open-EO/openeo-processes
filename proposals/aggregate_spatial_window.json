@@ -10,7 +10,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "A raster data cube.",
+            "description": "A raster data cube with exactly two horizontal spatial dimensions and an arbitrary number of additional dimensions. The process is applied to all additional dimensions individually.",
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
