@@ -12,8 +12,8 @@
       }
     },
     {
-      "description": "The atmospheric correction algorithm to use. Different backends can support different algorithms. Examples include FORCE, iCor.\nLeave empty to allow the backend to choose, which will improve portability.",
-      "name": "algorithm",
+      "description": "The atmospheric correction method to use. Different backends can support different algorithms. Examples include FORCE, iCor.\nLeave empty to allow the backend to choose, which will improve portability.",
+      "name": "method",
       "optional": true,
       "default": null,
       "schema": {
@@ -22,7 +22,7 @@
     },
     {
       "description": "The name of the digital elevation model to use, leave empty to allow the backend to make a suitable choice. Not all backends may offer all digital elevation models.",
-      "name": "elevation-model",
+      "name": "elevation_model",
       "optional": true,
       "default": null,
       "schema": {
