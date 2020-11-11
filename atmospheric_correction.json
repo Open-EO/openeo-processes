@@ -1,0 +1,47 @@
+{
+  "description": "Applies an atmospheric correction that converts top of atmosphere reflectance values into bottom of atmosphere/top of canopy reflectance values.",
+  "id": "atmospheric_correction",
+  "parameters": [
+    {
+      "description": "input data cube containing multispectral optical top of atmosphere reflectances to be corrected",
+      "name": "data",
+      "optional": false,
+      "schema": {
+        "subtype": "raster-cube",
+        "type": "object"
+      }
+    },
+    {
+      "description": "The atmospheric correction algorithm to use. Different backends can support different algorithms. Examples include FORCE, iCor.\nLeave empty to allow the backend to choose, which will improve portability.",
+      "name": "algorithm",
+      "optional": true,
+      "default": null,
+      "schema": {
+          "type": "string"
+      }
+    },
+    {
+      "description": "The name of the digital elevation model to use, leave empty to allow the backend to make a suitable choice. Not all backends may offer all digital elevation models.",
+      "name": "elevation-model",
+      "optional": true,
+      "default": null,
+      "schema": {
+          "type": "string"
+      }
+    }
+  ],
+  "returns": {
+    "description": "bottom of atmosphere reflectances",
+    "schema": {
+      "subtype": "raster-cube",
+      "type": "object"
+    }
+  },
+  "links": [
+        {
+            "rel": "about",
+            "href": "https://bok.eo4geo.eu/IP1-7-1",
+            "title": "Atmospheric correction explained by EO4GEO body of knowledge."
+        }
+    ]
+}
