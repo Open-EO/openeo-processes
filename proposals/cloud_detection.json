@@ -1,0 +1,52 @@
+{
+  "description": "Detects clouds and cloud shadow in optical imagery. The resulting cloud mask is added as a band to the datacube. Specific implementations may add additional implementation specific bands.",
+  "id": "cloud_detection",
+  "parameters": [
+    {
+      "description": "input data cube containing multispectral optical top of atmosphere reflectances on which to perform cloud detection.",
+      "name": "data",
+      "optional": false,
+      "schema": {
+        "subtype": "raster-cube",
+        "type": "object"
+      }
+    },
+    {
+      "description": "The cloud detection method to use. Different backends can support different algorithms. Examples include sen2cor, fmask,s2cloudless....\nLeave empty to allow the backend to choose, which will improve portability.",
+      "name": "method",
+      "optional": true,
+      "default": null,
+      "schema": {
+          "type": "string"
+      }
+    },
+    {
+      "description": "If true, the cloud mask is applied to the input datacube, if false, the cloud mask information is added as one or more additional bands.",
+      "name": "apply_mask",
+      "optional": true,
+      "default": true,
+      "schema": {
+          "type": "boolean"
+      }
+    }
+  ],
+  "returns": {
+    "description": "The original datacube, either with the cloud mask added as a band, or the cloud mask applied to the pixels.",
+    "schema": {
+      "subtype": "raster-cube",
+      "type": "object"
+    }
+  },
+  "exceptions": {
+        "UnsupportedParameter": {
+            "message": "One of the provided parameters is not supported by this backend. This can be resolved by using default parameters, or using a backend that supports the parameter value."
+        }
+    },
+  "links": [
+        {
+            "rel": "about",
+            "href": "https://bok.eo4geo.eu/TA14-2-2-1-3",
+            "title": "Cloud mask explained by EO4GEO body of knowledge."
+        }
+    ]
+}

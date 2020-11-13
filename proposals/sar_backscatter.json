@@ -1,0 +1,57 @@
+{
+  "description": "Computes backscatter from georeferenced SAR input.\n",
+  "id": "sar_backscatter",
+  "parameters": [
+    {
+      "description": "Input data cube containing raw backscatter input. Note that backscatter computation may require instrument specific metadata that is tightly coupled to the original SAR products. As a result, this process may only work in combination with loading data from specific collections, not with general datacubes.",
+      "name": "data",
+      "optional": false,
+      "schema": {
+        "subtype": "raster-cube",
+        "type": "object"
+      }
+    },
+    {
+      "description": "The backscatter coefficient to compute. Possible values: sigma0, gamma0.",
+      "name": "backscatter_coefficient",
+      "optional": true,
+      "default": "gamma0",
+      "schema": {
+          "type": "string"
+      }
+    },
+    {
+      "description": "The name of the digital elevation model to use, leave empty to allow the backend to make a suitable choice. Not all backends may offer all digital elevation models.",
+      "name": "elevation_model",
+      "optional": true,
+      "default": null,
+      "schema": {
+          "type": "string"
+      }
+    }
+  ],
+  "returns": {
+    "description": "Backscatter values in linear power corresponding to the chosen backscatter coefficient. For decibel values, an additional conversion is needed.",
+    "schema": {
+      "subtype": "raster-cube",
+      "type": "object"
+    }
+  },
+  "exceptions": {
+        "UnsupportedParameter": {
+            "message": "One of the provided parameters is not supported by this backend. This can be resolved by using default parameters, or using a backend that supports the parameter value."
+        }
+    },
+  "links": [
+        {
+            "rel": "about",
+            "href": "https://bok.eo4geo.eu/PP2-2-4-3",
+            "title": "Gamma nought (0) explained by EO4GEO body of knowledge."
+        },
+        {
+            "rel": "about",
+            "href": "https://bok.eo4geo.eu/PP2-2-4-2",
+            "title": "Sigma nought (0) explained by EO4GEO body of knowledge."
+        }
+    ]
+}

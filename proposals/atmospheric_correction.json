@@ -1,5 +1,5 @@
 {
-  "description": "Applies an atmospheric correction that converts top of atmosphere reflectance values into bottom of atmosphere/top of canopy reflectance values.",
+  "description": "Applies an atmospheric correction that converts top of atmosphere reflectance values into bottom of atmosphere/top of canopy reflectance values.\nNote that multiple atmospheric methods exist, but may not be supported by all backends. The method parameter gives you the option of requiring a specific method, but this may result in an error if the backend does not support it.",
   "id": "atmospheric_correction",
   "parameters": [
     {
@@ -37,6 +37,11 @@
       "type": "object"
     }
   },
+   "exceptions": {
+        "UnsupportedParameter": {
+            "message": "One of the provided parameters is not supported by this backend. This can be resolved by using default parameters, or using a backend that supports the parameter value."
+        }
+    },
   "links": [
         {
             "rel": "about",
