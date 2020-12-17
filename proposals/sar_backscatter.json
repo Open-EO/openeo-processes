@@ -21,7 +21,16 @@
       }
     },
     {
-      "description": "The name of the digital elevation model to use, leave empty to allow the backend to make a suitable choice. Not all backends may offer all digital elevation models.",
+      "description": "Enables/disables orthorectification. true: Orthorectified, false: non-Orthorectified.\n The non-orthorectified products use a simple earth model as provided in the products themselves. This may be sufficient for very flat target areas and is faster to process.",
+      "name": "orthorectify",
+      "optional": true,
+      "default": false,
+      "schema": {
+          "type": "boolean"
+      }
+    },
+    {
+      "description": "The (collection) name of the digital elevation model to use, leave empty to allow the backend to make a suitable choice. Not all backends may offer all digital elevation models. Elevation models are listed as collections, or can be found in backend specific documentation.",
       "name": "elevation_model",
       "optional": true,
       "default": null,
