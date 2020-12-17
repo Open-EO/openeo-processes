@@ -1,57 +1,69 @@
 {
-  "description": "Computes backscatter from georeferenced SAR input.\n",
-  "id": "sar_backscatter",
-  "parameters": [
-    {
-      "description": "Input data cube containing raw backscatter input. Note that backscatter computation may require instrument specific metadata that is tightly coupled to the original SAR products. As a result, this process may only work in combination with loading data from specific collections, not with general datacubes.",
-      "name": "data",
-      "optional": false,
-      "schema": {
-        "subtype": "raster-cube",
-        "type": "object"
-      }
-    },
-    {
-      "description": "The backscatter coefficient to compute. Possible values: sigma0, gamma0.",
-      "name": "backscatter_coefficient",
-      "optional": true,
-      "default": "gamma0",
-      "schema": {
-          "type": "string"
-      }
-    },
-    {
-      "description": "Enables/disables orthorectification. true: Orthorectified, false: non-Orthorectified.\n The non-orthorectified products use a simple earth model as provided in the products themselves. This may be sufficient for very flat target areas and is faster to process.",
-      "name": "orthorectify",
-      "optional": true,
-      "default": false,
-      "schema": {
-          "type": "boolean"
-      }
-    },
-    {
-      "description": "The (collection) name of the digital elevation model to use, leave empty to allow the backend to make a suitable choice. Not all backends may offer all digital elevation models. Elevation models are listed as collections, or can be found in backend specific documentation.",
-      "name": "elevation_model",
-      "optional": true,
-      "default": null,
-      "schema": {
-          "type": "string"
-      }
-    }
-  ],
-  "returns": {
-    "description": "Backscatter values in linear power corresponding to the chosen backscatter coefficient. For decibel values, an additional conversion is needed.",
-    "schema": {
-      "subtype": "raster-cube",
-      "type": "object"
-    }
-  },
-  "exceptions": {
-        "UnsupportedParameter": {
-            "message": "One of the provided parameters is not supported by this backend. This can be resolved by using default parameters, or using a backend that supports the parameter value."
+    "id": "sar_backscatter",
+    "summary": "Computes backscatter from georeferenced SAR input",
+    "description": "Computes backscatter from georeferenced SAR input.\n\nNote that backscatter computation may require instrument specific metadata that is tightly coupled to the original SAR products. As a result, this process may only work in combination with loading data from specific collections, not with general data cubes.",
+    "categories": [
+        "cubes",
+        "sar"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "description": "Data cube containing raw backscatter input.",
+            "name": "data",
+            "schema": {
+                "subtype": "raster-cube",
+                "type": "object"
+            }
+        },
+        {
+            "description": "The backscatter coefficient to compute, either `sigma0` or `gamma0` (the default).",
+            "name": "backscatter_coefficient",
+            "optional": true,
+            "default": "gamma0",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "sigma0",
+                    "gamma0"
+                ]
+            }
+        },
+        {
+            "description": "By default, orthorectification is disabled. Set to `true` to enables orthorectification.\n\nThe non-orthorectified products use a simple earth model as provided in the products themselves. This may be sufficient for very flat target areas and is faster to process.",
+            "name": "orthorectify",
+            "optional": true,
+            "default": false,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "description": "The (collection) name of the digital elevation model to use, leave empty to allow the back-end to make a suitable choice. Not all back-ends may offer all digital elevation models. Elevation models are listed as collections, or can be found in back-end specific documentation.",
+            "name": "elevation_model",
+            "optional": true,
+            "default": null,
+            "schema": {
+                "type": [
+                    "string",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "Backscatter values in linear power corresponding to the chosen backscatter coefficient. For decibel values, an additional conversion is needed.",
+        "schema": {
+            "subtype": "raster-cube",
+            "type": "object"
         }
     },
-  "links": [
+    "exceptions": {
+        "UnsupportedParameter": {
+            "message": "One of the provided parameters is not supported by this back-end. This can be resolved by using default parameters, or using a back-end that supports the parameter value."
+        }
+    },
+    "links": [
         {
             "rel": "about",
             "href": "https://bok.eo4geo.eu/PP2-2-4-3",

@@ -1,48 +1,63 @@
 {
-  "description": "Applies an atmospheric correction that converts top of atmosphere reflectance values into bottom of atmosphere/top of canopy reflectance values.\nNote that multiple atmospheric methods exist, but may not be supported by all backends. The method parameter gives you the option of requiring a specific method, but this may result in an error if the backend does not support it.",
-  "id": "atmospheric_correction",
-  "parameters": [
-    {
-      "description": "input data cube containing multispectral optical top of atmosphere reflectances to be corrected",
-      "name": "data",
-      "optional": false,
-      "schema": {
-        "subtype": "raster-cube",
-        "type": "object"
-      }
-    },
-    {
-      "description": "The atmospheric correction method to use. Different backends can support different algorithms. Examples include FORCE, iCor.\nLeave empty to allow the backend to choose, which will improve portability.",
-      "name": "method",
-      "optional": true,
-      "default": null,
-      "schema": {
-          "type": "string"
-      }
-    },
-    {
-      "description": "The name of the digital elevation model to use, leave empty to allow the backend to make a suitable choice. Not all backends may offer all digital elevation models.",
-      "name": "elevation_model",
-      "optional": true,
-      "default": null,
-      "schema": {
-          "type": "string"
-      }
-    }
-  ],
-  "returns": {
-    "description": "bottom of atmosphere reflectances",
-    "schema": {
-      "subtype": "raster-cube",
-      "type": "object"
-    }
-  },
-   "exceptions": {
-        "UnsupportedParameter": {
-            "message": "One of the provided parameters is not supported by this backend. This can be resolved by using default parameters, or using a backend that supports the parameter value."
+    "id": "atmospheric_correction",
+    "summary": "Apply atmospheric correction",
+    "description": "Applies an atmospheric correction that converts top of atmosphere reflectance values into bottom of atmosphere/top of canopy reflectance values.\nNote that multiple atmospheric methods exist, but may not be supported by all back-ends. The method parameter gives you the option of requiring a specific method, but this may result in an error if the back-end does not support it.",
+    "categories": [
+        "cubes",
+        "optical"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "description": "Data cube containing multi-spectral optical top of atmosphere reflectances to be corrected.",
+            "name": "data",
+            "schema": {
+                "subtype": "raster-cube",
+                "type": "object"
+            }
+        },
+        {
+            "description": "The atmospheric correction method to use.\n\nThe supported algorithms can vary between back-ends. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility..",
+            "name": "method",
+            "optional": true,
+            "default": null,
+            "schema": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "enum": [
+                    "FORCE",
+                    "iCor"
+                ]
+            }
+        },
+        {
+            "description": "The name of the digital elevation model to use, leave empty to allow the back-end to make a suitable choice. Not all back-ends may offer all digital elevation models.",
+            "name": "elevation_model",
+            "optional": true,
+            "default": null,
+            "schema": {
+                "type": [
+                    "string",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "Data cube containing bottom of atmosphere reflectances.",
+        "schema": {
+            "subtype": "raster-cube",
+            "type": "object"
         }
     },
-  "links": [
+    "exceptions": {
+        "UnsupportedParameter": {
+            "message": "One of the provided parameters is not supported by this back-end. This can be resolved by using default parameters, or using a back-end that supports the parameter value."
+        }
+    },
+    "links": [
         {
             "rel": "about",
             "href": "https://bok.eo4geo.eu/IP1-7-1",
