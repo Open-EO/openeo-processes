@@ -38,7 +38,14 @@
                         "optional": true,
                         "default": null
                     }
-                ]
+                ],
+                "returns": {
+                    "description": "Return the data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) must remain unchanged, otherwise a `DataCubePropertiesImmutable` exception will be thrown.",
+                    "schema": {
+                        "type": "object",
+                        "subtype": "raster-cube"
+                    }
+                }
             }
         },
         {
@@ -214,6 +221,9 @@
     "exceptions": {
         "DimensionNotAvailable": {
             "message": "A dimension with the specified name does not exist."
+        },
+        "DataCubePropertiesImmutable": {
+            "message": "The dimension properties (name, type, labels, reference system and resolution) must remain unchanged."
         }
     }
 }

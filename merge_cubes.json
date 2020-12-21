@@ -52,7 +52,13 @@
                         "optional": true,
                         "default": null
                     }
-                ]
+                ],
+                "returns": {
+                    "description": "Return the value that should be stored in the data cube.",
+                    "schema": {
+                        "description": "Any data type."
+                    }
+                }
             },
             "default": null,
             "optional": true
