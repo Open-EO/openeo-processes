@@ -5264,36 +5264,6 @@
     ]
   },
   {
-    "id": "is_infinite",
-    "summary": "Value is an infinite number",
-    "description": "Checks whether the specified value `x` is an infinite number. The definition of infinite numbers follows the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935). The special numerical value `NaN` (not a number) as defined by the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) is not an infinite number and must return `false`.",
-    "categories": [
-      "comparison"
-    ],
-    "parameters": [
-      {
-        "name": "x",
-        "description": "The data to check.",
-        "schema": {
-          "description": "Any data type is allowed."
-        }
-      }
-    ],
-    "returns": {
-      "description": "`true` if the data is an infinite number, otherwise `false`.",
-      "schema": {
-        "type": "boolean"
-      }
-    },
-    "links": [
-      {
-        "rel": "about",
-        "href": "https://ieeexplore.ieee.org/document/4610935",
-        "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
-      }
-    ]
-  },
-  {
     "id": "is_nan",
     "summary": "Value is not a number",
     "description": "Checks whether the specified value `x` is not a number. Returns `true` for numeric values (integers and floating point numbers), except for the special value `NaN` as defined by the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935). All non-numeric data types MUST also return `true`, including arrays that contain `NaN` values.",
@@ -7358,33 +7328,6 @@
     }
   },
   {
-    "id": "nan",
-    "summary": "Not a Number (NaN)",
-    "description": "NaN (not a number) is a symbolic floating-point representation which is neither a signed infinity nor a finite number.",
-    "categories": [
-      "math > constants"
-    ],
-    "parameters": [],
-    "returns": {
-      "description": "Returns NaN.",
-      "schema": {
-        "description": "Returns NaN.\n\n*SON Schema can't represent NaN, thus a schema can't be specified.*"
-      }
-    },
-    "links": [
-      {
-        "rel": "about",
-        "href": "https://ieeexplore.ieee.org/document/4610935",
-        "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
-      },
-      {
-        "rel": "about",
-        "href": "http://mathworld.wolfram.com/NaN.html",
-        "title": "NaN explained by Wolfram MathWorld"
-      }
-    ]
-  },
-  {
     "id": "ndvi",
     "summary": "Normalized Difference Vegetation Index",
     "description": "Computes the Normalized Difference Vegetation Index (NDVI). The NDVI is computed as *(nir - red) / (nir + red)*.\n\nThe `data` parameter expects a raster data cube with a dimension of type `bands` or a `DimensionAmbiguous` error is thrown otherwise. By default, the dimension must have at least two bands with the common names `red` and `nir` assigned or the user need to specify the parameters `nir` and `red`. Otherwise either the error `NirBandAmbiguous` or `RedBandAmbiguous` is thrown. The common names for each band are specified in the collection's band metadata and are *not* equal to the band names.\n\nBy default, the dimension of type `bands` is dropped by this process. To keep the dimension specify a new band name in the parameter `target_band`. This adds a new dimension label with the specified name to the dimension, which can be used to access the computed values. If a band with the specified name exists, a `BandExists` is thrown.\n\nThis process is very similar to the process ``normalized_difference()``, but determines the bands automatically based on the common names (`red`/`nir`) specified in the metadata.",
@@ -8550,6 +8493,65 @@
         "subtype": "raster-cube"
       }
     }
+  },
+  {
+    "id": "is_infinite",
+    "summary": "Value is an infinite number",
+    "description": "Checks whether the specified value `x` is an infinite number. The definition of infinite numbers follows the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935). The special numerical value `NaN` (not a number) as defined by the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) is not an infinite number and must return `false`.",
+    "categories": [
+      "comparison"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "x",
+        "description": "The data to check.",
+        "schema": {
+          "description": "Any data type is allowed."
+        }
+      }
+    ],
+    "returns": {
+      "description": "`true` if the data is an infinite number, otherwise `false`.",
+      "schema": {
+        "type": "boolean"
+      }
+    },
+    "links": [
+      {
+        "rel": "about",
+        "href": "https://ieeexplore.ieee.org/document/4610935",
+        "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
+      }
+    ]
+  },
+  {
+    "id": "nan",
+    "summary": "Not a Number (NaN)",
+    "description": "NaN (not a number) is a symbolic floating-point representation which is neither a signed infinity nor a finite number.",
+    "categories": [
+      "math > constants"
+    ],
+    "experimental": true,
+    "parameters": [],
+    "returns": {
+      "description": "Returns NaN.",
+      "schema": {
+        "description": "Returns NaN.\n\n*SON Schema can't represent NaN, thus a schema can't be specified.*"
+      }
+    },
+    "links": [
+      {
+        "rel": "about",
+        "href": "https://ieeexplore.ieee.org/document/4610935",
+        "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
+      },
+      {
+        "rel": "about",
+        "href": "http://mathworld.wolfram.com/NaN.html",
+        "title": "NaN explained by Wolfram MathWorld"
+      }
+    ]
   },
   {
     "id": "reduce_dimension_binary",
