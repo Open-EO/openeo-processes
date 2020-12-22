@@ -7368,7 +7368,7 @@
     "returns": {
       "description": "Returns NaN.",
       "schema": {
-        "description": "Returns NaN.\n\nJSON Schema can't represent NaN, thus a schema can't be specified."
+        "description": "Returns NaN.\n\n*SON Schema can't represent NaN, thus a schema can't be specified.*"
       }
     },
     "links": [
