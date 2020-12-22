@@ -7,8 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased / Draft
 
 ### Added
-- Processes:
-    - `is_infinity`
+- New processes in proposal state
+    - `is_infinite`
     - `nan`
 
 ### Changed
