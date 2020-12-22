@@ -34,7 +34,8 @@
                         "name": "index",
                         "description": "The zero-based index of the current element being processed.",
                         "schema": {
-                            "type": "integer"
+                            "type": "integer",
+                            "minimum": 0
                         }
                     },
                     {
