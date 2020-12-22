@@ -1,0 +1,75 @@
+{
+    "id": "array_merge",
+    "summary": "Merge two arrays",
+    "description": "Merges two arrays into a single array by appending the second array to the first array. Array labels get discarded.",
+    "categories": [
+        "arrays"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "array1",
+            "description": "The first array.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
+            }
+        },
+        {
+            "name": "array2",
+            "description": "The second array.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
+            }
+        }
+    ],
+    "returns": {
+        "description": "The merged array.",
+        "schema": {
+            "type": "array",
+            "items": {
+                "description": "Any data type is allowed."
+            }
+        }
+    },
+    "examples": [
+        {
+            "description": "Merges two arrays containing different data type.",
+            "arguments": {
+                "array1": [
+                    "a",
+                    "b"
+                ],
+                "array2": [
+                    1,
+                    2
+                ]
+            },
+            "returns": [
+                "a",
+                "b",
+                1,
+                2
+            ]
+        },
+        {
+            "description": "Duplicates an array by merging it with an empty array. Labels will be removed so this could also be used to just remove array labels.",
+            "arguments": {
+                "array1": [
+                    null,
+                    1.23
+                ],
+                "array2": []
+            },
+            "returns": [
+                null,
+                1.23
+            ]
+        }
+    ]
+}
