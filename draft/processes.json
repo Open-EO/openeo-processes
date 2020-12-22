@@ -929,7 +929,7 @@
   },
   {
     "id": "anomaly",
-    "summary": "Computes anomalies",
+    "summary": "Compute anomalies",
     "description": "Computes anomalies based on normals for temporal periods. It compares the data for each label in the temporal dimension with the corresponding data in the normals data cube by subtracting the normal from the data.",
     "categories": [
       "climatology",
@@ -1819,7 +1819,7 @@
   },
   {
     "id": "array_apply",
-    "summary": "Applies a unary process to each array element",
+    "summary": "Apply a unary process to each array element",
     "description": "Applies a **unary** process which takes a single value such as `abs` or `sqrt` to each value in the array. This is basically what other languages call either a `for each` loop or a `map` function.",
     "categories": [
       "arrays"
@@ -2841,7 +2841,7 @@
   },
   {
     "id": "climatological_normal",
-    "summary": "Computes climatology normals",
+    "summary": "Compute climatology normals",
     "description": "Climatological normal period is a usually 30 year average of a weather variable. Climatological normals are used as an average or baseline to evaluate climate events and provide context for yearly, monthly, daily or seasonal variability. The default climatology period is from 1981 until 2010 (both inclusive).",
     "categories": [
       "climatology"
@@ -6957,7 +6957,7 @@
   },
   {
     "id": "merge_cubes",
-    "summary": "Merging two data cubes",
+    "summary": "Merge two data cubes",
     "description": "The data cubes have to be compatible. A merge operation without overlap should be reversible with (a set of) filter operations for each of the two cubes. The process performs the join on overlapping dimensions, with the same name and type.\n\nAn overlapping dimension has the same name, type, reference system and resolution in both dimensions, but can have different labels. One of the dimensions can have different labels, for all other dimensions the labels must be equal. If data overlaps, the parameter `overlap_resolver` must be specified to resolve the overlap.\n\n**Examples for merging two data cubes:**\n\n1. Data cubes with the dimensions `x`, `y`, `t` and `bands` have the same dimension labels in `x`,`y` and `t`, but the labels for the dimension `bands` are `B1` and `B2` for the first cube and `B3` and `B4`. An overlap resolver is *not needed*. The merged data cube has the dimensions `x`, `y`, `t` and `bands` and the dimension `bands` has four dimension labels: `B1`, `B2`, `B3`, `B4`.\n2. Data cubes with the dimensions `x`, `y`, `t` and `bands` have the same dimension labels in `x`,`y` and `t`, but the labels for the dimension `bands` are `B1` and `B2` for the first data cube and `B2` and `B3` for the second. An overlap resolver is *required* to resolve overlap in band `B2`. The merged data cube has the dimensions `x`, `y`, `t` and `bands` and the dimension `bands` has three dimension labels: `B1`, `B2`, `B3`.\n3. Data cubes with the dimensions `x`, `y` and `t` have the same dimension labels in `x`,`y` and `t`. There are two options:\n   1. Keep the overlapping values separately in the merged data cube: An overlap resolver is *not needed*, but for each data cube you need to add a new dimension using ``add_dimension()``. The new dimensions must be equal, except that the labels for the new dimensions must differ by name. The merged data cube has the same dimensions and labels as the original data cubes, plus the dimension added with ``add_dimension()``, which has the two dimension labels after the merge.\n   2. Combine the overlapping values into a single value: An overlap resolver is *required* to resolve the overlap for all pixels. The merged data cube has the same dimensions and labels as the original data cubes, but all pixel values have been processed by the overlap resolver.\n4. Merging a data cube with dimensions `x`, `y`, `t` with another cube with dimensions `x`, `y` will join on the `x`, `y` dimension, so the lower dimension cube is merged with each time step in the higher dimensional cube. This can for instance be used to apply a digital elevation model to a spatiotemporal data cube.",
     "categories": [
       "cubes"
