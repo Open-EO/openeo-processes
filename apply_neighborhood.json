@@ -40,7 +40,7 @@
                     }
                 ],
                 "returns": {
-                    "description": "Return the data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) must remain unchanged, otherwise a `DataCubePropertiesImmutable` exception will be thrown.",
+                    "description": "The data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) must remain unchanged, otherwise a `DataCubePropertiesImmutable` exception will be thrown.",
                     "schema": {
                         "type": "object",
                         "subtype": "raster-cube"

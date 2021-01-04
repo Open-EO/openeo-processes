@@ -1,7 +1,7 @@
 {
     "id": "array_element",
     "summary": "Get an element from an array",
-    "description": "Returns the element with the specified index or label from the array.\n\nEither the parameter `index` or `label` must be specified, otherwise the `ArrayElementParameterMissing` exception is thrown. If both parameters are set the `ArrayElementParameterConflict` exception is thrown.",
+    "description": "Gives the element with the specified index or label from the array.\n\nEither the parameter `index` or `label` must be specified, otherwise the `ArrayElementParameterMissing` exception is thrown. If both parameters are set the `ArrayElementParameterConflict` exception is thrown.",
     "categories": [
         "arrays",
         "reducer"

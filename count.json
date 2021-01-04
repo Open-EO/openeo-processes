@@ -45,7 +45,7 @@
                         }
                     ],
                     "returns": {
-                        "description": "Return `true` if the element should increase the counter, otherwise return `false`.",
+                        "description": "`true` if the element should increase the counter, otherwise `false`.",
                         "schema": {
                             "type": "boolean"
                         }
