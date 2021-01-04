@@ -65,7 +65,7 @@
                     }
                 ],
                 "returns": {
-                    "description": "The value to be stored in the array.",
+                    "description": "The value to be stored in the new array.",
                     "schema": {
                         "description": "Any data type."
                     }

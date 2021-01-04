@@ -48,7 +48,7 @@
                     }
                 ],
                 "returns": {
-                    "description": "The value to be stored in the data cube.",
+                    "description": "The value to be stored in the new data cube.",
                     "schema": {
                         "description": "Any data type."
                     }
