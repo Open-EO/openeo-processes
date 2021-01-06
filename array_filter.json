@@ -65,7 +65,13 @@
                         "optional": true,
                         "default": null
                     }
-                ]
+                ],
+                "returns": {
+                    "description": "`true` if the value should be kept in the array, otherwise `false`.",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
             }
         },
         {

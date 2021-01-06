@@ -1,7 +1,7 @@
 {
     "id": "array_labels",
     "summary": "Get the labels for an array",
-    "description": "Returns all labels for a labeled array in the data cube. The labels have the same order as in the array.",
+    "description": "Gives all labels for a labeled array in the data cube. The labels have the same order as in the array.",
     "categories": [
         "arrays"
     ],
