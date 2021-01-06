@@ -51,7 +51,13 @@
                         "optional": true,
                         "default": null
                     }
-                ]
+                ],
+                "returns": {
+                    "description": "The value to be set in the resampled data cube.",
+                    "schema": {
+                        "description": "Any data type."
+                    }
+                }
             }
         },
         {

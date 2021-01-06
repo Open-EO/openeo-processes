@@ -79,7 +79,7 @@
         },
         {
             "name": "context",
-            "description": "Additional data such as configuration options that should be passed to the UDF.",
+            "description": "Additional data such as configuration options to be passed to the UDF.",
             "schema": {
                 "type": "object"
             },
