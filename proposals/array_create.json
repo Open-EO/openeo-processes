@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "length",
-            "description": "The number of elements to fill the array with. Default to `0`.",
+            "description": "The number of elements to fill the array with. Defaults to `0`.",
             "optional": true,
             "default": 0,
             "schema": {

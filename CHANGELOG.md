@@ -9,10 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - New processes in proposal state
     - `array_create`
+    - `array_find_label`
     - `array_merge`
     - `is_infinite`
     - `nan`
 - Added return value details (property `returns`) for the schemas with the subtype `process-graph`. [API#350](https://github.com/Open-EO/openeo-api/issues/350)
+- `apply_labels`: Also accept arrays without labels and return an empty array then.
 - `apply_neighborhood`: Clarify behavior for data cubes returned by the child processes and for that add the exception `DataCubePropertiesImmutable`.
 
 ### Changed

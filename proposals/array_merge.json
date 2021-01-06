@@ -1,7 +1,7 @@
 {
     "id": "array_merge",
     "summary": "Merge two arrays",
-    "description": "Merges two arrays into a single array by appending the second array to the first array. Array labels get discarded.",
+    "description": "Merges two arrays into a single array by appending the second array to the first array. Array labels get discarded from both arrays before merging.",
     "categories": [
         "arrays"
     ],
