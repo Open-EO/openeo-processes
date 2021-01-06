@@ -51,7 +51,7 @@
                     }
                 ],
                 "returns": {
-                    "description": "The value to be stored in the vector data cube.",
+                    "description": "The value to be set in the vector data cube.",
                     "schema": {
                         "description": "Any data type."
                     }
@@ -78,7 +78,7 @@
         }
     ],
     "returns": {
-        "description": "A vector data cube with the computed results and restricted to the bounds of the geometries.\n\nThe computed value is stored in dimension with the name that was specified in the parameter `target_dimension`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) for each geometry. These values are stored as new dimension with a dimension name derived from `target_dimension` by adding the suffix `_meta`. The new dimension has the dimension labels `total_count` and `valid_count`.",
+        "description": "A vector data cube with the computed results and restricted to the bounds of the geometries.\n\nThe computed value is used for the dimension with the name that was specified in the parameter `target_dimension`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) for each geometry. These values are added as new dimension with a dimension name derived from `target_dimension` by adding the suffix `_meta`. The new dimension has the dimension labels `total_count` and `valid_count`.",
         "schema": {
             "type": "object",
             "subtype": "vector-cube"

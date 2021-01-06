@@ -53,7 +53,7 @@
                     }
                 ],
                 "returns": {
-                    "description": "The value to be stored in the resampled data cube.",
+                    "description": "The value to be set in the resampled data cube.",
                     "schema": {
                         "description": "Any data type."
                     }

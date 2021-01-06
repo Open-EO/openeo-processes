@@ -25,7 +25,7 @@
                 "parameters": [
                     {
                         "name": "value",
-                        "description": "A single dimension label to compare against. The data type of the parameter depends on the dimension labels stored for the dimension.",
+                        "description": "A single dimension label to compare against. The data type of the parameter depends on the dimension labels set for the dimension.",
                         "schema": [
                             {
                                 "type": "number"
