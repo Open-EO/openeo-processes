@@ -1,0 +1,79 @@
+{
+    "id": "array_drop",
+    "summary": "Remove array elements",
+    "description": "Removes the number of array elements given in the parameter `length`, starting from the element at the index given in the parameter `index`.\n\nAll elements after the given index get a new index assigned so that the indices are always sequence of numbers with the step size of 1 and starting at 0. Labels assigned to the individual values are not affected.",
+    "categories": [
+        "arrays"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "An array.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
+            }
+        },
+        {
+            "name": "index",
+            "description": "The zero-based index of the first element to remove.",
+            "schema": {
+                "type": "integer",
+                "minimum": 0
+            }
+        },
+        {
+            "name": "length",
+            "description": "The number of elements to remove from the array. Defaults to `1`.",
+            "optional": true,
+            "default": 1,
+            "schema": {
+                "type": "integer",
+                "minimum": 1
+            }
+        }
+    ],
+    "returns": {
+        "description": "An array with values being removed. The number of elements get reduced by the number given in the parameter `length`.",
+        "schema": {
+            "type": "array",
+            "items": {
+                "description": "Any data type is allowed."
+            }
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "data": [
+                    "a",
+                    "b",
+                    "c"
+                ],
+                "index": 1
+            },
+            "returns": [
+                "a",
+                "c"
+            ]
+        },
+        {
+            "arguments": {
+                "data": [
+                    100,
+                    50,
+                    88,
+                    32
+                ],
+                "index": 0,
+                "length": 3
+            },
+            "returns": [
+                32
+            ]
+        }
+    ]
+}
