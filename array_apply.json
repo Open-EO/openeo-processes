@@ -1,6 +1,6 @@
 {
     "id": "array_apply",
-    "summary": "Applies a unary process to each array element",
+    "summary": "Apply a unary process to each array element",
     "description": "Applies a **unary** process which takes a single value such as `abs` or `sqrt` to each value in the array. This is basically what other languages call either a `for each` loop or a `map` function.",
     "categories": [
         "arrays"
@@ -34,7 +34,8 @@
                         "name": "index",
                         "description": "The zero-based index of the current element being processed.",
                         "schema": {
-                            "type": "integer"
+                            "type": "integer",
+                            "minimum": 0
                         }
                     },
                     {

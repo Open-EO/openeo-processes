@@ -1,7 +1,7 @@
 {
     "id": "array_filter",
     "summary": "Filter an array based on a condition",
-    "description": "Filters the array elements based on a logical expression so that afterwards an array is returned that only contains the values conforming to the condition.",
+    "description": "Filters the array elements based on a logical expression so that afterwards an array is returned that only contains the values, indices and/or labels conforming to the condition.",
     "categories": [
         "arrays",
         "filter"
@@ -19,7 +19,7 @@
         },
         {
             "name": "condition",
-            "description": "A condition that is evaluated against each value in the array. Only the array elements where the condition returns `true` are preserved.",
+            "description": "A condition that is evaluated against each value, index and/or label in the array. Only the array elements for which the condition returns `true` are preserved.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
@@ -35,7 +35,8 @@
                         "name": "index",
                         "description": "The zero-based index of the current element being processed.",
                         "schema": {
-                            "type": "integer"
+                            "type": "integer",
+                            "minimum": 0
                         }
                     },
                     {

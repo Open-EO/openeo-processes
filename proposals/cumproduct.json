@@ -5,6 +5,7 @@
     "categories": [
         "math > cumulative"
     ],
+    "experimental": true,
     "parameters": [
         {
             "name": "data",
