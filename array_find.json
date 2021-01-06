@@ -26,7 +26,7 @@
         }
     ],
     "returns": {
-        "description": "The index of the first element with the specified value. If no element was found, `null` is a.",
+        "description": "The index of the first element with the specified value. If no element was found, `null` is returned.",
         "schema": [
             {
                 "type": "null"
