@@ -6,6 +6,7 @@
         "cubes",
         "import"
     ],
+    "experimental": true,
     "parameters": [
         {
             "name": "paths",

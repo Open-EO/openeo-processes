@@ -6,6 +6,7 @@
         "cubes",
         "aggregate & resample"
     ],
+    "experimental": true,
     "parameters": [
         {
             "name": "data",

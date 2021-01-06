@@ -32,3 +32,12 @@ This repository contains a set of files formally describing the openEO Processes
 * [subtype-schemas.json](meta/subtype-schemas.json) in the `meta` folder defines common data types (`subtype`s) for JSON Schema used in openEO processes.
 * The [`examples`](examples/) folder contains some useful examples that the processes link to. All of these are non-binding additions.
 * The [`tests`](tests/) folder can be used to test the process specification for validity and and consistent "style". It also allows to render the processes in a web browser.
+
+
+## Process
+
+* All new processes must be added to the [`proposals`](proposals/) folder.
+* Processes will only be moved from proposals to the stable process specifications once there are at least two implementations and ann example process graph in the [`examples`](examples/) folder showing it in a use case. This doesn't require a PSC vote individually as it's not a breaking change, just an addition.
+* The [`proposals`](proposals/) folder allows breaking changes without a PSC vote and without increasing the major version number (i.e. a breaking change in the proposals doesn't require us to make the next version number 2.0.0).
+* The proposals are released as experimental processes with the other processes.
+* Each release and all breaking changes in the stable process specifications must go through PSC vote.
