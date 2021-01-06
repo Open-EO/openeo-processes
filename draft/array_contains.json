@@ -27,7 +27,7 @@
         }
     ],
     "returns": {
-        "description": "Returns `true` if the list contains the value, false` otherwise.",
+        "description": "`true` if the list contains the value, false` otherwise.",
         "schema": {
             "type": "boolean"
         }

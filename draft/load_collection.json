@@ -194,7 +194,13 @@
                                     "description": "Any data type."
                                 }
                             }
-                        ]
+                        ],
+                        "returns": {
+                            "description": "`true` if the data should be loaded into the data cube, otherwise `false`.",
+                            "schema": {
+                                "type": "boolean"
+                            }
+                        }
                     }
                 },
                 {

@@ -303,7 +303,13 @@
               "optional": true,
               "default": null
             }
-          ]
+          ],
+          "returns": {
+            "description": "The value to be set in the vector data cube.",
+            "schema": {
+              "description": "Any data type."
+            }
+          }
         }
       },
       {
@@ -326,7 +332,7 @@
       }
     ],
     "returns": {
-      "description": "A vector data cube with the computed results and restricted to the bounds of the geometries.\n\nThe computed value is stored in dimension with the name that was specified in the parameter `target_dimension`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) for each geometry. These values are stored as new dimension with a dimension name derived from `target_dimension` by adding the suffix `_meta`. The new dimension has the dimension labels `total_count` and `valid_count`.",
+      "description": "A vector data cube with the computed results and restricted to the bounds of the geometries.\n\nThe computed value is used for the dimension with the name that was specified in the parameter `target_dimension`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) for each geometry. These values are added as new dimension with a dimension name derived from `target_dimension` by adding the suffix `_meta`. The new dimension has the dimension labels `total_count` and `valid_count`.",
       "schema": {
         "type": "object",
         "subtype": "vector-cube"
@@ -414,7 +420,13 @@
               "optional": true,
               "default": null
             }
-          ]
+          ],
+          "returns": {
+            "description": "The value to be set in the new data cube.",
+            "schema": {
+              "description": "Any data type."
+            }
+          }
         }
       },
       {
@@ -440,7 +452,7 @@
       }
     ],
     "returns": {
-      "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except for the resolution and dimension labels of the given temporal dimension. The specified temporal dimension has the following dimension labels (`YYYY` = four-digit year, `MM` = two-digit month, `DD` two-digit day of month):\n\n* `hour`: `YYYY-MM-DD-00` - `YYYY-MM-DD-23`\n* `day`: `YYYY-001` - `YYYY-365`\n* `week`: `YYYY-01` - `YYYY-52`\n* `dekad`: `YYYY-00` - `YYYY-36`\n* `month`: `YYYY-01` - `YYYY-12`\n* `season`: `YYYY-djf` (December - February), `YYYY-mam` (March - May), `YYYY-jja` (June - August), `YYYY-son` (September - November).\n* `tropical-season`: `YYYY-ndjfma` (November - April), `YYYY-mjjaso` (May - October).\n* `year`: `YYYY`\n* `decade`: `YYY0`\n* `decade-ad`: `YYY1`",
+      "description": "A new data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except for the resolution and dimension labels of the given temporal dimension. The specified temporal dimension has the following dimension labels (`YYYY` = four-digit year, `MM` = two-digit month, `DD` two-digit day of month):\n\n* `hour`: `YYYY-MM-DD-00` - `YYYY-MM-DD-23`\n* `day`: `YYYY-001` - `YYYY-365`\n* `week`: `YYYY-01` - `YYYY-52`\n* `dekad`: `YYYY-00` - `YYYY-36`\n* `month`: `YYYY-01` - `YYYY-12`\n* `season`: `YYYY-djf` (December - February), `YYYY-mam` (March - May), `YYYY-jja` (June - August), `YYYY-son` (September - November).\n* `tropical-season`: `YYYY-ndjfma` (November - April), `YYYY-mjjaso` (May - October).\n* `year`: `YYYY`\n* `decade`: `YYY0`\n* `decade-ad`: `YYY1`",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -579,7 +591,13 @@
               "optional": true,
               "default": null
             }
-          ]
+          ],
+          "returns": {
+            "description": "The value to be set in the new data cube.",
+            "schema": {
+              "description": "Any data type."
+            }
+          }
         }
       },
       {
@@ -624,7 +642,7 @@
       }
     ],
     "returns": {
-      "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except for the resolution and dimension labels of the given temporal dimension.",
+      "description": "A new data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except for the resolution and dimension labels of the given temporal dimension.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -1159,7 +1177,13 @@
               "optional": true,
               "default": null
             }
-          ]
+          ],
+          "returns": {
+            "description": "The value to be set in the new data cube.",
+            "schema": {
+              "description": "Any data type."
+            }
+          }
         }
       },
       {
@@ -1340,7 +1364,14 @@
               "optional": true,
               "default": null
             }
-          ]
+          ],
+          "returns": {
+            "description": "The data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) must remain unchanged, otherwise a `DataCubePropertiesImmutable` exception will be thrown.",
+            "schema": {
+              "type": "object",
+              "subtype": "raster-cube"
+            }
+          }
         }
       },
       {
@@ -1516,6 +1547,9 @@
     "exceptions": {
       "DimensionNotAvailable": {
         "message": "A dimension with the specified name does not exist."
+      },
+      "DataCubePropertiesImmutable": {
+        "message": "The dimension properties (name, type, labels, reference system and resolution) must remain unchanged."
       }
     }
   },
@@ -1558,7 +1592,13 @@
               "optional": true,
               "default": null
             }
-          ]
+          ],
+          "returns": {
+            "description": "The value to be set in the new data cube.",
+            "schema": {
+              "description": "Any data type."
+            }
+          }
         }
       },
       {
@@ -1883,7 +1923,13 @@
               "optional": true,
               "default": null
             }
-          ]
+          ],
+          "returns": {
+            "description": "The value to be set in the new array.",
+            "schema": {
+              "description": "Any data type."
+            }
+          }
         }
       },
       {
@@ -1949,7 +1995,7 @@
       }
     ],
     "returns": {
-      "description": "Returns `true` if the list contains the value, false` otherwise.",
+      "description": "`true` if the list contains the value, false` otherwise.",
       "schema": {
         "type": "boolean"
       }
@@ -2093,7 +2139,7 @@
   {
     "id": "array_element",
     "summary": "Get an element from an array",
-    "description": "Returns the element with the specified index or label from the array.\n\nEither the parameter `index` or `label` must be specified, otherwise the `ArrayElementParameterMissing` exception is thrown. If both parameters are set the `ArrayElementParameterConflict` exception is thrown.",
+    "description": "Gives the element with the specified index or label from the array.\n\nEither the parameter `index` or `label` must be specified, otherwise the `ArrayElementParameterMissing` exception is thrown. If both parameters are set the `ArrayElementParameterConflict` exception is thrown.",
     "categories": [
       "arrays",
       "reducer"
@@ -2260,7 +2306,13 @@
               "optional": true,
               "default": null
             }
-          ]
+          ],
+          "returns": {
+            "description": "`true` if the value should be kept in the array, otherwise `false`.",
+            "schema": {
+              "type": "boolean"
+            }
+          }
         }
       },
       {
@@ -2311,7 +2363,7 @@
       }
     ],
     "returns": {
-      "description": "Returns the index of the first element with the specified value. If no element was found, `null` is returned.",
+      "description": "The index of the first element with the specified value. If no element was found, `null` is returned.",
       "schema": [
         {
           "type": "null"
@@ -2432,7 +2484,7 @@
   {
     "id": "array_labels",
     "summary": "Get the labels for an array",
-    "description": "Returns all labels for a labeled array in the data cube. The labels have the same order as in the array.",
+    "description": "Gives all labels for a labeled array in the data cube. The labels have the same order as in the array.",
     "categories": [
       "arrays"
     ],
@@ -3172,7 +3224,13 @@
                 "optional": true,
                 "default": null
               }
-            ]
+            ],
+            "returns": {
+              "description": "`true` if the element should increase the counter, otherwise `false`.",
+              "schema": {
+                "type": "boolean"
+              }
+            }
           },
           {
             "title": "All elements",
@@ -3289,7 +3347,7 @@
   {
     "id": "dimension_labels",
     "summary": "Get the dimension labels",
-    "description": "Returns all labels for a dimension in the data cube. The labels have the same order as in the data cube.",
+    "description": "Gives all labels for a dimension in the data cube. The labels have the same order as in the data cube.",
     "categories": [
       "cubes"
     ],
@@ -3515,7 +3573,7 @@
       }
     ],
     "returns": {
-      "description": "Returns `true` if `x` is equal to `y`, `null` if any operand is `null`, otherwise `false`.",
+      "description": "`true` if `x` is equal to `y`, `null` if any operand is `null`, otherwise `false`.",
       "schema": {
         "type": [
           "boolean",
@@ -5374,7 +5432,13 @@
                     "description": "Any data type."
                   }
                 }
-              ]
+              ],
+              "returns": {
+                "description": "`true` if the data should be loaded into the data cube, otherwise `false`.",
+                "schema": {
+                  "type": "boolean"
+                }
+              }
             }
           },
           {
@@ -6364,7 +6428,13 @@
               "optional": true,
               "default": null
             }
-          ]
+          ],
+          "returns": {
+            "description": "The value to be set in the merged data cube.",
+            "schema": {
+              "description": "Any data type."
+            }
+          }
         },
         "default": null,
         "optional": true
@@ -6820,7 +6890,7 @@
       }
     ],
     "returns": {
-      "description": "Returns `true` if `x` is *not* equal to `y`, `null` if any operand is `null`, otherwise `false`.",
+      "description": "`true` if `x` is *not* equal to `y`, `null` if any operand is `null`, otherwise `false`.",
       "schema": {
         "type": [
           "boolean",
@@ -7691,7 +7761,13 @@
               "optional": true,
               "default": null
             }
-          ]
+          ],
+          "returns": {
+            "description": "The value to be set in the vector data cube.",
+            "schema": {
+              "description": "Any data type."
+            }
+          }
         }
       },
       {
@@ -7714,7 +7790,7 @@
       }
     ],
     "returns": {
-      "description": "A vector data cube with the computed results and restricted to the bounds of the geometries.\n\nThe computed value is stored in dimension with the name that was specified in the parameter `target_dimension`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) for each geometry. These values are stored as new dimension with a dimension name derived from `target_dimension` by adding the suffix `_meta`. The new dimension has the dimension labels `total_count` and `valid_count`.",
+      "description": "A vector data cube with the computed results and restricted to the bounds of the geometries.\n\nThe computed value is used for the dimension with the name that was specified in the parameter `target_dimension`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) for each geometry. These values are added as new dimension with a dimension name derived from `target_dimension` by adding the suffix `_meta`. The new dimension has the dimension labels `total_count` and `valid_count`.",
       "schema": {
         "type": "object",
         "subtype": "vector-cube"
@@ -7787,7 +7863,13 @@
               "optional": true,
               "default": null
             }
-          ]
+          ],
+          "returns": {
+            "description": "The value to be set in the new data cube.",
+            "schema": {
+              "description": "Any data type."
+            }
+          }
         }
       },
       {
@@ -8312,7 +8394,7 @@
       }
     ],
     "returns": {
-      "description": "Returns the data as passed to the `data` parameter.",
+      "description": "The data as passed to the `data` parameter without any modification.",
       "schema": {
         "description": "Any data type is allowed."
       }
@@ -8345,7 +8427,7 @@
           "parameters": [
             {
               "name": "value",
-              "description": "A single dimension label to compare against. The data type of the parameter depends on the dimension labels stored for the dimension.",
+              "description": "A single dimension label to compare against. The data type of the parameter depends on the dimension labels set for the dimension.",
               "schema": [
                 {
                   "type": "number"
@@ -8364,7 +8446,13 @@
               "optional": true,
               "default": null
             }
-          ]
+          ],
+          "returns": {
+            "description": "`true` if the dimension label should be kept in the data cube, otherwise `false`.",
+            "schema": {
+              "type": "boolean"
+            }
+          }
         }
       },
       {
@@ -8612,7 +8700,13 @@
               "optional": true,
               "default": null
             }
-          ]
+          ],
+          "returns": {
+            "description": "The value to be set in the new data cube.",
+            "schema": {
+              "description": "Any data type."
+            }
+          }
         }
       },
       {
@@ -8705,7 +8799,13 @@
               "optional": true,
               "default": null
             }
-          ]
+          ],
+          "returns": {
+            "description": "The value to be set in the resampled data cube.",
+            "schema": {
+              "description": "Any data type."
+            }
+          }
         }
       },
       {
@@ -8798,7 +8898,7 @@
       },
       {
         "name": "context",
-        "description": "Additional data such as configuration options that should be passed to the UDF.",
+        "description": "Additional data such as configuration options to be passed to the UDF.",
         "schema": {
           "type": "object"
         },
@@ -9167,7 +9267,13 @@
               "optional": true,
               "default": null
             }
-          ]
+          ],
+          "returns": {
+            "description": "The value to be set in the new data cube.",
+            "schema": {
+              "description": "Any data type."
+            }
+          }
         }
       },
       {
@@ -9731,7 +9837,7 @@
       },
       {
         "name": "context",
-        "description": "Additional data such as configuration options that should be passed to the UDF.",
+        "description": "Additional data such as configuration options to be passed to the UDF.",
         "schema": {
           "type": "object"
         },
@@ -10969,7 +11075,7 @@
       }
     ],
     "returns": {
-      "description": "Returns a string containing a string representation of all the array elements in the same order, with the separator between each element.",
+      "description": "A string containing a string representation of all the array elements in the same order, with the separator between each element.",
       "schema": {
         "type": "string"
       }

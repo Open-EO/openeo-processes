@@ -18,7 +18,7 @@
         }
     ],
     "returns": {
-        "description": "Returns the index of the first element with a no-data value. If only data values are available, `null` is returned.",
+        "description": "The index of the first element with a no-data value. If only data values are available, `null` is returned.",
         "schema": [
             {
                 "type": "null"

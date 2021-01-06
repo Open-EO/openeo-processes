@@ -222,7 +222,13 @@
                             "description": "Any data type."
                         }
                     }
-                ]
+                ],
+                "returns": {
+                    "description": "`true` if the data should be used, otherwise `false`.",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
             }
         },
         "output-format": {
