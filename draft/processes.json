@@ -3287,470 +3287,6 @@
     }
   },
   {
-    "id": "cummax",
-    "summary": "Cumulative maxima",
-    "description": "Finds cumulative maxima of an array of numbers. Every computed element is equal to the bigger one between current element and the previously computed element. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `true` makes that once a no-data value / `null` is reached all following elements are set to `null` in the result.",
-    "categories": [
-      "math > cumulative"
-    ],
-    "parameters": [
-      {
-        "name": "data",
-        "description": "An array of numbers.",
-        "schema": {
-          "type": "array",
-          "items": {
-            "type": [
-              "number",
-              "null"
-            ]
-          }
-        }
-      },
-      {
-        "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
-        "schema": {
-          "type": "boolean"
-        },
-        "default": true,
-        "optional": true
-      }
-    ],
-    "returns": {
-      "description": "An array with the computed cumulative maxima.",
-      "schema": {
-        "type": "array",
-        "items": {
-          "type": [
-            "number",
-            "null"
-          ]
-        }
-      }
-    },
-    "examples": [
-      {
-        "arguments": {
-          "data": [
-            1,
-            3,
-            5,
-            3,
-            1
-          ]
-        },
-        "returns": [
-          1,
-          3,
-          5,
-          5,
-          5
-        ]
-      },
-      {
-        "arguments": {
-          "data": [
-            1,
-            3,
-            null,
-            5,
-            1
-          ]
-        },
-        "returns": [
-          1,
-          3,
-          null,
-          5,
-          5
-        ]
-      },
-      {
-        "arguments": {
-          "data": [
-            1,
-            3,
-            null,
-            5,
-            1
-          ],
-          "ignore_nodata": false
-        },
-        "returns": [
-          1,
-          3,
-          null,
-          null,
-          null
-        ]
-      }
-    ]
-  },
-  {
-    "id": "cummin",
-    "summary": "Cumulative minima",
-    "description": "Finds cumulative minima of an array of numbers. Every computed element is equal to the smaller one between current element and the previously computed element. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `true` makes that once a no-data value / `null` is reached all following elements are set to `null` in the result.",
-    "categories": [
-      "math > cumulative"
-    ],
-    "parameters": [
-      {
-        "name": "data",
-        "description": "An array of numbers.",
-        "schema": {
-          "type": "array",
-          "items": {
-            "type": [
-              "number",
-              "null"
-            ]
-          }
-        }
-      },
-      {
-        "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
-        "schema": {
-          "type": "boolean"
-        },
-        "default": true,
-        "optional": true
-      }
-    ],
-    "returns": {
-      "description": "An array with the computed cumulative minima.",
-      "schema": {
-        "type": "array",
-        "items": {
-          "type": [
-            "number",
-            "null"
-          ]
-        }
-      }
-    },
-    "examples": [
-      {
-        "arguments": {
-          "data": [
-            5,
-            3,
-            1,
-            3,
-            5
-          ]
-        },
-        "returns": [
-          5,
-          3,
-          1,
-          1,
-          1
-        ]
-      },
-      {
-        "arguments": {
-          "data": [
-            5,
-            3,
-            null,
-            1,
-            5
-          ]
-        },
-        "returns": [
-          5,
-          3,
-          null,
-          1,
-          1
-        ]
-      },
-      {
-        "arguments": {
-          "data": [
-            5,
-            3,
-            null,
-            1,
-            5
-          ],
-          "ignore_nodata": false
-        },
-        "returns": [
-          5,
-          3,
-          null,
-          null,
-          null
-        ]
-      }
-    ]
-  },
-  {
-    "id": "cumproduct",
-    "summary": "Cumulative products",
-    "description": "Computes cumulative products of an array of numbers. Every computed element is equal to the product of current and all previous values. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `true` makes that once a no-data value / `null` is reached all following elements are set to `null` in the result.",
-    "categories": [
-      "math > cumulative"
-    ],
-    "parameters": [
-      {
-        "name": "data",
-        "description": "An array of numbers.",
-        "schema": {
-          "type": "array",
-          "items": {
-            "type": [
-              "number",
-              "null"
-            ]
-          }
-        }
-      },
-      {
-        "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
-        "schema": {
-          "type": "boolean"
-        },
-        "default": true,
-        "optional": true
-      }
-    ],
-    "returns": {
-      "description": "An array with the computed cumulative products.",
-      "schema": {
-        "type": "array",
-        "items": {
-          "type": [
-            "number",
-            "null"
-          ]
-        }
-      }
-    },
-    "examples": [
-      {
-        "arguments": {
-          "data": [
-            1,
-            3,
-            5,
-            3,
-            1
-          ]
-        },
-        "returns": [
-          1,
-          3,
-          15,
-          45,
-          45
-        ]
-      },
-      {
-        "arguments": {
-          "data": [
-            1,
-            2,
-            3,
-            null,
-            3,
-            1
-          ]
-        },
-        "returns": [
-          1,
-          2,
-          6,
-          null,
-          18,
-          18
-        ]
-      },
-      {
-        "arguments": {
-          "data": [
-            1,
-            2,
-            3,
-            null,
-            3,
-            1
-          ],
-          "ignore_nodata": false
-        },
-        "returns": [
-          1,
-          2,
-          6,
-          null,
-          null,
-          null
-        ]
-      }
-    ]
-  },
-  {
-    "id": "cumsum",
-    "summary": "Cumulative sums",
-    "description": "Computes cumulative sums of an array of numbers. Every computed element is equal to the sum of current and all previous values. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `true` makes that once a no-data value / `null` is reached all following elements are set to `null` in the result.",
-    "categories": [
-      "math > cumulative"
-    ],
-    "parameters": [
-      {
-        "name": "data",
-        "description": "An array of numbers.",
-        "schema": {
-          "type": "array",
-          "items": {
-            "type": [
-              "number",
-              "null"
-            ]
-          }
-        }
-      },
-      {
-        "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
-        "schema": {
-          "type": "boolean"
-        },
-        "default": true,
-        "optional": true
-      }
-    ],
-    "returns": {
-      "description": "An array with the computed cumulative sums.",
-      "schema": {
-        "type": "array",
-        "items": {
-          "type": [
-            "number",
-            "null"
-          ]
-        }
-      }
-    },
-    "examples": [
-      {
-        "arguments": {
-          "data": [
-            1,
-            3,
-            5,
-            3,
-            1
-          ]
-        },
-        "returns": [
-          1,
-          4,
-          9,
-          12,
-          13
-        ]
-      },
-      {
-        "arguments": {
-          "data": [
-            1,
-            3,
-            null,
-            3,
-            1
-          ]
-        },
-        "returns": [
-          1,
-          4,
-          null,
-          7,
-          8
-        ]
-      },
-      {
-        "arguments": {
-          "data": [
-            1,
-            3,
-            null,
-            3,
-            1
-          ],
-          "ignore_nodata": false
-        },
-        "returns": [
-          1,
-          4,
-          null,
-          null,
-          null
-        ]
-      }
-    ]
-  },
-  {
-    "id": "debug",
-    "summary": "Publish debugging information",
-    "description": "Sends debugging information about the data to the log output. Passes the data through.",
-    "categories": [
-      "development"
-    ],
-    "parameters": [
-      {
-        "name": "data",
-        "description": "Data to publish.",
-        "schema": {
-          "description": "Any data type is allowed."
-        }
-      },
-      {
-        "name": "code",
-        "description": "An identifier to help identify the log entry in a bunch of other log entries.",
-        "schema": {
-          "type": "string"
-        },
-        "default": "",
-        "optional": true
-      },
-      {
-        "name": "level",
-        "description": "The severity level of this message, defaults to `info`. Note that the level `error` forces the computation to be stopped!",
-        "schema": {
-          "type": "string",
-          "enum": [
-            "error",
-            "warning",
-            "info",
-            "debug"
-          ]
-        },
-        "default": "info",
-        "optional": true
-      },
-      {
-        "name": "message",
-        "description": "A message to send in addition to the data.",
-        "schema": {
-          "type": "string"
-        },
-        "default": "",
-        "optional": true
-      }
-    ],
-    "returns": {
-      "description": "Returns the data as passed to the `data` parameter.",
-      "schema": {
-        "description": "Any data type is allowed."
-      }
-    }
-  },
-  {
     "id": "dimension_labels",
     "summary": "Get the dimension labels",
     "description": "Returns all labels for a dimension in the data cube. The labels have the same order as in the data cube.",
@@ -4493,110 +4029,6 @@
         "href": "http://www.opengeospatial.org/standards/sfa",
         "rel": "about",
         "title": "Simple Features standard by the OGC"
-      }
-    ]
-  },
-  {
-    "id": "filter_labels",
-    "summary": "Filter dimension labels based on a condition",
-    "description": "Filters the dimension labels in the data cube for the given dimension. Only the dimension labels that match the specified condition are preserved, all other labels with their corresponding data get removed.",
-    "categories": [
-      "cubes",
-      "filter"
-    ],
-    "parameters": [
-      {
-        "name": "data",
-        "description": "A data cube.",
-        "schema": {
-          "type": "object",
-          "subtype": "raster-cube"
-        }
-      },
-      {
-        "name": "condition",
-        "description": "A condition that is evaluated against each dimension label in the specified dimension. A dimension label and the corresponding data is preserved for the given dimension, if the condition returns `true`.",
-        "schema": {
-          "type": "object",
-          "subtype": "process-graph",
-          "parameters": [
-            {
-              "name": "value",
-              "description": "A single dimension label to compare against. The data type of the parameter depends on the dimension labels stored for the dimension.",
-              "schema": [
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "string"
-                }
-              ]
-            },
-            {
-              "name": "context",
-              "description": "Additional data passed by the user.",
-              "schema": {
-                "description": "Any data type."
-              },
-              "optional": true,
-              "default": null
-            }
-          ]
-        }
-      },
-      {
-        "name": "dimension",
-        "description": "The name of the dimension to filter on. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
-        "schema": {
-          "type": "string"
-        }
-      },
-      {
-        "name": "context",
-        "description": "Additional data to be passed to the condition.",
-        "schema": {
-          "description": "Any data type."
-        },
-        "optional": true,
-        "default": null
-      }
-    ],
-    "returns": {
-      "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the given dimension has less (or the same) dimension labels.",
-      "schema": {
-        "type": "object",
-        "subtype": "raster-cube"
-      }
-    },
-    "exceptions": {
-      "DimensionNotAvailable": {
-        "message": "A dimension with the specified name does not exist."
-      }
-    },
-    "examples": [
-      {
-        "description": "Filters the data cube to only contain data from platform Sentinel-2A. This example assumes that the data cube has a dimension `platform` so that computations can distinguish between Sentinel-2A and Sentinel-2B data.",
-        "arguments": {
-          "data": {
-            "from_parameter": "sentinel2_data"
-          },
-          "condition": {
-            "process_graph": {
-              "eq": {
-                "process_id": "eq",
-                "arguments": {
-                  "x": {
-                    "from_parameter": "value"
-                  },
-                  "y": "Sentinel-2A",
-                  "case_sensitive": false
-                },
-                "result": true
-              }
-            }
-          },
-          "dimension": "platform"
-        }
       }
     ]
   },
@@ -6039,86 +5471,6 @@
         "title": "List of common band names as specified by the STAC specification"
       }
     ]
-  },
-  {
-    "id": "load_result",
-    "summary": "Load batch job results",
-    "description": "Loads batch job results by job id from the local user workspace / data store. The job must have been stored by the authenticated user on the back-end currently connected to.",
-    "categories": [
-      "cubes",
-      "import"
-    ],
-    "parameters": [
-      {
-        "name": "id",
-        "description": "The id of a batch job with results.",
-        "schema": {
-          "type": "string",
-          "subtype": "job-id",
-          "pattern": "^[\\w\\-\\.~]+$"
-        }
-      }
-    ],
-    "returns": {
-      "description": "A data cube for further processing.",
-      "schema": {
-        "type": "object",
-        "subtype": "raster-cube"
-      }
-    }
-  },
-  {
-    "id": "load_uploaded_files",
-    "summary": "Load files from the user workspace",
-    "description": "Loads one or more user-uploaded files from the local user workspace / data store and returns them as a single data cube. The files must have been stored by the authenticated user on the back-end currently connected to.",
-    "categories": [
-      "cubes",
-      "import"
-    ],
-    "parameters": [
-      {
-        "name": "paths",
-        "description": "The files to read. Folders can't be specified, instead specify all files. An error is thrown if a file can't be read.",
-        "schema": {
-          "type": "array",
-          "subtype": "file-paths",
-          "items": {
-            "type": "string",
-            "subtype": "file-path"
-          }
-        }
-      },
-      {
-        "name": "format",
-        "description": "The file format to read from. It must be one of the values that the server reports as supported input file formats, which usually correspond to the short GDAL/OGR codes. If the format is not suitable for loading the data, a `FormatUnsuitable` exception will be thrown. This parameter is *case insensitive*.",
-        "schema": {
-          "type": "string",
-          "subtype": "input-format"
-        }
-      },
-      {
-        "name": "options",
-        "description": "The file format parameters to be used to read the files. Must correspond to the parameters that the server reports as supported parameters for the chosen `format`. The parameter names and valid values usually correspond to the GDAL/OGR format options.",
-        "schema": {
-          "type": "object",
-          "subtype": "input-format-options"
-        },
-        "default": {},
-        "optional": true
-      }
-    ],
-    "returns": {
-      "description": "A data cube for further processing.",
-      "schema": {
-        "type": "object",
-        "subtype": "raster-cube"
-      }
-    },
-    "exceptions": {
-      "FormatUnsuitable": {
-        "message": "Data can't be loaded with the requested input format."
-      }
-    }
   },
   {
     "id": "log",
@@ -8498,6 +7850,586 @@
     }
   },
   {
+    "id": "cummax",
+    "summary": "Cumulative maxima",
+    "description": "Finds cumulative maxima of an array of numbers. Every computed element is equal to the bigger one between current element and the previously computed element. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `true` makes that once a no-data value / `null` is reached all following elements are set to `null` in the result.",
+    "categories": [
+      "math > cumulative"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "An array of numbers.",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        }
+      },
+      {
+        "name": "ignore_nodata",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
+        "schema": {
+          "type": "boolean"
+        },
+        "default": true,
+        "optional": true
+      }
+    ],
+    "returns": {
+      "description": "An array with the computed cumulative maxima.",
+      "schema": {
+        "type": "array",
+        "items": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    },
+    "examples": [
+      {
+        "arguments": {
+          "data": [
+            1,
+            3,
+            5,
+            3,
+            1
+          ]
+        },
+        "returns": [
+          1,
+          3,
+          5,
+          5,
+          5
+        ]
+      },
+      {
+        "arguments": {
+          "data": [
+            1,
+            3,
+            null,
+            5,
+            1
+          ]
+        },
+        "returns": [
+          1,
+          3,
+          null,
+          5,
+          5
+        ]
+      },
+      {
+        "arguments": {
+          "data": [
+            1,
+            3,
+            null,
+            5,
+            1
+          ],
+          "ignore_nodata": false
+        },
+        "returns": [
+          1,
+          3,
+          null,
+          null,
+          null
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cummin",
+    "summary": "Cumulative minima",
+    "description": "Finds cumulative minima of an array of numbers. Every computed element is equal to the smaller one between current element and the previously computed element. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `true` makes that once a no-data value / `null` is reached all following elements are set to `null` in the result.",
+    "categories": [
+      "math > cumulative"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "An array of numbers.",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        }
+      },
+      {
+        "name": "ignore_nodata",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
+        "schema": {
+          "type": "boolean"
+        },
+        "default": true,
+        "optional": true
+      }
+    ],
+    "returns": {
+      "description": "An array with the computed cumulative minima.",
+      "schema": {
+        "type": "array",
+        "items": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    },
+    "examples": [
+      {
+        "arguments": {
+          "data": [
+            5,
+            3,
+            1,
+            3,
+            5
+          ]
+        },
+        "returns": [
+          5,
+          3,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "arguments": {
+          "data": [
+            5,
+            3,
+            null,
+            1,
+            5
+          ]
+        },
+        "returns": [
+          5,
+          3,
+          null,
+          1,
+          1
+        ]
+      },
+      {
+        "arguments": {
+          "data": [
+            5,
+            3,
+            null,
+            1,
+            5
+          ],
+          "ignore_nodata": false
+        },
+        "returns": [
+          5,
+          3,
+          null,
+          null,
+          null
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cumproduct",
+    "summary": "Cumulative products",
+    "description": "Computes cumulative products of an array of numbers. Every computed element is equal to the product of current and all previous values. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `true` makes that once a no-data value / `null` is reached all following elements are set to `null` in the result.",
+    "categories": [
+      "math > cumulative"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "An array of numbers.",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        }
+      },
+      {
+        "name": "ignore_nodata",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
+        "schema": {
+          "type": "boolean"
+        },
+        "default": true,
+        "optional": true
+      }
+    ],
+    "returns": {
+      "description": "An array with the computed cumulative products.",
+      "schema": {
+        "type": "array",
+        "items": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    },
+    "examples": [
+      {
+        "arguments": {
+          "data": [
+            1,
+            3,
+            5,
+            3,
+            1
+          ]
+        },
+        "returns": [
+          1,
+          3,
+          15,
+          45,
+          45
+        ]
+      },
+      {
+        "arguments": {
+          "data": [
+            1,
+            2,
+            3,
+            null,
+            3,
+            1
+          ]
+        },
+        "returns": [
+          1,
+          2,
+          6,
+          null,
+          18,
+          18
+        ]
+      },
+      {
+        "arguments": {
+          "data": [
+            1,
+            2,
+            3,
+            null,
+            3,
+            1
+          ],
+          "ignore_nodata": false
+        },
+        "returns": [
+          1,
+          2,
+          6,
+          null,
+          null,
+          null
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cumsum",
+    "summary": "Cumulative sums",
+    "description": "Computes cumulative sums of an array of numbers. Every computed element is equal to the sum of current and all previous values. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `true` makes that once a no-data value / `null` is reached all following elements are set to `null` in the result.",
+    "categories": [
+      "math > cumulative"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "An array of numbers.",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        }
+      },
+      {
+        "name": "ignore_nodata",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
+        "schema": {
+          "type": "boolean"
+        },
+        "default": true,
+        "optional": true
+      }
+    ],
+    "returns": {
+      "description": "An array with the computed cumulative sums.",
+      "schema": {
+        "type": "array",
+        "items": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    },
+    "examples": [
+      {
+        "arguments": {
+          "data": [
+            1,
+            3,
+            5,
+            3,
+            1
+          ]
+        },
+        "returns": [
+          1,
+          4,
+          9,
+          12,
+          13
+        ]
+      },
+      {
+        "arguments": {
+          "data": [
+            1,
+            3,
+            null,
+            3,
+            1
+          ]
+        },
+        "returns": [
+          1,
+          4,
+          null,
+          7,
+          8
+        ]
+      },
+      {
+        "arguments": {
+          "data": [
+            1,
+            3,
+            null,
+            3,
+            1
+          ],
+          "ignore_nodata": false
+        },
+        "returns": [
+          1,
+          4,
+          null,
+          null,
+          null
+        ]
+      }
+    ]
+  },
+  {
+    "id": "debug",
+    "summary": "Publish debugging information",
+    "description": "Sends debugging information about the data to the log output. Passes the data through.",
+    "categories": [
+      "development"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "Data to publish.",
+        "schema": {
+          "description": "Any data type is allowed."
+        }
+      },
+      {
+        "name": "code",
+        "description": "An identifier to help identify the log entry in a bunch of other log entries.",
+        "schema": {
+          "type": "string"
+        },
+        "default": "",
+        "optional": true
+      },
+      {
+        "name": "level",
+        "description": "The severity level of this message, defaults to `info`. Note that the level `error` forces the computation to be stopped!",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "error",
+            "warning",
+            "info",
+            "debug"
+          ]
+        },
+        "default": "info",
+        "optional": true
+      },
+      {
+        "name": "message",
+        "description": "A message to send in addition to the data.",
+        "schema": {
+          "type": "string"
+        },
+        "default": "",
+        "optional": true
+      }
+    ],
+    "returns": {
+      "description": "The data as passed to the `data` parameter without any modification.",
+      "schema": {
+        "description": "Any data type is allowed."
+      }
+    }
+  },
+  {
+    "id": "filter_labels",
+    "summary": "Filter dimension labels based on a condition",
+    "description": "Filters the dimension labels in the data cube for the given dimension. Only the dimension labels that match the specified condition are preserved, all other labels with their corresponding data get removed.",
+    "categories": [
+      "cubes",
+      "filter"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "A data cube.",
+        "schema": {
+          "type": "object",
+          "subtype": "raster-cube"
+        }
+      },
+      {
+        "name": "condition",
+        "description": "A condition that is evaluated against each dimension label in the specified dimension. A dimension label and the corresponding data is preserved for the given dimension, if the condition returns `true`.",
+        "schema": {
+          "type": "object",
+          "subtype": "process-graph",
+          "parameters": [
+            {
+              "name": "value",
+              "description": "A single dimension label to compare against. The data type of the parameter depends on the dimension labels stored for the dimension.",
+              "schema": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "name": "context",
+              "description": "Additional data passed by the user.",
+              "schema": {
+                "description": "Any data type."
+              },
+              "optional": true,
+              "default": null
+            }
+          ],
+          "returns": {
+            "description": "`true` if the dimension label should be kept in the data cube, otherwise `false`.",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      {
+        "name": "dimension",
+        "description": "The name of the dimension to filter on. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "context",
+        "description": "Additional data to be passed to the condition.",
+        "schema": {
+          "description": "Any data type."
+        },
+        "optional": true,
+        "default": null
+      }
+    ],
+    "returns": {
+      "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the given dimension has less (or the same) dimension labels.",
+      "schema": {
+        "type": "object",
+        "subtype": "raster-cube"
+      }
+    },
+    "exceptions": {
+      "DimensionNotAvailable": {
+        "message": "A dimension with the specified name does not exist."
+      }
+    },
+    "examples": [
+      {
+        "description": "Filters the data cube to only contain data from platform Sentinel-2A. This example assumes that the data cube has a dimension `platform` so that computations can distinguish between Sentinel-2A and Sentinel-2B data.",
+        "arguments": {
+          "data": {
+            "from_parameter": "sentinel2_data"
+          },
+          "condition": {
+            "process_graph": {
+              "eq": {
+                "process_id": "eq",
+                "arguments": {
+                  "x": {
+                    "from_parameter": "value"
+                  },
+                  "y": "Sentinel-2A",
+                  "case_sensitive": false
+                },
+                "result": true
+              }
+            }
+          },
+          "dimension": "platform"
+        }
+      }
+    ]
+  },
+  {
     "id": "is_infinite",
     "summary": "Value is an infinite number",
     "description": "Checks whether the specified value `x` is an infinite number. The definition of infinite numbers follows the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935). The special numerical value `NaN` (not a number) as defined by the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) is not an infinite number and must return `false`.",
@@ -8527,6 +8459,88 @@
         "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
       }
     ]
+  },
+  {
+    "id": "load_result",
+    "summary": "Load batch job results",
+    "description": "Loads batch job results by job id from the local user workspace / data store. The job must have been stored by the authenticated user on the back-end currently connected to.",
+    "categories": [
+      "cubes",
+      "import"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "id",
+        "description": "The id of a batch job with results.",
+        "schema": {
+          "type": "string",
+          "subtype": "job-id",
+          "pattern": "^[\\w\\-\\.~]+$"
+        }
+      }
+    ],
+    "returns": {
+      "description": "A data cube for further processing.",
+      "schema": {
+        "type": "object",
+        "subtype": "raster-cube"
+      }
+    }
+  },
+  {
+    "id": "load_uploaded_files",
+    "summary": "Load files from the user workspace",
+    "description": "Loads one or more user-uploaded files from the local user workspace / data store and returns them as a single data cube. The files must have been stored by the authenticated user on the back-end currently connected to.",
+    "categories": [
+      "cubes",
+      "import"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "paths",
+        "description": "The files to read. Folders can't be specified, instead specify all files. An error is thrown if a file can't be read.",
+        "schema": {
+          "type": "array",
+          "subtype": "file-paths",
+          "items": {
+            "type": "string",
+            "subtype": "file-path"
+          }
+        }
+      },
+      {
+        "name": "format",
+        "description": "The file format to read from. It must be one of the values that the server reports as supported input file formats, which usually correspond to the short GDAL/OGR codes. If the format is not suitable for loading the data, a `FormatUnsuitable` exception will be thrown. This parameter is *case insensitive*.",
+        "schema": {
+          "type": "string",
+          "subtype": "input-format"
+        }
+      },
+      {
+        "name": "options",
+        "description": "The file format parameters to be used to read the files. Must correspond to the parameters that the server reports as supported parameters for the chosen `format`. The parameter names and valid values usually correspond to the GDAL/OGR format options.",
+        "schema": {
+          "type": "object",
+          "subtype": "input-format-options"
+        },
+        "default": {},
+        "optional": true
+      }
+    ],
+    "returns": {
+      "description": "A data cube for further processing.",
+      "schema": {
+        "type": "object",
+        "subtype": "raster-cube"
+      }
+    },
+    "exceptions": {
+      "FormatUnsuitable": {
+        "message": "Data can't be loaded with the requested input format."
+      }
+    }
   },
   {
     "id": "nan",
@@ -8641,6 +8655,113 @@
         "rel": "about",
         "href": "https://en.wikipedia.org/wiki/Reduction_Operator",
         "title": "Background information on reduction operators (binary reducers) by Wikipedia"
+      }
+    ]
+  },
+  {
+    "id": "resample_cube_temporal",
+    "summary": "Resample a temporal dimension to match a target data cube",
+    "description": "Resamples the given temporal dimension from a source data cube to align with the corresponding dimension of the given target data cube. Returns a new data cube with the resampled dimension.\n\nIf the dimension is not set or is set to `null`, the data cube is expected to have one temporal dimension only.",
+    "categories": [
+      "cubes",
+      "aggregate & resample"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "A data cube.",
+        "schema": {
+          "type": "object",
+          "subtype": "raster-cube"
+        }
+      },
+      {
+        "name": "target",
+        "description": "A data cube that describes the temporal target resolution.",
+        "schema": {
+          "type": "object",
+          "subtype": "raster-cube"
+        }
+      },
+      {
+        "name": "method",
+        "description": "A resampling method to be applied, could be a reducer for downsampling or other methods for upsampling. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
+        "schema": {
+          "type": "object",
+          "subtype": "process-graph",
+          "parameters": [
+            {
+              "name": "data",
+              "description": "A labeled array with elements of any type.",
+              "schema": {
+                "type": "array",
+                "subtype": "labeled-array",
+                "items": {
+                  "description": "Any data type."
+                }
+              }
+            },
+            {
+              "name": "context",
+              "description": "Additional data passed by the user.",
+              "schema": {
+                "description": "Any data type."
+              },
+              "optional": true,
+              "default": null
+            }
+          ],
+          "returns": {
+            "description": "The value to be stored in the resampled data cube.",
+            "schema": {
+              "description": "Any data type."
+            }
+          }
+        }
+      },
+      {
+        "name": "dimension",
+        "description": "The name of the temporal dimension to resample, which must exist with this name in both data cubes. If the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` error if it has more dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+        "schema": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "default": null,
+        "optional": true
+      },
+      {
+        "name": "context",
+        "description": "Additional data to be passed to the process specified for the parameter `method`.",
+        "schema": {
+          "description": "Any data type."
+        },
+        "optional": true,
+        "default": null
+      }
+    ],
+    "returns": {
+      "description": "A raster data cube with the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-temporal dimensions. For the temporal dimension the name and type remain unchanged, but the reference system changes and the labels and resolution may change.",
+      "schema": {
+        "type": "object",
+        "subtype": "raster-cube"
+      }
+    },
+    "exceptions": {
+      "TooManyDimensions": {
+        "message": "The number of temporal dimensions must be reduced to one for 'resample_cube_temporal'."
+      },
+      "DimensionNotAvailable": {
+        "message": "A dimension with the specified name does not exist."
+      }
+    },
+    "links": [
+      {
+        "href": "https://openeo.org/documentation/1.0/glossary.html#resample-changing-data-cube-geometry",
+        "rel": "about",
+        "title": "Resampling explained in the openEO glossary"
       }
     ]
   },
@@ -9304,106 +9425,6 @@
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
-      }
-    },
-    "links": [
-      {
-        "href": "https://openeo.org/documentation/1.0/glossary.html#resample-changing-data-cube-geometry",
-        "rel": "about",
-        "title": "Resampling explained in the openEO glossary"
-      }
-    ]
-  },
-  {
-    "id": "resample_cube_temporal",
-    "summary": "Resample a temporal dimension to match a target data cube",
-    "description": "Resamples the given temporal dimension from a source data cube to align with the corresponding dimension of the given target data cube. Returns a new data cube with the resampled dimension.\n\nIf the dimension is not set or is set to `null`, the data cube is expected to have one temporal dimension only.",
-    "categories": [
-      "cubes",
-      "aggregate & resample"
-    ],
-    "parameters": [
-      {
-        "name": "data",
-        "description": "A data cube.",
-        "schema": {
-          "type": "object",
-          "subtype": "raster-cube"
-        }
-      },
-      {
-        "name": "target",
-        "description": "A data cube that describes the temporal target resolution.",
-        "schema": {
-          "type": "object",
-          "subtype": "raster-cube"
-        }
-      },
-      {
-        "name": "method",
-        "description": "A resampling method to be applied, could be a reducer for downsampling or other methods for upsampling. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
-        "schema": {
-          "type": "object",
-          "subtype": "process-graph",
-          "parameters": [
-            {
-              "name": "data",
-              "description": "A labeled array with elements of any type.",
-              "schema": {
-                "type": "array",
-                "subtype": "labeled-array",
-                "items": {
-                  "description": "Any data type."
-                }
-              }
-            },
-            {
-              "name": "context",
-              "description": "Additional data passed by the user.",
-              "schema": {
-                "description": "Any data type."
-              },
-              "optional": true,
-              "default": null
-            }
-          ]
-        }
-      },
-      {
-        "name": "dimension",
-        "description": "The name of the temporal dimension to resample, which must exist with this name in both data cubes. If the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` error if it has more dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
-        "schema": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "default": null,
-        "optional": true
-      },
-      {
-        "name": "context",
-        "description": "Additional data to be passed to the process specified for the parameter `method`.",
-        "schema": {
-          "description": "Any data type."
-        },
-        "optional": true,
-        "default": null
-      }
-    ],
-    "returns": {
-      "description": "A raster data cube with the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-temporal dimensions. For the temporal dimension the name and type remain unchanged, but the reference system changes and the labels and resolution may change.",
-      "schema": {
-        "type": "object",
-        "subtype": "raster-cube"
-      }
-    },
-    "exceptions": {
-      "TooManyDimensions": {
-        "message": "The number of temporal dimensions must be reduced to one for 'resample_cube_temporal'."
-      },
-      "DimensionNotAvailable": {
-        "message": "A dimension with the specified name does not exist."
       }
     },
     "links": [
