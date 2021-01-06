@@ -1181,7 +1181,10 @@
           "returns": {
             "description": "The value to be set in the new data cube.",
             "schema": {
-              "description": "Any data type."
+              "type": "array",
+              "items": {
+                "description": "Any data type."
+              }
             }
           }
         }
@@ -2166,7 +2169,7 @@
       },
       {
         "name": "label",
-        "description": "The label of the element to retrieve.",
+        "description": "The label of the element to retrieve. Throws a `ArrayNotLabeled` exception, if the given array is not a labeled array and this parameter is set.",
         "schema": [
           {
             "type": "number"
@@ -2202,6 +2205,9 @@
       },
       "ArrayElementParameterConflict": {
         "message": "The process 'array_element' only allows that either the 'index' or the 'labels' parameter is set."
+      },
+      "ArrayNotLabeled": {
+        "message": "The array is not a labeled array, but the `label` parameter is set. Use the `index` instead."
       }
     },
     "examples": [
@@ -2494,7 +2500,10 @@
         "description": "An array with labels.",
         "schema": {
           "type": "array",
-          "subtype": "labeled-array"
+          "subtype": "labeled-array",
+          "items": {
+            "description": "Any data type."
+          }
         }
       }
     ],
@@ -3811,9 +3820,7 @@
           "minItems": 2,
           "maxItems": 2,
           "items": {
-            "type": [
-              "number"
-            ]
+            "type": "number"
           }
         },
         {
@@ -3821,9 +3828,7 @@
           "minItems": 2,
           "maxItems": 2,
           "items": {
-            "type": [
-              "null"
-            ]
+            "type": "null"
           }
         }
       ]
@@ -5885,14 +5890,20 @@
       {
         "name": "replacement",
         "description": "The value used to replace masked values with.",
-        "schema": {
-          "type": [
-            "number",
-            "boolean",
-            "string",
-            "null"
-          ]
-        },
+        "schema": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
         "default": null,
         "optional": true
       },

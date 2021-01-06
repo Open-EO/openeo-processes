@@ -28,7 +28,7 @@
         },
         {
             "name": "label",
-            "description": "The label of the element to retrieve.",
+            "description": "The label of the element to retrieve. Throws a `ArrayNotLabeled` exception, if the given array is not a labeled array and this parameter is set.",
             "schema": [
                 {
                     "type": "number"
@@ -64,6 +64,9 @@
         },
         "ArrayElementParameterConflict": {
             "message": "The process 'array_element' only allows that either the 'index' or the 'labels' parameter is set."
+        },
+        "ArrayNotLabeled": {
+            "message": "The array is not a labeled array, but the `label` parameter is set. Use the `index` instead."
         }
     },
     "examples": [
