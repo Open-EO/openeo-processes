@@ -11,7 +11,10 @@
             "description": "An array with labels.",
             "schema": {
                 "type": "array",
-                "subtype": "labeled-array"
+                "subtype": "labeled-array",
+                "items": {
+                    "description": "Any data type."
+                }
             }
         }
     ],
