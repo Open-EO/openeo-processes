@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `array_element`: Clarify that `ArrayNotLabeled` exception is thrown when parameter `label` is specified and the given array is not labeled.
 - `array_apply`, `array_element`, `array_filter`: Added the `minimum: 0` constraint to all schemas describing zero-based indices (parameter `index`).
 - `array_labels`: Clarified the accepted data type for array elements passed to the parameter `data`.
+- `merge_cubes`: Clarified the dimension label order after the merge. [#212](https://github.com/Open-EO/openeo-processes/issues/212)
 - Examples `array_contains_nodata` and `array_find_nodata`
 
 ## 1.0.0 - 2020-07-31
