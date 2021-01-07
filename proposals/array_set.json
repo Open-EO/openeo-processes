@@ -1,0 +1,215 @@
+{
+    "id": "array_set",
+    "summary": "Change the content of an array (insert, remove, update)",
+    "description": "Allows to insert into, remove from or update an array.\n\nAll labels get discarded and the array indices are always a sequence of numbers with the step size of 1 and starting at 0.",
+    "categories": [
+        "arrays"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "An array.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
+            }
+        },
+        {
+            "name": "values",
+            "description": "The values to fill the array with.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
+            }
+        },
+        {
+            "name": "index",
+            "description": "The index of the element to insert the value(s) before. To insert after the last element, specify a number of elements in the array. If the index is greater than the number of elements, array is filled with `null` (no-data) values until the index and the values are added starting at the index given. The number of elements can be retrieved with the process ``count()`` having the parameter `condition` set to true.",
+            "optional": true,
+            "default": 0,
+            "schema": {
+                "type": "integer"
+            }
+        },
+        {
+            "name": "length",
+            "description": "The number of elements to replace. This parameter has no effect in case the given `index` does not exist in the array given.",
+            "optional": true,
+            "default": 1,
+            "schema": {
+                "type": "integer",
+                "minimum": 0
+            }
+        }
+    ],
+    "returns": {
+        "description": "An array with values added, updated or removed.",
+        "schema": {
+            "type": "array",
+            "items": {
+                "description": "Any data type is allowed."
+            }
+        }
+    },
+    "examples": [
+        {
+            "description": "With the default values for the optional parameters, values are added at the beginning of the array.",
+            "arguments": {
+                "data": [
+                    "b",
+                    "c"
+                ],
+                "values": [
+                    "a"
+                ]
+            },
+            "returns": [
+                "a",
+                "b",
+                "c"
+            ]
+        },
+        {
+            "description": "Add a value at the end of the array.",
+            "arguments": {
+                "data": [
+                    "a",
+                    "b"
+                ],
+                "values": [
+                    "c"
+                ],
+                "index": 2
+            },
+            "returns": [
+                "a",
+                "b",
+                "c"
+            ]
+        },
+        {
+            "description": "Add a value at a specific non-existing position after the array, fill missing elements with `null`.",
+            "arguments": {
+                "data": [
+                    "a",
+                    "b"
+                ],
+                "values": [
+                    "e"
+                ],
+                "index": 4
+            },
+            "returns": [
+                "a",
+                "b",
+                null,
+                null,
+                "e"
+            ]
+        },
+        {
+            "description": "Update a single value in the array.",
+            "arguments": {
+                "data": [
+                    "a",
+                    "d",
+                    "c"
+                ],
+                "values": [
+                    "b"
+                ],
+                "index": 1
+            },
+            "returns": [
+                "a",
+                "b",
+                "c"
+            ]
+        },
+        {
+            "description": "Update multiple values in the array.",
+            "arguments": {
+                "data": [
+                    "a",
+                    "b",
+                    4
+                ],
+                "values": [
+                    1,
+                    2
+                ],
+                "index": 0,
+                "length": 2
+            },
+            "returns": [
+                1,
+                2,
+                3,
+                4
+            ]
+        },
+        {
+            "description": "Replace a single values with two values in the array.",
+            "arguments": {
+                "data": [
+                    "a",
+                    null,
+                    "d"
+                ],
+                "values": [
+                    "b",
+                    "c"
+                ],
+                "index": 1
+            },
+            "returns": [
+                "a",
+                "b",
+                "c",
+                "d"
+            ]
+        },
+        {
+            "description": "Remove a single value from the array.",
+            "arguments": {
+                "data": [
+                    "a",
+                    "b",
+                    null,
+                    "c"
+                ],
+                "values": [],
+                "index": 1
+            },
+            "returns": [
+                "a",
+                "b",
+                "c"
+            ]
+        },
+        {
+            "description": "Remove multiple values from the array.",
+            "arguments": {
+                "data": [
+                    null,
+                    null,
+                    "a",
+                    "b",
+                    "c"
+                ],
+                "values": [],
+                "length": 2
+            },
+            "returns": [
+                "a",
+                "b",
+                "c"
+            ]
+        }
+    ]
+}
