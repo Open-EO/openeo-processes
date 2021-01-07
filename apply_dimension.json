@@ -45,7 +45,10 @@
                 "returns": {
                     "description": "The value to be set in the new data cube.",
                     "schema": {
-                        "description": "Any data type."
+                        "type": "array",
+                        "items": {
+                            "description": "Any data type."
+                        }
                     }
                 }
             }

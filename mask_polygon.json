@@ -26,14 +26,20 @@
         {
             "name": "replacement",
             "description": "The value used to replace masked values with.",
-            "schema": {
-                "type": [
-                    "number",
-                    "boolean",
-                    "string",
-                    "null"
-                ]
-            },
+            "schema": [
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "boolean"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ],
             "default": null,
             "optional": true
         },

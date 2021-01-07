@@ -10,7 +10,10 @@
             "name": "data",
             "description": "An array.",
             "schema": {
-                "type": "array"
+                "type": "array",
+                "items": {
+                    "description": "Any data type."
+                }
             }
         }
     ],
