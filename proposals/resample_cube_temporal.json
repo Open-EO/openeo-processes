@@ -62,7 +62,7 @@
         },
         {
             "name": "dimension",
-            "description": "The name of the temporal dimension to resample, which must exist with this name in both data cubes. If the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` error if it has more dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+            "description": "The name of the temporal dimension to resample, which must exist with this name in both data cubes. If the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` exception if it has more dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
             "schema": {
                 "type": [
                     "string",
@@ -83,7 +83,7 @@
         }
     ],
     "returns": {
-        "description": "A raster data cube with the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-temporal dimensions. For the temporal dimension the name and type remain unchanged, but the reference system changes and the labels and resolution may change.",
+        "description": "A raster data cube with the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-temporal dimensions. For the temporal dimension, the name and type remain unchanged, but the reference system changes and the labels and resolution may change.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"

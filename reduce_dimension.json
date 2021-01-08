@@ -53,7 +53,7 @@
         },
         {
             "name": "dimension",
-            "description": "The name of the dimension over which to reduce. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+            "description": "The name of the dimension over which to reduce. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
             "schema": {
                 "type": "string"
             }

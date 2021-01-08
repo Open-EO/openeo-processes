@@ -23,7 +23,7 @@
         }
     ],
     "returns": {
-        "description": "The labels as array.",
+        "description": "The labels as an array.",
         "schema": {
             "type": "array",
             "items": {
