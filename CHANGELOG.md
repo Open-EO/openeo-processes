@@ -28,7 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `array_apply`, `array_element`, `array_filter`: Added the `minimum: 0` constraint to all schemas describing zero-based indices (parameter `index`).
 - `array_labels`: Clarified the accepted data type for array elements passed to the parameter `data`.
 - `merge_cubes`: Clarified the dimension label order after the merge. [#212](https://github.com/Open-EO/openeo-processes/issues/212)
-- Examples `array_contains_nodata` and `array_find_nodata`
+- Fixed typos, grammar issues and other spelling-related issues in many of the processes.
+- Fixed the examples `array_contains_nodata` and `array_find_nodata`
 
 ## 1.0.0 - 2020-07-31
 
@@ -64,9 +65,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `aggregate_temporal`: Fixed outdated message for exception `TooManyDimensions`.
 - `clip`: Fixed examples.
 - `linear_scale_range`: Clarify that the process implicitly clips the values. [#159](https://github.com/Open-EO/openeo-processes/issues/159)
-- `mean`: Clarify behaviour for arrays with `null`-values only.
-- `mod`: Clarified behaviour. [#168](https://github.com/Open-EO/openeo-processes/issues/168)
-- `resample_*`: Clarified behaviour.
+- `mean`: Clarify behavior for arrays with `null`-values only.
+- `mod`: Clarified behavior. [#168](https://github.com/Open-EO/openeo-processes/issues/168)
+- `resample_*`: Clarified behavior.
 - `first`, `last`, `max`, `mean`, `median`, `min`, `sd`, `variance`: Clarify behavior for arrays with `null`-values only.
 - Clarified (and fixed if necessary) for all processes in the "cubes" category the descriptions for the returned data cube. [#149](https://github.com/Open-EO/openeo-processes/issues/149)
 

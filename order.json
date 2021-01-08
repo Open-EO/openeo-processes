@@ -1,7 +1,7 @@
 {
     "id": "order",
     "summary": "Create a permutation",
-    "description": "Computes a permutation which allows rearranging the data into ascending or descending order. In other words, this process computes the ranked (sorted) element positions in the original list.\n\n**Remarks:**\n\n* The positions in the result are zero-based.\n* Ties will be left in their original ordering.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
+    "description": "Computes a permutation which allows rearranging the data into ascending or descending order. In other words, this process computes the ranked (sorted) element positions in the original list.\n\n**Remarks:**\n\n* The positions in the result are zero-based.\n* Ties will be left in their original ordering.\n* Temporal strings can *not* be compared based on their string representation due to the time zone/time-offset representations.",
     "categories": [
         "arrays",
         "sorting"
@@ -50,7 +50,7 @@
         },
         {
             "name": "nodata",
-            "description": "Controls the handling of no-data values (`null`). By default they are removed. If `true`, missing values in the data are put last; if `false`, they are put first.",
+            "description": "Controls the handling of no-data values (`null`). By default, they are removed. If set to `true`, missing values in the data are put last; if set to `false`, they are put first.",
             "schema": {
                 "type": [
                     "boolean",

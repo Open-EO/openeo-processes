@@ -1,7 +1,7 @@
 {
     "id": "text_merge",
-    "summary": "Concatenate elements to a string",
-    "description": "Merges string representations of a set of elements together to a single string, with the separator between each element.",
+    "summary": "Concatenate elements to a single text",
+    "description": "Merges text representations (also known as *string*) of a set of elements to a single text, having the separator between each element.",
     "categories": [
         "texts"
     ],

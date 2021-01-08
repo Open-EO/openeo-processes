@@ -28,7 +28,7 @@
         },
         {
             "name": "label",
-            "description": "The label of the element to retrieve. Throws a `ArrayNotLabeled` exception, if the given array is not a labeled array and this parameter is set.",
+            "description": "The label of the element to retrieve. Throws an `ArrayNotLabeled` exception, if the given array is not a labeled array and this parameter is set.",
             "schema": [
                 {
                     "type": "number"
