@@ -29,7 +29,7 @@
         },
         {
             "name": "index",
-            "description": "The index of the element to insert the value(s) before. To insert after the last element, specify a number of elements in the array. If the index is greater than the number of elements, array is filled with `null` (no-data) values until the index and the values are added starting at the index given. The number of elements can be retrieved with the process ``count()`` having the parameter `condition` set to true.",
+            "description": "The index of the element to insert the value(s) before. To insert after the last element, specify the number of elements in the array. If the index is greater than the number of elements, the array is filled with `null` (no-data) values until the index is reached and then the values are added starting at the index given. The number of elements can be retrieved with the process ``count()`` having the parameter `condition` set to true.",
             "optional": true,
             "default": 0,
             "schema": {
@@ -154,7 +154,7 @@
             ]
         },
         {
-            "description": "Replace a single values with two values in the array.",
+            "description": "Replace a single value with two values in the array.",
             "arguments": {
                 "data": [
                     "a",

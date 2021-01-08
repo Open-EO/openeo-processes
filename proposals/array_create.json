@@ -1,7 +1,7 @@
 {
     "id": "array_create",
     "summary": "Create an array",
-    "description": "Creates a new array, which by default is empty.\n\nBy providing the parameter `length`, the array can be pre-filled with the given number of elements. By default each element is set to `null` unless another value is specified through the parameter `value`.",
+    "description": "Creates a new array, which by default is empty.\n\nBy providing the parameter `length`, the array can be pre-filled with the given number of elements. By default, each element is set to `null` unless another value is specified through the parameter `value`.",
     "categories": [
         "arrays"
     ],
@@ -19,7 +19,7 @@
         },
         {
             "name": "value",
-            "description": "The value to fill the array with in case `length` is greater than 0. Defaults to `null` (no data).",
+            "description": "The value to fill the array with, in case `length` is greater than 0. Defaults to `null` (no data).",
             "optional": true,
             "default": null,
             "schema": {
