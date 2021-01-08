@@ -100,7 +100,7 @@
   {
     "id": "add_dimension",
     "summary": "Add a new dimension",
-    "description": "Adds a new named dimension to the data cube.\n\nAfterwards, the dimension can be referenced with the specified `name`. If a dimension with the specified name exists, the process fails with a `DimensionExists` error. The dimension label of the dimension is set to the specified `label`.",
+    "description": "Adds a new named dimension to the data cube.\n\nAfterwards, the dimension can be referred to with the specified `name`. If a dimension with the specified name exists, the process fails with a `DimensionExists` exception. The dimension label of the dimension is set to the specified `label`.",
     "categories": [
       "cubes"
     ],
@@ -255,7 +255,7 @@
   {
     "id": "aggregate_spatial",
     "summary": "Zonal statistics for geometries",
-    "description": "Aggregates statistics for one or more geometries (e.g. zonal statistics for polygons) over the spatial dimensions. This process passes a list of values to the reducer. In contrast, ``aggregate_spatial_binary()`` passes two values, which may be better suited especially for UDFs in case the number of values gets too large to be processed at once.\n\n- For **polygons**, the process considers all pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n- For **points**, the process considers the closest pixel center.\n- For **lines** (line strings), the process considers all the pixels whose centers are closest to at least one point on the line.\n\nThus, pixels may be part of multiple geometries and be part of multiple aggregations.\n\nThe data cube must have been reduced to only contain two spatial dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise this process fails with the `TooManyDimensions` error.\n\nThe number of total and valid pixels is returned together with the calculated values.",
+    "description": "Aggregates statistics for one or more geometries (e.g. zonal statistics for polygons) over the spatial dimensions. This process passes a list of values to the reducer. In contrast, ``aggregate_spatial_binary()`` passes two values, which may be better suited especially for UDFs in case the number of values gets too large to be processed at once.\n\n- For **polygons**, the process considers all pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n- For **points**, the process considers the closest pixel center.\n- For **lines** (line strings), the process considers all the pixels whose centers are closest to at least one point on the line.\n\nThus, pixels may be part of multiple geometries and be part of multiple aggregations.\n\nThe data cube must have been reduced to only contain two spatial dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise, this process fails with the `TooManyDimensions` exception.\n\nThe number of total and valid pixels is returned together with the calculated values.",
     "categories": [
       "cubes",
       "aggregate & resample"
@@ -332,7 +332,7 @@
       }
     ],
     "returns": {
-      "description": "A vector data cube with the computed results and restricted to the bounds of the geometries.\n\nThe computed value is used for the dimension with the name that was specified in the parameter `target_dimension`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) for each geometry. These values are added as new dimension with a dimension name derived from `target_dimension` by adding the suffix `_meta`. The new dimension has the dimension labels `total_count` and `valid_count`.",
+      "description": "A vector data cube with the computed results and restricted to the bounds of the geometries.\n\nThe computed value is used for the dimension with the name that was specified in the parameter `target_dimension`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) for each geometry. These values are added as a new dimension with a dimension name derived from `target_dimension` by adding the suffix `_meta`. The new dimension has the dimension labels `total_count` and `valid_count`.",
       "schema": {
         "type": "object",
         "subtype": "vector-cube"
@@ -431,7 +431,7 @@
       },
       {
         "name": "dimension",
-        "description": "The name of the temporal dimension for aggregation. All data along the dimension is passed through the specified reducer. If the dimension is not set or set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` error if it has more dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+        "description": "The name of the temporal dimension for aggregation. All data along the dimension is passed through the specified reducer. If the dimension is not set or set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` exception if it has more dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
         "schema": {
           "type": [
             "string",
@@ -480,7 +480,7 @@
   {
     "id": "aggregate_temporal",
     "summary": "Temporal aggregations",
-    "description": "Computes a temporal aggregation based on an array of temporal intervals.\n\nFor common regular calendar hierarchies such as year, month, week or seasons ``aggregate_temporal_period()`` can be used. Other calendar hierarchies must be transformed into specific intervals by the clients.\n\nFor each interval, all data along the dimension will be passed through the reducer.\n\nThe computed values will be projected to the labels. If no labels are specified, the start of the temporal interval will be used as label for the corresponding values. In case of a conflict (i.e. the user-specified values for the start times of the temporal intervals are not distinct), the user-defined labels must be specified in the parameter `labels` as otherwise a `DistinctDimensionLabelsRequired` error would be thrown. The number of user-defined labels and the number of intervals need to be equal.\n\nIf the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension.",
+    "description": "Computes a temporal aggregation based on an array of temporal intervals.\n\nFor common regular calendar hierarchies such as year, month, week or seasons ``aggregate_temporal_period()`` can be used. Other calendar hierarchies must be transformed into specific intervals by the clients.\n\nFor each interval, all data along the dimension will be passed through the reducer.\n\nThe computed values will be projected to the labels. If no labels are specified, the start of the temporal interval will be used as label for the corresponding values. In case of a conflict (i.e. the user-specified values for the start times of the temporal intervals are not distinct), the user-defined labels must be specified in the parameter `labels` as otherwise a `DistinctDimensionLabelsRequired` exception would be thrown. The number of user-defined labels and the number of intervals need to be equal.\n\nIf the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension.",
     "categories": [
       "cubes",
       "aggregate & resample"
@@ -621,7 +621,7 @@
       },
       {
         "name": "dimension",
-        "description": "The name of the temporal dimension for aggregation. All data along the dimension is passed through the specified reducer. If the dimension is not set or set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` error if it has more dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+        "description": "The name of the temporal dimension for aggregation. All data along the dimension is passed through the specified reducer. If the dimension is not set or set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` exception if it has more dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
         "schema": {
           "type": [
             "string",
@@ -1152,7 +1152,7 @@
       },
       {
         "name": "process",
-        "description": "Process to be applied on all pixel values. The specified process needs to accept an array as parameter and must return an array with least one element. A process may consist of multiple sub-processes.",
+        "description": "Process to be applied on all pixel values. The specified process needs to accept an array and must return an array with at least one element. A process may consist of multiple sub-processes.",
         "schema": {
           "type": "object",
           "subtype": "process-graph",
@@ -1191,14 +1191,14 @@
       },
       {
         "name": "dimension",
-        "description": "The name of the source dimension to apply the process on. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+        "description": "The name of the source dimension to apply the process on. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
         "schema": {
           "type": "string"
         }
       },
       {
         "name": "target_dimension",
-        "description": "The name of the target dimension or `null` (the default) to use the source dimension specified in the parameter `dimension`.\n\nBy specifying a target dimension, the source dimension is removed. The target dimension with the specified name and the type `other` (see ``add_dimension()``) is created, if if doesn't exist yet.",
+        "description": "The name of the target dimension or `null` (the default) to use the source dimension specified in the parameter `dimension`.\n\nBy specifying a target dimension, the source dimension is removed. The target dimension with the specified name and the type `other` (see ``add_dimension()``) is created, if it doesn't exist yet.",
         "schema": {
           "type": [
             "string",
@@ -1250,7 +1250,7 @@
       },
       {
         "name": "kernel",
-        "description": "Kernel as a two-dimensional array of weights. The inner level of the nested array aligns with the `x` axis and the outer level aligns with the `y` axis. Each level of the kernel must have an uneven number of elements, otherwise the process throws a `KernelDimensionsUneven` error.",
+        "description": "Kernel as a two-dimensional array of weights. The inner level of the nested array aligns with the `x` axis and the outer level aligns with the `y` axis. Each level of the kernel must have an uneven number of elements, otherwise the process throws a `KernelDimensionsUneven` exception.",
         "schema": {
           "description": "A two-dimensional array of numbers.",
           "type": "array",
@@ -1329,8 +1329,8 @@
   },
   {
     "id": "apply_neighborhood",
-    "summary": "Apply a process to pixels in a n-dimensional neighbourhood",
-    "description": "Applies a focal process to a data cube.\n\nA focal process is a process that works on a 'neighbourhood' of pixels. The neighbourhood can extend into multiple dimensions, this extent is specified by the `size` argument. It is not only (part of) the size of the input window, but also the size of the output for a given position of the sliding window. The sliding window moves with multiples of `size`.\n\nAn overlap can be specified so that neighbourhoods can have overlapping boundaries. This allows for continuity of the output. The values included in the data cube as overlap can't be modified by the given `process`. The missing overlap at the borders of the original data cube are made available as no-data (`null`) in the sub data cubes.\n\nThe neighbourhood size should be kept small enough, to avoid running beyond computational resources, but a too small size will result in a larger number of process invocations, which may slow down processing. Window sizes for spatial dimensions typically are in the range of 64 to 512 pixels, while overlaps of 8 to 32 pixels are common.\n\nThe process must not add new dimensions, or remove entire dimensions, but the result can have different dimension labels.\n\nFor the special case of 2D convolution, it is recommended to use ``apply_kernel()``.",
+    "summary": "Apply a process to pixels in a n-dimensional neighborhood",
+    "description": "Applies a focal process to a data cube.\n\nA focal process is a process that works on a 'neighborhood' of pixels. The neighborhood can extend into multiple dimensions, this extent is specified by the `size` argument. It is not only (part of) the size of the input window, but also the size of the output for a given position of the sliding window. The sliding window moves with multiples of `size`.\n\nAn overlap can be specified so that neighborhoods can have overlapping boundaries. This allows for continuity of the output. The values included in the data cube as overlap can't be modified by the given `process`. The missing overlap at the borders of the original data cube are made available as no-data (`null`) in the sub data cubes.\n\nThe neighborhood size should be kept small enough, to avoid running beyond computational resources, but a too small size will result in a larger number of process invocations, which may slow down processing. Window sizes for spatial dimensions typically are in the range of 64 to 512 pixels, while overlaps of 8 to 32 pixels are common.\n\nThe process must not add new dimensions, or remove entire dimensions, but the result can have different dimension labels.\n\nFor the special case of 2D convolution, it is recommended to use ``apply_kernel()``.",
     "categories": [
       "cubes"
     ],
@@ -1345,7 +1345,7 @@
       },
       {
         "name": "process",
-        "description": "Process to be applied on all neighbourhoods.",
+        "description": "Process to be applied on all neighborhoods.",
         "schema": {
           "type": "object",
           "subtype": "process-graph",
@@ -1379,7 +1379,7 @@
       },
       {
         "name": "size",
-        "description": "Neighbourhood sizes along each dimension.\n\nThis object maps dimension names to either a physical measure (e.g. 100 m, 10 days) or pixels (e.g. 32 pixels). For dimensions not specified, the default is to provide all values. Be aware that including all values from overly large dimensions may not be processed at once.",
+        "description": "Neighborhood sizes along each dimension.\n\nThis object maps dimension names to either a physical measure (e.g. 100 m, 10 days) or pixels (e.g. 32 pixels). For dimensions not specified, the default is to provide all values. Be aware that including all values from overly large dimensions may not be processed at once.",
         "schema": {
           "type": "array",
           "items": {
@@ -1415,7 +1415,7 @@
               },
               "unit": {
                 "type": "string",
-                "description": "The unit the values are given in, either meters (`m`) or pixels (`px`). If no unit is given, uses the unit specified for the dimension or otherwise the default unit of the reference system.",
+                "description": "The unit the values are given in, either in meters (`m`) or pixels (`px`). If no unit is given, uses the unit specified for the dimension or otherwise the default unit of the reference system.",
                 "enum": [
                   "px",
                   "m"
@@ -1427,7 +1427,7 @@
       },
       {
         "name": "overlap",
-        "description": "Overlap of neighbourhoods along each dimension to avoid border effects.\n\nFor instance a temporal dimension can add 1 month before and after a neighbourhood. In the spatial dimensions, this is often a number of pixels. The overlap specified is added before and after, so an overlap of 8 pixels will add 8 pixels on both sides of the window, so 16 in total.\n\nBe aware that large overlaps increase the need for computational resources and modifying overlapping data in subsequent operations have no effect.",
+        "description": "Overlap of neighborhoods along each dimension to avoid border effects.\n\nFor instance a temporal dimension can add 1 month before and after a neighborhood. In the spatial dimensions, this is often a number of pixels. The overlap specified is added before and after, so an overlap of 8 pixels will add 8 pixels on both sides of the window, so 16 in total.\n\nBe aware that large overlaps increase the need for computational resources and modifying overlapping data in subsequent operations have no effect.",
         "optional": true,
         "schema": {
           "type": "array",
@@ -1464,7 +1464,7 @@
               },
               "unit": {
                 "type": "string",
-                "description": "The unit the values are given in, either meters (`m`) or pixels (`px`). If no unit is given, uses the unit specified for the dimension or otherwise the default unit of the reference system.",
+                "description": "The unit the values are given in, either in meters (`m`) or pixels (`px`). If no unit is given, uses the unit specified for the dimension or otherwise the default unit of the reference system.",
                 "enum": [
                   "px",
                   "m"
@@ -1808,7 +1808,7 @@
     "parameters": [
       {
         "name": "y",
-        "description": "A number to be used as dividend.",
+        "description": "A number to be used as the dividend.",
         "schema": {
           "type": [
             "number",
@@ -1818,7 +1818,7 @@
       },
       {
         "name": "x",
-        "description": "A number to be used as divisor.",
+        "description": "A number to be used as the divisor.",
         "schema": {
           "type": [
             "number",
@@ -1972,7 +1972,7 @@
   {
     "id": "array_contains",
     "summary": "Check whether the array contains a given value",
-    "description": "Checks whether the array specified for `data` contains the value specified in `value`. Returns `true` if there's a match, otherwise `false`.\n\n**Remarks:**\n\n* To get the index or the label of the value found, use ``array_find()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. A `null` return value from ``eq()`` is handled exactly as `false` (no match).\n* Data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.\n* If the specified value is an array, object or null, the process always returns `false`. See the examples for one to check for `null` values.",
+    "description": "Checks whether the array specified for `data` contains the value specified in `value`. Returns `true` if there's a match, otherwise `false`.\n\n**Remarks:**\n\n* To get the index or the label of the value found, use ``array_find()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. A `null` return value from ``eq()`` is handled exactly as `false` (no match).\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating-point numbers due to floating-point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.\n* If the specified value is an array, object or null, the process always returns `false`. See the examples for one to check for `null` values.",
     "categories": [
       "arrays",
       "comparison",
@@ -2169,7 +2169,7 @@
       },
       {
         "name": "label",
-        "description": "The label of the element to retrieve. Throws a `ArrayNotLabeled` exception, if the given array is not a labeled array and this parameter is set.",
+        "description": "The label of the element to retrieve. Throws an `ArrayNotLabeled` exception, if the given array is not a labeled array and this parameter is set.",
         "schema": [
           {
             "type": "number"
@@ -2344,7 +2344,7 @@
   {
     "id": "array_find",
     "summary": "Get the index for a value in an array",
-    "description": "Checks whether the array specified for `data` contains the value specified in `value` and returns the zero-based index for the first match. If there's no match, `null` is returned.\n\n**Remarks:**\n\n* To get a boolean value returned use ``array_contains()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. A `null` return value from ``eq()`` is handled exactly as `false` (no match).\n* Data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating point numbers due to floating point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.\n* If the specified value is an array, object or null, the process always returns `null`. See the examples for one to find `null` values.",
+    "description": "Checks whether the array specified for `data` contains the value specified in `value` and returns the zero-based index for the first match. If there's no match, `null` is returned.\n\n**Remarks:**\n\n* To get a boolean value returned use ``array_contains()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. A `null` return value from ``eq()`` is handled exactly as `false` (no match).\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating-point numbers due to floating-point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.\n* If the specified value is an array, object or null, the process always returns `null`. See the examples for one to find `null` values.",
     "categories": [
       "arrays",
       "reducer"
@@ -2508,7 +2508,7 @@
       }
     ],
     "returns": {
-      "description": "The labels as array.",
+      "description": "The labels as an array.",
       "schema": {
         "type": "array",
         "items": {
@@ -2615,7 +2615,7 @@
   {
     "id": "between",
     "summary": "Between comparison",
-    "description": "By default this process checks whether `x` is greater than or equal to `min` and lower than or equal to `max`, which is the same as computing `and(gte(x, min), lte(x, max))`. Therefore, all definitions from ``and()``, ``gte()`` and ``lte()`` apply here as well.\n\nIf `exclude_max` is set to `true` the upper bound is excluded so that the process checks whether `x` is greater than or equal to `min` and lower than `max`. In this case the process works the same as computing `and(gte(x, min), lt(x, max))`.\n\nLower and upper bounds are not allowed to be swapped. So `min` MUST be lower than or equal to `max` or otherwise the process always returns `false`.",
+    "description": "By default, this process checks whether `x` is greater than or equal to `min` and lower than or equal to `max`, which is the same as computing `and(gte(x, min), lte(x, max))`. Therefore, all definitions from ``and()``, ``gte()`` and ``lte()`` apply here as well.\n\nIf `exclude_max` is set to `true` the upper bound is excluded so that the process checks whether `x` is greater than or equal to `min` and lower than `max`. In this case, the process works the same as computing `and(gte(x, min), lt(x, max))`.\n\nLower and upper bounds are not allowed to be swapped. So `min` MUST be lower than or equal to `max` or otherwise the process always returns `false`.",
     "categories": [
       "comparison"
     ],
@@ -2935,7 +2935,7 @@
       },
       {
         "name": "climatology_period",
-        "description": "The climatology period as closed temporal interval. The first element of the array is the first year to be fully included in the temporal interval. The second element is the last year to be fully included in the temporal interval. The default period is from 1981 until 2010 (both inclusive).",
+        "description": "The climatology period as a closed temporal interval. The first element of the array is the first year to be fully included in the temporal interval. The second element is the last year to be fully included in the temporal interval. The default period is from 1981 until 2010 (both inclusive).",
         "schema": {
           "type": "array",
           "subtype": "temporal-interval",
@@ -2974,7 +2974,7 @@
   {
     "id": "clip",
     "summary": "Clip a value between a minimum and a maximum",
-    "description": "Clips a number between specified minimum and maximum values. A value larger than the maximal value will have the maximal value, a value lower than minimal value will have the minimal value.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Clips a number between specified minimum and maximum values. A value larger than the maximum value is set to the maximum value, a value lower than the minimum value is set to the minimum value.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "math"
     ],
@@ -3209,7 +3209,7 @@
       },
       {
         "name": "condition",
-        "description": "A condition consists of one ore more processes, which in the end return a boolean value. It is evaluated against each element in the array. An element is counted only if the condition returns `true`. Defaults to count valid elements in a list (see ``is_valid()``). Setting this parameter to boolean `true` counts all elements in the list.",
+        "description": "A condition consists of one or more processes, which in the end return a boolean value. It is evaluated against each element in the array. An element is counted only if the condition returns `true`. Defaults to count valid elements in a list (see ``is_valid()``). Setting this parameter to boolean `true` counts all elements in the list.",
         "schema": [
           {
             "title": "Condition",
@@ -3378,7 +3378,7 @@
       }
     ],
     "returns": {
-      "description": "The labels as array.",
+      "description": "The labels as an array.",
       "schema": {
         "type": "array",
         "items": {
@@ -3397,7 +3397,7 @@
   {
     "id": "divide",
     "summary": "Division of two numbers",
-    "description": "Divides argument `x` by the argument `y` (*x / y*) and returns the computed result.\n\nNo-data values are taken into account so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, a division by zero results in ±infinity if the processing environment supports it. Otherwise a `DivisionByZero` error must the thrown.",
+    "description": "Divides argument `x` by the argument `y` (*x / y*) and returns the computed result.\n\nNo-data values are taken into account so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, a division by zero results in ±infinity if the processing environment supports it. Otherwise, a `DivisionByZero` exception must the thrown.",
     "categories": [
       "math"
     ],
@@ -3476,7 +3476,7 @@
   {
     "id": "drop_dimension",
     "summary": "Remove a dimension",
-    "description": "Drops a dimension from the data cube.\n\nDropping a dimension only works on dimensions with a single dimension label left, otherwise the process fails with a `DimensionLabelCountMismatch` error. Dimension values can be reduced to a single value with a filter such as ``filter_bands()`` or the ``reduce_dimension()`` process. If a dimension with the specified name does not exist, the process fails with a `DimensionNotAvailable` error.",
+    "description": "Drops a dimension from the data cube.\n\nDropping a dimension only works on dimensions with a single dimension label left, otherwise the process fails with a `DimensionLabelCountMismatch` exception. Dimension values can be reduced to a single value with a filter such as ``filter_bands()`` or the ``reduce_dimension()`` process. If a dimension with the specified name does not exist, the process fails with a `DimensionNotAvailable` exception.",
     "categories": [
       "cubes"
     ],
@@ -3539,7 +3539,7 @@
   {
     "id": "eq",
     "summary": "Equal to comparison",
-    "description": "Compares whether `x` is strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`. Therefore, `eq(null, null)` returns `null` instead of `true`.\n* If any operand is an array or object, the return value is `false`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings MUST be compared differently than other strings and MUST NOT be compared based on their string representation due to different possible representations. For example, the UTC time zone representation `Z` has the same meaning as `+00:00`.",
+    "description": "Compares whether `x` is strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`. Therefore, `eq(null, null)` returns `null` instead of `true`.\n* If any operand is an array or object, the return value is `false`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings MUST be compared differently than other strings and MUST NOT be compared based on their string representation due to different possible representations. For example, the time zone representation `Z` (for UTC) has the same meaning as `+00:00`.",
     "categories": [
       "texts",
       "comparison"
@@ -3561,7 +3561,7 @@
       },
       {
         "name": "delta",
-        "description": "Only applicable for comparing two numbers. If this optional parameter is set to a positive non-zero number the equality of two numbers is checked against a delta value. This is especially useful to circumvent problems with floating point inaccuracy in machine-based computation.\n\nThis option is basically an alias for the following computation: `lte(abs(minus([x, y]), delta)`",
+        "description": "Only applicable for comparing two numbers. If this optional parameter is set to a positive non-zero number the equality of two numbers is checked against a delta value. This is especially useful to circumvent problems with floating-point inaccuracy in machine-based computation.\n\nThis option is basically an alias for the following computation: `lte(abs(minus([x, y]), delta)`",
         "schema": {
           "type": [
             "number",
@@ -3892,8 +3892,8 @@
   },
   {
     "id": "filter_bands",
-    "summary": "Filter the bands by name",
-    "description": "Filters the bands in the data cube so that bands that don't match any of the criteria are dropped from the data cube. The data cube is expected to have only one dimension of type `bands`. Fails with a `DimensionMissing` error if no such dimension exists.\n\nThe following criteria can be used to select bands:\n\n* `bands`: band name or common band name (e.g. `B01`, `B8A`, `red` or `nir`)\n* `wavelengths`: ranges of wavelengths in micrometres (μm) (e.g. 0.5 - 0.6)\n\nAll these information are exposed in the band metadata of the collection. To keep algorithms interoperable it is recommended to prefer the common bands names or the wavelengths over collection and/or back-end specific band names.\n\nIf multiple criteria are specified, any of them must match and not all of them, i.e. they are combined with an OR-operation. If no criteria is specified, the `BandFilterParameterMissing` exception must be thrown.\n\n**Important:** The order of the specified array defines the order of the bands in the data cube, which can be important for subsequent processes. If multiple bands are matched by a single criterion (e.g. a range of wavelengths), they stay in the original order.",
+    "summary": "Filter the bands by names",
+    "description": "Filters the bands in the data cube so that bands that don't match any of the criteria are dropped from the data cube. The data cube is expected to have only one dimension of type `bands`. Fails with a `DimensionMissing` exception if no such dimension exists.\n\nThe following criteria can be used to select bands:\n\n* `bands`: band name or common band name (e.g. `B01`, `B8A`, `red` or `nir`)\n* `wavelengths`: ranges of wavelengths in micrometers (μm) (e.g. 0.5 - 0.6)\n\nAll these information are exposed in the band metadata of the collection. To keep algorithms interoperable it is recommended to prefer the common band names or the wavelengths over band names that are specific to the collection and/or back-end.\n\nIf multiple criteria are specified, any of them must match and not all of them, i.e. they are combined with an OR-operation. If no criteria are specified, the `BandFilterParameterMissing` exception must be thrown.\n\n**Important:** The order of the specified array defines the order of the bands in the data cube, which can be important for subsequent processes. If multiple bands are matched by a single criterion (e.g. a range of wavelengths), they stay in the original order.",
     "categories": [
       "cubes",
       "filter"
@@ -3909,7 +3909,7 @@
       },
       {
         "name": "bands",
-        "description": "A list of band names. Either the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands). If unique band name and common name conflict, the unique band name has higher priority.\n\nThe order of the specified array defines the order of the bands in the data cube. If multiple bands match a common name, all matched bands are included in the original order.",
+        "description": "A list of band names. Either the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands). If the unique band name and the common name conflict, the unique band name has a higher priority.\n\nThe order of the specified array defines the order of the bands in the data cube. If multiple bands match a common name, all matched bands are included in the original order.",
         "schema": {
           "type": "array",
           "items": {
@@ -3922,7 +3922,7 @@
       },
       {
         "name": "wavelengths",
-        "description": "A list of sub-lists with each sub-list consisting of two elements. The first element is the minimum wavelength and the second element is the maximum wavelength. Wavelengths are specified in micrometres (μm).\n\nThe order of the specified array defines the order of the bands in the data cube. If multiple bands match the wavelengths, all matched bands are included in the original order.",
+        "description": "A list of sub-lists with each sub-list consisting of two elements. The first element is the minimum wavelength and the second element is the maximum wavelength. Wavelengths are specified in micrometers (μm).\n\nThe order of the specified array defines the order of the bands in the data cube. If multiple bands match the wavelengths, all matched bands are included in the original order.",
         "schema": {
           "type": "array",
           "items": {
@@ -4199,7 +4199,7 @@
       },
       {
         "name": "dimension",
-        "description": "The name of the temporal dimension to filter on. If no specific dimension is specified or it is set to `null`, the filter applies to all temporal dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+        "description": "The name of the temporal dimension to filter on. If no specific dimension is specified or it is set to `null`, the filter applies to all temporal dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
         "schema": {
           "type": [
             "string",
@@ -4764,7 +4764,7 @@
   {
     "id": "is_nan",
     "summary": "Value is not a number",
-    "description": "Checks whether the specified value `x` is not a number. Returns `true` for numeric values (integers and floating point numbers), except for the special value `NaN` as defined by the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935). All non-numeric data types MUST also return `true`, including arrays that contain `NaN` values.",
+    "description": "Checks whether the specified value `x` is not a number. Returns `true` for numeric values (integers and floating-point numbers), except for the special value `NaN` as defined by the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935). All non-numeric data types MUST also return `true`, including arrays that contain `NaN` values.",
     "categories": [
       "comparison",
       "math > constants"
@@ -4872,7 +4872,7 @@
   {
     "id": "is_valid",
     "summary": "Value is valid data",
-    "description": "Checks whether the specified value `x` is valid. The following values are considered valid:\n\n* Any finite numerical value (integers and floating point numbers). The definition of finite numbers follows the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) and excludes the special value `NaN` (not a number).\n* Any other value that is not a no-data value according to ``is_nodata()`. Thus all arrays, objects and strings are valid, regardless of their content.",
+    "description": "Checks whether the specified value `x` is valid. The following values are considered valid:\n\n* Any finite numerical value (integers and floating-point numbers). The definition of finite numbers follows the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) and excludes the special value `NaN` (not a number).\n* Any other value that is not a no-data value according to ``is_nodata()`. Thus all arrays, objects and strings are valid, regardless of their content.",
     "categories": [
       "comparison"
     ],
@@ -5177,7 +5177,7 @@
   {
     "id": "ln",
     "summary": "Natural logarithm",
-    "description": "The natural logarithm is the logarithm to the base *e* of the number `x`, which equals to using the *log* process with the base set to *e*. The natural logarithm is the inverse function of taking *e* to the power x.\n\nThe no-data value `null` is passed through.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, `ln(0)` results in ±infinity if the processing environment supports it or otherwise an error is thrown.",
+    "description": "The natural logarithm is the logarithm to the base *e* of the number `x`, which equals to using the *log* process with the base set to *e*. The natural logarithm is the inverse function of taking *e* to the power x.\n\nThe no-data value `null` is passed through.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, `ln(0)` results in ±infinity if the processing environment supports it or otherwise an exception is thrown.",
     "categories": [
       "math > exponential & logarithmic"
     ],
@@ -5244,7 +5244,7 @@
   {
     "id": "load_collection",
     "summary": "Load a collection",
-    "description": "Loads a collection from the current back-end by its id and returns it as processable data cube. The data that is added to the data cube can be restricted with the additional `spatial_extent`, `temporal_extent`, `bands` and `properties`.\n\n**Remarks:**\n\n* The bands (and all dimensions that specify nominal dimension labels) are expected to be ordered as specified in the metadata if the `bands` parameter is set to `null`.\n* If no additional parameter is specified this would imply that the whole data set is expected to be loaded. Due to the large size of many data sets this is not recommended and may be optimized by back-ends to only load the data that is actually required after evaluating subsequent processes such as filters. This means that the pixel values should be processed only after the data has been limited to the required extents and as a consequence also to a manageable size.",
+    "description": "Loads a collection from the current back-end by its id and returns it as a processable data cube. The data that is added to the data cube can be restricted with the additional `spatial_extent`, `temporal_extent`, `bands` and `properties`.\n\n**Remarks:**\n\n* The bands (and all dimensions that specify nominal dimension labels) are expected to be ordered as specified in the metadata if the `bands` parameter is set to `null`.\n* If no additional parameter is specified this would imply that the whole data set is expected to be loaded. Due to the large size of many data sets, this is not recommended and may be optimized by back-ends to only load the data that is actually required after evaluating subsequent processes such as filters. This means that the pixel values should be processed only after the data has been limited to the required extent and as a consequence also to a manageable size.",
     "categories": [
       "cubes",
       "import"
@@ -5399,7 +5399,7 @@
       },
       {
         "name": "bands",
-        "description": "Only adds the specified bands into the data cube so that bands that don't match the list of band names are not available. Applies to all dimensions of type `bands`.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If unique band name and common name conflict, the unique band name has higher priority.\n\nThe order of the specified array defines the order of the bands in the data cube. f multiple bands match a common name, all matched bands are included in the original order.",
+        "description": "Only adds the specified bands into the data cube so that bands that don't match the list of band names are not available. Applies to all dimensions of type `bands`.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If the unique band name and the common name conflict, the unique band name has a higher priority.\n\nThe order of the specified array defines the order of the bands in the data cube. f multiple bands match a common name, all matched bands are included in the original order.",
         "schema": [
           {
             "type": "array",
@@ -5544,7 +5544,7 @@
   {
     "id": "log",
     "summary": "Logarithm to a base",
-    "description": "Logarithm to the base `base` of the number `x` is defined to be the inverse function of taking b to the power of x.\n\nThe no-data value `null` is passed through and therefore gets propagated if any of the arguments is `null`.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, `log(0, 2)` results in ±infinity if the processing environment supports it or otherwise an error is thrown.",
+    "description": "Logarithm to the base `base` of the number `x` is defined to be the inverse function of taking b to the power of x.\n\nThe no-data value `null` is passed through and therefore gets propagated if any of the arguments is `null`.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, `log(0, 2)` results in ±infinity if the processing environment supports it or otherwise an exception is thrown.",
     "categories": [
       "math > exponential & logarithmic"
     ],
@@ -5865,7 +5865,7 @@
   {
     "id": "mask_polygon",
     "summary": "Apply a polygon mask",
-    "description": "Applies a polygon mask to a raster data cube. To apply a raster mask use ``mask()``.\n\nAll pixels for which the point at the pixel center **does not** intersect with any polygon (as defined in the Simple Features standard by the OGC) are replaced. This behaviour can be inverted by setting the parameter `inside` to `true`.\n\nThe pixel values are replaced with the value specified for `replacement`, which defaults to `null` (no data). No data values in `data` will be left untouched by the masking operation.",
+    "description": "Applies a polygon mask to a raster data cube. To apply a raster mask use ``mask()``.\n\nAll pixels for which the point at the pixel center **does not** intersect with any polygon (as defined in the Simple Features standard by the OGC) are replaced. This behavior can be inverted by setting the parameter `inside` to `true`.\n\nThe pixel values are replaced with the value specified for `replacement`, which defaults to `null` (no data). No data values in `data` will be left untouched by the masking operation.",
     "categories": [
       "cubes",
       "masks"
@@ -5935,7 +5935,7 @@
   {
     "id": "mask",
     "summary": "Apply a raster mask",
-    "description": "Applies a mask to a raster data cube. To apply a vector mask use ``mask_polygon()``.\n\nA mask is a raster data cube for which corresponding pixels among `data` and `mask` are compared and those pixels in `data` are replaced whose pixels in `mask` are non-zero (for numbers) or `true` (for boolean values). The pixel values are replaced with the value specified for `replacement`, which defaults to `null` (no data).\n\nThe data cubes have to be compatible so that each dimension in mask must also be available in the raster data cube with the same name, type, reference system, resolution and labels. Dimensions can be missing in the mask with the result that the mask is applied for each label of the missing dimension in the data cube. The process fails if there's an incompatibility found between the raster data cube and the mask.",
+    "description": "Applies a mask to a raster data cube. To apply a vector mask use ``mask_polygon()``.\n\nA mask is a raster data cube for which corresponding pixels among `data` and `mask` are compared and those pixels in `data` are replaced whose pixels in `mask` are non-zero (for numbers) or `true` (for boolean values). The pixel values are replaced with the value specified for `replacement`, which defaults to `null` (no data).\n\nThe data cubes have to be compatible so that each dimension in the mask must also be available in the raster data cube with the same name, type, reference system, resolution and labels. Dimensions can be missing in the mask with the result that the mask is applied for each label of the missing dimension in the data cube. The process fails if there's an incompatibility found between the raster data cube and the mask.",
     "categories": [
       "masks"
     ],
@@ -5950,7 +5950,7 @@
       },
       {
         "name": "mask",
-        "description": "A mask as raster data cube. Every pixel in `data` must have a corresponding element in `mask`.",
+        "description": "A mask as a raster data cube. Every pixel in `data` must have a corresponding element in `mask`.",
         "schema": {
           "type": "object",
           "subtype": "raster-cube"
@@ -5982,7 +5982,7 @@
   {
     "id": "max",
     "summary": "Maximum value",
-    "description": "Computes the largest value of an array of numbers, which is is equal to the first element of a sorted (i.e., ordered) version the array.\n\nAn array without non-`null` elements resolves always with `null`.",
+    "description": "Computes the largest value of an array of numbers, which is equal to the first element of a sorted (i.e., ordered) version of the array.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
       "math",
       "reducer"
@@ -6241,7 +6241,7 @@
   {
     "id": "median",
     "summary": "Statistical median",
-    "description": "The statistical median of an array of numbers is the value separating the higher half from the lower half of the data.\n\nAn array without non-`null` elements resolves always with `null`.\n\n**Remarks:**\n\n* For a symmetric arrays, the result is equal to the ``mean()``.\n* The median can also be calculated by computing the ``quantiles()`` with a probability of *0.5*.",
+    "description": "The statistical median of an array of numbers is the value separating the higher half from the lower half of the data.\n\nAn array without non-`null` elements resolves always with `null`.\n\n**Remarks:**\n\n* For symmetric arrays, the result is equal to the ``mean()``.\n* The median can also be calculated by computing the ``quantiles()`` with a probability of *0.5*.",
     "categories": [
       "math",
       "reducer"
@@ -6483,7 +6483,7 @@
   {
     "id": "min",
     "summary": "Minimum value",
-    "description": "Computes the smallest value of an array of numbers, which is is equal to the last element of a sorted (i.e., ordered) version the array.\n\nAn array without non-`null` elements resolves always with `null`.",
+    "description": "Computes the smallest value of an array of numbers, which is equal to the last element of a sorted (i.e., ordered) version of the array.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
       "math",
       "reducer"
@@ -6575,14 +6575,14 @@
   {
     "id": "mod",
     "summary": "Modulo",
-    "description": "Remainder after division of `x` by `y` for both integers and floating-point numbers.\n\nThe result of a modulo operation has the sign of the divisor. The handling regarding the sign of the result [differs between programming languages](https://en.wikipedia.org/wiki/Modulo_operation#In_programming_languages) and needs careful consideration to avoid unexpected results.\n\nThe no-data value `null` is passed through and therefore gets propagated if any of the arguments is `null`. A modulo by zero results in ±infinity if the processing environment supports it. Otherwise a `DivisionByZero` error must the thrown.",
+    "description": "Remainder after a division of `x` by `y` for both integers and floating-point numbers.\n\nThe result of a modulo operation has the sign of the divisor. The handling regarding the sign of the result [differs between programming languages](https://en.wikipedia.org/wiki/Modulo_operation#In_programming_languages) and needs careful consideration to avoid unexpected results.\n\nThe no-data value `null` is passed through and therefore gets propagated if any of the arguments is `null`. A modulo by zero results in ±infinity if the processing environment supports it. Otherwise, a `DivisionByZero` exception must the thrown.",
     "categories": [
       "math"
     ],
     "parameters": [
       {
         "name": "x",
-        "description": "A number to be used as dividend.",
+        "description": "A number to be used as the dividend.",
         "schema": {
           "type": [
             "number",
@@ -6592,7 +6592,7 @@
       },
       {
         "name": "y",
-        "description": "A number to be used as divisor.",
+        "description": "A number to be used as the divisor.",
         "schema": {
           "type": [
             "number",
@@ -6766,7 +6766,7 @@
   {
     "id": "ndvi",
     "summary": "Normalized Difference Vegetation Index",
-    "description": "Computes the Normalized Difference Vegetation Index (NDVI). The NDVI is computed as *(nir - red) / (nir + red)*.\n\nThe `data` parameter expects a raster data cube with a dimension of type `bands` or a `DimensionAmbiguous` error is thrown otherwise. By default, the dimension must have at least two bands with the common names `red` and `nir` assigned or the user need to specify the parameters `nir` and `red`. Otherwise either the error `NirBandAmbiguous` or `RedBandAmbiguous` is thrown. The common names for each band are specified in the collection's band metadata and are *not* equal to the band names.\n\nBy default, the dimension of type `bands` is dropped by this process. To keep the dimension specify a new band name in the parameter `target_band`. This adds a new dimension label with the specified name to the dimension, which can be used to access the computed values. If a band with the specified name exists, a `BandExists` is thrown.\n\nThis process is very similar to the process ``normalized_difference()``, but determines the bands automatically based on the common names (`red`/`nir`) specified in the metadata.",
+    "description": "Computes the Normalized Difference Vegetation Index (NDVI). The NDVI is computed as *(nir - red) / (nir + red)*.\n\nThe `data` parameter expects a raster data cube with a dimension of type `bands` or a `DimensionAmbiguous` exception is thrown otherwise. By default, the dimension must have at least two bands with the common names `red` and `nir` assigned. Otherwise, the user has to specify the parameters `nir` and `red`. If neither is the case, either the exception `NirBandAmbiguous` or `RedBandAmbiguous` is thrown. The common names for each band are specified in the collection's band metadata and are *not* equal to the band names.\n\nBy default, the dimension of type `bands` is dropped by this process. To keep the dimension specify a new band name in the parameter `target_band`. This adds a new dimension label with the specified name to the dimension, which can be used to access the computed values. If a band with the specified name exists, a `BandExists` is thrown.\n\nThis process is very similar to the process ``normalized_difference()``, but determines the bands automatically based on the common names (`red`/`nir`) specified in the metadata.",
     "categories": [
       "math > indices",
       "vegetation indices"
@@ -6782,7 +6782,7 @@
       },
       {
         "name": "nir",
-        "description": "The name of the NIR band. Defaults to the band that has the common name `nir` assigned.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If unique band name and common name conflict, the unique band name has higher priority.",
+        "description": "The name of the NIR band. Defaults to the band that has the common name `nir` assigned.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If the unique band name and the common name conflict, the unique band name has a higher priority.",
         "schema": {
           "type": "string",
           "subtype": "band-name"
@@ -6792,7 +6792,7 @@
       },
       {
         "name": "red",
-        "description": "The name of the red band. Defaults to the band that has the common name `red` assigned.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If unique band name and common name conflict, the unique band name has higher priority.",
+        "description": "The name of the red band. Defaults to the band that has the common name `red` assigned.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If the unique band name and the common name conflict, the unique band name has a higher priority.",
         "schema": {
           "type": "string",
           "subtype": "band-name"
@@ -6817,7 +6817,7 @@
       }
     ],
     "returns": {
-      "description": "A raster data cube containing the computed NDVI values. The structure of the data cube differs depending on the value passed to `target_band`:\n\n* `target_band` is `null`: The data cube does not contain the dimension of type `bands` any more, the number of dimensions decreases by one. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.\n* `target_band` is a string: The data cube keeps the same dimensions. The dimension properties remain unchanged, but the number of dimension labels for the dimension of type `bands` increases by one. The additional label is named as specified in `target_band`.",
+      "description": "A raster data cube containing the computed NDVI values. The structure of the data cube differs depending on the value passed to `target_band`:\n\n* `target_band` is `null`: The data cube does not contain the dimension of type `bands` anymore, the number of dimensions decreases by one. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.\n* `target_band` is a string: The data cube keeps the same dimensions. The dimension properties remain unchanged, but the number of dimension labels for the dimension of type `bands` increases by one. The additional label is named as specified in `target_band`.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -6825,10 +6825,10 @@
     },
     "exceptions": {
       "NirBandAmbiguous": {
-        "message": "The NIR band can't be resolved, please specify a band name."
+        "message": "The NIR band can't be resolved, please specify the specific NIR band name."
       },
       "RedBandAmbiguous": {
-        "message": "The red band can't be resolved, please specify a band name."
+        "message": "The red band can't be resolved, please specify the specific red band name."
       },
       "DimensionAmbiguous": {
         "message": "dimension of type `bands` is not available or is ambiguous.."
@@ -6858,7 +6858,7 @@
   {
     "id": "neq",
     "summary": "Not equal to comparison",
-    "description": "Compares whether `x` is *not* strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly, for example a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`. Therefore, `neq(null, null)` returns `null` instead of `false`.\n* If any operand is an array or object, the return value is `false`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings MUST be compared differently than other strings and MUST NOT be compared based on their string representation due to different possible representations. For example, the UTC time zone representation `Z` has the same meaning as `+00:00`.",
+    "description": "Compares whether `x` is *not* strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`. Therefore, `neq(null, null)` returns `null` instead of `false`.\n* If any operand is an array or object, the return value is `false`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings MUST be compared differently than other strings and MUST NOT be compared based on their string representation due to different possible representations. For example, the time zone representation `Z` (for UTC) has the same meaning as `+00:00`.",
     "categories": [
       "texts",
       "comparison"
@@ -6880,7 +6880,7 @@
       },
       {
         "name": "delta",
-        "description": "Only applicable for comparing two numbers. If this optional parameter is set to a positive non-zero number the non-equality of two numbers is checked against a delta value. This is especially useful to circumvent problems with floating point inaccuracy in machine-based computation.\n\nThis option is basically an alias for the following computation: `gt(abs(minus([x, y]), delta)`",
+        "description": "Only applicable for comparing two numbers. If this optional parameter is set to a positive non-zero number the non-equality of two numbers is checked against a delta value. This is especially useful to circumvent problems with floating-point inaccuracy in machine-based computation.\n\nThis option is basically an alias for the following computation: `gt(abs(minus([x, y]), delta)`",
         "schema": {
           "type": [
             "number",
@@ -7284,7 +7284,7 @@
   {
     "id": "order",
     "summary": "Create a permutation",
-    "description": "Computes a permutation which allows rearranging the data into ascending or descending order. In other words, this process computes the ranked (sorted) element positions in the original list.\n\n**Remarks:**\n\n* The positions in the result are zero-based.\n* Ties will be left in their original ordering.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
+    "description": "Computes a permutation which allows rearranging the data into ascending or descending order. In other words, this process computes the ranked (sorted) element positions in the original list.\n\n**Remarks:**\n\n* The positions in the result are zero-based.\n* Ties will be left in their original ordering.\n* Temporal strings can *not* be compared based on their string representation due to the time zone/time-offset representations.",
     "categories": [
       "arrays",
       "sorting"
@@ -7333,7 +7333,7 @@
       },
       {
         "name": "nodata",
-        "description": "Controls the handling of no-data values (`null`). By default they are removed. If `true`, missing values in the data are put last; if `false`, they are put first.",
+        "description": "Controls the handling of no-data values (`null`). By default, they are removed. If set to `true`, missing values in the data are put last; if set to `false`, they are put first.",
         "schema": {
           "type": [
             "boolean",
@@ -7719,7 +7719,7 @@
   {
     "id": "aggregate_spatial_binary",
     "summary": "Zonal statistics for geometries by binary aggregation",
-    "description": "Aggregates statistics for one or more geometries (e.g. zonal statistics for polygons) over the spatial dimensions. This process consecutively passes a pair of values to the reducer. This may be better suited especially for UDFs in case the number of values gets too large to be processed at once. In contrast, ``aggregate_spatial()`` passes a list of values.\n\n- For **polygons**, the process considers all pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n- For **points**, the process considers the closest pixel center.\n- For **lines** (line strings), the process considers all the pixels whose centers are closest to at least one point on the line.\n\nThe data cube must have been reduced to only contain two raster dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise this process fails with the `TooManyDimensions` error.\n\nThe number of total and valid pixels is returned together with the calculated values.",
+    "description": "Aggregates statistics for one or more geometries (e.g. zonal statistics for polygons) over the spatial dimensions. This process consecutively passes a pair of values to the reducer. This may be better suited especially for UDFs in case the number of values gets too large to be processed at once. In contrast, ``aggregate_spatial()`` passes a list of values.\n\n- For **polygons**, the process considers all pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n- For **points**, the process considers the closest pixel center.\n- For **lines** (line strings), the process considers all the pixels whose centers are closest to at least one point on the line.\n\nThe data cube must have been reduced to only contain two raster dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise, this process fails with the `TooManyDimensions` exception.\n\nThe number of total and valid pixels is returned together with the calculated values.",
     "categories": [
       "cubes",
       "aggregate & resample"
@@ -7801,7 +7801,7 @@
       }
     ],
     "returns": {
-      "description": "A vector data cube with the computed results and restricted to the bounds of the geometries.\n\nThe computed value is used for the dimension with the name that was specified in the parameter `target_dimension`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) for each geometry. These values are added as new dimension with a dimension name derived from `target_dimension` by adding the suffix `_meta`. The new dimension has the dimension labels `total_count` and `valid_count`.",
+      "description": "A vector data cube with the computed results and restricted to the bounds of the geometries.\n\nThe computed value is used for the dimension with the name that was specified in the parameter `target_dimension`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) for each geometry. These values are added as a new dimension with a dimension name derived from `target_dimension` by adding the suffix `_meta`. The new dimension has the dimension labels `total_count` and `valid_count`.",
       "schema": {
         "type": "object",
         "subtype": "vector-cube"
@@ -7833,7 +7833,7 @@
   {
     "id": "aggregate_spatial_window",
     "summary": "Zonal statistics for rectangular windows",
-    "description": "Aggregates statistics over the horizontal spatial dimensions (axes `x` and `y`) of the data cube.\n\nThe pixel grid for the axes `x` and `y` is divided into non-overlapping windows with the size specified in the parameter `size`. If the number of values for the axes `x` and `y` is not a multiple of the corresponding window size, the behaviour specified in the parameters `boundary` and `align` is applied.\nFor each of these windows, the reducer process computes the result.",
+    "description": "Aggregates statistics over the horizontal spatial dimensions (axes `x` and `y`) of the data cube.\n\nThe pixel grid for the axes `x` and `y` is divided into non-overlapping windows with the size specified in the parameter `size`. If the number of values for the axes `x` and `y` is not a multiple of the corresponding window size, the behavior specified in the parameters `boundary` and `align` is applied.\nFor each of these windows, the reducer process computes the result.",
     "categories": [
       "cubes",
       "aggregate & resample"
@@ -7885,7 +7885,7 @@
       },
       {
         "name": "size",
-        "description": "Window sizes in pixels along the horizontal spatial dimensions.\n\nThe first value corresponds to the `x` axis, the second values corresponds to the `y` axis.",
+        "description": "Window size in pixels along the horizontal spatial dimensions.\n\nThe first value corresponds to the `x` axis, the second value corresponds to the `y` axis.",
         "schema": {
           "type": "array",
           "minItems": 2,
@@ -7898,7 +7898,7 @@
       },
       {
         "name": "boundary",
-        "description": "Behaviour to apply if the number of values for the axes `x` and `y` is not a multiple of the corresponding value in the `size` parameter. Options are:\n\n- `pad` (default): pad the data cube with the no-data value `null` to fit the required window size.\n\n- `trim`: trim the data cube to fit the required window size.\n\nSet the parameter `align` to specifies to which corner the data is aligned to.",
+        "description": "Behavior to apply if the number of values for the axes `x` and `y` is not a multiple of the corresponding value in the `size` parameter. Options are:\n\n- `pad` (default): pad the data cube with the no-data value `null` to fit the required window size.\n\n- `trim`: trim the data cube to fit the required window size.\n\nSet the parameter `align` to specifies to which corner the data is aligned to.",
         "schema": {
           "type": "string",
           "enum": [
@@ -7945,7 +7945,7 @@
   {
     "id": "cummax",
     "summary": "Cumulative maxima",
-    "description": "Finds cumulative maxima of an array of numbers. Every computed element is equal to the bigger one between current element and the previously computed element. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `true` makes that once a no-data value / `null` is reached all following elements are set to `null` in the result.",
+    "description": "Finds cumulative maxima of an array of numbers. Every computed element is equal to the bigger one between the current element and the previously computed element. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `true` makes that once a no-data value (`null`) is reached all following elements are set to `null` in the result.",
     "categories": [
       "math > cumulative"
     ],
@@ -7966,7 +7966,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
+        "description": "Indicates whether no-data values are ignored or not and ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
         "schema": {
           "type": "boolean"
         },
@@ -8047,7 +8047,7 @@
   {
     "id": "cummin",
     "summary": "Cumulative minima",
-    "description": "Finds cumulative minima of an array of numbers. Every computed element is equal to the smaller one between current element and the previously computed element. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `true` makes that once a no-data value / `null` is reached all following elements are set to `null` in the result.",
+    "description": "Finds cumulative minima of an array of numbers. Every computed element is equal to the smaller one between the current element and the previously computed element. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `true` makes that once a no-data value (`null`) is reached all following elements are set to `null` in the result.",
     "categories": [
       "math > cumulative"
     ],
@@ -8068,7 +8068,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
+        "description": "Indicates whether no-data values are ignored or not and ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
         "schema": {
           "type": "boolean"
         },
@@ -8149,7 +8149,7 @@
   {
     "id": "cumproduct",
     "summary": "Cumulative products",
-    "description": "Computes cumulative products of an array of numbers. Every computed element is equal to the product of current and all previous values. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `true` makes that once a no-data value / `null` is reached all following elements are set to `null` in the result.",
+    "description": "Computes cumulative products of an array of numbers. Every computed element is equal to the product of the current and all previous values. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `true` makes that once a no-data value (`null`) is reached all following elements are set to `null` in the result.",
     "categories": [
       "math > cumulative"
     ],
@@ -8170,7 +8170,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
+        "description": "Indicates whether no-data values are ignored or not and ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
         "schema": {
           "type": "boolean"
         },
@@ -8255,7 +8255,7 @@
   {
     "id": "cumsum",
     "summary": "Cumulative sums",
-    "description": "Computes cumulative sums of an array of numbers. Every computed element is equal to the sum of current and all previous values. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `true` makes that once a no-data value / `null` is reached all following elements are set to `null` in the result.",
+    "description": "Computes cumulative sums of an array of numbers. Every computed element is equal to the sum of current and all previous values. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `true` makes that once a no-data value (`null`) is reached all following elements are set to `null` in the result.",
     "categories": [
       "math > cumulative"
     ],
@@ -8276,7 +8276,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
+        "description": "Indicates whether no-data values are ignored or not and ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
         "schema": {
           "type": "boolean"
         },
@@ -8468,7 +8468,7 @@
       },
       {
         "name": "dimension",
-        "description": "The name of the dimension to filter on. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+        "description": "The name of the dimension to filter on. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
         "schema": {
           "type": "string"
         }
@@ -8556,7 +8556,7 @@
   {
     "id": "load_result",
     "summary": "Load batch job results",
-    "description": "Loads batch job results by job id from the local user workspace / data store. The job must have been stored by the authenticated user on the back-end currently connected to.",
+    "description": "Loads batch job results by job id from the local user workspace/datastore. The job must have been stored by the authenticated user on the back-end currently connected to.",
     "categories": [
       "cubes",
       "import"
@@ -8584,7 +8584,7 @@
   {
     "id": "load_uploaded_files",
     "summary": "Load files from the user workspace",
-    "description": "Loads one or more user-uploaded files from the local user workspace / data store and returns them as a single data cube. The files must have been stored by the authenticated user on the back-end currently connected to.",
+    "description": "Loads one or more user-uploaded files from the local user workspace/datastore and returns them as a single data cube. The files must have been stored by the authenticated user on the back-end currently connected to.",
     "categories": [
       "cubes",
       "import"
@@ -8593,7 +8593,7 @@
     "parameters": [
       {
         "name": "paths",
-        "description": "The files to read. Folders can't be specified, instead specify all files. An error is thrown if a file can't be read.",
+        "description": "The files to read. Folders can't be specified, specify all files instead. An exception is thrown if a file can't be read.",
         "schema": {
           "type": "array",
           "subtype": "file-paths",
@@ -8722,7 +8722,7 @@
       },
       {
         "name": "dimension",
-        "description": "The name of the dimension over which to reduce. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+        "description": "The name of the dimension over which to reduce. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
         "schema": {
           "type": "string"
         }
@@ -8821,7 +8821,7 @@
       },
       {
         "name": "dimension",
-        "description": "The name of the temporal dimension to resample, which must exist with this name in both data cubes. If the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` error if it has more dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+        "description": "The name of the temporal dimension to resample, which must exist with this name in both data cubes. If the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` exception if it has more dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
         "schema": {
           "type": [
             "string",
@@ -8842,7 +8842,7 @@
       }
     ],
     "returns": {
-      "description": "A raster data cube with the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-temporal dimensions. For the temporal dimension the name and type remain unchanged, but the reference system changes and the labels and resolution may change.",
+      "description": "A raster data cube with the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-temporal dimensions. For the temporal dimension, the name and type remain unchanged, but the reference system changes and the labels and resolution may change.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -8867,7 +8867,7 @@
   {
     "id": "run_udf_externally",
     "summary": "Run an externally hosted UDF container",
-    "description": "Runs a compatible UDF container that is either externally hosted by a service provider or running on a local machine of the user. The UDF container must follow the [openEO UDF specification](https://openeo.org/documentation/1.0/udfs.html).\n\nThe referenced UDF service can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
+    "description": "Runs a compatible UDF container that is either externally hosted by a service provider or running on a local machine of the user. The UDF container must follow the [openEO UDF specification](https://openeo.org/documentation/1.0/udfs.html).\n\nThe referenced UDF service can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case, an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
     "categories": [
       "cubes",
       "import",
@@ -8877,7 +8877,7 @@
     "parameters": [
       {
         "name": "data",
-        "description": "The data to be passed to the UDF as array or raster data cube.",
+        "description": "The data to be passed to the UDF as an array or raster data cube.",
         "schema": [
           {
             "title": "Raster data cube",
@@ -8918,7 +8918,7 @@
       }
     ],
     "returns": {
-      "description": "The data processed by the UDF service.\n\n* Returns a raster data cube, if a raster data cube is passed for `data`. Details on the dimensions and dimension properties (name, type, labels, reference system and resolution) depend on the UDF.\n* If an array is passed for `data`, the returned value can be of any data type, but is exactly what the UDF returns.",
+      "description": "The data processed by the UDF service.\n\n* Returns a raster data cube if a raster data cube is passed for `data`. Details on the dimensions and dimension properties (name, type, labels, reference system and resolution) depend on the UDF.\n* If an array is passed for `data`, the returned value can be of any data type, but is exactly what the UDF returns.",
       "schema": [
         {
           "title": "Raster data cube",
@@ -8947,7 +8947,7 @@
   {
     "id": "quantiles",
     "summary": "Quantiles",
-    "description": "Calculates quantiles, which are cut points dividing the range of a probability distribution into either\n\n* intervals corresponding to the given `probabilities` or\n* (nearly) equal-sized intervals (q-quantiles based on the parameter `q`).\n\nEither the parameter `probabilites` or `q` must be specified, otherwise the `QuantilesParameterMissing` exception is thrown. If both parameters are set the `QuantilesParameterConflict` exception is thrown.",
+    "description": "Calculates quantiles, which are cut points dividing the range of a probability distribution into either\n\n* intervals corresponding to the given `probabilities` or\n* (nearly) equal-sized intervals (q-quantiles based on the parameter `q`).\n\nEither the parameter `probabilities` or `q` must be specified, otherwise the `QuantilesParameterMissing` exception is thrown. If both parameters are set the `QuantilesParameterConflict` exception is thrown.",
     "categories": [
       "math"
     ],
@@ -8980,7 +8980,7 @@
       },
       {
         "name": "q",
-        "description": "A number of intervals to calculate quantiles for. Calculates q-quantiles with (nearly) equal-sized intervals.",
+        "description": "Intervals to calculate quantiles for. Calculates q-quantiles with (nearly) equal-sized intervals.",
         "schema": {
           "type": "integer",
           "minimum": 2
@@ -8998,7 +8998,7 @@
       }
     ],
     "returns": {
-      "description": "An array with the computed quantiles. The list has either\n\n* as many elements as the given list of `probabilities` had or\n* *`q`-1* elements.\n\nIf the input array is empty the resulting array is filled with as many `null` values as required according to the list above. For an example, see the 'Empty array example'.",
+      "description": "An array with the computed quantiles. The list has either\n\n* as many elements as the given list of `probabilities` had or\n* *`q`-1* elements.\n\nIf the input array is empty the resulting array is filled with as many `null` values as required according to the list above. See the 'Empty array' example for an example.",
       "schema": {
         "type": "array",
         "items": {
@@ -9100,7 +9100,7 @@
         ]
       },
       {
-        "title": "Empty array example",
+        "title": "Empty array",
         "arguments": {
           "data": [],
           "probabilities": [
@@ -9289,7 +9289,7 @@
       },
       {
         "name": "dimension",
-        "description": "The name of the dimension over which to reduce. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+        "description": "The name of the dimension over which to reduce. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
         "schema": {
           "type": "string"
         }
@@ -9335,14 +9335,14 @@
       },
       {
         "name": "source",
-        "description": "The current name of the dimension. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+        "description": "The current name of the dimension. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
         "schema": {
           "type": "string"
         }
       },
       {
         "name": "target",
-        "description": "A new Name for the dimension. Fails with a `DimensionExists` error if a dimension with the specified name exists.",
+        "description": "A new Name for the dimension. Fails with a `DimensionExists` exception if a dimension with the specified name exists.",
         "schema": {
           "type": "string"
         }
@@ -9367,7 +9367,7 @@
   {
     "id": "rename_labels",
     "summary": "Rename dimension labels",
-    "description": "Renames the labels of the specified dimension in the data cube from `source` to `target`.\n\nIf the array for the source labels is empty (the default), the dimension labels are expected to be enumerated with zero-based numbering (0,1,2,3,...) so that the dimension labels directly map to the indices of the array specified for the parameter `target`. If the dimension labels are not enumerated and the `target` parameter is not specified, a `LabelsNotEnumerated` is thrown. The number of source and target labels must be equal, otherwise the error `LabelMismatch` is thrown.\n\nThis process doesn't change the order of the labels and their corresponding data.",
+    "description": "Renames the labels of the specified dimension in the data cube from `source` to `target`.\n\nIf the array for the source labels is empty (the default), the dimension labels are expected to be enumerated with zero-based numbering (0,1,2,3,...) so that the dimension labels directly map to the indices of the array specified for the parameter `target`. If the dimension labels are not enumerated and the `target` parameter is not specified, the `LabelsNotEnumerated` exception is thrown. The number of the source and target labels must be equal. Otherwise, the exception `LabelMismatch` is thrown.\n\nThis process doesn't change the order of the labels and their corresponding data.",
     "categories": [
       "cubes"
     ],
@@ -9389,7 +9389,7 @@
       },
       {
         "name": "target",
-        "description": "The new names for the labels. The dimension labels in the data cube are expected to be enumerated, if the parameter `target` is not specified. If a target dimension label already exists in the data cube, a `LabelExists` error is thrown.",
+        "description": "The new names for the labels. The dimension labels in the data cube are expected to be enumerated if the parameter `target` is not specified. If a target dimension label already exists in the data cube, a `LabelExists` exception is thrown.",
         "schema": {
           "type": "array",
           "items": {
@@ -9406,7 +9406,7 @@
       },
       {
         "name": "source",
-        "description": "The names of the labels as they are currently in the data cube. The array defines an unsorted and potentially incomplete list of labels that should be renamed to the names available in the corresponding array elements in the parameter `target`. If one of the source dimension labels doesn't exist, a `LabelNotAvailable` error is thrown. By default, the array is empty so that the dimension labels in the data cube are expected to be enumerated.",
+        "description": "The names of the labels as they are currently in the data cube. The array defines an unsorted and potentially incomplete list of labels that should be renamed to the names available in the corresponding array elements in the parameter `target`. If one of the source dimension labels doesn't exist, the `LabelNotAvailable` exception is thrown. By default, the array is empty so that the dimension labels in the data cube are expected to be enumerated.",
         "schema": {
           "type": "array",
           "items": {
@@ -9562,7 +9562,7 @@
         "description": "Resamples the data cube to the target resolution, which can be specified either as separate values for x and y or as a single value for both axes. Specified in the units of the target projection. Doesn't change the resolution by default (`0`).",
         "schema": [
           {
-            "description": "A single number used as resolution for both x and y.",
+            "description": "A single number used as the resolution for both x and y.",
             "type": "number",
             "minimum": 0
           },
@@ -9679,7 +9679,7 @@
   {
     "id": "round",
     "summary": "Round to a specified precision",
-    "description": "Rounds a real number `x` to specified precision `p`.\n\nIf the fractional part of `x` is halfway between two integers, one of which is even and the other odd, then the even number is returned.\nThis behaviour follows [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229). This kind of rounding is also called \"round to nearest (even)\" or \"banker's rounding\". It minimizes rounding errors that result from consistently rounding a midpoint value in a single direction.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Rounds a real number `x` to specified precision `p`.\n\nIf the fractional part of `x` is halfway between two integers, one of which is even and the other odd, then the even number is returned.\nThis behavior follows [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229). This kind of rounding is also called \"round to nearest (even)\" or \"banker's rounding\". It minimizes rounding errors that result from consistently rounding a midpoint value in a single direction.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "math > rounding"
     ],
@@ -9769,8 +9769,8 @@
   },
   {
     "id": "run_udf",
-    "summary": "Run an UDF",
-    "description": "Runs an UDF in one of the supported runtime environments.\n\nThe process can either:\n\n1. load and run a locally stored UDF from a file in the workspace of the authenticated user. The path to the UDF file must be relative to the root directory of the user's workspace.\n2. fetch and run a remotely stored and published UDF by absolute URI, for example from [openEO Hub](https://hub.openeo.org)).\n3. run the source code specified inline as string.\n\nThe loaded UDF can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
+    "summary": "Run a UDF",
+    "description": "Runs a UDF in one of the supported runtime environments.\n\nThe process can either:\n\n1. load and run a locally stored UDF from a file in the workspace of the authenticated user. The path to the UDF file must be relative to the root directory of the user's workspace.\n2. fetch and run a remotely stored and published UDF by absolute URI, for example from [openEO Hub](https://hub.openeo.org)).\n3. run the source code specified inline as string.\n\nThe loaded UDF can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case, an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
     "categories": [
       "cubes",
       "import",
@@ -9779,7 +9779,7 @@
     "parameters": [
       {
         "name": "data",
-        "description": "The data to be passed to the UDF as array or raster data cube.",
+        "description": "The data to be passed to the UDF as an array or raster data cube.",
         "schema": [
           {
             "title": "Raster data cube",
@@ -9802,16 +9802,16 @@
       },
       {
         "name": "udf",
-        "description": "Either source code, an absolute URL or a path to an UDF script.",
+        "description": "Either source code, an absolute URL or a path to a UDF script.",
         "schema": [
           {
-            "description": "URI to an UDF",
+            "description": "URI to a UDF",
             "type": "string",
             "format": "uri",
             "subtype": "uri"
           },
           {
-            "description": "Path to an UDF uploaded to the server.",
+            "description": "Path to a UDF uploaded to the server.",
             "type": "string",
             "subtype": "file-path"
           },
@@ -9824,7 +9824,7 @@
       },
       {
         "name": "runtime",
-        "description": "An UDF runtime identifier available at the back-end.",
+        "description": "A UDF runtime identifier available at the back-end.",
         "schema": {
           "type": "string",
           "subtype": "udf-runtime"
@@ -9879,7 +9879,7 @@
   {
     "id": "save_result",
     "summary": "Save processed data to storage",
-    "description": "Saves processed data to the local user workspace / data store of the authenticated user. This process aims to be compatible to GDAL/OGR formats and options. STAC-compatible metadata should be stored with the processed data.\n\nCalling this process may be rejected by back-ends in the context of secondary web services.",
+    "description": "Saves processed data to the local user workspace/datastore of the authenticated user. This process aims to be compatible with GDAL/OGR formats and options. STAC-compatible metadata should be stored with the processed data.\n\nCalling this process may be rejected by back-ends in the context of secondary web services.",
     "categories": [
       "cubes",
       "export"
@@ -10244,7 +10244,7 @@
   {
     "id": "sort",
     "summary": "Sort data",
-    "description": "Sorts an array into ascending (default) or descending order.\n\n**Remarks:**\n\n* Ties will be left in their original ordering.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
+    "description": "Sorts an array into ascending (default) or descending order.\n\n**Remarks:**\n\n* Ties will be left in their original ordering.\n* Temporal strings can *not* be compared based on their string representation due to the time zone/time-offset representations.",
     "categories": [
       "arrays",
       "sorting"
@@ -10293,7 +10293,7 @@
       },
       {
         "name": "nodata",
-        "description": "Controls the handling of no-data values (`null`). By default they are removed. If `true`, missing values in the data are put last; if `false`, they are put first.",
+        "description": "Controls the handling of no-data values (`null`). By default, they are removed. If set to `true`, missing values in the data are put last; if set to `false`, they are put first.",
         "schema": {
           "type": [
             "boolean",
@@ -11049,8 +11049,8 @@
   },
   {
     "id": "text_merge",
-    "summary": "Concatenate elements to a string",
-    "description": "Merges string representations of a set of elements together to a single string, with the separator between each element.",
+    "summary": "Concatenate elements to a single text",
+    "description": "Merges text representations (also known as *string*) of a set of elements to a single text, having the separator between each element.",
     "categories": [
       "texts"
     ],

@@ -1,7 +1,7 @@
 {
     "id": "sort",
     "summary": "Sort data",
-    "description": "Sorts an array into ascending (default) or descending order.\n\n**Remarks:**\n\n* Ties will be left in their original ordering.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
+    "description": "Sorts an array into ascending (default) or descending order.\n\n**Remarks:**\n\n* Ties will be left in their original ordering.\n* Temporal strings can *not* be compared based on their string representation due to the time zone/time-offset representations.",
     "categories": [
         "arrays",
         "sorting"
@@ -50,7 +50,7 @@
         },
         {
             "name": "nodata",
-            "description": "Controls the handling of no-data values (`null`). By default they are removed. If `true`, missing values in the data are put last; if `false`, they are put first.",
+            "description": "Controls the handling of no-data values (`null`). By default, they are removed. If set to `true`, missing values in the data are put last; if set to `false`, they are put first.",
             "schema": {
                 "type": [
                     "boolean",

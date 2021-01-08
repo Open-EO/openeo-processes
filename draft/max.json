@@ -1,7 +1,7 @@
 {
     "id": "max",
     "summary": "Maximum value",
-    "description": "Computes the largest value of an array of numbers, which is is equal to the first element of a sorted (i.e., ordered) version the array.\n\nAn array without non-`null` elements resolves always with `null`.",
+    "description": "Computes the largest value of an array of numbers, which is equal to the first element of a sorted (i.e., ordered) version of the array.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
         "math",
         "reducer"

@@ -1,7 +1,7 @@
 {
     "id": "divide",
     "summary": "Division of two numbers",
-    "description": "Divides argument `x` by the argument `y` (*x / y*) and returns the computed result.\n\nNo-data values are taken into account so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, a division by zero results in ±infinity if the processing environment supports it. Otherwise a `DivisionByZero` error must the thrown.",
+    "description": "Divides argument `x` by the argument `y` (*x / y*) and returns the computed result.\n\nNo-data values are taken into account so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, a division by zero results in ±infinity if the processing environment supports it. Otherwise, a `DivisionByZero` exception must the thrown.",
     "categories": [
         "math"
     ],

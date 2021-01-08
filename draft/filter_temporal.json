@@ -61,7 +61,7 @@
         },
         {
             "name": "dimension",
-            "description": "The name of the temporal dimension to filter on. If no specific dimension is specified or it is set to `null`, the filter applies to all temporal dimensions. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+            "description": "The name of the temporal dimension to filter on. If no specific dimension is specified or it is set to `null`, the filter applies to all temporal dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
             "schema": {
                 "type": [
                     "string",
