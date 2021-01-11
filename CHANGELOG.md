@@ -8,10 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - New processes in proposal state
+    - `array_concat`
     - `array_create`
     - `array_find_label`
-    - `array_merge`
-    - `array_set`
+    - `array_modify`
     - `is_infinite`
     - `nan`
 - Added return value details (property `returns`) for the schemas with the subtype `process-graph`. [API#350](https://github.com/Open-EO/openeo-api/issues/350)

@@ -1,5 +1,5 @@
 {
-    "id": "array_set",
+    "id": "array_modify",
     "summary": "Change the content of an array (insert, remove, update)",
     "description": "Allows to insert into, remove from or update an array.\n\nAll labels get discarded and the array indices are always a sequence of numbers with the step size of 1 and starting at 0.",
     "categories": [

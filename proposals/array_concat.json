@@ -1,7 +1,7 @@
 {
-    "id": "array_merge",
+    "id": "array_concat",
     "summary": "Merge two arrays",
-    "description": "Merges two arrays into a single array by appending the second array to the first array. Array labels get discarded from both arrays before merging.",
+    "description": "Concatenates two arrays into a single array by appending the second array to the first array. Array labels get discarded from both arrays before merging.",
     "categories": [
         "arrays"
     ],
@@ -39,7 +39,7 @@
     },
     "examples": [
         {
-            "description": "Merges two arrays containing different data type.",
+            "description": "Concatenates two arrays containing different data type.",
             "arguments": {
                 "array1": [
                     "a",
@@ -55,20 +55,6 @@
                 "b",
                 1,
                 2
-            ]
-        },
-        {
-            "description": "Duplicates an array by merging it with an empty array. Labels will be removed so this could also be used to just remove array labels.",
-            "arguments": {
-                "array1": [
-                    null,
-                    1.23
-                ],
-                "array2": []
-            },
-            "returns": [
-                null,
-                1.23
             ]
         }
     ]
