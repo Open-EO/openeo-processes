@@ -30,10 +30,9 @@
         {
             "name": "index",
             "description": "The index of the element to insert the value(s) before. To insert after the last element, specify the number of elements in the array. If the index is greater than the number of elements, the array is filled with `null` (no-data) values until the index is reached and then the values are added starting at the index given. The number of elements can be retrieved with the process ``count()`` having the parameter `condition` set to true.",
-            "optional": true,
-            "default": 0,
             "schema": {
-                "type": "integer"
+                "type": "integer",
+                "minimum": 0
             }
         },
         {
@@ -58,52 +57,60 @@
     },
     "examples": [
         {
-            "description": "With the default values for the optional parameters, the first element in the array gets replaced.",
-            "arguments": {
-                "data": [
-                    "z",
-                    "b",
-                    "c"
-                ],
-                "values": [
-                    "a"
-                ]
-            },
-            "returns": [
-                "a",
-                "b",
-                "c"
-            ]
-        },
-        {
-            "description": "Add a value at the beginning of the array.",
-            "arguments": {
-                "data": [
-                    "b",
-                    "c"
-                ],
-                "values": [
-                    "a"
-                ],
-                "length": 0
-            },
-            "returns": [
-                "a",
-                "b",
-                "c"
-            ]
-        },
-        {
-            "description": "Add a value at the end of the array.",
+            "description": "Replace a single value in the array.",
             "arguments": {
                 "data": [
                     "a",
-                    "b"
-                ],
-                "values": [
+                    "d",
                     "c"
                 ],
-                "index": 2,
+                "values": [
+                    "b"
+                ],
+                "index": 1
+            },
+            "returns": [
+                "a",
+                "b",
+                "c"
+            ]
+        },
+        {
+            "description": "Replace multiple values in the array.",
+            "arguments": {
+                "data": [
+                    "a",
+                    "b",
+                    4,
+                    5
+                ],
+                "values": [
+                    1,
+                    2,
+                    3
+                ],
+                "index": 0,
+                "length": 2
+            },
+            "returns": [
+                1,
+                2,
+                3,
+                4,
+                5
+            ]
+        },
+        {
+            "description": "Insert a value to the array at a given position.",
+            "arguments": {
+                "data": [
+                    "a",
+                    "c"
+                ],
+                "values": [
+                    "b"
+                ],
+                "index": 1,
                 "length": 0
             },
             "returns": [
@@ -130,69 +137,6 @@
                 null,
                 null,
                 "e"
-            ]
-        },
-        {
-            "description": "Update a single value in the array.",
-            "arguments": {
-                "data": [
-                    "a",
-                    "d",
-                    "c"
-                ],
-                "values": [
-                    "b"
-                ],
-                "index": 1
-            },
-            "returns": [
-                "a",
-                "b",
-                "c"
-            ]
-        },
-        {
-            "description": "Update multiple values in the array.",
-            "arguments": {
-                "data": [
-                    "a",
-                    "b",
-                    3,
-                    4
-                ],
-                "values": [
-                    1,
-                    2
-                ],
-                "index": 0,
-                "length": 2
-            },
-            "returns": [
-                1,
-                2,
-                3,
-                4
-            ]
-        },
-        {
-            "description": "Replace a single value with two values in the array.",
-            "arguments": {
-                "data": [
-                    "a",
-                    null,
-                    "d"
-                ],
-                "values": [
-                    "b",
-                    "c"
-                ],
-                "index": 1
-            },
-            "returns": [
-                "a",
-                "b",
-                "c",
-                "d"
             ]
         },
         {
@@ -224,6 +168,7 @@
                     "c"
                 ],
                 "values": [],
+                "index": 0,
                 "length": 2
             },
             "returns": [
