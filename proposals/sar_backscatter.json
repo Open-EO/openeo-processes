@@ -18,7 +18,7 @@
         },
         {
             "description": "The backscatter coefficient to compute, either `sigma0` or `gamma0` (the default).",
-            "name": "backscatter_coefficient",
+            "name": "coefficient",
             "optional": true,
             "default": "gamma0",
             "schema": {
