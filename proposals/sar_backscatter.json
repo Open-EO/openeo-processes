@@ -1,7 +1,7 @@
 {
     "id": "sar_backscatter",
-    "summary": "Computes backscatter from georeferenced SAR input",
-    "description": "Computes backscatter from georeferenced SAR input.\n\nNote that backscatter computation may require instrument specific metadata that is tightly coupled to the original SAR products. As a result, this process may only work in combination with loading data from specific collections, not with general data cubes.",
+    "summary": "Computes backscatter from SAR input",
+    "description": "Computes backscatter from SAR input.\n\nNote that backscatter computation may require instrument specific metadata that is tightly coupled to the original SAR products. As a result, this process may only work in combination with loading data from specific collections, not with general data cubes.",
     "categories": [
         "cubes",
         "sar"
@@ -9,7 +9,7 @@
     "experimental": true,
     "parameters": [
         {
-            "description": "Data cube containing raw backscatter input.",
+            "description": "Data cube containing SAR input.",
             "name": "data",
             "schema": {
                 "subtype": "raster-cube",
@@ -39,16 +39,19 @@
             }
         },
         {
-            "description": "The (collection) name of the digital elevation model to use, leave empty to allow the back-end to make a suitable choice. Not all back-ends may offer all digital elevation models. Elevation models are listed as collections, or can be found in back-end specific documentation.",
+            "description": "The digital elevation model to use. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
             "name": "elevation_model",
             "optional": true,
             "default": null,
-            "schema": {
-                "type": [
-                    "string",
-                    "null"
-                ]
-            }
+            "schema": [
+                {
+                  "type": "string",
+                  "subtype": "collection-id"
+                },
+                {
+                  "type": null
+                }
+            ]
         }
     ],
     "returns": {
@@ -59,8 +62,8 @@
         }
     },
     "exceptions": {
-        "UnsupportedParameter": {
-            "message": "One of the provided parameters is not supported by this back-end. This can be resolved by using default parameters, or using a back-end that supports the parameter value."
+        "DigitalElevationModelInvalid": {
+            "message": "The digital elevation model specified is either not a DEM or can't be used with the data cube given."
         }
     },
     "links": [

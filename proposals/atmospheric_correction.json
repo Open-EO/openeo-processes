@@ -17,7 +17,7 @@
             }
         },
         {
-            "description": "The atmospheric correction method to use.\n\nThe supported algorithms can vary between back-ends. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility..",
+            "description": "The atmospheric correction method to use.\n\nThe supported algorithms can vary between back-ends. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
             "name": "method",
             "optional": true,
             "default": null,
@@ -33,16 +33,19 @@
             }
         },
         {
-            "description": "The name of the digital elevation model to use, leave empty to allow the back-end to make a suitable choice. Not all back-ends may offer all digital elevation models.",
+            "description": "The digital elevation model to use, leave empty to allow the back-end to make a suitable choice.",
             "name": "elevation_model",
             "optional": true,
             "default": null,
-            "schema": {
-                "type": [
-                    "string",
-                    "null"
-                ]
-            }
+            "schema": [
+                {
+                  "type": "string",
+                  "subtype": "collection-id"
+                },
+                {
+                  "type": null
+                }
+            ]
         }
     ],
     "returns": {
@@ -53,8 +56,8 @@
         }
     },
     "exceptions": {
-        "UnsupportedParameter": {
-            "message": "One of the provided parameters is not supported by this back-end. This can be resolved by using default parameters, or using a back-end that supports the parameter value."
+        "DigitalElevationModelInvalid": {
+            "message": "The digital elevation model specified is either not a DEM or can't be used with the data cube given."
         }
     },
     "links": [
