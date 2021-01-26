@@ -1,0 +1,38 @@
+{
+    "id": "ard_normalized_radar_backscatter",
+    "summary": "CARD4L compliant SAR NRB",
+    "description": "...",
+    "categories": [
+        "cubes",
+        "optical",
+        "ard"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "description": "Data cube containing SAR input.",
+            "name": "data",
+            "schema": {
+                "subtype": "raster-cube",
+                "type": "object"
+            }
+        }
+    ],
+    "returns": {
+        "description": "...",
+        "schema": {
+            "subtype": "raster-cube",
+            "type": "object"
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://ceos.org/ard/files/PFS/NRB/v5.0/CARD4L-PFS_Normalised_Radar_Backscatter-v5.0.pdf",
+            "title": "CEOS CARD4L specification"
+        }
+    ],
+    "process_graph": {
+
+    }
+}

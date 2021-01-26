@@ -1,0 +1,38 @@
+{
+    "id": "ard_surface_reflectance",
+    "summary": "CARD4L compliant Surface Reflectance",
+    "description": "...",
+    "categories": [
+        "cubes",
+        "sar",
+        "ard"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "description": "The source data cube containing multi-spectral optical top of the atmosphere (TOA) reflectances.",
+            "name": "data",
+            "schema": {
+                "subtype": "raster-cube",
+                "type": "object"
+            }
+        }
+    ],
+    "returns": {
+        "description": "...",
+        "schema": {
+            "subtype": "raster-cube",
+            "type": "object"
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://ceos.org/ard/files/PFS/SR/v5.0/CARD4L_Product_Family_Specification_Surface_Reflectance-v5.0.pdf",
+            "title": "CEOS CARD4L specification"
+        }
+    ],
+    "process_graph": {
+        
+    }
+}
