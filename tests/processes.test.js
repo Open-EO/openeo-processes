@@ -103,11 +103,14 @@ describe.each(processes)("%s", (file, p, fileContent, proposal) => {
 
 		// return value description
 		expect(typeof p.returns.description).toBe('string');
+		// lint: Description should not be empty
+		expect(p.returns.description.length).toBeGreaterThan(0);
 		checkDescription(p.returns.description, p);
 
 		// return value schema
 		expect(typeof p.returns.schema).toBe('object');
 		expect(p.returns.schema).not.toBeNull();
+		// lint: Description should not be empty
 		checkJsonSchema(jsv, p.returns.schema);
 	});
 
@@ -233,6 +236,8 @@ function checkParam(param, p, checkCbParams = true) {
 
 	// parameter description
 	expect(typeof param.description).toBe('string');
+	// lint: Description should not be empty
+	expect(param.description.length).toBeGreaterThan(0);
 	checkDescription(param.description, p);
 
 	// Parameter flags

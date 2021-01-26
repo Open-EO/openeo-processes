@@ -9,16 +9,16 @@
     "experimental": true,
     "parameters": [
         {
-            "description": "Data cube containing SAR input.",
             "name": "data",
+            "description": "The source data cube containing SAR input.",
             "schema": {
                 "subtype": "raster-cube",
                 "type": "object"
             }
         },
         {
-            "description": "The backscatter coefficient to compute, either `sigma0` or `gamma0` (the default).",
             "name": "coefficient",
+            "description": "The backscatter coefficient to compute, either `sigma0` or `gamma0` (the default).",
             "optional": true,
             "default": "gamma0",
             "schema": {
@@ -30,8 +30,8 @@
             }
         },
         {
-            "description": "By default, orthorectification is disabled. Set to `true` to enable orthorectification.\n\nThe non-orthorectified products use a simple earth model as provided in the products themselves. This may be sufficient for very flat target areas and is faster to process.",
             "name": "orthorectify",
+            "description": "By default, orthorectification is disabled. Set to `true` to enable orthorectification.\n\nThe non-orthorectified products use a simple earth model as provided in the products themselves. This may be sufficient for very flat target areas and is faster to process.",
             "optional": true,
             "default": false,
             "schema": {
@@ -39,8 +39,8 @@
             }
         },
         {
-            "description": "The digital elevation model to use. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
             "name": "elevation_model",
+            "description": "The digital elevation model to use. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
             "optional": true,
             "default": null,
             "schema": [
@@ -52,10 +52,96 @@
                     "type": "null"
                 }
             ]
+        },
+        {
+            "name": "mask",
+            "description": "If set to `true`, a data mask is added to the bands. It indicates which values are valid (1), invalid (0) or contain no-data (null).",
+            "optional": true,
+            "default": false,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "contributing_area",
+            "description": "If set to `true`, a DEM-based local contributing area band is added. The values are given in square meters.",
+            "optional": true,
+            "default": false,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "incidence_angle",
+            "description": "If set to `true`, a DEM-based local incidence angle band is added. The values are given in degrees.",
+            "optional": true,
+            "default": false,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "ellipsoid_incidence_angle",
+            "description": "If set to `true`, a ellipsoidal incidence angle band is added. The values are given in degrees.",
+            "optional": true,
+            "default": false,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "noise_power",
+            "description": "",
+            "optional": true,
+            "default": false,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "gamma_sigma",
+            "description": "If set to `true`, a band is added that provides the ratio of the integrated area in the Gamma projection over the integrated area in the Sigma projection (ground).",
+            "optional": true,
+            "default": false,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "date",
+            "description": "If set to `true`, a band is added that provides the acquisition date for each pixel. Data are day offset to the first observation date (in UTC) as specified in the metadata.",
+            "optional": true,
+            "default": false,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "scaling",
+            "description": "",
+            "optional": true,
+            "default": "dB",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "dB",
+                    "db",
+                    "linear"
+                ]
+            }
+        },
+        {
+            "name": "noise_removal",
+            "description": "If set to `false`, no noise removal is applied. Defaults to `true`, which removes noise.",
+            "optional": true,
+            "default": true,
+            "schema": {
+                "type": "boolean"
+            }
         }
     ],
     "returns": {
-        "description": "Backscatter values in linear power corresponding to the chosen backscatter coefficient. For decibel values, an additional conversion is needed.",
+        "description": "Backscatter values corresponding to the chosen backscatter coefficient. By default given in decibel (dB), if not specified differently in the parameter `scaling`.",
         "schema": {
             "subtype": "raster-cube",
             "type": "object"
