@@ -45,11 +45,11 @@
             "default": null,
             "schema": [
                 {
-                  "type": "string",
-                  "subtype": "collection-id"
+                    "type": "string",
+                    "subtype": "collection-id"
                 },
                 {
-                  "type": null
+                    "type": "null"
                 }
             ]
         }

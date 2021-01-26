@@ -1,7 +1,7 @@
 {
     "id": "cloud_detection",
-    "summary": "Cloud detection",
-    "description": "Detects clouds and cloud shadow in optical imagery. By default, the cloud mask is applied to the input data cube. Set `apply_mask` to `false` to add the cloud mask as a new band.",
+    "summary": "Create cloud masks",
+    "description": "Detects atmospheric disturbances such as clouds, cloud shadows, aerosols, haze, ozone and/or water vapour in optical imagery.\n\nIt creates a data cube with the spatial and temporal dimensions compatible to the source data cube and a dimension that contains a dimension label for each of the supported/considered atmospheric disturbances. The naming of the bands should follow the following pre-defined values:\n\n- `clouds`\n- `shadows`\n- `aerosol`\n- `haze`\n- `ozone`\n- `water_vapor`\n\nAll bands have values between 0 (clear) and 1, which describes the probability that it is an atmospheric disturbance.",
     "categories": [
         "cubes",
         "optical"
@@ -9,7 +9,7 @@
     "experimental": true,
     "parameters": [
         {
-            "description": "Data cube containing multi-spectral optical top of atmosphere reflectances on which to perform cloud detection.",
+            "description": "The source data cube containing multi-spectral optical top of the atmosphere (TOA) reflectances on which to perform cloud detection.",
             "name": "data",
             "schema": {
                 "subtype": "raster-cube",
@@ -17,7 +17,7 @@
             }
         },
         {
-            "description": "The cloud detection method to use.\n\nThe supported algorithms can vary between back-ends. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
+            "description": "The cloud detection method to use.\n\nSet to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
             "name": "method",
             "optional": true,
             "default": null,
@@ -32,19 +32,10 @@
                     "s2cloudless"
                 ]
             }
-        },
-        {
-            "description": "By default, the cloud mask is applied to the input data cube. If set to `false`, the cloud mask information is added as one or more additional bands. Some implementations may add additional bands.",
-            "name": "apply_mask",
-            "optional": true,
-            "default": true,
-            "schema": {
-                "type": "boolean"
-            }
         }
     ],
     "returns": {
-        "description": "The original data cube, either with the cloud mask added as a band, or the cloud mask applied to the pixels.",
+        "description": "A data cube with bands for the atmospheric disturbances. Each of the masks contains values between 0 and 1. The data cube has the same spatial and temporal dimensions as the source data cube and a dimension that contains a dimension label for each of the supported/considered atmospheric disturbance.",
         "schema": {
             "subtype": "raster-cube",
             "type": "object"
