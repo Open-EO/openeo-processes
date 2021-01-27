@@ -21,16 +21,20 @@
             "name": "method",
             "optional": true,
             "default": null,
-            "schema": {
-                "type": [
-                    "string",
-                    "null"
-                ],
-                "enum": [
-                    "FORCE",
-                    "iCor"
-                ]
-            }
+            "schema": [
+                {
+                    "type": [
+                        "string"
+                    ],
+                    "enum": [
+                        "FORCE",
+                        "iCor"
+                    ]
+                },
+                {
+                    "type": "null"
+                }
+            ]
         },
         {
             "description": "The digital elevation model to use, leave empty to allow the back-end to make a suitable choice.",

@@ -33,7 +33,7 @@
             "name": "orthorectify",
             "description": "By default, orthorectification is disabled. Set to `true` to enable orthorectification.\n\nThe non-orthorectified products use a simple earth model as provided in the products themselves. This may be sufficient for very flat target areas and is faster to process.",
             "optional": true,
-            "default": false,
+            "default": true,
             "schema": {
                 "type": "boolean"
             }
@@ -83,15 +83,6 @@
         {
             "name": "ellipsoid_incidence_angle",
             "description": "If set to `true`, a ellipsoidal incidence angle band is added. The values are given in degrees.",
-            "optional": true,
-            "default": false,
-            "schema": {
-                "type": "boolean"
-            }
-        },
-        {
-            "name": "noise_power",
-            "description": "",
             "optional": true,
             "default": false,
             "schema": {

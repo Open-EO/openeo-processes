@@ -1,6 +1,6 @@
 {
     "id": "ard_normalized_radar_backscatter",
-    "summary": "CARD4L compliant SAR NRB",
+    "summary": "CARD4L compliant SAR NRB generation",
     "description": "...",
     "categories": [
         "cubes",
@@ -10,11 +10,75 @@
     "experimental": true,
     "parameters": [
         {
-            "description": "Data cube containing SAR input.",
             "name": "data",
+            "description": "Data cube containing SAR input.",
             "schema": {
                 "subtype": "raster-cube",
                 "type": "object"
+            }
+        },
+        {
+            "name": "elevation_model",
+            "description": "The digital elevation model to use. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
+            "optional": true,
+            "default": null,
+            "schema": [
+                {
+                    "type": "string",
+                    "subtype": "collection-id"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "name": "ellipsoid_incidence_angle",
+            "description": "If set to `true`, a ellipsoidal incidence angle band is added. The values are given in degrees.",
+            "optional": true,
+            "default": false,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "gamma_sigma",
+            "description": "If set to `true`, a band is added that provides the ratio of the integrated area in the Gamma projection over the integrated area in the Sigma projection (ground).",
+            "optional": true,
+            "default": false,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "date",
+            "description": "If set to `true`, a band is added that provides the acquisition date for each pixel. Data are day offset to the first observation date (in UTC) as specified in the metadata.",
+            "optional": true,
+            "default": false,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "scaling",
+            "description": "By default, all values are given in logarithmic decibel (dB) scale. If set to `linear`, the values are given in linear scale. Values are converted from linear to dB using *dB = 10*log₁₀(l)* and vice-versa.",
+            "optional": true,
+            "default": "dB",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "dB",
+                    "linear"
+                ]
+            }
+        },
+        {
+            "name": "noise_removal",
+            "description": "If set to `false`, no noise removal is applied. Defaults to `true`, which removes noise.",
+            "optional": true,
+            "default": true,
+            "schema": {
+                "type": "boolean"
             }
         }
     ],
@@ -33,6 +97,37 @@
         }
     ],
     "process_graph": {
-
+        "nrb": {
+            "process_id": "sar_backscatter",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "coefficient": "gamma0",
+                "orthorectify": true,
+                "elevation_model": {
+                    "from_parameter": "elevation_model"
+                },
+                "mask": true,
+                "contributing_area": true,
+                "incidence_angle": true,
+                "ellipsoid_incidence_angle": {
+                    "from_parameter": "ellipsoid_incidence_angle"
+                },
+                "gamma_sigma": {
+                    "from_parameter": "gamma_sigma"
+                },
+                "date": {
+                    "from_parameter": "date"
+                },
+                "scaling": {
+                    "from_parameter": "scaling"
+                },
+                "noise_removal": {
+                    "from_parameter": "noise_removal"
+                }
+            },
+            "result": true
+        }
     }
 }

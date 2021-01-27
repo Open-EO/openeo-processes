@@ -21,17 +21,21 @@
             "name": "method",
             "optional": true,
             "default": null,
-            "schema": {
-                "type": [
-                    "string",
-                    "null"
-                ],
-                "enum": [
-                    "sen2cor",
-                    "fmask",
-                    "s2cloudless"
-                ]
-            }
+            "schema": [
+                {
+                    "type": [
+                        "string"
+                    ],
+                    "enum": [
+                        "sen2cor",
+                        "fmask",
+                        "s2cloudless"
+                    ]
+                },
+                {
+                    "type": "null"
+                }
+            ]
         }
     ],
     "returns": {
