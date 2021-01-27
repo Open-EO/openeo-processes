@@ -1,17 +1,17 @@
 {
     "id": "ard_normalized_radar_backscatter",
     "summary": "CARD4L compliant SAR NRB generation",
-    "description": "...",
+    "description": "Computes CARD4L compliant backscatter from SAR input.\n\nNote that backscatter computation may require instrument specific metadata that is tightly coupled to the original SAR products. As a result, this process may only work in combination with loading data from specific collections, not with general data cubes.",
     "categories": [
         "cubes",
-        "optical",
+        "sar",
         "ard"
     ],
     "experimental": true,
     "parameters": [
         {
             "name": "data",
-            "description": "Data cube containing SAR input.",
+            "description": "The source data cube containing SAR input.",
             "schema": {
                 "subtype": "raster-cube",
                 "type": "object"
@@ -51,8 +51,8 @@
             }
         },
         {
-            "name": "date",
-            "description": "If set to `true`, a band is added that provides the acquisition date for each pixel. Data are day offset to the first observation date (in UTC) as specified in the metadata.",
+            "name": "date_offset",
+            "description": "If set to `true`, a band is added that provides the acquisition date for each pixel. Values are day offset to the first observation date (in UTC) as specified in the metadata.",
             "optional": true,
             "default": false,
             "schema": {
@@ -83,10 +83,15 @@
         }
     ],
     "returns": {
-        "description": "...",
+        "description": "Backscatter values corresponding to the chosen backscatter coefficient. By default given in decibel (dB), if not specified differently in the parameter `scaling`.",
         "schema": {
             "subtype": "raster-cube",
             "type": "object"
+        }
+    },
+    "exceptions": {
+        "DigitalElevationModelInvalid": {
+            "message": "The digital elevation model specified is either not a DEM or can't be used with the data cube given."
         }
     },
     "links": [
@@ -110,15 +115,15 @@
                 },
                 "mask": true,
                 "contributing_area": true,
-                "incidence_angle": true,
+                "local_incidence_angle": true,
                 "ellipsoid_incidence_angle": {
                     "from_parameter": "ellipsoid_incidence_angle"
                 },
                 "gamma_sigma": {
                     "from_parameter": "gamma_sigma"
                 },
-                "date": {
-                    "from_parameter": "date"
+                "date_offset": {
+                    "from_parameter": "date_offset"
                 },
                 "scaling": {
                     "from_parameter": "scaling"

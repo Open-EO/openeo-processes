@@ -72,7 +72,7 @@
             }
         },
         {
-            "name": "incidence_angle",
+            "name": "local_incidence_angle",
             "description": "If set to `true`, a DEM-based local incidence angle band is added. The values are given in degrees.",
             "optional": true,
             "default": false,
@@ -99,8 +99,8 @@
             }
         },
         {
-            "name": "date",
-            "description": "If set to `true`, a band is added that provides the acquisition date for each pixel. Data are day offset to the first observation date (in UTC) as specified in the metadata.",
+            "name": "date_offset",
+            "description": "If set to `true`, a band is added that provides the acquisition date for each pixel. Values are day offset to the first observation date (in UTC) as specified in the metadata.",
             "optional": true,
             "default": false,
             "schema": {
