@@ -118,14 +118,13 @@
         },
         {
             "name": "scaling",
-            "description": "",
+            "description": "By default, all values are given in logarithmic decibel (dB) scale. If set to `linear`, the values are given in linear scale. Values are converted from linear to dB using *dB = 10*log₁₀(l)* and vice-versa.",
             "optional": true,
             "default": "dB",
             "schema": {
                 "type": "string",
                 "enum": [
                     "dB",
-                    "db",
                     "linear"
                 ]
             }
