@@ -1,6 +1,6 @@
 {
     "id": "ard_surface_reflectance",
-    "summary": "CARD4L compliant Surface Reflectance",
+    "summary": "CARD4L compliant Surface Reflectance generation",
     "description": "...",
     "categories": [
         "cubes",
@@ -16,10 +16,46 @@
                 "subtype": "raster-cube",
                 "type": "object"
             }
+        },
+        {
+            "description": "The digital elevation model to use, leave empty to allow the back-end to make a suitable choice.",
+            "name": "elevation_model",
+            "optional": true,
+            "default": null,
+            "schema": [
+                {
+                    "type": "string",
+                    "subtype": "collection-id"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "description": "The minimum probability required for atmospheric disturbances like clouds for being removed (greater-than-equal).",
+            "name": "threshold",
+            "optional": true,
+            "default": 0.5,
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+            }
+        },
+        {
+            "description": "The name of the band dimension.",
+            "name": "dimension",
+            "optional": true,
+            "default": "bands",
+            "schema": {
+                "type": "string",
+                "subtype": "band-name"
+            }
         }
     ],
     "returns": {
-        "description": "...",
+        "description": "Data cube containing bottom of atmosphere reflectances with atmospheric disturbances like clouds removed. The data returned is CARD4L compliant and contains metadata.",
         "schema": {
             "subtype": "raster-cube",
             "type": "object"
@@ -33,6 +69,82 @@
         }
     ],
     "process_graph": {
-        
+        "cloud_det": {
+            "process_id": "cloud_detection",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                }
+            }
+        },
+        "reduce": {
+            "process_id": "reduce_dimension",
+            "arguments": {
+                "data": {
+                    "from_node": "cloud_det"
+                },
+                "reducer": {
+                    "process_graph": {
+                        "max": {
+                            "process_id": "max",
+                            "arguments": {
+                                "data": {
+                                    "from_parameter": "data"
+                                }
+                            }
+                        },
+                        "gte": {
+                            "process_id": "gte",
+                            "arguments": {
+                                "x": {
+                                    "from_node": "max"
+                                },
+                                "y": {
+                                    "from_parameter": "threshold"
+                                }
+                            },
+                            "result": true
+                        }
+                    }
+                },
+                "dimension": {
+                    "from_parameter": "dimension"
+                }
+            }
+        },
+        "mask": {
+            "process_id": "mask",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "mask": {
+                    "from_node": "reduce"
+                }
+            }
+        },
+        "atcor": {
+            "process_id": "atmospheric_correction",
+            "arguments": {
+                "data": {
+                    "from_node": "mask"
+                },
+                "elevation_model": {
+                    "from_parameter": "elevation_model"
+                }
+            }
+        },
+        "merge_cubes": {
+            "process_id": "merge_cubes",
+            "arguments": {
+                "cube1": {
+                    "from_node": "atcor"
+                },
+                "cube2": {
+                    "from_node": "cloud_det"
+                }
+            },
+            "result": true
+        }
     }
 }

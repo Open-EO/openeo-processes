@@ -15,27 +15,6 @@
                 "subtype": "raster-cube",
                 "type": "object"
             }
-        },
-        {
-            "description": "The cloud detection method to use.\n\nSet to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
-            "name": "method",
-            "optional": true,
-            "default": null,
-            "schema": [
-                {
-                    "type": [
-                        "string"
-                    ],
-                    "enum": [
-                        "sen2cor",
-                        "fmask",
-                        "s2cloudless"
-                    ]
-                },
-                {
-                    "type": "null"
-                }
-            ]
         }
     ],
     "returns": {

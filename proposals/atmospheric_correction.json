@@ -1,7 +1,7 @@
 {
     "id": "atmospheric_correction",
     "summary": "Apply atmospheric correction",
-    "description": "Applies an atmospheric correction that converts top of atmosphere reflectance values into bottom of atmosphere/top of canopy reflectance values.\nNote that multiple atmospheric methods exist, but may not be supported by all back-ends. The method parameter gives you the option of requiring a specific method, but this may result in an error if the back-end does not support it.",
+    "description": "Applies an atmospheric correction that converts top of atmosphere reflectance values into bottom of atmosphere/top of canopy reflectance values.",
     "categories": [
         "cubes",
         "optical"
@@ -15,26 +15,6 @@
                 "subtype": "raster-cube",
                 "type": "object"
             }
-        },
-        {
-            "description": "The atmospheric correction method to use.\n\nThe supported algorithms can vary between back-ends. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
-            "name": "method",
-            "optional": true,
-            "default": null,
-            "schema": [
-                {
-                    "type": [
-                        "string"
-                    ],
-                    "enum": [
-                        "FORCE",
-                        "iCor"
-                    ]
-                },
-                {
-                    "type": "null"
-                }
-            ]
         },
         {
             "description": "The digital elevation model to use, leave empty to allow the back-end to make a suitable choice.",
