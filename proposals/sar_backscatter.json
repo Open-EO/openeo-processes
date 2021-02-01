@@ -17,28 +17,6 @@
             }
         },
         {
-            "name": "coefficient",
-            "description": "The backscatter coefficient to compute, either `sigma0` or `gamma0` (the default).",
-            "optional": true,
-            "default": "gamma0",
-            "schema": {
-                "type": "string",
-                "enum": [
-                    "sigma0",
-                    "gamma0"
-                ]
-            }
-        },
-        {
-            "name": "orthorectify",
-            "description": "By default, orthorectification is enabled. Set to `false` to disable orthorectification.\n\nThe non-orthorectified products use a simple earth model as provided in the products themselves. This may be sufficient for very flat target areas and is faster to process.",
-            "optional": true,
-            "default": true,
-            "schema": {
-                "type": "boolean"
-            }
-        },
-        {
             "name": "elevation_model",
             "description": "The digital elevation model to use. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
             "optional": true,
@@ -52,6 +30,24 @@
                     "type": "null"
                 }
             ]
+        },
+        {
+            "name": "orthorectify",
+            "description": "By default, orthorectification is enabled. Set to `false` to disable orthorectification.\n\nThe non-orthorectified products use a simple earth model as provided in the products themselves. This may be sufficient for very flat target areas and is faster to process.",
+            "optional": true,
+            "default": true,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "rtc",
+            "description": "By default, adjustments are made for terrain by modelling the local illuminated reference area using an algorithm to produce a radiometrically terrain corrected (RTC) values. Set to `false` to disable radiometrically terrain correction.",
+            "optional": true,
+            "default": true,
+            "schema": {
+                "type": "boolean"
+            }
         },
         {
             "name": "mask",
@@ -90,24 +86,6 @@
             }
         },
         {
-            "name": "gamma_sigma",
-            "description": "If set to `true`, a band named `gamma_sigma` is added that provides the ratio of the integrated area in the Gamma projection over the integrated area in the Sigma projection (ground).",
-            "optional": true,
-            "default": false,
-            "schema": {
-                "type": "boolean"
-            }
-        },
-        {
-            "name": "date_offset",
-            "description": "If set to `true`, a band named `date_offset` is added that provides the acquisition date for each pixel. Values are day offset to the first observation date (in UTC) as specified in the metadata.",
-            "optional": true,
-            "default": false,
-            "schema": {
-                "type": "boolean"
-            }
-        },
-        {
             "name": "noise_removal",
             "description": "If set to `false`, no noise removal is applied. Defaults to `true`, which removes noise.",
             "optional": true,
@@ -118,7 +96,7 @@
         }
     ],
     "returns": {
-        "description": "Backscatter values corresponding to the chosen backscatter coefficient. The data returned is CARD4L compliant and contains metadata.\n\nBy default, the backscatter values are given in linear scale. To convert them to decibel scale (dB) use the processes ``multiply()`` and ``log()``.",
+        "description": "Backscatter values corresponding to the chosen parametrization.\n\nBy default, the backscatter values are given in linear scale. To convert them to decibel scale (dB) use the processes ``multiply()`` and ``log()``.",
         "schema": {
             "subtype": "raster-cube",
             "type": "object"
@@ -139,6 +117,11 @@
             "rel": "about",
             "href": "https://bok.eo4geo.eu/PP2-2-4-2",
             "title": "Sigma nought (0) explained by EO4GEO body of knowledge."
+        },
+        {
+            "rel": "about",
+            "href": "https://www.geo.uzh.ch/microsite/rsl-documents/research/publications/peer-reviewed-articles/201108-TGRS-Small-tcGamma-3809999360/201108-TGRS-Small-tcGamma.pdf",
+            "title": "Flattening Gamma: Radiometric Terrain Correction for SAR Imagery"
         }
     ]
 }
