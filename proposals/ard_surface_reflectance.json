@@ -33,10 +33,10 @@
             ]
         },
         {
-            "description": "The minimum probability required for atmospheric disturbances like clouds for being removed (greater-than-equal).",
+            "description": "The minimum probability required for atmospheric disturbances like clouds for being removed (greater-than-equal). Defaults to 30% probability.",
             "name": "threshold",
             "optional": true,
-            "default": 0.5,
+            "default": 0.3,
             "schema": {
                 "type": "number",
                 "minimum": 0,

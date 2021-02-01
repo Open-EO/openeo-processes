@@ -60,19 +60,6 @@
             }
         },
         {
-            "name": "scaling",
-            "description": "By default, all values are given in logarithmic decibel (dB) scale. If set to `linear`, the values are given in linear scale. Values are converted from linear to dB using *dB = 10*log₁₀(l)* and vice-versa.",
-            "optional": true,
-            "default": "dB",
-            "schema": {
-                "type": "string",
-                "enum": [
-                    "dB",
-                    "linear"
-                ]
-            }
-        },
-        {
             "name": "noise_removal",
             "description": "If set to `false`, no noise removal is applied. Defaults to `true`, which removes noise.",
             "optional": true,
@@ -83,7 +70,7 @@
         }
     ],
     "returns": {
-        "description": "Backscatter values corresponding to the chosen backscatter coefficient. By default given in decibel (dB), if not specified differently in the parameter `scaling`. The data returned is CARD4L compliant and contains metadata.",
+        "description": "Backscatter values corresponding to the chosen backscatter coefficient. The data returned is CARD4L compliant and contains metadata.\n\nBy default, the backscatter values are given in linear scale. To convert them to decibel scale (dB) use the processes ``multiply()`` and ``log()``.",
         "schema": {
             "subtype": "raster-cube",
             "type": "object"
@@ -124,9 +111,6 @@
                 },
                 "date_offset": {
                     "from_parameter": "date_offset"
-                },
-                "scaling": {
-                    "from_parameter": "scaling"
                 },
                 "noise_removal": {
                     "from_parameter": "noise_removal"
