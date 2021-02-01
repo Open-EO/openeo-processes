@@ -55,7 +55,7 @@
         },
         {
             "name": "mask",
-            "description": "If set to `true`, a data mask is added to the bands. It indicates which values are valid (1), invalid (0) or contain no-data (null).",
+            "description": "If set to `true`, a data mask is added to the bands with the name `mask`. It indicates which values are valid (1), invalid (0) or contain no-data (null).",
             "optional": true,
             "default": false,
             "schema": {
@@ -64,7 +64,7 @@
         },
         {
             "name": "contributing_area",
-            "description": "If set to `true`, a DEM-based local contributing area band is added. The values are given in square meters.",
+            "description": "If set to `true`, a DEM-based local contributing area band named `contributing_area` is added. The values are given in square meters.",
             "optional": true,
             "default": false,
             "schema": {
@@ -73,7 +73,7 @@
         },
         {
             "name": "local_incidence_angle",
-            "description": "If set to `true`, a DEM-based local incidence angle band is added. The values are given in degrees.",
+            "description": "If set to `true`, a DEM-based local incidence angle band named `local_incidence_angle` is added. The values are given in degrees.",
             "optional": true,
             "default": false,
             "schema": {
@@ -82,7 +82,7 @@
         },
         {
             "name": "ellipsoid_incidence_angle",
-            "description": "If set to `true`, a ellipsoidal incidence angle band is added. The values are given in degrees.",
+            "description": "If set to `true`, an ellipsoidal incidence angle band named `ellipsoid_incidence_angle` is added. The values are given in degrees.",
             "optional": true,
             "default": false,
             "schema": {
@@ -91,7 +91,7 @@
         },
         {
             "name": "gamma_sigma",
-            "description": "If set to `true`, a band is added that provides the ratio of the integrated area in the Gamma projection over the integrated area in the Sigma projection (ground).",
+            "description": "If set to `true`, a band named `gamma_sigma` is added that provides the ratio of the integrated area in the Gamma projection over the integrated area in the Sigma projection (ground).",
             "optional": true,
             "default": false,
             "schema": {
@@ -100,7 +100,7 @@
         },
         {
             "name": "date_offset",
-            "description": "If set to `true`, a band is added that provides the acquisition date for each pixel. Values are day offset to the first observation date (in UTC) as specified in the metadata.",
+            "description": "If set to `true`, a band named `date_offset` is added that provides the acquisition date for each pixel. Values are day offset to the first observation date (in UTC) as specified in the metadata.",
             "optional": true,
             "default": false,
             "schema": {

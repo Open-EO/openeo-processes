@@ -34,7 +34,7 @@
         },
         {
             "name": "ellipsoid_incidence_angle",
-            "description": "If set to `true`, a ellipsoidal incidence angle band is added. The values are given in degrees.",
+            "description": "If set to `true`, an ellipsoidal incidence angle band named `ellipsoid_incidence_angle` is added. The values are given in degrees.",
             "optional": true,
             "default": false,
             "schema": {
@@ -43,7 +43,7 @@
         },
         {
             "name": "gamma_sigma",
-            "description": "If set to `true`, a band is added that provides the ratio of the integrated area in the Gamma projection over the integrated area in the Sigma projection (ground).",
+            "description": "If set to `true`, a band named `gamma_sigma` is added that provides the ratio of the integrated area in the Gamma projection over the integrated area in the Sigma projection (ground).",
             "optional": true,
             "default": false,
             "schema": {
@@ -52,7 +52,7 @@
         },
         {
             "name": "date_offset",
-            "description": "If set to `true`, a band is added that provides the acquisition date for each pixel. Values are day offset to the first observation date (in UTC) as specified in the metadata.",
+            "description": "If set to `true`, a band named `date_offset` is added that provides the acquisition date for each pixel. Values are day offset to the first observation date (in UTC) as specified in the metadata.",
             "optional": true,
             "default": false,
             "schema": {
