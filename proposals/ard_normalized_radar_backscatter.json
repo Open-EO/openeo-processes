@@ -52,7 +52,7 @@
         }
     ],
     "returns": {
-        "description": "Backscatter values expressed as gamma0. The data returned is CARD4L compliant and contains metadata.\n\nBy default, the backscatter values are given in linear scale. To convert them to decibel scale (dB) use the processes ``multiply()`` and ``log()``.",
+        "description": "Backscatter values expressed as gamma0. The data returned is CARD4L compliant and contains metadata.\n\nBy default, the backscatter values are given in linear scale.",
         "schema": {
             "subtype": "raster-cube",
             "type": "object"

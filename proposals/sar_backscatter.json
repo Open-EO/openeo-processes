@@ -96,7 +96,7 @@
         }
     ],
     "returns": {
-        "description": "Backscatter values corresponding to the chosen parametrization.\n\nBy default, the backscatter values are given in linear scale. To convert them to decibel scale (dB) use the processes ``multiply()`` and ``log()``.",
+        "description": "Backscatter values corresponding to the chosen parametrization.\n\nBy default, the backscatter values are given in linear scale.",
         "schema": {
             "subtype": "raster-cube",
             "type": "object"
