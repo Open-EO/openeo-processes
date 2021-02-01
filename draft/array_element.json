@@ -60,10 +60,10 @@
             "message": "The array has no element with the specified index or label."
         },
         "ArrayElementParameterMissing": {
-            "message": "The process 'array_element' requires either the 'index' or 'labels' parameter to be set."
+            "message": "The process `array_element` requires either the `index` or `labels` parameter to be set."
         },
         "ArrayElementParameterConflict": {
-            "message": "The process 'array_element' only allows that either the 'index' or the 'labels' parameter is set."
+            "message": "The process `array_element` only allows that either the `index` or the `labels` parameter is set."
         },
         "ArrayNotLabeled": {
             "message": "The array is not a labeled array, but the `label` parameter is set. Use the `index` instead."

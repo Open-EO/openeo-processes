@@ -164,7 +164,7 @@
   {
     "id": "add",
     "summary": "Addition of two numbers",
-    "description": "Sums up the two numbers `x` and `y` (*x + y*) and returns the computed sum.\n\nNo-data values are taken into account so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it.",
+    "description": "Sums up the two numbers `x` and `y` (*`x + y`*) and returns the computed sum.\n\nNo-data values are taken into account so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it.",
     "categories": [
       "math"
     ],
@@ -340,7 +340,7 @@
     },
     "exceptions": {
       "TooManyDimensions": {
-        "message": "The number of dimensions must be reduced to three for 'aggregate_spatial'."
+        "message": "The number of dimensions must be reduced to three for `aggregate_spatial`."
       }
     },
     "links": [
@@ -376,7 +376,7 @@
       },
       {
         "name": "period",
-        "description": "The time intervals to aggregate. The following pre-defined values are available:\n\n* `hour`: Hour of the day\n* `day`: Day of the year\n* `week`: Week of the year\n* `dekad`: Ten day periods, counted per year with three periods per month (day 1 - 10, 11 - 20 and 21 - end of month). The third dekad of the month can range from 8 to 11 days. For example, the fourth dekad is Feb, 1 - Feb, 10 each year.\n* `month`: Month of the year\n* `season`: Three month periods of the calendar seasons (December - February, March - May, June - August, September - November).\n* `tropical-season`: Six month periods of the tropical seasons (November - April, May - October).\n* `year`: Proleptic years\n* `decade`: Ten year periods ([0-to-9 decade](https://en.wikipedia.org/wiki/Decade#0-to-9_decade)), from a year ending in a 0 to the next year ending in a 9.\n* `decade-ad`: Ten year periods ([1-to-0 decade](https://en.wikipedia.org/wiki/Decade#1-to-0_decade)) better aligned with the Anno Domini (AD) calendar era, from a year ending in a 1 to the next year ending in a 0.",
+        "description": "The time intervals to aggregate. The following pre-defined values are available:\n\n* `hour`: Hour of the day\n* `day`: Day of the year\n* `week`: Week of the year\n* `dekad`: Ten day periods, counted per year with three periods per month (day 1 - 10, 11 - 20 and 21 - end of month). The third dekad of the month can range from 8 to 11 days. For example, the fourth dekad is Feb, 1 - Feb, 10 each year.\n* `month`: Month of the year\n* `season`: Three month periods of the calendar seasons (December - February, March - May, June - August, September - November).\n* `tropical-season`: Six month periods of the tropical seasons (November - April, May - October).\n* `year`: Proleptic years\n* `decade`: Ten year periods ([0-to-9 decade](https://en.wikipedia.org/wiki/Decade#0-to-9_decade)), from a year ending in a 0 to the next year ending in a 9.\n* `decade-ad`: Ten year periods ([1-to-0 decade](https://en.wikipedia.org/wiki/Decade#1-to-0_decade)) better aligned with the anno Domini (AD) calendar era, from a year ending in a 1 to the next year ending in a 0.",
         "schema": {
           "type": "string",
           "enum": [
@@ -972,7 +972,7 @@
       },
       {
         "name": "period",
-        "description": "Specifies the time intervals available in the normals data cube. The following options are available:\n\n* `hour`: Hour of the day\n* `day`: Day of the year\n* `week`: Week of the year\n* `dekad`: Ten day periods, counted per year with three periods per month (day 1 - 10, 11 - 20 and 21 - end of month). The third dekad of the month can range from 8 to 11 days. For example, the fourth dekad is Feb, 1 - Feb, 10 each year.\n* `month`: Month of the year\n* `season`: Three month periods of the calendar seasons (December - February, March - May, June - August, September - November).\n* `tropical-season`: Six month periods of the tropical seasons (November - April, May - October).\n* `year`: Proleptic years\n* `decade`: Ten year periods ([0-to-9 decade](https://en.wikipedia.org/wiki/Decade#0-to-9_decade)), from a year ending in a 0 to the next year ending in a 9.\n* `decade-ad`: Ten year periods ([1-to-0 decade](https://en.wikipedia.org/wiki/Decade#1-to-0_decade)) better aligned with the Anno Domini (AD) calendar era, from a year ending in a 1 to the next year ending in a 0.\n* `single-period` / `climatology-period`: A single period of arbitrary length",
+        "description": "Specifies the time intervals available in the normals data cube. The following options are available:\n\n* `hour`: Hour of the day\n* `day`: Day of the year\n* `week`: Week of the year\n* `dekad`: Ten day periods, counted per year with three periods per month (day 1 - 10, 11 - 20 and 21 - end of month). The third dekad of the month can range from 8 to 11 days. For example, the fourth dekad is Feb, 1 - Feb, 10 each year.\n* `month`: Month of the year\n* `season`: Three month periods of the calendar seasons (December - February, March - May, June - August, September - November).\n* `tropical-season`: Six month periods of the tropical seasons (November - April, May - October).\n* `year`: Proleptic years\n* `decade`: Ten year periods ([0-to-9 decade](https://en.wikipedia.org/wiki/Decade#0-to-9_decade)), from a year ending in a 0 to the next year ending in a 9.\n* `decade-ad`: Ten year periods ([1-to-0 decade](https://en.wikipedia.org/wiki/Decade#1-to-0_decade)) better aligned with the anno Domini (AD) calendar era, from a year ending in a 1 to the next year ending in a 0.\n* `single-period` / `climatology-period`: A single period of arbitrary length",
         "schema": {
           "type": "string",
           "enum": [
@@ -1625,7 +1625,7 @@
   {
     "id": "arccos",
     "summary": "Inverse cosine",
-    "description": "Computes the arc cosine of `x`. The arc cosine is the inverse function of the cosine so that *arccos(cos(x)) = x*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the arc cosine of `x`. The arc cosine is the inverse function of the cosine so that *`arccos(cos(x)) = x`*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "math > trigonometric"
     ],
@@ -1669,7 +1669,7 @@
   {
     "id": "arcosh",
     "summary": "Inverse hyperbolic cosine",
-    "description": "Computes the inverse hyperbolic cosine of `x`. It is the inverse function of the hyperbolic cosine so that *arcosh(cosh(x)) = x*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the inverse hyperbolic cosine of `x`. It is the inverse function of the hyperbolic cosine so that *`arcosh(cosh(x)) = x`*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "math > trigonometric"
     ],
@@ -1713,7 +1713,7 @@
   {
     "id": "arcsin",
     "summary": "Inverse sine",
-    "description": "Computes the arc sine of `x`. The arc sine is the inverse function of the sine so that *arcsin(sin(x)) = x*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the arc sine of `x`. The arc sine is the inverse function of the sine so that *`arcsin(sin(x)) = x`*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "math > trigonometric"
     ],
@@ -1757,7 +1757,7 @@
   {
     "id": "arctan",
     "summary": "Inverse tangent",
-    "description": "Computes the arc tangent of `x`. The arc tangent is the inverse function of the tangent so that *arctan(tan(x)) = x*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the arc tangent of `x`. The arc tangent is the inverse function of the tangent so that *`arctan(tan(x)) = x`*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "math > trigonometric"
     ],
@@ -1801,7 +1801,7 @@
   {
     "id": "arctan2",
     "summary": "Inverse tangent of two numbers",
-    "description": "Computes the arc tangent of two numbers `x` and `y`. It is similar to calculating the arc tangent of *y / x*, except that the signs of both arguments are used to determine the quadrant of the result.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated if any of the arguments is `null`.",
+    "description": "Computes the arc tangent of two numbers `x` and `y`. It is similar to calculating the arc tangent of *`y / x`*, except that the signs of both arguments are used to determine the quadrant of the result.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated if any of the arguments is `null`.",
     "categories": [
       "math > trigonometric"
     ],
@@ -2201,10 +2201,10 @@
         "message": "The array has no element with the specified index or label."
       },
       "ArrayElementParameterMissing": {
-        "message": "The process 'array_element' requires either the 'index' or 'labels' parameter to be set."
+        "message": "The process `array_element` requires either the `index` or `labels` parameter to be set."
       },
       "ArrayElementParameterConflict": {
-        "message": "The process 'array_element' only allows that either the 'index' or the 'labels' parameter is set."
+        "message": "The process `array_element` only allows that either the `index` or the `labels` parameter is set."
       },
       "ArrayNotLabeled": {
         "message": "The array is not a labeled array, but the `label` parameter is set. Use the `index` instead."
@@ -2527,7 +2527,7 @@
   {
     "id": "arsinh",
     "summary": "Inverse hyperbolic sine",
-    "description": "Computes the inverse hyperbolic sine of `x`. It is the inverse function of the hyperbolic sine so that *arsinh(sinh(x)) = x*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the inverse hyperbolic sine of `x`. It is the inverse function of the hyperbolic sine so that *`arsinh(sinh(x)) = x`*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "math > trigonometric"
     ],
@@ -2571,7 +2571,7 @@
   {
     "id": "artanh",
     "summary": "Inverse hyperbolic tangent",
-    "description": "Computes the inverse hyperbolic tangent of `x`. It is the inverse function of the hyperbolic tangent so that *artanh(tanh(x)) = x*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the inverse hyperbolic tangent of `x`. It is the inverse function of the hyperbolic tangent so that *`artanh(tanh(x)) = x`*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "math > trigonometric"
     ],
@@ -3397,7 +3397,7 @@
   {
     "id": "divide",
     "summary": "Division of two numbers",
-    "description": "Divides argument `x` by the argument `y` (*x / y*) and returns the computed result.\n\nNo-data values are taken into account so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, a division by zero results in ±infinity if the processing environment supports it. Otherwise, a `DivisionByZero` exception must the thrown.",
+    "description": "Divides argument `x` by the argument `y` (*`x / y`*) and returns the computed result.\n\nNo-data values are taken into account so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, a division by zero results in ±infinity if the processing environment supports it. Otherwise, a `DivisionByZero` exception must the thrown.",
     "categories": [
       "math"
     ],
@@ -3516,7 +3516,7 @@
   {
     "id": "e",
     "summary": "Euler's number (e)",
-    "description": "The real number *e* is a mathematical constant that is the base of the natural logarithm such that *ln(e) = 1*. The numerical value is approximately *2.71828*.",
+    "description": "The real number *e* is a mathematical constant that is the base of the natural logarithm such that *`ln(e) = 1`*. The numerical value is approximately *2.71828*.",
     "categories": [
       "math > constants",
       "math > exponential & logarithmic"
@@ -3959,7 +3959,7 @@
     },
     "exceptions": {
       "BandFilterParameterMissing": {
-        "message": "The process 'filter_bands' requires any of the parameters 'bands', 'common_names' or 'wavelengths' to be set."
+        "message": "The process `filter_bands` requires any of the parameters `bands`, `common_names` or `wavelengths` to be set."
       },
       "DimensionMissing": {
         "message": "A band dimension is missing."
@@ -5008,7 +5008,7 @@
   {
     "id": "linear_scale_range",
     "summary": "Linear transformation between two ranges",
-    "description": "Performs a linear transformation between the input and output range.\n\nThe given number in `x` is clipped to the bounds specified in `inputMin` and `inputMax` so that the underlying formula *((x - inputMin) / (inputMax - inputMin)) * (outputMax - outputMin) + outputMin* never returns any value lower than `outputMin` or greater than `outputMax`.\n\nPotential use case include\n\n* scaling values to the 8-bit range (0 - 255) often used for numeric representation of values in one of the channels of the [RGB colour model](https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations) or\n* calculating percentages (0 - 100).\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Performs a linear transformation between the input and output range.\n\nThe given number in `x` is clipped to the bounds specified in `inputMin` and `inputMax` so that the underlying formula *`((x - inputMin) / (inputMax - inputMin)) * (outputMax - outputMin) + outputMin`* never returns any value lower than `outputMin` or greater than `outputMax`.\n\nPotential use case include\n\n* scaling values to the 8-bit range (0 - 255) often used for numeric representation of values in one of the channels of the [RGB colour model](https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations) or\n* calculating percentages (0 - 100).\n\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "math"
     ],
@@ -5177,7 +5177,7 @@
   {
     "id": "ln",
     "summary": "Natural logarithm",
-    "description": "The natural logarithm is the logarithm to the base *e* of the number `x`, which equals to using the *log* process with the base set to *e*. The natural logarithm is the inverse function of taking *e* to the power x.\n\nThe no-data value `null` is passed through.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, `ln(0)` results in ±infinity if the processing environment supports it or otherwise an exception is thrown.",
+    "description": "The natural logarithm is the logarithm to the base *e* of the number `x`, which equals to using the *log* process with the base set to *e*. The natural logarithm is the inverse function of taking *e* to the power x.\n\nThe no-data value `null` is passed through.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, *`ln(0)`* results in ±infinity if the processing environment supports it or otherwise an exception is thrown.",
     "categories": [
       "math > exponential & logarithmic"
     ],
@@ -6388,7 +6388,7 @@
   {
     "id": "merge_cubes",
     "summary": "Merge two data cubes",
-    "description": "The data cubes have to be compatible. A merge operation without overlap should be reversible with (a set of) filter operations for each of the two cubes. The process performs the join on overlapping dimensions, with the same name and type.\n\nAn overlapping dimension has the same name, type, reference system and resolution in both dimensions, but can have different labels. One of the dimensions can have different labels, for all other dimensions the labels must be equal. If data overlaps, the parameter `overlap_resolver` must be specified to resolve the overlap.\n\n**Examples for merging two data cubes:**\n\n1. Data cubes with the dimensions `x`, `y`, `t` and `bands` have the same dimension labels in `x`, `y` and `t`, but the labels for the dimension `bands` are `B1` and `B2` for the first cube and `B3` and `B4`. An overlap resolver is *not needed*. The merged data cube has the dimensions `x`, `y`, `t` and `bands` and the dimension `bands` has four dimension labels: `B1`, `B2`, `B3`, `B4`.\n2. Data cubes with the dimensions `x`, `y`, `t` and `bands` have the same dimension labels in `x`, `y` and `t`, but the labels for the dimension `bands` are `B1` and `B2` for the first data cube and `B2` and `B3` for the second. An overlap resolver is *required* to resolve overlap in band `B2`. The merged data cube has the dimensions `x`, `y`, `t` and `bands` and the dimension `bands` has three dimension labels: `B1`, `B2`, `B3`.\n3. Data cubes with the dimensions `x`, `y` and `t` have the same dimension labels in `x`, `y` and `t`. There are two options:\n   1. Keep the overlapping values separately in the merged data cube: An overlap resolver is *not needed*, but for each data cube you need to add a new dimension using ``add_dimension()``. The new dimensions must be equal, except that the labels for the new dimensions must differ by name. The merged data cube has the same dimensions and labels as the original data cubes, plus the dimension added with ``add_dimension()``, which has the two dimension labels after the merge.\n   2. Combine the overlapping values into a single value: An overlap resolver is *required* to resolve the overlap for all pixels. The merged data cube has the same dimensions and labels as the original data cubes, but all pixel values have been processed by the overlap resolver.\n4. Merging a data cube with dimensions `x`, `y`, `t` with another cube with dimensions `x`, `y` will join on the `x`, `y` dimension, so the lower dimension cube is merged with each time step in the higher dimensional cube. This can for instance be used to apply a digital elevation model to a spatiotemporal data cube.\n\nAfter the merge, the dimensions with a natural/inherent label order (with a reference system this is each spatial and temporal dimensions) still have all dimension labels sorted. For other dimensions where there is no inherent order, including bands, the dimension labels keep the order in which they are present in the original data cubes and the dimension labels of `cube2` are appended to the dimension labels of `cube1`.",
+    "description": "The data cubes have to be compatible. A merge operation without overlap should be reversible with (a set of) filter operations for each of the two cubes. The process performs the join on overlapping dimensions, with the same name and type.\n\nAn overlapping dimension has the same name, type, reference system and resolution in both dimensions, but can have different labels. One of the dimensions can have different labels, for all other dimensions the labels must be equal. If data overlaps, the parameter `overlap_resolver` must be specified to resolve the overlap.\n\n**Examples for merging two data cubes:**\n\n1. Data cubes with the dimensions `x`, `y`, `t` and `bands` have the same dimension labels in `x`, `y` and `t`, but the labels for the dimension `bands` are `B1` and `B2` for the first cube and `B3` and `B4`. An overlap resolver is *not needed*. The merged data cube has the dimensions `x`, `y`, `t` and `bands` and the dimension `bands` has four dimension labels: `B1`, `B2`, `B3`, `B4`.\n2. Data cubes with the dimensions `x`, `y`, `t` and `bands` have the same dimension labels in `x`, `y` and `t`, but the labels for the dimension `bands` are `B1` and `B2` for the first data cube and `B2` and `B3` for the second. An overlap resolver is *required* to resolve overlap in band `B2`. The merged data cube has the dimensions `x`, `y`, `t` and `bands` and the dimension `bands` has three dimension labels: `B1`, `B2`, `B3`.\n3. Data cubes with the dimensions `x`, `y` and `t` have the same dimension labels in `x`, `y` and `t`. There are two options:\n   1. Keep the overlapping values separately in the merged data cube: An overlap resolver is *not needed*, but for each data cube you need to add a new dimension using ``add_dimension()``. The new dimensions must be equal, except that the labels for the new dimensions must differ by name. The merged data cube has the same dimensions and labels as the original data cubes, plus the dimension added with ``add_dimension()``, which has the two dimension labels after the merge.\n   2. Combine the overlapping values into a single value: An overlap resolver is *required* to resolve the overlap for all pixels. The merged data cube has the same dimensions and labels as the original data cubes, but all pixel values have been processed by the overlap resolver.\n4. Merging a data cube with dimensions `x`, `y`, `t` with another cube with dimensions `x`, `y` will join on the `x`, `y` dimension, so the lower dimension cube is merged with each time step in the higher dimensional cube. This can for instance be used to apply a digital elevation model to a spatio-temporal data cube.\n\nAfter the merge, the dimensions with a natural/inherent label order (with a reference system this is each spatial and temporal dimensions) still have all dimension labels sorted. For other dimensions where there is no inherent order, including bands, the dimension labels keep the order in which they are present in the original data cubes and the dimension labels of `cube2` are appended to the dimension labels of `cube1`.",
     "categories": [
       "cubes"
     ],
@@ -6670,7 +6670,7 @@
   {
     "id": "multiply",
     "summary": "Multiplication of two numbers",
-    "description": "Multiplies the two numbers `x` and `y` (*x * y*) and returns the computed product.\n\nNo-data values are taken into account so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it.",
+    "description": "Multiplies the two numbers `x` and `y` (*`x * y`*) and returns the computed product.\n\nNo-data values are taken into account so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it.",
     "categories": [
       "math"
     ],
@@ -6766,7 +6766,7 @@
   {
     "id": "ndvi",
     "summary": "Normalized Difference Vegetation Index",
-    "description": "Computes the Normalized Difference Vegetation Index (NDVI). The NDVI is computed as *(nir - red) / (nir + red)*.\n\nThe `data` parameter expects a raster data cube with a dimension of type `bands` or a `DimensionAmbiguous` exception is thrown otherwise. By default, the dimension must have at least two bands with the common names `red` and `nir` assigned. Otherwise, the user has to specify the parameters `nir` and `red`. If neither is the case, either the exception `NirBandAmbiguous` or `RedBandAmbiguous` is thrown. The common names for each band are specified in the collection's band metadata and are *not* equal to the band names.\n\nBy default, the dimension of type `bands` is dropped by this process. To keep the dimension specify a new band name in the parameter `target_band`. This adds a new dimension label with the specified name to the dimension, which can be used to access the computed values. If a band with the specified name exists, a `BandExists` is thrown.\n\nThis process is very similar to the process ``normalized_difference()``, but determines the bands automatically based on the common names (`red`/`nir`) specified in the metadata.",
+    "description": "Computes the Normalized Difference Vegetation Index (NDVI). The NDVI is computed as *`(nir - red) / (nir + red)`*.\n\nThe `data` parameter expects a raster data cube with a dimension of type `bands` or a `DimensionAmbiguous` exception is thrown otherwise. By default, the dimension must have at least two bands with the common names `red` and `nir` assigned. Otherwise, the user has to specify the parameters `nir` and `red`. If neither is the case, either the exception `NirBandAmbiguous` or `RedBandAmbiguous` is thrown. The common names for each band are specified in the collection's band metadata and are *not* equal to the band names.\n\nBy default, the dimension of type `bands` is dropped by this process. To keep the dimension specify a new band name in the parameter `target_band`. This adds a new dimension label with the specified name to the dimension, which can be used to access the computed values. If a band with the specified name exists, a `BandExists` is thrown.\n\nThis process is very similar to the process ``normalized_difference()``, but determines the bands automatically based on the common names (`red`/`nir`) specified in the metadata.",
     "categories": [
       "math > indices",
       "vegetation indices"
@@ -6817,7 +6817,7 @@
       }
     ],
     "returns": {
-      "description": "A raster data cube containing the computed NDVI values. The structure of the data cube differs depending on the value passed to `target_band`:\n\n* `target_band` is `null`: The data cube does not contain the dimension of type `bands` anymore, the number of dimensions decreases by one. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.\n* `target_band` is a string: The data cube keeps the same dimensions. The dimension properties remain unchanged, but the number of dimension labels for the dimension of type `bands` increases by one. The additional label is named as specified in `target_band`.",
+      "description": "A raster data cube containing the computed NDVI values. The structure of the data cube differs depending on the value passed to `target_band`:\n\n* `target_band` is `null`: The data cube does not contain the dimension of type `bands`, the number of dimensions decreases by one. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.\n* `target_band` is a string: The data cube keeps the same dimensions. The dimension properties remain unchanged, but the number of dimension labels for the dimension of type `bands` increases by one. The additional label is named as specified in `target_band`.",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -7056,7 +7056,7 @@
   {
     "id": "normalized_difference",
     "summary": "Normalized difference",
-    "description": "Computes the normalized difference for two bands. The normalized difference is computed as *(x - y) / (x + y)*.\n\nThis process could be used for a number of remote sensing indices such as:\n\n* [NDVI](https://eos.com/ndvi/): `x` = NIR band, `y` = red band\n* [NDWI](https://eos.com/ndwi/): `x` = NIR band, `y` = SWIR band\n* [NDSI](https://eos.com/ndsi/): `x` = green band, `y` = SWIR band\n\nSome back-ends may have native processes such as ``ndvi()`` available for convenience.",
+    "description": "Computes the normalized difference for two bands. The normalized difference is computed as *`(x - y) / (x + y)`*.\n\nThis process could be used for a number of remote sensing indices such as:\n\n* [NDVI](https://eos.com/ndvi/): `x` = NIR band, `y` = red band\n* [NDWI](https://eos.com/ndwi/): `x` = NIR band, `y` = SWIR band\n* [NDSI](https://eos.com/ndsi/): `x` = green band, `y` = SWIR band\n\nSome back-ends may have native processes such as ``ndvi()`` available for convenience.",
     "categories": [
       "math > indices",
       "vegetation indices"
@@ -7809,7 +7809,7 @@
     },
     "exceptions": {
       "TooManyDimensions": {
-        "message": "The number of dimensions must be reduced to three for 'aggregate_spatial_binary'."
+        "message": "The number of dimensions must be reduced to three for `aggregate_spatial_binary`."
       }
     },
     "links": [
@@ -8556,7 +8556,7 @@
   {
     "id": "load_result",
     "summary": "Load batch job results",
-    "description": "Loads batch job results by job id from the local user workspace/datastore. The job must have been stored by the authenticated user on the back-end currently connected to.",
+    "description": "Loads batch job results by job id from the local user workspace/data store. The job must have been stored by the authenticated user on the back-end currently connected to.",
     "categories": [
       "cubes",
       "import"
@@ -8584,7 +8584,7 @@
   {
     "id": "load_uploaded_files",
     "summary": "Load files from the user workspace",
-    "description": "Loads one or more user-uploaded files from the local user workspace/datastore and returns them as a single data cube. The files must have been stored by the authenticated user on the back-end currently connected to.",
+    "description": "Loads one or more user-uploaded files from the local user workspace/data store and returns them as a single data cube. The files must have been stored by the authenticated user on the back-end currently connected to.",
     "categories": [
       "cubes",
       "import"
@@ -8850,7 +8850,7 @@
     },
     "exceptions": {
       "TooManyDimensions": {
-        "message": "The number of temporal dimensions must be reduced to one for 'resample_cube_temporal'."
+        "message": "The number of temporal dimensions must be reduced to one for `resample_cube_temporal`."
       },
       "DimensionNotAvailable": {
         "message": "A dimension with the specified name does not exist."
@@ -9011,10 +9011,10 @@
     },
     "exceptions": {
       "QuantilesParameterMissing": {
-        "message": "The process 'quantiles' requires either the 'probabilities' or 'q' parameter to be set."
+        "message": "The process `quantiles` requires either the `probabilities` or `q` parameter to be set."
       },
       "QuantilesParameterConflict": {
-        "message": "The process 'quantiles' only allows that either the 'probabilities' or the 'q' parameter is set."
+        "message": "The process `quantiles` only allows that either the `probabilities` or the `q` parameter is set."
       }
     },
     "examples": [
@@ -9503,7 +9503,7 @@
       },
       {
         "name": "method",
-        "description": "Resampling method. Methods are inspired by GDAL, see [gdalwarp](https://www.gdal.org/gdalwarp.html) for more information.",
+        "description": "Resampling method. Methods are inspired by GDAL, see [`gdalwarp`](https://www.gdal.org/gdalwarp.html) for more information.",
         "schema": {
           "type": "string",
           "enum": [
@@ -9614,7 +9614,7 @@
       },
       {
         "name": "method",
-        "description": "Resampling method. Methods are inspired by GDAL, see [gdalwarp](https://www.gdal.org/gdalwarp.html) for more information.",
+        "description": "Resampling method. Methods are inspired by GDAL, see [`gdalwarp`](https://www.gdal.org/gdalwarp.html) for more information.",
         "schema": {
           "type": "string",
           "enum": [
@@ -9879,7 +9879,7 @@
   {
     "id": "save_result",
     "summary": "Save processed data to storage",
-    "description": "Saves processed data to the local user workspace/datastore of the authenticated user. This process aims to be compatible with GDAL/OGR formats and options. STAC-compatible metadata should be stored with the processed data.\n\nCalling this process may be rejected by back-ends in the context of secondary web services.",
+    "description": "Saves processed data to the local user workspace/data store of the authenticated user. This process aims to be compatible with GDAL/OGR formats and options. STAC-compatible metadata should be stored with the processed data.\n\nCalling this process may be rejected by back-ends in the context of secondary web services.",
     "categories": [
       "cubes",
       "export"
@@ -10429,7 +10429,7 @@
   {
     "id": "sqrt",
     "summary": "Square root",
-    "description": "Computes the square root of a real number `x`, which is equal to calculating `x` to the power of *0.5*.\n\nA square root of x is a number a such that *a^2^ = x*. Therefore, the square root is the inverse function of a to the power of 2, but only for *a >= 0*.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the square root of a real number `x`, which is equal to calculating `x` to the power of *0.5*.\n\nA square root of x is a number a such that *`a² = x`*. Therefore, the square root is the inverse function of a to the power of 2, but only for *a >= 0*.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "math",
       "math > exponential & logarithmic"
@@ -10504,7 +10504,7 @@
   {
     "id": "subtract",
     "summary": "Subtraction of two numbers",
-    "description": "Subtracts argument `y` from the argument `x` (*x - y*) and returns the computed result.\n\nNo-data values are taken into account so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it.",
+    "description": "Subtracts argument `y` from the argument `x` (*`x - y`*) and returns the computed result.\n\nNo-data values are taken into account so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it.",
     "categories": [
       "math"
     ],

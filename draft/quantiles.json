@@ -65,10 +65,10 @@
     },
     "exceptions": {
         "QuantilesParameterMissing": {
-            "message": "The process 'quantiles' requires either the 'probabilities' or 'q' parameter to be set."
+            "message": "The process `quantiles` requires either the `probabilities` or `q` parameter to be set."
         },
         "QuantilesParameterConflict": {
-            "message": "The process 'quantiles' only allows that either the 'probabilities' or the 'q' parameter is set."
+            "message": "The process `quantiles` only allows that either the `probabilities` or the `q` parameter is set."
         }
     },
     "examples": [

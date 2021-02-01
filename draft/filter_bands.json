@@ -67,7 +67,7 @@
     },
     "exceptions": {
         "BandFilterParameterMissing": {
-            "message": "The process 'filter_bands' requires any of the parameters 'bands', 'common_names' or 'wavelengths' to be set."
+            "message": "The process `filter_bands` requires any of the parameters `bands`, `common_names` or `wavelengths` to be set."
         },
         "DimensionMissing": {
             "message": "A band dimension is missing."
