@@ -15,6 +15,25 @@
                 "subtype": "raster-cube",
                 "type": "object"
             }
+        },
+        {
+            "description": "The cloud detection method to use. To get reproducible results, you have to set a specific method.\n\nSet to `null` to allow the back-end to choose, which will improve portability, but reduce reproducibility as you *may* get different results if you run the processes mutliple times.",
+            "name": "method",
+            "schema": [
+                {
+                    "type": [
+                        "string"
+                    ],
+                    "enum": [
+                        "sen2cor",
+                        "fmask",
+                        "s2cloudless"
+                    ]
+                },
+                {
+                    "type": "null"
+                }
+            ]
         }
     ],
     "returns": {
