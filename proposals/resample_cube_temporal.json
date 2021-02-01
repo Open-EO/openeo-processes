@@ -91,7 +91,7 @@
     },
     "exceptions": {
         "TooManyDimensions": {
-            "message": "The number of temporal dimensions must be reduced to one for 'resample_cube_temporal'."
+            "message": "The number of temporal dimensions must be reduced to one for `resample_cube_temporal`."
         },
         "DimensionNotAvailable": {
             "message": "A dimension with the specified name does not exist."

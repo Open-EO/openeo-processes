@@ -91,7 +91,7 @@
     },
     "exceptions": {
         "TooManyDimensions": {
-            "message": "The number of dimensions must be reduced to three for 'aggregate_spatial_binary'."
+            "message": "The number of dimensions must be reduced to three for `aggregate_spatial_binary`."
         }
     },
     "links": [
