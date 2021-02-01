@@ -1,8 +1,7 @@
 {
     "id": "resolution_merge",
-    "summary": "Resolution merging or pansharpening: increase the spatial resolution of low-resolution bands, based on higher resolution bands.",
-    "description": "Resolution merging algorithms try to improve the spatial resolution of lower resolution bands (e.g. Sentinel-2 20M) based on higher resolution bands. (e.g. Sentinel-2 10M).\n ",
-
+    "summary": "Resolution merging / pan-sharpening",
+    "description": "Resolution merging algorithms try to improve the spatial resolution of lower resolution bands (e.g. Sentinel-2 20M) based on higher resolution bands (e.g. Sentinel-2 10M).",
     "categories": [
         "cubes",
         "optical"
@@ -19,33 +18,29 @@
         },
         {
             "name": "high_resolution_bands",
-            "description": "A list of band names to use as 'high-resolution' band. Either the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands). If unique band name and common name conflict, the unique band name has higher priority.\n\nThe order of the specified array defines the order of the bands in the data cube. If multiple bands match a common name, all matched bands are included in the original order.\n These bands will remain unmodified.",
+            "description": "A list of band names to use as 'high-resolution' band. These bands will remain unmodified.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands). If unique band name and common name conflict, the unique band name has higher priority.\n\nThe order of the specified array defines the order of the bands in the data cube. If multiple bands match a common name, all matched bands are included in the original order.",
             "schema": {
                 "type": "array",
                 "items": {
                     "type": "string",
                     "subtype": "band-name"
                 }
-            },
-            "default": [],
-            "optional": false
+            }
         },
         {
             "name": "low_resolution_bands",
-            "description": "A list of band names for which the spatial resolution should be increased. Either the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands). If unique band name and common name conflict, the unique band name has higher priority.\n\nThe order of the specified array defines the order of the bands in the data cube. If multiple bands match a common name, all matched bands are included in the original order.\n These bands will be modified by the process.",
+            "description": "A list of band names for which the spatial resolution should be increased. These bands will be modified by the process.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands). If unique band name and common name conflict, the unique band name has higher priority.\n\nThe order of the specified array defines the order of the bands in the data cube. If multiple bands match a common name, all matched bands are included in the original order.",
             "schema": {
                 "type": "array",
                 "items": {
                     "type": "string",
                     "subtype": "band-name"
                 }
-            },
-            "default": [],
-            "optional": false
+            }
         },
         {
             "name": "method",
-            "description": "The method to use.\\n\\nThe supported algorithms can vary between back-ends. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility..",
+            "description": "The method to use.\n\nThe supported algorithms can vary between back-ends. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
             "optional": true,
             "default": null,
             "schema": {
@@ -57,7 +52,7 @@
         }
     ],
     "returns": {
-        "description": "A datacube with the same bands and metadata as the input, but algorithmically increased spatial resolution for the selected bands.",
+        "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except for the resolution and dimension labels of the spatial dimensions. The selected bands may have an algorithmically increased spatial resolution.",
         "schema": {
             "subtype": "raster-cube",
             "type": "object"
@@ -67,13 +62,12 @@
         {
             "rel": "about",
             "href": "https://bok.eo4geo.eu/IP2-1-3",
-            "title": "Pansharpening explained by EO4GEO body of knowledge."
+            "title": "Pan-sharpening explained by EO4GEO body of knowledge."
         },
         {
             "rel": "about",
             "href": "https://doi.org/10.1109/TGRS.2016.2537929",
             "title": "Scientific publication: Improving the Spatial Resolution of Land Surface Phenology by Fusing Medium- and Coarse-Resolution Inputs"
         }
-
     ]
 }
