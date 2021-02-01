@@ -8,7 +8,7 @@
             "type": "string",
             "subtype": "band-name",
             "title": "Band Name",
-            "description": "Either a unique band name (metadata field `name`) or a [common band name](https://github.com/radiantearth/stac-spec/tree/v0.9.0/extensions/eo#common-band-names) (metadata field `common_name`) available in the data cube. If unique band name and common name conflict, the unique band name has higher priority."
+            "description": "Either a unique band name (metadata field `name`) or a [common band name](https://github.com/radiantearth/stac-spec/tree/v0.9.0/extensions/eo#common-band-names) (metadata field `common_name`) available in the data cube. If the unique band name and the common name conflict, the unique band name has a higher priority."
         },
         "bounding-box": {
             "type": "object",
@@ -222,7 +222,13 @@
                             "description": "Any data type."
                         }
                     }
-                ]
+                ],
+                "returns": {
+                    "description": "`true` if the data should be used, otherwise `false`.",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
             }
         },
         "output-format": {
@@ -326,7 +332,7 @@
             "type": "array",
             "subtype": "temporal-intervals",
             "title": "Multiple temporal intervals",
-            "description": "Left-closed temporal intervals, which are allowed to overlap. Formatted as array of two-element arrays, each being an array with subtype `temporal-interval`.",
+            "description": "Left-closed temporal intervals, which are allowed to overlap. Formatted as an array of two-element arrays, each being an array with subtype `temporal-interval`.",
             "items": {
                 "$ref": "#/definitions/temporal-interval"
             },
@@ -381,13 +387,13 @@
             "type": "string",
             "subtype": "udf-runtime",
             "title": "UDF runtime",
-            "description": "The name of an UDF runtime."
+            "description": "The name of a UDF runtime."
         },
         "udf-runtime-version": {
             "type": "string",
             "subtype": "udf-runtime-version",
             "title": "UDF Runtime version",
-            "description": "The version of an UDF runtime."
+            "description": "The version of a UDF runtime."
         },
         "uri": {
             "type": "string",

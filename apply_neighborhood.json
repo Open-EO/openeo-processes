@@ -1,7 +1,7 @@
 {
     "id": "apply_neighborhood",
-    "summary": "Apply a process to pixels in a n-dimensional neighbourhood",
-    "description": "Applies a focal process to a data cube.\n\nA focal process is a process that works on a 'neighbourhood' of pixels. The neighbourhood can extend into multiple dimensions, this extent is specified by the `size` argument. It is not only (part of) the size of the input window, but also the size of the output for a given position of the sliding window. The sliding window moves with multiples of `size`.\n\nAn overlap can be specified so that neighbourhoods can have overlapping boundaries. This allows for continuity of the output. The values included in the data cube as overlap can't be modified by the given `process`. The missing overlap at the borders of the original data cube are made available as no-data (`null`) in the sub data cubes.\n\nThe neighbourhood size should be kept small enough, to avoid running beyond computational resources, but a too small size will result in a larger number of process invocations, which may slow down processing. Window sizes for spatial dimensions typically are in the range of 64 to 512 pixels, while overlaps of 8 to 32 pixels are common.\n\nThe process must not add new dimensions, or remove entire dimensions, but the result can have different dimension labels.\n\nFor the special case of 2D convolution, it is recommended to use ``apply_kernel()``.",
+    "summary": "Apply a process to pixels in a n-dimensional neighborhood",
+    "description": "Applies a focal process to a data cube.\n\nA focal process is a process that works on a 'neighborhood' of pixels. The neighborhood can extend into multiple dimensions, this extent is specified by the `size` argument. It is not only (part of) the size of the input window, but also the size of the output for a given position of the sliding window. The sliding window moves with multiples of `size`.\n\nAn overlap can be specified so that neighborhoods can have overlapping boundaries. This allows for continuity of the output. The values included in the data cube as overlap can't be modified by the given `process`. The missing overlap at the borders of the original data cube are made available as no-data (`null`) in the sub data cubes.\n\nThe neighborhood size should be kept small enough, to avoid running beyond computational resources, but a too small size will result in a larger number of process invocations, which may slow down processing. Window sizes for spatial dimensions typically are in the range of 64 to 512 pixels, while overlaps of 8 to 32 pixels are common.\n\nThe process must not add new dimensions, or remove entire dimensions, but the result can have different dimension labels.\n\nFor the special case of 2D convolution, it is recommended to use ``apply_kernel()``.",
     "categories": [
         "cubes"
     ],
@@ -16,7 +16,7 @@
         },
         {
             "name": "process",
-            "description": "Process to be applied on all neighbourhoods.",
+            "description": "Process to be applied on all neighborhoods.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
@@ -38,12 +38,19 @@
                         "optional": true,
                         "default": null
                     }
-                ]
+                ],
+                "returns": {
+                    "description": "The data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) must remain unchanged, otherwise a `DataCubePropertiesImmutable` exception will be thrown.",
+                    "schema": {
+                        "type": "object",
+                        "subtype": "raster-cube"
+                    }
+                }
             }
         },
         {
             "name": "size",
-            "description": "Neighbourhood sizes along each dimension.\n\nThis object maps dimension names to either a physical measure (e.g. 100 m, 10 days) or pixels (e.g. 32 pixels). For dimensions not specified, the default is to provide all values. Be aware that including all values from overly large dimensions may not be processed at once.",
+            "description": "Neighborhood sizes along each dimension.\n\nThis object maps dimension names to either a physical measure (e.g. 100 m, 10 days) or pixels (e.g. 32 pixels). For dimensions not specified, the default is to provide all values. Be aware that including all values from overly large dimensions may not be processed at once.",
             "schema": {
                 "type": "array",
                 "items": {
@@ -79,7 +86,7 @@
                         },
                         "unit": {
                             "type": "string",
-                            "description": "The unit the values are given in, either meters (`m`) or pixels (`px`). If no unit is given, uses the unit specified for the dimension or otherwise the default unit of the reference system.",
+                            "description": "The unit the values are given in, either in meters (`m`) or pixels (`px`). If no unit is given, uses the unit specified for the dimension or otherwise the default unit of the reference system.",
                             "enum": [
                                 "px",
                                 "m"
@@ -91,7 +98,7 @@
         },
         {
             "name": "overlap",
-            "description": "Overlap of neighbourhoods along each dimension to avoid border effects.\n\nFor instance a temporal dimension can add 1 month before and after a neighbourhood. In the spatial dimensions, this is often a number of pixels. The overlap specified is added before and after, so an overlap of 8 pixels will add 8 pixels on both sides of the window, so 16 in total.\n\nBe aware that large overlaps increase the need for computational resources and modifying overlapping data in subsequent operations have no effect.",
+            "description": "Overlap of neighborhoods along each dimension to avoid border effects.\n\nFor instance a temporal dimension can add 1 month before and after a neighborhood. In the spatial dimensions, this is often a number of pixels. The overlap specified is added before and after, so an overlap of 8 pixels will add 8 pixels on both sides of the window, so 16 in total.\n\nBe aware that large overlaps increase the need for computational resources and modifying overlapping data in subsequent operations have no effect.",
             "optional": true,
             "schema": {
                 "type": "array",
@@ -128,7 +135,7 @@
                         },
                         "unit": {
                             "type": "string",
-                            "description": "The unit the values are given in, either meters (`m`) or pixels (`px`). If no unit is given, uses the unit specified for the dimension or otherwise the default unit of the reference system.",
+                            "description": "The unit the values are given in, either in meters (`m`) or pixels (`px`). If no unit is given, uses the unit specified for the dimension or otherwise the default unit of the reference system.",
                             "enum": [
                                 "px",
                                 "m"
@@ -214,6 +221,9 @@
     "exceptions": {
         "DimensionNotAvailable": {
             "message": "A dimension with the specified name does not exist."
+        },
+        "DataCubePropertiesImmutable": {
+            "message": "The dimension properties (name, type, labels, reference system and resolution) must remain unchanged."
         }
     }
 }

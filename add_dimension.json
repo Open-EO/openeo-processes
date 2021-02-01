@@ -1,7 +1,7 @@
 {
     "id": "add_dimension",
     "summary": "Add a new dimension",
-    "description": "Adds a new named dimension to the data cube.\n\nAfterwards, the dimension can be referenced with the specified `name`. If a dimension with the specified name exists, the process fails with a `DimensionExists` error. The dimension label of the dimension is set to the specified `label`.",
+    "description": "Adds a new named dimension to the data cube.\n\nAfterwards, the dimension can be referred to with the specified `name`. If a dimension with the specified name exists, the process fails with a `DimensionExists` exception. The dimension label of the dimension is set to the specified `label`.",
     "categories": [
         "cubes"
     ],

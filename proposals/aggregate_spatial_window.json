@@ -1,7 +1,7 @@
 {
     "id": "aggregate_spatial_window",
     "summary": "Zonal statistics for rectangular windows",
-    "description": "Aggregates statistics over the horizontal spatial dimensions (axes `x` and `y`) of the data cube.\n\nThe pixel grid for the axes `x` and `y` is divided into non-overlapping windows with the size specified in the parameter `size`. If the number of values for the axes `x` and `y` is not a multiple of the corresponding window size, the behaviour specified in the parameters `boundary` and `align` is applied.\nFor each of these windows, the reducer process computes the result.",
+    "description": "Aggregates statistics over the horizontal spatial dimensions (axes `x` and `y`) of the data cube.\n\nThe pixel grid for the axes `x` and `y` is divided into non-overlapping windows with the size specified in the parameter `size`. If the number of values for the axes `x` and `y` is not a multiple of the corresponding window size, the behavior specified in the parameters `boundary` and `align` is applied.\nFor each of these windows, the reducer process computes the result.",
     "categories": [
         "cubes",
         "aggregate & resample"
@@ -42,12 +42,18 @@
                         "optional": true,
                         "default": null
                     }
-                ]
+                ],
+                "returns": {
+                    "description": "The value to be set in the new data cube.",
+                    "schema": {
+                        "description": "Any data type."
+                    }
+                }
             }
         },
         {
             "name": "size",
-            "description": "Window sizes in pixels along the horizontal spatial dimensions.\n\nThe first value corresponds to the `x` axis, the second values corresponds to the `y` axis.",
+            "description": "Window size in pixels along the horizontal spatial dimensions.\n\nThe first value corresponds to the `x` axis, the second value corresponds to the `y` axis.",
             "schema": {
                 "type": "array",
                 "minItems": 2,
@@ -60,7 +66,7 @@
         },
         {
             "name": "boundary",
-            "description": "Behaviour to apply if the number of values for the axes `x` and `y` is not a multiple of the corresponding value in the `size` parameter. Options are:\n\n- `pad` (default): pad the data cube with the no-data value `null` to fit the required window size.\n\n- `trim`: trim the data cube to fit the required window size.\n\nSet the parameter `align` to specifies to which corner the data is aligned to.",
+            "description": "Behavior to apply if the number of values for the axes `x` and `y` is not a multiple of the corresponding value in the `size` parameter. Options are:\n\n- `pad` (default): pad the data cube with the no-data value `null` to fit the required window size.\n\n- `trim`: trim the data cube to fit the required window size.\n\nSet the parameter `align` to specifies to which corner the data is aligned to.",
             "schema": {
                 "type": "string",
                 "enum": [

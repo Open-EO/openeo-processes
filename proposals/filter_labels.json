@@ -6,6 +6,7 @@
         "cubes",
         "filter"
     ],
+    "experimental": true,
     "parameters": [
         {
             "name": "data",
@@ -24,7 +25,7 @@
                 "parameters": [
                     {
                         "name": "value",
-                        "description": "A single dimension label to compare against. The data type of the parameter depends on the dimension labels stored for the dimension.",
+                        "description": "A single dimension label to compare against. The data type of the parameter depends on the dimension labels set for the dimension.",
                         "schema": [
                             {
                                 "type": "number"
@@ -43,12 +44,18 @@
                         "optional": true,
                         "default": null
                     }
-                ]
+                ],
+                "returns": {
+                    "description": "`true` if the dimension label should be kept in the data cube, otherwise `false`.",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
             }
         },
         {
             "name": "dimension",
-            "description": "The name of the dimension to filter on. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+            "description": "The name of the dimension to filter on. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
             "schema": {
                 "type": "string"
             }
