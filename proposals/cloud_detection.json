@@ -25,9 +25,10 @@
                         "string"
                     ],
                     "enum": [
-                        "sen2cor",
-                        "fmask",
-                        "s2cloudless"
+                        "FORCE",
+                        "Fmask",
+                        "s2cloudless",
+                        "Sen2Cor"
                     ]
                 },
                 {

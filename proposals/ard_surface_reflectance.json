@@ -19,14 +19,14 @@
         },
         {
             "description": "The atmospheric correction method to use.",
-            "name": "athmosperic_correction_method",
+            "name": "atmospheric_correction_method",
             "schema":  {
                 "type": [
                     "string"
                 ],
                 "enum": [
                     "FORCE",
-                    "iCor"
+                    "iCOR"
                 ]
             }
         },
@@ -38,9 +38,10 @@
                     "string"
                 ],
                 "enum": [
-                    "sen2cor",
-                    "fmask",
-                    "s2cloudless"
+                    "FORCE",
+                    "Fmask",
+                    "s2cloudless",
+                    "Sen2Cor"
                 ]
             }
         },
