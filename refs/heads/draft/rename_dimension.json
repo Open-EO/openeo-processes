@@ -1,0 +1,47 @@
+{
+    "id": "rename_dimension",
+    "summary": "Rename a dimension",
+    "description": "Renames a dimension in the data cube while preserving all other properties.",
+    "categories": [
+        "cubes"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "source",
+            "description": "The current name of the dimension. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "target",
+            "description": "A new Name for the dimension. Fails with a `DimensionExists` exception if a dimension with the specified name exists.",
+            "schema": {
+                "type": "string"
+            }
+        }
+    ],
+    "returns": {
+        "description": "A data cube with the same dimensions, but the name of one of the dimensions changes. The old name can not be referred to any longer. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
+        },
+        "DimensionExists": {
+            "message": "A dimension with the specified name already exists."
+        }
+    }
+}

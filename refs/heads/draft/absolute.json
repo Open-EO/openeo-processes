@@ -1,0 +1,98 @@
+{
+    "id": "absolute",
+    "summary": "Absolute value",
+    "description": "Computes the absolute value of a real number `x`, which is the \"unsigned\" portion of x and often denoted as *|x|*.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "categories": [
+        "math"
+    ],
+    "parameters": [
+        {
+            "name": "x",
+            "description": "A number.",
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "The computed absolute value.",
+        "schema": {
+            "type": [
+                "number",
+                "null"
+            ],
+            "minimum": 0
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "x": 0
+            },
+            "returns": 0
+        },
+        {
+            "arguments": {
+                "x": 3.5
+            },
+            "returns": 3.5
+        },
+        {
+            "arguments": {
+                "x": -0.4
+            },
+            "returns": 0.4
+        },
+        {
+            "arguments": {
+                "x": -3.5
+            },
+            "returns": 3.5
+        }
+    ],
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://mathworld.wolfram.com/AbsoluteValue.html",
+            "title": "Absolute value explained by Wolfram MathWorld"
+        }
+    ],
+    "process_graph": {
+        "lt": {
+            "process_id": "lt",
+            "arguments": {
+                "x": {
+                    "from_parameter": "x"
+                },
+                "y": 0
+            }
+        },
+        "multiply": {
+            "process_id": "multiply",
+            "arguments": {
+                "x": {
+                    "from_parameter": "x"
+                },
+                "y": -1
+            }
+        },
+        "if": {
+            "process_id": "if",
+            "arguments": {
+                "value": {
+                    "from_node": "lt"
+                },
+                "accept": {
+                    "from_node": "multiply"
+                },
+                "reject": {
+                    "from_parameter": "x"
+                }
+            },
+            "result": true
+        }
+    }
+}

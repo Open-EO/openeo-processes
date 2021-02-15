@@ -1,0 +1,31 @@
+{
+    "id": "is_infinite",
+    "summary": "Value is an infinite number",
+    "description": "Checks whether the specified value `x` is an infinite number. The definition of infinite numbers follows the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935). The special numerical value `NaN` (not a number) as defined by the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) is not an infinite number and must return `false`.",
+    "categories": [
+        "comparison"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "x",
+            "description": "The data to check.",
+            "schema": {
+                "description": "Any data type is allowed."
+            }
+        }
+    ],
+    "returns": {
+        "description": "`true` if the data is an infinite number, otherwise `false`.",
+        "schema": {
+            "type": "boolean"
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://ieeexplore.ieee.org/document/4610935",
+            "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
+        }
+    ]
+}

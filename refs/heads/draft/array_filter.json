@@ -1,0 +1,96 @@
+{
+    "id": "array_filter",
+    "summary": "Filter an array based on a condition",
+    "description": "Filters the array elements based on a logical expression so that afterwards an array is returned that only contains the values, indices and/or labels conforming to the condition.",
+    "categories": [
+        "arrays",
+        "filter"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "An array.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
+            }
+        },
+        {
+            "name": "condition",
+            "description": "A condition that is evaluated against each value, index and/or label in the array. Only the array elements for which the condition returns `true` are preserved.",
+            "schema": {
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": [
+                    {
+                        "name": "x",
+                        "description": "The value of the current element being processed.",
+                        "schema": {
+                            "description": "Any data type."
+                        }
+                    },
+                    {
+                        "name": "index",
+                        "description": "The zero-based index of the current element being processed.",
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 0
+                        }
+                    },
+                    {
+                        "name": "label",
+                        "description": "The label of the current element being processed. Only populated for labeled arrays.",
+                        "schema": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "default": null,
+                        "optional": true
+                    },
+                    {
+                        "name": "context",
+                        "description": "Additional data passed by the user.",
+                        "schema": {
+                            "description": "Any data type."
+                        },
+                        "optional": true,
+                        "default": null
+                    }
+                ],
+                "returns": {
+                    "description": "`true` if the value should be kept in the array, otherwise `false`.",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            }
+        },
+        {
+            "name": "context",
+            "description": "Additional data to be passed to the condition.",
+            "schema": {
+                "description": "Any data type."
+            },
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "An array filtered by the specified condition. The number of elements are less than or equal compared to the original array.",
+        "schema": {
+            "type": "array",
+            "items": {
+                "description": "Any data type is allowed."
+            }
+        }
+    }
+}
