@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@apidevtools/json-schema-ref-parser": "^9.0.6",
-    "@openeo/js-processgraphs": "^1.0.0-beta.6",
+    "@openeo/js-processgraphs": "^1.0.0",
     "ajv": "^6.12.4",
     "concat-json-files": "^1.1.0",
     "glob": "^7.1.6",
