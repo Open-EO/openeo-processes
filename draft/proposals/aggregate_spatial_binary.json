@@ -1,0 +1,114 @@
+{
+    "id": "aggregate_spatial_binary",
+    "summary": "Zonal statistics for geometries by binary aggregation",
+    "description": "Aggregates statistics for one or more geometries (e.g. zonal statistics for polygons) over the spatial dimensions. This process consecutively passes a pair of values to the reducer. This may be better suited especially for UDFs in case the number of values gets too large to be processed at once. In contrast, ``aggregate_spatial()`` passes a list of values.\n\n- For **polygons**, the process considers all pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n- For **points**, the process considers the closest pixel center.\n- For **lines** (line strings), the process considers all the pixels whose centers are closest to at least one point on the line.\n\nThe data cube must have been reduced to only contain two raster dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise, this process fails with the `TooManyDimensions` exception.\n\nThe number of total and valid pixels is returned together with the calculated values.",
+    "categories": [
+        "cubes",
+        "aggregate & resample"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A raster data cube. The data cube implicitly gets restricted to the bounds of the geometries as if ``filter_spatial()`` would have been used with the same values for the corresponding parameters immediately before this process.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "geometries",
+            "description": "Geometries as GeoJSON on which the aggregation will be based.",
+            "schema": {
+                "type": "object",
+                "subtype": "geojson"
+            }
+        },
+        {
+            "name": "reducer",
+            "description": "A reduction operator to be applied consecutively on tuples of values. It must be both associative and commutative as the execution may be executed in parallel and therefore the order of execution is arbitrary. The reduction operator may be a single process such as ``multiply()`` or consist of multiple sub-processes.",
+            "schema": {
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": [
+                    {
+                        "name": "x",
+                        "description": "The first value.",
+                        "schema": {
+                            "description": "Any data type."
+                        }
+                    },
+                    {
+                        "name": "y",
+                        "description": "The second value.",
+                        "schema": {
+                            "description": "Any data type."
+                        }
+                    },
+                    {
+                        "name": "context",
+                        "description": "Additional data passed by the user.",
+                        "schema": {
+                            "description": "Any data type."
+                        },
+                        "optional": true,
+                        "default": null
+                    }
+                ],
+                "returns": {
+                    "description": "The value to be set in the vector data cube.",
+                    "schema": {
+                        "description": "Any data type."
+                    }
+                }
+            }
+        },
+        {
+            "name": "target_dimension",
+            "description": "The new dimension name to be used for storing the results. Defaults to `result`.",
+            "schema": {
+                "type": "string"
+            },
+            "default": "result",
+            "optional": true
+        },
+        {
+            "name": "context",
+            "description": "Additional data to be passed to the reducer.",
+            "schema": {
+                "description": "Any data type."
+            },
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "A vector data cube with the computed results and restricted to the bounds of the geometries.\n\nThe computed value is used for the dimension with the name that was specified in the parameter `target_dimension`.\n\nThe computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) for each geometry. These values are added as a new dimension with a dimension name derived from `target_dimension` by adding the suffix `_meta`. The new dimension has the dimension labels `total_count` and `valid_count`.",
+        "schema": {
+            "type": "object",
+            "subtype": "vector-cube"
+        }
+    },
+    "exceptions": {
+        "TooManyDimensions": {
+            "message": "The number of dimensions must be reduced to three for `aggregate_spatial_binary`."
+        }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/glossary.html#aggregate-reducing-resolution",
+            "rel": "about",
+            "title": "Aggregation explained in the openEO glossary"
+        },
+        {
+            "href": "http://www.opengeospatial.org/standards/sfa",
+            "rel": "about",
+            "title": "Simple Features standard by the OGC"
+        },
+        {
+            "rel": "about",
+            "href": "https://en.wikipedia.org/wiki/Reduction_Operator",
+            "title": "Background information on reduction operators (binary reducers) by Wikipedia"
+        }
+    ]
+}

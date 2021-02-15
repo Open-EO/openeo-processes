@@ -1,0 +1,57 @@
+{
+    "id": "debug",
+    "summary": "Publish debugging information",
+    "description": "Sends debugging information about the data to the log output. Passes the data through.",
+    "categories": [
+        "development"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "Data to publish.",
+            "schema": {
+                "description": "Any data type is allowed."
+            }
+        },
+        {
+            "name": "code",
+            "description": "An identifier to help identify the log entry in a bunch of other log entries.",
+            "schema": {
+                "type": "string"
+            },
+            "default": "",
+            "optional": true
+        },
+        {
+            "name": "level",
+            "description": "The severity level of this message, defaults to `info`. Note that the level `error` forces the computation to be stopped!",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "error",
+                    "warning",
+                    "info",
+                    "debug"
+                ]
+            },
+            "default": "info",
+            "optional": true
+        },
+        {
+            "name": "message",
+            "description": "A message to send in addition to the data.",
+            "schema": {
+                "type": "string"
+            },
+            "default": "",
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "The data as passed to the `data` parameter without any modification.",
+        "schema": {
+            "description": "Any data type is allowed."
+        }
+    }
+}
