@@ -20,7 +20,7 @@
         {
             "description": "The atmospheric correction method to use.",
             "name": "atmospheric_correction_method",
-            "schema":  {
+            "schema": {
                 "type": [
                     "string"
                 ],

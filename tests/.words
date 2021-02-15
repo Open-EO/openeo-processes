@@ -8,6 +8,7 @@ centers
 dekad
 DEM-based
 Domini
+gamma0
 GeoJSON
 labeled
 MathWorld
@@ -17,6 +18,7 @@ neighborhoods
 openEO
 orthorectification
 orthorectified
+radiometrically
 reflectances
 resample
 resampled
