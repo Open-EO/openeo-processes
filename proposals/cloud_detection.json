@@ -25,7 +25,6 @@
                         "string"
                     ],
                     "enum": [
-                        "FORCE",
                         "Fmask",
                         "s2cloudless",
                         "Sen2Cor"
