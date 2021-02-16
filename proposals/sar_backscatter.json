@@ -17,22 +17,26 @@
             }
         },
         {
-            "name": "orthorectify",
-            "description": "By default, orthorectification is enabled. Set to `false` to disable orthorectification.\n\nThe non-orthorectified products use a simple earth model as provided in the products themselves. This may be sufficient for very flat target areas and is faster to process.",
+            "name": "coefficient",
+            "description": "Select the radiometric correction coefficient. The following options are available:\n\n* `beta0`: radar brightness\n* `sigma0-ellipsoid`: ground area computed with ellipsoid earth model\n* `sigma0-terrain`: ground area computed with terrain earth model\n* `gamma0-ellipsoid`: ground area computed with ellipsoid earth model in sensor line of sight\n* `gamma0-terrain`: ground area computed with terrain earth model in sensor line of sight (default)\n* `null`: non-normalized backscatter",
             "optional": true,
-            "default": true,
-            "schema": {
-                "type": "boolean"
-            }
-        },
-        {
-            "name": "rtc",
-            "description": "By default, adjustments are made for terrain by modelling the local illuminated reference area using an algorithm to produce a radiometrically terrain corrected (RTC) values. Set to `false` to disable radiometrically terrain correction.",
-            "optional": true,
-            "default": true,
-            "schema": {
-                "type": "boolean"
-            }
+            "default": "gamma0-terrain",
+            "schema": [
+                {
+                    "type": "string",
+                    "enum": [
+                        "beta0",
+                        "sigma0-ellipsoid",
+                        "sigma0-terrain",
+                        "gamma0-ellipsoid",
+                        "gamma0-terrain"
+                    ]
+                },
+                {
+                    "title": "Non-normalized backscatter",
+                    "type": "null"
+                }
+            ]
         },
         {
             "name": "elevation_model",

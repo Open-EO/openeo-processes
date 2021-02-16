@@ -77,8 +77,7 @@
                 "data": {
                     "from_parameter": "data"
                 },
-                "orthorectify": true,
-                "rtc": true,
+                "coefficient": "gamma0-terrain",
                 "elevation_model": {
                     "from_parameter": "elevation_model"
                 },
