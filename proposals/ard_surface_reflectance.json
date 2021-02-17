@@ -1,0 +1,77 @@
+{
+    "id": "ard_surface_reflectance",
+    "summary": "CARD4L compliant Surface Reflectance generation",
+    "description": "Computes CARD4L compliant surface reflectance values from optical input.",
+    "categories": [
+        "cubes",
+        "sar",
+        "ard"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "description": "The source data cube containing multi-spectral optical top of the atmosphere (TOA) reflectances. There must be a single dimension of type bands available.",
+            "name": "data",
+            "schema": {
+                "subtype": "raster-cube",
+                "type": "object"
+            }
+        },
+        {
+            "description": "The atmospheric correction method to use.",
+            "name": "atmospheric_correction_method",
+            "schema": {
+                "type": [
+                    "string"
+                ],
+                "enum": [
+                    "FORCE",
+                    "iCOR"
+                ]
+            }
+        },
+        {
+            "description": "The cloud detection method to use.",
+            "name": "cloud_detection_method",
+            "schema": {
+                "type": [
+                    "string"
+                ],
+                "enum": [
+                    "Fmask",
+                    "s2cloudless",
+                    "Sen2Cor"
+                ]
+            }
+        },
+        {
+            "description": "The digital elevation model to use, leave empty to allow the back-end to make a suitable choice.",
+            "name": "elevation_model",
+            "optional": true,
+            "default": null,
+            "schema": [
+                {
+                    "type": "string",
+                    "subtype": "collection-id"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        }
+    ],
+    "returns": {
+        "description": "Data cube containing bottom of atmosphere reflectances with atmospheric disturbances like clouds and cloud shadows removed. The data returned is CARD4L compliant and contains metadata.",
+        "schema": {
+            "subtype": "raster-cube",
+            "type": "object"
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://ceos.org/ard/files/PFS/SR/v5.0/CARD4L_Product_Family_Specification_Surface_Reflectance-v5.0.pdf",
+            "title": "CEOS CARD4L specification"
+        }
+    ]
+}
