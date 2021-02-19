@@ -24,7 +24,7 @@ jobs:
       - name: clone gh-pages and clean-up
         if: ${{ env.GITHUB_REF_SLUG == 'master' }}
         run: |
-          git clone --branch gh-pages https://$GITHUB_TOKEN@github.com/Open-EO/openeo-processes.git gh-pages
+          git clone --branch gh-pages https://github.com/Open-EO/openeo-processes.git gh-pages
           find gh-pages -maxdepth 1 -type f -delete
           rm -rf gh-pages/examples/
           rm -rf gh-pages/meta/
