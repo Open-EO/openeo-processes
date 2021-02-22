@@ -115,14 +115,14 @@
             "subtype": "date",
             "format": "date",
             "title": "Date only",
-            "description": "Date only representation, as defined for `full-date` by [RFC 3339 in section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). The time zone is UTC."
+            "description": "Date only representation, as defined for `full-date` by [RFC 3339 in section 5.6](https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6). The time zone is UTC."
         },
         "date-time": {
             "type": "string",
             "subtype": "date-time",
             "format": "date-time",
             "title": "Date with Time",
-            "description": "Date and time representation, as defined for `date-time` by [RFC 3339 in section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6)."
+            "description": "Date and time representation, as defined for `date-time` by [RFC 3339 in section 5.6](https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6)."
         },
         "duration": {
             "type": "string",
@@ -159,7 +159,7 @@
             "type": "object",
             "subtype": "geojson",
             "title": "GeoJSON",
-            "description": "GeoJSON as defined by [RFC 7946](https://tools.ietf.org/html/rfc7946).",
+            "description": "GeoJSON as defined by [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946.html).",
             "allOf": [
                 {
                     "$ref": "https://geojson.org/schema/GeoJSON.json"
@@ -286,7 +286,7 @@
             "type": "array",
             "subtype": "temporal-interval",
             "title": "Single temporal interval",
-            "description": "Left-closed temporal interval, represented as two-element array with the following elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://tools.ietf.org/html/rfc3339). Although [RFC 3339 prohibits the hour to be '24'](https://tools.ietf.org/html/rfc3339#section-5.7), **this process allows the value '24' for the hour** of an end time in order to make it possible that left-closed time intervals can fully cover the day. `null` can be used to specify open intervals.",
+            "description": "Left-closed temporal interval, represented as two-element array with the following elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html). Although [RFC 3339 prohibits the hour to be '24'](https://www.rfc-editor.org/rfc/rfc3339.html#section-5.7), **this process allows the value '24' for the hour** of an end time in order to make it possible that left-closed time intervals can fully cover the day. `null` can be used to specify open intervals.",
             "minItems": 2,
             "maxItems": 2,
             "items": {
@@ -375,7 +375,7 @@
             "subtype": "time",
             "format": "time",
             "title": "Time only",
-            "description": "Time only representation, as defined for `full-time` by [RFC 3339 in section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Although [RFC 3339 prohibits the hour to be '24'](https://tools.ietf.org/html/rfc3339#section-5.7), this definition allows the value '24' for the hour as end time in an interval in order to make it possible that left-closed time intervals can fully cover the day."
+            "description": "Time only representation, as defined for `full-time` by [RFC 3339 in section 5.6](https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6). Although [RFC 3339 prohibits the hour to be '24'](https://www.rfc-editor.org/rfc/rfc3339.html#section-5.7), this definition allows the value '24' for the hour as end time in an interval in order to make it possible that left-closed time intervals can fully cover the day."
         },
         "udf-code": {
             "type": "string",
@@ -400,7 +400,7 @@
             "subtype": "uri",
             "format": "uri",
             "title": "URI",
-            "description": "A valid URI according to [RFC3986](https://tools.ietf.org/html/rfc3986)."
+            "description": "A valid URI according to [RFC3986](https://www.rfc-editor.org/rfc/rfc3986.html)."
         },
         "vector-cube": {
             "type": "object",
@@ -421,7 +421,7 @@
             "maxLength": 4,
             "pattern": "^\\d{4}$",
             "title": "Year only",
-            "description": "Year representation, as defined for `date-fullyear` by [RFC 3339 in section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6)."
+            "description": "Year representation, as defined for `date-fullyear` by [RFC 3339 in section 5.6](https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6)."
         }
     }
 }
