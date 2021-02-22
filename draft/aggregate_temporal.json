@@ -17,7 +17,7 @@
         },
         {
             "name": "intervals",
-            "description": "Left-closed temporal intervals, which are allowed to overlap. Each temporal interval in the array has exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://www.rfc-editor.org//rfc/rfc3339.html). Although [RFC 3339 prohibits the hour to be '24'](https://www.rfc-editor.org//rfc/rfc3339.html#section-5.7), **this process allows the value '24' for the hour** of an end time in order to make it possible that left-closed time intervals can fully cover the day.",
+            "description": "Left-closed temporal intervals, which are allowed to overlap. Each temporal interval in the array has exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html). Although [RFC 3339 prohibits the hour to be '24'](https://www.rfc-editor.org/rfc/rfc3339.html#section-5.7), **this process allows the value '24' for the hour** of an end time in order to make it possible that left-closed time intervals can fully cover the day.",
             "schema": {
                 "type": "array",
                 "subtype": "temporal-intervals",
