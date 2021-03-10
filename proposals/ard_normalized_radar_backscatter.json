@@ -33,6 +33,15 @@
             ]
         },
         {
+            "name": "contributing_area",
+            "description": "If set to `true`, a DEM-based local contributing area band named `contributing_area` is added. The values are given in square meters.",
+            "optional": true,
+            "default": false,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
             "name": "ellipsoid_incidence_angle",
             "description": "If set to `true`, an ellipsoidal incidence angle band named `ellipsoid_incidence_angle` is added. The values are given in degrees.",
             "optional": true,
@@ -82,7 +91,9 @@
                     "from_parameter": "elevation_model"
                 },
                 "mask": true,
-                "contributing_area": true,
+                "contributing_area": {
+                    "from_parameter": "contributing_area"
+                },
                 "local_incidence_angle": true,
                 "ellipsoid_incidence_angle": {
                     "from_parameter": "ellipsoid_incidence_angle"
