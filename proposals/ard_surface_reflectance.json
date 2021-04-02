@@ -31,7 +31,7 @@
             }
         },
         {
-            "description": "The cloud detection method to use.\n\nEach method supprts detecting different atmospheric disturbances such as clouds, cloud shadows, aerosols, haze, ozone and/or water vapour in optical imagery.",
+            "description": "The cloud detection method to use.\n\nEach method supports detecting different atmospheric disturbances such as clouds, cloud shadows, aerosols, haze, ozone and/or water vapour in optical imagery.",
             "name": "cloud_detection_method",
             "schema": {
                 "type": [
