@@ -1,7 +1,7 @@
 {
     "id": "ard_surface_reflectance",
     "summary": "CARD4L compliant Surface Reflectance generation",
-    "description": "Computes CARD4L compliant surface reflectance values from optical input.",
+    "description": "Computes CARD4L compliant surface (bottom of atmosphere/top of canopy) reflectance values from optical input.",
     "categories": [
         "cubes",
         "sar",
@@ -10,7 +10,7 @@
     "experimental": true,
     "parameters": [
         {
-            "description": "The source data cube containing multi-spectral optical top of the atmosphere (TOA) reflectances. There must be a single dimension of type bands available.",
+            "description": "The source data cube containing multi-spectral optical top of the atmosphere (TOA) reflectances. There must be a single dimension of type `bands` available.",
             "name": "data",
             "schema": {
                 "subtype": "raster-cube",
@@ -31,7 +31,7 @@
             }
         },
         {
-            "description": "The cloud detection method to use.",
+            "description": "The cloud detection method to use.\n\nEach method supprts detecting different atmospheric disturbances such as clouds, cloud shadows, aerosols, haze, ozone and/or water vapour in optical imagery.",
             "name": "cloud_detection_method",
             "schema": {
                 "type": [
@@ -45,7 +45,7 @@
             }
         },
         {
-            "description": "The digital elevation model to use, leave empty to allow the back-end to make a suitable choice.",
+            "description": "The digital elevation model to use. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
             "name": "elevation_model",
             "optional": true,
             "default": null,
