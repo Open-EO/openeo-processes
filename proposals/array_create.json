@@ -1,29 +1,29 @@
 {
     "id": "array_create",
     "summary": "Create an array",
-    "description": "Creates a new array, which by default is empty.\n\nBy providing the parameter `length`, the array can be pre-filled with the given number of elements. By default, each element is set to `null` unless another value is specified through the parameter `value`.",
+    "description": "Creates a new array, which by default is empty.\n\nThe second parameter `repeat` allows to add the given array multiple times to the new array.\n\nIn most cases you can simply pass a (native) array to processes directly, but this process is especially useful to create a new array that is getting returned by a child process, for example in ``apply_dimension()``.",
     "categories": [
         "arrays"
     ],
     "experimental": true,
     "parameters": [
         {
-            "name": "length",
-            "description": "The number of elements to fill the array with. Defaults to `0`.",
+            "name": "data",
+            "description": "A (native) array to fill the newly created array with. Defaults to an empty array.",
             "optional": true,
-            "default": 0,
+            "default": [],
             "schema": {
-                "type": "integer",
-                "minimum": 0
+                "description": "Any data type is allowed."
             }
         },
         {
-            "name": "value",
-            "description": "The value to fill the array with, in case `length` is greater than 0. Defaults to `null` (no data).",
+            "name": "repeat",
+            "description": "The number of times the (native) array specified in `data` is repeatedly added after each other to the new array being created. Defaults to `1`.",
             "optional": true,
-            "default": null,
+            "default": 1,
             "schema": {
-                "description": "Any data type is allowed."
+                "type": "integer",
+                "minimum": 1
             }
         }
     ],
@@ -43,7 +43,26 @@
         },
         {
             "arguments": {
-                "length": 3
+                "data": [
+                    "this",
+                    "is",
+                    "a",
+                    "test"
+                ]
+            },
+            "returns": [
+                "this",
+                "is",
+                "a",
+                "test"
+            ]
+        },
+        {
+            "arguments": {
+                "data": [
+                    null
+                ],
+                "repeat": 3
             },
             "returns": [
                 null,
@@ -53,12 +72,20 @@
         },
         {
             "arguments": {
-                "length": 2,
-                "value": 1
+                "data": [
+                    1,
+                    2,
+                    3
+                ],
+                "repeat": 2
             },
             "returns": [
                 1,
-                1
+                2,
+                3,
+                1,
+                2,
+                3
             ]
         }
     ]
