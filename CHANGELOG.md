@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Exception messages have been aligned always use ` instead of '. Tooling could render it with CommonMark.
 
 ### Fixed
+- Clarify that the user workspace is server-side. [#225](https://github.com/Open-EO/openeo-processes/issues/225)
 - Clarify that the `condition` parameter for `array_filter` works also on indices and labels.
 - Clarify contradicting statements in `filter_temporal` for the default value of the `dimension` parameter. By default *all* temporal dimensions are affected by the process. [#203](https://github.com/Open-EO/openeo-processes/issues/203)
 - Clarify how the parameters passed to the overlap resolver correspond to the data cubes. [#184](https://github.com/Open-EO/openeo-processes/issues/184)
