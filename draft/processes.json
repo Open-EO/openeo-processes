@@ -8866,7 +8866,7 @@
   {
     "id": "load_result",
     "summary": "Load batch job results",
-    "description": "Loads batch job results by job id from the local user workspace/data store. The job must have been stored by the authenticated user on the back-end currently connected to.",
+    "description": "Loads batch job results by job id from the server-side user workspace. The job must have been stored by the authenticated user on the back-end currently connected to.",
     "categories": [
       "cubes",
       "import"
@@ -8894,7 +8894,7 @@
   {
     "id": "load_uploaded_files",
     "summary": "Load files from the user workspace",
-    "description": "Loads one or more user-uploaded files from the local user workspace/data store and returns them as a single data cube. The files must have been stored by the authenticated user on the back-end currently connected to.",
+    "description": "Loads one or more user-uploaded files from the server-side workspace of the authenticated user and returns them as a single data cube. The files must have been stored by the authenticated user on the back-end currently connected to.",
     "categories": [
       "cubes",
       "import"
@@ -10211,7 +10211,7 @@
   {
     "id": "run_udf",
     "summary": "Run a UDF",
-    "description": "Runs a UDF in one of the supported runtime environments.\n\nThe process can either:\n\n1. load and run a locally stored UDF from a file in the workspace of the authenticated user. The path to the UDF file must be relative to the root directory of the user's workspace.\n2. fetch and run a remotely stored and published UDF by absolute URI, for example from [openEO Hub](https://hub.openeo.org)).\n3. run the source code specified inline as string.\n\nThe loaded UDF can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case, an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
+    "description": "Runs a UDF in one of the supported runtime environments.\n\nThe process can either:\n\n1. load and run a UDF stored in a file on the server-side workspace of the authenticated user. The path to the UDF file must be relative to the root directory of the user's workspace.\n2. fetch and run a remotely stored and published UDF by absolute URI.\n3. run the source code specified inline as string.\n\nThe loaded UDF can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case, an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
     "categories": [
       "cubes",
       "import",
@@ -10320,7 +10320,7 @@
   {
     "id": "save_result",
     "summary": "Save processed data to storage",
-    "description": "Saves processed data to the local user workspace/data store of the authenticated user. This process aims to be compatible with GDAL/OGR formats and options. STAC-compatible metadata should be stored with the processed data.\n\nCalling this process may be rejected by back-ends in the context of secondary web services.",
+    "description": "Saves processed data to the server-side user workspace of the authenticated user. This process aims to be compatible with GDAL/OGR formats and options. STAC-compatible metadata should be stored with the processed data.\n\nCalling this process may be rejected by back-ends in the context of secondary web services.",
     "categories": [
       "cubes",
       "export"
