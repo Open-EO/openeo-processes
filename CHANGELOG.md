@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - New processes in proposal state
+    - `array_interpolate_linear` [#173](https://github.com/Open-EO/openeo-processes/issues/173)
     - `is_infinite`
     - `nan`
 - Added return value details (property `returns`) for the schemas with the subtype `process-graph`. [API#350](https://github.com/Open-EO/openeo-api/issues/350)
