@@ -1,7 +1,7 @@
 {
     "id": "array_interpolate_linear",
     "summary": "One-dimensional linear interpolation for arrays",
-    "description": "Performs a linear interpolation for each of the no-data values (`null`) in the array given, except for the first and last value. If one of those values is a no-data value, they can be replaced with the parameters `first` and `last`.",
+    "description": "Performs a linear interpolation for each of the no-data values (`null`) in the array given, except for the first and last value.",
     "categories": [
         "arrays",
         "math",
@@ -21,34 +21,10 @@
                     ]
                 }
             }
-        },
-        {
-            "name": "first",
-            "description": "A value to set for the first value, if the first value is a no-data value. By default (`null`), the value is not changed.",
-            "default": null,
-            "optional": true,
-            "schema": {
-                "type": [
-                    "number",
-                    "null"
-                ]
-            }
-        },
-        {
-            "name": "last",
-            "description": "A value to set for the last value, if the last value is a no-data value. By default (`null`), the value is not changed.",
-            "default": null,
-            "optional": true,
-            "schema": {
-                "type": [
-                    "number",
-                    "null"
-                ]
-            }
         }
     ],
     "returns": {
-        "description": "An array with no-data values being replaced with either interpolated values or the values given in the parameters `first` and `last`.",
+        "description": "An array with no-data values being replaced with interpolated values. If not at least 2 numerical values are available in the array, the array stays the same.",
         "schema": {
             "type": [
                 "number",
@@ -65,7 +41,7 @@
                     null,
                     6,
                     null,
-                    5
+                    -8
                 ]
             },
             "returns": [
@@ -73,28 +49,8 @@
                 1,
                 3.5,
                 6,
-                5.5,
-                5
-            ]
-        },
-        {
-            "arguments": {
-                "data": [
-                    null,
-                    1,
-                    null,
-                    -2,
-                    null
-                ],
-                "first": 0,
-                "last": -1
-            },
-            "returns": [
-                0,
-                1,
-                -0.5,
-                -2,
-                -1
+                -1,
+                -8
             ]
         }
     ]
