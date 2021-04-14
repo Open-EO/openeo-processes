@@ -11,7 +11,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "An array of numbers and no-data values.\n\nIf the given array is a labeled array, the labels must have a natural/inherent label order and it expects the labels to be sorted accordingly. This is the default behavior in openEO for spatial and temporal dimensions.",
+            "description": "An array of numbers and no-data values.\n\nIf the given array is a labeled array, the labels must have a natural/inherent label order and the process expects the labels to be sorted accordingly. This is the default behavior in openEO for spatial and temporal dimensions.",
             "schema": {
                 "type": "array",
                 "items": {
