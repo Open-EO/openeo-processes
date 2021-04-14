@@ -1,7 +1,7 @@
 {
     "id": "array_interpolate_linear",
     "summary": "One-dimensional linear interpolation for arrays",
-    "description": "Performs a linear interpolation for each of the no-data values (`null`) in the array given, except for the first and last value.",
+    "description": "Performs a linear interpolation for each of the no-data values (`null`) in the array given, except for leading and trailing no-data values.\n\nThe linear interpolants are defined by the array indices or labels (x) and the values in the array (y).",
     "categories": [
         "arrays",
         "math",
@@ -52,6 +52,13 @@
                 -1,
                 -8
             ]
+        }
+    ],
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://en.wikipedia.org/wiki/Linear_interpolation",
+            "title": "Linear interpolation explained by Wikipedia"
         }
     ]
 }
