@@ -49,5 +49,21 @@
                 3
             ]
         }
-    ]
+    ],
+    "process_graph": {
+        "append": {
+            "process_id": "array_concat",
+            "arguments": {
+                "array1": {
+                    "from_parameter": "data"
+                },
+                "array2": [
+                    {
+                        "from_parameter": "value"
+                    }
+                ]
+            },
+            "result": true
+        }
+    }
 }
