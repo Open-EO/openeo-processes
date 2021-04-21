@@ -78,6 +78,11 @@
             "rel": "about",
             "href": "https://github.com/radiantearth/stac-spec/tree/master/extensions/eo#common-band-names",
             "title": "List of common band names as specified by the STAC specification"
+        },
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#filter",
+            "rel": "about",
+            "title": "Filters explained in the openEO documentation"
         }
     ]
 }

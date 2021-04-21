@@ -96,9 +96,9 @@
     },
     "links": [
         {
-            "href": "https://openeo.org/documentation/1.0/glossary.html#aggregate-reducing-resolution",
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#aggregate",
             "rel": "about",
-            "title": "Aggregation explained in the openEO glossary"
+            "title": "Aggregation explained in the openEO documentation"
         },
         {
             "href": "http://www.opengeospatial.org/standards/sfa",

@@ -345,9 +345,9 @@
     },
     "links": [
       {
-        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregate-reducing-resolution",
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#aggregate",
         "rel": "about",
-        "title": "Aggregation explained in the openEO glossary"
+        "title": "Aggregation explained in the openEO documentation"
       },
       {
         "href": "http://www.opengeospatial.org/standards/sfa",
@@ -471,9 +471,9 @@
     },
     "links": [
       {
-        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregate-reducing-resolution",
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#aggregate",
         "rel": "about",
-        "title": "Aggregation explained in the openEO glossary"
+        "title": "Aggregation explained in the openEO documentation"
       }
     ]
   },
@@ -712,9 +712,9 @@
     },
     "links": [
       {
-        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregate-reducing-resolution",
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#aggregate",
         "rel": "about",
-        "title": "Aggregation explained in the openEO glossary"
+        "title": "Aggregation explained in the openEO documentation"
       }
     ]
   },
@@ -1229,7 +1229,14 @@
       "DimensionNotAvailable": {
         "message": "A dimension with the specified name does not exist."
       }
-    }
+    },
+    "links": [
+      {
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#apply",
+        "rel": "about",
+        "title": "Apply explained in the openEO documentation"
+      }
+    ]
   },
   {
     "id": "apply_kernel",
@@ -1315,6 +1322,11 @@
       }
     },
     "links": [
+      {
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#apply",
+        "rel": "about",
+        "title": "Apply explained in the openEO documentation"
+      },
       {
         "rel": "about",
         "href": "http://www.songho.ca/dsp/convolution/convolution.html",
@@ -1554,7 +1566,14 @@
       "DataCubePropertiesImmutable": {
         "message": "The dimension properties (name, type, labels, reference system and resolution) must remain unchanged."
       }
-    }
+    },
+    "links": [
+      {
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#apply",
+        "rel": "about",
+        "title": "Apply explained in the openEO documentation"
+      }
+    ]
   },
   {
     "id": "apply",
@@ -1620,7 +1639,14 @@
         "type": "object",
         "subtype": "raster-cube"
       }
-    }
+    },
+    "links": [
+      {
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#apply",
+        "rel": "about",
+        "title": "Apply explained in the openEO documentation"
+      }
+    ]
   },
   {
     "id": "arccos",
@@ -3351,7 +3377,14 @@
         "type": "object",
         "subtype": "raster-cube"
       }
-    }
+    },
+    "links": [
+      {
+        "href": "https://openeo.org/documentation/1.0/datacubes.html",
+        "rel": "about",
+        "title": "Data Cubes explained in the openEO documentation"
+      }
+    ]
   },
   {
     "id": "dimension_labels",
@@ -3970,6 +4003,11 @@
         "rel": "about",
         "href": "https://github.com/radiantearth/stac-spec/tree/master/extensions/eo#common-band-names",
         "title": "List of common band names as specified by the STAC specification"
+      },
+      {
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#filter",
+        "rel": "about",
+        "title": "Filters explained in the openEO documentation"
       }
     ]
   },
@@ -4074,6 +4112,11 @@
     },
     "links": [
       {
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#filter",
+        "rel": "about",
+        "title": "Filters explained in the openEO documentation"
+      },
+      {
         "rel": "about",
         "href": "https://proj.org/usage/projections.html",
         "title": "PROJ parameters for cartographic projections"
@@ -4129,6 +4172,11 @@
       }
     },
     "links": [
+      {
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#filter",
+        "rel": "about",
+        "title": "Filters explained in the openEO documentation"
+      },
       {
         "href": "http://www.opengeospatial.org/standards/sfa",
         "rel": "about",
@@ -4221,7 +4269,14 @@
       "DimensionNotAvailable": {
         "message": "A dimension with the specified name does not exist."
       }
-    }
+    },
+    "links": [
+      {
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#filter",
+        "rel": "about",
+        "title": "Filters explained in the openEO documentation"
+      }
+    ]
   },
   {
     "id": "first",
@@ -5514,6 +5569,11 @@
       }
     ],
     "links": [
+      {
+        "href": "https://openeo.org/documentation/1.0/datacubes.html",
+        "rel": "about",
+        "title": "Data Cubes explained in the openEO documentation"
+      },
       {
         "rel": "about",
         "href": "https://proj.org/usage/projections.html",
@@ -7814,9 +7874,9 @@
     },
     "links": [
       {
-        "href": "https://openeo.org/documentation/1.0/glossary.html#aggregate-reducing-resolution",
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#aggregate",
         "rel": "about",
-        "title": "Aggregation explained in the openEO glossary"
+        "title": "Aggregation explained in the openEO documentation"
       },
       {
         "href": "http://www.opengeospatial.org/standards/sfa",
@@ -7940,7 +8000,14 @@
         "type": "object",
         "subtype": "raster-cube"
       }
-    }
+    },
+    "links": [
+      {
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#aggregate",
+        "rel": "about",
+        "title": "Aggregation explained in the openEO documentation"
+      }
+    ]
   },
   {
     "id": "ard_normalized_radar_backscatter",
@@ -8830,6 +8897,13 @@
           "dimension": "platform"
         }
       }
+    ],
+    "links": [
+      {
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#filter",
+        "rel": "about",
+        "title": "Filters explained in the openEO documentation"
+      }
     ]
   },
   {
@@ -9061,6 +9135,11 @@
     },
     "links": [
       {
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#reduce",
+        "rel": "about",
+        "title": "Reducers explained in the openEO documentation"
+      },
+      {
         "rel": "about",
         "href": "https://en.wikipedia.org/wiki/Reduction_Operator",
         "title": "Background information on reduction operators (binary reducers) by Wikipedia"
@@ -9168,9 +9247,9 @@
     },
     "links": [
       {
-        "href": "https://openeo.org/documentation/1.0/glossary.html#resample-changing-data-cube-geometry",
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#resample",
         "rel": "about",
-        "title": "Resampling explained in the openEO glossary"
+        "title": "Resampling explained in the openEO documentation"
       }
     ]
   },
@@ -9756,7 +9835,14 @@
       "DimensionNotAvailable": {
         "message": "A dimension with the specified name does not exist."
       }
-    }
+    },
+    "links": [
+      {
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#reduce",
+        "rel": "about",
+        "title": "Reducers explained in the openEO documentation"
+      }
+    ]
   },
   {
     "id": "rename_dimension",
@@ -9975,9 +10061,9 @@
     },
     "links": [
       {
-        "href": "https://openeo.org/documentation/1.0/glossary.html#resample-changing-data-cube-geometry",
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#resample",
         "rel": "about",
-        "title": "Resampling explained in the openEO glossary"
+        "title": "Resampling explained in the openEO documentation"
       }
     ]
   },
@@ -10100,6 +10186,11 @@
       }
     },
     "links": [
+      {
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#resample",
+        "rel": "about",
+        "title": "Resampling explained in the openEO documentation"
+      },
       {
         "rel": "about",
         "href": "https://proj.org/usage/projections.html",
