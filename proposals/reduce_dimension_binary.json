@@ -86,6 +86,11 @@
     },
     "links": [
         {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#reduce",
+            "rel": "about",
+            "title": "Reducers explained in the openEO documentation"
+        },
+        {
             "rel": "about",
             "href": "https://en.wikipedia.org/wiki/Reduction_Operator",
             "title": "Background information on reduction operators (binary reducers) by Wikipedia"

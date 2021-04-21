@@ -79,5 +79,12 @@
         "DimensionNotAvailable": {
             "message": "A dimension with the specified name does not exist."
         }
-    }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#reduce",
+            "rel": "about",
+            "title": "Reducers explained in the openEO documentation"
+        }
+    ]
 }

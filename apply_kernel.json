@@ -83,6 +83,11 @@
     },
     "links": [
         {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#apply",
+            "rel": "about",
+            "title": "Apply explained in the openEO documentation"
+        },
+        {
             "rel": "about",
             "href": "http://www.songho.ca/dsp/convolution/convolution.html",
             "title": "Convolutions explained"

@@ -83,5 +83,12 @@
         "DimensionNotAvailable": {
             "message": "A dimension with the specified name does not exist."
         }
-    }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#filter",
+            "rel": "about",
+            "title": "Filters explained in the openEO documentation"
+        }
+    ]
 }

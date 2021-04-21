@@ -118,6 +118,11 @@
     },
     "links": [
         {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#resample",
+            "rel": "about",
+            "title": "Resampling explained in the openEO documentation"
+        },
+        {
             "rel": "about",
             "href": "https://proj.org/usage/projections.html",
             "title": "PROJ parameters for cartographic projections"

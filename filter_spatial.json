@@ -33,6 +33,11 @@
     },
     "links": [
         {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#filter",
+            "rel": "about",
+            "title": "Filters explained in the openEO documentation"
+        },
+        {
             "href": "http://www.opengeospatial.org/standards/sfa",
             "rel": "about",
             "title": "Simple Features standard by the OGC"
