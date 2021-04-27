@@ -1,16 +1,17 @@
 {
     "id": "array_labels",
     "summary": "Get the labels for an array",
-    "description": "Gives all labels for a labeled array in the data cube. The labels have the same order as in the array.\n\nIf the array is not labeled, an empty array is returned.",
+    "description": "Gives all labels for a labeled array. The labels have the same order as in the array.",
     "categories": [
         "arrays"
     ],
     "parameters": [
         {
             "name": "data",
-            "description": "An array.",
+            "description": "An array with labels.",
             "schema": {
                 "type": "array",
+                "subtype": "labeled-array",
                 "items": {
                     "description": "Any data type."
                 }
