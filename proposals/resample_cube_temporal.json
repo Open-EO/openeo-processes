@@ -26,39 +26,24 @@
         },
         {
             "name": "method",
-            "description": "A resampling method to be applied, could be a reducer for downsampling or other methods for upsampling. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
+            "description": "Resampling method to use. The following options are available:\n\n* `average`: average (mean) resampling, computes the weighted average of all valid pixels\n* `max`: maximum resampling, selects the maximum value from all valid pixels\n* `med`: median resampling, selects the median value of all valid pixels\n* `min`: minimum resampling, selects the minimum value from all valid pixels\n* `mode`: mode resampling, selects the value which appears most often of all the sampled points\n* `near`: nearest neighbour resampling (default)\n* `q1`: first quartile resampling, selects the first quartile value of all valid pixels\n* `q3`: third quartile resampling, selects the third quartile value of all valid pixels\n* `rms` root mean square (quadratic mean) of all valid pixels\n* `sum`: compute the weighted sum of all valid pixels\n\nValid pixels are determined based on the function ``is_valid()``.",
             "schema": {
-                "type": "object",
-                "subtype": "process-graph",
-                "parameters": [
-                    {
-                        "name": "data",
-                        "description": "A labeled array with elements of any type.",
-                        "schema": {
-                            "type": "array",
-                            "subtype": "labeled-array",
-                            "items": {
-                                "description": "Any data type."
-                            }
-                        }
-                    },
-                    {
-                        "name": "context",
-                        "description": "Additional data passed by the user.",
-                        "schema": {
-                            "description": "Any data type."
-                        },
-                        "optional": true,
-                        "default": null
-                    }
-                ],
-                "returns": {
-                    "description": "The value to be set in the resampled data cube.",
-                    "schema": {
-                        "description": "Any data type."
-                    }
-                }
-            }
+                "type": "string",
+                "enum": [
+                    "average",
+                    "max",
+                    "med",
+                    "min",
+                    "mode",
+                    "near",
+                    "q1",
+                    "q3",
+                    "rms",
+                    "sum"
+                ]
+            },
+            "default": "near",
+            "optional": true
         },
         {
             "name": "dimension",

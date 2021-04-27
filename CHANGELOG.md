@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Moved the experimental processes `aggregate_spatial_binary`, `reduce_dimension_binary` and `run_udf_externally` to the proposals.
     - Moved the rarely used and implemented processes `cummax`, `cummin`, `cumproduct`, `cumsum`, `debug`, `filter_labels`, `load_result`, `load_uploaded_files`, `resample_cube_temporal` to the proposals.
 - Exception messages have been aligned always use ` instead of '. Tooling could render it with CommonMark.
+- `resample_cube_spatial` and `resample_spatial`: Aligned with GDAL and added `rms` and `sum` options to methods. Also added better descriptions.
+- `resample_cube_temporal`: Replaced parameter `process` (callback-style) with a parameter `method` that aligns with the spatial resampling processes. [#194](https://github.com/Open-EO/openeo-processes/issues/194)
 
 ### Fixed
 - Clarify that the user workspace is server-side. [#225](https://github.com/Open-EO/openeo-processes/issues/225)
