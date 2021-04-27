@@ -9,7 +9,20 @@
     "parameters": [
         {
             "name": "data",
-            "description": "A labeled array of numbers. The array labels are the values for `x` (independent variable where the data is measured) and the array elements are the values for `y` (dependent data).",
+            "description": "The values for `y` (dependent data) as an array of numbers.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "labels",
+            "description": "The values for `x` (independent variable where the data is measured) as an array of numbers.\n\nUse the process ``array_labels()`` to retrieve the labels for a labeled array.",
             "schema": {
                 "type": "array",
                 "items": {
