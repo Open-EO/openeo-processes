@@ -36,20 +36,23 @@
             "description": "Either source code, an absolute URL or a path to a UDF script.",
             "schema": [
                 {
-                    "description": "URI to a UDF",
+                    "description": "Absolute URL to a UDF",
                     "type": "string",
                     "format": "uri",
-                    "subtype": "uri"
+                    "subtype": "uri",
+                    "pattern": "^(http|https)://"
                 },
                 {
                     "description": "Path to a UDF uploaded to the server.",
                     "type": "string",
-                    "subtype": "file-path"
+                    "subtype": "file-path",
+                    "pattern": "^[^\r\n\\:'\"]+$"
                 },
                 {
-                    "description": "Source code as string",
+                    "description": "The multi-line source code of a UDF, must contain a newline/line-break.",
                     "type": "string",
-                    "subtype": "udf-code"
+                    "subtype": "udf-code",
+                    "pattern": "(\r\n|\r|\n)"
                 }
             ]
         },
