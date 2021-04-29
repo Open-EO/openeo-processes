@@ -48,6 +48,16 @@
                     "type": "null"
                 }
             ]
+        },
+        {
+            "description": "Proprietary options for the atmospheric correction method. Specifying proprietary options will reduce portability.",
+            "name": "options",
+            "optional": true,
+            "default": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": false
+            }
         }
     ],
     "returns": {

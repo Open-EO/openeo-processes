@@ -34,6 +34,16 @@
                     "type": "null"
                 }
             ]
+        },
+        {
+            "description": "Proprietary options for the cloud detection method. Specifying proprietary options will reduce portability.",
+            "name": "options",
+            "optional": true,
+            "default": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": false
+            }
         }
     ],
     "returns": {

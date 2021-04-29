@@ -58,6 +58,26 @@
                     "type": "null"
                 }
             ]
+        },
+        {
+            "description": "Proprietary options for the atmospheric correction method. Specifying proprietary options will reduce portability.",
+            "name": "atmospheric_correction_options",
+            "optional": true,
+            "default": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": false
+            }
+        },
+        {
+            "description": "Proprietary options for the cloud detection method. Specifying proprietary options will reduce portability.",
+            "name": "cloud_detection_options",
+            "optional": true,
+            "default": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": false
+            }
         }
     ],
     "returns": {
