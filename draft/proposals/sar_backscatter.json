@@ -100,7 +100,7 @@
         }
     ],
     "returns": {
-        "description": "Backscatter values corresponding to the chosen parametrization.\n\nBy default, the backscatter values are given in linear scale.",
+        "description": "Backscatter values corresponding to the chosen parametrization. The values are given in linear scale.",
         "schema": {
             "subtype": "raster-cube",
             "type": "object"
