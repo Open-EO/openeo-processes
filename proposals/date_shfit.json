@@ -1,0 +1,86 @@
+{
+    "id": "date_shfit",
+    "summary": "Calculates and manipulates dates and times",
+    "description": "Allows to calculate a new date and time based on a given date and time by adding or subtracting a given temporal period.",
+    "categories": [
+        "date & time"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The base date and time to manipulate.\n\nThe millisecond part of the date and time is optional and defaults to 0 if not given. The time zone never changes.",
+            "schema": {
+                "type": "string",
+                "format": "date-time",
+                "subtype": "date-time"
+            }
+        },
+        {
+            "name": "value",
+            "description": "The period of time in the unit given that is added (positive numbers) or subtracted (negative numbers).",
+            "schema": {
+                "type": "integer"
+            }
+        },
+        {
+            "name": "unit",
+            "description": "The unit for the value given. The following pre-defined units are available:\n\n- millisecond: Milliseconds\n- second: Seconds\n- minute: Minutes\n- hour: Hours\n- day: Days - changes only the the day part of a date (and potentially also the month and the year)\n- week: Weeks (equivalent to 7 days)\n- month: Months - changes only the month part of a date (and potentially also the year)\n- year: Years - changes only the year part of a date\n",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "millisecond",
+                    "second",
+                    "minute",
+                    "hour",
+                    "day",
+                    "week",
+                    "month",
+                    "year"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "The manipulated date and time.",
+        "schema": {
+            "type": "string",
+            "format": "date-time",
+            "subtype": "date-time"
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "data": "2020-02-01T17:22:45Z",
+                "value": 1,
+                "unit": "year"
+            },
+            "returns": "2021-02-01T17:22:45Z"
+        },
+        {
+            "arguments": {
+                "data": "2020-02-01T17:22:45Z",
+                "value": 6,
+                "unit": "month"
+            },
+            "returns": "2020-08-01T17:22:45Z"
+        },
+        {
+            "arguments": {
+                "data": "2021-03-31T00:00:00+02:00",
+                "value": -7,
+                "unit": "day"
+            },
+            "returns": "2021-03-24T00:00:00+02:00"
+        },
+        {
+            "arguments": {
+                "data": "2018-12-31T17:22:45Z",
+                "value": 1150,
+                "unit": "millisecond"
+            },
+            "returns": "2018-12-31T17:22:46.150Z"
+        }
+    ]
+}
