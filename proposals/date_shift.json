@@ -1,5 +1,5 @@
 {
-    "id": "date_shfit",
+    "id": "date_shift",
     "summary": "Calculates and manipulates dates and times",
     "description": "Allows to calculate a new date and time based on a given date and time by adding or subtracting a given temporal period.",
     "categories": [
