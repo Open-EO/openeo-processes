@@ -34,11 +34,12 @@
         },
         {
             "name": "url",
-            "description": "URL to a remote UDF service.",
+            "description": "Absolute URL to a remote UDF service.",
             "schema": {
                 "type": "string",
                 "format": "uri",
-                "subtype": "uri"
+                "subtype": "uri",
+                "pattern": "^(http|https)://"
             }
         },
         {
