@@ -1,7 +1,7 @@
 {
     "id": "sar_backscatter",
     "summary": "Computes backscatter from SAR input",
-    "description": "Computes backscatter from SAR input.\n\nNote that backscatter computation may require instrument specific metadata that is tightly coupled to the original SAR products. As a result, this process may only work in combination with loading data from specific collections, not with general data cubes.",
+    "description": "Computes backscatter from SAR input.\n\nNote that backscatter computation may require instrument specific metadata that is tightly coupled to the original SAR products. As a result, this process may only work in combination with loading data from specific collections, not with general data cubes.\n\nThis process uses bilinear interpolation, both for resampling the DEM and the backscatter.",
     "categories": [
         "cubes",
         "sar"
@@ -126,6 +126,11 @@
             "rel": "about",
             "href": "https://www.geo.uzh.ch/microsite/rsl-documents/research/publications/peer-reviewed-articles/201108-TGRS-Small-tcGamma-3809999360/201108-TGRS-Small-tcGamma.pdf",
             "title": "Flattening Gamma: Radiometric Terrain Correction for SAR Imagery"
+        },
+        {
+            "rel": "about",
+            "href": "https://doi.org/10.3390/data4030093",
+            "title": "Reasoning behind the choice of bilinear resampling"
         }
     ]
 }
