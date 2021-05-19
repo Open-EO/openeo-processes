@@ -1,7 +1,7 @@
 {
     "id": "date_shift",
     "summary": "Calculates and manipulates dates and times",
-    "description": "Based on a given date (and optionally time), calculates a new date (and time if given) by adding or subtracting a given temporal period. If the given date doesn't include a time component, the returned values will also not include the time component.\n\nThis process doesn't change the time zone and also doesn't take daylight saving time (DST) into account.",
+    "description": "Based on a given date (and optionally time), calculates a new date (and time if given) by adding or subtracting a given temporal period.\n\nSome specifics about dates and times need to be taken into account:\n\n* This process doesn't have any effect on the time zone.\n* It doesn't take daylight saving time (DST) into account as only dates and time in UTC (with potential numerical time zone modifier) are supported.\n* Leap years are implemented in a way that computations handle them gracefully (see parameter `unit` for details).\n* Leap seconds are mostly ignored in manipulations as they don't follow a regular pattern. Leap seconds can be passed to the process, but will never be returned.",
     "categories": [
         "date & time"
     ],
@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "The date (and optionally time) to manipulate.\n\nIf the given date doesn't include the time, the process assumes that the time component is `00:00:00Z` (i.e. midnight, in UTC). The millisecond part of the time is optional and defaults to 0 if not given.",
+            "description": "The date (and optionally time) to manipulate.\n\nIf the given date doesn't include the time, the process assumes that the time component is `00:00:00Z` (i.e. midnight, in UTC). The millisecond part of the time is optional and defaults to `0` if not given.",
             "schema": [
                 {
                     "type": "string",
@@ -25,14 +25,14 @@
         },
         {
             "name": "value",
-            "description": "The period of time in the unit given that is added (positive numbers) or subtracted (negative numbers).",
+            "description": "The period of time in the unit given that is added (positive numbers) or subtracted (negative numbers). The value `0` doesn't have any effect.",
             "schema": {
                 "type": "integer"
             }
         },
         {
             "name": "unit",
-            "description": "The unit for the value given. The following pre-defined units are available:\n\n- millisecond: Milliseconds\n- second: Seconds\n- minute: Minutes\n- hour: Hours\n- day: Days - changes only the the day part of a date (and potentially also the month and the year)\n- week: Weeks (equivalent to 7 days)\n- month: Months - changes only the month part of a date (and potentially also the year)\n- year: Years - changes only the year part of a date\n\nIf any of the changes result in an invalid date, the corresponding part is rounded down to the next valid date. For example, adding a month to `2020-01-31` would result in `2020-02-29`.",
+            "description": "The unit for the value given. The following pre-defined units are available:\n\n- millisecond: Milliseconds\n- second: Seconds - leap seconds are ignored in computations.\n- minute: Minutes\n- hour: Hours\n- day: Days - changes only the the day part of a date\n- week: Weeks (equivalent to 7 days)\n- month: Months\n- year: Years\n\nManipulations with the unit `year`, `month`, `week` or `day` do never change the time. If any of the manipulations result in an invalid date or time, the corresponding part is rounded down to the next valid date or time respectively. For example, adding a month to `2020-01-31` would result in `2020-02-29`.",
             "schema": {
                 "type": "string",
                 "enum": [
@@ -49,7 +49,7 @@
         }
     ],
     "returns": {
-        "description": "The manipulated date (and time if a time component is given in the parameter `data`).",
+        "description": "The manipulated date. If a time component was given in the parameter `data`, the time component is returned with the date.",
         "schema": [
             {
                 "type": "string",
@@ -64,14 +64,6 @@
         ]
     },
     "examples": [
-        {
-            "arguments": {
-                "data": "2020-02-29T17:22:45Z",
-                "value": 1,
-                "unit": "year"
-            },
-            "returns": "2021-02-28T17:22:45Z"
-        },
         {
             "arguments": {
                 "data": "2020-02-01T17:22:45Z",
@@ -89,6 +81,34 @@
             "returns": "2021-03-24T00:00:00+02:00"
         },
         {
+            "description": "Adding a year to February 29th in a leap year will result in February 28th in the next (non-leap) year.",
+            "arguments": {
+                "data": "2020-02-29T17:22:45Z",
+                "value": 1,
+                "unit": "year"
+            },
+            "returns": "2021-02-28T17:22:45Z"
+        },
+        {
+            "description": "Adding a month to January 31th will result in February 29th in leap years.",
+            "arguments": {
+                "data": "2020-01-31",
+                "value": 1,
+                "unit": "month"
+            },
+            "returns": "2020-02-29"
+        },
+        {
+            "description": "The process skips over the leap second `2016-12-31T23:59:60Z`.",
+            "arguments": {
+                "data": "2016-12-31T23:59:59Z",
+                "value": 1,
+                "unit": "second"
+            },
+            "returns": "2017-01-01T00:00:00Z"
+        },
+        {
+            "description": "Milliseconds can be added or subtracted. If not given, the default value is `0`.",
             "arguments": {
                 "data": "2018-12-31T17:22:45Z",
                 "value": 1150,
