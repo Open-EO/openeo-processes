@@ -1,6 +1,6 @@
 {
     "id": "date_shift",
-    "summary": "Calculates and manipulates dates and times",
+    "summary": "Manipulates dates and times by addition or subtraction",
     "description": "Based on a given date (and optionally time), calculates a new date (and time if given) by adding or subtracting a given temporal period.\n\nSome specifics about dates and times need to be taken into account:\n\n* This process doesn't have any effect on the time zone.\n* It doesn't take daylight saving time (DST) into account as only dates and time in UTC (with potential numerical time zone modifier) are supported.\n* Leap years are implemented in a way that computations handle them gracefully (see parameter `unit` for details).\n* Leap seconds are mostly ignored in manipulations as they don't follow a regular pattern. Leap seconds can be passed to the process, but will never be returned.",
     "categories": [
         "date & time"
