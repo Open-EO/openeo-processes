@@ -17,7 +17,7 @@
         },
         {
             "name": "kernel",
-            "description": "Kernel as a two-dimensional array of weights. The inner level of the nested array aligns with the `x` axis and the outer level aligns with the `y` axis. Each level of the kernel must have an uneven number of elements, otherwise the process throws a `KernelDimensionsUneven` error.",
+            "description": "Kernel as a two-dimensional array of weights. The inner level of the nested array aligns with the `x` axis and the outer level aligns with the `y` axis. Each level of the kernel must have an uneven number of elements, otherwise the process throws a `KernelDimensionsUneven` exception.",
             "schema": {
                 "description": "A two-dimensional array of numbers.",
                 "type": "array",
@@ -82,6 +82,11 @@
         }
     },
     "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#apply",
+            "rel": "about",
+            "title": "Apply explained in the openEO documentation"
+        },
         {
             "rel": "about",
             "href": "http://www.songho.ca/dsp/convolution/convolution.html",

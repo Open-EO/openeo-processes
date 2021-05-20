@@ -1,7 +1,7 @@
 {
     "id": "load_uploaded_files",
     "summary": "Load files from the user workspace",
-    "description": "Loads one or more user-uploaded files from the local user workspace / data store and returns them as a single data cube. The files must have been stored by the authenticated user on the back-end currently connected to.",
+    "description": "Loads one or more user-uploaded files from the server-side workspace of the authenticated user and returns them as a single data cube. The files must have been stored by the authenticated user on the back-end currently connected to.",
     "categories": [
         "cubes",
         "import"
@@ -10,13 +10,14 @@
     "parameters": [
         {
             "name": "paths",
-            "description": "The files to read. Folders can't be specified, instead specify all files. An error is thrown if a file can't be read.",
+            "description": "The files to read. Folders can't be specified, specify all files instead. An exception is thrown if a file can't be read.",
             "schema": {
                 "type": "array",
                 "subtype": "file-paths",
                 "items": {
                     "type": "string",
-                    "subtype": "file-path"
+                    "subtype": "file-path",
+                    "pattern": "^[^\r\n\\:'\"]+$"
                 }
             }
         },

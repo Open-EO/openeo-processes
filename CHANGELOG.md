@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `array_create`
     - `array_find_label`
     - `array_modify`
+    - `date_shift`
     - `is_infinite`
     - `nan`
 - Added return value details (property `returns`) for the schemas with the subtype `process-graph`. [API#350](https://github.com/Open-EO/openeo-api/issues/350)
@@ -22,8 +23,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `proposals` folder for experimental processes. Experimental processes are not covered by the CHANGELOG and MAY include breaking changes! [#196](https://github.com/Open-EO/openeo-processes/issues/196), [#207](https://github.com/Open-EO/openeo-processes/issues/207), [PSC#8](https://github.com/Open-EO/PSC/issues/8)
     - Moved the experimental processes `aggregate_spatial_binary`, `reduce_dimension_binary` and `run_udf_externally` to the proposals.
     - Moved the rarely used and implemented processes `cummax`, `cummin`, `cumproduct`, `cumsum`, `debug`, `filter_labels`, `load_result`, `load_uploaded_files`, `resample_cube_temporal` to the proposals.
+- Exception messages have been aligned always use ` instead of '. Tooling could render it with CommonMark.
+- `run_udf` and `run_udf_externally`: Specify specific (extensible) protocols for UDF URIs.
 
 ### Fixed
+- Clarify that the user workspace is server-side. [#225](https://github.com/Open-EO/openeo-processes/issues/225)
 - Clarify that the `condition` parameter for `array_filter` works also on indices and labels.
 - Clarify contradicting statements in `filter_temporal` for the default value of the `dimension` parameter. By default *all* temporal dimensions are affected by the process. [#203](https://github.com/Open-EO/openeo-processes/issues/203)
 - Clarify how the parameters passed to the overlap resolver correspond to the data cubes. [#184](https://github.com/Open-EO/openeo-processes/issues/184)
@@ -32,7 +36,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `array_element`: Clarify that `ArrayNotLabeled` exception is thrown when parameter `label` is specified and the given array is not labeled.
 - `array_apply`, `array_element`, `array_filter`: Added the `minimum: 0` constraint to all schemas describing zero-based indices (parameter `index`).
 - `array_labels`: Clarified the accepted data type for array elements passed to the parameter `data`.
-- Examples `array_contains_nodata` and `array_find_nodata`
+- `merge_cubes`: Clarified the dimension label order after the merge. [#212](https://github.com/Open-EO/openeo-processes/issues/212)
+- Fixed typos, grammar issues and other spelling-related issues in many of the processes.
+- Fixed the examples `array_contains_nodata` and `array_find_nodata`.
+- Fixed links to openEO glossary and added links to data cube introduction. [#216](https://github.com/Open-EO/openeo-processes/issues/216)
+- Clarified disallowed characters in subtype `file-path`.
+- Clarified that UDF source code must contain a newline/line-break (affects `run_udf`).
 
 ## 1.0.0 - 2020-07-31
 
@@ -68,9 +77,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `aggregate_temporal`: Fixed outdated message for exception `TooManyDimensions`.
 - `clip`: Fixed examples.
 - `linear_scale_range`: Clarify that the process implicitly clips the values. [#159](https://github.com/Open-EO/openeo-processes/issues/159)
-- `mean`: Clarify behaviour for arrays with `null`-values only.
-- `mod`: Clarified behaviour. [#168](https://github.com/Open-EO/openeo-processes/issues/168)
-- `resample_*`: Clarified behaviour.
+- `mean`: Clarify behavior for arrays with `null`-values only.
+- `mod`: Clarified behavior. [#168](https://github.com/Open-EO/openeo-processes/issues/168)
+- `resample_*`: Clarified behavior.
 - `first`, `last`, `max`, `mean`, `median`, `min`, `sd`, `variance`: Clarify behavior for arrays with `null`-values only.
 - Clarified (and fixed if necessary) for all processes in the "cubes" category the descriptions for the returned data cube. [#149](https://github.com/Open-EO/openeo-processes/issues/149)
 

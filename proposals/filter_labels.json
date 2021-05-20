@@ -55,7 +55,7 @@
         },
         {
             "name": "dimension",
-            "description": "The name of the dimension to filter on. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+            "description": "The name of the dimension to filter on. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
             "schema": {
                 "type": "string"
             }
@@ -106,6 +106,13 @@
                 },
                 "dimension": "platform"
             }
+        }
+    ],
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#filter",
+            "rel": "about",
+            "title": "Filters explained in the openEO documentation"
         }
     ]
 }

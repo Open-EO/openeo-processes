@@ -16,7 +16,7 @@
         },
         {
             "name": "process",
-            "description": "Process to be applied on all pixel values. The specified process needs to accept an array as parameter and must return an array with least one element. A process may consist of multiple sub-processes.",
+            "description": "Process to be applied on all pixel values. The specified process needs to accept an array and must return an array with at least one element. A process may consist of multiple sub-processes.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
@@ -55,14 +55,14 @@
         },
         {
             "name": "dimension",
-            "description": "The name of the source dimension to apply the process on. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+            "description": "The name of the source dimension to apply the process on. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
             "schema": {
                 "type": "string"
             }
         },
         {
             "name": "target_dimension",
-            "description": "The name of the target dimension or `null` (the default) to use the source dimension specified in the parameter `dimension`.\n\nBy specifying a target dimension, the source dimension is removed. The target dimension with the specified name and the type `other` (see ``add_dimension()``) is created, if if doesn't exist yet.",
+            "description": "The name of the target dimension or `null` (the default) to use the source dimension specified in the parameter `dimension`.\n\nBy specifying a target dimension, the source dimension is removed. The target dimension with the specified name and the type `other` (see ``add_dimension()``) is created, if it doesn't exist yet.",
             "schema": {
                 "type": [
                     "string",
@@ -93,5 +93,12 @@
         "DimensionNotAvailable": {
             "message": "A dimension with the specified name does not exist."
         }
-    }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#apply",
+            "rel": "about",
+            "title": "Apply explained in the openEO documentation"
+        }
+    ]
 }

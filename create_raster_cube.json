@@ -12,5 +12,12 @@
             "type": "object",
             "subtype": "raster-cube"
         }
-    }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html",
+            "rel": "about",
+            "title": "Data Cubes explained in the openEO documentation"
+        }
+    ]
 }
