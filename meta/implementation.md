@@ -74,3 +74,28 @@ you may define something like the following for the parameter:
 	]
 }
 ```
+
+## Date and Time manipulation
+
+Working with dates is a lot more complex than it seems to be at first sight. Issues arise especially with daylight saving times (DST), time zones, leap years and leap seconds.
+
+The date/time functions in openEO don't have any effect on time zones right now as only dates and times in UTC (with potential numerical time zone modifier) are supported.
+
+Month overflows, including the specific case of leap years, are implemented in a way that computations handle them gracefully. For example:
+
+- If you add a month to January, 31th, it will result in February 29th (leap year) or 28th (other years). This means for invalid dates due to month overflow we round down (or "snap") to the last valid date of the month.
+- If you add a month to February, 29th, it will result in March, 29. So the "snap" behavior doesn't work the other way round.
+
+Leap seconds are basically ignored in manipulations as they don't follow a regular pattern. So leap seconds may be passed into the processes, but will never be returned by date manipulation processes in openEO. See the examples for the leap second `2016-12-31T23:59:60Z`:
+
+- If you add a minute to `2016-12-31T23:59:60Z`, it will result in `2017-01-01T00:00:59Z`. This means for invalid times we round down (or "snap") to the next valid time.
+- If you add a seconds to `2016-12-31T23:59:59Z`, it will result in `2017-01-01T00:00:00Z`.
+
+### Language support
+
+To make `date_shift` easier to implement, we have found some libraries that follow this specification and can be used for implementations:
+
+- Java: [java.time](https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html)
+- JavaScript: [Moment.js](https://momentjs.com/)
+- Python: [dateutil](https://dateutil.readthedocs.io/en/stable/index.html)
+- R: [lubridate](https://lubridate.tidyverse.org/) ([Cheatsheet](https://rawgit.com/rstudio/cheatsheets/master/lubridate.pdf))
