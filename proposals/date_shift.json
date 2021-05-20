@@ -8,7 +8,7 @@
     "experimental": true,
     "parameters": [
         {
-            "name": "data",
+            "name": "date",
             "description": "The date (and optionally time) to manipulate.\n\nIf the given date doesn't include the time, the process assumes that the time component is `00:00:00Z` (i.e. midnight, in UTC). The millisecond part of the time is optional and defaults to `0` if not given.",
             "schema": [
                 {
@@ -49,7 +49,7 @@
         }
     ],
     "returns": {
-        "description": "The manipulated date. If a time component was given in the parameter `data`, the time component is returned with the date.",
+        "description": "The manipulated date. If a time component was given in the parameter `date`, the time component is returned with the date.",
         "schema": [
             {
                 "type": "string",
@@ -66,7 +66,7 @@
     "examples": [
         {
             "arguments": {
-                "data": "2020-02-01T17:22:45Z",
+                "date": "2020-02-01T17:22:45Z",
                 "value": 6,
                 "unit": "month"
             },
@@ -74,7 +74,7 @@
         },
         {
             "arguments": {
-                "data": "2021-03-31T00:00:00+02:00",
+                "date": "2021-03-31T00:00:00+02:00",
                 "value": -7,
                 "unit": "day"
             },
@@ -83,7 +83,7 @@
         {
             "description": "Adding a year to February 29th in a leap year will result in February 28th in the next (non-leap) year.",
             "arguments": {
-                "data": "2020-02-29T17:22:45Z",
+                "date": "2020-02-29T17:22:45Z",
                 "value": 1,
                 "unit": "year"
             },
@@ -92,7 +92,7 @@
         {
             "description": "Adding a month to January 31th will result in February 29th in leap years.",
             "arguments": {
-                "data": "2020-01-31",
+                "date": "2020-01-31",
                 "value": 1,
                 "unit": "month"
             },
@@ -101,7 +101,7 @@
         {
             "description": "The process skips over the leap second `2016-12-31T23:59:60Z`.",
             "arguments": {
-                "data": "2016-12-31T23:59:59Z",
+                "date": "2016-12-31T23:59:59Z",
                 "value": 1,
                 "unit": "second"
             },
@@ -110,7 +110,7 @@
         {
             "description": "Milliseconds can be added or subtracted. If not given, the default value is `0`.",
             "arguments": {
-                "data": "2018-12-31T17:22:45Z",
+                "date": "2018-12-31T17:22:45Z",
                 "value": 1150,
                 "unit": "millisecond"
             },
@@ -118,7 +118,7 @@
         },
         {
             "arguments": {
-                "data": "2018-01-01",
+                "date": "2018-01-01",
                 "value": 25,
                 "unit": "hour"
             },
@@ -126,7 +126,7 @@
         },
         {
             "arguments": {
-                "data": "2018-01-01",
+                "date": "2018-01-01",
                 "value": -1,
                 "unit": "hour"
             },
