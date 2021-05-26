@@ -52,11 +52,13 @@ you may define something like the following for the parameter:
 			"properties": {
 				"force_option1": {
 					"type": "number",
-					"description": "Description for option 1"
+					"description": "Description for option 1",
+					"default": 0
 				},
 				"force_option2": {
 					"type": "boolean",
-					"description": "Description for option 1"
+					"description": "Description for option 1",
+					"default": true
 				}
 			}
 		},
@@ -66,7 +68,8 @@ you may define something like the following for the parameter:
 			"properties": {
 				"icor_option1": {
 					"type": "string",
-					"description": "Description for option 1"
+					"description": "Description for option 1",
+					"default": "example"
 				}
 			}
 		}
@@ -74,6 +77,10 @@ you may define something like the following for the parameter:
 	]
 }
 ```
+
+Default values should be specified for each of the additional options given in `properties`.
+The top-level default value should always be an empty object `{}`. The default values for the empty object will be provided by the schema.
+None of the additional options should be required for better interoperability.
 
 ## Date and Time manipulation
 
