@@ -1,7 +1,7 @@
 {
     "id": "cloud_detection",
     "summary": "Create cloud masks",
-    "description": "Detects atmospheric disturbances such as clouds, cloud shadows, aerosols, haze, ozone and/or water vapour in optical imagery.\n\nIt creates a data cube with the spatial and temporal dimensions compatible to the source data cube and a dimension that contains a dimension label for each of the supported/considered atmospheric disturbances. The naming of the bands should follow the following pre-defined values:\n\n- `clouds`\n- `shadows`\n- `aerosol`\n- `haze`\n- `ozone`\n- `water_vapor`\n\nAll bands have values between 0 (clear) and 1, which describes the probability that it is an atmospheric disturbance.",
+    "description": "Detects atmospheric disturbances such as clouds, cloud shadows, aerosols, haze, ozone and/or water vapour in optical imagery.\n\nIt creates a data cube with the spatial and temporal dimensions compatible to the source data cube and a dimension that contains a dimension label for each of the supported/considered atmospheric disturbances. The naming of the bands follows these pre-defined values:\n\n- `cloud`\n- `shadow`\n- `aerosol`\n- `haze`\n- `ozone`\n- `water_vapor`\n\nAll bands have values between 0 (clear) and 1, which describes the probability that it is an atmospheric disturbance.",
     "categories": [
         "cubes",
         "optical"
@@ -34,6 +34,16 @@
                     "type": "null"
                 }
             ]
+        },
+        {
+            "description": "Proprietary options for the cloud detection method. Specifying proprietary options will reduce portability.",
+            "name": "options",
+            "optional": true,
+            "default": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": false
+            }
         }
     ],
     "returns": {
