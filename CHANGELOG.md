@@ -48,6 +48,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Clarified disallowed characters in subtype `file-path`.
 - Clarified that UDF source code must contain a newline/line-break (affects `run_udf`).
 - `aggregate_spatial`, `aggregate_spatial_binary`: Clarified that Features, Geometries and GeometryCollections are a single entity in computations. Only FeatureCollections are multiple entities. [#252](https://github.com/Open-EO/openeo-processes/issues/252)
+- `load_collection`, parameter `spatial_extent`: Clarified that all pixels that are inside the bounding box of the given polygons but do not intersect with any polygon have to be set to no-data (`null`). [#256](https://github.com/Open-EO/openeo-processes/issues/256)
+- `load_collection`: Clarified that the parameters are recommended to be used in favor of `filter_*` processes.
 
 ## 1.0.0 - 2020-07-31
 
