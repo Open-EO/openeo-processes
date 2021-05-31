@@ -1,7 +1,7 @@
 {
     "id": "resample_cube_temporal",
-    "summary": "Resample a temporal dimension to match a target data cube",
-    "description": "Resamples the given temporal dimension from a source data cube to align with the corresponding dimension of the given target data cube. Returns a new data cube with the resampled dimension.\n\nIf the dimension is not set or is set to `null`, the data cube is expected to have one temporal dimension only.",
+    "summary": "Resample temporal dimensions to match a target data cube",
+    "description": "Resamples one or more given temporal dimensions from a source data cube to align with the corresponding dimensions of the given target data cube using the nearest neighbor method. Returns a new data cube with the resampled dimensions.",
     "categories": [
         "cubes",
         "aggregate & resample"
@@ -10,7 +10,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "A data cube.",
+            "description": "A data cube with one or more temporal dimensions.",
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
@@ -25,29 +25,8 @@
             }
         },
         {
-            "name": "method",
-            "description": "Resampling method to use. The following options are available:\n\n* `average`: average (mean) resampling, computes the weighted average of all valid pixels\n* `max`: maximum resampling, selects the maximum value from all valid pixels\n* `med`: median resampling, selects the median value of all valid pixels\n* `min`: minimum resampling, selects the minimum value from all valid pixels\n* `mode`: mode resampling, selects the value which appears most often of all the sampled points\n* `near`: nearest neighbour resampling (default)\n* `q1`: first quartile resampling, selects the first quartile value of all valid pixels\n* `q3`: third quartile resampling, selects the third quartile value of all valid pixels\n* `rms` root mean square (quadratic mean) of all valid pixels\n* `sum`: compute the weighted sum of all valid pixels\n\nValid pixels are determined based on the function ``is_valid()``.",
-            "schema": {
-                "type": "string",
-                "enum": [
-                    "average",
-                    "max",
-                    "med",
-                    "min",
-                    "mode",
-                    "near",
-                    "q1",
-                    "q3",
-                    "rms",
-                    "sum"
-                ]
-            },
-            "default": "near",
-            "optional": true
-        },
-        {
             "name": "dimension",
-            "description": "The name of the temporal dimension to resample, which must exist with this name in both data cubes. If the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` exception if it has more dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+            "description": "The name of the temporal dimension to resample, which must exist with this name in both data cubes. If the dimension is not set or is set to `null`, the process resamples all temporal dimensions that exist with the same names in both data cubes.\n\nThe following exceptions may occur:\n\n* A dimension is given, but it does not exist in any of the data cubes: `DimensionNotAvailable`\n* A dimension is given, but one of them is not temporal: `DimensionMismatch`\n\n* No specific dimension name is given and there are no temporal dimensions with the same name in the data: `DimensionMismatch`",
             "schema": {
                 "type": [
                     "string",
@@ -56,27 +35,18 @@
             },
             "default": null,
             "optional": true
-        },
-        {
-            "name": "context",
-            "description": "Additional data to be passed to the process specified for the parameter `method`.",
-            "schema": {
-                "description": "Any data type."
-            },
-            "optional": true,
-            "default": null
         }
     ],
     "returns": {
-        "description": "A raster data cube with the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-temporal dimensions. For the temporal dimension, the name and type remain unchanged, but the reference system changes and the labels and resolution may change.",
+        "description": "A raster data cube with the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-temporal dimensions. For the temporal dimension, the name and type remain unchanged, but the dimension labels, resolution and reference system may change.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"
         }
     },
     "exceptions": {
-        "TooManyDimensions": {
-            "message": "The number of temporal dimensions must be reduced to one for `resample_cube_temporal`."
+        "DimensionMismatch": {
+            "message": "The temporal dimensions for resampling don't match."
         },
         "DimensionNotAvailable": {
             "message": "A dimension with the specified name does not exist."
