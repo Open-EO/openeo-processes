@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - New processes in proposal state
+    - `array_append`
+    - `array_concat`
+    - `array_create`
+    - `array_find_label`
+    - `array_modify`
+    - `date_shift`
     - `is_infinite`
     - `nan`
 - Added return value details (property `returns`) for the schemas with the subtype `process-graph`. [API#350](https://github.com/Open-EO/openeo-api/issues/350)
@@ -18,11 +24,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Moved the experimental processes `aggregate_spatial_binary`, `reduce_dimension_binary` and `run_udf_externally` to the proposals.
     - Moved the rarely used and implemented processes `cummax`, `cummin`, `cumproduct`, `cumsum`, `debug`, `filter_labels`, `load_result`, `load_uploaded_files`, `resample_cube_temporal` to the proposals.
 - Exception messages have been aligned always use ` instead of '. Tooling could render it with CommonMark.
+- `load_collection`  and `mask_polygon`: Also support multi polygons instead of just polygons. [#237](https://github.com/Open-EO/openeo-processes/issues/237)
+- `run_udf` and `run_udf_externally`: Specify specific (extensible) protocols for UDF URIs.
+
+### Deprecated
+
+- `GeometryCollection`s are discouraged in all relevant processes.
 
 ### Fixed
 - Clarify that the user workspace is server-side. [#225](https://github.com/Open-EO/openeo-processes/issues/225)
 - Clarify that the `condition` parameter for `array_filter` works also on indices and labels.
-- Clarify contradicting statements in `filter_temporal` for the default value of the `dimension` parameter. By default *all* temporal dimensions are affected by the process. [#203](https://github.com/Open-EO/openeo-processes/issues/203)
+- Clarify contradicting statements in `filter_temporal` for the default value of the `dimension` parameter. By default *all* temporal dimensions are affected by the process. [#203](https://github.com/Open-EO/openeo-processes/issues/203)
 - Clarify how the parameters passed to the overlap resolver correspond to the data cubes. [#184](https://github.com/Open-EO/openeo-processes/issues/184)
 - Improve and clarify specifications for `is_nan`, `is_nodata`, `is_valid`. [#189](https://github.com/Open-EO/openeo-processes/issues/189)
 - Improve and clarify specifications for `all` and `any`. [#189](https://github.com/Open-EO/openeo-processes/issues/199)
@@ -34,6 +46,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed the examples `array_contains_nodata` and `array_find_nodata`.
 - Fixed links to openEO glossary and added links to data cube introduction. [#216](https://github.com/Open-EO/openeo-processes/issues/216)
 - Fixed description of `apply_dimension` with regards to reference systems. Made description easier to understand, too. [#234](https://github.com/Open-EO/openeo-processes/issues/234)
+- Clarified disallowed characters in subtype `file-path`.
+- Clarified that UDF source code must contain a newline/line-break (affects `run_udf`).
+- `aggregate_spatial`, `aggregate_spatial_binary`: Clarified that Features, Geometries and GeometryCollections are a single entity in computations. Only FeatureCollections are multiple entities. [#252](https://github.com/Open-EO/openeo-processes/issues/252)
+- `load_collection`, parameter `spatial_extent`: Clarified that all pixels that are inside the bounding box of the given polygons but do not intersect with any polygon have to be set to no-data (`null`). [#256](https://github.com/Open-EO/openeo-processes/issues/256)
+- `load_collection`: Clarified that the parameters are recommended to be used in favor of `filter_*` processes.
 
 ## 1.0.0 - 2020-07-31
 
