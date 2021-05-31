@@ -1,7 +1,7 @@
 {
     "id": "reduce_dimension_binary",
     "summary": "Reduce dimensions using binary reduction",
-    "description": "Applies a binary reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer. This process consecutively passes a pair of values to the reducer. This may be better suited especially for UDFs in case the number of values gets too large to be processed at once. In contrast, ``reduce_dimension()`` passes a list of values.\n\nThe dimension is dropped. To avoid this, use ``apply_dimension()`` instead.",
+    "description": "Applies a binary reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer. The dimension is dropped.\n\nThis process consecutively passes a pair of values to the reducer. This may be better suited especially for UDFs in case the number of values gets too large to be processed at once. In contrast, ``reduce_dimension()`` passes a list of values. An aggregation over certain spatial areas can be computed with the process ``aggregate_spatial_binary()``.",
     "categories": [
         "cubes",
         "reducer"

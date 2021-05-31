@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `date_shift`
     - `is_infinite`
     - `nan`
+    - `reduce_spatial`
 - Added return value details (property `returns`) for the schemas with the subtype `process-graph`. [API#350](https://github.com/Open-EO/openeo-api/issues/350)
 - `apply_neighborhood`: Clarify behavior for data cubes returned by the child processes and for that add the exception `DataCubePropertiesImmutable`.
 
@@ -28,7 +29,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `run_udf` and `run_udf_externally`: Specify specific (extensible) protocols for UDF URIs.
 
 ### Deprecated
-
 - `GeometryCollection`s are discouraged in all relevant processes.
 
 ### Fixed
@@ -48,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Clarified disallowed characters in subtype `file-path`.
 - Clarified that UDF source code must contain a newline/line-break (affects `run_udf`).
 - `aggregate_spatial`, `aggregate_spatial_binary`: Clarified that Features, Geometries and GeometryCollections are a single entity in computations. Only FeatureCollections are multiple entities. [#252](https://github.com/Open-EO/openeo-processes/issues/252)
+- `aggregate_spatial`: Clarified that the values have no predefined order and reducers such as `first`, `last` and `median` return unpredictable results. [#260](https://github.com/Open-EO/openeo-processes/issues/260)
 - `load_collection`, parameter `spatial_extent`: Clarified that all pixels that are inside the bounding box of the given polygons but do not intersect with any polygon have to be set to no-data (`null`). [#256](https://github.com/Open-EO/openeo-processes/issues/256)
 - `load_collection`: Clarified that the parameters are recommended to be used in favor of `filter_*` processes.
 

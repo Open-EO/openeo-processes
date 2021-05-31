@@ -1,11 +1,13 @@
 {
-    "id": "reduce_dimension",
-    "summary": "Reduce dimensions",
-    "description": "Applies a unary reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer. The dimension is dropped. To avoid this, use ``apply_dimension()`` instead.\n\nThis process passes a list of values to the reducer. In contrast, ``reduce_dimension_binary()`` passes two values, which may be better suited especially for UDFs in case the number of values gets too large to be processed at once.",
+    "id": "reduce_spatial",
+    "summary": "Reduce horizontal spatial dimensions",
+    "description": "Applies a unary reducer to a data cube dimension by collapsing all the pixel values along the horizontal spatial dimensions (i.e. axes `x` and `y`) into an output value computed by the reducer. The horizontal spatial dimensions are dropped.\n\nThis process passes a list of values to the reducer. The list of values has an undefined order, therefore processes such as ``last()`` and ``first()`` that depend on the order of the values will lead to unpredictable results.\n\nIn contrast to this process, ``reduce_spatial_binary()`` passes two values, which may be better suited especially for UDFs in case the number of values gets too large to be processed at once. An aggregation over certain spatial areas can be computed with the process ``aggregate_spatial()``.",
     "categories": [
+        "aggregate & resample",
         "cubes",
         "reducer"
     ],
+    "experimental": true,
     "parameters": [
         {
             "name": "data",
@@ -17,17 +19,16 @@
         },
         {
             "name": "reducer",
-            "description": "A reducer to apply on the specified dimension. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
+            "description": "A reducer to apply on the horizontal spatial dimensions. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
                 "parameters": [
                     {
                         "name": "data",
-                        "description": "A labeled array with elements of any type.",
+                        "description": "An array with elements of any type.",
                         "schema": {
                             "type": "array",
-                            "subtype": "labeled-array",
                             "items": {
                                 "description": "Any data type."
                             }
@@ -52,13 +53,6 @@
             }
         },
         {
-            "name": "dimension",
-            "description": "The name of the dimension over which to reduce. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
-            "schema": {
-                "type": "string"
-            }
-        },
-        {
             "name": "context",
             "description": "Additional data to be passed to the reducer.",
             "schema": {
@@ -69,15 +63,10 @@
         }
     ],
     "returns": {
-        "description": "A data cube with the newly computed values. It is missing the given dimension, the number of dimensions decreases by one. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.",
+        "description": "A data cube with the newly computed values. It is missing the horizontal spatial dimensions, the number of dimensions decreases by two. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"
-        }
-    },
-    "exceptions": {
-        "DimensionNotAvailable": {
-            "message": "A dimension with the specified name does not exist."
         }
     },
     "links": [
