@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Added `proposals` folder for experimental processes. Experimental processes are not covered by the CHANGELOG and MAY include breaking changes! [#196](https://github.com/Open-EO/openeo-processes/issues/196), [#207](https://github.com/Open-EO/openeo-processes/issues/207), [PSC#8](https://github.com/Open-EO/PSC/issues/8)
-    - Moved the experimental processes `aggregate_spatial_binary`, `reduce_dimension_binary` and `run_udf_externally` to the proposals.
+    - Moved the experimental process `run_udf_externally` to the proposals.
     - Moved the rarely used and implemented processes `cummax`, `cummin`, `cumproduct`, `cumsum`, `debug`, `filter_labels`, `load_result`, `load_uploaded_files`, `resample_cube_temporal` to the proposals.
 - Exception messages have been aligned always use ` instead of '. Tooling could render it with CommonMark.
 - `load_collection`  and `mask_polygon`: Also support multi polygons instead of just polygons. [#237](https://github.com/Open-EO/openeo-processes/issues/237)
@@ -30,6 +30,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 
 - `GeometryCollection`s are discouraged in all relevant processes.
+
+### Removed
+
+- Removed the experimental processes `aggregate_spatial_binary` and `reduce_dimension_binary`. [#258](https://github.com/Open-EO/openeo-processes/issues/258)
 
 ### Fixed
 - Clarify that the user workspace is server-side. [#225](https://github.com/Open-EO/openeo-processes/issues/225)
