@@ -1,7 +1,7 @@
 {
     "id": "reduce_spatial",
-    "summary": "Reduce horizontal spatial dimensions",
-    "description": "Applies a unary reducer to a data cube dimension by collapsing all the pixel values along the horizontal spatial dimensions (i.e. axes `x` and `y`) into an output value computed by the reducer. The horizontal spatial dimensions are dropped.\n\nAn aggregation over certain spatial areas can be computed with the process ``aggregate_spatial()``.\n\nThis process passes a list of values to the reducer. The list of values has an undefined order, therefore processes such as ``last()`` and ``first()`` that depend on the order of the values will lead to unpredictable results.",
+    "summary": "Reduce spatial dimensions 'x' and 'y",
+    "description": "Applies a unary reducer to a data cube by collapsing all the pixel values along the horizontal spatial dimensions (i.e. axes `x` and `y`) into an output value computed by the reducer. The horizontal spatial dimensions are dropped.\n\nAn aggregation over certain spatial areas can be computed with the process ``aggregate_spatial()``.\n\nThis process passes a list of values to the reducer. The list of values has an undefined order, therefore processes such as ``last()`` and ``first()`` that depend on the order of the values will lead to unpredictable results.",
     "categories": [
         "aggregate & resample",
         "cubes",
