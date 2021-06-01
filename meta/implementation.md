@@ -10,7 +10,7 @@ Nevertheless, there are some cases where a special treatment can make a huge dif
 ### Branching behavior
 
 The `if` process (and any process that is working on some kind of condition) are usually
-special control structures and not normal function. Those conditionals usually decide between
+special control structures and not normal functions. Those conditionals usually decide between
 one outcome or the other. Evaluating them in a naive way would compute both outcomes and depending
 on the condition use one outcome and discard the other.
 This can and should be optimized by "lazily" only computing the outcome that is actually used.
@@ -28,7 +28,7 @@ Similarly, back-ends **should** ["short-circuit"](https://en.wikipedia.org/wiki/
 the evaluation of conditions, which means that once a condition has reached an unambiguous result
 the evaluation should stop and provide the result directly.
 
-For example, the condition `A > 0 or A < 0` should only execute `A < 0` if `A > 0` is false as
+For example, the condition `A > 0 or B > 0` should only execute `B > 0` if `A > 0` is false as
 otherwise the result is already unambiguous and will be `true` regardless of the rest of the 
 condition.
 
