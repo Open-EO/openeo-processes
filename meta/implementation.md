@@ -25,8 +25,10 @@ and comparability and reproducibility of the results is still given.
 ### Short-circuit evaluation
 
 Similarly, back-ends **should** ["short-circuit"](https://en.wikipedia.org/wiki/Short-circuit_evaluation)
-the evaluation of conditions, which means that once a condition has reached an unambiguous result
+the evaluation of conditions that use processes processes such as `and`, `or` or `xor`,
+which means that once a condition has reached an unambiguous result
 the evaluation should stop and provide the result directly.
+This is basically the same behavior that is also described in the processes `all` and `any`.
 
 For example, the condition `A > 0 or B > 0` should only execute `B > 0` if `A > 0` is false as
 otherwise the result is already unambiguous and will be `true` regardless of the rest of the 
