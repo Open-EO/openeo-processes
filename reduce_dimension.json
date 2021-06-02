@@ -1,7 +1,7 @@
 {
     "id": "reduce_dimension",
     "summary": "Reduce dimensions",
-    "description": "Applies a unary reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer.\n\nThe dimension is dropped. To avoid this, use ``apply_dimension()`` instead.",
+    "description": "Applies a reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer.\n\nThe dimension is dropped. To avoid this, use ``apply_dimension()`` instead.",
     "categories": [
         "cubes",
         "reducer"
