@@ -255,7 +255,7 @@
   {
     "id": "aggregate_spatial",
     "summary": "Zonal statistics for geometries",
-    "description": "Aggregates statistics for one or more geometries (e.g. zonal statistics for polygons) over the spatial dimensions. This process passes a list of values to the reducer.\n\nThe data cube must have been reduced to only contain two spatial dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise, this process fails with the `TooManyDimensions` exception.\n\nThe number of total and valid pixels is returned together with the calculated values.",
+    "description": "Aggregates statistics for one or more geometries (e.g. zonal statistics for polygons) over the spatial dimensions. The number of total and valid pixels is returned together with the calculated values.\n\nAn 'unbounded' aggregation over the full extent of the horizontal spatial dimensions can be computed with the process ``reduce_spatial()``.\n\nThis process passes a list of values to the reducer. The list of values has an undefined order, therefore processes such as ``last()`` and ``first()`` that depend on the order of the values will lead to unpredictable results.",
     "categories": [
       "cubes",
       "aggregate & resample"
@@ -263,7 +263,7 @@
     "parameters": [
       {
         "name": "data",
-        "description": "A raster data cube. The data cube implicitly gets restricted to the bounds of the geometries as if ``filter_spatial()`` would have been used with the same values for the corresponding parameters immediately before this process.",
+        "description": "A raster data cube.\n\nThe data cube must have been reduced to only contain two spatial dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise, this process fails with the `TooManyDimensions` exception.\n\nThe data cube implicitly gets restricted to the bounds of the geometries as if ``filter_spatial()`` would have been used with the same values for the corresponding parameters immediately before this process.",
         "schema": {
           "type": "object",
           "subtype": "raster-cube"
@@ -1578,7 +1578,7 @@
   {
     "id": "apply",
     "summary": "Apply a process to each pixel",
-    "description": "Applies a *unary* process to each pixel value in the data cube (i.e. a local operation). A unary process takes a single value and returns a single value, for example ``abs()`` or ``linear_scale_range()``. In contrast, the process ``apply_dimension()`` applies a process to all pixel values along a particular dimension.",
+    "description": "Applies a process to each pixel value in the data cube (i.e. a local operation). In contrast, the process ``apply_dimension()`` applies a process to all pixel values along a particular dimension.",
     "categories": [
       "cubes"
     ],
@@ -1593,7 +1593,7 @@
       },
       {
         "name": "process",
-        "description": "A unary process to be applied on each value, may consist of multiple sub-processes.",
+        "description": "A process that accepts and returns a single value and is applied on each individual value in the data cube. The process may consist of multiple sub-processes and could, for example, consist of processes such as ``abs()`` or ``linear_scale_range()``.",
         "schema": {
           "type": "object",
           "subtype": "process-graph",
@@ -1888,8 +1888,8 @@
   },
   {
     "id": "array_apply",
-    "summary": "Apply a unary process to each array element",
-    "description": "Applies a **unary** process which takes a single value such as `abs` or `sqrt` to each value in the array. This is basically what other languages call either a `for each` loop or a `map` function.",
+    "summary": "Apply a process to each array element",
+    "description": "Applies a process to each individual value in the array. This is basically what other languages call either a `for each` loop or a `map` function.",
     "categories": [
       "arrays"
     ],
@@ -1906,7 +1906,7 @@
       },
       {
         "name": "process",
-        "description": "A process to be applied on each value, may consist of multiple sub-processes. The specified process must be unary meaning that it must work on a single value.",
+        "description": "A process that accepts and returns a single value and is applied on each individual value in the array. The process may consist of multiple sub-processes and could, for example, consist of processes such as ``abs()`` or ``linear_scale_range()``.",
         "schema": {
           "type": "object",
           "subtype": "process-graph",
@@ -9577,6 +9577,85 @@
     ]
   },
   {
+    "id": "reduce_spatial",
+    "summary": "Reduce spatial dimensions 'x' and 'y'",
+    "description": "Applies a reducer to a data cube by collapsing all the pixel values along the horizontal spatial dimensions (i.e. axes `x` and `y`) into an output value computed by the reducer. The horizontal spatial dimensions are dropped.\n\nAn aggregation over certain spatial areas can be computed with the process ``aggregate_spatial()``.\n\nThis process passes a list of values to the reducer. The list of values has an undefined order, therefore processes such as ``last()`` and ``first()`` that depend on the order of the values will lead to unpredictable results.",
+    "categories": [
+      "aggregate & resample",
+      "cubes",
+      "reducer"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "A data cube.",
+        "schema": {
+          "type": "object",
+          "subtype": "raster-cube"
+        }
+      },
+      {
+        "name": "reducer",
+        "description": "A reducer to apply on the horizontal spatial dimensions. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
+        "schema": {
+          "type": "object",
+          "subtype": "process-graph",
+          "parameters": [
+            {
+              "name": "data",
+              "description": "An array with elements of any type.",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "description": "Any data type."
+                }
+              }
+            },
+            {
+              "name": "context",
+              "description": "Additional data passed by the user.",
+              "schema": {
+                "description": "Any data type."
+              },
+              "optional": true,
+              "default": null
+            }
+          ],
+          "returns": {
+            "description": "The value to be set in the new data cube.",
+            "schema": {
+              "description": "Any data type."
+            }
+          }
+        }
+      },
+      {
+        "name": "context",
+        "description": "Additional data to be passed to the reducer.",
+        "schema": {
+          "description": "Any data type."
+        },
+        "optional": true,
+        "default": null
+      }
+    ],
+    "returns": {
+      "description": "A data cube with the newly computed values. It is missing the horizontal spatial dimensions, the number of dimensions decreases by two. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.",
+      "schema": {
+        "type": "object",
+        "subtype": "raster-cube"
+      }
+    },
+    "links": [
+      {
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#reduce",
+        "rel": "about",
+        "title": "Reducers explained in the openEO documentation"
+      }
+    ]
+  },
+  {
     "id": "resample_cube_temporal",
     "summary": "Resample a temporal dimension to match a target data cube",
     "description": "Resamples the given temporal dimension from a source data cube to align with the corresponding dimension of the given target data cube. Returns a new data cube with the resampled dimension.\n\nIf the dimension is not set or is set to `null`, the data cube is expected to have one temporal dimension only.",
@@ -10193,7 +10272,7 @@
   {
     "id": "reduce_dimension",
     "summary": "Reduce dimensions",
-    "description": "Applies a unary reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer. The dimension is dropped. To avoid this, use ``apply_dimension()`` instead.",
+    "description": "Applies a reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer.\n\nThe dimension is dropped. To avoid this, use ``apply_dimension()`` instead.",
     "categories": [
       "cubes",
       "reducer"
