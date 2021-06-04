@@ -49,6 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed typos, grammar issues and other spelling-related issues in many of the processes.
 - Fixed the examples `array_contains_nodata` and `array_find_nodata`.
 - Fixed links to openEO glossary and added links to data cube introduction. [#216](https://github.com/Open-EO/openeo-processes/issues/216)
+- Fixed description of `apply_dimension` with regards to reference systems. Made description easier to understand, too. [#234](https://github.com/Open-EO/openeo-processes/issues/234)
 - Clarified disallowed characters in subtype `file-path`.
 - Clarified that UDF source code must contain a newline/line-break (affects `run_udf`).
 - `aggregate_spatial`, `aggregate_spatial_binary`: Clarified that Features, Geometries and GeometryCollections are a single entity in computations. Only FeatureCollections are multiple entities. [#252](https://github.com/Open-EO/openeo-processes/issues/252)
