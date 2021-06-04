@@ -1,7 +1,7 @@
 {
     "id": "aggregate_spatial",
     "summary": "Zonal statistics for geometries",
-    "description": "Aggregates statistics for one or more geometries (e.g. zonal statistics for polygons) over the spatial dimensions. This process passes a list of values to the reducer.\n\nThe data cube must have been reduced to only contain two spatial dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise, this process fails with the `TooManyDimensions` exception.\n\nThe number of total and valid pixels is returned together with the calculated values.",
+    "description": "Aggregates statistics for one or more geometries (e.g. zonal statistics for polygons) over the spatial dimensions. The number of total and valid pixels is returned together with the calculated values.\n\nAn 'unbounded' aggregation over the full extent of the horizontal spatial dimensions can be computed with the process ``reduce_spatial()``.\n\nThis process passes a list of values to the reducer. The list of values has an undefined order, therefore processes such as ``last()`` and ``first()`` that depend on the order of the values will lead to unpredictable results.",
     "categories": [
         "cubes",
         "aggregate & resample"
@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "A raster data cube. The data cube implicitly gets restricted to the bounds of the geometries as if ``filter_spatial()`` would have been used with the same values for the corresponding parameters immediately before this process.",
+            "description": "A raster data cube.\n\nThe data cube must have been reduced to only contain two spatial dimensions and a third dimension the values are aggregated for, for example the temporal dimension to get a time series. Otherwise, this process fails with the `TooManyDimensions` exception.\n\nThe data cube implicitly gets restricted to the bounds of the geometries as if ``filter_spatial()`` would have been used with the same values for the corresponding parameters immediately before this process.",
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
