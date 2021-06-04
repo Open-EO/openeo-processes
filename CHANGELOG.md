@@ -16,12 +16,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `date_shift`
     - `is_infinite`
     - `nan`
+    - `reduce_spatial`
 - Added return value details (property `returns`) for the schemas with the subtype `process-graph`. [API#350](https://github.com/Open-EO/openeo-api/issues/350)
 - `apply_neighborhood`: Clarify behavior for data cubes returned by the child processes and for that add the exception `DataCubePropertiesImmutable`.
+- Added a guide for implementors that describes numerours implementation details for processes that could not be covered in the specifications itself, for example a recommended implementation for the `if` process. [#246](https://github.com/Open-EO/openeo-processes/issues/246)
 
 ### Changed
 - Added `proposals` folder for experimental processes. Experimental processes are not covered by the CHANGELOG and MAY include breaking changes! [#196](https://github.com/Open-EO/openeo-processes/issues/196), [#207](https://github.com/Open-EO/openeo-processes/issues/207), [PSC#8](https://github.com/Open-EO/PSC/issues/8)
-    - Moved the experimental processes `aggregate_spatial_binary`, `reduce_dimension_binary` and `run_udf_externally` to the proposals.
+    - Moved the experimental process `run_udf_externally` to the proposals.
     - Moved the rarely used and implemented processes `cummax`, `cummin`, `cumproduct`, `cumsum`, `debug`, `filter_labels`, `load_result`, `load_uploaded_files`, `resample_cube_temporal` to the proposals.
 - Exception messages have been aligned always use ` instead of '. Tooling could render it with CommonMark.
 - `load_collection`  and `mask_polygon`: Also support multi polygons instead of just polygons. [#237](https://github.com/Open-EO/openeo-processes/issues/237)
@@ -30,8 +32,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `resample_cube_temporal`: Process has been simplified and only offers the nearest neighbor method now. The `process` parameter has been removed, the `dimension` parameter was made less restrictive. [#194](https://github.com/Open-EO/openeo-processes/issues/194)
 
 ### Deprecated
-
 - `GeometryCollection`s are discouraged in all relevant processes.
+
+### Removed
+
+- Removed the experimental processes `aggregate_spatial_binary` and `reduce_dimension_binary`. [#258](https://github.com/Open-EO/openeo-processes/issues/258)
 
 ### Fixed
 - Clarify that the user workspace is server-side. [#225](https://github.com/Open-EO/openeo-processes/issues/225)
@@ -47,9 +52,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed typos, grammar issues and other spelling-related issues in many of the processes.
 - Fixed the examples `array_contains_nodata` and `array_find_nodata`.
 - Fixed links to openEO glossary and added links to data cube introduction. [#216](https://github.com/Open-EO/openeo-processes/issues/216)
+- Fixed description of `apply_dimension` with regards to reference systems. Made description easier to understand, too. [#234](https://github.com/Open-EO/openeo-processes/issues/234)
 - Clarified disallowed characters in subtype `file-path`.
 - Clarified that UDF source code must contain a newline/line-break (affects `run_udf`).
 - `aggregate_spatial`, `aggregate_spatial_binary`: Clarified that Features, Geometries and GeometryCollections are a single entity in computations. Only FeatureCollections are multiple entities. [#252](https://github.com/Open-EO/openeo-processes/issues/252)
+- `aggregate_spatial`: Clarified that the values have no predefined order and reducers such as `first` and `last` return unpredictable results. [#260](https://github.com/Open-EO/openeo-processes/issues/260)
 - `load_collection`, parameter `spatial_extent`: Clarified that all pixels that are inside the bounding box of the given polygons but do not intersect with any polygon have to be set to no-data (`null`). [#256](https://github.com/Open-EO/openeo-processes/issues/256)
 - `load_collection`: Clarified that the parameters are recommended to be used in favor of `filter_*` processes.
 

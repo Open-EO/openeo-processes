@@ -2,6 +2,41 @@
 
 This file is meant to provide some additional implementation details for back-ends.
 
+## Optimizations for conditions (e.g. `if`)
+
+None of the openEO processes per se is "special" and thus all are treated the same way by default.
+Nevertheless, there are some cases where a special treatment can make a huge difference.
+
+### Branching behavior
+
+The `if` process (and any process that is working on some kind of condition) are usually
+special control structures and not normal functions. Those conditionals usually decide between
+one outcome or the other. Evaluating them in a naive way would compute both outcomes and depending
+on the condition use one outcome and discard the other.
+This can and should be optimized by "lazily" only computing the outcome that is actually used.
+This could have a huge impact on performance as some computation doesn't need to be executed at all.
+
+openEO doesn't require special handling for the `if` process, but it is **strongly recommended**
+that back-ends treat them special and only compute the outcome that is actually needed.
+In the end, this is faster and cheaper for the user and thus users may prefer back-ends
+that offer this optimization. Fortunately, both ways still lead to the same results
+and comparability and reproducibility of the results is still given.
+
+### Short-circuit evaluation
+
+Similarly, back-ends **should** ["short-circuit"](https://en.wikipedia.org/wiki/Short-circuit_evaluation)
+the evaluation of conditions that use processes processes such as `and`, `or` or `xor`,
+which means that once a condition has reached an unambiguous result
+the evaluation should stop and provide the result directly.
+This is basically the same behavior that is also described in the processes `all` and `any`.
+
+For example, the condition `A > 0 or B > 0` should only execute `B > 0` if `A > 0` is false as
+otherwise the result is already unambiguous and will be `true` regardless of the rest of the 
+condition.
+
+Implementing this behavior does not have any negative side-effects so that 
+comparability and reproducibility of the results is still given.
+
 ## Enums for processing methods
 
 There are numerours processes that provide a predefined set of processing methods.
