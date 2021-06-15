@@ -1,7 +1,7 @@
 {
-    "id": "dimension_labels",
-    "summary": "Get the dimension labels",
-    "description": "Gives all labels for a dimension in the data cube. The labels have the same order as in the data cube.\n\nIf a dimension with the specified name does not exist, the process fails with a `DimensionNotAvailable` exception.",
+    "id": "dimension_values",
+    "summary": "Get the values across a dimension",
+    "description": "Gives all values and labels for a dimension in the data cube as a labeled array, similar to how ``apply_dimension()`` passes the values to the child process.\n\nIf a dimension with the specified name does not exist, the process fails with a `DimensionNotAvailable` exception.",
     "categories": [
         "cubes"
     ],
@@ -16,25 +16,19 @@
         },
         {
             "name": "dimension",
-            "description": "The name of the dimension to get the labels for.",
+            "description": "The name of the dimension to get the values and labels for.",
             "schema": {
                 "type": "string"
             }
         }
     ],
     "returns": {
-        "description": "The labels as an array.",
+        "description": "A labeled array with values and labels for the given dimension.",
         "schema": {
             "type": "array",
+            "subtype": "labeled-array",
             "items": {
-                "anyOf": [
-                    {
-                        "type": "number"
-                    },
-                    {
-                        "type": "string"
-                    }
-                ]
+                "description": "Any data type."
             }
         }
     },
