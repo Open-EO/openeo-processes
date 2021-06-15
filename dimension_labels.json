@@ -1,7 +1,7 @@
 {
     "id": "dimension_labels",
     "summary": "Get the dimension labels",
-    "description": "Gives all labels for a dimension in the data cube. The labels have the same order as in the data cube.",
+    "description": "Gives all labels for a dimension in the data cube. The labels have the same order as in the data cube.\n\nIf a dimension with the specified name does not exist, the process fails with a `DimensionNotAvailable` exception.",
     "categories": [
         "cubes"
     ],
@@ -36,6 +36,11 @@
                     }
                 ]
             }
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
         }
     }
 }
