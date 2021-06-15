@@ -59,6 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `load_collection`, parameter `spatial_extent`: Clarified that all pixels that are inside the bounding box of the given polygons but do not intersect with any polygon have to be set to no-data (`null`). [#256](https://github.com/Open-EO/openeo-processes/issues/256)
 - `load_collection`: Clarified that the parameters are recommended to be used in favor of `filter_*` processes.
 - `aggregate_temporal` and `aggregate_temporal_period`: Clarified that reducers are also executed for intervals/periods with no data. [#263](https://github.com/Open-EO/openeo-processes/issues/263)
+- `dimension_labels`: Clarified that the process fails with a `DimensionNotAvailable` exception, if a dimension with the specified name does not exist.
 
 ## 1.0.0 - 2020-07-31
 
