@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `array_concat`
     - `array_create`
     - `array_find_label`
+    - `array_interpolate_linear` [#173](https://github.com/Open-EO/openeo-processes/issues/173)
     - `array_modify`
     - `date_shift`
     - `is_infinite`
