@@ -34,6 +34,17 @@
             }
         },
         {
+            "name": "parameters",
+            "description": "Defined the number of parameters for the model function and provides an initial guess for them. At least one parameter is required.",
+            "schema": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                    "type": "number"
+                }
+            }
+        },
+        {
             "name": "function",
             "description": "The model function. It must take the independent variable `x` as the first argument and the parameters to fit as array through the second argument.",
             "schema": {
@@ -41,23 +52,23 @@
                 "subtype": "process-graph",
                 "parameters": [
                     {
-                        "name": "x",
-                        "description": "The value for the independent variable `x`.",
-                        "schema": {
-                            "type": [
-                                "number"
-                            ]
-                        }
-                    },
-                    {
                         "name": "parameters",
-                        "description": "The parameters for the model function, at least one parameter required.",
+                        "description": "The parameters for the model function, contains at least one parameter.",
                         "schema": {
                             "type": "array",
                             "minItems": 1,
                             "items": {
                                 "type": "number"
                             }
+                        }
+                    },
+                    {
+                        "name": "x",
+                        "description": "The value for the independent variable `x`.",
+                        "schema": {
+                            "type": [
+                                "number"
+                            ]
                         }
                     }
                 ],
@@ -83,6 +94,7 @@
         "description": "An array with the optimal values for the parameters.",
         "schema": {
             "type": "array",
+            "minItems": 1,
             "items": {
                 "type": "number"
             }
