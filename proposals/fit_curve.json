@@ -26,9 +26,15 @@
             "schema": {
                 "type": "array",
                 "items": {
-                    "type": [
-                        "number",
-                        "null"
+                    "anyOf": [
+                        {
+                            "type": "number"
+                        },
+                        {
+                            "type": "string",
+                            "format": "date-time",
+                            "subtype": "date-time"
+                        }
                     ]
                 }
             }
