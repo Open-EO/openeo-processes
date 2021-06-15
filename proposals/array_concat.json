@@ -1,0 +1,61 @@
+{
+    "id": "array_concat",
+    "summary": "Merge two arrays",
+    "description": "Concatenates two arrays into a single array by appending the second array to the first array. Array labels get discarded from both arrays before merging.",
+    "categories": [
+        "arrays"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "array1",
+            "description": "The first array.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
+            }
+        },
+        {
+            "name": "array2",
+            "description": "The second array.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
+            }
+        }
+    ],
+    "returns": {
+        "description": "The merged array.",
+        "schema": {
+            "type": "array",
+            "items": {
+                "description": "Any data type is allowed."
+            }
+        }
+    },
+    "examples": [
+        {
+            "description": "Concatenates two arrays containing different data type.",
+            "arguments": {
+                "array1": [
+                    "a",
+                    "b"
+                ],
+                "array2": [
+                    1,
+                    2
+                ]
+            },
+            "returns": [
+                "a",
+                "b",
+                1,
+                2
+            ]
+        }
+    ]
+}
