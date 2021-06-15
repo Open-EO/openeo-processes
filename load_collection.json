@@ -18,7 +18,7 @@
         },
         {
             "name": "spatial_extent",
-            "description": "Limits the data to load from the collection to the specified bounding box or polygons.\n\nThe process puts a pixel into the data cube if the point at the pixel center intersects with the bounding box or any of the polygons (as defined in the Simple Features standard by the OGC).\n\nThe GeoJSON can be one of the following GeoJSON types:\n\n* A `Polygon` geometry,\n* a `GeometryCollection` containing Polygons,\n* a `Feature` with a `Polygon` geometry or\n* a `FeatureCollection` containing `Feature`s with a `Polygon` geometry.\n\nSet this parameter to `null` to set no limit for the spatial extent. Be careful with this when loading large datasets!",
+            "description": "Limits the data to load from the collection to the specified bounding box or polygons.\n\nThe process puts a pixel into the data cube if the point at the pixel center intersects with the bounding box or any of the polygons (as defined in the Simple Features standard by the OGC).\n\nThe GeoJSON can be one of the following feature types:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry,\n* a `FeatureCollection` containing at least one `Feature` with `Polygon` or `MultiPolygon` geometries, or\n* a `GeometryCollection` containing `Polygon` or `MultiPolygon` geometries. To maximize interoperability, `GeometryCollection` should be avoided in favour of one of the alternatives above.\n\nSet this parameter to `null` to set no limit for the spatial extent. Be careful with this when loading large datasets! It is recommended to use this parameter instead of using ``filter_bbox()`` or ``filter_spatial()`` directly after loading unbounded data.",
             "schema": [
                 {
                     "title": "Bounding Box",
@@ -93,6 +93,7 @@
                 },
                 {
                     "title": "GeoJSON",
+                    "description": "Limits the data cube to the bounding box of the given geometry. All pixels inside the bounding box that do not intersect with any of the polygons will be set to no data (`null`).",
                     "type": "object",
                     "subtype": "geojson"
                 },
@@ -105,7 +106,7 @@
         },
         {
             "name": "temporal_extent",
-            "description": "Limits the data to load from the collection to the specified left-closed temporal interval. Applies to all temporal dimensions. The interval has to be specified as an array with exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html). Also supports open intervals by setting one of the boundaries to `null`, but never both.\n\nSet this parameter to `null` to set no limit for the spatial extent. Be careful with this when loading large datasets!",
+            "description": "Limits the data to load from the collection to the specified left-closed temporal interval. Applies to all temporal dimensions. The interval has to be specified as an array with exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html). Also supports open intervals by setting one of the boundaries to `null`, but never both.\n\nSet this parameter to `null` to set no limit for the temporal extent. Be careful with this when loading large datasets! It is recommended to use this parameter instead of using ``filter_temporal()`` directly after loading unbounded data.",
             "schema": [
                 {
                     "type": "array",
@@ -156,7 +157,7 @@
         },
         {
             "name": "bands",
-            "description": "Only adds the specified bands into the data cube so that bands that don't match the list of band names are not available. Applies to all dimensions of type `bands`.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If the unique band name and the common name conflict, the unique band name has a higher priority.\n\nThe order of the specified array defines the order of the bands in the data cube. f multiple bands match a common name, all matched bands are included in the original order.",
+            "description": "Only adds the specified bands into the data cube so that bands that don't match the list of band names are not available. Applies to all dimensions of type `bands`.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If the unique band name and the common name conflict, the unique band name has a higher priority.\n\nThe order of the specified array defines the order of the bands in the data cube. If multiple bands match a common name, all matched bands are included in the original order.\n\nIt is recommended to use this parameter instead of using ``filter_bands()`` directly after loading unbounded data.",
             "schema": [
                 {
                     "type": "array",
@@ -271,6 +272,11 @@
         }
     ],
     "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html",
+            "rel": "about",
+            "title": "Data Cubes explained in the openEO documentation"
+        },
         {
             "rel": "about",
             "href": "https://proj.org/usage/projections.html",

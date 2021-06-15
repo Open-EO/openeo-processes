@@ -108,5 +108,12 @@
             "type": "object",
             "subtype": "raster-cube"
         }
-    }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#aggregate",
+            "rel": "about",
+            "title": "Aggregation explained in the openEO documentation"
+        }
+    ]
 }

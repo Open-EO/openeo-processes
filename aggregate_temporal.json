@@ -87,14 +87,14 @@
         },
         {
             "name": "reducer",
-            "description": "A reducer to be applied on all values along the specified dimension. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
+            "description": "A reducer to be applied for the values contained in each interval. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes. Intervals may not contain any values, which for most reducers leads to no-data (`null`) values by default.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
                 "parameters": [
                     {
                         "name": "data",
-                        "description": "A labeled array with elements of any type.",
+                        "description": "A labeled array with elements of any type. If there's no data for the interval, the array is empty.",
                         "schema": {
                             "type": "array",
                             "subtype": "labeled-array",
@@ -233,9 +233,9 @@
     },
     "links": [
         {
-            "href": "https://openeo.org/documentation/1.0/glossary.html#aggregate-reducing-resolution",
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#aggregate",
             "rel": "about",
-            "title": "Aggregation explained in the openEO glossary"
+            "title": "Aggregation explained in the openEO documentation"
         }
     ]
 }

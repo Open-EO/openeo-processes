@@ -225,5 +225,12 @@
         "DataCubePropertiesImmutable": {
             "message": "The dimension properties (name, type, labels, reference system and resolution) must remain unchanged."
         }
-    }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#apply",
+            "rel": "about",
+            "title": "Apply explained in the openEO documentation"
+        }
+    ]
 }

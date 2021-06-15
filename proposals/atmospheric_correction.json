@@ -35,7 +35,7 @@
             ]
         },
         {
-            "description": "The digital elevation model to use, leave empty to allow the back-end to make a suitable choice.",
+            "description": "The digital elevation model to use. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
             "name": "elevation_model",
             "optional": true,
             "default": null,
@@ -48,6 +48,16 @@
                     "type": "null"
                 }
             ]
+        },
+        {
+            "description": "Proprietary options for the atmospheric correction method. Specifying proprietary options will reduce portability.",
+            "name": "options",
+            "optional": true,
+            "default": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": false
+            }
         }
     ],
     "returns": {

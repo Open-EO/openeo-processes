@@ -16,7 +16,8 @@
                 "subtype": "file-paths",
                 "items": {
                     "type": "string",
-                    "subtype": "file-path"
+                    "subtype": "file-path",
+                    "pattern": "^[^\r\n\\:'\"]+$"
                 }
             }
         },
