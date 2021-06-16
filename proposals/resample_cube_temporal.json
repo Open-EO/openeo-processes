@@ -1,7 +1,7 @@
 {
     "id": "resample_cube_temporal",
     "summary": "Resample temporal dimensions to match a target data cube",
-    "description": "Resamples one or more given temporal dimensions from a source data cube to align with the corresponding dimensions of the given target data cube using the nearest neighbor method. Returns a new data cube with the resampled dimensions.",
+    "description": "Resamples one or more given temporal dimensions from a source data cube to align with the corresponding dimensions of the given target data cube using the nearest neighbor method. Returns a new data cube with the resampled dimensions.\n\nBy default, this process simply takes the nearest neighbor independent of the value (including values such as no-data / `null`). To only consider valid values in a specific range around the target date, use the parameter `valid_within`.\n\nThe rare case of ties is resolved by choosing the earlier date/time.",
     "categories": [
         "cubes",
         "aggregate & resample"
@@ -30,6 +30,18 @@
             "schema": {
                 "type": [
                     "string",
+                    "null"
+                ]
+            },
+            "default": null,
+            "optional": true
+        },
+        {
+            "name": "valid_within",
+            "description": "Setting this parameter to a numerical value enables that the process searches for valid values within the given period of days before and after the target date and time. Valid values are determined based on the function ``is_valid()``. For example, the limit of `7` for the target date and time `2020-01-15 12:00:00` looks for a nearest neighbor after `2020-01-08 12:00:00` and before `2020-01-22 12:00:00`. If no valid value is found within the given period, the value will be set to no-data (`null`).",
+            "schema": {
+                "type": [
+                    "number",
                     "null"
                 ]
             },
