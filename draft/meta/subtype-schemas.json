@@ -84,7 +84,7 @@
                 },
                 "value": {
                     "default": null,
-                    "oneOf": [
+                    "anyOf": [
                         {
                             "type": "null"
                         },

@@ -13,7 +13,10 @@
             "optional": true,
             "default": [],
             "schema": {
-                "description": "Any data type is allowed."
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
             }
         },
         {

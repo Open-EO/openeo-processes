@@ -23,13 +23,9 @@
         "schema": {
             "type": "array",
             "items": {
-                "anyOf": [
-                    {
-                        "type": "number"
-                    },
-                    {
-                        "type": "string"
-                    }
+                "type": [
+                    "number",
+                    "string"
                 ]
             }
         }

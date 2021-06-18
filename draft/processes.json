@@ -606,13 +606,9 @@
         "schema": {
           "type": "array",
           "items": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "string"
-              }
+            "type": [
+              "number",
+              "string"
             ]
           }
         },
@@ -1407,7 +1403,7 @@
               },
               "value": {
                 "default": null,
-                "oneOf": [
+                "anyOf": [
                   {
                     "type": "null",
                     "title": "All values"
@@ -1456,7 +1452,7 @@
               },
               "value": {
                 "default": null,
-                "oneOf": [
+                "anyOf": [
                   {
                     "type": "null",
                     "title": "No values"
@@ -2538,13 +2534,9 @@
       "schema": {
         "type": "array",
         "items": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "string"
-            }
+          "type": [
+            "number",
+            "string"
           ]
         }
       }
@@ -3415,13 +3407,9 @@
       "schema": {
         "type": "array",
         "items": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "string"
-            }
+          "type": [
+            "number",
+            "string"
           ]
         }
       }
@@ -8262,7 +8250,10 @@
         "optional": true,
         "default": [],
         "schema": {
-          "description": "Any data type is allowed."
+          "type": "array",
+          "items": {
+            "description": "Any data type is allowed."
+          }
         }
       },
       {
@@ -10504,13 +10495,9 @@
         "schema": {
           "type": "array",
           "items": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "string"
-              }
+            "type": [
+              "number",
+              "string"
             ]
           }
         }
@@ -10521,13 +10508,9 @@
         "schema": {
           "type": "array",
           "items": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "string"
-              }
+            "type": [
+              "number",
+              "string"
             ]
           }
         },
