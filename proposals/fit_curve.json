@@ -32,6 +32,11 @@
                         },
                         {
                             "type": "string",
+                            "format": "date",
+                            "subtype": "date"
+                        },
+                        {
+                            "type": "string",
                             "format": "date-time",
                             "subtype": "date-time"
                         }
@@ -52,11 +57,20 @@
         },
         {
             "name": "function",
-            "description": "The model function. It must take the independent variable `x` as the first argument and the parameters to fit as array through the second argument.",
+            "description": "The model function. It must take the parameters to fit as array through the first argument and the independent variable `x` as the second argument.\n\nIt is recommended to store the model function as a user-defined process on the back-end to be able to re-use the model function with the computed optimal values for the parameters afterwards.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
                 "parameters": [
+                    {
+                        "name": "x",
+                        "description": "The value for the independent variable `x`.",
+                        "schema": {
+                            "type": [
+                                "number"
+                            ]
+                        }
+                    },
                     {
                         "name": "parameters",
                         "description": "The parameters for the model function, contains at least one parameter.",
@@ -66,15 +80,6 @@
                             "items": {
                                 "type": "number"
                             }
-                        }
-                    },
-                    {
-                        "name": "x",
-                        "description": "The value for the independent variable `x`.",
-                        "schema": {
-                            "type": [
-                                "number"
-                            ]
                         }
                     }
                 ],
