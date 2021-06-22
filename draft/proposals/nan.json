@@ -1,16 +1,16 @@
 {
     "id": "nan",
     "summary": "Not a Number (NaN)",
-    "description": "NaN (not a number) is a symbolic floating-point representation which is neither a signed infinity nor a finite number.",
+    "description": "`NaN` (not a number) is a symbolic floating-point representation which is neither a signed infinity nor a finite number.",
     "categories": [
         "math > constants"
     ],
     "experimental": true,
     "parameters": [],
     "returns": {
-        "description": "Returns NaN.",
+        "description": "Returns `NaN`.",
         "schema": {
-            "description": "Returns NaN.\n\n*SON Schema can't represent NaN, thus a schema can't be specified.*"
+            "description": "JSON Schema can't represent `NaN` and thus a schema can't be specified."
         }
     },
     "links": [
