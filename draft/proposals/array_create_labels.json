@@ -1,5 +1,5 @@
 {
-    "id": "array_create_labels",
+    "id": "array_create_labeled",
     "summary": "Create a labeled array",
     "description": "Creates a new labeled array by using the values from the `labels` array as labels and the values from the `data` array as the corresponding values.\n\nThe exception `ArrayLengthMismatch` is thrown, if the number of the values in the given arrays don't match exactly.\n\nThe primary use case here is to be able to transmit labeled arrays from the client to the server as JSON doesn't support this data type.",
     "categories": [
