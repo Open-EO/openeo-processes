@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased / Draft
 
+## [1.1.0] - 2021-07-02
+
 ### Added
 - New processes in proposal state
     - `array_append`
@@ -65,7 +67,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `aggregate_temporal` and `aggregate_temporal_period`: Clarified that reducers are also executed for intervals/periods with no data. [#263](https://github.com/Open-EO/openeo-processes/issues/263)
 - `dimension_labels`: Clarified that the process fails with a `DimensionNotAvailable` exception, if a dimension with the specified name does not exist.
 
-## 1.0.0 - 2020-07-31
+## [1.0.0] - 2020-07-31
 
 ### Added
 - `subtype-schemas.json`: A list of predefined subtypes is available as JSON Schema; Moved over from openeo-api.
@@ -105,7 +107,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `first`, `last`, `max`, `mean`, `median`, `min`, `sd`, `variance`: Clarify behavior for arrays with `null`-values only.
 - Clarified (and fixed if necessary) for all processes in the "cubes" category the descriptions for the returned data cube. [#149](https://github.com/Open-EO/openeo-processes/issues/149)
 
-## 1.0.0-rc.1 - 2020-01-31
+## [1.0.0-rc.1] - 2020-01-31
 
 ### Added
 - Processes:
@@ -217,3 +219,13 @@ First version which is separated from the openEO API. Complete rework of all pro
 
 ## Legacy versions
 Older versions of the processes were released as part of the openEO API, see the corresponding changelog for more information.
+
+
+[Unreleased]: <https://github.com/Open-EO/openeo-processes/compare/1.1.0...HEAD>
+[1.1.0]: <https://github.com/Open-EO/openeo-processes/compare/1.0.0...1.1.0>
+[1.0.0]: <https://github.com/Open-EO/openeo-processes/compare/1.0.0-rc.1...1.0.0>
+[1.0.0-rc.1]: <https://github.com/Open-EO/openeo-processes/compare/0.4.2...1.0.0-rc.1>
+[0.4.2]: <https://github.com/Open-EO/openeo-processes/compare/0.4.1...0.4.2>
+[0.4.1]: <https://github.com/Open-EO/openeo-processes/compare/0.4.0...0.4.1>
+[0.4.0]: <https://github.com/Open-EO/openeo-processes/tree/0.4.0>
+
