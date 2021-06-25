@@ -13,6 +13,7 @@ GeoJSON
 labeled
 MathWorld
 n-ary
+neighbor
 neighborhood
 neighborhoods
 openEO
@@ -22,6 +23,7 @@ radiometrically
 reflectances
 resample
 resampled
+resamples
 Resamples
 resampling
 Sentinel-2
@@ -31,4 +33,7 @@ signum
 STAC
 summand
 UDFs
+gdalwarp
+Lanczos
+sinc
 interpolants
