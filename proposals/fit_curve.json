@@ -1,8 +1,9 @@
 {
     "id": "fit_curve",
     "summary": "Curve fitting",
-    "description": "Use non-linear least squares to fit a model function `y = f(x, parameters)` to data.",
+    "description": "Use non-linear least squares to fit a model function `y = f(x, parameters)` to data.\n\nThe process throws an `InvalidValues` exception if invalid values are encountered. Invalid values are finite numbers (see also ``is_valid()``).",
     "categories": [
+        "cubes",
         "math"
     ],
     "experimental": true,
@@ -14,6 +15,24 @@
                 "type": "object",
                 "subtype": "raster-cube"
             }
+        },
+        {
+            "name": "parameters",
+            "description": "Defined the number of parameters for the model function and provides an initial guess for them. At least one parameter is required.",
+            "schema": [
+                {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                {
+                    "title": "Data Cube with optimal values from a previous result of this process.",
+                    "type": "object",
+                    "subtype": "raster-cube"
+                }
+            ]
         },
         {
             "name": "function",
@@ -52,80 +71,26 @@
             }
         },
         {
-            "name": "parameters",
-            "description": "Defined the number of parameters for the model function and provides an initial guess for them. At least one parameter is required.",
-            "schema": {
-                "type": "array",
-                "minItems": 1,
-                "items": {
-                    "type": "number"
-                }
-            }
-        },
-        {
             "name": "dimension",
-            "description": "The name of the dimension for curve fitting and predictions. Must be a dimension with labels that have a order (i.e. numerical labels or a temporal dimension). Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+            "description": "The name of the dimension for curve fitting. Must be a dimension with labels that have a order (i.e. numerical labels or a temporal dimension). Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
             "schema": {
                 "type": "string"
             }
-        },
-        {
-            "name": "predict_labels",
-            "description": "The labels to predict values for.",
-            "schema": {
-                "type": "array",
-                "items": {
-                    "anyOf": [
-                        {
-                            "type": "number"
-                        },
-                        {
-                            "type": "string",
-                            "format": "date",
-                            "subtype": "date"
-                        },
-                        {
-                            "type": "string",
-                            "format": "date-time",
-                            "subtype": "date-time"
-                        }
-                    ]
-                }
-            }
-        },
-        {
-            "name": "ignore_invalid",
-            "description": "By default, the process throws an `InvalidValues` exception if invalid values are encountered. Invalid values are finite numbers (see also ``is_valid()``). Enabling this parameter ignores invalid values, but may lead to nonsensical results if invalid values are present.",
-            "schema": {
-                "type": "boolean"
-            },
-            "default": false,
-            "optional": true
         }
     ],
     "returns": {
-        "description": "An array containing two data cubes:\n\n1. The data cube with the predicted values.\n2. The data cube with the optimal values for the parameters.",
+        "description": "A data cube with the optimal values for the parameters.",
         "schema": {
-            "type": "array",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": [
-                {
-                    "title": "Data Cube with predicted values",
-                    "type": "object",
-                    "subtype": "raster-cube"
-                },
-                {
-                    "title": "Data Cube with the optimal values for the parameters",
-                    "type": "object",
-                    "subtype": "raster-cube"
-                }
-            ]
+            "type": "object",
+            "subtype": "raster-cube"
         }
     },
     "exceptions": {
         "InvalidValues": {
             "message": "At least one of the values is not a finite number."
+        },
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
         }
     }
 }
