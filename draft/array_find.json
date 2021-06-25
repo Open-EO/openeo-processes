@@ -139,7 +139,7 @@
         {
             "rel": "example",
             "type": "application/json",
-            "href": "https://processes.openeo.org/draft/examples/array_find_nodata.json",
+            "href": "https://processes.openeo.org/1.0.0/examples/array_find_nodata.json",
             "title": "Find no-data values in arrays"
         }
     ]

@@ -1980,13 +1980,13 @@
       {
         "rel": "example",
         "type": "application/json",
-        "href": "https://processes.openeo.org/draft/examples/array_find_nodata.json",
+        "href": "https://processes.openeo.org/1.0.0/examples/array_find_nodata.json",
         "title": "Find no-data values in arrays"
       },
       {
         "rel": "example",
         "type": "application/json",
-        "href": "https://processes.openeo.org/draft/examples/array_contains_nodata.json",
+        "href": "https://processes.openeo.org/1.0.0/examples/array_contains_nodata.json",
         "title": "Check for no-data values in arrays"
       }
     ]
@@ -2126,7 +2126,7 @@
       {
         "rel": "example",
         "type": "application/json",
-        "href": "https://processes.openeo.org/draft/examples/array_contains_nodata.json",
+        "href": "https://processes.openeo.org/1.0.0/examples/array_contains_nodata.json",
         "title": "Check for no-data values in arrays"
       }
     ],
@@ -2504,7 +2504,7 @@
       {
         "rel": "example",
         "type": "application/json",
-        "href": "https://processes.openeo.org/draft/examples/array_find_nodata.json",
+        "href": "https://processes.openeo.org/1.0.0/examples/array_find_nodata.json",
         "title": "Find no-data values in arrays"
       }
     ]
@@ -10578,7 +10578,7 @@
       {
         "rel": "example",
         "type": "application/json",
-        "href": "https://processes.openeo.org/draft/examples/rename-enumerated-labels.json",
+        "href": "https://processes.openeo.org/1.0.0/examples/rename-enumerated-labels.json",
         "title": "Rename enumerated labels"
       }
     ]
