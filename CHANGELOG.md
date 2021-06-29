@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased / Draft
 
-## [1.1.0] - 2021-07-02
+## [1.1.0] - 2021-06-29
 
 ### Added
 - New processes in proposal state
