@@ -1,0 +1,40 @@
+{
+    "id": "drop_dimension",
+    "summary": "Remove a dimension",
+    "description": "Drops a dimension from the data cube.\n\nDropping a dimension only works on dimensions with a single dimension label left, otherwise the process fails with a `DimensionLabelCountMismatch` exception. Dimension values can be reduced to a single value with a filter such as ``filter_bands()`` or the ``reduce_dimension()`` process. If a dimension with the specified name does not exist, the process fails with a `DimensionNotAvailable` exception.",
+    "categories": [
+        "cubes"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The data cube to drop a dimension from.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "name",
+            "description": "Name of the dimension to drop.",
+            "schema": {
+                "type": "string"
+            }
+        }
+    ],
+    "returns": {
+        "description": "A data cube without the specified dimension. The number of dimensions decreases by one, but the dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "exceptions": {
+        "DimensionLabelCountMismatch": {
+            "message": "The number of dimension labels exceeds one, which requires a reducer."
+        },
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
+        }
+    }
+}

@@ -1,0 +1,48 @@
+{
+    "id": "mask",
+    "summary": "Apply a raster mask",
+    "description": "Applies a mask to a raster data cube. To apply a vector mask use ``mask_polygon()``.\n\nA mask is a raster data cube for which corresponding pixels among `data` and `mask` are compared and those pixels in `data` are replaced whose pixels in `mask` are non-zero (for numbers) or `true` (for boolean values). The pixel values are replaced with the value specified for `replacement`, which defaults to `null` (no data).\n\nThe data cubes have to be compatible so that each dimension in the mask must also be available in the raster data cube with the same name, type, reference system, resolution and labels. Dimensions can be missing in the mask with the result that the mask is applied for each label of the missing dimension in the data cube. The process fails if there's an incompatibility found between the raster data cube and the mask.",
+    "categories": [
+        "cubes",
+        "masks"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A raster data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "mask",
+            "description": "A mask as a raster data cube. Every pixel in `data` must have a corresponding element in `mask`.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "replacement",
+            "description": "The value used to replace masked values with.",
+            "schema": {
+                "type": [
+                    "number",
+                    "boolean",
+                    "string",
+                    "null"
+                ]
+            },
+            "default": null,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "A masked raster data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    }
+}

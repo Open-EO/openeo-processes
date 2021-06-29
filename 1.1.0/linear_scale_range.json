@@ -1,0 +1,169 @@
+{
+    "id": "linear_scale_range",
+    "summary": "Linear transformation between two ranges",
+    "description": "Performs a linear transformation between the input and output range.\n\nThe given number in `x` is clipped to the bounds specified in `inputMin` and `inputMax` so that the underlying formula *`((x - inputMin) / (inputMax - inputMin)) * (outputMax - outputMin) + outputMin`* never returns any value lower than `outputMin` or greater than `outputMax`.\n\nPotential use case include\n\n* scaling values to the 8-bit range (0 - 255) often used for numeric representation of values in one of the channels of the [RGB colour model](https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations) or\n* calculating percentages (0 - 100).\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "categories": [
+        "math"
+    ],
+    "parameters": [
+        {
+            "name": "x",
+            "description": "A number to transform. The number gets clipped to the bounds specified in `inputMin` and `inputMax`.",
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            }
+        },
+        {
+            "name": "inputMin",
+            "description": "Minimum value the input can obtain.",
+            "schema": {
+                "type": "number"
+            }
+        },
+        {
+            "name": "inputMax",
+            "description": "Maximum value the input can obtain.",
+            "schema": {
+                "type": "number"
+            }
+        },
+        {
+            "name": "outputMin",
+            "description": "Minimum value of the desired output range.",
+            "schema": {
+                "type": "number"
+            },
+            "default": 0,
+            "optional": true
+        },
+        {
+            "name": "outputMax",
+            "description": "Maximum value of the desired output range.",
+            "schema": {
+                "type": "number"
+            },
+            "default": 1,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "The transformed number.",
+        "schema": {
+            "type": [
+                "number",
+                "null"
+            ]
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "x": 0.3,
+                "inputMin": -1,
+                "inputMax": 1,
+                "outputMin": 0,
+                "outputMax": 255
+            },
+            "returns": 165.75
+        },
+        {
+            "arguments": {
+                "x": 25.5,
+                "inputMin": 0,
+                "inputMax": 255
+            },
+            "returns": 0.1
+        },
+        {
+            "arguments": {
+                "x": null,
+                "inputMin": 0,
+                "inputMax": 100
+            },
+            "returns": null
+        },
+        {
+            "description": "Shows that the input data is clipped.",
+            "arguments": {
+                "x": 1.12,
+                "inputMin": 0,
+                "inputMax": 1,
+                "outputMin": 0,
+                "outputMax": 255
+            },
+            "returns": 255
+        }
+    ],
+    "process_graph": {
+        "subtract1": {
+            "process_id": "subtract",
+            "arguments": {
+                "x": {
+                    "from_parameter": "x"
+                },
+                "y": {
+                    "from_parameter": "inputMin"
+                }
+            }
+        },
+        "subtract2": {
+            "process_id": "subtract",
+            "arguments": {
+                "x": {
+                    "from_parameter": "inputMax"
+                },
+                "y": {
+                    "from_parameter": "inputMin"
+                }
+            }
+        },
+        "subtract3": {
+            "process_id": "subtract",
+            "arguments": {
+                "x": {
+                    "from_parameter": "outputMax"
+                },
+                "y": {
+                    "from_parameter": "outputMin"
+                }
+            }
+        },
+        "divide": {
+            "process_id": "divide",
+            "arguments": {
+                "x": {
+                    "from_node": "subtract1"
+                },
+                "y": {
+                    "from_node": "subtract2"
+                }
+            }
+        },
+        "multiply": {
+            "process_id": "multiply",
+            "arguments": {
+                "x": {
+                    "from_node": "divide"
+                },
+                "y": {
+                    "from_node": "subtract3"
+                }
+            }
+        },
+        "add": {
+            "process_id": "add",
+            "arguments": {
+                "x": {
+                    "from_node": "multiply"
+                },
+                "y": {
+                    "from_parameter": "outputMin"
+                }
+            },
+            "result": true
+        }
+    }
+}

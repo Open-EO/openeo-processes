@@ -1,0 +1,66 @@
+{
+    "id": "resample_cube_spatial",
+    "summary": "Resample the spatial dimensions to match a target data cube",
+    "description": "Resamples the spatial dimensions (x,y) from a source data cube to align with the corresponding dimensions of the given target data cube. Returns a new data cube with the resampled dimensions.\n\nTo resample a data cube to a specific resolution or projection regardless of an existing target data cube, refer to ``resample_spatial()``.",
+    "categories": [
+        "cubes",
+        "aggregate & resample"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "target",
+            "description": "A data cube that describes the spatial target resolution.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "method",
+            "description": "Resampling method to use. The following options are available and are meant to align with [`gdalwarp`](https://gdal.org/programs/gdalwarp.html#cmdoption-gdalwarp-r):\n\n* `average`: average (mean) resampling, computes the weighted average of all valid pixels\n* `bilinear`: bilinear resampling\n* `cubic`: cubic resampling\n* `cubicspline`: cubic spline resampling\n* `lanczos`: Lanczos windowed sinc resampling\n* `max`: maximum resampling, selects the maximum value from all valid pixels\n* `med`: median resampling, selects the median value of all valid pixels\n* `min`: minimum resampling, selects the minimum value from all valid pixels\n* `mode`: mode resampling, selects the value which appears most often of all the sampled points\n* `near`: nearest neighbour resampling (default)\n* `q1`: first quartile resampling, selects the first quartile value of all valid pixels\n* `q3`: third quartile resampling, selects the third quartile value of all valid pixels\n* `rms` root mean square (quadratic mean) of all valid pixels\n* `sum`: compute the weighted sum of all valid pixels\n\nValid pixels are determined based on the function ``is_valid()``.",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "average",
+                    "bilinear",
+                    "cubic",
+                    "cubicspline",
+                    "lanczos",
+                    "max",
+                    "med",
+                    "min",
+                    "mode",
+                    "near",
+                    "q1",
+                    "q3",
+                    "rms",
+                    "sum"
+                ]
+            },
+            "default": "near",
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except for the resolution and dimension labels of the spatial dimensions.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#resample",
+            "rel": "about",
+            "title": "Resampling explained in the openEO documentation"
+        }
+    ]
+}

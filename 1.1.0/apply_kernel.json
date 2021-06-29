@@ -1,0 +1,101 @@
+{
+    "id": "apply_kernel",
+    "summary": "Apply a spatial convolution with a kernel",
+    "description": "Applies a 2D convolution (i.e. a focal operation with a weighted kernel) on the horizontal spatial dimensions (axes `x` and `y`) of the data cube.\n\nEach value in the kernel is multiplied with the corresponding pixel value and all products are summed up afterwards. The sum is then multiplied with the factor.\n\nThe process can't handle non-numerical or infinite numerical values in the data cube. Boolean values are converted to integers (`false` = 0, `true` = 1), but all other non-numerical or infinite values are replaced with zeroes by default (see parameter `replace_invalid`).\n\nFor cases requiring more generic focal operations or non-numerical values, see ``apply_neighborhood()``.",
+    "categories": [
+        "cubes",
+        "math > image filter"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "kernel",
+            "description": "Kernel as a two-dimensional array of weights. The inner level of the nested array aligns with the `x` axis and the outer level aligns with the `y` axis. Each level of the kernel must have an uneven number of elements, otherwise the process throws a `KernelDimensionsUneven` exception.",
+            "schema": {
+                "description": "A two-dimensional array of numbers.",
+                "type": "array",
+                "subtype": "kernel",
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        {
+            "name": "factor",
+            "description": "A factor that is multiplied to each value after the kernel has been applied.\n\nThis is basically a shortcut for explicitly multiplying each value by a factor afterwards, which is often required for some kernel-based algorithms such as the Gaussian blur.",
+            "schema": {
+                "type": "number"
+            },
+            "default": 1,
+            "optional": true
+        },
+        {
+            "name": "border",
+            "description": "Determines how the data is extended when the kernel overlaps with the borders. Defaults to fill the border with zeroes.\n\nThe following options are available:\n\n* *numeric value* - fill with a user-defined constant number `n`: `nnnnnn|abcdefgh|nnnnnn` (default, with `n` = 0)\n* `replicate` - repeat the value from the pixel at the border: `aaaaaa|abcdefgh|hhhhhh`\n* `reflect` - mirror/reflect from the border: `fedcba|abcdefgh|hgfedc`\n* `reflect_pixel` - mirror/reflect from the center of the pixel at the border: `gfedcb|abcdefgh|gfedcb`\n* `wrap` - repeat/wrap the image: `cdefgh|abcdefgh|abcdef`",
+            "schema": [
+                {
+                    "type": "string",
+                    "enum": [
+                        "replicate",
+                        "reflect",
+                        "reflect_pixel",
+                        "wrap"
+                    ]
+                },
+                {
+                    "type": "number"
+                }
+            ],
+            "default": 0,
+            "optional": true
+        },
+        {
+            "name": "replace_invalid",
+            "description": "This parameter specifies the value to replace non-numerical or infinite numerical values with. By default, those values are replaced with zeroes.",
+            "schema": {
+                "type": "number"
+            },
+            "default": 0,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "A data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "exceptions": {
+        "KernelDimensionsUneven": {
+            "message": "Each dimension of the kernel must have an uneven number of elements."
+        }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#apply",
+            "rel": "about",
+            "title": "Apply explained in the openEO documentation"
+        },
+        {
+            "rel": "about",
+            "href": "http://www.songho.ca/dsp/convolution/convolution.html",
+            "title": "Convolutions explained"
+        },
+        {
+            "rel": "about",
+            "href": "http://www.songho.ca/dsp/convolution/convolution2d_example.html",
+            "title": "Example of 2D Convolution"
+        }
+    ]
+}

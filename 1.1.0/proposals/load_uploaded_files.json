@@ -1,0 +1,55 @@
+{
+    "id": "load_uploaded_files",
+    "summary": "Load files from the user workspace",
+    "description": "Loads one or more user-uploaded files from the server-side workspace of the authenticated user and returns them as a single data cube. The files must have been stored by the authenticated user on the back-end currently connected to.",
+    "categories": [
+        "cubes",
+        "import"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "paths",
+            "description": "The files to read. Folders can't be specified, specify all files instead. An exception is thrown if a file can't be read.",
+            "schema": {
+                "type": "array",
+                "subtype": "file-paths",
+                "items": {
+                    "type": "string",
+                    "subtype": "file-path",
+                    "pattern": "^[^\r\n\\:'\"]+$"
+                }
+            }
+        },
+        {
+            "name": "format",
+            "description": "The file format to read from. It must be one of the values that the server reports as supported input file formats, which usually correspond to the short GDAL/OGR codes. If the format is not suitable for loading the data, a `FormatUnsuitable` exception will be thrown. This parameter is *case insensitive*.",
+            "schema": {
+                "type": "string",
+                "subtype": "input-format"
+            }
+        },
+        {
+            "name": "options",
+            "description": "The file format parameters to be used to read the files. Must correspond to the parameters that the server reports as supported parameters for the chosen `format`. The parameter names and valid values usually correspond to the GDAL/OGR format options.",
+            "schema": {
+                "type": "object",
+                "subtype": "input-format-options"
+            },
+            "default": {},
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "A data cube for further processing.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "exceptions": {
+        "FormatUnsuitable": {
+            "message": "Data can't be loaded with the requested input format."
+        }
+    }
+}

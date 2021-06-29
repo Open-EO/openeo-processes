@@ -1,0 +1,68 @@
+{
+    "id": "climatological_normal",
+    "summary": "Compute climatology normals",
+    "description": "Climatological normal period is a usually 30 year average of a weather variable. Climatological normals are used as an average or baseline to evaluate climate events and provide context for yearly, monthly, daily or seasonal variability. The default climatology period is from 1981 until 2010 (both inclusive).",
+    "categories": [
+        "climatology"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube with exactly one temporal dimension. The data cube must span at least the temporal interval specified in the parameter `climatology-period`.\n\nSeasonal periods may span two consecutive years, e.g. temporal winter that includes months December, January and February. If the required months before the actual climate period are available, the season is taken into account. If not available, the first season is not taken into account and the seasonal mean is based on one year less than the other seasonal normals. The incomplete season at the end of the last year is never taken into account.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "period",
+            "description": "The time intervals to aggregate the average value for. The following pre-defined frequencies are supported:\n\n* `day`: Day of the year\n* `month`: Month of the year\n* `climatology-period`: The period specified in the `climatology-period`.\n* `season`: Three month periods of the calendar seasons (December - February, March - May, June - August, September - November).\n* `tropical-season`: Six month periods of the tropical seasons (November - April, May - October).",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "day",
+                    "month",
+                    "season",
+                    "tropical-season",
+                    "climatology-period"
+                ]
+            }
+        },
+        {
+            "name": "climatology_period",
+            "description": "The climatology period as a closed temporal interval. The first element of the array is the first year to be fully included in the temporal interval. The second element is the last year to be fully included in the temporal interval. The default period is from 1981 until 2010 (both inclusive).",
+            "schema": {
+                "type": "array",
+                "subtype": "temporal-interval",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
+                    "type": "string",
+                    "subtype": "year",
+                    "minLength": 4,
+                    "maxLength": 4,
+                    "pattern": "^\\d{4}$"
+                }
+            },
+            "default": [
+                "1981",
+                "2010"
+            ],
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except for the resolution and dimension labels of the temporal dimension. The temporal dimension has the following dimension labels:\n\n* `day`: `001` - `365`\n* `month`: `01` - `12`\n* `climatology-period`: `climatology-period`\n* `season`: `djf` (December - February), `mam` (March - May), `jja` (June - August), `son` (September - November)\n* `tropical-season`: `ndjfma` (November - April), `mjjaso` (May - October)",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://en.wikipedia.org/wiki/Climatological_normal",
+            "title": "Background information on climatology normal by Wikipedia"
+        }
+    ]
+}

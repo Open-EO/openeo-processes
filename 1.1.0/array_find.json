@@ -1,0 +1,146 @@
+{
+    "id": "array_find",
+    "summary": "Get the index for a value in an array",
+    "description": "Checks whether the array specified for `data` contains the value specified in `value` and returns the zero-based index for the first match. If there's no match, `null` is returned.\n\n**Remarks:**\n\n* To get a boolean value returned use ``array_contains()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. A `null` return value from ``eq()`` is handled exactly as `false` (no match).\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating-point numbers due to floating-point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.\n* If the specified value is an array, object or null, the process always returns `null`. See the examples for one to find `null` values.",
+    "categories": [
+        "arrays",
+        "reducer"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "List to find the value in.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
+            }
+        },
+        {
+            "name": "value",
+            "description": "Value to find in `data`.",
+            "schema": {
+                "description": "Any data type is allowed."
+            }
+        }
+    ],
+    "returns": {
+        "description": "The index of the first element with the specified value. If no element was found, `null` is returned.",
+        "schema": [
+            {
+                "type": "null"
+            },
+            {
+                "type": "integer",
+                "minimum": 0
+            }
+        ]
+    },
+    "examples": [
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    2,
+                    3
+                ],
+                "value": 2
+            },
+            "returns": 1
+        },
+        {
+            "arguments": {
+                "data": [
+                    "A",
+                    "B",
+                    "C"
+                ],
+                "value": "b"
+            },
+            "returns": null
+        },
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    2,
+                    3
+                ],
+                "value": "2"
+            },
+            "returns": null
+        },
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    null,
+                    2,
+                    null
+                ],
+                "value": null
+            },
+            "returns": 1
+        },
+        {
+            "arguments": {
+                "data": [
+                    [
+                        1,
+                        2
+                    ],
+                    [
+                        3,
+                        4
+                    ]
+                ],
+                "value": [
+                    1,
+                    2
+                ]
+            },
+            "returns": null
+        },
+        {
+            "arguments": {
+                "data": [
+                    [
+                        1,
+                        2
+                    ],
+                    [
+                        3,
+                        4
+                    ]
+                ],
+                "value": 2
+            },
+            "returns": null
+        },
+        {
+            "arguments": {
+                "data": [
+                    {
+                        "a": "b"
+                    },
+                    {
+                        "c": "d"
+                    }
+                ],
+                "value": {
+                    "a": "b"
+                }
+            },
+            "returns": null
+        }
+    ],
+    "links": [
+        {
+            "rel": "example",
+            "type": "application/json",
+            "href": "https://processes.openeo.org/1.1.0/examples/array_find_nodata.json",
+            "title": "Find no-data values in arrays"
+        }
+    ]
+}

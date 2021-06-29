@@ -1,0 +1,64 @@
+{
+    "id": "add_dimension",
+    "summary": "Add a new dimension",
+    "description": "Adds a new named dimension to the data cube.\n\nAfterwards, the dimension can be referred to with the specified `name`. If a dimension with the specified name exists, the process fails with a `DimensionExists` exception. The dimension label of the dimension is set to the specified `label`.",
+    "categories": [
+        "cubes"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube to add the dimension to.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "name",
+            "description": "Name for the dimension.",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "label",
+            "description": "A dimension label.",
+            "schema": [
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "type",
+            "description": "The type of dimension, defaults to `other`.",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "spatial",
+                    "temporal",
+                    "bands",
+                    "other"
+                ]
+            },
+            "default": "other",
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "The data cube with a newly added dimension. The new dimension has exactly one dimension label. All other dimensions remain unchanged.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "exceptions": {
+        "DimensionExists": {
+            "message": "A dimension with the specified name already exists."
+        }
+    }
+}
