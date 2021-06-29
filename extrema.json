@@ -37,9 +37,7 @@
                 "minItems": 2,
                 "maxItems": 2,
                 "items": {
-                    "type": [
-                        "number"
-                    ]
+                    "type": "number"
                 }
             },
             {
@@ -47,9 +45,7 @@
                 "minItems": 2,
                 "maxItems": 2,
                 "items": {
-                    "type": [
-                        "null"
-                    ]
+                    "type": "null"
                 }
             }
         ]

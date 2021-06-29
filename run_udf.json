@@ -1,7 +1,7 @@
 {
     "id": "run_udf",
-    "summary": "Run an UDF",
-    "description": "Runs an UDF in one of the supported runtime environments.\n\nThe process can either:\n\n1. load and run a locally stored UDF from a file in the workspace of the authenticated user. The path to the UDF file must be relative to the root directory of the user's workspace.\n2. fetch and run a remotely stored and published UDF by absolute URI, for example from [openEO Hub](https://hub.openeo.org)).\n3. run the source code specified inline as string.\n\nThe loaded UDF can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
+    "summary": "Run a UDF",
+    "description": "Runs a UDF in one of the supported runtime environments.\n\nThe process can either:\n\n1. load and run a UDF stored in a file on the server-side workspace of the authenticated user. The path to the UDF file must be relative to the root directory of the user's workspace.\n2. fetch and run a remotely stored and published UDF by absolute URI.\n3. run the source code specified inline as string.\n\nThe loaded UDF can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case, an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
     "categories": [
         "cubes",
         "import",
@@ -10,7 +10,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "The data to be passed to the UDF as array or raster data cube.",
+            "description": "The data to be passed to the UDF as an array or raster data cube.",
             "schema": [
                 {
                     "title": "Raster data cube",
@@ -33,29 +33,32 @@
         },
         {
             "name": "udf",
-            "description": "Either source code, an absolute URL or a path to an UDF script.",
+            "description": "Either source code, an absolute URL or a path to a UDF script.",
             "schema": [
                 {
-                    "description": "URI to an UDF",
+                    "description": "Absolute URL to a UDF",
                     "type": "string",
                     "format": "uri",
-                    "subtype": "uri"
+                    "subtype": "uri",
+                    "pattern": "^(http|https)://"
                 },
                 {
-                    "description": "Path to an UDF uploaded to the server.",
+                    "description": "Path to a UDF uploaded to the server.",
                     "type": "string",
-                    "subtype": "file-path"
+                    "subtype": "file-path",
+                    "pattern": "^[^\r\n\\:'\"]+$"
                 },
                 {
-                    "description": "Source code as string",
+                    "description": "The multi-line source code of a UDF, must contain a newline/line-break.",
                     "type": "string",
-                    "subtype": "udf-code"
+                    "subtype": "udf-code",
+                    "pattern": "(\r\n|\r|\n)"
                 }
             ]
         },
         {
             "name": "runtime",
-            "description": "An UDF runtime identifier available at the back-end.",
+            "description": "A UDF runtime identifier available at the back-end.",
             "schema": {
                 "type": "string",
                 "subtype": "udf-runtime"
@@ -79,7 +82,7 @@
         },
         {
             "name": "context",
-            "description": "Additional data such as configuration options that should be passed to the UDF.",
+            "description": "Additional data such as configuration options to be passed to the UDF.",
             "schema": {
                 "type": "object"
             },

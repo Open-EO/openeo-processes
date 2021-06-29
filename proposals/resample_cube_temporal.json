@@ -1,0 +1,74 @@
+{
+    "id": "resample_cube_temporal",
+    "summary": "Resample temporal dimensions to match a target data cube",
+    "description": "Resamples one or more given temporal dimensions from a source data cube to align with the corresponding dimensions of the given target data cube using the nearest neighbor method. Returns a new data cube with the resampled dimensions.\n\nBy default, this process simply takes the nearest neighbor independent of the value (including values such as no-data / `null`). Depending on the data cubes this may lead to values being assigned to two target timestamps. To only consider valid values in a specific range around the target timestamps, use the parameter `valid_within`.\n\nThe rare case of ties is resolved by choosing the earlier timestamps.",
+    "categories": [
+        "cubes",
+        "aggregate & resample"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube with one or more temporal dimensions.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "target",
+            "description": "A data cube that describes the temporal target resolution.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "dimension",
+            "description": "The name of the temporal dimension to resample, which must exist with this name in both data cubes. If the dimension is not set or is set to `null`, the process resamples all temporal dimensions that exist with the same names in both data cubes.\n\nThe following exceptions may occur:\n\n* A dimension is given, but it does not exist in any of the data cubes: `DimensionNotAvailable`\n* A dimension is given, but one of them is not temporal: `DimensionMismatch`\n\n* No specific dimension name is given and there are no temporal dimensions with the same name in the data: `DimensionMismatch`",
+            "schema": {
+                "type": [
+                    "string",
+                    "null"
+                ]
+            },
+            "default": null,
+            "optional": true
+        },
+        {
+            "name": "valid_within",
+            "description": "Setting this parameter to a numerical value enables that the process searches for valid values within the given period of days before and after the target timestamps. Valid values are determined based on the function ``is_valid()``. For example, the limit of `7` for the target timestamps `2020-01-15 12:00:00` looks for a nearest neighbor after `2020-01-08 12:00:00` and before `2020-01-22 12:00:00`. If no valid value is found within the given period, the value will be set to no-data (`null`).",
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            },
+            "default": null,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "A raster data cube with the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-temporal dimensions. For the temporal dimension, the name and type remain unchanged, but the dimension labels, resolution and reference system may change.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "exceptions": {
+        "DimensionMismatch": {
+            "message": "The temporal dimensions for resampling don't match."
+        },
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
+        }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#resample",
+            "rel": "about",
+            "title": "Resampling explained in the openEO documentation"
+        }
+    ]
+}

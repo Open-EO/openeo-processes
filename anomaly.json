@@ -1,6 +1,6 @@
 {
     "id": "anomaly",
-    "summary": "Computes anomalies",
+    "summary": "Compute anomalies",
     "description": "Computes anomalies based on normals for temporal periods. It compares the data for each label in the temporal dimension with the corresponding data in the normals data cube by subtracting the normal from the data.",
     "categories": [
         "climatology",
@@ -25,7 +25,7 @@
         },
         {
             "name": "period",
-            "description": "Specifies the time intervals available in the normals data cube. The following options are available:\n\n* `hour`: Hour of the day\n* `day`: Day of the year\n* `week`: Week of the year\n* `dekad`: Ten day periods, counted per year with three periods per month (day 1 - 10, 11 - 20 and 21 - end of month). The third dekad of the month can range from 8 to 11 days. For example, the fourth dekad is Feb, 1 - Feb, 10 each year.\n* `month`: Month of the year\n* `season`: Three month periods of the calendar seasons (December - February, March - May, June - August, September - November).\n* `tropical-season`: Six month periods of the tropical seasons (November - April, May - October).\n* `year`: Proleptic years\n* `decade`: Ten year periods ([0-to-9 decade](https://en.wikipedia.org/wiki/Decade#0-to-9_decade)), from a year ending in a 0 to the next year ending in a 9.\n* `decade-ad`: Ten year periods ([1-to-0 decade](https://en.wikipedia.org/wiki/Decade#1-to-0_decade)) better aligned with the Anno Domini (AD) calendar era, from a year ending in a 1 to the next year ending in a 0.\n* `single-period` / `climatology-period`: A single period of arbitrary length",
+            "description": "Specifies the time intervals available in the normals data cube. The following options are available:\n\n* `hour`: Hour of the day\n* `day`: Day of the year\n* `week`: Week of the year\n* `dekad`: Ten day periods, counted per year with three periods per month (day 1 - 10, 11 - 20 and 21 - end of month). The third dekad of the month can range from 8 to 11 days. For example, the fourth dekad is Feb, 1 - Feb, 10 each year.\n* `month`: Month of the year\n* `season`: Three month periods of the calendar seasons (December - February, March - May, June - August, September - November).\n* `tropical-season`: Six month periods of the tropical seasons (November - April, May - October).\n* `year`: Proleptic years\n* `decade`: Ten year periods ([0-to-9 decade](https://en.wikipedia.org/wiki/Decade#0-to-9_decade)), from a year ending in a 0 to the next year ending in a 9.\n* `decade-ad`: Ten year periods ([1-to-0 decade](https://en.wikipedia.org/wiki/Decade#1-to-0_decade)) better aligned with the anno Domini (AD) calendar era, from a year ending in a 1 to the next year ending in a 0.\n* `single-period` / `climatology-period`: A single period of arbitrary length",
             "schema": {
                 "type": "string",
                 "enum": [

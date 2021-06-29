@@ -1,0 +1,28 @@
+{
+    "id": "nan",
+    "summary": "Not a Number (NaN)",
+    "description": "`NaN` (not a number) is a symbolic floating-point representation which is neither a signed infinity nor a finite number.",
+    "categories": [
+        "math > constants"
+    ],
+    "experimental": true,
+    "parameters": [],
+    "returns": {
+        "description": "Returns `NaN`.",
+        "schema": {
+            "description": "JSON Schema can't represent `NaN` and thus a schema can't be specified."
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://ieeexplore.ieee.org/document/4610935",
+            "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
+        },
+        {
+            "rel": "about",
+            "href": "http://mathworld.wolfram.com/NaN.html",
+            "title": "NaN explained by Wolfram MathWorld"
+        }
+    ]
+}

@@ -5,6 +5,7 @@
     "categories": [
         "development"
     ],
+    "experimental": true,
     "parameters": [
         {
             "name": "data",
@@ -48,7 +49,7 @@
         }
     ],
     "returns": {
-        "description": "Returns the data as passed to the `data` parameter.",
+        "description": "The data as passed to the `data` parameter without any modification.",
         "schema": {
             "description": "Any data type is allowed."
         }

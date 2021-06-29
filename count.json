@@ -19,7 +19,7 @@
         },
         {
             "name": "condition",
-            "description": "A condition consists of one ore more processes, which in the end return a boolean value. It is evaluated against each element in the array. An element is counted only if the condition returns `true`. Defaults to count valid elements in a list (see ``is_valid()``). Setting this parameter to boolean `true` counts all elements in the list.",
+            "description": "A condition consists of one or more processes, which in the end return a boolean value. It is evaluated against each element in the array. An element is counted only if the condition returns `true`. Defaults to count valid elements in a list (see ``is_valid()``). Setting this parameter to boolean `true` counts all elements in the list.",
             "schema": [
                 {
                     "title": "Condition",
@@ -43,7 +43,13 @@
                             "optional": true,
                             "default": null
                         }
-                    ]
+                    ],
+                    "returns": {
+                        "description": "`true` if the element should increase the counter, otherwise `false`.",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
                 },
                 {
                     "title": "All elements",
