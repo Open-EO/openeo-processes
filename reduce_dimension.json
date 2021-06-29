@@ -1,7 +1,7 @@
 {
     "id": "reduce_dimension",
     "summary": "Reduce dimensions",
-    "description": "Applies a unary reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer. This process passes a list of values to the reducer. In contrast, ``reduce_dimension_binary()`` passes two values, which may be better suited especially for UDFs in case the number of values gets too large to be processed at once.\n\nThe dimension is dropped. To avoid this, use ``apply_dimension()`` instead.",
+    "description": "Applies a reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer.\n\nThe dimension is dropped. To avoid this, use ``apply_dimension()`` instead.",
     "categories": [
         "cubes",
         "reducer"
@@ -42,12 +42,18 @@
                         "optional": true,
                         "default": null
                     }
-                ]
+                ],
+                "returns": {
+                    "description": "The value to be set in the new data cube.",
+                    "schema": {
+                        "description": "Any data type."
+                    }
+                }
             }
         },
         {
             "name": "dimension",
-            "description": "The name of the dimension over which to reduce. Fails with a `DimensionNotAvailable` error if the specified dimension does not exist.",
+            "description": "The name of the dimension over which to reduce. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
             "schema": {
                 "type": "string"
             }
@@ -73,5 +79,12 @@
         "DimensionNotAvailable": {
             "message": "A dimension with the specified name does not exist."
         }
-    }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#reduce",
+            "rel": "about",
+            "title": "Reducers explained in the openEO documentation"
+        }
+    ]
 }

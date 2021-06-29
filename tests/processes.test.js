@@ -13,24 +13,30 @@ beforeAll(async () => {
 	jsv = await getAjv();
 });
 
-var processes = [];
-const files = glob.sync("../*.json", {realpath: true});
-files.forEach(file => {
+var loader = (file, proposal = false) => {
 	try {
 		var fileContent = fs.readFileSync(file);
 		// Check JSON structure for faults
 		var p = JSON.parse(fileContent);
 
 		// Prepare for tests
-		processes.push([file, p, fileContent.toString()]);
+		processes.push([file, p, fileContent.toString(), proposal]);
 	} catch(err) {
-		processes.push([file, {}, ""]);
+		processes.push([file, {}, "", proposal]);
 		console.error(err);
 		expect(err).toBeUndefined();
 	}
-});
+};
 
-describe.each(processes)("%s", (file, p, fileContent) => {
+var processes = [];
+
+const files = glob.sync("../*.json", {realpath: true});
+files.forEach(file => loader(file));
+
+const proposals = glob.sync("../proposals/*.json", {realpath: true});
+proposals.forEach(file => loader(file, true));
+
+describe.each(processes)("%s", (file, p, fileContent, proposal) => {
 
 	test("File / JSON", () => {
 		const ext = path.extname(file);
@@ -77,7 +83,7 @@ describe.each(processes)("%s", (file, p, fileContent) => {
 	});
 
 	test("Flags", () => {
-		checkFlags(p);
+		checkFlags(p, proposal);
 	});
 
 	test("Parameters", () => {
@@ -97,11 +103,14 @@ describe.each(processes)("%s", (file, p, fileContent) => {
 
 		// return value description
 		expect(typeof p.returns.description).toBe('string');
+		// lint: Description should not be empty
+		expect(p.returns.description.length).toBeGreaterThan(0);
 		checkDescription(p.returns.description, p);
 
 		// return value schema
 		expect(typeof p.returns.schema).toBe('object');
 		expect(p.returns.schema).not.toBeNull();
+		// lint: Description should not be empty
 		checkJsonSchema(jsv, p.returns.schema);
 	});
 
@@ -204,15 +213,20 @@ describe.each(processes)("%s", (file, p, fileContent) => {
 	}
 });
 
-function checkFlags(p) {
+function checkFlags(p, proposal = false) {
 	// deprecated
 	expect(typeof p.deprecated === 'undefined' || typeof p.deprecated === 'boolean').toBeTruthy();
 	// lint: don't specify defaults
 	expect(typeof p.deprecated === 'undefined' || p.deprecated === true).toBeTruthy();
-	// experimental
-	expect(typeof p.experimental === 'undefined' || typeof p.experimental === 'boolean').toBeTruthy();
-	// lint: don't specify defaults
-	expect(typeof p.experimental === 'undefined' || p.experimental === true).toBeTruthy();
+	if (proposal) {
+		// experimental must be true for proposals
+		expect(p.experimental).toBe(true);
+	}
+	else {
+		// experimental must not be false for stable
+		// lint: don't specify defaults, so false should not be set explicitly
+		expect(p.experimental).toBeUndefined();
+	}
 }
 
 function checkParam(param, p, checkCbParams = true) {
@@ -222,6 +236,8 @@ function checkParam(param, p, checkCbParams = true) {
 
 	// parameter description
 	expect(typeof param.description).toBe('string');
+	// lint: Description should not be empty
+	expect(param.description.length).toBeGreaterThan(0);
 	checkDescription(param.description, p);
 
 	// Parameter flags

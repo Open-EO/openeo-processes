@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://processes.openeo.org/1.0.0/meta/subtype-schemas.json",
+    "$id": "http://processes.openeo.org/1.1.0/meta/subtype-schemas.json",
     "title": "Subtype Schemas",
     "description": "This file defines the schemas for subtypes we define for openEO processes.",
     "definitions": {
@@ -8,7 +8,7 @@
             "type": "string",
             "subtype": "band-name",
             "title": "Band Name",
-            "description": "Either a unique band name (metadata field `name`) or a [common band name](https://github.com/radiantearth/stac-spec/tree/v0.9.0/extensions/eo#common-band-names) (metadata field `common_name`) available in the data cube. If unique band name and common name conflict, the unique band name has higher priority."
+            "description": "Either a unique band name (metadata field `name`) or a [common band name](https://github.com/radiantearth/stac-spec/tree/v0.9.0/extensions/eo#common-band-names) (metadata field `common_name`) available in the data cube. If the unique band name and the common name conflict, the unique band name has a higher priority."
         },
         "bounding-box": {
             "type": "object",
@@ -84,7 +84,7 @@
                 },
                 "value": {
                     "default": null,
-                    "oneOf": [
+                    "anyOf": [
                         {
                             "type": "null"
                         },
@@ -115,14 +115,14 @@
             "subtype": "date",
             "format": "date",
             "title": "Date only",
-            "description": "Date only representation, as defined for `full-date` by [RFC 3339 in section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). The time zone is UTC."
+            "description": "Date only representation, as defined for `full-date` by [RFC 3339 in section 5.6](https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6). The time zone is UTC."
         },
         "date-time": {
             "type": "string",
             "subtype": "date-time",
             "format": "date-time",
             "title": "Date with Time",
-            "description": "Date and time representation, as defined for `date-time` by [RFC 3339 in section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6)."
+            "description": "Date and time representation, as defined for `date-time` by [RFC 3339 in section 5.6](https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6)."
         },
         "duration": {
             "type": "string",
@@ -143,6 +143,7 @@
         "file-path": {
             "type": "string",
             "subtype": "file-path",
+            "pattern": "^[^\r\n\\:'\"]+$",
             "title": "Single File path",
             "description": "A relative path to a user-uploaded file. Folders can't be specified."
         },
@@ -159,7 +160,7 @@
             "type": "object",
             "subtype": "geojson",
             "title": "GeoJSON",
-            "description": "GeoJSON as defined by [RFC 7946](https://tools.ietf.org/html/rfc7946).",
+            "description": "GeoJSON as defined by [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946.html).",
             "allOf": [
                 {
                     "$ref": "https://geojson.org/schema/GeoJSON.json"
@@ -222,7 +223,13 @@
                             "description": "Any data type."
                         }
                     }
-                ]
+                ],
+                "returns": {
+                    "description": "`true` if the data should be used, otherwise `false`.",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
             }
         },
         "output-format": {
@@ -280,7 +287,7 @@
             "type": "array",
             "subtype": "temporal-interval",
             "title": "Single temporal interval",
-            "description": "Left-closed temporal interval, represented as two-element array with the following elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://tools.ietf.org/html/rfc3339). Although [RFC 3339 prohibits the hour to be '24'](https://tools.ietf.org/html/rfc3339#section-5.7), **this process allows the value '24' for the hour** of an end time in order to make it possible that left-closed time intervals can fully cover the day. `null` can be used to specify open intervals.",
+            "description": "Left-closed temporal interval, represented as two-element array with the following elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html). Although [RFC 3339 prohibits the hour to be '24'](https://www.rfc-editor.org/rfc/rfc3339.html#section-5.7), **this process allows the value '24' for the hour** of an end time in order to make it possible that left-closed time intervals can fully cover the day. `null` can be used to specify open intervals.",
             "minItems": 2,
             "maxItems": 2,
             "items": {
@@ -326,7 +333,7 @@
             "type": "array",
             "subtype": "temporal-intervals",
             "title": "Multiple temporal intervals",
-            "description": "Left-closed temporal intervals, which are allowed to overlap. Formatted as array of two-element arrays, each being an array with subtype `temporal-interval`.",
+            "description": "Left-closed temporal intervals, which are allowed to overlap. Formatted as an array of two-element arrays, each being an array with subtype `temporal-interval`.",
             "items": {
                 "$ref": "#/definitions/temporal-interval"
             },
@@ -369,32 +376,33 @@
             "subtype": "time",
             "format": "time",
             "title": "Time only",
-            "description": "Time only representation, as defined for `full-time` by [RFC 3339 in section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). Although [RFC 3339 prohibits the hour to be '24'](https://tools.ietf.org/html/rfc3339#section-5.7), this definition allows the value '24' for the hour as end time in an interval in order to make it possible that left-closed time intervals can fully cover the day."
+            "description": "Time only representation, as defined for `full-time` by [RFC 3339 in section 5.6](https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6). Although [RFC 3339 prohibits the hour to be '24'](https://www.rfc-editor.org/rfc/rfc3339.html#section-5.7), this definition allows the value '24' for the hour as end time in an interval in order to make it possible that left-closed time intervals can fully cover the day."
         },
         "udf-code": {
             "type": "string",
             "subtype": "udf-code",
             "title": "UDF source code",
-            "description": "The (multi-line) source code of an user-defined function (UDF)."
+            "description": "The multi-line source code of a user-defined function (UDF), must contain a newline/line-break.",
+            "pattern": "(\r\n|\r|\n)"
         },
         "udf-runtime": {
             "type": "string",
             "subtype": "udf-runtime",
             "title": "UDF runtime",
-            "description": "The name of an UDF runtime."
+            "description": "The name of a UDF runtime."
         },
         "udf-runtime-version": {
             "type": "string",
             "subtype": "udf-runtime-version",
             "title": "UDF Runtime version",
-            "description": "The version of an UDF runtime."
+            "description": "The version of a UDF runtime."
         },
         "uri": {
             "type": "string",
             "subtype": "uri",
             "format": "uri",
             "title": "URI",
-            "description": "A valid URI according to [RFC3986](https://tools.ietf.org/html/rfc3986)."
+            "description": "A valid URI according to [RFC3986](https://www.rfc-editor.org/rfc/rfc3986.html). Can be restricted using a regular expression, e.g. to (dis)allow certain protocols."
         },
         "vector-cube": {
             "type": "object",
@@ -415,7 +423,7 @@
             "maxLength": 4,
             "pattern": "^\\d{4}$",
             "title": "Year only",
-            "description": "Year representation, as defined for `date-fullyear` by [RFC 3339 in section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6)."
+            "description": "Year representation, as defined for `date-fullyear` by [RFC 3339 in section 5.6](https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6)."
         }
     }
 }

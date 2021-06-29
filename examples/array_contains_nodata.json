@@ -18,7 +18,7 @@
         }
     ],
     "returns": {
-        "description": "Returns `true` if the list contains a no-data value, false` otherwise.",
+        "description": "`true` if the list contains a no-data value, false` otherwise.",
         "schema": {
             "type": "boolean"
         }
@@ -31,11 +31,13 @@
                     "from_parameter": "data"
                 },
                 "process": {
-                    "process-graph": {
+                    "process_graph": {
                         "is_null": {
                             "process_id": "is_nodata",
                             "arguments": {
-                                "from_parameter": "x"
+                                "x": {
+                                    "from_parameter": "x"
+                                }
                             },
                             "result": true
                         }

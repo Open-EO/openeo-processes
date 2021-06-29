@@ -1,9 +1,10 @@
 {
     "id": "is_nan",
     "summary": "Value is not a number",
-    "description": "Checks whether the specified value `x` is not a number (often abbreviated as `NaN`). The definition of `NaN` follows the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935). All non-numeric data types MUST also return `true`.",
+    "description": "Checks whether the specified value `x` is not a number. Returns `true` for numeric values (integers and floating-point numbers), except for the special value `NaN` as defined by the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935). All non-numeric data types MUST also return `true`, including arrays that contain `NaN` values.",
     "categories": [
-        "comparison"
+        "comparison",
+        "math > constants"
     ],
     "parameters": [
         {
@@ -15,7 +16,7 @@
         }
     ],
     "returns": {
-        "description": "`true` if the data is not a number, otherwise `false`",
+        "description": "`true` if the data is not a number, otherwise `false`.",
         "schema": {
             "type": "boolean"
         }
@@ -32,6 +33,12 @@
                 "x": "Test"
             },
             "returns": true
+        },
+        {
+            "arguments": {
+                "x": null
+            },
+            "returns": true
         }
     ],
     "links": [
@@ -39,6 +46,11 @@
             "rel": "about",
             "href": "https://ieeexplore.ieee.org/document/4610935",
             "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
+        },
+        {
+            "rel": "about",
+            "href": "http://mathworld.wolfram.com/NaN.html",
+            "title": "NaN explained by Wolfram MathWorld"
         }
     ]
 }

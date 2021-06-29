@@ -1,0 +1,82 @@
+{
+    "id": "atmospheric_correction",
+    "summary": "Apply atmospheric correction",
+    "description": "Applies an atmospheric correction that converts top of atmosphere reflectance values into bottom of atmosphere/top of canopy reflectance values.",
+    "categories": [
+        "cubes",
+        "optical"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "description": "Data cube containing multi-spectral optical top of atmosphere reflectances to be corrected.",
+            "name": "data",
+            "schema": {
+                "subtype": "raster-cube",
+                "type": "object"
+            }
+        },
+        {
+            "description": "The atmospheric correction method to use. To get reproducible results, you have to set a specific method.\n\nSet to `null` to allow the back-end to choose, which will improve portability, but reduce reproducibility as you *may* get different results if you run the processes multiple times.",
+            "name": "method",
+            "schema": [
+                {
+                    "type": [
+                        "string"
+                    ],
+                    "enum": [
+                        "FORCE",
+                        "iCOR"
+                    ]
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "description": "The digital elevation model to use. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
+            "name": "elevation_model",
+            "optional": true,
+            "default": null,
+            "schema": [
+                {
+                    "type": "string",
+                    "subtype": "collection-id"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "description": "Proprietary options for the atmospheric correction method. Specifying proprietary options will reduce portability.",
+            "name": "options",
+            "optional": true,
+            "default": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": false
+            }
+        }
+    ],
+    "returns": {
+        "description": "Data cube containing bottom of atmosphere reflectances.",
+        "schema": {
+            "subtype": "raster-cube",
+            "type": "object"
+        }
+    },
+    "exceptions": {
+        "DigitalElevationModelInvalid": {
+            "message": "The digital elevation model specified is either not a DEM or can't be used with the data cube given."
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://bok.eo4geo.eu/IP1-7-1",
+            "title": "Atmospheric correction explained by EO4GEO body of knowledge."
+        }
+    ]
+}

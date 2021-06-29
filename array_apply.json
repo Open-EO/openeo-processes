@@ -1,7 +1,7 @@
 {
     "id": "array_apply",
-    "summary": "Applies a unary process to each array element",
-    "description": "Applies a **unary** process which takes a single value such as `abs` or `sqrt` to each value in the array. This is basically what other languages call either a `for each` loop or a `map` function.",
+    "summary": "Apply a process to each array element",
+    "description": "Applies a process to each individual value in the array. This is basically what other languages call either a `for each` loop or a `map` function.",
     "categories": [
         "arrays"
     ],
@@ -18,7 +18,7 @@
         },
         {
             "name": "process",
-            "description": "A process to be applied on each value, may consist of multiple sub-processes. The specified process must be unary meaning that it must work on a single value.",
+            "description": "A process that accepts and returns a single value and is applied on each individual value in the array. The process may consist of multiple sub-processes and could, for example, consist of processes such as ``abs()`` or ``linear_scale_range()``.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
@@ -34,7 +34,8 @@
                         "name": "index",
                         "description": "The zero-based index of the current element being processed.",
                         "schema": {
-                            "type": "integer"
+                            "type": "integer",
+                            "minimum": 0
                         }
                     },
                     {
@@ -63,7 +64,13 @@
                         "optional": true,
                         "default": null
                     }
-                ]
+                ],
+                "returns": {
+                    "description": "The value to be set in the new array.",
+                    "schema": {
+                        "description": "Any data type."
+                    }
+                }
             }
         },
         {
@@ -89,13 +96,13 @@
         {
             "rel": "example",
             "type": "application/json",
-            "href": "https://processes.openeo.org/1.0.0/examples/array_find_nodata.json",
+            "href": "https://processes.openeo.org/1.1.0/examples/array_find_nodata.json",
             "title": "Find no-data values in arrays"
         },
         {
             "rel": "example",
             "type": "application/json",
-            "href": "https://processes.openeo.org/1.0.0/examples/array_contains_nodata.json",
+            "href": "https://processes.openeo.org/1.1.0/examples/array_contains_nodata.json",
             "title": "Check for no-data values in arrays"
         }
     ]
