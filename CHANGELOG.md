@@ -18,8 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `array_interpolate_linear` [#173](https://github.com/Open-EO/openeo-processes/issues/173)
     - `array_modify`
     - `date_shift`
+    - `fit_curve`
     - `is_infinite`
     - `nan`
+    - `predict_curve`
     - `reduce_spatial`
 - Added return value details (property `returns`) for the schemas with the subtype `process-graph`. [API#350](https://github.com/Open-EO/openeo-api/issues/350)
 - `apply_neighborhood`: Clarify behavior for data cubes returned by the child processes and for that add the exception `DataCubePropertiesImmutable`.
