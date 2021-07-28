@@ -8476,6 +8476,22 @@
           -1,
           -8
         ]
+      },
+      {
+        "arguments": {
+          "data": [
+            null,
+            1,
+            null,
+            null
+          ]
+        },
+        "returns": [
+          null,
+          1,
+          null,
+          null
+        ]
       }
     ],
     "links": [
