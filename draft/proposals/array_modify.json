@@ -29,7 +29,7 @@
         },
         {
             "name": "index",
-            "description": "The index of the element to insert the value(s) before. If the index is greater than the number of elements, the process throws an `ArrayElementNotAvailable` exception.\n\nTo insert after the last element, there are two options:\n\n1. Use the simpler processes ``array_append()`` to append a single value or ``array_concat`` to append multiple values.\n2. Specify the number of elements in the array. You can retrieve the number of elements with the process ``count()``, having the parameter `condition` set to `true`.",
+            "description": "The index of the element to insert the value(s) before. If the index is greater than the number of elements, the process throws an `ArrayElementNotAvailable` exception.\n\nTo insert after the last element, there are two options:\n\n1. Use the simpler processes ``array_append()`` to append a single value or ``array_concat()`` to append multiple values.\n2. Specify the number of elements in the array. You can retrieve the number of elements with the process ``count()``, having the parameter `condition` set to `true`.",
             "schema": {
                 "type": "integer",
                 "minimum": 0
