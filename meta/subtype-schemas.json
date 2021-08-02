@@ -74,6 +74,7 @@
         "chunk-size": {
             "type": "object",
             "subtype": "chunk-size",
+            "title": "Chunk Size",
             "required": [
                 "dimension",
                 "value"
