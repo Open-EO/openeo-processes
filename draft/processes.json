@@ -11207,6 +11207,9 @@
       }
     ],
     "exceptions": {
+      "InvalidRuntime": {
+        "message": "The specified UDF runtime is not supported."
+      },
       "InvalidVersion": {
         "message": "The specified UDF runtime version is not supported."
       }
