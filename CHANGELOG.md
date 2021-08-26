@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `predict_curve`
 - `run_udf`: Exception `InvalidRuntime` added
 
+### Fixed
+
+- `aggregate_temporal_period`: Clarified which dimension labels are present in the returned data cube. [#274](https://github.com/Open-EO/openeo-processes/issues/274)
+
 ## [1.1.0] - 2021-06-29
 
 ### Added
