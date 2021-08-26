@@ -1,7 +1,7 @@
 {
     "id": "predict_curve",
     "summary": "Predict values",
-    "description": "Predict values using a model function and pre-computed parameters.",
+    "description": "Predict values using a model function and pre-computed parameters. The process is primarily intended to compute values for new labels, but it can also fill gaps where existing labels contain no-data (`null`) values.",
     "categories": [
         "cubes",
         "math"
