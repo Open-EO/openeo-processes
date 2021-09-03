@@ -8014,7 +8014,7 @@
     "description": "Computes CARD4L compliant surface (bottom of atmosphere/top of canopy) reflectance values from optical input.",
     "categories": [
       "cubes",
-      "sar",
+      "optical",
       "ard"
     ],
     "experimental": true,
