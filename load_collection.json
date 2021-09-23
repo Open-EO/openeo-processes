@@ -177,7 +177,7 @@
         },
         {
             "name": "properties",
-            "description": "Limits the data by metadata properties to include only data in the data cube which all given conditions return `true` for (AND operation).\n\nSpecify key-value-pairs with the key being the name of the metadata property, which can be retrieved with the openEO Data Discovery for Collections. The value must a condition (user-defined process) to be evaluated against the collection metadata, see the example.",
+            "description": "Limits the data by metadata properties to include only data in the data cube which all given conditions return `true` for (AND operation).\n\nSpecify key-value-pairs with the key being the name of the metadata property, which can be retrieved with the openEO Data Discovery for Collections. The value must be a condition (user-defined process) to be evaluated against the collection metadata, see the example.",
             "schema": [
                 {
                     "type": "object",
