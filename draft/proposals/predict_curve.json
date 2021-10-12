@@ -35,9 +35,7 @@
                         "name": "x",
                         "description": "The value for the independent variable `x`.",
                         "schema": {
-                            "type": [
-                                "number"
-                            ]
+                            "type": "number"
                         }
                     },
                     {
