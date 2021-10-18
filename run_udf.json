@@ -1,7 +1,7 @@
 {
     "id": "run_udf",
     "summary": "Run a UDF",
-    "description": "Runs a UDF in one of the supported runtime environments.\n\nThe process can either:\n\n1. load and run a UDF stored in a file on the server-side workspace of the authenticated user. The path to the UDF file must be relative to the root directory of the user's workspace.\n2. fetch and run a remotely stored and published UDF by absolute URI.\n3. run the source code specified inline as string.\n\nThe loaded UDF can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case, an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
+    "description": "Runs a UDF in one of the supported runtime environments.\n\nThe process can either:\n\n1. load and run a UDF stored in a file on the server-side workspace of the authenticated user. The path to the UDF file must be relative to the root directory of the user's workspace.\n2. fetch and run a remotely stored and published UDF by absolute URI.\n3. run the source code specified inline as string.\n\nThe loaded UDF can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. The user must ensure that the data is passed over in a way that the UDF code can make sense of it.",
     "categories": [
         "cubes",
         "import",
@@ -10,13 +10,8 @@
     "parameters": [
         {
             "name": "data",
-            "description": "The data to be passed to the UDF as an array or raster data cube.",
+            "description": "The data to be passed to the UDF.",
             "schema": [
-                {
-                    "title": "Raster data cube",
-                    "type": "object",
-                    "subtype": "raster-cube"
-                },
                 {
                     "title": "Array",
                     "type": "array",
@@ -99,17 +94,10 @@
         }
     },
     "returns": {
-        "description": "The data processed by the UDF.\n\n* Returns a raster data cube, if a raster data cube is passed for `data`. Details on the dimensions and dimension properties (name, type, labels, reference system and resolution) depend on the UDF.\n* If an array is passed for `data`, the returned value can be of any data type, but is exactly what the UDF returns.",
-        "schema": [
-            {
-                "title": "Raster data cube",
-                "type": "object",
-                "subtype": "raster-cube"
-            },
-            {
-                "title": "Any",
-                "description": "Any data type."
-            }
-        ]
+        "description": "The data processed by the UDF. The returned value can be of any data type and is exactly what the UDF code returns.",
+        "schema": {
+            "title": "Any",
+            "description": "Any data type."
+        }
     }
 }
