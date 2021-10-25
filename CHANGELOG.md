@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `predict_curve`
 - `run_udf`: Exception `InvalidRuntime` added
 
+### Changed
+
+- `array_labels`: Allow normal arrays to be passed for which the process returns the indices. [#243](https://github.com/Open-EO/openeo-processes/issues/243)
+
 ### Removed
 
 - Removed the explict schema for `raster-cube` in the `data` parameters and return values of `run_udf` and `run_udf_externally`. It's still possible to pass raster-cubes via the "any" data type, but it's discouraged due to scalability issues. [#285](https://github.com/Open-EO/openeo-processes/issues/285)
