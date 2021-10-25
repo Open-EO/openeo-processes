@@ -11,7 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New processes in proposal state
     - `fit_curve`
     - `predict_curve`
-- `run_udf`: Exception `InvalidRuntime` added
+- `array_find`: Added parameter `reverse`. [#269](https://github.com/Open-EO/openeo-processes/issues/269)
+- `run_udf`: Exception `InvalidRuntime` added. [#273](https://github.com/Open-EO/openeo-processes/issues/273)
 
 ### Changed
 
