@@ -1,7 +1,7 @@
 {
     "id": "save_result",
-    "summary": "Save processed data to storage",
-    "description": "Saves processed data to the server-side user workspace of the authenticated user. This process aims to be compatible with GDAL/OGR formats and options. STAC-compatible metadata should be stored with the processed data.\n\nCalling this process may be rejected by back-ends in the context of secondary web services.",
+    "summary": "Save processed data",
+    "description": "Saves the processed data to the corresponding medium that is relevant for the context this processes is applied in:\n\n* For **batch jobs** the data is stored in the server-side user workspace of the authenticated user.\n* For **synchronous processing** the data is directly sent to the client.\n* For secondary web services the behavior depends on the service type. Usually, the data is directly provided to the secondary web service, but calling this process may also be rejected by some service types.\n\nThis process aims to be compatible with GDAL/OGR formats and options. STAC-compatible metadata should be stored with the processed data.",
     "categories": [
         "cubes",
         "export"
@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "The data to save.",
+            "description": "The data to output.",
             "schema": [
                 {
                     "type": "object",
@@ -23,7 +23,7 @@
         },
         {
             "name": "format",
-            "description": "The file format to save to. It must be one of the values that the server reports as supported output file formats, which usually correspond to the short GDAL/OGR codes. If the format is not suitable for storing the underlying data structure, a `FormatUnsuitable` exception will be thrown. This parameter is *case insensitive*.",
+            "description": "The file format to use. It must be one of the values that the server reports as supported output file formats, which usually correspond to the short GDAL/OGR codes. If the format is not suitable for storing the underlying data structure, a `FormatUnsuitable` exception will be thrown. This parameter is *case insensitive*.",
             "schema": {
                 "type": "string",
                 "subtype": "output-format"
