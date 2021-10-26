@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New processes in proposal state
     - `fit_curve`
     - `predict_curve`
+- `load_result`:
+    - Added ability to load by (signed) URL (supported since openEO API v1.1.0).
+    - Added parameters `spatial_extent`, `temporal_extent` and `bands`. [#220](https://github.com/Open-EO/openeo-processes/issues/220)
 - `run_udf`: Exception `InvalidRuntime` added
 
 ### Changed
