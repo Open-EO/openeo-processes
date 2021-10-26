@@ -31,6 +31,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New processes in proposal state
+    - `ard_normalized_radar_backscatter`
+    - `ard_surface_relectance`
     - `array_append`
     - `array_concat`
     - `array_create`
@@ -38,6 +40,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `array_find_label`
     - `array_interpolate_linear` [#173](https://github.com/Open-EO/openeo-processes/issues/173)
     - `array_modify`
+    - `atmospheric_correction`
+    - `cloud_detection`
     - `date_shift`
     - `is_infinite`
     - `nan`
