@@ -97,6 +97,16 @@
             "schema": {
                 "type": "boolean"
             }
+        },
+        {
+            "description": "Proprietary options for the backscatter computations. Specifying proprietary options will reduce portability.",
+            "name": "options",
+            "optional": true,
+            "default": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": false
+            }
         }
     ],
     "returns": {
