@@ -1,9 +1,9 @@
 {
     "id": "quantiles",
     "summary": "Quantiles",
-    "description": "Calculates quantiles, which are cut points dividing the range of a probability distribution into either\n\n* intervals corresponding to the given `probabilities` or\n* (nearly) equal-sized intervals (q-quantiles based on the parameter `q`).\n\nEither the parameter `probabilities` or `q` must be specified, otherwise the `QuantilesParameterMissing` exception is thrown. If both parameters are set the `QuantilesParameterConflict` exception is thrown.",
+    "description": "Calculates quantiles, which are cut points dividing the range of a sample distribution into either\n\n* intervals corresponding to the given `probabilities` or\n* equal-sized intervals (q-quantiles based on the parameter `q`).\n\nEither the parameter `probabilities` or `q` must be specified, otherwise the `QuantilesParameterMissing` exception is thrown. If both parameters are set the `QuantilesParameterConflict` exception is thrown.",
     "categories": [
-        "math"
+        "math > statistics"
     ],
     "parameters": [
         {
@@ -21,7 +21,7 @@
         },
         {
             "name": "probabilities",
-            "description": "A list of probabilities to calculate quantiles for. The probabilities must be between 0 and 1.",
+            "description": "A list of probabilities to calculate quantiles for. The probabilities must be between 0 and 1 (inclusive).",
             "schema": {
                 "type": "array",
                 "items": {
@@ -34,7 +34,7 @@
         },
         {
             "name": "q",
-            "description": "Intervals to calculate quantiles for. Calculates q-quantiles with (nearly) equal-sized intervals.",
+            "description": "Number of intervals to calculate quantiles for. Calculates q-quantiles with equal-sized intervals.",
             "schema": {
                 "type": "integer",
                 "minimum": 2

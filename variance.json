@@ -3,7 +3,7 @@
     "summary": "Variance",
     "description": "Computes the sample variance of an array of numbers by calculating the square of the standard deviation (see ``sd()``). It is defined to be the expectation of the squared deviation of a random variable from its expected value. Basically, it measures how far the numbers in the array are spread out from their average value.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
-        "math",
+        "math > statistics",
         "reducer"
     ],
     "parameters": [
