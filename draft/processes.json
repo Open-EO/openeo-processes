@@ -3208,6 +3208,7 @@
     "description": "Gives the number of elements in an array that matches the specified condition.\n\n**Remarks:**\n\n* Counts the number of valid elements by default (`condition` is set to `null`). A valid element is every element for which ``is_valid()`` returns `true`.\n* To count all elements in a list set the `condition` parameter to boolean `true`.",
     "categories": [
       "arrays",
+      "math > statistics",
       "reducer"
     ],
     "parameters": [
@@ -3808,7 +3809,7 @@
     "summary": "Minimum and maximum values",
     "description": "Two element array containing the minimum and the maximum values of `data`.\n\nThis process is basically an alias for calling both ``min()`` and ``max()``, but may be implemented more performant by back-ends as it only needs to iterate over the data once instead of twice.",
     "categories": [
-      "math"
+      "math > statistics"
     ],
     "parameters": [
       {
@@ -6036,6 +6037,7 @@
     "description": "Computes the largest value of an array of numbers, which is equal to the first element of a sorted (i.e., ordered) version of the array.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
       "math",
+      "math > statistics",
       "reducer"
     ],
     "parameters": [
@@ -6128,7 +6130,7 @@
     "summary": "Arithmetic mean (average)",
     "description": "The arithmetic mean of an array of numbers is the quantity commonly called the average. It is defined as the sum of all elements divided by the number of elements.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
-      "math",
+      "math > statistics",
       "reducer"
     ],
     "parameters": [
@@ -6294,7 +6296,7 @@
     "summary": "Statistical median",
     "description": "The statistical median of an array of numbers is the value separating the higher half from the lower half of the data.\n\nAn array without non-`null` elements resolves always with `null`.\n\n**Remarks:**\n\n* For symmetric arrays, the result is equal to the ``mean()``.\n* The median can also be calculated by computing the ``quantiles()`` with a probability of *0.5*.",
     "categories": [
-      "math",
+      "math > statistics",
       "reducer"
     ],
     "parameters": [
@@ -6537,6 +6539,7 @@
     "description": "Computes the smallest value of an array of numbers, which is equal to the last element of a sorted (i.e., ordered) version of the array.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
       "math",
+      "math > statistics",
       "reducer"
     ],
     "parameters": [
@@ -10284,9 +10287,9 @@
   {
     "id": "quantiles",
     "summary": "Quantiles",
-    "description": "Calculates quantiles, which are cut points dividing the range of a probability distribution into either\n\n* intervals corresponding to the given `probabilities` or\n* (nearly) equal-sized intervals (q-quantiles based on the parameter `q`).\n\nEither the parameter `probabilities` or `q` must be specified, otherwise the `QuantilesParameterMissing` exception is thrown. If both parameters are set the `QuantilesParameterConflict` exception is thrown.",
+    "description": "Calculates quantiles, which are cut points dividing the range of a sample distribution into either\n\n* intervals corresponding to the given `probabilities` or\n* equal-sized intervals (q-quantiles based on the parameter `q`).\n\nEither the parameter `probabilities` or `q` must be specified, otherwise the `QuantilesParameterMissing` exception is thrown. If both parameters are set the `QuantilesParameterConflict` exception is thrown.",
     "categories": [
-      "math"
+      "math > statistics"
     ],
     "parameters": [
       {
@@ -10304,7 +10307,7 @@
       },
       {
         "name": "probabilities",
-        "description": "A list of probabilities to calculate quantiles for. The probabilities must be between 0 and 1.",
+        "description": "A list of probabilities to calculate quantiles for. The probabilities must be between 0 and 1 (inclusive).",
         "schema": {
           "type": "array",
           "items": {
@@ -10317,7 +10320,7 @@
       },
       {
         "name": "q",
-        "description": "Intervals to calculate quantiles for. Calculates q-quantiles with (nearly) equal-sized intervals.",
+        "description": "Number of intervals to calculate quantiles for. Calculates q-quantiles with equal-sized intervals.",
         "schema": {
           "type": "integer",
           "minimum": 2
@@ -11291,7 +11294,7 @@
     "summary": "Standard deviation",
     "description": "Computes the sample standard deviation, which quantifies the amount of variation of an array of numbers. It is defined to be the square root of the corresponding variance (see ``variance()``).\n\nA low standard deviation indicates that the values tend to be close to the expected value, while a high standard deviation indicates that the values are spread out over a wider range.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
-      "math",
+      "math > statistics",
       "reducer"
     ],
     "parameters": [
@@ -12525,7 +12528,7 @@
     "summary": "Variance",
     "description": "Computes the sample variance of an array of numbers by calculating the square of the standard deviation (see ``sd()``). It is defined to be the expectation of the squared deviation of a random variable from its expected value. Basically, it measures how far the numbers in the array are spread out from their average value.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
-      "math",
+      "math > statistics",
       "reducer"
     ],
     "parameters": [
