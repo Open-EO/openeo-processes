@@ -4,6 +4,7 @@
     "description": "Gives the number of elements in an array that matches the specified condition.\n\n**Remarks:**\n\n* Counts the number of valid elements by default (`condition` is set to `null`). A valid element is every element for which ``is_valid()`` returns `true`.\n* To count all elements in a list set the `condition` parameter to boolean `true`.",
     "categories": [
         "arrays",
+        "math > statistics",
         "reducer"
     ],
     "parameters": [
