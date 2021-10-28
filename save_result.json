@@ -1,7 +1,7 @@
 {
     "id": "save_result",
     "summary": "Save processed data",
-    "description": "Saves the processed data to the corresponding medium that is relevant for the context this processes is applied in:\n\n* For **batch jobs** the data is stored in the server-side user workspace of the authenticated user.\n* For **synchronous processing** the data is directly sent to the client.\n* For secondary web services the behavior depends on the service type. Usually, the data is directly provided to the secondary web service, but calling this process may also be rejected by some service types.\n\nThis process aims to be compatible with GDAL/OGR formats and options. STAC-compatible metadata should be stored with the processed data.",
+    "description": "Makes the processed data available in the given file format to the corresponding medium that is relevant for the context this processes is applied in:\n\n* For **batch jobs** the data is stored in the server-side user workspace of the authenticated user. STAC-compatible metadata are usually made available with the processed data.\n* For **synchronous processing** the data is directly sent to the client.\n* For secondary web services the behavior depends on the service type. Usually, the data is directly provided to the secondary web service, but calling this process may also be rejected by some service types.",
     "categories": [
         "cubes",
         "export"
@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "The data to output.",
+            "description": "The data to make available in the given file format.",
             "schema": [
                 {
                     "type": "object",
@@ -41,7 +41,7 @@
         }
     ],
     "returns": {
-        "description": "`false` if saving failed, `true` otherwise.",
+        "description": "Reurns `false` if the process failed to make the data available, `true` otherwise.",
         "schema": {
             "type": "boolean"
         }
