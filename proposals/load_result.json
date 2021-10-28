@@ -1,7 +1,7 @@
 {
     "id": "load_result",
     "summary": "Load batch job results",
-    "description": "Loads batch job results and returns them as a processable data cube. A batch job result can be loaded by ID or URL:\n\n* **ID**: A batch job identifier available on the server-side user workspace. The job must have been stored by the authenticated user on the back-end currently connected to.\n* **URL**: The URL to the STAC metadata for a batch job result. This needs to the signed URL that is provided by some back-ends through the `canonical` link relation in the batch job result metadata. Please note that this is only supported since openEO API version 1.1.0.\n\nIf supported by the underlying metadata and file format, the data that is added to the data cube can be restricted with the parameters `spatial_extent`, `temporal_extent` and `bands`.\n\n**Remarks:**\n\n* The bands (and all dimensions that specify nominal dimension labels) are expected to be ordered as specified in the metadata if the `bands` parameter is set to `null`.\n* If no additional parameter is specified this would imply that the whole data set is expected to be loaded. Due to the large size of many data sets, this is not recommended and may be optimized by back-ends to only load the data that is actually required after evaluating subsequent processes such as filters. This means that the pixel values should be processed only after the data has been limited to the required extent and as a consequence also to a manageable size.",
+    "description": "Loads batch job results and returns them as a processable data cube. A batch job result can be loaded by ID or URL:\n\n* **ID**: The identifier for a finished batch job. The job must have been submitted by the authenticated user on the back-end currently connected to.\n* **URL**: The URL to the STAC metadata for a batch job result. This needs to the signed URL that is provided by some back-ends through the `canonical` link relation in the batch job result metadata. Please note that signed URLs for batch jobs are only supported since openEO API version 1.1.0.\n\nIf supported by the underlying metadata and file format, the data that is added to the data cube can be restricted with the parameters `spatial_extent`, `temporal_extent` and `bands`.\n\n**Remarks:**\n\n* The bands (and all dimensions that specify nominal dimension labels) are expected to be ordered as specified in the metadata if the `bands` parameter is set to `null`.\n* If no additional parameter is specified this would imply that the whole data set is expected to be loaded. Due to the large size of many data sets, this is not recommended and may be optimized by back-ends to only load the data that is actually required after evaluating subsequent processes such as filters. This means that the pixel values should be processed only after the data has been limited to the required extent and as a consequence also to a manageable size.",
     "categories": [
         "cubes",
         "import"
@@ -113,7 +113,9 @@
                     "description": "Don't filter spatially. All data is included in the data cube.",
                     "type": "null"
                 }
-            ]
+            ],
+            "default": null,
+            "optional": true
         },
         {
             "name": "temporal_extent",
@@ -164,7 +166,9 @@
                     "description": "Don't filter temporally. All data is included in the data cube.",
                     "type": "null"
                 }
-            ]
+            ],
+            "default": null,
+            "optional": true
         },
         {
             "name": "bands",
