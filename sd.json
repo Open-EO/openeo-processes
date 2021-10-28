@@ -3,7 +3,7 @@
     "summary": "Standard deviation",
     "description": "Computes the sample standard deviation, which quantifies the amount of variation of an array of numbers. It is defined to be the square root of the corresponding variance (see ``variance()``).\n\nA low standard deviation indicates that the values tend to be close to the expected value, while a high standard deviation indicates that the values are spread out over a wider range.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
-        "math",
+        "math > statistics",
         "reducer"
     ],
     "parameters": [
