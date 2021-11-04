@@ -12,10 +12,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `fit_curve`
     - `predict_curve`
 - `ard_normalized_radar_backscatter` and `sar_backscatter`: Added `options` parameter
+- `array_find`: Added parameter `reverse`. [#269](https://github.com/Open-EO/openeo-processes/issues/269)
 - `load_result`:
     - Added ability to load by (signed) URL (supported since openEO API v1.1.0).
     - Added parameters `spatial_extent`, `temporal_extent` and `bands`. [#220](https://github.com/Open-EO/openeo-processes/issues/220)
-- `run_udf`: Exception `InvalidRuntime` added
+- `run_udf`: Exception `InvalidRuntime` added. [#273](https://github.com/Open-EO/openeo-processes/issues/273)
 - A new category "math > statistics" has been added [#277](https://github.com/Open-EO/openeo-processes/issues/277)
 
 ### Changed
@@ -29,7 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - `aggregate_temporal_period`: Clarified which dimension labels are present in the returned data cube. [#274](https://github.com/Open-EO/openeo-processes/issues/274)
-- `ard_surface_reflectance`: has been categorized as "optical" instead of "sar".
+- `ard_surface_reflectance`: The process has been categorized as "optical" instead of "sar".
+- `save_result`: Clarify how the process works in the different contexts it is used in (e.g. synchronous processing, secondary web service). [#288](https://github.com/Open-EO/openeo-processes/issues/288)
 - `quantiles`: Clarified behavior. [#278](https://github.com/Open-EO/openeo-processes/issues/278)
 
 ## [1.1.0] - 2021-06-29
