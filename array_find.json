@@ -69,10 +69,10 @@
                     2,
                     3
                 ],
-                "value": 3,
+                "value": 2,
                 "reverse": true
             },
-            "returns": 2
+            "returns": 3
         },
         {
             "arguments": {
