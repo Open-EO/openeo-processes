@@ -27,7 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - `aggregate_temporal_period`: Clarified which dimension labels are present in the returned data cube. [#274](https://github.com/Open-EO/openeo-processes/issues/274)
-- `ard_surface_reflectance`: has been categorized as "optical" instead of "sar".
+- `ard_surface_reflectance`: The process has been categorized as "optical" instead of "sar".
+- `save_result`: Clarify how the process works in the different contexts it is used in (e.g. synchronous processing, secondary web service). [#288](https://github.com/Open-EO/openeo-processes/issues/288)
 - `quantiles`: Clarified behavior. [#278](https://github.com/Open-EO/openeo-processes/issues/278)
 
 ## [1.1.0] - 2021-06-29
