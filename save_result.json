@@ -1,7 +1,7 @@
 {
     "id": "save_result",
     "summary": "Save processed data",
-    "description": "Makes the processed data available in the given file format to the corresponding medium that is relevant for the context this processes is applied in:\n\n* For **batch jobs** the data is stored in the server-side user workspace of the authenticated user. STAC-compatible metadata are usually made available with the processed data.\n* For **synchronous processing** the data is directly sent to the client.\n* For secondary web services the behavior depends on the service type. Usually, the data is directly provided to the secondary web service, but calling this process may also be rejected by some service types.",
+    "description": "Makes the processed data available in the given file format to the corresponding medium that is relevant for the context this processes is applied in:\n\n* For **batch jobs** the data is stored on the back-end. STAC-compatible metadata is usually made available with the processed data.\n* For **synchronous processing** the data is sent to the client as a direct response to the request.\n* **Secondary web services** are provided with the processed data so that it can make use of it (e.g., visualize it). Web service may require the data in a certain format. Please refer to the documentation of the individual service types for details.",
     "categories": [
         "cubes",
         "export"
@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "The data to make available in the given file format.",
+            "description": "The data to deliver in the given file format.",
             "schema": [
                 {
                     "type": "object",
@@ -41,7 +41,7 @@
         }
     ],
     "returns": {
-        "description": "Reurns `false` if the process failed to make the data available, `true` otherwise.",
+        "description": "Returns `false` if the process failed to make the data available, `true` otherwise.",
         "schema": {
             "type": "boolean"
         }
