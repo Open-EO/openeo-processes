@@ -1,0 +1,80 @@
+{
+    "id": "chunk_polygon",
+    "summary": "Apply a process to spatial chunks of a data cube",
+    "description": "The given data cube is chunked by the given polygons and applies the given process to each individual chunk.",
+    "categories": [
+        "cubes"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "chunks",
+            "description": "A GeoJSON object containing at least one polygon. The provided feature types can be one of the following:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry,\n* a `FeatureCollection` containing at least one `Feature` with `Polygon` or `MultiPolygon` geometries, or\n* a `GeometryCollection` containing `Polygon` or `MultiPolygon` geometries. To maximize interoperability, `GeometryCollection` should be avoided in favour of one of the alternatives above.",
+            "schema": {
+                "type": "object",
+                "subtype": "geojson"
+            }
+        },
+        {
+            "name": "process",
+            "description": "A process that accepts and returns a single data cube and is applied on each individual chunk. The process may consist of multiple sub-processes.",
+            "schema": {
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "description": "A chunk of the original data cube.",
+                        "schema": {
+                            "type": "object",
+                            "subtype": "raster-cube"
+                        }
+                    },
+                    {
+                        "name": "context",
+                        "description": "Additional data passed by the user.",
+                        "schema": {
+                            "description": "Any data type."
+                        },
+                        "optional": true,
+                        "default": null
+                    }
+                ],
+                "returns": {
+                    "description": "The updated data cube.",
+                    "schema": {
+                        "description": "A data cube.",
+                        "schema": {
+                            "type": "object",
+                            "subtype": "raster-cube"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "context",
+            "description": "Additional data to be passed to the process.",
+            "schema": {
+                "description": "Any data type."
+            },
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "A data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    }
+}
