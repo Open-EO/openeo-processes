@@ -1,7 +1,7 @@
 {
     "id": "quantiles",
     "summary": "Quantiles",
-    "description": "Calculates quantiles, which are cut points dividing the range of a sample distribution into either\n\n* intervals corresponding to the given `probabilities` or\n* equal-sized intervals (q-quantiles based on the parameter `q`).\n\nEither the parameter `probabilities` or `q` must be specified, otherwise the `QuantilesParameterMissing` exception is thrown. If both parameters are set the `QuantilesParameterConflict` exception is thrown.",
+    "description": "Calculates quantiles, which are cut points dividing the range of a sample distribution into either\n\n1. intervals corresponding to the given probabilities *or*\n2. equal-sized intervals (q-quantiles).\n\nEither the parameter `probabilities` or `q` must be specified, otherwise the `QuantilesParameterMissing` exception is thrown. If both parameters are set the `QuantilesParameterConflict` exception is thrown.",
     "categories": [
         "math > statistics"
     ],
@@ -21,20 +21,29 @@
         },
         {
             "name": "probabilities",
-            "description": "A list of probabilities to calculate quantiles for. The probabilities must be between 0 and 1 (inclusive).",
-            "schema": {
-                "type": "array",
-                "items": {
-                    "type": "number",
-                    "minimum": 0,
-                    "maximum": 1
+            "description": "Quantiles to calculate. Either a list of probabilities or the number of intervals:\n\n* Provide an array with a list of probabilities to calculate quantiles for. The probabilities must be between 0 and 1 (inclusive).\n* Provide an integer to specify the number of intervals to calculate quantiles for. Calculates q-quantiles with equal-sized intervals.",
+            "schema": [
+                {
+                    "title": "List of probabilities",
+                    "type": "array",
+                    "items": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                    }
+                },
+                {
+                    "title": "Number of intervals (q-quantiles)",
+                    "type": "integer",
+                    "minimum": 2
                 }
-            },
+            ],
             "optional": true
         },
         {
             "name": "q",
-            "description": "Number of intervals to calculate quantiles for. Calculates q-quantiles with equal-sized intervals.",
+            "description": "Number of intervals to calculate quantiles for. Calculates q-quantiles with equal-sized intervals.\n\nThis parameter has been **deprecated**. Please use the parameter `probabilities` instead.",
+            "deprecated": true,
             "schema": {
                 "type": "integer",
                 "minimum": 2
@@ -114,7 +123,7 @@
                     7,
                     9
                 ],
-                "q": 4
+                "probabilities": 4
             },
             "returns": [
                 4,
@@ -130,7 +139,7 @@
                     null,
                     1
                 ],
-                "q": 2
+                "probabilities": 2
             },
             "returns": [
                 -0.5
@@ -144,7 +153,7 @@
                     null,
                     1
                 ],
-                "q": 4,
+                "probabilities": 4,
                 "ignore_nodata": false
             },
             "returns": [

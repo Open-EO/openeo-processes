@@ -19,6 +19,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - `array_labels`: Allow normal arrays to be passed for which the process returns the indices. [#243](https://github.com/Open-EO/openeo-processes/issues/243)
+- `quantiles`: The parameter `probabilities` also accepts an integer value to compute q-quantiles. [#293](https://github.com/Open-EO/openeo-processes/issues/293)
+
+### Deprecated
+
+- `quantiles`: The parameter `q` has been deprecated in favor of the extended parameter `probabilities`. [#293](https://github.com/Open-EO/openeo-processes/issues/293)
 
 ### Removed
 
