@@ -4201,7 +4201,7 @@
   },
   {
     "id": "filter_temporal",
-    "summary": "Temporal filter for a temporal intervals",
+    "summary": "Temporal filter based on temporal intervals",
     "description": "Limits the data cube to the specified interval of dates and/or times.\n\nMore precisely, the filter checks whether each of the temporal dimension labels is greater than or equal to the lower boundary (start date/time) and less than the value of the upper boundary (end date/time). This corresponds to a left-closed interval, which contains the lower boundary but not the upper boundary.",
     "categories": [
       "cubes",
