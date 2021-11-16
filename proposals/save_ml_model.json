@@ -1,0 +1,36 @@
+{
+    "id": "save_ml_model",
+    "summary": "Save a machine learning model",
+    "description": "...",
+    "categories": [
+        "machine learning",
+        "import"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The data to store as a machine learning model.",
+            "schema": {
+                "type": "object",
+                "subtype": "ml-model"
+            }
+        },
+        {
+            "name": "options",
+            "description": "Any additional parameters to create the file(s).",
+            "schema": {
+                "type": "object",
+                "additionalParameters": false
+            },
+            "default": {},
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "Returns `false` if the process failed to store the model, `true` otherwise.",
+        "schema": {
+            "type": "boolean"
+        }
+    }
+}

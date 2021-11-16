@@ -1,0 +1,44 @@
+{
+    "id": "load_ml_model",
+    "summary": "Load a machine learning model",
+    "description": "...",
+    "categories": [
+        "machine learning",
+        "import"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "id",
+            "description": "The STAC item to load the machine learning model from. The STAC Item must implement the ml-model extension.",
+            "schema": [
+                {
+                    "title": "URL",
+                    "type": "string",
+                    "format": "uri",
+                    "subtype": "uri",
+                    "pattern": "^https?://"
+                },
+                {
+                    "title": "Batch Job ID",
+                    "type": "string",
+                    "subtype": "job-id",
+                    "pattern": "^[\\w\\-\\.~]+$"
+                },
+                {
+                    "title": "User-uploaded File",
+                    "type": "string",
+                    "subtype": "file-path",
+                    "pattern": "^[^\r\n\\:'\"]+$"
+                }
+            ]
+        }
+    ],
+    "returns": {
+        "description": "A machine learning model to be used with machine learning processes.",
+        "schema": {
+            "type": "object",
+            "subtype": "ml-model"
+        }
+    }
+}
