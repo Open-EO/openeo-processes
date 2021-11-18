@@ -1,0 +1,39 @@
+{
+    "id": "predict_random_forest",
+    "summary": "Predict values from a Random Forest model",
+    "description": "Applies a Random Forest Model to a raster cube objects. The raster data cube necessarily needs the same bands as the predictors in the model. Otherwise, an `IncompatibleBands` must be returned.",
+    "categories": [
+        "machine learning"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A raster cube with the bands corresponding to the predictors.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "model",
+            "description": "A model object that can be trained with the ``fit_regr_random_forest()`` process.",
+            "schema": {
+                "type": "object",
+                "subtype": "ml-model"
+            }
+        }
+    ],
+    "returns": {
+        "description": "A raster data cube with the prediction of the target variable based on the model.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "exceptions": {
+        "IncompatibleBands": {
+            "message": "The bands provided do not match the bands that the model has been trained for."
+        }
+    }
+}
