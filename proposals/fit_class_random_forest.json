@@ -1,0 +1,76 @@
+{
+    "id": "fit_class_random_forest",
+    "summary": "Train a random forest classification model",
+    "description": "Executes the fit of a random forest classification based on the user input of target and predictors. The Random Forest classification model is based on the approach by Breiman (2001).",
+    "categories": [
+        "machine learning"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The input data for the classification model. The raster images that will be used as predictors for the Random Forest. Aggregated to the features (vectors) of the target input variable.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "target",
+            "description": "The input data for the classification model. This will be vector cubes for each training site. This is associated with the target variable for the Random Forest Model. The Geometry has to associated with a value to predict (e.g. fractional forest canopy cover).",
+            "schema": {
+                "type": "object",
+                "subtype": "vector-cube"
+            }
+        },
+        {
+            "name": "training",
+            "description": "The amount of training data to be used in the classification. The sampling will be randomly through the data object. The remaining data will be used as test data for the validation.",
+            "schema": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 100
+            }
+        },
+        {
+            "name": "num_trees",
+            "description": "The number of trees build within the Random Forest classification.",
+            "optional": true,
+            "default": 100,
+            "schema": {
+                "type": "integer",
+                "minimum": 1
+            }
+        },
+        {
+            "name": "mtry",
+            "description": "Specifies how many split variables will be used at a node. Default value is `null`, which corresponds to the number of predictors divided by 3.",
+            "optional": true,
+            "default": null,
+            "schema": [
+                {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        }
+    ],
+    "returns": {
+        "description": "A model object that can be saved with ``save_ml_model()`` and restored with ``load_ml_model()``.",
+        "schema": {
+            "type": "object",
+            "subtype": "ml-model"
+        }
+    },
+    "links": [
+        {
+            "href": "https://doi.org/10.1023/A:1010933404324",
+            "title": "Breiman (2001): Random Forests",
+            "type": "text/html",
+            "rel": "about"
+        }
+    ]
+}
