@@ -146,7 +146,7 @@ To make `date_shift` easier to implement, we have found some libraries that foll
 
 The `quantiles` could implement a number of different algorithms, literature usually distinguishes [9 types](https://en.wikipedia.org/wiki/Quantile#Estimating_quantiles_from_a_sample).
 Right now it's not possible to choose from them, but it may be added in the future.
-To improve interoperability openEO processes v1.2 added details about the algorithm that should be implemented.
+To improve interoperability openEO processes, version 1.2.0 added details about the algorithm that must be implemented.
 A survey has shown that most libraries implement type 7 and as such this was chosen to be the default.
 
 We have found some libraries that can be used for an implementation:
