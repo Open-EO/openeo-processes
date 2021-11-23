@@ -149,6 +149,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `apply_polygon`
     - `fit_curve`
     - `predict_curve`
+    - `run_process`
 - `ard_normalized_radar_backscatter` and `sar_backscatter`: Added `options` parameter
 - `array_find`: Added parameter `reverse`. [#269](https://github.com/Open-EO/openeo-processes/issues/269)
 - `load_result`:

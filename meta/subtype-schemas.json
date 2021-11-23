@@ -271,6 +271,18 @@
                 }
             }
         },
+        "process-id": {
+            "type": "string",
+            "subtype": "process-id",
+            "title": "Process",
+            "description": "A process, referenced by id without namespace"
+        },
+        "process-namespace": {
+            "type": "string",
+            "subtype": "process-namespace",
+            "title": "Process namespace",
+            "description": "The namespace for the process."
+        },
         "raster-cube": {
             "type": "object",
             "subtype": "raster-cube",
