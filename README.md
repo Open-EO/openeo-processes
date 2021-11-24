@@ -34,7 +34,10 @@ This repository contains a set of files formally describing the openEO Processes
 * [subtype-schemas.json](meta/subtype-schemas.json) in the `meta` folder defines common data types (`subtype`s) for JSON Schema used in openEO processes.
 * The [`examples`](examples/) folder contains some useful examples that the processes link to. All of these are non-binding additions.
 * The [`tests`](tests/) folder can be used to test the process specification for validity and consistent "style". It also allows rendering the processes in a web browser.
-
+    
+	If you switch to the `tests` folder in CLI and after installing NodeJS and run `npm install`, you can run a couple of commands:
+	* `npm test`: Check the processes for validity and lint them. Processes need to pass tests to be added to this repository.
+	* `npm run render`: Opens a browser with all processes rendered through the docgen.
 
 ## Process
 
