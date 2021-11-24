@@ -2,7 +2,7 @@
 name: New process proposal
 about: Propose a new process with detailed specifics (name, description, parameters,
   return value etc.). To just pitch an idea without a lot of details, please fill
-  a normal issue.
+  a "normal" issue.
 title: ''
 labels: new process
 assignees: ''

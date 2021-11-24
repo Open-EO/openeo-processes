@@ -1,5 +1,5 @@
 ---
-name: Issue or Clarification for existing process
+name: Issue or clarification for existing process
 about: Report an issue or clarification for an existing process.
 title: "[process id]: [issue summary]"
 labels: bug, patch
