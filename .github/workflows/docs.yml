@@ -43,6 +43,7 @@ jobs:
           publish_dir: gh-pages
           user_name: 'openEO CI'
           user_email: openeo.ci@uni-muenster.de
+          cname: processes.openeo.org
       - name: deploy to ${{ env.GITHUB_REF_SLUG }}
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ env.GITHUB_REF_SLUG != 'master' }}
