@@ -125,26 +125,6 @@
             ]
         },
         {
-            "description": "Add a value at a specific non-existing position after the array, fill missing elements with `null`.",
-            "arguments": {
-                "data": [
-                    "a",
-                    "b"
-                ],
-                "values": [
-                    "e"
-                ],
-                "index": 4
-            },
-            "returns": [
-                "a",
-                "b",
-                null,
-                null,
-                "e"
-            ]
-        },
-        {
             "description": "Remove a single value from the array.",
             "arguments": {
                 "data": [
