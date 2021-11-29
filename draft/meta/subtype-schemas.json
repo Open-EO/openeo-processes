@@ -75,6 +75,7 @@
             "type": "object",
             "subtype": "chunk-size",
             "title": "Chunk Size",
+            "description": "The chunk size per dimension given. This object maps the dimension names given as key to chunks given as either a physical measure or pixels. If not given or `null`, no chunking is applied.",
             "required": [
                 "dimension",
                 "value"
@@ -108,7 +109,7 @@
             "type": "string",
             "subtype": "collection-id",
             "title": "Collection ID",
-            "description": "A collection id from the list of supported collections.",
+            "description": "A collection identifier from the list of supported collections.",
             "pattern": "^[\\w\\-\\.~/]+$"
         },
         "date": {
@@ -128,6 +129,7 @@
         "duration": {
             "type": "string",
             "subtype": "duration",
+            "title": "Duration",
             "description": "[ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations), e.g. `P1D` for one day.",
             "pattern": "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
         },
@@ -172,7 +174,7 @@
             "type": "string",
             "subtype": "input-format",
             "title": "Input File Format",
-            "description": "An input format supported by the back-end."
+            "description": "A file format that the back-end supports to import data from."
         },
         "input-format-options": {
             "type": "object",
@@ -191,7 +193,7 @@
             "type": "array",
             "subtype": "kernel",
             "title": "Image Kernel",
-            "description": "Image kernel, a two-dimensional array of numbers.",
+            "description": "A two-dimensional array of numbers to be used as kernel for the image operation.",
             "items": {
                 "type": "array",
                 "items": {
@@ -237,7 +239,7 @@
             "type": "string",
             "subtype": "output-format",
             "title": "Output File Format",
-            "description": "An output format supported by the back-end."
+            "description": "A file format that the back-end supports to save and export data to."
         },
         "output-format-options": {
             "type": "object",
@@ -390,13 +392,13 @@
             "type": "string",
             "subtype": "udf-runtime",
             "title": "UDF runtime",
-            "description": "The name of a UDF runtime."
+            "description": "The identifier of a UDF runtime you want to run the given UDF source code with."
         },
         "udf-runtime-version": {
             "type": "string",
             "subtype": "udf-runtime-version",
             "title": "UDF Runtime version",
-            "description": "The version of a UDF runtime."
+            "description": "The version of the UDF runtime you want to run the given UDF source code with."
         },
         "uri": {
             "type": "string",
