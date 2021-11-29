@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "An array.",
+            "description": "The array to modify.",
             "schema": {
                 "type": "array",
                 "items": {
@@ -19,7 +19,7 @@
         },
         {
             "name": "values",
-            "description": "The values to fill the array with.",
+            "description": "The values to insert into the `data` array.",
             "schema": {
                 "type": "array",
                 "items": {
@@ -29,7 +29,7 @@
         },
         {
             "name": "index",
-            "description": "The index of the element to insert the value(s) before. If the index is greater than the number of elements, the process throws an `ArrayElementNotAvailable` exception.\n\nTo insert after the last element, there are two options:\n\n1. Use the simpler processes ``array_append()`` to append a single value or ``array_concat()`` to append multiple values.\n2. Specify the number of elements in the array. You can retrieve the number of elements with the process ``count()``, having the parameter `condition` set to `true`.",
+            "description": "The index in the `data` array of the element to insert the value(s) before. If the index is greater than the number of elements in the `data` array, the process throws an `ArrayElementNotAvailable` exception.\n\nTo insert after the last element, there are two options:\n\n1. Use the simpler processes ``array_append()`` to append a single value or ``array_concat()`` to append multiple values.\n2. Specify the number of elements in the array. You can retrieve the number of elements with the process ``count()``, having the parameter `condition` set to `true`.",
             "schema": {
                 "type": "integer",
                 "minimum": 0
@@ -37,7 +37,7 @@
         },
         {
             "name": "length",
-            "description": "The number of elements to replace. This parameter has no effect in case the given `index` does not exist in the array given.",
+            "description": "The number of elements in the `data` array to replace. This parameter has no effect in case the given `index` does not exist in the array given.",
             "optional": true,
             "default": 1,
             "schema": {
@@ -57,7 +57,7 @@
     },
     "exceptions": {
         "ArrayElementNotAvailable": {
-            "message": "The array has no element with the specified index."
+            "message": "An invalid insert index is specified."
         }
     },
     "examples": [
