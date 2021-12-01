@@ -212,3 +212,17 @@ The top-level object and/or each dimension can be enhanced with additional stats
 	"max": 1
 }
 ```
+
+## Quantile algorithms
+
+The `quantiles` could implement a number of different algorithms, literature usually distinguishes [9 types](https://en.wikipedia.org/wiki/Quantile#Estimating_quantiles_from_a_sample).
+Right now it's not possible to choose from them, but it may be added in the future.
+To improve interoperability openEO processes, version 1.2.0 added details about the algorithm that must be implemented.
+A survey has shown that most libraries implement type 7 and as such this was chosen to be the default.
+
+We have found some libraries that can be used for an implementation:
+- Java: [Apache Commons Math Percentile](http://commons.apache.org/proper/commons-math/javadocs/api-3.6/org/apache/commons/math3/stat/descriptive/rank/Percentile.html), choose the [estimation type `R_7`](http://commons.apache.org/proper/commons-math/javadocs/api-3.6/org/apache/commons/math3/stat/descriptive/rank/Percentile.EstimationType.html#R_7)
+- JavaScript: [d3](https://github.com/d3/d3-array/blob/v2.8.0/README.md#quantile), has only type 7 implemented.
+- Julia: [Statistics.quantile](https://docs.julialang.org/en/v1/stdlib/Statistics/#Statistics.quantile!), type 7 is the default.
+- Python: [numpy](https://numpy.org/doc/stable/reference/generated/numpy.quantile.html), [pandas](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.quantile.html), [xarray](http://xarray.pydata.org/en/stable/generated/xarray.DataArray.quantile.html) - type 7 (called 'linear' for the interpolation parameter) is the default for all of them. 
+- R: [quantile](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/quantile.html) - type 7 is the default.
