@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased / Draft
 
+## [1.2.0] - 2021-12-15
+
 ### Added
 
 - New processes in proposal state
@@ -29,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-- Removed the explict schema for `raster-cube` in the `data` parameters and return values of `run_udf` and `run_udf_externally`. It's still possible to pass raster-cubes via the "any" data type, but it's discouraged due to scalability issues. [#285](https://github.com/Open-EO/openeo-processes/issues/285)
+- Removed the explicit schema for `raster-cube` in the `data` parameters and return values of `run_udf` and `run_udf_externally`. It's still possible to pass raster-cubes via the "any" data type, but it's discouraged due to scalability issues. [#285](https://github.com/Open-EO/openeo-processes/issues/285)
 
 ### Fixed
 
@@ -261,7 +263,8 @@ First version which is separated from the openEO API. Complete rework of all pro
 Older versions of the processes were released as part of the openEO API, see the corresponding changelog for more information.
 
 
-[Unreleased]: <https://github.com/Open-EO/openeo-processes/compare/1.1.0...HEAD>
+[Unreleased]: <https://github.com/Open-EO/openeo-processes/compare/1.2.0...HEAD>
+[1.2.0]: <https://github.com/Open-EO/openeo-processes/compare/1.1.0...1.2.0>
 [1.1.0]: <https://github.com/Open-EO/openeo-processes/compare/1.0.0...1.1.0>
 [1.0.0]: <https://github.com/Open-EO/openeo-processes/compare/1.0.0-rc.1...1.0.0>
 [1.0.0-rc.1]: <https://github.com/Open-EO/openeo-processes/compare/0.4.2...1.0.0-rc.1>
