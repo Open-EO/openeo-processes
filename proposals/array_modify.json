@@ -37,7 +37,7 @@
         },
         {
             "name": "length",
-            "description": "The number of elements in the `data` array to remove (or replace) starting from the given index. If the array contains too few elements to remove, the process simply removes all elements up to the end.",
+            "description": "The number of elements in the `data` array to remove (or replace) starting from the given index. If the array contains fewer elements, the process simply removes all elements up to the end.",
             "optional": true,
             "default": 1,
             "schema": {
