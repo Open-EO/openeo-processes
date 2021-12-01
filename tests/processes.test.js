@@ -21,6 +21,7 @@ var loader = (file, proposal = false) => {
 
 		// Prepare for tests
 		processes.push([file, p, fileContent.toString(), proposal]);
+		processIds.push(p.id);
 	} catch(err) {
 		processes.push([file, {}, "", proposal]);
 		console.error(err);
@@ -29,12 +30,18 @@ var loader = (file, proposal = false) => {
 };
 
 var processes = [];
+var processIds = [];
 
 const files = glob.sync("../*.json", {realpath: true});
 files.forEach(file => loader(file));
 
 const proposals = glob.sync("../proposals/*.json", {realpath: true});
 proposals.forEach(file => loader(file, true));
+
+test("Check for duplicate process ids", () => {
+	const duplicates = processIds.filter((id, index) => processIds.indexOf(id) !== index);
+	expect(duplicates).toEqual([]);
+});
 
 describe.each(processes)("%s", (file, p, fileContent, proposal) => {
 
