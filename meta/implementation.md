@@ -144,17 +144,21 @@ To make `date_shift` easier to implement, we have found some libraries that foll
 
 ## `log` process
 
-The `log` process (previously known as `debug`) is only useful if a common behavior
-for data types passed into the `data` parameter has been agreed on across implementations. 
+The `log` process (previously known as `debug`) is a process to allow users to debug their workflows.
+Back-ends should not execute the processes for log levels that are not matching the mininum log level that can be specified through the API (>= v1.2.0) for each data processing request.
+
+### Data Types
+
+The process is only useful for users if a common behavior for data types passed into the `data` parameter has been agreed on across implementations. 
 
 The following chapters include some proposals for common data (sub) types, but it is incomplete and will be extended in the future.
 Also, for some data types a JSON encoding is missing, we'll add more details once agreed upon:
 <https://github.com/Open-EO/openeo-processes/issues/299>
 
-### Scalars
+#### Scalars
 For the data types boolean, numbers, strings and null it is recommended to log them as given.
 
-### Arrays
+#### Arrays
 
 It is recommended to summarize arrays with as follows:
 ```js
@@ -166,7 +170,7 @@ It is recommended to summarize arrays with as follows:
 }
 ```
 
-### Data Cubes
+#### Data Cubes
 
 It is recommended to return them summarized in a structure compliant to the [STAC data cube extension](https://github.com/stac-extensions/datacube).
 If reasonsable, it gives a valuable benefit for users to provide all dimension labels (e.g. individual timestamps for the temporal dimension) instead of values ranges.

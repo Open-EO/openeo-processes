@@ -1,7 +1,7 @@
 {
     "id": "log",
     "summary": "Add information to the logs",
-    "description": "This process can be used to add runtime information to the logs, e.g. for debugging purposes. This process should be used with caution. For example, logging each pixel or array individually in a process such as ``apply()`` or ``reduce_dimension()`` could lead to a (too) large number of log entries. Several data structures (e.g. data cubes) are too large to log and will only return summaries of their contents.\n\nThe data provided in the parameter `data` is returned without changes.",
+    "description": "This process can be used to add runtime information to the logs, e.g. for debugging purposes. This process should be used with caution and it is recommended to remove the process in production workflows. For example, logging each pixel or array individually in a process such as ``apply()`` or ``reduce_dimension()`` could lead to a (too) large number of log entries. Several data structures (e.g. data cubes) are too large to log and will only return summaries of their contents.\n\nThe data provided in the parameter `data` is returned without changes.",
     "categories": [
         "development"
     ],
