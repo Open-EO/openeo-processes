@@ -142,9 +142,9 @@ To make `date_shift` easier to implement, we have found some libraries that foll
 - Python: [dateutil](https://dateutil.readthedocs.io/en/stable/index.html)
 - R: [lubridate](https://lubridate.tidyverse.org/) ([Cheatsheet](https://rawgit.com/rstudio/cheatsheets/master/lubridate.pdf))
 
-## `log` process
+## `inspect` process
 
-The `log` process (previously known as `debug`) is a process to allow users to debug their workflows.
+The `inspect` process (previously known as `debug`) is a process to allow users to debug their workflows.
 Back-ends should not execute the processes for log levels that are not matching the mininum log level that can be specified through the API (>= v1.2.0) for each data processing request.
 
 ### Data Types
