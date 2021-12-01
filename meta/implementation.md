@@ -141,3 +141,70 @@ To make `date_shift` easier to implement, we have found some libraries that foll
 - JavaScript: [Moment.js](https://momentjs.com/)
 - Python: [dateutil](https://dateutil.readthedocs.io/en/stable/index.html)
 - R: [lubridate](https://lubridate.tidyverse.org/) ([Cheatsheet](https://rawgit.com/rstudio/cheatsheets/master/lubridate.pdf))
+
+## `log` process
+
+The `log` process (previously known as `debug`) is only useful if a common behavior
+for data types passed into the `data` parameter has been agreed on across implementations. 
+
+The following chapters include some proposals for common data (sub) types, but it is incomplete and will be extended in the future.
+Also, for some data types a JSON encoding is missing, we'll add more details once agreed upon:
+<https://github.com/Open-EO/openeo-processes/issues/299>
+
+### Scalars
+For the data types boolean, numbers, strings and null it is recommended to log them as given.
+
+### Arrays
+
+It is recommended to summarize arrays with as follows:
+```js
+{
+	"data": [3,1,6,4,8], // Return a reasonable excerpt of the data, e.g. the first 5 or 10 elements
+	"length": 10, // Return the length of the array, this is important to determine whether the data above is complete or an excerpt
+	"min": 0, // optional: Return additional statstics if possible, ideally use the corresponsing openEO process names as keys
+	"max": 10
+}
+```
+
+### Data Cubes
+
+It is recommended to return them summarized in a structure compliant to the [STAC data cube extension](https://github.com/stac-extensions/datacube).
+If reasonsable, it gives a valuable benefit for users to provide all dimension labels (e.g. individual timestamps for the temporal dimension) instead of values ranges.
+The top-level object and/or each dimension can be enhanced with additional statstics if possible, ideally use the corresponsing openEO process names as keys.
+
+```js
+{
+	"cube:dimensions": {
+		"x": {
+			"type": "spatial",
+			"axis": "x",
+			"extent": [8.253, 12.975],
+			"reference_system": 4326
+		},
+		"y": {
+			"type": "spatial",
+			"axis": "y",
+			"extent": [51.877,55.988],
+			"reference_system": 4326
+		},
+		"t": {
+			"type": "temporal",
+			"values": [
+				"2015-06-21T12:56:55Z",
+				"2015-06-23T09:12:14Z",
+				"2015-06-25T23:44:44Z",
+				"2015-06-27T21:11:34Z",
+				"2015-06-30T17:33:12Z"
+			],
+			"step": null
+		},
+		"bands": {
+			"type": "bands",
+			"values": ["NDVI"]
+		}
+	},
+	// optional: Return additional statstics for the data cube if possible, ideally use the corresponsing openEO process names as keys
+	"min": -1,
+	"max": 1
+}
+```

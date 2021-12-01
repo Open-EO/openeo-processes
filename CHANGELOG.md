@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - `array_labels`: Allow normal arrays to be passed for which the process returns the indices. [#243](https://github.com/Open-EO/openeo-processes/issues/243)
+- `debug`:
+    - Renamed to `log`.
+    - The log level `error` does not need to stop execution.
+    - Added proposals for logging several data types to the implementation guide.
 
 ### Removed
 
