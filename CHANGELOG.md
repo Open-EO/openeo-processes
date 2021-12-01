@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `predict_curve`
 - `ard_normalized_radar_backscatter` and `sar_backscatter`: Added `options` parameter
 - `array_find`: Added parameter `reverse`. [#269](https://github.com/Open-EO/openeo-processes/issues/269)
+- `load_result`:
+    - Added ability to load by (signed) URL (supported since openEO API v1.1.0).
+    - Added parameters `spatial_extent`, `temporal_extent` and `bands`. [#220](https://github.com/Open-EO/openeo-processes/issues/220)
 - `run_udf`: Exception `InvalidRuntime` added. [#273](https://github.com/Open-EO/openeo-processes/issues/273)
 - A new category "math > statistics" has been added [#277](https://github.com/Open-EO/openeo-processes/issues/277)
 
