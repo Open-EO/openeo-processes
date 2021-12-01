@@ -16,7 +16,7 @@
         },
         {
             "name": "code",
-            "description": "A code to help identify one or more log entries originating from this process in the list of all log entries. The code can help to group or filter log entries and is usually not unique.",
+            "description": "A label to help identify one or more log entries originating from this process in the list of all log entries. It can help to group or filter log entries and is usually not unique.",
             "schema": {
                 "type": "string"
             },
