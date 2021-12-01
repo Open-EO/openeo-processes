@@ -1,7 +1,7 @@
 {
     "id": "array_modify",
-    "summary": "Change the content of an array (insert, remove, update)",
-    "description": "Allows to insert into, remove from or update an array. This process describes updating an array as two separate operations that first removes and then inserts elements.\n\nAll labels get discarded and the array indices are always a sequence of numbers with the step size of 1 and starting at 0.",
+    "summary": "Change the content of an array (remove, insert, update)",
+    "description": "Modify an array by removing, inserting or updating elements. Updating can be seen as removing elements followed by inserting new elements (not necessarily the same number).\n\nAll labels get discarded and the array indices are always a sequence of numbers with the step size of 1 and starting at 0.",
     "categories": [
         "arrays"
     ],
@@ -37,7 +37,7 @@
         },
         {
             "name": "length",
-            "description": "The number of elements in the `data` array to remove (or replace) at the given index. If there are not enough elements to remove, the process simply removes all elements after the given index.",
+            "description": "The number of elements in the `data` array to remove (or replace) starting from the given index. If the array contains too few elements to remove, the process simply removes all elements up to the end.",
             "optional": true,
             "default": 1,
             "schema": {
