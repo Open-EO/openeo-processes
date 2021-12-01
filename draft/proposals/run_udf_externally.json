@@ -34,7 +34,7 @@
                 "type": "string",
                 "format": "uri",
                 "subtype": "uri",
-                "pattern": "^(http|https)://"
+                "pattern": "^https?://"
             }
         },
         {
