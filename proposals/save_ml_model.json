@@ -1,7 +1,7 @@
 {
     "id": "save_ml_model",
-    "summary": "Save a machine learning model",
-    "description": "...",
+    "summary": "Save a ML model",
+    "description": "Saves a machine learning model as part of a batch job.\n\nThe model will be accompanied by a separate STAC Item that implements the [ml-model extension](https://github.com/stac-extensions/ml-model).",
     "categories": [
         "machine learning",
         "import"
@@ -18,7 +18,7 @@
         },
         {
             "name": "options",
-            "description": "Any additional parameters to create the file(s).",
+            "description": "Additional parameters to create the file(s).",
             "schema": {
                 "type": "object",
                 "additionalParameters": false
@@ -32,5 +32,13 @@
         "schema": {
             "type": "boolean"
         }
-    }
+    },
+    "links": [
+        {
+            "href": "https://github.com/stac-extensions/ml-model",
+            "title": "STAC ml-model extension",
+            "type": "text/html",
+            "rel": "about"
+        }
+    ]
 }
