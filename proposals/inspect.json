@@ -1,7 +1,7 @@
 {
-    "id": "debug",
-    "summary": "Publish debugging information",
-    "description": "Sends debugging information about the data to the log output. Passes the data through.",
+    "id": "inspect",
+    "summary": "Add information to the logs",
+    "description": "This process can be used to add runtime information to the logs, e.g. for debugging purposes. This process should be used with caution and it is recommended to remove the process in production workflows. For example, logging each pixel or array individually in a process such as ``apply()`` or ``reduce_dimension()`` could lead to a (too) large number of log entries. Several data structures (e.g. data cubes) are too large to log and will only return summaries of their contents.\n\nThe data provided in the parameter `data` is returned without changes.",
     "categories": [
         "development"
     ],
@@ -9,23 +9,23 @@
     "parameters": [
         {
             "name": "data",
-            "description": "Data to publish.",
+            "description": "Data to log.",
             "schema": {
                 "description": "Any data type is allowed."
             }
         },
         {
             "name": "code",
-            "description": "An identifier to help identify the log entry in a bunch of other log entries.",
+            "description": "A label to help identify one or more log entries originating from this process in the list of all log entries. It can help to group or filter log entries and is usually not unique.",
             "schema": {
                 "type": "string"
             },
-            "default": "",
+            "default": "User",
             "optional": true
         },
         {
             "name": "level",
-            "description": "The severity level of this message, defaults to `info`. Note that the level `error` forces the computation to be stopped!",
+            "description": "The severity level of this message, defaults to `info`.",
             "schema": {
                 "type": "string",
                 "enum": [

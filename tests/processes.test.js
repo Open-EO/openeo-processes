@@ -1,7 +1,7 @@
 const glob = require('glob');
 const fs = require('fs');
 const path = require('path');
-const { normalizeString, checkDescription, checkSpelling, checkJsonSchema, getAjv, prepareSchema } = require('./testHelpers');
+const { normalizeString, checkDescription, checkSpelling, checkJsonSchema, getAjv, prepareSchema, isObject } = require('./testHelpers');
 
 const anyOfRequired = [
   "quantiles",
@@ -21,6 +21,7 @@ var loader = (file, proposal = false) => {
 
 		// Prepare for tests
 		processes.push([file, p, fileContent.toString(), proposal]);
+		processIds.push(p.id);
 	} catch(err) {
 		processes.push([file, {}, "", proposal]);
 		console.error(err);
@@ -29,12 +30,18 @@ var loader = (file, proposal = false) => {
 };
 
 var processes = [];
+var processIds = [];
 
 const files = glob.sync("../*.json", {realpath: true});
 files.forEach(file => loader(file));
 
 const proposals = glob.sync("../proposals/*.json", {realpath: true});
 proposals.forEach(file => loader(file, true));
+
+test("Check for duplicate process ids", () => {
+	const duplicates = processIds.filter((id, index) => processIds.indexOf(id) !== index);
+	expect(duplicates).toEqual([]);
+});
 
 describe.each(processes)("%s", (file, p, fileContent, proposal) => {
 
@@ -66,7 +73,7 @@ describe.each(processes)("%s", (file, p, fileContent, proposal) => {
 		// description
 		expect(typeof p.description).toBe('string');
 		// lint: Description should be longer than a summary
-		expect(p.description.length).toBeGreaterThan(55);
+		expect(p.description.length).toBeGreaterThan(60);
 		checkDescription(p.description, p);
 	});
 
@@ -98,7 +105,7 @@ describe.each(processes)("%s", (file, p, fileContent, proposal) => {
 	}
 
 	test("Return Value", () => {
-		expect(typeof p.returns).toBe('object');
+		expect(isObject(p.returns)).toBeTruthy();
 		expect(p.returns).not.toBeNull();
 
 		// return value description
@@ -108,14 +115,14 @@ describe.each(processes)("%s", (file, p, fileContent, proposal) => {
 		checkDescription(p.returns.description, p);
 
 		// return value schema
-		expect(typeof p.returns.schema).toBe('object');
 		expect(p.returns.schema).not.toBeNull();
+		expect(typeof p.returns.schema).toBe('object');
 		// lint: Description should not be empty
 		checkJsonSchema(jsv, p.returns.schema);
 	});
 
 	test("Exceptions", () => {
-		expect(typeof p.exceptions === 'undefined' || (typeof p.exceptions === 'object' && p.exceptions !== 'null')).toBeTruthy();
+		expect(typeof p.exceptions === 'undefined' || isObject(p.exceptions)).toBeTruthy();
 	});
 
 	var exceptions = o2a(p.exceptions);
@@ -153,7 +160,7 @@ describe.each(processes)("%s", (file, p, fileContent, proposal) => {
 			}
 			var paramKeys = Object.keys(parametersObj);
 
-			expect(typeof example).toBe('object');
+			expect(isObject(example)).toBeTruthy();
 			expect(example).not.toBeNull();
 
 			// example title
@@ -194,8 +201,7 @@ describe.each(processes)("%s", (file, p, fileContent, proposal) => {
 
 	if (Array.isArray(p.links)) {
 		test.each(p.links)("Links > %#", (link) => {
-			expect(typeof link).toBe('object');
-			expect(link).not.toBeNull();
+			expect(isObject(link)).toBeTruthy();
 
 			// link href
 			expect(typeof link.href).toBe('string');
@@ -250,8 +256,8 @@ function checkParam(param, p, checkCbParams = true) {
 	checkFlags(param);
 
 	// Parameter schema
-	expect(typeof param.schema).toBe('object');
 	expect(param.schema).not.toBeNull();
+	expect(typeof param.schema).toBe('object');
 	checkJsonSchema(jsv, param.schema);
 
 	if (!checkCbParams) {

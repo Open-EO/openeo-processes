@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased / Draft
 
+## [1.2.0] - 2021-12-13
+
 ### Added
 
 - New processes in proposal state
@@ -13,23 +15,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `predict_curve`
 - `ard_normalized_radar_backscatter` and `sar_backscatter`: Added `options` parameter
 - `array_find`: Added parameter `reverse`. [#269](https://github.com/Open-EO/openeo-processes/issues/269)
+- `load_result`:
+    - Added ability to load by (signed) URL (supported since openEO API v1.1.0).
+    - Added parameters `spatial_extent`, `temporal_extent` and `bands`. [#220](https://github.com/Open-EO/openeo-processes/issues/220)
 - `run_udf`: Exception `InvalidRuntime` added. [#273](https://github.com/Open-EO/openeo-processes/issues/273)
 - A new category "math > statistics" has been added [#277](https://github.com/Open-EO/openeo-processes/issues/277)
 
 ### Changed
 
 - `array_labels`: Allow normal arrays to be passed for which the process returns the indices. [#243](https://github.com/Open-EO/openeo-processes/issues/243)
+- `debug`:
+    - Renamed to `inspect`.
+    - The log level `error` does not need to stop execution.
+    - Added proposals for logging several data types to the implementation guide.
 
 ### Removed
 
-- Removed the explict schema for `raster-cube` in the `data` parameters and return values of `run_udf` and `run_udf_externally`. It's still possible to pass raster-cubes via the "any" data type, but it's discouraged due to scalability issues. [#285](https://github.com/Open-EO/openeo-processes/issues/285)
+- Removed the explicit schema for `raster-cube` in the `data` parameters and return values of `run_udf` and `run_udf_externally`. It's still possible to pass raster-cubes via the "any" data type, but it's discouraged due to scalability issues. [#285](https://github.com/Open-EO/openeo-processes/issues/285)
 
 ### Fixed
 
 - `aggregate_temporal_period`: Clarified which dimension labels are present in the returned data cube. [#274](https://github.com/Open-EO/openeo-processes/issues/274)
 - `ard_surface_reflectance`: The process has been categorized as "optical" instead of "sar".
+- `array_modify`: Clarified behavior.
 - `save_result`: Clarify how the process works in the different contexts it is used in (e.g. synchronous processing, secondary web service). [#288](https://github.com/Open-EO/openeo-processes/issues/288)
-- `quantiles`: Clarified behavior. [#278](https://github.com/Open-EO/openeo-processes/issues/278)
+- `quantiles`:
+  - The default algorithm for sample quantiles has been clarified (type 7). [#296](https://github.com/Open-EO/openeo-processes/issues/296)
+  - Improved documentation in general. [#278](https://github.com/Open-EO/openeo-processes/issues/278)
 
 ## [1.1.0] - 2021-06-29
 
@@ -251,7 +263,8 @@ First version which is separated from the openEO API. Complete rework of all pro
 Older versions of the processes were released as part of the openEO API, see the corresponding changelog for more information.
 
 
-[Unreleased]: <https://github.com/Open-EO/openeo-processes/compare/1.1.0...HEAD>
+[Unreleased]: <https://github.com/Open-EO/openeo-processes/compare/1.2.0...HEAD>
+[1.2.0]: <https://github.com/Open-EO/openeo-processes/compare/1.1.0...1.2.0>
 [1.1.0]: <https://github.com/Open-EO/openeo-processes/compare/1.0.0...1.1.0>
 [1.0.0]: <https://github.com/Open-EO/openeo-processes/compare/1.0.0-rc.1...1.0.0>
 [1.0.0-rc.1]: <https://github.com/Open-EO/openeo-processes/compare/0.4.2...1.0.0-rc.1>
