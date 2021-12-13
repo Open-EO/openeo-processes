@@ -1,0 +1,150 @@
+{
+    "id": "count",
+    "summary": "Count the number of elements",
+    "description": "Gives the number of elements in an array that matches the specified condition.\n\n**Remarks:**\n\n* Counts the number of valid elements by default (`condition` is set to `null`). A valid element is every element for which ``is_valid()`` returns `true`.\n* To count all elements in a list set the `condition` parameter to boolean `true`.",
+    "categories": [
+        "arrays",
+        "math > statistics",
+        "reducer"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "An array with elements of any data type.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
+            }
+        },
+        {
+            "name": "condition",
+            "description": "A condition consists of one or more processes, which in the end return a boolean value. It is evaluated against each element in the array. An element is counted only if the condition returns `true`. Defaults to count valid elements in a list (see ``is_valid()``). Setting this parameter to boolean `true` counts all elements in the list.",
+            "schema": [
+                {
+                    "title": "Condition",
+                    "description": "A logical expression that is evaluated against each element in the array.",
+                    "type": "object",
+                    "subtype": "process-graph",
+                    "parameters": [
+                        {
+                            "name": "x",
+                            "description": "The value of the current element being processed.",
+                            "schema": {
+                                "description": "Any data type."
+                            }
+                        },
+                        {
+                            "name": "context",
+                            "description": "Additional data passed by the user.",
+                            "schema": {
+                                "description": "Any data type."
+                            },
+                            "optional": true,
+                            "default": null
+                        }
+                    ],
+                    "returns": {
+                        "description": "`true` if the element should increase the counter, otherwise `false`.",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                {
+                    "title": "All elements",
+                    "description": "Boolean `true` counts all elements in the list.",
+                    "type": "boolean",
+                    "const": true
+                },
+                {
+                    "title": "Valid elements",
+                    "description": "`null` counts valid elements in the list.",
+                    "type": "null"
+                }
+            ],
+            "default": null,
+            "optional": true
+        },
+        {
+            "name": "context",
+            "description": "Additional data to be passed to the condition.",
+            "schema": {
+                "description": "Any data type."
+            },
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "The counted number of elements.",
+        "schema": {
+            "type": "number"
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "data": []
+            },
+            "returns": 0
+        },
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    0,
+                    3,
+                    2
+                ]
+            },
+            "returns": 4
+        },
+        {
+            "arguments": {
+                "data": [
+                    "ABC",
+                    null
+                ]
+            },
+            "returns": 1
+        },
+        {
+            "arguments": {
+                "data": [
+                    false,
+                    null
+                ],
+                "condition": true
+            },
+            "returns": 2
+        },
+        {
+            "arguments": {
+                "data": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    null
+                ],
+                "condition": {
+                    "gt": {
+                        "process_id": "gt",
+                        "arguments": {
+                            "x": {
+                                "from_parameter": "element"
+                            },
+                            "y": 2
+                        },
+                        "result": true
+                    }
+                }
+            },
+            "returns": 3
+        }
+    ]
+}

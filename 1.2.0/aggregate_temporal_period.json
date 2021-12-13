@@ -1,0 +1,121 @@
+{
+    "id": "aggregate_temporal_period",
+    "summary": "Temporal aggregations based on calendar hierarchies",
+    "description": "Computes a temporal aggregation based on calendar hierarchies such as years, months or seasons. For other calendar hierarchies ``aggregate_temporal()`` can be used.\n\nFor each interval, all data along the dimension will be passed through the reducer.\n\nIf the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension.",
+    "categories": [
+        "aggregate & resample",
+        "climatology",
+        "cubes"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The source data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "period",
+            "description": "The time intervals to aggregate. The following pre-defined values are available:\n\n* `hour`: Hour of the day\n* `day`: Day of the year\n* `week`: Week of the year\n* `dekad`: Ten day periods, counted per year with three periods per month (day 1 - 10, 11 - 20 and 21 - end of month). The third dekad of the month can range from 8 to 11 days. For example, the fourth dekad is Feb, 1 - Feb, 10 each year.\n* `month`: Month of the year\n* `season`: Three month periods of the calendar seasons (December - February, March - May, June - August, September - November).\n* `tropical-season`: Six month periods of the tropical seasons (November - April, May - October).\n* `year`: Proleptic years\n* `decade`: Ten year periods ([0-to-9 decade](https://en.wikipedia.org/wiki/Decade#0-to-9_decade)), from a year ending in a 0 to the next year ending in a 9.\n* `decade-ad`: Ten year periods ([1-to-0 decade](https://en.wikipedia.org/wiki/Decade#1-to-0_decade)) better aligned with the anno Domini (AD) calendar era, from a year ending in a 1 to the next year ending in a 0.",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "hour",
+                    "day",
+                    "week",
+                    "dekad",
+                    "month",
+                    "season",
+                    "tropical-season",
+                    "year",
+                    "decade",
+                    "decade-ad"
+                ]
+            }
+        },
+        {
+            "name": "reducer",
+            "description": "A reducer to be applied for the values contained in each period. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes. Periods may not contain any values, which for most reducers leads to no-data (`null`) values by default.",
+            "schema": {
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "description": "A labeled array with elements of any type. If there's no data for the period, the array is empty.",
+                        "schema": {
+                            "type": "array",
+                            "subtype": "labeled-array",
+                            "items": {
+                                "description": "Any data type."
+                            }
+                        }
+                    },
+                    {
+                        "name": "context",
+                        "description": "Additional data passed by the user.",
+                        "schema": {
+                            "description": "Any data type."
+                        },
+                        "optional": true,
+                        "default": null
+                    }
+                ],
+                "returns": {
+                    "description": "The value to be set in the new data cube.",
+                    "schema": {
+                        "description": "Any data type."
+                    }
+                }
+            }
+        },
+        {
+            "name": "dimension",
+            "description": "The name of the temporal dimension for aggregation. All data along the dimension is passed through the specified reducer. If the dimension is not set or set to `null`, the source data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` exception if it has more dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+            "schema": {
+                "type": [
+                    "string",
+                    "null"
+                ]
+            },
+            "optional": true,
+            "default": null
+        },
+        {
+            "name": "context",
+            "description": "Additional data to be passed to the reducer.",
+            "schema": {
+                "description": "Any data type."
+            },
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "A new data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except for the resolution and dimension labels of the given temporal dimension. The specified temporal dimension has the following dimension labels (`YYYY` = four-digit year, `MM` = two-digit month, `DD` two-digit day of month):\n\n* `hour`: `YYYY-MM-DD-00` - `YYYY-MM-DD-23`\n* `day`: `YYYY-001` - `YYYY-365`\n* `week`: `YYYY-01` - `YYYY-52`\n* `dekad`: `YYYY-00` - `YYYY-36`\n* `month`: `YYYY-01` - `YYYY-12`\n* `season`: `YYYY-djf` (December - February), `YYYY-mam` (March - May), `YYYY-jja` (June - August), `YYYY-son` (September - November).\n* `tropical-season`: `YYYY-ndjfma` (November - April), `YYYY-mjjaso` (May - October).\n* `year`: `YYYY`\n* `decade`: `YYY0`\n* `decade-ad`: `YYY1`\n\nThe dimension labels in the new data cube are complete for the whole extent of the source data cube. For example, if `period` is set to `day` and the source data cube has two dimension labels at the beginning of the year (`2020-01-01`) and the end of a year (`2020-12-31`), the process returns a data cube with 365 dimension labels (`2020-001`, `2020-002`, ..., `2020-365`). In contrast, if `period` is set to `day` and the source data cube has just one dimension label `2020-01-05`, the process returns a data cube with just a single dimension label (`2020-005`).",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "exceptions": {
+        "TooManyDimensions": {
+            "message": "The data cube contains multiple temporal dimensions. The parameter `dimension` must be specified."
+        },
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
+        },
+        "DistinctDimensionLabelsRequired": {
+            "message": "The dimension labels have duplicate values. Distinct labels must be specified."
+        }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#aggregate",
+            "rel": "about",
+            "title": "Aggregation explained in the openEO documentation"
+        }
+    ]
+}

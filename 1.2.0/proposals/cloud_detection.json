@@ -1,0 +1,63 @@
+{
+    "id": "cloud_detection",
+    "summary": "Create cloud masks",
+    "description": "Detects atmospheric disturbances such as clouds, cloud shadows, aerosols, haze, ozone and/or water vapour in optical imagery.\n\nIt creates a data cube with the spatial and temporal dimensions compatible to the source data cube and a dimension that contains a dimension label for each of the supported/considered atmospheric disturbances. The naming of the bands follows these pre-defined values:\n\n- `cloud`\n- `shadow`\n- `aerosol`\n- `haze`\n- `ozone`\n- `water_vapor`\n\nAll bands have values between 0 (clear) and 1, which describes the probability that it is an atmospheric disturbance.",
+    "categories": [
+        "cubes",
+        "optical"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "description": "The source data cube containing multi-spectral optical top of the atmosphere (TOA) reflectances on which to perform cloud detection.",
+            "name": "data",
+            "schema": {
+                "subtype": "raster-cube",
+                "type": "object"
+            }
+        },
+        {
+            "description": "The cloud detection method to use. To get reproducible results, you have to set a specific method.\n\nSet to `null` to allow the back-end to choose, which will improve portability, but reduce reproducibility as you *may* get different results if you run the processes multiple times.",
+            "name": "method",
+            "schema": [
+                {
+                    "type": [
+                        "string"
+                    ],
+                    "enum": [
+                        "Fmask",
+                        "s2cloudless",
+                        "Sen2Cor"
+                    ]
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "description": "Proprietary options for the cloud detection method. Specifying proprietary options will reduce portability.",
+            "name": "options",
+            "optional": true,
+            "default": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": false
+            }
+        }
+    ],
+    "returns": {
+        "description": "A data cube with bands for the atmospheric disturbances. Each of the masks contains values between 0 and 1. The data cube has the same spatial and temporal dimensions as the source data cube and a dimension that contains a dimension label for each of the supported/considered atmospheric disturbance.",
+        "schema": {
+            "subtype": "raster-cube",
+            "type": "object"
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://bok.eo4geo.eu/TA14-2-2-1-3",
+            "title": "Cloud mask explained by EO4GEO body of knowledge."
+        }
+    ]
+}

@@ -1,0 +1,104 @@
+{
+    "id": "rename_labels",
+    "summary": "Rename dimension labels",
+    "description": "Renames the labels of the specified dimension in the data cube from `source` to `target`.\n\nIf the array for the source labels is empty (the default), the dimension labels are expected to be enumerated with zero-based numbering (0,1,2,3,...) so that the dimension labels directly map to the indices of the array specified for the parameter `target`. If the dimension labels are not enumerated and the `target` parameter is not specified, the `LabelsNotEnumerated` exception is thrown. The number of the source and target labels must be equal. Otherwise, the exception `LabelMismatch` is thrown.\n\nThis process doesn't change the order of the labels and their corresponding data.",
+    "categories": [
+        "cubes"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "dimension",
+            "description": "The name of the dimension to rename the labels for.",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "target",
+            "description": "The new names for the labels. The dimension labels in the data cube are expected to be enumerated if the parameter `target` is not specified. If a target dimension label already exists in the data cube, a `LabelExists` exception is thrown.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": [
+                        "number",
+                        "string"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "source",
+            "description": "The names of the labels as they are currently in the data cube. The array defines an unsorted and potentially incomplete list of labels that should be renamed to the names available in the corresponding array elements in the parameter `target`. If one of the source dimension labels doesn't exist, the `LabelNotAvailable` exception is thrown. By default, the array is empty so that the dimension labels in the data cube are expected to be enumerated.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": [
+                        "number",
+                        "string"
+                    ]
+                }
+            },
+            "default": [],
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "The data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that for the given dimension the labels change. The old labels can not be referred to any longer. The number of labels remains the same.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "exceptions": {
+        "LabelsNotEnumerated": {
+            "message": "The dimension labels are not enumerated."
+        },
+        "LabelMismatch": {
+            "message": "The number of labels in the parameters `source` and `target` don't match."
+        },
+        "LabelNotAvailable": {
+            "message": "A label with the specified name does not exist."
+        },
+        "LabelExists": {
+            "message": "A label with the specified name exists."
+        }
+    },
+    "examples": [
+        {
+            "title": "Rename named labels",
+            "description": "Renaming the bands from `B1` to `red`, from `B2` to `green` and from `B3` to `blue`.",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "dimension": "bands",
+                "source": [
+                    "B1",
+                    "B2",
+                    "B3"
+                ],
+                "target": [
+                    "red",
+                    "green",
+                    "blue"
+                ]
+            }
+        }
+    ],
+    "links": [
+        {
+            "rel": "example",
+            "type": "application/json",
+            "href": "https://processes.openeo.org/1.2.0/examples/rename-enumerated-labels.json",
+            "title": "Rename enumerated labels"
+        }
+    ]
+}

@@ -1,0 +1,131 @@
+{
+    "id": "ard_normalized_radar_backscatter",
+    "summary": "CARD4L compliant SAR NRB generation",
+    "description": "Computes CARD4L compliant backscatter from SAR input. The radiometric correction coefficient is gamma0 (terrain), which is the ground area computed with terrain earth model in sensor line of sight.\n\nNote that backscatter computation may require instrument specific metadata that is tightly coupled to the original SAR products. As a result, this process may only work in combination with loading data from specific collections, not with general data cubes.\n\nThis process uses bilinear interpolation, both for resampling the DEM and the backscatter.",
+    "categories": [
+        "cubes",
+        "sar",
+        "ard"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The source data cube containing SAR input.",
+            "schema": {
+                "subtype": "raster-cube",
+                "type": "object"
+            }
+        },
+        {
+            "name": "elevation_model",
+            "description": "The digital elevation model to use. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
+            "optional": true,
+            "default": null,
+            "schema": [
+                {
+                    "type": "string",
+                    "subtype": "collection-id"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "name": "contributing_area",
+            "description": "If set to `true`, a DEM-based local contributing area band named `contributing_area` is added. The values are given in square meters.",
+            "optional": true,
+            "default": false,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "ellipsoid_incidence_angle",
+            "description": "If set to `true`, an ellipsoidal incidence angle band named `ellipsoid_incidence_angle` is added. The values are given in degrees.",
+            "optional": true,
+            "default": false,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "noise_removal",
+            "description": "If set to `false`, no noise removal is applied. Defaults to `true`, which removes noise.",
+            "optional": true,
+            "default": true,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "description": "Proprietary options for the backscatter computations. Specifying proprietary options will reduce portability.",
+            "name": "options",
+            "optional": true,
+            "default": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": false
+            }
+        }
+    ],
+    "returns": {
+        "description": "Backscatter values expressed as gamma0 in linear scale.\n\nIn addition to the bands `contributing_area` and `ellipsoid_incidence_angle` that can optionally be added with corresponding parameters, the following bands are always added to the data cube:\n\n- `mask`: A data mask that indicates which values are valid (1), invalid (0) or contain no-data (null).\n- `local_incidence_angle`: A band with DEM-based local incidence angles in degrees.\n\nThe data returned is CARD4L compliant with corresponding metadata.",
+        "schema": {
+            "subtype": "raster-cube",
+            "type": "object"
+        }
+    },
+    "exceptions": {
+        "DigitalElevationModelInvalid": {
+            "message": "The digital elevation model specified is either not a DEM or can't be used with the data cube given."
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://ceos.org/ard/files/PFS/NRB/v5.0/CARD4L-PFS_Normalised_Radar_Backscatter-v5.0.pdf",
+            "title": "CEOS CARD4L specification"
+        },
+        {
+            "rel": "about",
+            "href": "https://bok.eo4geo.eu/PP2-2-4-3",
+            "title": "Gamma nought (0) explained by EO4GEO body of knowledge."
+        },
+        {
+            "rel": "about",
+            "href": "https://doi.org/10.3390/data4030093",
+            "title": "Reasoning behind the choice of bilinear resampling"
+        }
+    ],
+    "process_graph": {
+        "nrb": {
+            "process_id": "sar_backscatter",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "coefficient": "gamma0-terrain",
+                "elevation_model": {
+                    "from_parameter": "elevation_model"
+                },
+                "mask": true,
+                "contributing_area": {
+                    "from_parameter": "contributing_area"
+                },
+                "local_incidence_angle": true,
+                "ellipsoid_incidence_angle": {
+                    "from_parameter": "ellipsoid_incidence_angle"
+                },
+                "noise_removal": {
+                    "from_parameter": "noise_removal"
+                },
+                "options": {
+                    "from_parameter": "options"
+                }
+            },
+            "result": true
+        }
+    }
+}

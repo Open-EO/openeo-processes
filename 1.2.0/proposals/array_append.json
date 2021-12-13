@@ -1,0 +1,69 @@
+{
+    "id": "array_append",
+    "summary": "Append a value to an array",
+    "description": "Appends a value to the end of the array. Array labels get discarded from the array.",
+    "categories": [
+        "arrays"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "An array.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
+            }
+        },
+        {
+            "name": "value",
+            "description": "Value to append to the array.",
+            "schema": {
+                "description": "Any data type is allowed."
+            }
+        }
+    ],
+    "returns": {
+        "description": "The new array with the value being appended.",
+        "schema": {
+            "type": "array",
+            "items": {
+                "description": "Any data type is allowed."
+            }
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    2
+                ],
+                "value": 3
+            },
+            "returns": [
+                1,
+                2,
+                3
+            ]
+        }
+    ],
+    "process_graph": {
+        "append": {
+            "process_id": "array_concat",
+            "arguments": {
+                "array1": {
+                    "from_parameter": "data"
+                },
+                "array2": [
+                    {
+                        "from_parameter": "value"
+                    }
+                ]
+            },
+            "result": true
+        }
+    }
+}

@@ -1,0 +1,94 @@
+{
+    "id": "max",
+    "summary": "Maximum value",
+    "description": "Computes the largest value of an array of numbers, which is equal to the first element of a sorted (i.e., ordered) version of the array.\n\nAn array without non-`null` elements resolves always with `null`.",
+    "categories": [
+        "math",
+        "math > statistics",
+        "reducer"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "An array of numbers.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "ignore_nodata",
+            "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is returned if any value is such a value.",
+            "schema": {
+                "type": "boolean"
+            },
+            "default": true,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "The maximum value.",
+        "schema": {
+            "type": [
+                "number",
+                "null"
+            ]
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    0,
+                    3,
+                    2
+                ]
+            },
+            "returns": 3
+        },
+        {
+            "arguments": {
+                "data": [
+                    5,
+                    2.5,
+                    null,
+                    -0.7
+                ]
+            },
+            "returns": 5
+        },
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    0,
+                    3,
+                    null,
+                    2
+                ],
+                "ignore_nodata": false
+            },
+            "returns": null
+        },
+        {
+            "description": "The input array is empty: return `null`.",
+            "arguments": {
+                "data": []
+            },
+            "returns": null
+        }
+    ],
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://mathworld.wolfram.com/Maximum.html",
+            "title": "Maximum explained by Wolfram MathWorld"
+        }
+    ]
+}

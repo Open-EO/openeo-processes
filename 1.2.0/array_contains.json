@@ -1,0 +1,170 @@
+{
+    "id": "array_contains",
+    "summary": "Check whether the array contains a given value",
+    "description": "Checks whether the array specified for `data` contains the value specified in `value`. Returns `true` if there's a match, otherwise `false`.\n\n**Remarks:**\n\n* To get the index or the label of the value found, use ``array_find()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. A `null` return value from ``eq()`` is handled exactly as `false` (no match).\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating-point numbers due to floating-point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.\n* If the specified value is an array, object or null, the process always returns `false`. See the examples for one to check for `null` values.",
+    "categories": [
+        "arrays",
+        "comparison",
+        "reducer"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "List to find the value in.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
+            }
+        },
+        {
+            "name": "value",
+            "description": "Value to find in `data`.",
+            "schema": {
+                "description": "Any data type is allowed."
+            }
+        }
+    ],
+    "returns": {
+        "description": "`true` if the list contains the value, false` otherwise.",
+        "schema": {
+            "type": "boolean"
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    2,
+                    3
+                ],
+                "value": 2
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "data": [
+                    "A",
+                    "B",
+                    "C"
+                ],
+                "value": "b"
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    2,
+                    3
+                ],
+                "value": "2"
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    2,
+                    null
+                ],
+                "value": null
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "data": [
+                    [
+                        1,
+                        2
+                    ],
+                    [
+                        3,
+                        4
+                    ]
+                ],
+                "value": [
+                    1,
+                    2
+                ]
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "data": [
+                    [
+                        1,
+                        2
+                    ],
+                    [
+                        3,
+                        4
+                    ]
+                ],
+                "value": 2
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "data": [
+                    {
+                        "a": "b"
+                    },
+                    {
+                        "c": "d"
+                    }
+                ],
+                "value": {
+                    "a": "b"
+                }
+            },
+            "returns": false
+        }
+    ],
+    "links": [
+        {
+            "rel": "example",
+            "type": "application/json",
+            "href": "https://processes.openeo.org/1.2.0/examples/array_contains_nodata.json",
+            "title": "Check for no-data values in arrays"
+        }
+    ],
+    "process_graph": {
+        "find": {
+            "process_id": "array_find",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "value": {
+                    "from_parameter": "value"
+                }
+            }
+        },
+        "is_nodata": {
+            "process_id": "is_nodata",
+            "arguments": {
+                "x": {
+                    "from_node": "find"
+                }
+            }
+        },
+        "not": {
+            "process_id": "not",
+            "arguments": {
+                "x": {
+                    "from_node": "is_nodata"
+                }
+            },
+            "result": true
+        }
+    }
+}

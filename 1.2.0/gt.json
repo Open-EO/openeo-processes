@@ -1,0 +1,98 @@
+{
+    "id": "gt",
+    "summary": "Greater than comparison",
+    "description": "Compares whether `x` is strictly greater than `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* If any operand is not a `number` or temporal string (`date`, `time` or `date-time`), the process returns `false`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
+    "categories": [
+        "comparison"
+    ],
+    "parameters": [
+        {
+            "name": "x",
+            "description": "First operand.",
+            "schema": {
+                "description": "Any data type is allowed."
+            }
+        },
+        {
+            "name": "y",
+            "description": "Second operand.",
+            "schema": {
+                "description": "Any data type is allowed."
+            }
+        }
+    ],
+    "returns": {
+        "description": "`true` if `x` is strictly greater than `y` or `null` if any operand is `null`, otherwise `false`.",
+        "schema": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "x": 1,
+                "y": null
+            },
+            "returns": null
+        },
+        {
+            "arguments": {
+                "x": 0,
+                "y": 0
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "x": 2,
+                "y": 1
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "x": -0.5,
+                "y": -0.6
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "x": "00:00:00Z",
+                "y": "00:00:00+01:00"
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "x": "1950-01-01T00:00:00Z",
+                "y": "2018-01-01T12:00:00Z"
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "x": "2018-01-01T12:00:00+00:00",
+                "y": "2018-01-01T12:00:00Z"
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "x": true,
+                "y": 0
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "x": true,
+                "y": false
+            },
+            "returns": false
+        }
+    ]
+}

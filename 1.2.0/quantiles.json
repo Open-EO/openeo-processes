@@ -1,0 +1,184 @@
+{
+    "id": "quantiles",
+    "summary": "Quantiles",
+    "description": "Calculates quantiles, which are cut points dividing the range of a sample distribution into either\n\n* intervals corresponding to the given `probabilities` or\n* equal-sized intervals (q-quantiles based on the parameter `q`).\n\nEither the parameter `probabilities` or `q` must be specified, otherwise the `QuantilesParameterMissing` exception is thrown. If both parameters are set the `QuantilesParameterConflict` exception is thrown.\n\nSample quantiles can be computed with several different algorithms. Hyndman and Fan (1996) have concluded on nine different types, which are commonly implemented in statistical software packages. This process is implementing type 7, which is implemented widely and often also the default type (e.g. in Excel, Julia, Python, R and S).",
+    "categories": [
+        "math > statistics"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "An array of numbers.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "probabilities",
+            "description": "A list of probabilities to calculate quantiles for. The probabilities must be between 0 and 1 (inclusive).",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                }
+            },
+            "optional": true
+        },
+        {
+            "name": "q",
+            "description": "Number of intervals to calculate quantiles for. Calculates q-quantiles with equal-sized intervals.",
+            "schema": {
+                "type": "integer",
+                "minimum": 2
+            },
+            "optional": true
+        },
+        {
+            "name": "ignore_nodata",
+            "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that an array with `null` values is returned if any element is such a value.",
+            "schema": {
+                "type": "boolean"
+            },
+            "default": true,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "An array with the computed quantiles. The list has either\n\n* as many elements as the given list of `probabilities` had or\n* *`q`-1* elements.\n\nIf the input array is empty the resulting array is filled with as many `null` values as required according to the list above. See the 'Empty array' example for an example.",
+        "schema": {
+            "type": "array",
+            "items": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            }
+        }
+    },
+    "exceptions": {
+        "QuantilesParameterMissing": {
+            "message": "The process `quantiles` requires either the `probabilities` or `q` parameter to be set."
+        },
+        "QuantilesParameterConflict": {
+            "message": "The process `quantiles` only allows that either the `probabilities` or the `q` parameter is set."
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "data": [
+                    2,
+                    4,
+                    4,
+                    4,
+                    5,
+                    5,
+                    7,
+                    9
+                ],
+                "probabilities": [
+                    0.005,
+                    0.01,
+                    0.02,
+                    0.05,
+                    0.1,
+                    0.5
+                ]
+            },
+            "returns": [
+                2.07,
+                2.14,
+                2.28,
+                2.7,
+                3.4,
+                4.5
+            ]
+        },
+        {
+            "arguments": {
+                "data": [
+                    2,
+                    4,
+                    4,
+                    4,
+                    5,
+                    5,
+                    7,
+                    9
+                ],
+                "q": 4
+            },
+            "returns": [
+                4,
+                4.5,
+                5.5
+            ]
+        },
+        {
+            "arguments": {
+                "data": [
+                    -1,
+                    -0.5,
+                    null,
+                    1
+                ],
+                "q": 2
+            },
+            "returns": [
+                -0.5
+            ]
+        },
+        {
+            "arguments": {
+                "data": [
+                    -1,
+                    -0.5,
+                    null,
+                    1
+                ],
+                "q": 4,
+                "ignore_nodata": false
+            },
+            "returns": [
+                null,
+                null,
+                null
+            ]
+        },
+        {
+            "title": "Empty array",
+            "arguments": {
+                "data": [],
+                "probabilities": [
+                    0.1,
+                    0.5
+                ]
+            },
+            "returns": [
+                null,
+                null
+            ]
+        }
+    ],
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://en.wikipedia.org/wiki/Quantile",
+            "title": "Quantiles explained by Wikipedia"
+        },
+        {
+            "rel": "about",
+            "href": "https://www.amherst.edu/media/view/129116/original/Sample+Quantiles.pdf",
+            "type": "application/pdf",
+            "title": "Hyndman and Fan (1996): Sample Quantiles in Statistical Packages"
+        }
+    ]
+}

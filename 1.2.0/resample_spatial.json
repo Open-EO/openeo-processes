@@ -1,0 +1,148 @@
+{
+    "id": "resample_spatial",
+    "summary": "Resample and warp the spatial dimensions",
+    "description": "Resamples the spatial dimensions (x,y) of the data cube to a specified resolution and/or warps the data cube to the target projection. At least `resolution` or `projection` must be specified.\n\nRelated processes:\n\n* Use ``filter_bbox()`` to set the target spatial extent.\n* To spatially align two data cubes with each other (e.g. for merging), better use the process ``resample_cube_spatial()``.",
+    "categories": [
+        "cubes",
+        "aggregate & resample"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A raster data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "resolution",
+            "description": "Resamples the data cube to the target resolution, which can be specified either as separate values for x and y or as a single value for both axes. Specified in the units of the target projection. Doesn't change the resolution by default (`0`).",
+            "schema": [
+                {
+                    "description": "A single number used as the resolution for both x and y.",
+                    "type": "number",
+                    "minimum": 0
+                },
+                {
+                    "description": "A two-element array to specify separate resolutions for x (first element) and y (second element).",
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                        "type": "number",
+                        "minimum": 0
+                    }
+                }
+            ],
+            "default": 0,
+            "optional": true
+        },
+        {
+            "name": "projection",
+            "description": "Warps the data cube to the target projection, specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html), [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html). By default (`null`), the projection is not changed.",
+            "schema": [
+                {
+                    "title": "EPSG Code",
+                    "type": "integer",
+                    "subtype": "epsg-code",
+                    "minimum": 1000,
+                    "examples": [
+                        3857
+                    ]
+                },
+                {
+                    "title": "WKT2",
+                    "type": "string",
+                    "subtype": "wkt2-definition"
+                },
+                {
+                    "title": "PROJ definition",
+                    "type": "string",
+                    "subtype": "proj-definition",
+                    "deprecated": true
+                },
+                {
+                    "title": "Don't change projection",
+                    "type": "null"
+                }
+            ],
+            "default": null,
+            "optional": true
+        },
+        {
+            "name": "method",
+            "description": "Resampling method to use. The following options are available and are meant to align with [`gdalwarp`](https://gdal.org/programs/gdalwarp.html#cmdoption-gdalwarp-r):\n\n* `average`: average (mean) resampling, computes the weighted average of all valid pixels\n* `bilinear`: bilinear resampling\n* `cubic`: cubic resampling\n* `cubicspline`: cubic spline resampling\n* `lanczos`: Lanczos windowed sinc resampling\n* `max`: maximum resampling, selects the maximum value from all valid pixels\n* `med`: median resampling, selects the median value of all valid pixels\n* `min`: minimum resampling, selects the minimum value from all valid pixels\n* `mode`: mode resampling, selects the value which appears most often of all the sampled points\n* `near`: nearest neighbour resampling (default)\n* `q1`: first quartile resampling, selects the first quartile value of all valid pixels\n* `q3`: third quartile resampling, selects the third quartile value of all valid pixels\n* `rms` root mean square (quadratic mean) of all valid pixels\n* `sum`: compute the weighted sum of all valid pixels\n\nValid pixels are determined based on the function ``is_valid()``.",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "average",
+                    "bilinear",
+                    "cubic",
+                    "cubicspline",
+                    "lanczos",
+                    "max",
+                    "med",
+                    "min",
+                    "mode",
+                    "near",
+                    "q1",
+                    "q3",
+                    "rms",
+                    "sum"
+                ]
+            },
+            "default": "near",
+            "optional": true
+        },
+        {
+            "name": "align",
+            "description": "Specifies to which corner of the spatial extent the new resampled data is aligned to.",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "lower-left",
+                    "upper-left",
+                    "lower-right",
+                    "upper-right"
+                ]
+            },
+            "default": "upper-left",
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "A raster data cube with values warped onto the new projection. It has the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-spatial or vertical spatial dimensions. For the horizontal spatial dimensions the name and type remain unchanged, but reference system, labels and resolution may change depending on the given parameters.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#resample",
+            "rel": "about",
+            "title": "Resampling explained in the openEO documentation"
+        },
+        {
+            "rel": "about",
+            "href": "https://proj.org/usage/projections.html",
+            "title": "PROJ parameters for cartographic projections"
+        },
+        {
+            "rel": "about",
+            "href": "http://www.epsg-registry.org",
+            "title": "Official EPSG code registry"
+        },
+        {
+            "rel": "about",
+            "href": "http://www.epsg.io",
+            "title": "Unofficial EPSG code database"
+        },
+        {
+            "href": "https://gdal.org/programs/gdalwarp.html#cmdoption-gdalwarp-r",
+            "rel": "about",
+            "title": "gdalwarp resampling methods"
+        }
+    ]
+}

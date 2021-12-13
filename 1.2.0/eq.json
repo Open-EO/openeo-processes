@@ -1,0 +1,177 @@
+{
+    "id": "eq",
+    "summary": "Equal to comparison",
+    "description": "Compares whether `x` is strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`. Therefore, `eq(null, null)` returns `null` instead of `true`.\n* If any operand is an array or object, the return value is `false`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings MUST be compared differently than other strings and MUST NOT be compared based on their string representation due to different possible representations. For example, the time zone representation `Z` (for UTC) has the same meaning as `+00:00`.",
+    "categories": [
+        "texts",
+        "comparison"
+    ],
+    "parameters": [
+        {
+            "name": "x",
+            "description": "First operand.",
+            "schema": {
+                "description": "Any data type is allowed."
+            }
+        },
+        {
+            "name": "y",
+            "description": "Second operand.",
+            "schema": {
+                "description": "Any data type is allowed."
+            }
+        },
+        {
+            "name": "delta",
+            "description": "Only applicable for comparing two numbers. If this optional parameter is set to a positive non-zero number the equality of two numbers is checked against a delta value. This is especially useful to circumvent problems with floating-point inaccuracy in machine-based computation.\n\nThis option is basically an alias for the following computation: `lte(abs(minus([x, y]), delta)`",
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            },
+            "default": null,
+            "optional": true
+        },
+        {
+            "name": "case_sensitive",
+            "description": "Only applicable for comparing two strings. Case sensitive comparison can be disabled by setting this parameter to `false`.",
+            "schema": {
+                "type": "boolean"
+            },
+            "default": true,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "`true` if `x` is equal to `y`, `null` if any operand is `null`, otherwise `false`.",
+        "schema": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "x": 1,
+                "y": null
+            },
+            "returns": null
+        },
+        {
+            "arguments": {
+                "x": null,
+                "y": null
+            },
+            "returns": null
+        },
+        {
+            "arguments": {
+                "x": 1,
+                "y": 1
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "x": 1,
+                "y": "1"
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "x": 0,
+                "y": false
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "x": 1.02,
+                "y": 1,
+                "delta": 0.01
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "x": -1,
+                "y": -1.001,
+                "delta": 0.01
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "x": 115,
+                "y": 110,
+                "delta": 10
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "x": "Test",
+                "y": "test"
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "x": "Test",
+                "y": "test",
+                "case_sensitive": false
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "x": "Ä",
+                "y": "ä",
+                "case_sensitive": false
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "x": "00:00:00+00:00",
+                "y": "00:00:00Z"
+            },
+            "returns": true
+        },
+        {
+            "description": "`y` is not a valid date-time representation and therefore will be treated as a string so that the provided values are not equal.",
+            "arguments": {
+                "x": "2018-01-01T12:00:00Z",
+                "y": "2018-01-01T12:00:00"
+            },
+            "returns": false
+        },
+        {
+            "description": "01:00 in the time zone +1 is equal to 00:00 in UTC.",
+            "arguments": {
+                "x": "2018-01-01T00:00:00Z",
+                "y": "2018-01-01T01:00:00+01:00"
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "x": [
+                    1,
+                    2,
+                    3
+                ],
+                "y": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            "returns": false
+        }
+    ]
+}

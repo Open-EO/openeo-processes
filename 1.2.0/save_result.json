@@ -1,0 +1,66 @@
+{
+    "id": "save_result",
+    "summary": "Save processed data",
+    "description": "Makes the processed data available in the given file format to the corresponding medium that is relevant for the context this processes is applied in:\n\n* For **batch jobs** the data is stored on the back-end. STAC-compatible metadata is usually made available with the processed data.\n* For **synchronous processing** the data is sent to the client as a direct response to the request.\n* **Secondary web services** are provided with the processed data so that it can make use of it (e.g., visualize it). Web service may require the data in a certain format. Please refer to the documentation of the individual service types for details.",
+    "categories": [
+        "cubes",
+        "export"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The data to deliver in the given file format.",
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "raster-cube"
+                },
+                {
+                    "type": "object",
+                    "subtype": "vector-cube"
+                }
+            ]
+        },
+        {
+            "name": "format",
+            "description": "The file format to use. It must be one of the values that the server reports as supported output file formats, which usually correspond to the short GDAL/OGR codes. If the format is not suitable for storing the underlying data structure, a `FormatUnsuitable` exception will be thrown. This parameter is *case insensitive*.",
+            "schema": {
+                "type": "string",
+                "subtype": "output-format"
+            }
+        },
+        {
+            "name": "options",
+            "description": "The file format parameters to be used to create the file(s). Must correspond to the parameters that the server reports as supported parameters for the chosen `format`. The parameter names and valid values usually correspond to the GDAL/OGR format options.",
+            "schema": {
+                "type": "object",
+                "subtype": "output-format-options"
+            },
+            "default": {},
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "Returns `false` if the process failed to make the data available, `true` otherwise.",
+        "schema": {
+            "type": "boolean"
+        }
+    },
+    "exceptions": {
+        "FormatUnsuitable": {
+            "message": "Data can't be transformed into the requested output format."
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://www.gdal.org/formats_list.html",
+            "title": "GDAL Raster Formats"
+        },
+        {
+            "rel": "about",
+            "href": "https://www.gdal.org/ogr_formats.html",
+            "title": "OGR Vector Formats"
+        }
+    ]
+}

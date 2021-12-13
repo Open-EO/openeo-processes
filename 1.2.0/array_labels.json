@@ -1,0 +1,29 @@
+{
+    "id": "array_labels",
+    "summary": "Get the labels for an array",
+    "description": "Gives all labels for a labeled array or gives all indices for an array without labels. If the array is not labeled, an array with the zero-based indices is returned. The labels or indices have the same order as in the array.",
+    "categories": [
+        "arrays"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "An array.",
+            "schema": {
+                "type": "array"
+            }
+        }
+    ],
+    "returns": {
+        "description": "The labels or indices as array.",
+        "schema": {
+            "type": "array",
+            "items": {
+                "type": [
+                    "number",
+                    "string"
+                ]
+            }
+        }
+    }
+}

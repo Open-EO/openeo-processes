@@ -1,0 +1,125 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>openEO API Processes</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@openeo/processes-docgen@1/dist/DocGen.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@openeo/processes-docgen@1/dist/DocGen.css">
+    <style>
+      html {
+        box-sizing: border-box;
+        text-size-adjust: none;
+        height: 100%;
+        font-size: 62.5%;
+        overflow-x: hidden;
+      }
+
+      @media only screen and (min-width: 100em) {
+        html {
+          font-size: 68.75%;
+        }
+      }
+
+      @media only screen and (min-width: 125em) {
+        html {
+          font-size: 75%;
+        }
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: inherit;
+      }
+
+      body {
+        margin: 0;
+        position: relative;
+        height: 100%;
+      }
+
+      hr {
+        overflow: visible;
+        box-sizing: content-box;
+        display: block;
+        height: 0.1rem;
+        padding: 0;
+        border: 0;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      small {
+        font-size: 80%;
+      }
+
+      sub, sup {
+        position: relative;
+        font-size: 80%;
+        line-height: 0;
+        vertical-align: baseline;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      sup {
+        top: -0.5em;
+      }
+
+      table {
+        border-collapse: separate;
+        border-spacing: 0;
+      }
+
+      body, input {
+        color: rgba(0, 0, 0, 0.87);
+        -webkit-font-feature-settings: "kern", "liga";
+        font-feature-settings: "kern", "liga";
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      pre, code, kbd {
+        color: rgba(0, 0, 0, 0.87);
+        -webkit-font-feature-settings: "kern";
+        font-feature-settings: "kern";
+        font-family: "Roboto Mono", "Courier New", Courier, monospace;
+      }
+
+      .anchor {
+        position: relative;
+        display: block;
+        visibility: hidden;
+      }
+    
+      #container {
+        font-size: 1.45rem;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body dir="ltr">
+    <div id="container">
+      <div id="app"></div>
+    </div>
+    <script>
+    new Vue({
+      el: '#app',
+      render: h => h(DocGen, {
+        props: {
+          document: 'processes.json',
+          categorize: true,
+          apiVersion: '1.1.0',
+          title: 'openEO processes (1.2.0)',
+          notice: '**Note:** This is the list of all processes specified by the openEO project. Back-ends implement a varying set of processes. Thus, the processes you can use at a specific back-end may derive from the specification, may include non-standardized processes and may not implement all processes listed here. Please check each back-end individually for the processes they support. The client libraries usually have a function called `listProcesses` or `list_processes` for that.'
+        }
+      })
+    });
+    </script>
+    <noscript>Sorry, the documentation generator requires JavaScript to be enabled!</noscript>
+  </body>
+</html>

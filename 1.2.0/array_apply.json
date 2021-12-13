@@ -1,0 +1,109 @@
+{
+    "id": "array_apply",
+    "summary": "Apply a process to each array element",
+    "description": "Applies a process to each individual value in the array. This is basically what other languages call either a `for each` loop or a `map` function.",
+    "categories": [
+        "arrays"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "An array.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
+            }
+        },
+        {
+            "name": "process",
+            "description": "A process that accepts and returns a single value and is applied on each individual value in the array. The process may consist of multiple sub-processes and could, for example, consist of processes such as ``abs()`` or ``linear_scale_range()``.",
+            "schema": {
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": [
+                    {
+                        "name": "x",
+                        "description": "The value of the current element being processed.",
+                        "schema": {
+                            "description": "Any data type."
+                        }
+                    },
+                    {
+                        "name": "index",
+                        "description": "The zero-based index of the current element being processed.",
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 0
+                        }
+                    },
+                    {
+                        "name": "label",
+                        "description": "The label of the current element being processed. Only populated for labeled arrays.",
+                        "schema": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "default": null,
+                        "optional": true
+                    },
+                    {
+                        "name": "context",
+                        "description": "Additional data passed by the user.",
+                        "schema": {
+                            "description": "Any data type."
+                        },
+                        "optional": true,
+                        "default": null
+                    }
+                ],
+                "returns": {
+                    "description": "The value to be set in the new array.",
+                    "schema": {
+                        "description": "Any data type."
+                    }
+                }
+            }
+        },
+        {
+            "name": "context",
+            "description": "Additional data to be passed to the process.",
+            "schema": {
+                "description": "Any data type."
+            },
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "An array with the newly computed values. The number of elements are the same as for the original array.",
+        "schema": {
+            "type": "array",
+            "items": {
+                "description": "Any data type is allowed."
+            }
+        }
+    },
+    "links": [
+        {
+            "rel": "example",
+            "type": "application/json",
+            "href": "https://processes.openeo.org/1.2.0/examples/array_find_nodata.json",
+            "title": "Find no-data values in arrays"
+        },
+        {
+            "rel": "example",
+            "type": "application/json",
+            "href": "https://processes.openeo.org/1.2.0/examples/array_contains_nodata.json",
+            "title": "Check for no-data values in arrays"
+        }
+    ]
+}

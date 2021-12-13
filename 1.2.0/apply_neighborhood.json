@@ -1,0 +1,236 @@
+{
+    "id": "apply_neighborhood",
+    "summary": "Apply a process to pixels in a n-dimensional neighborhood",
+    "description": "Applies a focal process to a data cube.\n\nA focal process is a process that works on a 'neighborhood' of pixels. The neighborhood can extend into multiple dimensions, this extent is specified by the `size` argument. It is not only (part of) the size of the input window, but also the size of the output for a given position of the sliding window. The sliding window moves with multiples of `size`.\n\nAn overlap can be specified so that neighborhoods can have overlapping boundaries. This allows for continuity of the output. The values included in the data cube as overlap can't be modified by the given `process`. The missing overlap at the borders of the original data cube are made available as no-data (`null`) in the sub data cubes.\n\nThe neighborhood size should be kept small enough, to avoid running beyond computational resources, but a too small size will result in a larger number of process invocations, which may slow down processing. Window sizes for spatial dimensions typically are in the range of 64 to 512 pixels, while overlaps of 8 to 32 pixels are common.\n\nThe process must not add new dimensions, or remove entire dimensions, but the result can have different dimension labels.\n\nFor the special case of 2D convolution, it is recommended to use ``apply_kernel()``.",
+    "categories": [
+        "cubes"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "process",
+            "description": "Process to be applied on all neighborhoods.",
+            "schema": {
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "description": "A subset of the data cube as specified in `context` and `overlap`.",
+                        "schema": {
+                            "type": "object",
+                            "subtype": "raster-cube"
+                        }
+                    },
+                    {
+                        "name": "context",
+                        "description": "Additional data passed by the user.",
+                        "schema": {
+                            "description": "Any data type."
+                        },
+                        "optional": true,
+                        "default": null
+                    }
+                ],
+                "returns": {
+                    "description": "The data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) must remain unchanged, otherwise a `DataCubePropertiesImmutable` exception will be thrown.",
+                    "schema": {
+                        "type": "object",
+                        "subtype": "raster-cube"
+                    }
+                }
+            }
+        },
+        {
+            "name": "size",
+            "description": "Neighborhood sizes along each dimension.\n\nThis object maps dimension names to either a physical measure (e.g. 100 m, 10 days) or pixels (e.g. 32 pixels). For dimensions not specified, the default is to provide all values. Be aware that including all values from overly large dimensions may not be processed at once.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "subtype": "chunk-size",
+                    "required": [
+                        "dimension",
+                        "value"
+                    ],
+                    "properties": {
+                        "dimension": {
+                            "type": "string"
+                        },
+                        "value": {
+                            "default": null,
+                            "anyOf": [
+                                {
+                                    "type": "null",
+                                    "title": "All values"
+                                },
+                                {
+                                    "type": "number",
+                                    "minimum": 0,
+                                    "description": "See the `unit` parameter for more information."
+                                },
+                                {
+                                    "type": "string",
+                                    "subtype": "duration",
+                                    "description": "[ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations), e.g. `P1D` for one day.",
+                                    "pattern": "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
+                                }
+                            ]
+                        },
+                        "unit": {
+                            "type": "string",
+                            "description": "The unit the values are given in, either in meters (`m`) or pixels (`px`). If no unit is given, uses the unit specified for the dimension or otherwise the default unit of the reference system.",
+                            "enum": [
+                                "px",
+                                "m"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "overlap",
+            "description": "Overlap of neighborhoods along each dimension to avoid border effects.\n\nFor instance a temporal dimension can add 1 month before and after a neighborhood. In the spatial dimensions, this is often a number of pixels. The overlap specified is added before and after, so an overlap of 8 pixels will add 8 pixels on both sides of the window, so 16 in total.\n\nBe aware that large overlaps increase the need for computational resources and modifying overlapping data in subsequent operations have no effect.",
+            "optional": true,
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "subtype": "chunk-size",
+                    "required": [
+                        "dimension",
+                        "value"
+                    ],
+                    "properties": {
+                        "dimension": {
+                            "type": "string"
+                        },
+                        "value": {
+                            "default": null,
+                            "anyOf": [
+                                {
+                                    "type": "null",
+                                    "title": "No values"
+                                },
+                                {
+                                    "type": "number",
+                                    "minimum": 0,
+                                    "description": "See the `unit` parameter for more information."
+                                },
+                                {
+                                    "type": "string",
+                                    "subtype": "duration",
+                                    "description": "[ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations), e.g. `P1D` for one day.",
+                                    "pattern": "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
+                                }
+                            ]
+                        },
+                        "unit": {
+                            "type": "string",
+                            "description": "The unit the values are given in, either in meters (`m`) or pixels (`px`). If no unit is given, uses the unit specified for the dimension or otherwise the default unit of the reference system.",
+                            "enum": [
+                                "px",
+                                "m"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "context",
+            "description": "Additional data to be passed to the process.",
+            "schema": {
+                "description": "Any data type."
+            },
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "A data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "process": {
+                    "process_graph": {
+                        "udf": {
+                            "process_id": "run_udf",
+                            "arguments": {
+                                "data": {
+                                    "from_parameter": "data"
+                                },
+                                "udf": "ml.py",
+                                "runtime": "Python"
+                            },
+                            "result": true
+                        }
+                    }
+                },
+                "size": [
+                    {
+                        "dimension": "x",
+                        "value": 128,
+                        "unit": "px"
+                    },
+                    {
+                        "dimension": "y",
+                        "value": 128,
+                        "unit": "px"
+                    },
+                    {
+                        "dimension": "t",
+                        "value": "P5D"
+                    }
+                ],
+                "overlap": [
+                    {
+                        "dimension": "x",
+                        "value": 16,
+                        "unit": "px"
+                    },
+                    {
+                        "dimension": "y",
+                        "value": 16,
+                        "unit": "px"
+                    },
+                    {
+                        "dimension": "t",
+                        "value": "P3D"
+                    }
+                ]
+            }
+        }
+    ],
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
+        },
+        "DataCubePropertiesImmutable": {
+            "message": "The dimension properties (name, type, labels, reference system and resolution) must remain unchanged."
+        }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#apply",
+            "rel": "about",
+            "title": "Apply explained in the openEO documentation"
+        }
+    ]
+}

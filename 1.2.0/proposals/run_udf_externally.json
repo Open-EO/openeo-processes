@@ -1,0 +1,69 @@
+{
+    "id": "run_udf_externally",
+    "summary": "Run an externally hosted UDF container",
+    "description": "Runs a compatible UDF container that is either externally hosted by a service provider or running on a local machine of the user. The UDF container must follow the [openEO UDF specification](https://openeo.org/documentation/1.0/udfs.html).\n\nThe referenced UDF service can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case, an array is passed instead of a raster data cube. The user must ensure that the data is given in a way that the UDF code can make sense of it.",
+    "categories": [
+        "cubes",
+        "import",
+        "udf"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The data to be passed to the UDF.",
+            "schema": [
+                {
+                    "title": "Array",
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "description": "Any data type."
+                    }
+                },
+                {
+                    "title": "Single Value",
+                    "description": "A single value of any data type."
+                }
+            ]
+        },
+        {
+            "name": "url",
+            "description": "Absolute URL to a remote UDF service.",
+            "schema": {
+                "type": "string",
+                "format": "uri",
+                "subtype": "uri",
+                "pattern": "^https?://"
+            }
+        },
+        {
+            "name": "context",
+            "description": "Additional data such as configuration options to be passed to the UDF.",
+            "schema": {
+                "type": "object"
+            },
+            "default": {},
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "The data processed by the UDF. The returned value can in principle be of any data type, but it depends on what is returned by the UDF code. Please see the implemented UDF interface for details.",
+        "schema": {
+            "title": "Any",
+            "description": "Any data type."
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://openeo.org/documentation/1.0/udfs.html",
+            "title": "openEO UDF specification"
+        },
+        {
+            "rel": "about",
+            "href": "https://github.com/Open-EO/openeo-udf",
+            "title": "openEO UDF repository"
+        }
+    ]
+}

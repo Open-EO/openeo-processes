@@ -1,0 +1,90 @@
+{
+    "id": "reduce_dimension",
+    "summary": "Reduce dimensions",
+    "description": "Applies a reducer to a data cube dimension by collapsing all the pixel values along the specified dimension into an output value computed by the reducer.\n\nThe dimension is dropped. To avoid this, use ``apply_dimension()`` instead.",
+    "categories": [
+        "cubes",
+        "reducer"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "reducer",
+            "description": "A reducer to apply on the specified dimension. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
+            "schema": {
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "description": "A labeled array with elements of any type.",
+                        "schema": {
+                            "type": "array",
+                            "subtype": "labeled-array",
+                            "items": {
+                                "description": "Any data type."
+                            }
+                        }
+                    },
+                    {
+                        "name": "context",
+                        "description": "Additional data passed by the user.",
+                        "schema": {
+                            "description": "Any data type."
+                        },
+                        "optional": true,
+                        "default": null
+                    }
+                ],
+                "returns": {
+                    "description": "The value to be set in the new data cube.",
+                    "schema": {
+                        "description": "Any data type."
+                    }
+                }
+            }
+        },
+        {
+            "name": "dimension",
+            "description": "The name of the dimension over which to reduce. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "context",
+            "description": "Additional data to be passed to the reducer.",
+            "schema": {
+                "description": "Any data type."
+            },
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "A data cube with the newly computed values. It is missing the given dimension, the number of dimensions decreases by one. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
+        }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#reduce",
+            "rel": "about",
+            "title": "Reducers explained in the openEO documentation"
+        }
+    ]
+}

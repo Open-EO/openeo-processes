@@ -1,0 +1,182 @@
+{
+    "id": "array_modify",
+    "summary": "Change the content of an array (remove, insert, update)",
+    "description": "Modify an array by removing, inserting or updating elements. Updating can be seen as removing elements followed by inserting new elements (not necessarily the same number).\n\nAll labels get discarded and the array indices are always a sequence of numbers with the step size of 1 and starting at 0.",
+    "categories": [
+        "arrays"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The array to modify.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
+            }
+        },
+        {
+            "name": "values",
+            "description": "The values to insert into the `data` array.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
+            }
+        },
+        {
+            "name": "index",
+            "description": "The index in the `data` array of the element to insert the value(s) before. If the index is greater than the number of elements in the `data` array, the process throws an `ArrayElementNotAvailable` exception.\n\nTo insert after the last element, there are two options:\n\n1. Use the simpler processes ``array_append()`` to append a single value or ``array_concat()`` to append multiple values.\n2. Specify the number of elements in the array. You can retrieve the number of elements with the process ``count()``, having the parameter `condition` set to `true`.",
+            "schema": {
+                "type": "integer",
+                "minimum": 0
+            }
+        },
+        {
+            "name": "length",
+            "description": "The number of elements in the `data` array to remove (or replace) starting from the given index. If the array contains fewer elements, the process simply removes all elements up to the end.",
+            "optional": true,
+            "default": 1,
+            "schema": {
+                "type": "integer",
+                "minimum": 0
+            }
+        }
+    ],
+    "returns": {
+        "description": "An array with values added, updated or removed.",
+        "schema": {
+            "type": "array",
+            "items": {
+                "description": "Any data type is allowed."
+            }
+        }
+    },
+    "exceptions": {
+        "ArrayElementNotAvailable": {
+            "message": "The array can't be modified as the given index is larger than the number of elements in the array."
+        }
+    },
+    "examples": [
+        {
+            "description": "Replace a single value in the array.",
+            "arguments": {
+                "data": [
+                    "a",
+                    "d",
+                    "c"
+                ],
+                "values": [
+                    "b"
+                ],
+                "index": 1
+            },
+            "returns": [
+                "a",
+                "b",
+                "c"
+            ]
+        },
+        {
+            "description": "Replace multiple values in the array.",
+            "arguments": {
+                "data": [
+                    "a",
+                    "b",
+                    4,
+                    5
+                ],
+                "values": [
+                    1,
+                    2,
+                    3
+                ],
+                "index": 0,
+                "length": 2
+            },
+            "returns": [
+                1,
+                2,
+                3,
+                4,
+                5
+            ]
+        },
+        {
+            "description": "Insert a value to the array at a given position.",
+            "arguments": {
+                "data": [
+                    "a",
+                    "c"
+                ],
+                "values": [
+                    "b"
+                ],
+                "index": 1,
+                "length": 0
+            },
+            "returns": [
+                "a",
+                "b",
+                "c"
+            ]
+        },
+        {
+            "description": "Remove a single value from the array.",
+            "arguments": {
+                "data": [
+                    "a",
+                    "b",
+                    null,
+                    "c"
+                ],
+                "values": [],
+                "index": 2
+            },
+            "returns": [
+                "a",
+                "b",
+                "c"
+            ]
+        },
+        {
+            "description": "Remove multiple values from the array.",
+            "arguments": {
+                "data": [
+                    null,
+                    null,
+                    "a",
+                    "b",
+                    "c"
+                ],
+                "values": [],
+                "index": 0,
+                "length": 2
+            },
+            "returns": [
+                "a",
+                "b",
+                "c"
+            ]
+        },
+        {
+            "description": "Remove multiple values from the end of the array and ignore that the given length is exceeding the size of the array.",
+            "arguments": {
+                "data": [
+                    "a",
+                    "b",
+                    "c"
+                ],
+                "values": [],
+                "index": 1,
+                "length": 10
+            },
+            "returns": [
+                "a"
+            ]
+        }
+    ]
+}

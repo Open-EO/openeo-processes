@@ -1,0 +1,52 @@
+{
+    "id": "is_nodata",
+    "summary": "Value is a no-data value",
+    "description": "Checks whether the specified data is missing data, i.e. equals to `null` or any of the no-data values specified in the metadata. The special numerical value `NaN` (not a number) as defined by the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) is not considered no-data and must return `false`.",
+    "categories": [
+        "comparison"
+    ],
+    "parameters": [
+        {
+            "name": "x",
+            "description": "The data to check.",
+            "schema": {
+                "description": "Any data type is allowed."
+            }
+        }
+    ],
+    "returns": {
+        "description": "`true` if the data is a no-data value, otherwise `false`.",
+        "schema": {
+            "type": "boolean"
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "x": 1
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "x": "Test"
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "x": null
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "x": [
+                    null,
+                    null
+                ]
+            },
+            "returns": false
+        }
+    ]
+}

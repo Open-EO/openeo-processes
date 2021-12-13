@@ -1,0 +1,171 @@
+{
+    "id": "array_find",
+    "summary": "Get the index for a value in an array",
+    "description": "Returns the zero-based index of the first (or last) occurrence of the value specified by `value` in the array specified by `data` or `null` if there is no match. Use the parameter `reverse` to switch from the first to the last match.\n\n**Remarks:**\n\n* Use ``array_contains()`` to check if an array contains a value regardless of the position.\n* Use ``array_find_label()`` to find the index for a label.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. A `null` return value from ``eq()`` is handled exactly as `false` (no match).\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating-point numbers due to floating-point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.\n* If the specified value is an array, object or null, the process always returns `null`. See the examples for one to find `null` values.",
+    "categories": [
+        "arrays",
+        "reducer"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "List to find the value in.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
+            }
+        },
+        {
+            "name": "value",
+            "description": "Value to find in `data`.",
+            "schema": {
+                "description": "Any data type is allowed."
+            }
+        },
+        {
+            "name": "reverse",
+            "description": "By default, this process finds the index of the first match. To return the index of the last match instead, set this flag to `true`.",
+            "schema": {
+                "type": "boolean"
+            },
+            "default": false,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "The index of the first element with the specified value. If no element was found, `null` is returned.",
+        "schema": [
+            {
+                "type": "null"
+            },
+            {
+                "type": "integer",
+                "minimum": 0
+            }
+        ]
+    },
+    "examples": [
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    2,
+                    3,
+                    2,
+                    3
+                ],
+                "value": 2
+            },
+            "returns": 1
+        },
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    2,
+                    3,
+                    2,
+                    3
+                ],
+                "value": 2,
+                "reverse": true
+            },
+            "returns": 3
+        },
+        {
+            "arguments": {
+                "data": [
+                    "A",
+                    "B",
+                    "C"
+                ],
+                "value": "b"
+            },
+            "returns": null
+        },
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    2,
+                    3
+                ],
+                "value": "2"
+            },
+            "returns": null
+        },
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    null,
+                    2,
+                    null
+                ],
+                "value": null
+            },
+            "returns": 1
+        },
+        {
+            "arguments": {
+                "data": [
+                    [
+                        1,
+                        2
+                    ],
+                    [
+                        3,
+                        4
+                    ]
+                ],
+                "value": [
+                    1,
+                    2
+                ]
+            },
+            "returns": null
+        },
+        {
+            "arguments": {
+                "data": [
+                    [
+                        1,
+                        2
+                    ],
+                    [
+                        3,
+                        4
+                    ]
+                ],
+                "value": 2
+            },
+            "returns": null
+        },
+        {
+            "arguments": {
+                "data": [
+                    {
+                        "a": "b"
+                    },
+                    {
+                        "c": "d"
+                    }
+                ],
+                "value": {
+                    "a": "b"
+                }
+            },
+            "returns": null
+        }
+    ],
+    "links": [
+        {
+            "rel": "example",
+            "type": "application/json",
+            "href": "https://processes.openeo.org/1.2.0/examples/array_find_nodata.json",
+            "title": "Find no-data values in arrays"
+        }
+    ]
+}

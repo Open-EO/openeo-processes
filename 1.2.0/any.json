@@ -1,0 +1,134 @@
+{
+    "id": "any",
+    "summary": "Is at least one value true?",
+    "description": "Checks if **any** (i.e. at least one) value in `data` is `true`. If no value is given (i.e. the array is empty) the process returns `null`.\n\nBy default all no-data values are ignored so that the process returns `null` if all values are no-data, `true` if at least one value is true and `false` otherwise. Setting the `ignore_nodata` flag to `false` takes no-data values into account and the array values are reduced pairwise according to the following truth table:\n\n```\n      || null | false | true\n----- || ---- | ----- | ----\nnull  || null | null  | true\nfalse || null | false | true\ntrue  || true | true  | true\n```\n\n**Remark:** The process evaluates all values from the first to the last element and stops once the outcome is unambiguous. A result is ambiguous unless a value is `true`.",
+    "categories": [
+        "logic",
+        "reducer"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A set of boolean values.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "ignore_nodata",
+            "description": "Indicates whether no-data values are ignored or not and ignores them by default.",
+            "schema": {
+                "type": "boolean"
+            },
+            "default": true,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "Boolean result of the logical operation.",
+        "schema": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "data": [
+                    false,
+                    null
+                ]
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "data": [
+                    true,
+                    null
+                ]
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "data": [
+                    false,
+                    null
+                ],
+                "ignore_nodata": false
+            },
+            "returns": null
+        },
+        {
+            "arguments": {
+                "data": [
+                    true,
+                    null
+                ],
+                "ignore_nodata": false
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "data": [
+                    true,
+                    false,
+                    true,
+                    false
+                ]
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "data": [
+                    true,
+                    false
+                ]
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "data": [
+                    false,
+                    false
+                ]
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "data": [
+                    true
+                ]
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "data": [
+                    null
+                ],
+                "ignore_nodata": false
+            },
+            "returns": null
+        },
+        {
+            "arguments": {
+                "data": []
+            },
+            "returns": null
+        }
+    ]
+}

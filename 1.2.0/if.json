@@ -1,0 +1,96 @@
+{
+    "id": "if",
+    "summary": "If-Then-Else conditional",
+    "description": "If the value passed is `true`, returns the value of the `accept` parameter, otherwise returns the value of the `reject` parameter.\n\nThis is basically an if-then-else construct as in other programming languages.",
+    "categories": [
+        "logic",
+        "comparison",
+        "masks"
+    ],
+    "parameters": [
+        {
+            "name": "value",
+            "description": "A boolean value.",
+            "schema": {
+                "type": [
+                    "boolean",
+                    "null"
+                ]
+            }
+        },
+        {
+            "name": "accept",
+            "description": "A value that is returned if the boolean value is `true`.",
+            "schema": {
+                "description": "Any data type is allowed."
+            }
+        },
+        {
+            "name": "reject",
+            "description": "A value that is returned if the boolean value is **not** `true`. Defaults to `null`.",
+            "schema": {
+                "description": "Any data type is allowed."
+            },
+            "default": null,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "Either the `accept` or `reject` argument depending on the given boolean value.",
+        "schema": {
+            "description": "Any data type is allowed."
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "value": true,
+                "accept": "A",
+                "reject": "B"
+            },
+            "returns": "A"
+        },
+        {
+            "arguments": {
+                "value": null,
+                "accept": "A",
+                "reject": "B"
+            },
+            "returns": "B"
+        },
+        {
+            "arguments": {
+                "value": false,
+                "accept": [
+                    1,
+                    2,
+                    3
+                ],
+                "reject": [
+                    4,
+                    5,
+                    6
+                ]
+            },
+            "returns": [
+                4,
+                5,
+                6
+            ]
+        },
+        {
+            "arguments": {
+                "value": true,
+                "accept": 123
+            },
+            "returns": 123
+        },
+        {
+            "arguments": {
+                "value": false,
+                "accept": 1
+            },
+            "returns": null
+        }
+    ]
+}
