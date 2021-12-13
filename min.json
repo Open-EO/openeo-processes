@@ -4,6 +4,7 @@
     "description": "Computes the smallest value of an array of numbers, which is equal to the last element of a sorted (i.e., ordered) version of the array.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
         "math",
+        "math > statistics",
         "reducer"
     ],
     "parameters": [

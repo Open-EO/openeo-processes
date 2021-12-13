@@ -368,7 +368,7 @@
     "parameters": [
       {
         "name": "data",
-        "description": "A data cube.",
+        "description": "The source data cube.",
         "schema": {
           "type": "object",
           "subtype": "raster-cube"
@@ -431,7 +431,7 @@
       },
       {
         "name": "dimension",
-        "description": "The name of the temporal dimension for aggregation. All data along the dimension is passed through the specified reducer. If the dimension is not set or set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` exception if it has more dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+        "description": "The name of the temporal dimension for aggregation. All data along the dimension is passed through the specified reducer. If the dimension is not set or set to `null`, the source data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` exception if it has more dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
         "schema": {
           "type": [
             "string",
@@ -452,7 +452,7 @@
       }
     ],
     "returns": {
-      "description": "A new data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except for the resolution and dimension labels of the given temporal dimension. The specified temporal dimension has the following dimension labels (`YYYY` = four-digit year, `MM` = two-digit month, `DD` two-digit day of month):\n\n* `hour`: `YYYY-MM-DD-00` - `YYYY-MM-DD-23`\n* `day`: `YYYY-001` - `YYYY-365`\n* `week`: `YYYY-01` - `YYYY-52`\n* `dekad`: `YYYY-00` - `YYYY-36`\n* `month`: `YYYY-01` - `YYYY-12`\n* `season`: `YYYY-djf` (December - February), `YYYY-mam` (March - May), `YYYY-jja` (June - August), `YYYY-son` (September - November).\n* `tropical-season`: `YYYY-ndjfma` (November - April), `YYYY-mjjaso` (May - October).\n* `year`: `YYYY`\n* `decade`: `YYY0`\n* `decade-ad`: `YYY1`",
+      "description": "A new data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except for the resolution and dimension labels of the given temporal dimension. The specified temporal dimension has the following dimension labels (`YYYY` = four-digit year, `MM` = two-digit month, `DD` two-digit day of month):\n\n* `hour`: `YYYY-MM-DD-00` - `YYYY-MM-DD-23`\n* `day`: `YYYY-001` - `YYYY-365`\n* `week`: `YYYY-01` - `YYYY-52`\n* `dekad`: `YYYY-00` - `YYYY-36`\n* `month`: `YYYY-01` - `YYYY-12`\n* `season`: `YYYY-djf` (December - February), `YYYY-mam` (March - May), `YYYY-jja` (June - August), `YYYY-son` (September - November).\n* `tropical-season`: `YYYY-ndjfma` (November - April), `YYYY-mjjaso` (May - October).\n* `year`: `YYYY`\n* `decade`: `YYY0`\n* `decade-ad`: `YYY1`\n\nThe dimension labels in the new data cube are complete for the whole extent of the source data cube. For example, if `period` is set to `day` and the source data cube has two dimension labels at the beginning of the year (`2020-01-01`) and the end of a year (`2020-12-31`), the process returns a data cube with 365 dimension labels (`2020-001`, `2020-002`, ..., `2020-365`). In contrast, if `period` is set to `day` and the source data cube has just one dimension label `2020-01-05`, the process returns a data cube with just a single dimension label (`2020-005`).",
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
@@ -1980,13 +1980,13 @@
       {
         "rel": "example",
         "type": "application/json",
-        "href": "https://processes.openeo.org/1.1.0/examples/array_find_nodata.json",
+        "href": "https://processes.openeo.org/1.2.0/examples/array_find_nodata.json",
         "title": "Find no-data values in arrays"
       },
       {
         "rel": "example",
         "type": "application/json",
-        "href": "https://processes.openeo.org/1.1.0/examples/array_contains_nodata.json",
+        "href": "https://processes.openeo.org/1.2.0/examples/array_contains_nodata.json",
         "title": "Check for no-data values in arrays"
       }
     ]
@@ -2126,7 +2126,7 @@
       {
         "rel": "example",
         "type": "application/json",
-        "href": "https://processes.openeo.org/1.1.0/examples/array_contains_nodata.json",
+        "href": "https://processes.openeo.org/1.2.0/examples/array_contains_nodata.json",
         "title": "Check for no-data values in arrays"
       }
     ],
@@ -2366,7 +2366,7 @@
   {
     "id": "array_find",
     "summary": "Get the index for a value in an array",
-    "description": "Checks whether the array specified for `data` contains the value specified in `value` and returns the zero-based index for the first match. If there's no match, `null` is returned.\n\n**Remarks:**\n\n* To get a boolean value returned use ``array_contains()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. A `null` return value from ``eq()`` is handled exactly as `false` (no match).\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating-point numbers due to floating-point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.\n* If the specified value is an array, object or null, the process always returns `null`. See the examples for one to find `null` values.",
+    "description": "Returns the zero-based index of the first (or last) occurrence of the value specified by `value` in the array specified by `data` or `null` if there is no match. Use the parameter `reverse` to switch from the first to the last match.\n\n**Remarks:**\n\n* Use ``array_contains()`` to check if an array contains a value regardless of the position.\n* Use ``array_find_label()`` to find the index for a label.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. A `null` return value from ``eq()`` is handled exactly as `false` (no match).\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating-point numbers due to floating-point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.\n* If the specified value is an array, object or null, the process always returns `null`. See the examples for one to find `null` values.",
     "categories": [
       "arrays",
       "reducer"
@@ -2388,6 +2388,15 @@
         "schema": {
           "description": "Any data type is allowed."
         }
+      },
+      {
+        "name": "reverse",
+        "description": "By default, this process finds the index of the first match. To return the index of the last match instead, set this flag to `true`.",
+        "schema": {
+          "type": "boolean"
+        },
+        "default": false,
+        "optional": true
       }
     ],
     "returns": {
@@ -2408,11 +2417,27 @@
           "data": [
             1,
             2,
+            3,
+            2,
             3
           ],
           "value": 2
         },
         "returns": 1
+      },
+      {
+        "arguments": {
+          "data": [
+            1,
+            2,
+            3,
+            2,
+            3
+          ],
+          "value": 2,
+          "reverse": true
+        },
+        "returns": 3
       },
       {
         "arguments": {
@@ -2504,7 +2529,7 @@
       {
         "rel": "example",
         "type": "application/json",
-        "href": "https://processes.openeo.org/1.1.0/examples/array_find_nodata.json",
+        "href": "https://processes.openeo.org/1.2.0/examples/array_find_nodata.json",
         "title": "Find no-data values in arrays"
       }
     ]
@@ -2512,25 +2537,21 @@
   {
     "id": "array_labels",
     "summary": "Get the labels for an array",
-    "description": "Gives all labels for a labeled array. The labels have the same order as in the array.",
+    "description": "Gives all labels for a labeled array or gives all indices for an array without labels. If the array is not labeled, an array with the zero-based indices is returned. The labels or indices have the same order as in the array.",
     "categories": [
       "arrays"
     ],
     "parameters": [
       {
         "name": "data",
-        "description": "An array with labels.",
+        "description": "An array.",
         "schema": {
-          "type": "array",
-          "subtype": "labeled-array",
-          "items": {
-            "description": "Any data type."
-          }
+          "type": "array"
         }
       }
     ],
     "returns": {
-      "description": "The labels as an array.",
+      "description": "The labels or indices as array.",
       "schema": {
         "type": "array",
         "items": {
@@ -3212,6 +3233,7 @@
     "description": "Gives the number of elements in an array that matches the specified condition.\n\n**Remarks:**\n\n* Counts the number of valid elements by default (`condition` is set to `null`). A valid element is every element for which ``is_valid()`` returns `true`.\n* To count all elements in a list set the `condition` parameter to boolean `true`.",
     "categories": [
       "arrays",
+      "math > statistics",
       "reducer"
     ],
     "parameters": [
@@ -3812,7 +3834,7 @@
     "summary": "Minimum and maximum values",
     "description": "Two element array containing the minimum and the maximum values of `data`.\n\nThis process is basically an alias for calling both ``min()`` and ``max()``, but may be implemented more performant by back-ends as it only needs to iterate over the data once instead of twice.",
     "categories": [
-      "math"
+      "math > statistics"
     ],
     "parameters": [
       {
@@ -4179,7 +4201,7 @@
   },
   {
     "id": "filter_temporal",
-    "summary": "Temporal filter for a temporal intervals",
+    "summary": "Temporal filter based on temporal intervals",
     "description": "Limits the data cube to the specified interval of dates and/or times.\n\nMore precisely, the filter checks whether each of the temporal dimension labels is greater than or equal to the lower boundary (start date/time) and less than the value of the upper boundary (end date/time). This corresponds to a left-closed interval, which contains the lower boundary but not the upper boundary.",
     "categories": [
       "cubes",
@@ -4867,8 +4889,8 @@
   },
   {
     "id": "is_nodata",
-    "summary": "Value is not a no-data value",
-    "description": "Checks whether the specified data is a missing data, i.e. equals to `null` or any of the no-data values specified in the metadata. The special numerical value `NaN` (not a number) as defined by the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) is not considered no-data and must return `false`.",
+    "summary": "Value is a no-data value",
+    "description": "Checks whether the specified data is missing data, i.e. equals to `null` or any of the no-data values specified in the metadata. The special numerical value `NaN` (not a number) as defined by the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) is not considered no-data and must return `false`.",
     "categories": [
       "comparison"
     ],
@@ -5292,7 +5314,7 @@
   {
     "id": "load_collection",
     "summary": "Load a collection",
-    "description": "Loads a collection from the current back-end by its id and returns it as a processable data cube. The data that is added to the data cube can be restricted with the additional `spatial_extent`, `temporal_extent`, `bands` and `properties`.\n\n**Remarks:**\n\n* The bands (and all dimensions that specify nominal dimension labels) are expected to be ordered as specified in the metadata if the `bands` parameter is set to `null`.\n* If no additional parameter is specified this would imply that the whole data set is expected to be loaded. Due to the large size of many data sets, this is not recommended and may be optimized by back-ends to only load the data that is actually required after evaluating subsequent processes such as filters. This means that the pixel values should be processed only after the data has been limited to the required extent and as a consequence also to a manageable size.",
+    "description": "Loads a collection from the current back-end by its id and returns it as a processable data cube. The data that is added to the data cube can be restricted with the parameters `spatial_extent`, `temporal_extent`, `bands` and `properties`.\n\n**Remarks:**\n\n* The bands (and all dimensions that specify nominal dimension labels) are expected to be ordered as specified in the metadata if the `bands` parameter is set to `null`.\n* If no additional parameter is specified this would imply that the whole data set is expected to be loaded. Due to the large size of many data sets, this is not recommended and may be optimized by back-ends to only load the data that is actually required after evaluating subsequent processes such as filters. This means that the pixel values should be processed only after the data has been limited to the required extent and as a consequence also to a manageable size.",
     "categories": [
       "cubes",
       "import"
@@ -5468,7 +5490,7 @@
       },
       {
         "name": "properties",
-        "description": "Limits the data by metadata properties to include only data in the data cube which all given conditions return `true` for (AND operation).\n\nSpecify key-value-pairs with the key being the name of the metadata property, which can be retrieved with the openEO Data Discovery for Collections. The value must a condition (user-defined process) to be evaluated against the collection metadata, see the example.",
+        "description": "Limits the data by metadata properties to include only data in the data cube which all given conditions return `true` for (AND operation).\n\nSpecify key-value-pairs with the key being the name of the metadata property, which can be retrieved with the openEO Data Discovery for Collections. The value must be a condition (user-defined process) to be evaluated against the collection metadata, see the example.",
         "schema": [
           {
             "type": "object",
@@ -6040,6 +6062,7 @@
     "description": "Computes the largest value of an array of numbers, which is equal to the first element of a sorted (i.e., ordered) version of the array.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
       "math",
+      "math > statistics",
       "reducer"
     ],
     "parameters": [
@@ -6132,7 +6155,7 @@
     "summary": "Arithmetic mean (average)",
     "description": "The arithmetic mean of an array of numbers is the quantity commonly called the average. It is defined as the sum of all elements divided by the number of elements.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
-      "math",
+      "math > statistics",
       "reducer"
     ],
     "parameters": [
@@ -6298,7 +6321,7 @@
     "summary": "Statistical median",
     "description": "The statistical median of an array of numbers is the value separating the higher half from the lower half of the data.\n\nAn array without non-`null` elements resolves always with `null`.\n\n**Remarks:**\n\n* For symmetric arrays, the result is equal to the ``mean()``.\n* The median can also be calculated by computing the ``quantiles()`` with a probability of *0.5*.",
     "categories": [
-      "math",
+      "math > statistics",
       "reducer"
     ],
     "parameters": [
@@ -6541,6 +6564,7 @@
     "description": "Computes the smallest value of an array of numbers, which is equal to the last element of a sorted (i.e., ordered) version of the array.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
       "math",
+      "math > statistics",
       "reducer"
     ],
     "parameters": [
@@ -7950,6 +7974,16 @@
         "schema": {
           "type": "boolean"
         }
+      },
+      {
+        "description": "Proprietary options for the backscatter computations. Specifying proprietary options will reduce portability.",
+        "name": "options",
+        "optional": true,
+        "default": {},
+        "schema": {
+          "type": "object",
+          "additionalProperties": false
+        }
       }
     ],
     "returns": {
@@ -8002,6 +8036,9 @@
           },
           "noise_removal": {
             "from_parameter": "noise_removal"
+          },
+          "options": {
+            "from_parameter": "options"
           }
         },
         "result": true
@@ -8014,7 +8051,7 @@
     "description": "Computes CARD4L compliant surface (bottom of atmosphere/top of canopy) reflectance values from optical input.",
     "categories": [
       "cubes",
-      "sar",
+      "optical",
       "ard"
     ],
     "experimental": true,
@@ -8379,7 +8416,7 @@
   {
     "id": "array_find_label",
     "summary": "Get the index for a label in a labeled array",
-    "description": "Checks whether the labeled array specified for `data` has the label specified in `label` and returns the zero-based index for it. If there's no match as either the label doesn't exist or the array is not labeled, `null` is returned.",
+    "description": "Checks whether the labeled array specified for `data` has the label specified in `label` and returns the zero-based index for it. If there's no match as either the label doesn't exist or the array is not labeled, `null` is returned.\n\nUse ``array_find()`` to find the index for a given value in the array.",
     "categories": [
       "arrays",
       "reducer"
@@ -8476,6 +8513,22 @@
           -1,
           -8
         ]
+      },
+      {
+        "arguments": {
+          "data": [
+            null,
+            1,
+            null,
+            null
+          ]
+        },
+        "returns": [
+          null,
+          1,
+          null,
+          null
+        ]
       }
     ],
     "links": [
@@ -8488,8 +8541,8 @@
   },
   {
     "id": "array_modify",
-    "summary": "Change the content of an array (insert, remove, update)",
-    "description": "Allows to insert into, remove from or update an array.\n\nAll labels get discarded and the array indices are always a sequence of numbers with the step size of 1 and starting at 0.",
+    "summary": "Change the content of an array (remove, insert, update)",
+    "description": "Modify an array by removing, inserting or updating elements. Updating can be seen as removing elements followed by inserting new elements (not necessarily the same number).\n\nAll labels get discarded and the array indices are always a sequence of numbers with the step size of 1 and starting at 0.",
     "categories": [
       "arrays"
     ],
@@ -8497,7 +8550,7 @@
     "parameters": [
       {
         "name": "data",
-        "description": "An array.",
+        "description": "The array to modify.",
         "schema": {
           "type": "array",
           "items": {
@@ -8507,7 +8560,7 @@
       },
       {
         "name": "values",
-        "description": "The values to fill the array with.",
+        "description": "The values to insert into the `data` array.",
         "schema": {
           "type": "array",
           "items": {
@@ -8517,7 +8570,7 @@
       },
       {
         "name": "index",
-        "description": "The index of the element to insert the value(s) before. If the index is greater than the number of elements, the process throws an `ArrayElementNotAvailable` exception.\n\nTo insert after the last element, there are two options:\n\n1. Use the simpler processes ``array_append()`` to append a single value or ``array_concat`` to append multiple values.\n2. Specify the number of elements in the array. You can retrieve the number of elements with the process ``count()``, having the parameter `condition` set to `true`.",
+        "description": "The index in the `data` array of the element to insert the value(s) before. If the index is greater than the number of elements in the `data` array, the process throws an `ArrayElementNotAvailable` exception.\n\nTo insert after the last element, there are two options:\n\n1. Use the simpler processes ``array_append()`` to append a single value or ``array_concat()`` to append multiple values.\n2. Specify the number of elements in the array. You can retrieve the number of elements with the process ``count()``, having the parameter `condition` set to `true`.",
         "schema": {
           "type": "integer",
           "minimum": 0
@@ -8525,7 +8578,7 @@
       },
       {
         "name": "length",
-        "description": "The number of elements to replace. This parameter has no effect in case the given `index` does not exist in the array given.",
+        "description": "The number of elements in the `data` array to remove (or replace) starting from the given index. If the array contains fewer elements, the process simply removes all elements up to the end.",
         "optional": true,
         "default": 1,
         "schema": {
@@ -8545,7 +8598,7 @@
     },
     "exceptions": {
       "ArrayElementNotAvailable": {
-        "message": "The array has no element with the specified index."
+        "message": "The array can't be modified as the given index is larger than the number of elements in the array."
       }
     },
     "examples": [
@@ -8613,26 +8666,6 @@
         ]
       },
       {
-        "description": "Add a value at a specific non-existing position after the array, fill missing elements with `null`.",
-        "arguments": {
-          "data": [
-            "a",
-            "b"
-          ],
-          "values": [
-            "e"
-          ],
-          "index": 4
-        },
-        "returns": [
-          "a",
-          "b",
-          null,
-          null,
-          "e"
-        ]
-      },
-      {
         "description": "Remove a single value from the array.",
         "arguments": {
           "data": [
@@ -8668,6 +8701,22 @@
           "a",
           "b",
           "c"
+        ]
+      },
+      {
+        "description": "Remove multiple values from the end of the array and ignore that the given length is exceeding the size of the array.",
+        "arguments": {
+          "data": [
+            "a",
+            "b",
+            "c"
+          ],
+          "values": [],
+          "index": 1,
+          "length": 10
+        },
+        "returns": [
+          "a"
         ]
       }
     ]
@@ -9366,63 +9415,6 @@
     ]
   },
   {
-    "id": "debug",
-    "summary": "Publish debugging information",
-    "description": "Sends debugging information about the data to the log output. Passes the data through.",
-    "categories": [
-      "development"
-    ],
-    "experimental": true,
-    "parameters": [
-      {
-        "name": "data",
-        "description": "Data to publish.",
-        "schema": {
-          "description": "Any data type is allowed."
-        }
-      },
-      {
-        "name": "code",
-        "description": "An identifier to help identify the log entry in a bunch of other log entries.",
-        "schema": {
-          "type": "string"
-        },
-        "default": "",
-        "optional": true
-      },
-      {
-        "name": "level",
-        "description": "The severity level of this message, defaults to `info`. Note that the level `error` forces the computation to be stopped!",
-        "schema": {
-          "type": "string",
-          "enum": [
-            "error",
-            "warning",
-            "info",
-            "debug"
-          ]
-        },
-        "default": "info",
-        "optional": true
-      },
-      {
-        "name": "message",
-        "description": "A message to send in addition to the data.",
-        "schema": {
-          "type": "string"
-        },
-        "default": "",
-        "optional": true
-      }
-    ],
-    "returns": {
-      "description": "The data as passed to the `data` parameter without any modification.",
-      "schema": {
-        "description": "Any data type is allowed."
-      }
-    }
-  },
-  {
     "id": "filter_labels",
     "summary": "Filter dimension labels based on a condition",
     "description": "Filters the dimension labels in the data cube for the given dimension. Only the dimension labels that match the specified condition are preserved, all other labels with their corresponding data get removed.",
@@ -9541,6 +9533,157 @@
     ]
   },
   {
+    "id": "fit_curve",
+    "summary": "Curve fitting",
+    "description": "Use non-linear least squares to fit a model function `y = f(x, parameters)` to data.\n\nThe process throws an `InvalidValues` exception if invalid values are encountered. Invalid values are finite numbers (see also ``is_valid()``).",
+    "categories": [
+      "cubes",
+      "math"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "A data cube.",
+        "schema": {
+          "type": "object",
+          "subtype": "raster-cube"
+        }
+      },
+      {
+        "name": "parameters",
+        "description": "Defined the number of parameters for the model function and provides an initial guess for them. At least one parameter is required.",
+        "schema": [
+          {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "number"
+            }
+          },
+          {
+            "title": "Data Cube with optimal values from a previous result of this process.",
+            "type": "object",
+            "subtype": "raster-cube"
+          }
+        ]
+      },
+      {
+        "name": "function",
+        "description": "The model function. It must take the parameters to fit as array through the first argument and the independent variable `x` as the second argument.\n\nIt is recommended to store the model function as a user-defined process on the back-end to be able to re-use the model function with the computed optimal values for the parameters afterwards.",
+        "schema": {
+          "type": "object",
+          "subtype": "process-graph",
+          "parameters": [
+            {
+              "name": "x",
+              "description": "The value for the independent variable `x`.",
+              "schema": {
+                "type": "number"
+              }
+            },
+            {
+              "name": "parameters",
+              "description": "The parameters for the model function, contains at least one parameter.",
+              "schema": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "number"
+                }
+              }
+            }
+          ],
+          "returns": {
+            "description": "The computed value `y` value for the given independent variable `x` and the parameters.",
+            "schema": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      {
+        "name": "dimension",
+        "description": "The name of the dimension for curve fitting. Must be a dimension with labels that have a order (i.e. numerical labels or a temporal dimension). Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "returns": {
+      "description": "A data cube with the optimal values for the parameters.",
+      "schema": {
+        "type": "object",
+        "subtype": "raster-cube"
+      }
+    },
+    "exceptions": {
+      "InvalidValues": {
+        "message": "At least one of the values is not a finite number."
+      },
+      "DimensionNotAvailable": {
+        "message": "A dimension with the specified name does not exist."
+      }
+    }
+  },
+  {
+    "id": "inspect",
+    "summary": "Add information to the logs",
+    "description": "This process can be used to add runtime information to the logs, e.g. for debugging purposes. This process should be used with caution and it is recommended to remove the process in production workflows. For example, logging each pixel or array individually in a process such as ``apply()`` or ``reduce_dimension()`` could lead to a (too) large number of log entries. Several data structures (e.g. data cubes) are too large to log and will only return summaries of their contents.\n\nThe data provided in the parameter `data` is returned without changes.",
+    "categories": [
+      "development"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "Data to log.",
+        "schema": {
+          "description": "Any data type is allowed."
+        }
+      },
+      {
+        "name": "code",
+        "description": "A label to help identify one or more log entries originating from this process in the list of all log entries. It can help to group or filter log entries and is usually not unique.",
+        "schema": {
+          "type": "string"
+        },
+        "default": "User",
+        "optional": true
+      },
+      {
+        "name": "level",
+        "description": "The severity level of this message, defaults to `info`.",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "error",
+            "warning",
+            "info",
+            "debug"
+          ]
+        },
+        "default": "info",
+        "optional": true
+      },
+      {
+        "name": "message",
+        "description": "A message to send in addition to the data.",
+        "schema": {
+          "type": "string"
+        },
+        "default": "",
+        "optional": true
+      }
+    ],
+    "returns": {
+      "description": "The data as passed to the `data` parameter without any modification.",
+      "schema": {
+        "description": "Any data type is allowed."
+      }
+    }
+  },
+  {
     "id": "is_infinite",
     "summary": "Value is an infinite number",
     "description": "Checks whether the specified value `x` is an infinite number. The definition of infinite numbers follows the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935). The special numerical value `NaN` (not a number) as defined by the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) is not an infinite number and must return `false`.",
@@ -9574,7 +9717,7 @@
   {
     "id": "load_result",
     "summary": "Load batch job results",
-    "description": "Loads batch job results by job id from the server-side user workspace. The job must have been stored by the authenticated user on the back-end currently connected to.",
+    "description": "Loads batch job results and returns them as a processable data cube. A batch job result can be loaded by ID or URL:\n\n* **ID**: The identifier for a finished batch job. The job must have been submitted by the authenticated user on the back-end currently connected to.\n* **URL**: The URL to the STAC metadata for a batch job result. This is usually a signed URL that is provided by some back-ends since openEO API version 1.1.0 through the `canonical` link relation in the batch job result metadata.\n\nIf supported by the underlying metadata and file format, the data that is added to the data cube can be restricted with the parameters `spatial_extent`, `temporal_extent` and `bands`.\n\n**Remarks:**\n\n* The bands (and all dimensions that specify nominal dimension labels) are expected to be ordered as specified in the metadata if the `bands` parameter is set to `null`.\n* If no additional parameter is specified this would imply that the whole data set is expected to be loaded. Due to the large size of many data sets, this is not recommended and may be optimized by back-ends to only load the data that is actually required after evaluating subsequent processes such as filters. This means that the pixel values should be processed only after the data has been limited to the required extent and as a consequence also to a manageable size.",
     "categories": [
       "cubes",
       "import"
@@ -9584,11 +9727,184 @@
       {
         "name": "id",
         "description": "The id of a batch job with results.",
-        "schema": {
-          "type": "string",
-          "subtype": "job-id",
-          "pattern": "^[\\w\\-\\.~]+$"
-        }
+        "schema": [
+          {
+            "title": "ID",
+            "type": "string",
+            "subtype": "job-id",
+            "pattern": "^[\\w\\-\\.~]+$"
+          },
+          {
+            "title": "URL",
+            "type": "string",
+            "format": "uri",
+            "subtype": "uri",
+            "pattern": "^https?://"
+          }
+        ]
+      },
+      {
+        "name": "spatial_extent",
+        "description": "Limits the data to load from the batch job result to the specified bounding box or polygons.\n\nThe process puts a pixel into the data cube if the point at the pixel center intersects with the bounding box or any of the polygons (as defined in the Simple Features standard by the OGC).\n\nThe GeoJSON can be one of the following feature types:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry,\n* a `FeatureCollection` containing at least one `Feature` with `Polygon` or `MultiPolygon` geometries, or\n* a `GeometryCollection` containing `Polygon` or `MultiPolygon` geometries. To maximize interoperability, `GeometryCollection` should be avoided in favour of one of the alternatives above.\n\nSet this parameter to `null` to set no limit for the spatial extent. Be careful with this when loading large datasets! It is recommended to use this parameter instead of using ``filter_bbox()`` or ``filter_spatial()`` directly after loading unbounded data.",
+        "schema": [
+          {
+            "title": "Bounding Box",
+            "type": "object",
+            "subtype": "bounding-box",
+            "required": [
+              "west",
+              "south",
+              "east",
+              "north"
+            ],
+            "properties": {
+              "west": {
+                "description": "West (lower left corner, coordinate axis 1).",
+                "type": "number"
+              },
+              "south": {
+                "description": "South (lower left corner, coordinate axis 2).",
+                "type": "number"
+              },
+              "east": {
+                "description": "East (upper right corner, coordinate axis 1).",
+                "type": "number"
+              },
+              "north": {
+                "description": "North (upper right corner, coordinate axis 2).",
+                "type": "number"
+              },
+              "base": {
+                "description": "Base (optional, lower left corner, coordinate axis 3).",
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "default": null
+              },
+              "height": {
+                "description": "Height (optional, upper right corner, coordinate axis 3).",
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "default": null
+              },
+              "crs": {
+                "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html) or [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
+                "anyOf": [
+                  {
+                    "title": "EPSG Code",
+                    "type": "integer",
+                    "subtype": "epsg-code",
+                    "minimum": 1000,
+                    "examples": [
+                      3857
+                    ]
+                  },
+                  {
+                    "title": "WKT2",
+                    "type": "string",
+                    "subtype": "wkt2-definition"
+                  },
+                  {
+                    "title": "PROJ definition",
+                    "type": "string",
+                    "subtype": "proj-definition",
+                    "deprecated": true
+                  }
+                ],
+                "default": 4326
+              }
+            }
+          },
+          {
+            "title": "GeoJSON",
+            "description": "Limits the data cube to the bounding box of the given geometry. All pixels inside the bounding box that do not intersect with any of the polygons will be set to no data (`null`).",
+            "type": "object",
+            "subtype": "geojson"
+          },
+          {
+            "title": "No filter",
+            "description": "Don't filter spatially. All data is included in the data cube.",
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "optional": true
+      },
+      {
+        "name": "temporal_extent",
+        "description": "Limits the data to load from the batch job result to the specified left-closed temporal interval. Applies to all temporal dimensions. The interval has to be specified as an array with exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html). Also supports open intervals by setting one of the boundaries to `null`, but never both.\n\nSet this parameter to `null` to set no limit for the temporal extent. Be careful with this when loading large datasets! It is recommended to use this parameter instead of using ``filter_temporal()`` directly after loading unbounded data.",
+        "schema": [
+          {
+            "type": "array",
+            "subtype": "temporal-interval",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time",
+                  "subtype": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date",
+                  "subtype": "date"
+                },
+                {
+                  "type": "string",
+                  "subtype": "year",
+                  "minLength": 4,
+                  "maxLength": 4,
+                  "pattern": "^\\d{4}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "examples": [
+              [
+                "2015-01-01T00:00:00Z",
+                "2016-01-01T00:00:00Z"
+              ],
+              [
+                "2015-01-01",
+                "2016-01-01"
+              ]
+            ]
+          },
+          {
+            "title": "No filter",
+            "description": "Don't filter temporally. All data is included in the data cube.",
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "optional": true
+      },
+      {
+        "name": "bands",
+        "description": "Only adds the specified bands into the data cube so that bands that don't match the list of band names are not available. Applies to all dimensions of type `bands`.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If the unique band name and the common name conflict, the unique band name has a higher priority.\n\nThe order of the specified array defines the order of the bands in the data cube. If multiple bands match a common name, all matched bands are included in the original order.\n\nIt is recommended to use this parameter instead of using ``filter_bands()`` directly after loading unbounded data.",
+        "schema": [
+          {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "subtype": "band-name"
+            }
+          },
+          {
+            "title": "No filter",
+            "description": "Don't filter bands. All bands are included in the data cube.",
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "optional": true
       }
     ],
     "returns": {
@@ -9681,6 +9997,118 @@
         "title": "NaN explained by Wolfram MathWorld"
       }
     ]
+  },
+  {
+    "id": "predict_curve",
+    "summary": "Predict values",
+    "description": "Predict values using a model function and pre-computed parameters. The process is primarily intended to compute values for new labels, but it can also fill gaps where existing labels contain no-data (`null`) values.",
+    "categories": [
+      "cubes",
+      "math"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "A data cube to predict values for.",
+        "schema": {
+          "type": "object",
+          "subtype": "raster-cube"
+        }
+      },
+      {
+        "name": "parameters",
+        "description": "A data cube with optimal values from a result of e.g. ``fit_curve()``.",
+        "schema": {
+          "type": "object",
+          "subtype": "raster-cube"
+        }
+      },
+      {
+        "name": "function",
+        "description": "The model function. It must take the parameters to fit as array through the first argument and the independent variable `x` as the second argument.\n\nIt is recommended to store the model function as a user-defined process on the back-end.",
+        "schema": {
+          "type": "object",
+          "subtype": "process-graph",
+          "parameters": [
+            {
+              "name": "x",
+              "description": "The value for the independent variable `x`.",
+              "schema": {
+                "type": "number"
+              }
+            },
+            {
+              "name": "parameters",
+              "description": "The parameters for the model function, contains at least one parameter.",
+              "schema": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "number"
+                }
+              }
+            }
+          ],
+          "returns": {
+            "description": "The computed value `y` value for the given independent variable `x` and the parameters.",
+            "schema": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      {
+        "name": "dimension",
+        "description": "The name of the dimension for predictions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "labels",
+        "description": "The labels to predict values for. If no labels are given, predicts values only for no-data (`null`) values in the data cube.",
+        "optional": true,
+        "default": null,
+        "schema": [
+          {
+            "type": "null"
+          },
+          {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string",
+                  "format": "date",
+                  "subtype": "date"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time",
+                  "subtype": "date-time"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "returns": {
+      "description": "A data cube with the predicted values.",
+      "schema": {
+        "type": "object",
+        "subtype": "raster-cube"
+      }
+    },
+    "exceptions": {
+      "DimensionNotAvailable": {
+        "message": "A dimension with the specified name does not exist."
+      }
+    }
   },
   {
     "id": "reduce_spatial",
@@ -9838,7 +10266,7 @@
   {
     "id": "run_udf_externally",
     "summary": "Run an externally hosted UDF container",
-    "description": "Runs a compatible UDF container that is either externally hosted by a service provider or running on a local machine of the user. The UDF container must follow the [openEO UDF specification](https://openeo.org/documentation/1.0/udfs.html).\n\nThe referenced UDF service can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case, an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
+    "description": "Runs a compatible UDF container that is either externally hosted by a service provider or running on a local machine of the user. The UDF container must follow the [openEO UDF specification](https://openeo.org/documentation/1.0/udfs.html).\n\nThe referenced UDF service can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case, an array is passed instead of a raster data cube. The user must ensure that the data is given in a way that the UDF code can make sense of it.",
     "categories": [
       "cubes",
       "import",
@@ -9848,13 +10276,8 @@
     "parameters": [
       {
         "name": "data",
-        "description": "The data to be passed to the UDF as an array or raster data cube.",
+        "description": "The data to be passed to the UDF.",
         "schema": [
-          {
-            "title": "Raster data cube",
-            "type": "object",
-            "subtype": "raster-cube"
-          },
           {
             "title": "Array",
             "type": "array",
@@ -9876,7 +10299,7 @@
           "type": "string",
           "format": "uri",
           "subtype": "uri",
-          "pattern": "^(http|https)://"
+          "pattern": "^https?://"
         }
       },
       {
@@ -9890,18 +10313,11 @@
       }
     ],
     "returns": {
-      "description": "The data processed by the UDF service.\n\n* Returns a raster data cube if a raster data cube is passed for `data`. Details on the dimensions and dimension properties (name, type, labels, reference system and resolution) depend on the UDF.\n* If an array is passed for `data`, the returned value can be of any data type, but is exactly what the UDF returns.",
-      "schema": [
-        {
-          "title": "Raster data cube",
-          "type": "object",
-          "subtype": "raster-cube"
-        },
-        {
-          "title": "Any",
-          "description": "Any data type."
-        }
-      ]
+      "description": "The data processed by the UDF. The returned value can in principle be of any data type, but it depends on what is returned by the UDF code. Please see the implemented UDF interface for details.",
+      "schema": {
+        "title": "Any",
+        "description": "Any data type."
+      }
     },
     "links": [
       {
@@ -10015,6 +10431,16 @@
         "schema": {
           "type": "boolean"
         }
+      },
+      {
+        "description": "Proprietary options for the backscatter computations. Specifying proprietary options will reduce portability.",
+        "name": "options",
+        "optional": true,
+        "default": {},
+        "schema": {
+          "type": "object",
+          "additionalProperties": false
+        }
       }
     ],
     "returns": {
@@ -10055,9 +10481,9 @@
   {
     "id": "quantiles",
     "summary": "Quantiles",
-    "description": "Calculates quantiles, which are cut points dividing the range of a probability distribution into either\n\n* intervals corresponding to the given `probabilities` or\n* (nearly) equal-sized intervals (q-quantiles based on the parameter `q`).\n\nEither the parameter `probabilities` or `q` must be specified, otherwise the `QuantilesParameterMissing` exception is thrown. If both parameters are set the `QuantilesParameterConflict` exception is thrown.",
+    "description": "Calculates quantiles, which are cut points dividing the range of a sample distribution into either\n\n* intervals corresponding to the given `probabilities` or\n* equal-sized intervals (q-quantiles based on the parameter `q`).\n\nEither the parameter `probabilities` or `q` must be specified, otherwise the `QuantilesParameterMissing` exception is thrown. If both parameters are set the `QuantilesParameterConflict` exception is thrown.\n\nSample quantiles can be computed with several different algorithms. Hyndman and Fan (1996) have concluded on nine different types, which are commonly implemented in statistical software packages. This process is implementing type 7, which is implemented widely and often also the default type (e.g. in Excel, Julia, Python, R and S).",
     "categories": [
-      "math"
+      "math > statistics"
     ],
     "parameters": [
       {
@@ -10075,7 +10501,7 @@
       },
       {
         "name": "probabilities",
-        "description": "A list of probabilities to calculate quantiles for. The probabilities must be between 0 and 1.",
+        "description": "A list of probabilities to calculate quantiles for. The probabilities must be between 0 and 1 (inclusive).",
         "schema": {
           "type": "array",
           "items": {
@@ -10088,7 +10514,7 @@
       },
       {
         "name": "q",
-        "description": "Intervals to calculate quantiles for. Calculates q-quantiles with (nearly) equal-sized intervals.",
+        "description": "Number of intervals to calculate quantiles for. Calculates q-quantiles with equal-sized intervals.",
         "schema": {
           "type": "integer",
           "minimum": 2
@@ -10227,6 +10653,12 @@
         "rel": "about",
         "href": "https://en.wikipedia.org/wiki/Quantile",
         "title": "Quantiles explained by Wikipedia"
+      },
+      {
+        "rel": "about",
+        "href": "https://www.amherst.edu/media/view/129116/original/Sample+Quantiles.pdf",
+        "type": "application/pdf",
+        "title": "Hyndman and Fan (1996): Sample Quantiles in Statistical Packages"
       }
     ]
   },
@@ -10578,7 +11010,7 @@
       {
         "rel": "example",
         "type": "application/json",
-        "href": "https://processes.openeo.org/1.1.0/examples/rename-enumerated-labels.json",
+        "href": "https://processes.openeo.org/1.2.0/examples/rename-enumerated-labels.json",
         "title": "Rename enumerated labels"
       }
     ]
@@ -10891,7 +11323,7 @@
   {
     "id": "run_udf",
     "summary": "Run a UDF",
-    "description": "Runs a UDF in one of the supported runtime environments.\n\nThe process can either:\n\n1. load and run a UDF stored in a file on the server-side workspace of the authenticated user. The path to the UDF file must be relative to the root directory of the user's workspace.\n2. fetch and run a remotely stored and published UDF by absolute URI.\n3. run the source code specified inline as string.\n\nThe loaded UDF can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case, an array is passed instead of a raster data cube. The user must ensure that the data is properly passed as an array so that the UDF can make sense of it.",
+    "description": "Runs a UDF in one of the supported runtime environments.\n\nThe process can either:\n\n1. load and run a UDF stored in a file on the server-side workspace of the authenticated user. The path to the UDF file must be relative to the root directory of the user's workspace.\n2. fetch and run a remotely stored and published UDF by absolute URI.\n3. run the source code specified inline as string.\n\nThe loaded UDF can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. The user must ensure that the data is given in a way that the UDF code can make sense of it.",
     "categories": [
       "cubes",
       "import",
@@ -10900,13 +11332,8 @@
     "parameters": [
       {
         "name": "data",
-        "description": "The data to be passed to the UDF as an array or raster data cube.",
+        "description": "The data to be passed to the UDF.",
         "schema": [
-          {
-            "title": "Raster data cube",
-            "type": "object",
-            "subtype": "raster-cube"
-          },
           {
             "title": "Array",
             "type": "array",
@@ -10930,7 +11357,7 @@
             "type": "string",
             "format": "uri",
             "subtype": "uri",
-            "pattern": "^(http|https)://"
+            "pattern": "^https?://"
           },
           {
             "description": "Path to a UDF uploaded to the server.",
@@ -10981,29 +11408,25 @@
       }
     ],
     "exceptions": {
+      "InvalidRuntime": {
+        "message": "The specified UDF runtime is not supported."
+      },
       "InvalidVersion": {
         "message": "The specified UDF runtime version is not supported."
       }
     },
     "returns": {
-      "description": "The data processed by the UDF.\n\n* Returns a raster data cube, if a raster data cube is passed for `data`. Details on the dimensions and dimension properties (name, type, labels, reference system and resolution) depend on the UDF.\n* If an array is passed for `data`, the returned value can be of any data type, but is exactly what the UDF returns.",
-      "schema": [
-        {
-          "title": "Raster data cube",
-          "type": "object",
-          "subtype": "raster-cube"
-        },
-        {
-          "title": "Any",
-          "description": "Any data type."
-        }
-      ]
+      "description": "The data processed by the UDF. The returned value can be of any data type and is exactly what the UDF code returns.",
+      "schema": {
+        "title": "Any",
+        "description": "Any data type."
+      }
     }
   },
   {
     "id": "save_result",
-    "summary": "Save processed data to storage",
-    "description": "Saves processed data to the server-side user workspace of the authenticated user. This process aims to be compatible with GDAL/OGR formats and options. STAC-compatible metadata should be stored with the processed data.\n\nCalling this process may be rejected by back-ends in the context of secondary web services.",
+    "summary": "Save processed data",
+    "description": "Makes the processed data available in the given file format to the corresponding medium that is relevant for the context this processes is applied in:\n\n* For **batch jobs** the data is stored on the back-end. STAC-compatible metadata is usually made available with the processed data.\n* For **synchronous processing** the data is sent to the client as a direct response to the request.\n* **Secondary web services** are provided with the processed data so that it can make use of it (e.g., visualize it). Web service may require the data in a certain format. Please refer to the documentation of the individual service types for details.",
     "categories": [
       "cubes",
       "export"
@@ -11011,7 +11434,7 @@
     "parameters": [
       {
         "name": "data",
-        "description": "The data to save.",
+        "description": "The data to deliver in the given file format.",
         "schema": [
           {
             "type": "object",
@@ -11025,7 +11448,7 @@
       },
       {
         "name": "format",
-        "description": "The file format to save to. It must be one of the values that the server reports as supported output file formats, which usually correspond to the short GDAL/OGR codes. If the format is not suitable for storing the underlying data structure, a `FormatUnsuitable` exception will be thrown. This parameter is *case insensitive*.",
+        "description": "The file format to use. It must be one of the values that the server reports as supported output file formats, which usually correspond to the short GDAL/OGR codes. If the format is not suitable for storing the underlying data structure, a `FormatUnsuitable` exception will be thrown. This parameter is *case insensitive*.",
         "schema": {
           "type": "string",
           "subtype": "output-format"
@@ -11043,7 +11466,7 @@
       }
     ],
     "returns": {
-      "description": "`false` if saving failed, `true` otherwise.",
+      "description": "Returns `false` if the process failed to make the data available, `true` otherwise.",
       "schema": {
         "type": "boolean"
       }
@@ -11071,7 +11494,7 @@
     "summary": "Standard deviation",
     "description": "Computes the sample standard deviation, which quantifies the amount of variation of an array of numbers. It is defined to be the square root of the corresponding variance (see ``variance()``).\n\nA low standard deviation indicates that the values tend to be close to the expected value, while a high standard deviation indicates that the values are spread out over a wider range.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
-      "math",
+      "math > statistics",
       "reducer"
     ],
     "parameters": [
@@ -12305,7 +12728,7 @@
     "summary": "Variance",
     "description": "Computes the sample variance of an array of numbers by calculating the square of the standard deviation (see ``sd()``). It is defined to be the expectation of the squared deviation of a random variable from its expected value. Basically, it measures how far the numbers in the array are spread out from their average value.\n\nAn array without non-`null` elements resolves always with `null`.",
     "categories": [
-      "math",
+      "math > statistics",
       "reducer"
     ],
     "parameters": [
