@@ -1,23 +1,29 @@
 {
     "id": "predict_random_forest",
     "summary": "Predict values from a Random Forest model",
-    "description": "Applies a Random Forest Model to a raster cube objects. The raster data cube necessarily needs the same bands as the predictors in the model. Otherwise, an `IncompatibleBands` must be returned.",
+    "description": "Applies a Random Forest machine learning model to an array and predict a value for it.",
     "categories": [
-        "machine learning"
+        "machine learning",
+        "reducer"
     ],
     "experimental": true,
     "parameters": [
         {
             "name": "data",
-            "description": "A raster cube with the bands corresponding to the predictors.",
+            "description": "An array of numbers.",
             "schema": {
-                "type": "object",
-                "subtype": "raster-cube"
+                "type": "array",
+                "items": {
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
             }
         },
         {
             "name": "model",
-            "description": "A model object that can be trained with the ``fit_regr_random_forest()`` process.",
+            "description": "A model object that can be trained with the processes ``fit_regr_random_forest()`` (regression) and ``fit_class_random_forest()`` (classification).",
             "schema": {
                 "type": "object",
                 "subtype": "ml-model"
@@ -25,15 +31,12 @@
         }
     ],
     "returns": {
-        "description": "A raster data cube with the prediction of the target variable based on the model.",
+        "description": "The predicted value. Returns `null` if any of the given values in the array is a no-data value.",
         "schema": {
-            "type": "object",
-            "subtype": "raster-cube"
-        }
-    },
-    "exceptions": {
-        "IncompatibleBands": {
-            "message": "The bands provided do not match the bands that the model has been trained for."
+            "type": [
+                "number",
+                "null"
+            ]
         }
     }
 }
