@@ -1,0 +1,57 @@
+{
+    "id": "implode_dimensions",
+    "summary": "Combine multiple dimensions into a single dimension",
+    "description": "Combines multiple given dimensions into a single dimension by flattening the values and merging the dimension labels with the given `label_separator`. Non-string dimension labels will be converted to strings.\n\nExample: Executing the process with a data cube with two dimensions `A` (labels: `2020` and `2021`) and B (labels: `B1` and `B2`) and the data `[[1,2],[3,4]]` and the parameters `dimensions` = `[A,B]` and `target_dimension` = `X` will result in a data cube with one dimension `X` (labels: `2020~B1`, `2020~B2`, `2021~B1` and `2021~B2`) and the data `[1,2,3,4]`.",
+    "categories": [
+        "cubes"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "dimensions",
+            "description": "The names of the dimension to combine. The order of the array defined the order in which the dimension labels and values are combined.\n\nFails with a `DimensionNotAvailable` exception if one of the specified dimension does not exist.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            }
+        },
+        {
+            "name": "target_dimension",
+            "description": "The name of an a target dimension with a single dimension label, which will be replaced. If a dimension with the given name doesn't exist yet, it is created with the specified name and the type `other` (see ``add_dimension()``).",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "label_separator",
+            "description": "The string that will be used as a separator for the combined dimension labels. The string given must not be contained in any of the dimension labels.",
+            "optional": true,
+            "default": "~",
+            "schema": {
+                "type": "string"
+            }
+        }
+    ],
+    "returns": {
+        "description": "A data cube with the new shape. The number of dimensions decreases. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
+        }
+    }
+}
