@@ -18,7 +18,7 @@
         },
         {
             "name": "geometries",
-            "description": "Geometries to extract samples for. If not given or `null`, the bounding box of the raster data cube is used as the Polygon to sample for.\n\nTo maximize interoperability, a nested `GeometryCollection` should be avoided. Furthermore, a `GeometryCollection` composed of a single type of geometries should be avoided in favour of the corresponding multi-part type (e.g. `MultiPolygon`).",
+            "description": "Input Geometries for sample extraction. If not given or `null`, the bounding box of the raster data cube is used as input polygon.\n\nTo maximize interoperability, a nested `GeometryCollection` should be avoided. Furthermore, a `GeometryCollection` composed of a single type of geometries should be avoided in favour of the corresponding multi-part type (e.g. `MultiPolygon`).",
             "optional": true,
             "default": null,
             "schema": [
