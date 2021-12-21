@@ -1,0 +1,68 @@
+{
+    "id": "vector_to_points",
+    "summary": "Sample random points from geometries",
+    "description": "For each geometry samples a number of random points based on one of the sampling method.",
+    "categories": [
+        "cubes",
+        "vector"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "Input geometries for sample extraction.\n\nTo maximize interoperability, a nested `GeometryCollection` should be avoided. Furthermore, a `GeometryCollection` composed of a single type of geometries should be avoided in favour of the corresponding multi-part type (e.g. `MultiPolygon`).",
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "geojson"
+                },
+                {
+                    "type": "object",
+                    "subtype": "vector-cube"
+                }
+            ]
+        },
+        {
+            "name": "count",
+            "description": "The number of points to compute. For each point given the maximum number of computed points is always 1.",
+            "optional": true,
+            "default": 1,
+            "schema": {
+                "type": "integer",
+                "minimum": 1
+            }
+        },
+        {
+            "name": "method",
+            "description": "The method to distribute the samples:\n\n* `random` (default): Random sampling\n* `fibonacci`: Fibonacci spiral sampling",
+            "optional": true,
+            "default": "random",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "random",
+                    "fibonacci"
+                ]
+            }
+        },
+        {
+            "name": "seed",
+            "description": "A randomization seed to use for random sampling. If not given or `null`, no seed is used and results may differ on subsequent use.",
+            "optional": true,
+            "default": null,
+            "schema": {
+                "type": [
+                    "integer",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "Returns a vector data cube with the sampled points as `MultiPoint` per geometry given.",
+        "schema": {
+            "type": "object",
+            "subtype": "vector-cube"
+        }
+    }
+}
