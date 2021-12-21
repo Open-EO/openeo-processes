@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased / Draft
 
+### Changed
+
+- Added better support for labeled arrays. Labels are not discarded in all cases anymore. Affected processes:
+    - `array_append`
+    - `array_concat`
+    - `array_modify`
+
 ## [1.2.0] - 2021-12-13
 
 ### Added

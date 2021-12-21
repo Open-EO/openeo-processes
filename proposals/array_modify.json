@@ -1,7 +1,7 @@
 {
     "id": "array_modify",
     "summary": "Change the content of an array (remove, insert, update)",
-    "description": "Modify an array by removing, inserting or updating elements. Updating can be seen as removing elements followed by inserting new elements (not necessarily the same number).\n\nAll labels get discarded and the array indices are always a sequence of numbers with the step size of 1 and starting at 0.",
+    "description": "Modify an array by removing, inserting or updating elements. Updating can be seen as removing elements followed by inserting new elements (not necessarily the same number).\n\nArray labels are kept only if both arrays given in `data` and `values` are labeled (or empty). Otherwise, all labels get discarded and the array indices are a sequence of numbers with the step size of 1 and starting at 0.",
     "categories": [
         "arrays"
     ],
