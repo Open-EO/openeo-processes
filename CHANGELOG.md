@@ -9,7 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New processes in proposal state:
-    - `raster_to_points`
     - `vector_to_points`
 
 ## [1.2.0] - 2021-12-13
