@@ -1,7 +1,7 @@
 {
     "id": "vector_to_points",
     "summary": "Sample random points from geometries",
-    "description": "For each geometry samples a number of random points based on one of the sampling method.",
+    "description": "Generate a vector data cube of points by sampling points from input geometries.",
     "categories": [
         "cubes",
         "vector"
@@ -24,7 +24,7 @@
         },
         {
             "name": "count",
-            "description": "The number of points to compute. For each point given the maximum number of computed points is always 1.",
+            "description": "The number of points to compute per geometry. Note that points in the input geometries can be selected at most once by the sampling.",
             "optional": true,
             "default": 1,
             "schema": {
