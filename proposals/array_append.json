@@ -48,7 +48,7 @@
     },
     "exceptions": {
         "LabelExists": {
-            "message": "A label with the specified name exists."
+            "message": "An array element with the specified label already exists."
         }
     },
     "examples": [
