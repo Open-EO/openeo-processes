@@ -34,11 +34,12 @@
         },
         {
             "name": "label_separator",
-            "description": "The string that will be used as a separator for the combined dimension labels. The string given must not be contained in any of the dimension labels.",
+            "description": "The string that will be used as a separator for the concatenated dimension labels.\n\nTo unambiguously revert the dimension labels with the process ``explode_dimensions()``, the given string must not be contained in any of the dimension labels.",
             "optional": true,
             "default": "~",
             "schema": {
-                "type": "string"
+                "type": "string",
+                "minLength": 1
             }
         }
     ],

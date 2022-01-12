@@ -19,6 +19,13 @@
             "name": "dimension",
             "description": "The name of the dimension to split. The order of the array defines the order in which the dimension labels and values are split.\n\nFails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
             "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "target_dimensions",
+            "description": "The names of the target dimensions, each with a single dimension label to replace. Non-existing dimensions will be created with the specified name and the type `other` (see ``add_dimension()``).",
+            "schema": {
                 "type": "array",
                 "items": {
                     "type": "string"
@@ -26,19 +33,13 @@
             }
         },
         {
-            "name": "target_dimensions",
-            "description": "The names of the target dimensions, each with a single dimension label to replace. Non-existing dimensions will be created with the specified name and the type `other` (see ``add_dimension()``).",
-            "schema": {
-                "type": "string"
-            }
-        },
-        {
             "name": "label_separator",
-            "description": "The string that will be used as a separator to split the dimension labels.",
+            "description": "The string that will be used as a separator to split the dimension labels. Each label will be split at the first occurrence of the given string only.",
             "optional": true,
             "default": "~",
             "schema": {
-                "type": "string"
+                "type": "string",
+                "minLength": 1
             }
         }
     ],
