@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased / Draft
 
+### Changed
+
+- Moved the `text_` processes to proposals as they are lacking implementations.
+- Renamed `text_merge` to `text_concat` for better alignment with `array_concat`.
+
 ## [1.2.0] - 2021-12-13
 
 ### Added
