@@ -10,7 +10,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "Input geometries for sample extraction.\n\nTo maximize interoperability, a nested `GeometryCollection` should be avoided. Furthermore, a `GeometryCollection` composed of a single type of geometries should be avoided in favour of the corresponding multi-part type (e.g. `MultiPolygon`).",
+            "description": "Input geometries for sample extraction. Vector properties are preserved for vector data cubes and all GeoJSON Features.\n\nTo maximize interoperability, a nested `GeometryCollection` should be avoided. Furthermore, a `GeometryCollection` composed of a single type of geometries should be avoided in favour of the corresponding multi-part type (e.g. `MultiPolygon`).",
             "schema": [
                 {
                     "type": "object",
