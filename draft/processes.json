@@ -8145,7 +8145,7 @@
   {
     "id": "array_append",
     "summary": "Append a value to an array",
-    "description": "Appends a value to the end of the array. Array labels get discarded from the array.",
+    "description": "Appends a new value to the end of the array, which may also include a new label for labeled arrays.",
     "categories": [
       "arrays"
     ],
@@ -8167,6 +8167,18 @@
         "schema": {
           "description": "Any data type is allowed."
         }
+      },
+      {
+        "name": "label",
+        "description": "If the given array is a labeled array, a new label for the new value should be given. If not given or `null`, the array index as string is used as the label. If in any case the label exists, a `LabelExists` exception is thrown.",
+        "optional": true,
+        "default": null,
+        "schema": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       }
     ],
     "returns": {
@@ -8176,6 +8188,11 @@
         "items": {
           "description": "Any data type is allowed."
         }
+      }
+    },
+    "exceptions": {
+      "LabelExists": {
+        "message": "An array element with the specified label already exists."
       }
     },
     "examples": [
@@ -8193,28 +8210,12 @@
           3
         ]
       }
-    ],
-    "process_graph": {
-      "append": {
-        "process_id": "array_concat",
-        "arguments": {
-          "array1": {
-            "from_parameter": "data"
-          },
-          "array2": [
-            {
-              "from_parameter": "value"
-            }
-          ]
-        },
-        "result": true
-      }
-    }
+    ]
   },
   {
     "id": "array_concat",
     "summary": "Merge two arrays",
-    "description": "Concatenates two arrays into a single array by appending the second array to the first array. Array labels get discarded from both arrays before merging.",
+    "description": "Concatenates two arrays into a single array by appending the second array to the first array.\n\nArray labels are kept only if both given arrays are labeled. Otherwise, the labels get discarded from both arrays. The process fails with an `ArrayLabelConflict` exception if a label is present in both arrays. Conflicts must be resolved beforehand.",
     "categories": [
       "arrays"
     ],
@@ -8248,6 +8249,11 @@
         "items": {
           "description": "Any data type is allowed."
         }
+      }
+    },
+    "exceptions": {
+      "ArrayLabelConflict": {
+        "message": "At least one label exists in both arrays and the conflict must be resolved before."
       }
     },
     "examples": [
@@ -8542,7 +8548,7 @@
   {
     "id": "array_modify",
     "summary": "Change the content of an array (remove, insert, update)",
-    "description": "Modify an array by removing, inserting or updating elements. Updating can be seen as removing elements followed by inserting new elements (not necessarily the same number).\n\nAll labels get discarded and the array indices are always a sequence of numbers with the step size of 1 and starting at 0.",
+    "description": "Modify an array by removing, inserting or updating elements. Updating can be seen as removing elements followed by inserting new elements (not necessarily the same number).\n\nArray labels are kept only if both arrays given in `data` and `values` are labeled or one of them is empty. Otherwise, all labels get discarded and the array indices are a sequence of numbers with the step size of 1 and starting at 0. The process fails with an `ArrayLabelConflict` exception if a label is present in both arrays.",
     "categories": [
       "arrays"
     ],
@@ -8599,6 +8605,9 @@
     "exceptions": {
       "ArrayElementNotAvailable": {
         "message": "The array can't be modified as the given index is larger than the number of elements in the array."
+      },
+      "ArrayLabelConflict": {
+        "message": "At least one label exists in both arrays and the conflict must be resolved before."
       }
     },
     "examples": [
