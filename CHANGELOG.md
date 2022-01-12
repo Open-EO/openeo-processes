@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Added better support for labeled arrays. Labels are not discarded in all cases anymore. Affected processes:
+    - `array_append`
+    - `array_concat`
+    - `array_modify`
 - Moved the `text_` processes to proposals as they are lacking implementations.
 - Renamed `text_merge` to `text_concat` for better alignment with `array_concat`.
 
