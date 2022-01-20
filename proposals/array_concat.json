@@ -1,7 +1,7 @@
 {
     "id": "array_concat",
     "summary": "Merge two arrays",
-    "description": "Concatenates two arrays into a single array by appending the second array to the first array. Array labels get discarded from both arrays before merging.",
+    "description": "Concatenates two arrays into a single array by appending the second array to the first array.\n\nArray labels are kept only if both given arrays are labeled. Otherwise, the labels get discarded from both arrays. The process fails with an `ArrayLabelConflict` exception if a label is present in both arrays. Conflicts must be resolved beforehand.",
     "categories": [
         "arrays"
     ],
@@ -35,6 +35,11 @@
             "items": {
                 "description": "Any data type is allowed."
             }
+        }
+    },
+    "exceptions": {
+        "ArrayLabelConflict": {
+            "message": "At least one label exists in both arrays and the conflict must be resolved before."
         }
     },
     "examples": [
