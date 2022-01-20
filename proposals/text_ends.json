@@ -1,15 +1,16 @@
 {
-    "id": "text_begins",
-    "summary": "Text begins with another text",
-    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern` at the beginning. Both are expected to be encoded in UTF-8 by default. The no-data value `null` is passed through and therefore gets propagated.",
+    "id": "text_ends",
+    "summary": "Text ends with another text",
+    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern` at the end. Both are expected to be encoded in UTF-8 by default. The no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
         "texts",
         "comparison"
     ],
+    "experimental": true,
     "parameters": [
         {
             "name": "data",
-            "description": "Text in which to find something at the beginning.",
+            "description": "Text in which to find something at the end.",
             "schema": {
                 "type": [
                     "string",
@@ -19,7 +20,7 @@
         },
         {
             "name": "pattern",
-            "description": "Text to find at the beginning of `data`. Regular expressions are not supported.",
+            "description": "Text to find at the end of `data`. Regular expressions are not supported.",
             "schema": {
                 "type": "string"
             }
@@ -35,7 +36,7 @@
         }
     ],
     "returns": {
-        "description": "`true` if `data` begins with `pattern`, false` otherwise.",
+        "description": "`true` if `data` ends with `pattern`, false` otherwise.",
         "schema": {
             "type": [
                 "boolean",
@@ -49,6 +50,13 @@
                 "data": "Lorem ipsum dolor sit amet",
                 "pattern": "amet"
             },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "data": "Lorem ipsum dolor sit amet",
+                "pattern": "AMET"
+            },
             "returns": false
         },
         {
@@ -56,19 +64,12 @@
                 "data": "Lorem ipsum dolor sit amet",
                 "pattern": "Lorem"
             },
-            "returns": true
-        },
-        {
-            "arguments": {
-                "data": "Lorem ipsum dolor sit amet",
-                "pattern": "lorem"
-            },
             "returns": false
         },
         {
             "arguments": {
                 "data": "Lorem ipsum dolor sit amet",
-                "pattern": "lorem",
+                "pattern": "AMET",
                 "case_sensitive": false
             },
             "returns": true

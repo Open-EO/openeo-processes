@@ -11,6 +11,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New processes in proposal state
     - `vector_buffer`
 
+### Changed
+
+- Added better support for labeled arrays. Labels are not discarded in all cases anymore. Affected processes:
+    - `array_append`
+    - `array_concat`
+    - `array_modify`
+- Moved the `text_` processes to proposals as they are lacking implementations.
+- Renamed `text_merge` to `text_concat` for better alignment with `array_concat`.
+
+### Fixed
+
+- `aggregate_spatial`: Clarified that vector properties are preserved for vector data cubes and all GeoJSON Features. [#270](https://github.com/Open-EO/openeo-processes/issues/270)
+
 ## [1.2.0] - 2021-12-13
 
 ### Added
