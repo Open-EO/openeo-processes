@@ -1,7 +1,7 @@
 {
     "id": "vector_buffer",
-    "summary": "Compute a buffer around geometries",
-    "description": "Calculates a round buffer around each geometry given. Buffers can be applied to points, lines and polygons, but the results are always polygons. Multi-part types (e.g. `MultiPoint`) are also allowed.",
+    "summary": "Buffer geometries by distance",
+    "description": "Buffers each input geometry by a given distance, which can either expand (dilate) or a shrink (erose) the geometry. Buffers can be applied to points, lines and polygons, but the results are always polygons. Multi-part types (e.g. `MultiPoint`) are also allowed.",
     "categories": [
         "vector"
     ],
@@ -23,7 +23,7 @@
         },
         {
             "name": "distance",
-            "description": "The radius of the buffer in the unit given in the `unit` parameter. A negative number can be provided to subtract from geometries.",
+            "description": "The distance of the buffer in the unit given by the `unit` parameter. A positive distance expands the geometries and results in outward buffering (dilation) while a negative distance shrinks the geometries and results in inward buffering (erosion).",
             "schema": {
                 "type": "number",
                 "not": {
