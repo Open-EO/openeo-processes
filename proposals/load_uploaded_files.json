@@ -42,10 +42,16 @@
     ],
     "returns": {
         "description": "A data cube for further processing.",
-        "schema": {
-            "type": "object",
-            "subtype": "raster-cube"
-        }
+        "schema": [
+            {
+                "type": "object",
+                "subtype": "raster-cube"
+            },
+            {
+                "type": "object",
+                "subtype": "vector-cube"
+            }
+        ]
     },
     "exceptions": {
         "FormatUnsuitable": {
