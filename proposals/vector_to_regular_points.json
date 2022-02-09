@@ -1,0 +1,41 @@
+{
+    "id": "vector_to_regular_points",
+    "summary": "Sample regular points from geometries",
+    "description": "Generate a vector data cube of points by sampling regularly-spaced points from input geometries.",
+    "categories": [
+        "cubes",
+        "vector"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "Input geometries for sample extraction. Vector properties are preserved for vector data cubes and all GeoJSON Features.\n\nTo maximize interoperability, a nested `GeometryCollection` should be avoided. Furthermore, a `GeometryCollection` composed of a single type of geometries should be avoided in favour of the corresponding multi-part type (e.g. `MultiPolygon`).",
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "geojson"
+                },
+                {
+                    "type": "object",
+                    "subtype": "vector-cube"
+                }
+            ]
+        },
+        {
+            "name": "cell_size",
+            "description": "The size in degrees of the cell of the regular grid. If the cell size is bigger than the geometry, a single point is returned located in the centroid of the geometry. If the centroid is not enclosed in the geometry area, no point is returned.",
+            "schema": {
+                "type": "integer",
+                "minimumExclusive": 0
+            }
+        }
+    ],
+    "returns": {
+        "description": "Returns a vector data cube with the sampled points as `MultiPoint` per geometry given.",
+        "schema": {
+            "type": "object",
+            "subtype": "vector-cube"
+        }
+    }
+}

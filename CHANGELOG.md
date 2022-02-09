@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New processes in proposal state:
-    - `vector_to_points`
+    - `vector_to_random_points`
+    - `vector_to_regular_points`
 
 ### Changed
 

@@ -1,7 +1,7 @@
 {
-    "id": "vector_to_points",
+    "id": "vector_to_random_points",
     "summary": "Sample random points from geometries",
-    "description": "Generate a vector data cube of points by sampling points from input geometries.",
+    "description": "Generate a vector data cube of points by sampling random points from input geometries.\n\nThrows a `CountsMissing` exception if `geometry_count` and `total_count` are both unrestricted (i.e. set to `null`).",
     "categories": [
         "cubes",
         "vector"
@@ -23,27 +23,36 @@
             ]
         },
         {
-            "name": "count",
-            "description": "The number of points to compute per geometry. Note that points in the input geometries can be selected at most once by the sampling.",
+            "name": "geometry_count",
+            "description": "The maximum number of points to compute per geometry. Defaults to a maximum of one point per geometry.\n\nPoints in the input geometries can be selected only once by the sampling.",
             "optional": true,
             "default": 1,
-            "schema": {
-                "type": "integer",
-                "minimum": 1
-            }
+            "schema": [
+                {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                {
+                    "title": "Unrestricted",
+                    "type": "null"
+                }
+            ]
         },
         {
-            "name": "method",
-            "description": "The method to distribute the samples:\n\n* `random` (default): Random sampling\n* `fibonacci`: Fibonacci spiral sampling",
+            "name": "total_count",
+            "description": "The maximum number of points to compute overall.\n\nThrows a `CountMismatch` exception if the specified value is less than the provided number of geometries.",
             "optional": true,
-            "default": "random",
-            "schema": {
-                "type": "string",
-                "enum": [
-                    "random",
-                    "fibonacci"
-                ]
-            }
+            "default": null,
+            "schema": [
+                {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                {
+                    "title": "Unrestricted",
+                    "type": "null"
+                }
+            ]
         },
         {
             "name": "seed",
@@ -63,6 +72,14 @@
         "schema": {
             "type": "object",
             "subtype": "vector-cube"
+        }
+    },
+    "exceptions": {
+        "CountsMissing": {
+            "message": "No maximum count is set per geometry and in total."
+        },
+        "CountMismatch": {
+            "message": "The total number of points is lower than the number of geometries."
         }
     }
 }
