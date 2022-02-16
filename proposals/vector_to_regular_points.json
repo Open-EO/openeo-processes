@@ -26,7 +26,7 @@
             "name": "cell_size",
             "description": "The size in degrees of the cell of the regular grid. If the cell size is bigger than the geometry, a single point is returned located in the centroid of the geometry. If the centroid is not enclosed in the geometry area, no point is returned.",
             "schema": {
-                "type": "integer",
+                "type": "number",
                 "minimumExclusive": 0
             }
         }
