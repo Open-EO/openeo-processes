@@ -1,7 +1,7 @@
 {
     "id": "round",
     "summary": "Round to a specified precision",
-    "description": "Rounds a real number `x` to specified precision `p`.\n\nIf the fractional part of `x` is halfway between two integers, one of which is even and the other odd, then the even number is returned.\nThis behavior follows [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229). This kind of rounding is also called \"round to nearest (even)\" or \"banker's rounding\". It minimizes rounding errors that result from consistently rounding a midpoint value in a single direction.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Rounds a real number `x` to specified precision `p`.\n\nIf the reamining part of `x` that is relevant for rounding under consideration of `p` is halfway between two numbers, one of which is even and the other odd, then the even number gets rounded to.\nThis behavior follows [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) and is often called \"round to nearest (even)\" or \"banker's rounding\". It minimizes rounding errors that result from consistently rounding a midpoint value in a single direction.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
         "math > rounding"
     ],
@@ -67,6 +67,20 @@
                 "x": -3.5
             },
             "returns": -4
+        },
+        {
+            "arguments": {
+                "x": 0.25,
+                "p": 1
+            },
+            "returns": 0.2
+        },
+        {
+            "arguments": {
+                "x": 0.35,
+                "p": 1
+            },
+            "returns": 0.4
         },
         {
             "arguments": {
