@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - `aggregate_spatial`: Clarified that vector properties are preserved for vector data cubes and all GeoJSON Features. [#270](https://github.com/Open-EO/openeo-processes/issues/270)
+- `apply_neighborhood`: Parameter `overlap` was optional but had no default value and no schena for the default value defined.
 - `rename_labels`: Clarified that the `LabelsNotEnumerated` exception is thrown if `source` is empty instead of if `target` is empty. [#321](https://github.com/Open-EO/openeo-processes/issues/321)
 
 ## [1.2.0] - 2021-12-13
