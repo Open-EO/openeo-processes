@@ -23,8 +23,8 @@
             ]
         },
         {
-            "name": "cell_size",
-            "description": "The size in degrees of the cell of the regular grid. If the cell size is bigger than the geometry, a single point is returned located in the centroid of the geometry. If the centroid is not enclosed in the geometry area, no point is returned.",
+            "name": "distance",
+            "description": "Defines the minimum distance in degrees required between two samples generated for a single geometry.\n\n- For **polygons**, the distance defines the cell sizes of a regular grid that starts at the upper-left bound of each polygon. The centroid of each cell is then a sample point. If the centroid is not enclosed in the polygon, no point is sampled, which results in an empty geometry.\n- For **lines** (line strings), the sampling starts with a point at the first coordinate of the line and then walks along the line and samples a new point each time the distance to the previous point has been reached again.\n- For **points**, the point is returned as given.",
             "schema": {
                 "type": "number",
                 "minimumExclusive": 0
@@ -32,7 +32,7 @@
         }
     ],
     "returns": {
-        "description": "Returns a vector data cube with the sampled points as `MultiPoint` per geometry given.",
+        "description": "Returns a vector data cube with the sampled points as `MultiPoint` per geometry given. If the input was a feature or a feature collection, the returned data is also a feature or feature collection respectively, with all properties retained.",
         "schema": {
             "type": "object",
             "subtype": "vector-cube"
