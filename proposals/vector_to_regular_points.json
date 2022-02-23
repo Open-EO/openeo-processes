@@ -24,7 +24,7 @@
         },
         {
             "name": "distance",
-            "description": "Defines the minimum distance in degrees required between two samples generated for a single geometry.\n\n- For **polygons**, the distance defines the cell sizes of a regular grid that starts at the upper-left bound of each polygon. The centroid of each cell is then a sample point. If the centroid is not enclosed in the polygon, no point is sampled. If no point can be sampled for the geometry at all, the first coordinate of the geometry is returned as point.\n- For **lines** (line strings), the sampling starts with a point at the first coordinate of the line and then walks along the line and samples a new point each time the distance to the previous point has been reached again.\n- For **points**, the point is returned as given.",
+            "description": "Defines the minimum distance in degrees that is required between two samples generated *inside* a single geometry.\n\n- For **polygons**, the distance defines the cell sizes of a regular grid that starts at the upper-left bound of each polygon. The centroid of each cell is then a sample point. If the centroid is not enclosed in the polygon, no point is sampled. If no point can be sampled for the geometry at all, the first coordinate of the geometry is returned as point.\n- For **lines** (line strings), the sampling starts with a point at the first coordinate of the line and then walks along the line and samples a new point each time the distance to the previous point has been reached again.\n- For **points**, the point is returned as given.",
             "schema": {
                 "type": "number",
                 "minimumExclusive": 0
