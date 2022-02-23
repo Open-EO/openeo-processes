@@ -160,7 +160,7 @@ For the data types boolean, numbers, strings and null it is recommended to log t
 
 #### Arrays
 
-It is recommended to summarize arrays with as follows:
+It is recommended to summarize arrays as follows:
 ```js
 {
 	"data": [3,1,6,4,8], // Return a reasonable excerpt of the data, e.g. the first 5 or 10 elements

@@ -248,10 +248,14 @@ function checkParam(param, p, checkCbParams = true) {
 
 	// Parameter flags
 	expect(typeof param.optional === 'undefined' || typeof param.optional === 'boolean').toBeTruthy();
-	// lint: don't specify defaults
+	// lint: don't specify default value "false" for optional
 	expect(typeof param.optional === 'undefined' || param.optional === true).toBeTruthy();
 	// lint: make sure there's no old required flag
 	expect(typeof param.required === 'undefined').toBeTruthy();
+	// lint: require a default value if the parameter is optional
+	if (param.optional === true && !anyOfRequired.includes(p.id)) {
+		expect(param.default).toBeDefined();
+	}
 	// Check flags (recommended / experimental)
 	checkFlags(param);
 
@@ -260,13 +264,7 @@ function checkParam(param, p, checkCbParams = true) {
 	expect(typeof param.schema).toBe('object');
 	checkJsonSchema(jsv, param.schema);
 
-	if (!checkCbParams) {
-		// Parameters that are not required should define a default value
-		if(param.optional === true && !anyOfRequired.includes(p.id)) {
-			expect(param.default).toBeDefined();
-		}
-	}
-	else {
+	if (checkCbParams) {
 		// Checking that callbacks (process-graphs) define their parameters
 		if (typeof param.schema === 'object' && param.schema.subtype === 'process-graph') {
 			// lint: A callback without parameters is not very useful

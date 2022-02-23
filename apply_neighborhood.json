@@ -98,52 +98,60 @@
         },
         {
             "name": "overlap",
-            "description": "Overlap of neighborhoods along each dimension to avoid border effects.\n\nFor instance a temporal dimension can add 1 month before and after a neighborhood. In the spatial dimensions, this is often a number of pixels. The overlap specified is added before and after, so an overlap of 8 pixels will add 8 pixels on both sides of the window, so 16 in total.\n\nBe aware that large overlaps increase the need for computational resources and modifying overlapping data in subsequent operations have no effect.",
+            "description": "Overlap of neighborhoods along each dimension to avoid border effects. By default no overlap is provided.\n\nFor instance a temporal dimension can add 1 month before and after a neighborhood. In the spatial dimensions, this is often a number of pixels. The overlap specified is added before and after, so an overlap of 8 pixels will add 8 pixels on both sides of the window, so 16 in total.\n\nBe aware that large overlaps increase the need for computational resources and modifying overlapping data in subsequent operations have no effect.",
             "optional": true,
-            "schema": {
-                "type": "array",
-                "items": {
-                    "type": "object",
-                    "subtype": "chunk-size",
-                    "required": [
-                        "dimension",
-                        "value"
-                    ],
-                    "properties": {
-                        "dimension": {
-                            "type": "string"
-                        },
-                        "value": {
-                            "default": null,
-                            "anyOf": [
-                                {
-                                    "type": "null",
-                                    "title": "No values"
-                                },
-                                {
-                                    "type": "number",
-                                    "minimum": 0,
-                                    "description": "See the `unit` parameter for more information."
-                                },
-                                {
-                                    "type": "string",
-                                    "subtype": "duration",
-                                    "description": "[ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations), e.g. `P1D` for one day.",
-                                    "pattern": "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
-                                }
-                            ]
-                        },
-                        "unit": {
-                            "type": "string",
-                            "description": "The unit the values are given in, either in meters (`m`) or pixels (`px`). If no unit is given, uses the unit specified for the dimension or otherwise the default unit of the reference system.",
-                            "enum": [
-                                "px",
-                                "m"
-                            ]
+            "default": null,
+            "schema": [
+                {
+                    "title": "Without overlap",
+                    "type": "null"
+                },
+                {
+                    "title": "With overlap",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "subtype": "chunk-size",
+                        "required": [
+                            "dimension",
+                            "value"
+                        ],
+                        "properties": {
+                            "dimension": {
+                                "type": "string"
+                            },
+                            "value": {
+                                "default": null,
+                                "anyOf": [
+                                    {
+                                        "type": "null",
+                                        "title": "No values"
+                                    },
+                                    {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "description": "See the `unit` parameter for more information."
+                                    },
+                                    {
+                                        "type": "string",
+                                        "subtype": "duration",
+                                        "description": "[ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations), e.g. `P1D` for one day.",
+                                        "pattern": "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
+                                    }
+                                ]
+                            },
+                            "unit": {
+                                "type": "string",
+                                "description": "The unit the values are given in, either in meters (`m`) or pixels (`px`). If no unit is given, uses the unit specified for the dimension or otherwise the default unit of the reference system.",
+                                "enum": [
+                                    "px",
+                                    "m"
+                                ]
+                            }
                         }
                     }
                 }
-            }
+            ]
         },
         {
             "name": "context",
