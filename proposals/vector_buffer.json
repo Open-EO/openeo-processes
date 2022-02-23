@@ -23,30 +23,13 @@
         },
         {
             "name": "distance",
-            "description": "The distance of the buffer in the unit given by the `unit` parameter. A positive distance expands the geometries and results in outward buffering (dilation) while a negative distance shrinks the geometries and results in inward buffering (erosion).",
+            "description": "The distance of the buffer in the unit of the spatial reference system. A positive distance expands the geometries and results in outward buffering (dilation) while a negative distance shrinks the geometries and results in inward buffering (erosion).",
             "schema": {
                 "type": "number",
                 "not": {
                     "const": 0
                 }
             }
-        },
-        {
-            "name": "unit",
-            "description": "The unit the distance is given in, either in the unit of the spatial reference system (`null`, the default value) or in meters (`m`).",
-            "optional": true,
-            "default": null,
-            "schema": [
-                {
-                    "title": "Unit of the SRS",
-                    "type": "null"
-                },
-                {
-                    "title": "Meters",
-                    "type": "string",
-                    "const": "m"
-                }
-            ]
         }
     ],
     "returns": {
