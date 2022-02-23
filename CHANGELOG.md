@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New processes in proposal state:
-    - `implode_dimensions`
-    - `explode_dimensions`
+    - `flatten_dimensions`
+    - `unflatten_dimension`
 
 ## [1.2.0] - 2021-12-13
 
