@@ -1422,11 +1422,21 @@
                 ]
               },
               "unit": {
-                "type": "string",
-                "description": "The unit the values are given in, either in meters (`m`) or pixels (`px`). If no unit is given, uses the unit specified for the dimension or otherwise the default unit of the reference system.",
-                "enum": [
-                  "px",
-                  "m"
+                "description": "The unit the values are given in, either in meters (`m`) or pixels (`px`). If no unit or `null` is given, uses the unit specified for the dimension or otherwise the default unit of the reference system.",
+                "default": null,
+                "anyOf": [
+                  {
+                    "title": "Default unit",
+                    "type": "null"
+                  },
+                  {
+                    "title": "Specific unit",
+                    "type": "string",
+                    "enum": [
+                      "px",
+                      "m"
+                    ]
+                  }
                 ]
               }
             }
@@ -1478,11 +1488,21 @@
                   ]
                 },
                 "unit": {
-                  "type": "string",
-                  "description": "The unit the values are given in, either in meters (`m`) or pixels (`px`). If no unit is given, uses the unit specified for the dimension or otherwise the default unit of the reference system.",
-                  "enum": [
-                    "px",
-                    "m"
+                  "description": "The unit the values are given in, either in meters (`m`) or pixels (`px`). If no unit or `null` is given, uses the unit specified for the dimension or otherwise the default unit of the reference system.",
+                  "default": null,
+                  "anyOf": [
+                    {
+                      "title": "Default unit",
+                      "type": "null"
+                    },
+                    {
+                      "title": "Specific unit",
+                      "type": "string",
+                      "enum": [
+                        "px",
+                        "m"
+                      ]
+                    }
                   ]
                 }
               }
