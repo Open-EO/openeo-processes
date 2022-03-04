@@ -1,0 +1,55 @@
+{
+    "id": "run_eoepca_externally",
+    "summary": "Run processing externally on EOEPCA",
+    "description": "Runs processing tasks on an [EOEPCA](https://eoepca.org/) compliant processing platform, which essentially runs a hosted docker container.",
+    "categories": [
+        "cubes",
+        "import",
+        "export",
+        "udf"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The data to be passed to the external processing platform.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "url",
+            "description": "Absolute URL to a remote EOEPCA service.",
+            "schema": {
+                "type": "string",
+                "format": "uri",
+                "subtype": "uri",
+                "pattern": "^https?://"
+            }
+        },
+        {
+            "name": "context",
+            "description": "Additional data such as configuration options to be passed to the container.",
+            "schema": {
+                "type": "object"
+            },
+            "default": {},
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "The data processed by the external processing platform.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://eoepca.org/",
+            "title": "EOEPCA: Earth Observation Exploitation Platform Common Architecture"
+        }
+    ]
+}
