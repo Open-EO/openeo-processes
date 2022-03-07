@@ -12,8 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `array_append`
     - `array_concat`
     - `array_modify`
-- Moved the `text_` processes to proposals as they are lacking implementations.
-- Renamed `text_merge` to `text_concat` for better alignment with `array_concat`.
+- Renamed `text_merge` to `text_concat` for better alignment with `array_concat` and existing implementations.
 - `apply_neighborhood`: Allow `null` as default value for units.
 
 ### Fixed

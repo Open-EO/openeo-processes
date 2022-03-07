@@ -6,7 +6,6 @@
         "texts",
         "comparison"
     ],
-    "experimental": true,
     "parameters": [
         {
             "name": "data",
