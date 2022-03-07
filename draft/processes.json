@@ -12377,7 +12377,6 @@
       "texts",
       "comparison"
     ],
-    "experimental": true,
     "parameters": [
       {
         "name": "data",
@@ -12469,7 +12468,6 @@
     "categories": [
       "texts"
     ],
-    "experimental": true,
     "parameters": [
       {
         "name": "data",
@@ -12575,7 +12573,6 @@
       "texts",
       "comparison"
     ],
-    "experimental": true,
     "parameters": [
       {
         "name": "data",
@@ -12668,7 +12665,6 @@
       "texts",
       "comparison"
     ],
-    "experimental": true,
     "parameters": [
       {
         "name": "data",
