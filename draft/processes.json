@@ -10516,390 +10516,6 @@
     ]
   },
   {
-    "id": "text_begins",
-    "summary": "Text begins with another text",
-    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern` at the beginning. Both are expected to be encoded in UTF-8 by default. The no-data value `null` is passed through and therefore gets propagated.",
-    "categories": [
-      "texts",
-      "comparison"
-    ],
-    "experimental": true,
-    "parameters": [
-      {
-        "name": "data",
-        "description": "Text in which to find something at the beginning.",
-        "schema": {
-          "type": [
-            "string",
-            "null"
-          ]
-        }
-      },
-      {
-        "name": "pattern",
-        "description": "Text to find at the beginning of `data`. Regular expressions are not supported.",
-        "schema": {
-          "type": "string"
-        }
-      },
-      {
-        "name": "case_sensitive",
-        "description": "Case sensitive comparison can be disabled by setting this parameter to `false`.",
-        "schema": {
-          "type": "boolean"
-        },
-        "default": true,
-        "optional": true
-      }
-    ],
-    "returns": {
-      "description": "`true` if `data` begins with `pattern`, false` otherwise.",
-      "schema": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      }
-    },
-    "examples": [
-      {
-        "arguments": {
-          "data": "Lorem ipsum dolor sit amet",
-          "pattern": "amet"
-        },
-        "returns": false
-      },
-      {
-        "arguments": {
-          "data": "Lorem ipsum dolor sit amet",
-          "pattern": "Lorem"
-        },
-        "returns": true
-      },
-      {
-        "arguments": {
-          "data": "Lorem ipsum dolor sit amet",
-          "pattern": "lorem"
-        },
-        "returns": false
-      },
-      {
-        "arguments": {
-          "data": "Lorem ipsum dolor sit amet",
-          "pattern": "lorem",
-          "case_sensitive": false
-        },
-        "returns": true
-      },
-      {
-        "arguments": {
-          "data": "Ä",
-          "pattern": "ä",
-          "case_sensitive": false
-        },
-        "returns": true
-      },
-      {
-        "arguments": {
-          "data": null,
-          "pattern": "null"
-        },
-        "returns": null
-      }
-    ]
-  },
-  {
-    "id": "text_concat",
-    "summary": "Concatenate elements to a single text",
-    "description": "Merges text representations (also known as *string*) of a set of elements to a single text, having the separator between each element.",
-    "categories": [
-      "texts"
-    ],
-    "experimental": true,
-    "parameters": [
-      {
-        "name": "data",
-        "description": "A set of elements. Numbers, boolean values and null values get converted to their (lower case) string representation. For example: `1` (integer), `-1.5` (number), `true` / `false` (boolean values)",
-        "schema": {
-          "type": "array",
-          "items": {
-            "type": [
-              "string",
-              "number",
-              "boolean",
-              "null"
-            ]
-          }
-        }
-      },
-      {
-        "name": "separator",
-        "description": "A separator to put between each of the individual texts. Defaults to an empty string.",
-        "schema": {
-          "type": [
-            "string",
-            "number",
-            "boolean",
-            "null"
-          ]
-        },
-        "default": "",
-        "optional": true
-      }
-    ],
-    "returns": {
-      "description": "A string containing a string representation of all the array elements in the same order, with the separator between each element.",
-      "schema": {
-        "type": "string"
-      }
-    },
-    "examples": [
-      {
-        "arguments": {
-          "data": [
-            "Hello",
-            "World"
-          ],
-          "separator": " "
-        },
-        "returns": "Hello World"
-      },
-      {
-        "arguments": {
-          "data": [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            0
-          ]
-        },
-        "returns": "1234567890"
-      },
-      {
-        "arguments": {
-          "data": [
-            null,
-            true,
-            false,
-            1,
-            -1.5,
-            "ß"
-          ],
-          "separator": "\n"
-        },
-        "returns": "null\ntrue\nfalse\n1\n-1.5\nß"
-      },
-      {
-        "arguments": {
-          "data": [
-            2,
-            0
-          ],
-          "separator": 1
-        },
-        "returns": "210"
-      },
-      {
-        "arguments": {
-          "data": []
-        },
-        "returns": ""
-      }
-    ]
-  },
-  {
-    "id": "text_contains",
-    "summary": "Text contains another text",
-    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern`. Both are expected to be encoded in UTF-8 by default. The no-data value `null` is passed through and therefore gets propagated.",
-    "categories": [
-      "texts",
-      "comparison"
-    ],
-    "experimental": true,
-    "parameters": [
-      {
-        "name": "data",
-        "description": "Text in which to find something in.",
-        "schema": {
-          "type": [
-            "string",
-            "null"
-          ]
-        }
-      },
-      {
-        "name": "pattern",
-        "description": "Text to find in `data`. Regular expressions are not supported.",
-        "schema": {
-          "type": "string"
-        }
-      },
-      {
-        "name": "case_sensitive",
-        "description": "Case sensitive comparison can be disabled by setting this parameter to `false`.",
-        "schema": {
-          "type": "boolean"
-        },
-        "default": true,
-        "optional": true
-      }
-    ],
-    "returns": {
-      "description": "`true` if `data` contains the `pattern`, false` otherwise.",
-      "schema": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      }
-    },
-    "examples": [
-      {
-        "arguments": {
-          "data": "Lorem ipsum dolor sit amet",
-          "pattern": "openEO"
-        },
-        "returns": false
-      },
-      {
-        "arguments": {
-          "data": "Lorem ipsum dolor sit amet",
-          "pattern": "ipsum dolor"
-        },
-        "returns": true
-      },
-      {
-        "arguments": {
-          "data": "Lorem ipsum dolor sit amet",
-          "pattern": "Ipsum Dolor"
-        },
-        "returns": false
-      },
-      {
-        "arguments": {
-          "data": "Lorem ipsum dolor sit amet",
-          "pattern": "SIT",
-          "case_sensitive": false
-        },
-        "returns": true
-      },
-      {
-        "arguments": {
-          "data": "ÄÖÜ",
-          "pattern": "ö",
-          "case_sensitive": false
-        },
-        "returns": true
-      },
-      {
-        "arguments": {
-          "data": null,
-          "pattern": "null"
-        },
-        "returns": null
-      }
-    ]
-  },
-  {
-    "id": "text_ends",
-    "summary": "Text ends with another text",
-    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern` at the end. Both are expected to be encoded in UTF-8 by default. The no-data value `null` is passed through and therefore gets propagated.",
-    "categories": [
-      "texts",
-      "comparison"
-    ],
-    "experimental": true,
-    "parameters": [
-      {
-        "name": "data",
-        "description": "Text in which to find something at the end.",
-        "schema": {
-          "type": [
-            "string",
-            "null"
-          ]
-        }
-      },
-      {
-        "name": "pattern",
-        "description": "Text to find at the end of `data`. Regular expressions are not supported.",
-        "schema": {
-          "type": "string"
-        }
-      },
-      {
-        "name": "case_sensitive",
-        "description": "Case sensitive comparison can be disabled by setting this parameter to `false`.",
-        "schema": {
-          "type": "boolean"
-        },
-        "default": true,
-        "optional": true
-      }
-    ],
-    "returns": {
-      "description": "`true` if `data` ends with `pattern`, false` otherwise.",
-      "schema": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      }
-    },
-    "examples": [
-      {
-        "arguments": {
-          "data": "Lorem ipsum dolor sit amet",
-          "pattern": "amet"
-        },
-        "returns": true
-      },
-      {
-        "arguments": {
-          "data": "Lorem ipsum dolor sit amet",
-          "pattern": "AMET"
-        },
-        "returns": false
-      },
-      {
-        "arguments": {
-          "data": "Lorem ipsum dolor sit amet",
-          "pattern": "Lorem"
-        },
-        "returns": false
-      },
-      {
-        "arguments": {
-          "data": "Lorem ipsum dolor sit amet",
-          "pattern": "AMET",
-          "case_sensitive": false
-        },
-        "returns": true
-      },
-      {
-        "arguments": {
-          "data": "Ä",
-          "pattern": "ä",
-          "case_sensitive": false
-        },
-        "returns": true
-      },
-      {
-        "arguments": {
-          "data": null,
-          "pattern": "null"
-        },
-        "returns": null
-      }
-    ]
-  },
-  {
     "id": "quantiles",
     "summary": "Quantiles",
     "description": "Calculates quantiles, which are cut points dividing the range of a sample distribution into either\n\n* intervals corresponding to the given `probabilities` or\n* equal-sized intervals (q-quantiles based on the parameter `q`).\n\nEither the parameter `probabilities` or `q` must be specified, otherwise the `QuantilesParameterMissing` exception is thrown. If both parameters are set the `QuantilesParameterConflict` exception is thrown.\n\nSample quantiles can be computed with several different algorithms. Hyndman and Fan (1996) have concluded on nine different types, which are commonly implemented in statistical software packages. This process is implementing type 7, which is implemented widely and often also the default type (e.g. in Excel, Julia, Python, R and S).",
@@ -12750,6 +12366,390 @@
         "rel": "about",
         "href": "http://mathworld.wolfram.com/HyperbolicTangent.html",
         "title": "Hyperbolic tangent explained by Wolfram MathWorld"
+      }
+    ]
+  },
+  {
+    "id": "text_begins",
+    "summary": "Text begins with another text",
+    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern` at the beginning. Both are expected to be encoded in UTF-8 by default. The no-data value `null` is passed through and therefore gets propagated.",
+    "categories": [
+      "texts",
+      "comparison"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "Text in which to find something at the beginning.",
+        "schema": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      {
+        "name": "pattern",
+        "description": "Text to find at the beginning of `data`. Regular expressions are not supported.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "case_sensitive",
+        "description": "Case sensitive comparison can be disabled by setting this parameter to `false`.",
+        "schema": {
+          "type": "boolean"
+        },
+        "default": true,
+        "optional": true
+      }
+    ],
+    "returns": {
+      "description": "`true` if `data` begins with `pattern`, false` otherwise.",
+      "schema": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      }
+    },
+    "examples": [
+      {
+        "arguments": {
+          "data": "Lorem ipsum dolor sit amet",
+          "pattern": "amet"
+        },
+        "returns": false
+      },
+      {
+        "arguments": {
+          "data": "Lorem ipsum dolor sit amet",
+          "pattern": "Lorem"
+        },
+        "returns": true
+      },
+      {
+        "arguments": {
+          "data": "Lorem ipsum dolor sit amet",
+          "pattern": "lorem"
+        },
+        "returns": false
+      },
+      {
+        "arguments": {
+          "data": "Lorem ipsum dolor sit amet",
+          "pattern": "lorem",
+          "case_sensitive": false
+        },
+        "returns": true
+      },
+      {
+        "arguments": {
+          "data": "Ä",
+          "pattern": "ä",
+          "case_sensitive": false
+        },
+        "returns": true
+      },
+      {
+        "arguments": {
+          "data": null,
+          "pattern": "null"
+        },
+        "returns": null
+      }
+    ]
+  },
+  {
+    "id": "text_concat",
+    "summary": "Concatenate elements to a single text",
+    "description": "Merges text representations (also known as *string*) of a set of elements to a single text, having the separator between each element.",
+    "categories": [
+      "texts"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "A set of elements. Numbers, boolean values and null values get converted to their (lower case) string representation. For example: `1` (integer), `-1.5` (number), `true` / `false` (boolean values)",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "number",
+              "boolean",
+              "null"
+            ]
+          }
+        }
+      },
+      {
+        "name": "separator",
+        "description": "A separator to put between each of the individual texts. Defaults to an empty string.",
+        "schema": {
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "null"
+          ]
+        },
+        "default": "",
+        "optional": true
+      }
+    ],
+    "returns": {
+      "description": "A string containing a string representation of all the array elements in the same order, with the separator between each element.",
+      "schema": {
+        "type": "string"
+      }
+    },
+    "examples": [
+      {
+        "arguments": {
+          "data": [
+            "Hello",
+            "World"
+          ],
+          "separator": " "
+        },
+        "returns": "Hello World"
+      },
+      {
+        "arguments": {
+          "data": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            0
+          ]
+        },
+        "returns": "1234567890"
+      },
+      {
+        "arguments": {
+          "data": [
+            null,
+            true,
+            false,
+            1,
+            -1.5,
+            "ß"
+          ],
+          "separator": "\n"
+        },
+        "returns": "null\ntrue\nfalse\n1\n-1.5\nß"
+      },
+      {
+        "arguments": {
+          "data": [
+            2,
+            0
+          ],
+          "separator": 1
+        },
+        "returns": "210"
+      },
+      {
+        "arguments": {
+          "data": []
+        },
+        "returns": ""
+      }
+    ]
+  },
+  {
+    "id": "text_contains",
+    "summary": "Text contains another text",
+    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern`. Both are expected to be encoded in UTF-8 by default. The no-data value `null` is passed through and therefore gets propagated.",
+    "categories": [
+      "texts",
+      "comparison"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "Text in which to find something in.",
+        "schema": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      {
+        "name": "pattern",
+        "description": "Text to find in `data`. Regular expressions are not supported.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "case_sensitive",
+        "description": "Case sensitive comparison can be disabled by setting this parameter to `false`.",
+        "schema": {
+          "type": "boolean"
+        },
+        "default": true,
+        "optional": true
+      }
+    ],
+    "returns": {
+      "description": "`true` if `data` contains the `pattern`, false` otherwise.",
+      "schema": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      }
+    },
+    "examples": [
+      {
+        "arguments": {
+          "data": "Lorem ipsum dolor sit amet",
+          "pattern": "openEO"
+        },
+        "returns": false
+      },
+      {
+        "arguments": {
+          "data": "Lorem ipsum dolor sit amet",
+          "pattern": "ipsum dolor"
+        },
+        "returns": true
+      },
+      {
+        "arguments": {
+          "data": "Lorem ipsum dolor sit amet",
+          "pattern": "Ipsum Dolor"
+        },
+        "returns": false
+      },
+      {
+        "arguments": {
+          "data": "Lorem ipsum dolor sit amet",
+          "pattern": "SIT",
+          "case_sensitive": false
+        },
+        "returns": true
+      },
+      {
+        "arguments": {
+          "data": "ÄÖÜ",
+          "pattern": "ö",
+          "case_sensitive": false
+        },
+        "returns": true
+      },
+      {
+        "arguments": {
+          "data": null,
+          "pattern": "null"
+        },
+        "returns": null
+      }
+    ]
+  },
+  {
+    "id": "text_ends",
+    "summary": "Text ends with another text",
+    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern` at the end. Both are expected to be encoded in UTF-8 by default. The no-data value `null` is passed through and therefore gets propagated.",
+    "categories": [
+      "texts",
+      "comparison"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "Text in which to find something at the end.",
+        "schema": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      {
+        "name": "pattern",
+        "description": "Text to find at the end of `data`. Regular expressions are not supported.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "case_sensitive",
+        "description": "Case sensitive comparison can be disabled by setting this parameter to `false`.",
+        "schema": {
+          "type": "boolean"
+        },
+        "default": true,
+        "optional": true
+      }
+    ],
+    "returns": {
+      "description": "`true` if `data` ends with `pattern`, false` otherwise.",
+      "schema": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      }
+    },
+    "examples": [
+      {
+        "arguments": {
+          "data": "Lorem ipsum dolor sit amet",
+          "pattern": "amet"
+        },
+        "returns": true
+      },
+      {
+        "arguments": {
+          "data": "Lorem ipsum dolor sit amet",
+          "pattern": "AMET"
+        },
+        "returns": false
+      },
+      {
+        "arguments": {
+          "data": "Lorem ipsum dolor sit amet",
+          "pattern": "Lorem"
+        },
+        "returns": false
+      },
+      {
+        "arguments": {
+          "data": "Lorem ipsum dolor sit amet",
+          "pattern": "AMET",
+          "case_sensitive": false
+        },
+        "returns": true
+      },
+      {
+        "arguments": {
+          "data": "Ä",
+          "pattern": "ä",
+          "case_sensitive": false
+        },
+        "returns": true
+      },
+      {
+        "arguments": {
+          "data": null,
+          "pattern": "null"
+        },
+        "returns": null
       }
     ]
   },
