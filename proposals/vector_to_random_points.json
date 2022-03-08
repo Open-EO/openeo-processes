@@ -1,7 +1,7 @@
 {
     "id": "vector_to_random_points",
     "summary": "Sample random points from geometries",
-    "description": "Generate a vector data cube of points by sampling random points from input geometries.\n\nThrows a `CountsMissing` exception if `geometry_count` and `total_count` are both unrestricted (i.e. set to `null`).",
+    "description": "Generate a vector data cube of points by sampling random points from input geometries. At least one point is sampled per input geometry.\n\nThrows a `CountsMissing` exception if `geometry_count` and `total_count` are both unrestricted (i.e. set to `null`).",
     "categories": [
         "cubes",
         "vector"
