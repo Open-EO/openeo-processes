@@ -8521,10 +8521,13 @@
     "returns": {
       "description": "An array with no-data values being replaced with interpolated values. If not at least 2 numerical values are available in the array, the array stays the same.",
       "schema": {
-        "type": [
-          "number",
-          "null"
-        ]
+        "type": "array",
+        "items": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
       }
     },
     "examples": [
