@@ -17,7 +17,7 @@
         },
         {
             "name": "dimensions",
-            "description": "The names of the dimension to combine. The order of the array defines the order in which the dimension labels and values are combined.\n\nFails with a `DimensionNotAvailable` exception if at least one of the specified dimensions does not exist.",
+            "description": "The names of the dimension to combine. The order of the array defines the order in which the dimension labels and values are combined (see the example in the process description). Fails with a `DimensionNotAvailable` exception if at least one of the specified dimensions does not exist.",
             "schema": {
                 "type": "array",
                 "items": {
@@ -27,7 +27,7 @@
         },
         {
             "name": "target_dimension",
-            "description": "The name of a target dimension with a single dimension label to replace. If a dimension with the given name doesn't exist yet, it is created with the specified name and the type `other` (see ``add_dimension()``).",
+            "description": "The name of the new target dimension. A new dimensions will be created with the given names and type `other` (see ``add_dimension()``). Fails with a `TargetDimensionExists` exception if a dimension with the specified name exists.",
             "schema": {
                 "type": "string"
             }
@@ -53,6 +53,9 @@
     "exceptions": {
         "DimensionNotAvailable": {
             "message": "A dimension with the specified name does not exist."
+        },
+        "TargetDimensionExists": {
+            "message": "A dimension with the specified target dimension name already exists."
         }
     }
 }
