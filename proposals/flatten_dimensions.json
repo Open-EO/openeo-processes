@@ -1,7 +1,7 @@
 {
     "id": "flatten_dimensions",
     "summary": "Combine multiple dimensions into a single dimension",
-    "description": "Combines multiple given dimensions into a single dimension by flattening the values and merging the dimension labels with the given `label_separator`. Non-string dimension labels will be converted to strings. This process is the opposite of the process ``explode_dimensions()`` but executing both processes subsequently doesn't necessarily create a data cube that is equal to the original data cube.\n\nExample: Executing the process with a data cube with two dimensions `A` (labels: `2020` and `2021`) and B (labels: `B1` and `B2`) and the data `[[1,2],[3,4]]` and the parameters `dimensions` = `[A,B]` and `target_dimension` = `X` will result in a data cube with one dimension `X` (labels: `2020~B1`, `2020~B2`, `2021~B1` and `2021~B2`) and the data `[1,2,3,4]`.",
+    "description": "Combines multiple given dimensions into a single dimension by flattening the values and merging the dimension labels with the given `label_separator`. Non-string dimension labels will be converted to strings. This process is the opposite of the process ``unflatten_dimensions()`` but executing both processes subsequently doesn't necessarily create a data cube that is equal to the original data cube.\n\nExample: Executing the process with a data cube with two dimensions `A` (labels: `2020` and `2021`) and `B` (labels: `B1` and `B2`) and the data `[[1,2],[3,4]]` and the parameters `dimensions` = `[A,B]` and `target_dimension` = `X` will result in a data cube with one dimension `X` (labels: `2020~B1`, `2020~B2`, `2021~B1` and `2021~B2`) and the data `[1,2,3,4]`.",
     "categories": [
         "cubes"
     ],
