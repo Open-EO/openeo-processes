@@ -124,7 +124,7 @@ function normalizeString(str) {
 	return str.replace(/\r\n|\r|\n/g, "\n").trim();
 }
 
-function checkDescription(text, p = null, commonmark = true) {
+function checkDescription(text, p = null, processIds = [], commonmark = true) {
 	if (!text) {
 		return;
 	}
@@ -148,6 +148,14 @@ function checkDescription(text, p = null, commonmark = true) {
 
 	// Check spelling
 	checkSpelling(text, p);
+
+	// Check whether process references are referencing valid processes
+	if (Array.isArray(processIds) && processIds.length > 0) {
+		let matches = text.matchAll(/(?:^|[^\w`])``(\w+)\(\)``(?![\w`])/g);
+		for(match of matches) {
+			expect(processIds).toContain(match[1]);
+		}
+	}
 }
 
 function checkSpelling(text, p = null) {
