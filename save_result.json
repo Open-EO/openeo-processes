@@ -54,12 +54,12 @@
     "links": [
         {
             "rel": "about",
-            "href": "https://www.gdal.org/formats_list.html",
+            "href": "https://gdal.org/drivers/raster/index.html",
             "title": "GDAL Raster Formats"
         },
         {
             "rel": "about",
-            "href": "https://www.gdal.org/ogr_formats.html",
+            "href": "https://gdal.org/drivers/vector/index.html",
             "title": "OGR Vector Formats"
         }
     ]
