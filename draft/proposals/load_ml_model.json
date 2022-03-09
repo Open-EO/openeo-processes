@@ -1,7 +1,7 @@
 {
     "id": "load_ml_model",
     "summary": "Load a ML model",
-    "description": "Loads a machine learning model from a STAC Item.\n\nSuch a model could be trained and saved as part of a previous batch job with processes such as ``save_ml_model()``.",
+    "description": "Loads a machine learning model from a STAC Item.\n\nSuch a model could be trained and saved as part of a previous batch job with processes such as  ``fit_regr_random_forest()`` and ``save_ml_model()``.",
     "categories": [
         "machine learning",
         "import"
@@ -36,7 +36,7 @@
         }
     ],
     "returns": {
-        "description": "A machine learning model to be used with machine learning processes.",
+        "description": "A machine learning model to be used with machine learning processes such as ``predict_random_forest()``.",
         "schema": {
             "type": "object",
             "subtype": "ml-model"

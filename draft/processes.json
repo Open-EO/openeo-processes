@@ -9573,6 +9573,94 @@
     ]
   },
   {
+    "id": "fit_class_random_forest",
+    "summary": "Train a random forest classification model",
+    "description": "Executes the fit of a random forest classification based on the user input of target and predictors. The Random Forest classification model is based on the approach by Breiman (2001).",
+    "categories": [
+      "machine learning"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "predictors",
+        "description": "The predictors for the classification model as a vector data cube. Aggregated to the features (vectors) of the target input variable.",
+        "schema": {
+          "type": "object",
+          "subtype": "vector-cube"
+        }
+      },
+      {
+        "name": "target",
+        "description": "The training sites for the classification model as a vector data cube. This is associated with the target variable for the Random Forest model. The geometry has to associated with a value to predict (e.g. fractional forest canopy cover).",
+        "schema": {
+          "type": "object",
+          "subtype": "vector-cube"
+        }
+      },
+      {
+        "name": "training",
+        "description": "The amount of training data to be used in the classification, given as a fraction. The sampling will be chosen randomly through the data object. The remaining data will be used as test data for the validation.",
+        "schema": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        }
+      },
+      {
+        "name": "num_trees",
+        "description": "The number of trees build within the Random Forest classification.",
+        "optional": true,
+        "default": 100,
+        "schema": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      {
+        "name": "mtry",
+        "description": "Specifies how many split variables will be used at a node. Default value is `null`, which corresponds to the number of predictors divided by 3.",
+        "optional": true,
+        "default": null,
+        "schema": [
+          {
+            "type": "integer",
+            "minimum": 1
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      {
+        "name": "seed",
+        "description": "A randomization seed to use for the random sampling in training. If not given or `null`, no seed is used and results may differ on subsequent use.",
+        "optional": true,
+        "default": null,
+        "schema": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      }
+    ],
+    "returns": {
+      "description": "A model object that can be saved with ``save_ml_model()`` and restored with ``load_ml_model()``.",
+      "schema": {
+        "type": "object",
+        "subtype": "ml-model"
+      }
+    },
+    "links": [
+      {
+        "href": "https://doi.org/10.1023/A:1010933404324",
+        "title": "Breiman (2001): Random Forests",
+        "type": "text/html",
+        "rel": "about"
+      }
+    ]
+  },
+  {
     "id": "fit_curve",
     "summary": "Curve fitting",
     "description": "Use non-linear least squares to fit a model function `y = f(x, parameters)` to data.\n\nThe process throws an `InvalidValues` exception if invalid values are encountered. Invalid values are finite numbers (see also ``is_valid()``).",
@@ -9665,6 +9753,94 @@
         "message": "A dimension with the specified name does not exist."
       }
     }
+  },
+  {
+    "id": "fit_regr_random_forest",
+    "summary": "Train a random forest regression model",
+    "description": "Executes the fit of a random forest regression based on the user input of target and predictors. The Random Forest regression model is based on the approach by Breiman (2001).",
+    "categories": [
+      "machine learning"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "predictors",
+        "description": "The predictors for the regression model as a vector data cube. Aggregated to the features (vectors) of the target input variable.",
+        "schema": {
+          "type": "object",
+          "subtype": "vector-cube"
+        }
+      },
+      {
+        "name": "target",
+        "description": "The training sites for the regression model as a vector data cube. This is associated with the target variable for the Random Forest model. The geometry has to associated with a value to predict (e.g. fractional forest canopy cover).",
+        "schema": {
+          "type": "object",
+          "subtype": "vector-cube"
+        }
+      },
+      {
+        "name": "training",
+        "description": "The amount of training data to be used in the regression, given as a fraction. The sampling will be randomly through the data object. The remaining data will be used as test data for the validation.",
+        "schema": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        }
+      },
+      {
+        "name": "num_trees",
+        "description": "The number of trees build within the Random Forest regression.",
+        "optional": true,
+        "default": 100,
+        "schema": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      {
+        "name": "mtry",
+        "description": "Specifies how many split variables will be used at a node. Default value is `null`, which corresponds to the number of predictors divided by 3.",
+        "optional": true,
+        "default": null,
+        "schema": [
+          {
+            "type": "integer",
+            "minimum": 1
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      {
+        "name": "seed",
+        "description": "A randomization seed to use for the random sampling in training. If not given or `null`, no seed is used and results may differ on subsequent use.",
+        "optional": true,
+        "default": null,
+        "schema": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      }
+    ],
+    "returns": {
+      "description": "A model object that can be saved with ``save_ml_model()`` and restored with ``load_ml_model()``.",
+      "schema": {
+        "type": "object",
+        "subtype": "ml-model"
+      }
+    },
+    "links": [
+      {
+        "href": "https://doi.org/10.1023/A:1010933404324",
+        "title": "Breiman (2001): Random Forests",
+        "type": "text/html",
+        "rel": "about"
+      }
+    ]
   },
   {
     "id": "flatten_dimensions",
@@ -9815,7 +9991,7 @@
   {
     "id": "load_ml_model",
     "summary": "Load a ML model",
-    "description": "Loads a machine learning model from a STAC Item.\n\nSuch a model could be trained and saved as part of a previous batch job with processes such as ``save_ml_model()``.",
+    "description": "Loads a machine learning model from a STAC Item.\n\nSuch a model could be trained and saved as part of a previous batch job with processes such as  ``fit_regr_random_forest()`` and ``save_ml_model()``.",
     "categories": [
       "machine learning",
       "import"
@@ -9850,7 +10026,7 @@
       }
     ],
     "returns": {
-      "description": "A machine learning model to be used with machine learning processes.",
+      "description": "A machine learning model to be used with machine learning processes such as ``predict_random_forest()``.",
       "schema": {
         "type": "object",
         "subtype": "ml-model"
@@ -10258,6 +10434,48 @@
     "exceptions": {
       "DimensionNotAvailable": {
         "message": "A dimension with the specified name does not exist."
+      }
+    }
+  },
+  {
+    "id": "predict_random_forest",
+    "summary": "Predict values from a Random Forest model",
+    "description": "Applies a Random Forest machine learning model to an array and predict a value for it.",
+    "categories": [
+      "machine learning",
+      "reducer"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "An array of numbers.",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        }
+      },
+      {
+        "name": "model",
+        "description": "A model object that can be trained with the processes ``fit_regr_random_forest()`` (regression) and ``fit_class_random_forest()`` (classification).",
+        "schema": {
+          "type": "object",
+          "subtype": "ml-model"
+        }
+      }
+    ],
+    "returns": {
+      "description": "The predicted value. Returns `null` if any of the given values in the array is a no-data value.",
+      "schema": {
+        "type": [
+          "number",
+          "null"
+        ]
       }
     }
   },
