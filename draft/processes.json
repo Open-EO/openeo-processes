@@ -9813,6 +9813,59 @@
     ]
   },
   {
+    "id": "load_ml_model",
+    "summary": "Load a ML model",
+    "description": "Loads a machine learning model from a STAC Item.\n\nSuch a model could be trained and saved as part of a previous batch job with processes such as ``fit_random_forest()`` and ``save_ml_model()``.",
+    "categories": [
+      "machine learning",
+      "import"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "id",
+        "description": "The STAC Item to load the machine learning model from. The STAC Item must implement the `ml-model` extension.",
+        "schema": [
+          {
+            "title": "URL",
+            "type": "string",
+            "format": "uri",
+            "subtype": "uri",
+            "pattern": "^https?://"
+          },
+          {
+            "title": "Batch Job ID",
+            "description": "Loading a model by batch job ID is possible only if a single model has been saved by the job. Otherwise, you have to load a specific model from a batch job by URL.",
+            "type": "string",
+            "subtype": "job-id",
+            "pattern": "^[\\w\\-\\.~]+$"
+          },
+          {
+            "title": "User-uploaded Files",
+            "type": "string",
+            "subtype": "file-path",
+            "pattern": "^[^\r\n\\:'\"]+$"
+          }
+        ]
+      }
+    ],
+    "returns": {
+      "description": "A machine learning model to be used with machine learning processes such as ``predict_random_forest()``.",
+      "schema": {
+        "type": "object",
+        "subtype": "ml-model"
+      }
+    },
+    "links": [
+      {
+        "href": "https://github.com/stac-extensions/ml-model",
+        "title": "STAC ml-model extension",
+        "type": "text/html",
+        "rel": "about"
+      }
+    ]
+  },
+  {
     "id": "load_result",
     "summary": "Load batch job results",
     "description": "Loads batch job results and returns them as a processable data cube. A batch job result can be loaded by ID or URL:\n\n* **ID**: The identifier for a finished batch job. The job must have been submitted by the authenticated user on the back-end currently connected to.\n* **URL**: The URL to the STAC metadata for a batch job result. This is usually a signed URL that is provided by some back-ends since openEO API version 1.1.0 through the `canonical` link relation in the batch job result metadata.\n\nIf supported by the underlying metadata and file format, the data that is added to the data cube can be restricted with the parameters `spatial_extent`, `temporal_extent` and `bands`.\n\n**Remarks:**\n\n* The bands (and all dimensions that specify nominal dimension labels) are expected to be ordered as specified in the metadata if the `bands` parameter is set to `null`.\n* If no additional parameter is specified this would imply that the whole data set is expected to be loaded. Due to the large size of many data sets, this is not recommended and may be optimized by back-ends to only load the data that is actually required after evaluating subsequent processes such as filters. This means that the pixel values should be processed only after the data has been limited to the required extent and as a consequence also to a manageable size.",
@@ -10573,6 +10626,50 @@
         "rel": "about",
         "href": "https://doi.org/10.3390/data4030093",
         "title": "Reasoning behind the choice of bilinear resampling"
+      }
+    ]
+  },
+  {
+    "id": "save_ml_model",
+    "summary": "Save a ML model",
+    "description": "Saves a machine learning model as part of a batch job.\n\nThe model will be accompanied by a separate STAC Item that implements the [ml-model extension](https://github.com/stac-extensions/ml-model).",
+    "categories": [
+      "machine learning",
+      "import"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "The data to store as a machine learning model.",
+        "schema": {
+          "type": "object",
+          "subtype": "ml-model"
+        }
+      },
+      {
+        "name": "options",
+        "description": "Additional parameters to create the file(s).",
+        "schema": {
+          "type": "object",
+          "additionalParameters": false
+        },
+        "default": {},
+        "optional": true
+      }
+    ],
+    "returns": {
+      "description": "Returns `false` if the process failed to store the model, `true` otherwise.",
+      "schema": {
+        "type": "boolean"
+      }
+    },
+    "links": [
+      {
+        "href": "https://github.com/stac-extensions/ml-model",
+        "title": "STAC ml-model extension",
+        "type": "text/html",
+        "rel": "about"
       }
     ]
   },
