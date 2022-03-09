@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased / Draft
 
+### Added
+
+- New processes in proposal state:
+    - `flatten_dimensions`
+    - `unflatten_dimension`
+
 ### Changed
 
 - Added better support for labeled arrays. Labels are not discarded in all cases anymore. Affected processes:
