@@ -116,6 +116,10 @@ async function getAjv() {
 	return jsv;
 }
 
+function isObject(obj) {
+	return (typeof obj === 'object' && obj === Object(obj) && !Array.isArray(obj));
+}
+
 function normalizeString(str) {
 	return str.replace(/\r\n|\r|\n/g, "\n").trim();
 }
@@ -214,5 +218,6 @@ module.exports = {
 	checkSpelling,
 	checkJsonSchema,
 	checkSchemaRecursive,
-	prepareSchema
+	prepareSchema,
+	isObject
 };

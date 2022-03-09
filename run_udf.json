@@ -35,7 +35,7 @@
                     "type": "string",
                     "format": "uri",
                     "subtype": "uri",
-                    "pattern": "^(http|https)://"
+                    "pattern": "^https?://"
                 },
                 {
                     "description": "Path to a UDF uploaded to the server.",

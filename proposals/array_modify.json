@@ -1,7 +1,7 @@
 {
     "id": "array_modify",
-    "summary": "Change the content of an array (insert, remove, update)",
-    "description": "Allows to insert into, remove from or update an array.\n\nAll labels get discarded and the array indices are always a sequence of numbers with the step size of 1 and starting at 0.",
+    "summary": "Change the content of an array (remove, insert, update)",
+    "description": "Modify an array by removing, inserting or updating elements. Updating can be seen as removing elements followed by inserting new elements (not necessarily the same number).\n\nArray labels are kept only if both arrays given in `data` and `values` are labeled or one of them is empty. Otherwise, all labels get discarded and the array indices are a sequence of numbers with the step size of 1 and starting at 0. The process fails with an `ArrayLabelConflict` exception if a label is present in both arrays.",
     "categories": [
         "arrays"
     ],
@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "An array.",
+            "description": "The array to modify.",
             "schema": {
                 "type": "array",
                 "items": {
@@ -19,7 +19,7 @@
         },
         {
             "name": "values",
-            "description": "The values to fill the array with.",
+            "description": "The values to insert into the `data` array.",
             "schema": {
                 "type": "array",
                 "items": {
@@ -29,7 +29,7 @@
         },
         {
             "name": "index",
-            "description": "The index of the element to insert the value(s) before. If the index is greater than the number of elements, the process throws an `ArrayElementNotAvailable` exception.\n\nTo insert after the last element, there are two options:\n\n1. Use the simpler processes ``array_append()`` to append a single value or ``array_concat()`` to append multiple values.\n2. Specify the number of elements in the array. You can retrieve the number of elements with the process ``count()``, having the parameter `condition` set to `true`.",
+            "description": "The index in the `data` array of the element to insert the value(s) before. If the index is greater than the number of elements in the `data` array, the process throws an `ArrayElementNotAvailable` exception.\n\nTo insert after the last element, there are two options:\n\n1. Use the simpler processes ``array_append()`` to append a single value or ``array_concat()`` to append multiple values.\n2. Specify the number of elements in the array. You can retrieve the number of elements with the process ``count()``, having the parameter `condition` set to `true`.",
             "schema": {
                 "type": "integer",
                 "minimum": 0
@@ -37,7 +37,7 @@
         },
         {
             "name": "length",
-            "description": "The number of elements to replace. This parameter has no effect in case the given `index` does not exist in the array given.",
+            "description": "The number of elements in the `data` array to remove (or replace) starting from the given index. If the array contains fewer elements, the process simply removes all elements up to the end.",
             "optional": true,
             "default": 1,
             "schema": {
@@ -57,7 +57,10 @@
     },
     "exceptions": {
         "ArrayElementNotAvailable": {
-            "message": "The array has no element with the specified index."
+            "message": "The array can't be modified as the given index is larger than the number of elements in the array."
+        },
+        "ArrayLabelConflict": {
+            "message": "At least one label exists in both arrays and the conflict must be resolved before."
         }
     },
     "examples": [
@@ -125,26 +128,6 @@
             ]
         },
         {
-            "description": "Add a value at a specific non-existing position after the array, fill missing elements with `null`.",
-            "arguments": {
-                "data": [
-                    "a",
-                    "b"
-                ],
-                "values": [
-                    "e"
-                ],
-                "index": 4
-            },
-            "returns": [
-                "a",
-                "b",
-                null,
-                null,
-                "e"
-            ]
-        },
-        {
             "description": "Remove a single value from the array.",
             "arguments": {
                 "data": [
@@ -180,6 +163,22 @@
                 "a",
                 "b",
                 "c"
+            ]
+        },
+        {
+            "description": "Remove multiple values from the end of the array and ignore that the given length is exceeding the size of the array.",
+            "arguments": {
+                "data": [
+                    "a",
+                    "b",
+                    "c"
+                ],
+                "values": [],
+                "index": 1,
+                "length": 10
+            },
+            "returns": [
+                "a"
             ]
         }
     ]
