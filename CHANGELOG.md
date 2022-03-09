@@ -10,7 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - New processes in proposal state:
     - `flatten_dimensions`
+    - `load_ml_model`
     - `unflatten_dimension`
+    - `save_ml_model`
 
 ### Changed
 
