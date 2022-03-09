@@ -1617,7 +1617,7 @@
       },
       {
         "name": "process",
-        "description": "A process that accepts and returns a single value and is applied on each individual value in the data cube. The process may consist of multiple sub-processes and could, for example, consist of processes such as ``abs()`` or ``linear_scale_range()``.",
+        "description": "A process that accepts and returns a single value and is applied on each individual value in the data cube. The process may consist of multiple sub-processes and could, for example, consist of processes such as ``absolute()`` or ``linear_scale_range()``.",
         "schema": {
           "type": "object",
           "subtype": "process-graph",
@@ -1930,7 +1930,7 @@
       },
       {
         "name": "process",
-        "description": "A process that accepts and returns a single value and is applied on each individual value in the array. The process may consist of multiple sub-processes and could, for example, consist of processes such as ``abs()`` or ``linear_scale_range()``.",
+        "description": "A process that accepts and returns a single value and is applied on each individual value in the array. The process may consist of multiple sub-processes and could, for example, consist of processes such as ``absolute()`` or ``linear_scale_range()``.",
         "schema": {
           "type": "object",
           "subtype": "process-graph",
@@ -9669,7 +9669,7 @@
   {
     "id": "flatten_dimensions",
     "summary": "Combine multiple dimensions into a single dimension",
-    "description": "Combines multiple given dimensions into a single dimension by flattening the values and merging the dimension labels with the given `label_separator`. Non-string dimension labels will be converted to strings. This process is the opposite of the process ``unflatten_dimensions()`` but executing both processes subsequently doesn't necessarily create a data cube that is equal to the original data cube.\n\nExample: Executing the process with a data cube with two dimensions `A` (labels: `2020` and `2021`) and `B` (labels: `B1` and `B2`) and the data `[[1,2],[3,4]]` and the parameters `dimensions` = `[A,B]` and `target_dimension` = `X` will result in a data cube with one dimension `X` (labels: `2020~B1`, `2020~B2`, `2021~B1` and `2021~B2`) and the data `[1,2,3,4]`.",
+    "description": "Combines multiple given dimensions into a single dimension by flattening the values and merging the dimension labels with the given `label_separator`. Non-string dimension labels will be converted to strings. This process is the opposite of the process ``unflatten_dimension()`` but executing both processes subsequently doesn't necessarily create a data cube that is equal to the original data cube.\n\nExample: Executing the process with a data cube with two dimensions `A` (labels: `2020` and `2021`) and `B` (labels: `B1` and `B2`) and the data `[[1,2],[3,4]]` and the parameters `dimensions` = `[A,B]` and `target_dimension` = `X` will result in a data cube with one dimension `X` (labels: `2020~B1`, `2020~B2`, `2021~B1` and `2021~B2`) and the data `[1,2,3,4]`.",
     "categories": [
       "cubes"
     ],
@@ -9702,7 +9702,7 @@
       },
       {
         "name": "label_separator",
-        "description": "The string that will be used as a separator for the concatenated dimension labels.\n\nTo unambiguously revert the dimension labels with the process ``explode_dimensions()``, the given string must not be contained in any of the dimension labels.",
+        "description": "The string that will be used as a separator for the concatenated dimension labels.\n\nTo unambiguously revert the dimension labels with the process ``unflatten_dimension()``, the given string must not be contained in any of the dimension labels.",
         "optional": true,
         "default": "~",
         "schema": {
@@ -9815,7 +9815,7 @@
   {
     "id": "load_ml_model",
     "summary": "Load a ML model",
-    "description": "Loads a machine learning model from a STAC Item.\n\nSuch a model could be trained and saved as part of a previous batch job with processes such as ``fit_random_forest()`` and ``save_ml_model()``.",
+    "description": "Loads a machine learning model from a STAC Item.\n\nSuch a model could be trained and saved as part of a previous batch job with processes such as ``save_ml_model()``.",
     "categories": [
       "machine learning",
       "import"
@@ -9850,7 +9850,7 @@
       }
     ],
     "returns": {
-      "description": "A machine learning model to be used with machine learning processes such as ``predict_random_forest()``.",
+      "description": "A machine learning model to be used with machine learning processes.",
       "schema": {
         "type": "object",
         "subtype": "ml-model"
