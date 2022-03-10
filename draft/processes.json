@@ -314,7 +314,7 @@
       },
       {
         "name": "target_dimension",
-        "description": "The new dimension name to be used for storing the results. Defaults to `result`.",
+        "description": "The name of a new dimensions that is used to store the results. A new dimension will be created with the given name and type `other` (see ``add_dimension()``). Defaults to the dimension name `result`. Fails with a `TargetDimensionExists` exception if a dimension with the specified name exists.",
         "schema": {
           "type": "string"
         },
@@ -341,6 +341,9 @@
     "exceptions": {
       "TooManyDimensions": {
         "message": "The number of dimensions must be reduced to three for `aggregate_spatial`."
+      },
+      "TargetDimensionExists": {
+        "message": "A dimension with the specified target dimension name already exists."
       }
     },
     "links": [
@@ -9861,7 +9864,7 @@
       },
       {
         "name": "dimensions",
-        "description": "The names of the dimension to combine. The order of the array defines the order in which the dimension labels and values are combined.\n\nFails with a `DimensionNotAvailable` exception if at least one of the specified dimensions does not exist.",
+        "description": "The names of the dimension to combine. The order of the array defines the order in which the dimension labels and values are combined (see the example in the process description). Fails with a `DimensionNotAvailable` exception if at least one of the specified dimensions does not exist.",
         "schema": {
           "type": "array",
           "items": {
@@ -9871,7 +9874,7 @@
       },
       {
         "name": "target_dimension",
-        "description": "The name of a target dimension with a single dimension label to replace. If a dimension with the given name doesn't exist yet, it is created with the specified name and the type `other` (see ``add_dimension()``).",
+        "description": "The name of the new target dimension. A new dimensions will be created with the given names and type `other` (see ``add_dimension()``). Fails with a `TargetDimensionExists` exception if a dimension with the specified name exists.",
         "schema": {
           "type": "string"
         }
@@ -9897,6 +9900,9 @@
     "exceptions": {
       "DimensionNotAvailable": {
         "message": "A dimension with the specified name does not exist."
+      },
+      "TargetDimensionExists": {
+        "message": "A dimension with the specified target dimension name already exists."
       }
     }
   },
@@ -10910,16 +10916,17 @@
       },
       {
         "name": "dimension",
-        "description": "The name of the dimension to split. The order of the array defines the order in which the dimension labels and values are split.\n\nFails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+        "description": "The name of the dimension to split.",
         "schema": {
           "type": "string"
         }
       },
       {
         "name": "target_dimensions",
-        "description": "The names of the target dimensions, each with a single dimension label to replace. Non-existing dimensions will be created with the specified name and the type `other` (see ``add_dimension()``).",
+        "description": "The names of the new target dimensions. New dimensions will be created with the given names and type `other` (see ``add_dimension()``). Fails with a `TargetDimensionExists` exception if any of the dimensions exists.\n\nThe order of the array defines the order in which the dimensions and dimension labels are added to the data cube (see the example in the process description).",
         "schema": {
           "type": "array",
+          "minItems": 2,
           "items": {
             "type": "string"
           }
@@ -10927,7 +10934,7 @@
       },
       {
         "name": "label_separator",
-        "description": "The string that will be used as a separator to split the dimension labels. Each label will be split at the first occurrence of the given string only.",
+        "description": "The string that will be used as a separator to split the dimension labels.",
         "optional": true,
         "default": "~",
         "schema": {
@@ -10946,6 +10953,9 @@
     "exceptions": {
       "DimensionNotAvailable": {
         "message": "A dimension with the specified name does not exist."
+      },
+      "TargetDimensionExists": {
+        "message": "A dimension with the specified target dimension name already exists."
       }
     }
   },
