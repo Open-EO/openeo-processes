@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New processes in proposal state:
+    - `flatten_dimensions`
+    - `load_ml_model`
+    - `unflatten_dimension`
+    - `save_ml_model`
     - `vector_to_random_points`
     - `vector_to_regular_points`
 
@@ -18,12 +22,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `array_append`
     - `array_concat`
     - `array_modify`
-- Moved the `text_` processes to proposals as they are lacking implementations.
-- Renamed `text_merge` to `text_concat` for better alignment with `array_concat`.
+- Renamed `text_merge` to `text_concat` for better alignment with `array_concat` and existing implementations.
+- `apply_neighborhood`: Allow `null` as default value for units.
 
 ### Fixed
 
-- `aggregate_spatial`: Clarified that vector properties are preserved for vector data cubes and all GeoJSON Features. [#270](https://github.com/Open-EO/openeo-processes/issues/270)
+- `aggregate_spatial`:
+  - Clarified that vector properties are preserved for vector data cubes and all GeoJSON Features. [#270](https://github.com/Open-EO/openeo-processes/issues/270)
+  - Clarified that a `TargetDimensionExists` exception is thrown if the target dimension exists.
+- `apply` and `array_apply`: Fixed broken references to the `absolute` process
+- `apply_neighborhood`: Parameter `overlap` was optional but had no default value and no schena for the default value defined.
+- `array_interpolate_linear`: Return value was incorrectly specified as `number` or `null`. It must return an array instead. [#333](https://github.com/Open-EO/openeo-processes/issues/333)
+- `rename_labels`: Clarified that the `LabelsNotEnumerated` exception is thrown if `source` is empty instead of if `target` is empty. [#321](https://github.com/Open-EO/openeo-processes/issues/321)
+- `round`: Clarify that the rounding for ties applies not only for integers. [#326](https://github.com/Open-EO/openeo-processes/issues/326)
 
 ## [1.2.0] - 2021-12-13
 
@@ -91,7 +102,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Moved the experimental process `run_udf_externally` to the proposals.
     - Moved the rarely used and implemented processes `cummax`, `cummin`, `cumproduct`, `cumsum`, `debug`, `filter_labels`, `load_result`, `load_uploaded_files`, `resample_cube_temporal` to the proposals.
 - Exception messages have been aligned always use ` instead of '. Tooling could render it with CommonMark.
-- `load_collection` and `mask_polygon`: Also support multi polygons instead of just polygons. [#237](https://github.com/Open-EO/openeo-processes/issues/237)
+- `load_collection` and `mask_polygon`: Also support multi polygons instead of just polygons. [#237](https://github.com/Open-EO/openeo-processes/issues/237)
 - `run_udf` and `run_udf_externally`: Specify specific (extensible) protocols for UDF URIs.
 - `resample_cube_spatial` and `resample_spatial`: Aligned with GDAL and added `rms` and `sum` options to methods. Also added better descriptions.
 - `resample_cube_temporal`: Process has been simplified and only offers the nearest neighbor method now. The `process` parameter has been removed, the `dimension` parameter was made less restrictive, the parameter `valid_within` was added. [#194](https://github.com/Open-EO/openeo-processes/issues/194)

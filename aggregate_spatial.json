@@ -60,7 +60,7 @@
         },
         {
             "name": "target_dimension",
-            "description": "The new dimension name to be used for storing the results. Defaults to `result`.",
+            "description": "The name of a new dimensions that is used to store the results. A new dimension will be created with the given name and type `other` (see ``add_dimension()``). Defaults to the dimension name `result`. Fails with a `TargetDimensionExists` exception if a dimension with the specified name exists.",
             "schema": {
                 "type": "string"
             },
@@ -87,6 +87,9 @@
     "exceptions": {
         "TooManyDimensions": {
             "message": "The number of dimensions must be reduced to three for `aggregate_spatial`."
+        },
+        "TargetDimensionExists": {
+            "message": "A dimension with the specified target dimension name already exists."
         }
     },
     "links": [

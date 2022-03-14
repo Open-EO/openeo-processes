@@ -1,0 +1,61 @@
+{
+    "id": "flatten_dimensions",
+    "summary": "Combine multiple dimensions into a single dimension",
+    "description": "Combines multiple given dimensions into a single dimension by flattening the values and merging the dimension labels with the given `label_separator`. Non-string dimension labels will be converted to strings. This process is the opposite of the process ``unflatten_dimension()`` but executing both processes subsequently doesn't necessarily create a data cube that is equal to the original data cube.\n\nExample: Executing the process with a data cube with two dimensions `A` (labels: `2020` and `2021`) and `B` (labels: `B1` and `B2`) and the data `[[1,2],[3,4]]` and the parameters `dimensions` = `[A,B]` and `target_dimension` = `X` will result in a data cube with one dimension `X` (labels: `2020~B1`, `2020~B2`, `2021~B1` and `2021~B2`) and the data `[1,2,3,4]`.",
+    "categories": [
+        "cubes"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "dimensions",
+            "description": "The names of the dimension to combine. The order of the array defines the order in which the dimension labels and values are combined (see the example in the process description). Fails with a `DimensionNotAvailable` exception if at least one of the specified dimensions does not exist.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            }
+        },
+        {
+            "name": "target_dimension",
+            "description": "The name of the new target dimension. A new dimensions will be created with the given names and type `other` (see ``add_dimension()``). Fails with a `TargetDimensionExists` exception if a dimension with the specified name exists.",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "label_separator",
+            "description": "The string that will be used as a separator for the concatenated dimension labels.\n\nTo unambiguously revert the dimension labels with the process ``unflatten_dimension()``, the given string must not be contained in any of the dimension labels.",
+            "optional": true,
+            "default": "~",
+            "schema": {
+                "type": "string",
+                "minLength": 1
+            }
+        }
+    ],
+    "returns": {
+        "description": "A data cube with the new shape. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
+        },
+        "TargetDimensionExists": {
+            "message": "A dimension with the specified target dimension name already exists."
+        }
+    }
+}

@@ -1,16 +1,15 @@
 {
-    "id": "text_ends",
-    "summary": "Text ends with another text",
-    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern` at the end. Both are expected to be encoded in UTF-8 by default. The no-data value `null` is passed through and therefore gets propagated.",
+    "id": "text_contains",
+    "summary": "Text contains another text",
+    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern`. Both are expected to be encoded in UTF-8 by default. The no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
         "texts",
         "comparison"
     ],
-    "experimental": true,
     "parameters": [
         {
             "name": "data",
-            "description": "Text in which to find something at the end.",
+            "description": "Text in which to find something in.",
             "schema": {
                 "type": [
                     "string",
@@ -20,7 +19,7 @@
         },
         {
             "name": "pattern",
-            "description": "Text to find at the end of `data`. Regular expressions are not supported.",
+            "description": "Text to find in `data`. Regular expressions are not supported.",
             "schema": {
                 "type": "string"
             }
@@ -36,7 +35,7 @@
         }
     ],
     "returns": {
-        "description": "`true` if `data` ends with `pattern`, false` otherwise.",
+        "description": "`true` if `data` contains the `pattern`, false` otherwise.",
         "schema": {
             "type": [
                 "boolean",
@@ -48,36 +47,36 @@
         {
             "arguments": {
                 "data": "Lorem ipsum dolor sit amet",
-                "pattern": "amet"
+                "pattern": "openEO"
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "data": "Lorem ipsum dolor sit amet",
+                "pattern": "ipsum dolor"
             },
             "returns": true
         },
         {
             "arguments": {
                 "data": "Lorem ipsum dolor sit amet",
-                "pattern": "AMET"
+                "pattern": "Ipsum Dolor"
             },
             "returns": false
         },
         {
             "arguments": {
                 "data": "Lorem ipsum dolor sit amet",
-                "pattern": "Lorem"
-            },
-            "returns": false
-        },
-        {
-            "arguments": {
-                "data": "Lorem ipsum dolor sit amet",
-                "pattern": "AMET",
+                "pattern": "SIT",
                 "case_sensitive": false
             },
             "returns": true
         },
         {
             "arguments": {
-                "data": "Ä",
-                "pattern": "ä",
+                "data": "ÄÖÜ",
+                "pattern": "ö",
                 "case_sensitive": false
             },
             "returns": true
