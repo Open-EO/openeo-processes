@@ -10,7 +10,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "Input geometries for sample extraction. Vector properties are preserved for vector data cubes and all GeoJSON Features.\n\nTo maximize interoperability, a nested `GeometryCollection` should be avoided. Furthermore, a `GeometryCollection` composed of a single type of geometries should be avoided in favour of the corresponding multi-part type (e.g. `MultiPolygon`).",
+            "description": "Input geometries for sample extraction.\n\nTo maximize interoperability, a nested `GeometryCollection` should be avoided. Furthermore, a `GeometryCollection` composed of a single type of geometries should be avoided in favour of the corresponding multi-part type (e.g. `MultiPolygon`).",
             "schema": [
                 {
                     "type": "object",
@@ -29,10 +29,19 @@
                 "type": "number",
                 "minimumExclusive": 0
             }
+        },
+        {
+            "name": "group",
+            "description": "Specifies whether the sampled points should be grouped by input geometry (default) or be generated as independent points.\n\n* If the sampled points are grouped, the process generates a `MultiPoint` per geometry given. Vector properties are preserved.\n* Otherwise, each sampled point is generated as a distinct `Point` geometry. Vector properties are *not* preserved.",
+            "optional": true,
+            "default": true,
+            "schema": {
+                "type": "boolean"
+            }
         }
     ],
     "returns": {
-        "description": "Returns a vector data cube with the sampled points as `MultiPoint` per geometry given. If the input was a feature or a feature collection, the returned data is also a feature or feature collection respectively, with all properties retained.",
+        "description": "Returns a one-dimensional vector data cube with the sampled points.",
         "schema": {
             "type": "object",
             "subtype": "vector-cube"
