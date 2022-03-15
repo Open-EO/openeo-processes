@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `load_ml_model`
     - `unflatten_dimension`
     - `save_ml_model`
+    - `vector_buffer`
     - `vector_to_random_points`
     - `vector_to_regular_points`
 
