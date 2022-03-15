@@ -10960,6 +10960,150 @@
     }
   },
   {
+    "id": "vector_to_random_points",
+    "summary": "Sample random points from geometries",
+    "description": "Generate a vector data cube of points by sampling random points from input geometries. At least one point is sampled per input geometry.\n\nThrows a `CountsMissing` exception if `geometry_count` and `total_count` are both unrestricted (i.e. set to `null`).",
+    "categories": [
+      "cubes",
+      "vector"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "Input geometries for sample extraction.\n\nTo maximize interoperability, a nested `GeometryCollection` should be avoided. Furthermore, a `GeometryCollection` composed of a single type of geometries should be avoided in favour of the corresponding multi-part type (e.g. `MultiPolygon`).",
+        "schema": [
+          {
+            "type": "object",
+            "subtype": "geojson"
+          },
+          {
+            "type": "object",
+            "subtype": "vector-cube"
+          }
+        ]
+      },
+      {
+        "name": "geometry_count",
+        "description": "The maximum number of points to compute per geometry. Defaults to a maximum of one point per geometry.\n\nPoints in the input geometries can be selected only once by the sampling.",
+        "optional": true,
+        "default": 1,
+        "schema": [
+          {
+            "type": "integer",
+            "minimum": 1
+          },
+          {
+            "title": "Unrestricted",
+            "type": "null"
+          }
+        ]
+      },
+      {
+        "name": "total_count",
+        "description": "The maximum number of points to compute overall.\n\nThrows a `CountMismatch` exception if the specified value is less than the provided number of geometries.",
+        "optional": true,
+        "default": null,
+        "schema": [
+          {
+            "type": "integer",
+            "minimum": 1
+          },
+          {
+            "title": "Unrestricted",
+            "type": "null"
+          }
+        ]
+      },
+      {
+        "name": "group",
+        "description": "Specifies whether the sampled points should be grouped by input geometry (default) or be generated as independent points.\n\n* If the sampled points are grouped, the process generates a `MultiPoint` per geometry given. Vector properties are preserved.\n* Otherwise, each sampled point is generated as a distinct `Point` geometry. Vector properties are *not* preserved.",
+        "optional": true,
+        "default": true,
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      {
+        "name": "seed",
+        "description": "A randomization seed to use for random sampling. If not given or `null`, no seed is used and results may differ on subsequent use.",
+        "optional": true,
+        "default": null,
+        "schema": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      }
+    ],
+    "returns": {
+      "description": "Returns a vector data cube with the sampled points.",
+      "schema": {
+        "type": "object",
+        "subtype": "vector-cube"
+      }
+    },
+    "exceptions": {
+      "CountsMissing": {
+        "message": "No maximum count is set per geometry and in total."
+      },
+      "CountMismatch": {
+        "message": "The total number of points is lower than the number of geometries."
+      }
+    }
+  },
+  {
+    "id": "vector_to_regular_points",
+    "summary": "Sample regular points from geometries",
+    "description": "Generate a vector data cube of points by sampling regularly-spaced points from input geometries.",
+    "categories": [
+      "cubes",
+      "vector"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "Input geometries for sample extraction.\n\nTo maximize interoperability, a nested `GeometryCollection` should be avoided. Furthermore, a `GeometryCollection` composed of a single type of geometries should be avoided in favour of the corresponding multi-part type (e.g. `MultiPolygon`).",
+        "schema": [
+          {
+            "type": "object",
+            "subtype": "geojson"
+          },
+          {
+            "type": "object",
+            "subtype": "vector-cube"
+          }
+        ]
+      },
+      {
+        "name": "distance",
+        "description": "Defines the minimum distance in the unit of the reference system that is required between two samples generated *inside* a single geometry.\n\n- For **polygons**, the distance defines the cell sizes of a regular grid that starts at the upper-left bound of each polygon. The centroid of each cell is then a sample point. If the centroid is not enclosed in the polygon, no point is sampled. If no point can be sampled for the geometry at all, the first coordinate of the geometry is returned as point.\n- For **lines** (line strings), the sampling starts with a point at the first coordinate of the line and then walks along the line and samples a new point each time the distance to the previous point has been reached again.\n- For **points**, the point is returned as given.",
+        "schema": {
+          "type": "number",
+          "minimumExclusive": 0
+        }
+      },
+      {
+        "name": "group",
+        "description": "Specifies whether the sampled points should be grouped by input geometry (default) or be generated as independent points.\n\n* If the sampled points are grouped, the process generates a `MultiPoint` per geometry given. Vector properties are preserved.\n* Otherwise, each sampled point is generated as a distinct `Point` geometry. Vector properties are *not* preserved.",
+        "optional": true,
+        "default": true,
+        "schema": {
+          "type": "boolean"
+        }
+      }
+    ],
+    "returns": {
+      "description": "Returns a vector data cube with the sampled points.",
+      "schema": {
+        "type": "object",
+        "subtype": "vector-cube"
+      }
+    }
+  },
+  {
     "id": "quantiles",
     "summary": "Quantiles",
     "description": "Calculates quantiles, which are cut points dividing the range of a sample distribution into either\n\n* intervals corresponding to the given `probabilities` or\n* equal-sized intervals (q-quantiles based on the parameter `q`).\n\nEither the parameter `probabilities` or `q` must be specified, otherwise the `QuantilesParameterMissing` exception is thrown. If both parameters are set the `QuantilesParameterConflict` exception is thrown.\n\nSample quantiles can be computed with several different algorithms. Hyndman and Fan (1996) have concluded on nine different types, which are commonly implemented in statistical software packages. This process is implementing type 7, which is implemented widely and often also the default type (e.g. in Excel, Julia, Python, R and S).",
