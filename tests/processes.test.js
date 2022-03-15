@@ -74,7 +74,7 @@ describe.each(processes)("%s", (file, p, fileContent, proposal) => {
 		expect(typeof p.description).toBe('string');
 		// lint: Description should be longer than a summary
 		expect(p.description.length).toBeGreaterThan(60);
-		checkDescription(p.description, p);
+		checkDescription(p.description, p, processIds);
 	});
 
 	test("Categories", () => {
@@ -112,7 +112,7 @@ describe.each(processes)("%s", (file, p, fileContent, proposal) => {
 		expect(typeof p.returns.description).toBe('string');
 		// lint: Description should not be empty
 		expect(p.returns.description.length).toBeGreaterThan(0);
-		checkDescription(p.returns.description, p);
+		checkDescription(p.returns.description, p, processIds);
 
 		// return value schema
 		expect(p.returns.schema).not.toBeNull();
@@ -136,7 +136,7 @@ describe.each(processes)("%s", (file, p, fileContent, proposal) => {
 
 			// exception description
 			expect(typeof e.description === 'undefined' || typeof e.description === 'boolean').toBeTruthy();
-			checkDescription(e.description, p);
+			checkDescription(e.description, p, processIds);
 
 			// exception http code
 			if (typeof e.http !== 'undefined') {
@@ -169,7 +169,7 @@ describe.each(processes)("%s", (file, p, fileContent, proposal) => {
 
 			// example description
 			expect(typeof example.description === 'undefined' || typeof example.description === 'string').toBeTruthy();
-			checkDescription(example.description, p);
+			checkDescription(example.description, p, processIds);
 
 			// example process graph
 			expect(example.process_graph).toBeUndefined();
@@ -244,14 +244,18 @@ function checkParam(param, p, checkCbParams = true) {
 	expect(typeof param.description).toBe('string');
 	// lint: Description should not be empty
 	expect(param.description.length).toBeGreaterThan(0);
-	checkDescription(param.description, p);
+	checkDescription(param.description, p, processIds);
 
 	// Parameter flags
 	expect(typeof param.optional === 'undefined' || typeof param.optional === 'boolean').toBeTruthy();
-	// lint: don't specify defaults
+	// lint: don't specify default value "false" for optional
 	expect(typeof param.optional === 'undefined' || param.optional === true).toBeTruthy();
 	// lint: make sure there's no old required flag
 	expect(typeof param.required === 'undefined').toBeTruthy();
+	// lint: require a default value if the parameter is optional
+	if (param.optional === true && !anyOfRequired.includes(p.id)) {
+		expect(param.default).toBeDefined();
+	}
 	// Check flags (recommended / experimental)
 	checkFlags(param);
 
@@ -260,13 +264,7 @@ function checkParam(param, p, checkCbParams = true) {
 	expect(typeof param.schema).toBe('object');
 	checkJsonSchema(jsv, param.schema);
 
-	if (!checkCbParams) {
-		// Parameters that are not required should define a default value
-		if(param.optional === true && !anyOfRequired.includes(p.id)) {
-			expect(param.default).toBeDefined();
-		}
-	}
-	else {
+	if (checkCbParams) {
 		// Checking that callbacks (process-graphs) define their parameters
 		if (typeof param.schema === 'object' && param.schema.subtype === 'process-graph') {
 			// lint: A callback without parameters is not very useful

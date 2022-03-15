@@ -5,7 +5,6 @@
     "categories": [
         "texts"
     ],
-    "experimental": true,
     "parameters": [
         {
             "name": "data",
