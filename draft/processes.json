@@ -10960,6 +10960,48 @@
     }
   },
   {
+    "id": "vector_buffer",
+    "summary": "Buffer geometries by distance",
+    "description": "Buffers each input geometry by a given distance, which can either expand (dilate) or a shrink (erode) the geometry. Buffers can be applied to points, lines and polygons, but the results are always polygons. Multi-part types (e.g. `MultiPoint`) are also allowed.",
+    "categories": [
+      "vector"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "geometries",
+        "description": "Geometries to apply the buffer on. Vector properties are preserved for vector data cubes and all GeoJSON Features.\n\nTo maximize interoperability, a nested `GeometryCollection` should be avoided. Furthermore, a `GeometryCollection` composed of a single type of geometries should be avoided in favour of the corresponding multi-part type (e.g. `MultiPolygon`).",
+        "schema": [
+          {
+            "type": "object",
+            "subtype": "geojson"
+          },
+          {
+            "type": "object",
+            "subtype": "vector-cube"
+          }
+        ]
+      },
+      {
+        "name": "distance",
+        "description": "The distance of the buffer in the unit of the spatial reference system. A positive distance expands the geometries and results in outward buffering (dilation) while a negative distance shrinks the geometries and results in inward buffering (erosion).",
+        "schema": {
+          "type": "number",
+          "not": {
+            "const": 0
+          }
+        }
+      }
+    ],
+    "returns": {
+      "description": "Returns a vector data cube with the computed new geometries.",
+      "schema": {
+        "type": "object",
+        "subtype": "vector-cube"
+      }
+    }
+  },
+  {
     "id": "vector_to_random_points",
     "summary": "Sample random points from geometries",
     "description": "Generate a vector data cube of points by sampling random points from input geometries. At least one point is sampled per input geometry.\n\nThrows a `CountsMissing` exception if `geometry_count` and `total_count` are both unrestricted (i.e. set to `null`).",
