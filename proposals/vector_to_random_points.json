@@ -56,7 +56,7 @@
         },
         {
             "name": "group",
-            "description": "Specifies whether the sampled points should be grouped by input geometry (default) or be generated as independent points.\n\n* If the sampled points are grouped, the process generates a `MultiPoint` per geometry given which keeps the original identifier.\n* Otherwise, each sampled point is generated as a distinct `Point` geometry with a new identifier.",
+            "description": "Specifies whether the sampled points should be grouped by input geometry (default) or be generated as independent points.\n\n* If the sampled points are grouped, the process generates a `MultiPoint` per geometry given which keeps the original identifier if present.\n* Otherwise, each sampled point is generated as a distinct `Point` geometry without identifier.",
             "optional": true,
             "default": true,
             "schema": {
