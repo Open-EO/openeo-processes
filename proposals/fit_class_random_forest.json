@@ -26,6 +26,8 @@
         {
             "name": "training",
             "description": "The amount of training data to be used in the classification, given as a fraction. The sampling will be chosen randomly through the data object. The remaining data will be used as test data for the validation.",
+            "optional": true,
+            "default": 0.8,
             "schema": {
                 "type": "number",
                 "exclusiveMinimum": 0,
