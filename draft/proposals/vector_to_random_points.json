@@ -1,7 +1,7 @@
 {
     "id": "vector_to_random_points",
     "summary": "Sample random points from geometries",
-    "description": "Generate a vector data cube of points by sampling random points from input geometries. At least one point is sampled per input geometry. Vector properties are preserved.\n\nIf `geometry_count` and `total_count` are both unrestricted (i.e. set to `null`, which is the default), one sample per geometry is used.",
+    "description": "Generate a vector data cube of points by sampling random points from input geometries. At least one point is sampled per input geometry.\n\nThrows a `CountsMissing` exception if `geometry_count` and `total_count` are both unrestricted (i.e. set to `null`).",
     "categories": [
         "cubes",
         "vector"
@@ -24,9 +24,9 @@
         },
         {
             "name": "geometry_count",
-            "description": "The maximum number of points to compute per geometry.\n\nPoints in the input geometries can be selected only once by the sampling.",
+            "description": "The maximum number of points to compute per geometry. Defaults to a maximum of one point per geometry.\n\nPoints in the input geometries can be selected only once by the sampling.",
             "optional": true,
-            "default": null,
+            "default": 1,
             "schema": [
                 {
                     "type": "integer",
@@ -56,7 +56,7 @@
         },
         {
             "name": "group",
-            "description": "Specifies whether the sampled points should be grouped by input geometry (default) or be generated as independent points.\n\n* If the sampled points are grouped, the process generates a `MultiPoint` per geometry given which keeps the original identifier.\n* Otherwise, each sampled point is generated as a distinct `Point` geometry with a identifier.",
+            "description": "Specifies whether the sampled points should be grouped by input geometry (default) or be generated as independent points.\n\n* If the sampled points are grouped, the process generates a `MultiPoint` per geometry given. Vector properties are preserved.\n* Otherwise, each sampled point is generated as a distinct `Point` geometry. Vector properties are *not* preserved.",
             "optional": true,
             "default": true,
             "schema": {
@@ -84,6 +84,9 @@
         }
     },
     "exceptions": {
+        "CountsMissing": {
+            "message": "No maximum count is set per geometry and in total."
+        },
         "CountMismatch": {
             "message": "The total number of points is lower than the number of geometries."
         }
