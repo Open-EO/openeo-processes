@@ -1,7 +1,7 @@
 {
     "id": "vector_to_regular_points",
     "summary": "Sample regular points from geometries",
-    "description": "Generate a vector data cube of points by sampling regularly-spaced points from input geometries.",
+    "description": "Generate a vector data cube of points by sampling regularly-spaced points from input geometries. Vector properties are preserved.",
     "categories": [
         "cubes",
         "vector"
@@ -32,7 +32,7 @@
         },
         {
             "name": "group",
-            "description": "Specifies whether the sampled points should be grouped by input geometry (default) or be generated as independent points.\n\n* If the sampled points are grouped, the process generates a `MultiPoint` per geometry given. Vector properties are preserved.\n* Otherwise, each sampled point is generated as a distinct `Point` geometry. Vector properties are *not* preserved.",
+            "description": "Specifies whether the sampled points should be grouped by input geometry (default) or be generated as independent points.\n\n* If the sampled points are grouped, the process generates a `MultiPoint` per geometry given which keeps the original identifier.\n* Otherwise, each sampled point is generated as a distinct `Point` geometry with a identifier.",
             "optional": true,
             "default": true,
             "schema": {
