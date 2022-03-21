@@ -45,7 +45,7 @@
             }
         },
         {
-            "name": "mtry",
+            "name": "max_variables",
             "description": "Specifies how many split variables will be used at a node. Default value is `null`, which corresponds to the number of predictors divided by 3.",
             "optional": true,
             "default": null,
