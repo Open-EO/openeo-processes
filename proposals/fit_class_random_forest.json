@@ -1,7 +1,7 @@
 {
     "id": "fit_class_random_forest",
     "summary": "Train a random forest classification model",
-    "description": "Executes the fit of a random forest classification based on the user input of target and predictors. The Random Forest classification model is based on the approach by Breiman (2001).",
+    "description": "Executes the fit of a random forest classification based on the user input of target and predictors. The Random Forest classification model is based on the approach by Breiman (2001). Training/validation split must be done before.",
     "categories": [
         "machine learning"
     ],
@@ -21,17 +21,6 @@
             "schema": {
                 "type": "object",
                 "subtype": "vector-cube"
-            }
-        },
-        {
-            "name": "training",
-            "description": "The amount of training data to be used in the classification, given as a fraction. The sampling will be chosen randomly through the data object. The remaining data will be used as test data for the validation.",
-            "optional": true,
-            "default": 0.8,
-            "schema": {
-                "type": "number",
-                "exclusiveMinimum": 0,
-                "maximum": 1
             }
         },
         {
