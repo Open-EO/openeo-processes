@@ -1,7 +1,7 @@
 {
     "id": "fit_regr_random_forest",
     "summary": "Train a random forest regression model",
-    "description": "Executes the fit of a random forest regression based on the user input of target and predictors. The Random Forest regression model is based on the approach by Breiman (2001). Training/validation split must be done before.",
+    "description": "Executes the fit of a random forest regression based on training data. The process does not include a separate split of the data in test, validation and training data. The Random Forest regression model is based on the approach by Breiman (2001).",
     "categories": [
         "machine learning"
     ],
@@ -25,7 +25,7 @@
         },
         {
             "name": "max_variables",
-            "description": "Specifies how many split variables will be used at a node.\n\nThe following options are available:\n\n- *integer*: The given number of variables are considered for each split\n- `all`: All variables are considered for each split\n- `log2`: The logarithm with base 2 of the number of variables are considered for each split\n- `sqrt`: The square root of the number of variables are considered for each split",
+            "description": "Specifies how many split variables will be used at a node.\n\nThe following options are available:\n\n- *integer*: The given number of variables are considered for each split.\n- `all`: All variables are considered for each split.\n- `log2`: The logarithm with base 2 of the number of variables are considered for each split.\n- `onethird`: A third of the number of variables are considered for each split. This is often the default for regression.\n- `sqrt`: The square root of the number of variables are considered for each split.",
             "schema": [
                 {
                     "type": "integer",
