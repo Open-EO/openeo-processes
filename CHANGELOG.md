@@ -9,10 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New processes in proposal state:
+    - `fit_class_random_forest`
+    - `fit_regr_random_forest`
     - `flatten_dimensions`
     - `load_ml_model`
-    - `unflatten_dimension`
+    - `predict_random_forest`
     - `save_ml_model`
+    - `unflatten_dimension`
     - `vector_buffer`
     - `vector_to_random_points`
     - `vector_to_regular_points`
