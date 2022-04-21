@@ -159,5 +159,13 @@
             },
             "returns": null
         }
+    ],
+    "links": [
+        {
+            "rel": "example",
+            "type": "application/json",
+            "href": "https://raw.githubusercontent.com/Open-EO/openeo-community-examples/main/processes/array_find_nodata.json",
+            "title": "Find no-data values in arrays"
+        }
     ]
 }

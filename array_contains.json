@@ -129,6 +129,14 @@
             "returns": false
         }
     ],
+    "links": [
+        {
+            "rel": "example",
+            "type": "application/json",
+            "href": "https://raw.githubusercontent.com/Open-EO/openeo-community-examples/main/processes/array_contains_nodata.json",
+            "title": "Check for no-data values in arrays"
+        }
+    ],
     "process_graph": {
         "find": {
             "process_id": "array_find",
