@@ -2006,21 +2006,7 @@
           "description": "Any data type is allowed."
         }
       }
-    },
-    "links": [
-      {
-        "rel": "example",
-        "type": "application/json",
-        "href": "https://processes.openeo.org/1.2.0/examples/array_find_nodata.json",
-        "title": "Find no-data values in arrays"
-      },
-      {
-        "rel": "example",
-        "type": "application/json",
-        "href": "https://processes.openeo.org/1.2.0/examples/array_contains_nodata.json",
-        "title": "Check for no-data values in arrays"
-      }
-    ]
+    }
   },
   {
     "id": "array_contains",
@@ -2157,7 +2143,7 @@
       {
         "rel": "example",
         "type": "application/json",
-        "href": "https://processes.openeo.org/1.2.0/examples/array_contains_nodata.json",
+        "href": "https://raw.githubusercontent.com/Open-EO/openeo-community-examples/main/processes/array_contains_nodata.json",
         "title": "Check for no-data values in arrays"
       }
     ],
@@ -2560,7 +2546,7 @@
       {
         "rel": "example",
         "type": "application/json",
-        "href": "https://processes.openeo.org/1.2.0/examples/array_find_nodata.json",
+        "href": "https://raw.githubusercontent.com/Open-EO/openeo-community-examples/main/processes/array_find_nodata.json",
         "title": "Find no-data values in arrays"
       }
     ]
@@ -11658,14 +11644,6 @@
             "blue"
           ]
         }
-      }
-    ],
-    "links": [
-      {
-        "rel": "example",
-        "type": "application/json",
-        "href": "https://processes.openeo.org/1.2.0/examples/rename-enumerated-labels.json",
-        "title": "Rename enumerated labels"
       }
     ]
   },
