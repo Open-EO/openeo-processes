@@ -91,19 +91,5 @@
                 "description": "Any data type is allowed."
             }
         }
-    },
-    "links": [
-        {
-            "rel": "example",
-            "type": "application/json",
-            "href": "https://processes.openeo.org/1.2.0/examples/array_find_nodata.json",
-            "title": "Find no-data values in arrays"
-        },
-        {
-            "rel": "example",
-            "type": "application/json",
-            "href": "https://processes.openeo.org/1.2.0/examples/array_contains_nodata.json",
-            "title": "Check for no-data values in arrays"
-        }
-    ]
+    }
 }
