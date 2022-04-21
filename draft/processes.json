@@ -10421,7 +10421,7 @@
   },
   {
     "id": "predict_random_forest",
-    "summary": "Predict values from a Random Forest model",
+    "summary": "Predict values based on a Random Forest model",
     "description": "Applies a Random Forest machine learning model to an array and predict a value for it.",
     "categories": [
       "machine learning",
