@@ -27,7 +27,7 @@
                     "pattern": "^[\\w\\-\\.~]+$"
                 },
                 {
-                    "title": "User-uploaded Files",
+                    "title": "User-uploaded File",
                     "type": "string",
                     "subtype": "file-path",
                     "pattern": "^[^\r\n\\:'\"]+$"
