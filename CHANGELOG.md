@@ -28,6 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `array_modify`
 - Renamed `text_merge` to `text_concat` for better alignment with `array_concat` and existing implementations.
 - `apply_neighborhood`: Allow `null` as default value for units.
+- Added a more concrete `DataCubeEmpty` exception to `save_result`.
+- Added a `NoDataAvailable` exception to `load_collection`.
 
 ### Removed
 
