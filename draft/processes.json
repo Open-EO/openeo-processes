@@ -5491,6 +5491,7 @@
         "schema": [
           {
             "type": "array",
+            "minItems": 1,
             "items": {
               "type": "string",
               "subtype": "band-name"
@@ -10201,6 +10202,7 @@
         "schema": [
           {
             "type": "array",
+            "minItems": 1,
             "items": {
               "type": "string",
               "subtype": "band-name"
