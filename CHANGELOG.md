@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `array_modify`
 - Renamed `text_merge` to `text_concat` for better alignment with `array_concat` and existing implementations.
 - `apply_neighborhood`: Allow `null` as default value for units.
+- `run_udf`: Allow all data types instead of just objects in the `context` parameter. [#376](https://github.com/Open-EO/openeo-processes/issues/376)
 
 ### Removed
 
