@@ -207,7 +207,7 @@ The top-level object and/or each dimension can be enhanced with additional stats
 			"values": ["NDVI"]
 		}
 	},
-	// optional: Return additional statstics for the data cube if possible, ideally use the corresponsing openEO process names as keys
+	// optional: Return additional data or statstics for the data cube if possible (see also the chapter for "Arrays" above).
 	"min": -1,
 	"max": 1
 }
