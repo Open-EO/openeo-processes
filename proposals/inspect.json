@@ -15,6 +15,15 @@
             }
         },
         {
+            "name": "message",
+            "description": "A message to send in addition to the data.",
+            "schema": {
+                "type": "string"
+            },
+            "default": "",
+            "optional": true
+        },
+        {
             "name": "code",
             "description": "A label to help identify one or more log entries originating from this process in the list of all log entries. It can help to group or filter log entries and is usually not unique.",
             "schema": {
@@ -36,15 +45,6 @@
                 ]
             },
             "default": "info",
-            "optional": true
-        },
-        {
-            "name": "message",
-            "description": "A message to send in addition to the data.",
-            "schema": {
-                "type": "string"
-            },
-            "default": "",
             "optional": true
         }
     ],
