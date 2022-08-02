@@ -5331,7 +5331,7 @@
   {
     "id": "load_collection",
     "summary": "Load a collection",
-    "description": "Loads a collection from the current back-end by its id and returns it as a processable data cube. The data that is added to the data cube can be restricted with the parameters `spatial_extent`, `temporal_extent`, `bands` and `properties`.\n\n**Remarks:**\n\n* The bands (and all dimensions that specify nominal dimension labels) are expected to be ordered as specified in the metadata if the `bands` parameter is set to `null`.\n* If no additional parameter is specified this would imply that the whole data set is expected to be loaded. Due to the large size of many data sets, this is not recommended and may be optimized by back-ends to only load the data that is actually required after evaluating subsequent processes such as filters. This means that the pixel values should be processed only after the data has been limited to the required extent and as a consequence also to a manageable size.",
+    "description": "Loads a collection from the current back-end by its id and returns it as a processable data cube. The data that is added to the data cube can be restricted with the parameters `spatial_extent`, `temporal_extent`, `bands` and `properties`. If no data is available for the given extents, a `NoDataAvailable` exception is thrown.\n\n**Remarks:**\n\n* The bands (and all dimensions that specify nominal dimension labels) are expected to be ordered as specified in the metadata if the `bands` parameter is set to `null`.\n* If no additional parameter is specified this would imply that the whole data set is expected to be loaded. Due to the large size of many data sets, this is not recommended and may be optimized by back-ends to only load the data that is actually required after evaluating subsequent processes such as filters. This means that the pixel values should be processed only after the data has been limited to the required extent and as a consequence also to a manageable size.",
     "categories": [
       "cubes",
       "import"
@@ -5550,6 +5550,11 @@
       "schema": {
         "type": "object",
         "subtype": "raster-cube"
+      }
+    },
+    "exceptions": {
+      "NoDataAvailable": {
+        "message": "There is no data available for the given extents."
       }
     },
     "examples": [
@@ -12096,7 +12101,7 @@
       },
       {
         "name": "format",
-        "description": "The file format to use. It must be one of the values that the server reports as supported output file formats, which usually correspond to the short GDAL/OGR codes. If the format is not suitable for storing the underlying data structure, a `FormatUnsuitable` exception will be thrown. This parameter is *case insensitive*.",
+        "description": "The file format to use. It must be one of the values that the server reports as supported output file formats, which usually correspond to the short GDAL/OGR codes. This parameter is *case insensitive*.\n\n* If the data cube is empty and the file format can't store empty data cubes, a `DataCubeEmpty` exception is thrown.\n* If the file format is otherwise not suitable for storing the underlying data structure, a `FormatUnsuitable` exception is thrown.",
         "schema": {
           "type": "string",
           "subtype": "output-format"
@@ -12122,6 +12127,9 @@
     "exceptions": {
       "FormatUnsuitable": {
         "message": "Data can't be transformed into the requested output format."
+      },
+      "DataCubeEmpty": {
+        "message": "The file format doesn't support storing empty data cubes."
       }
     },
     "links": [
