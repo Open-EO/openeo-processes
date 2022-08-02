@@ -30,7 +30,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `apply_neighborhood`: Allow `null` as default value for units.
 - `run_udf`: Allow all data types instead of just objects in the `context` parameter. [#376](https://github.com/Open-EO/openeo-processes/issues/376)
 - `load_collection` and `load_result`: Require at least one band if not set to `null`. [#372](https://github.com/Open-EO/openeo-processes/issues/372)
+- `load_collection`: Added a `NoDataAvailable` exception
 - `inspect`: The parameter `message` has been moved to be the second argument. [#369](https://github.com/Open-EO/openeo-processes/issues/369)
+- `save_result`: Added a more concrete `DataCubeEmpty` exception.
 
 ### Removed
 
