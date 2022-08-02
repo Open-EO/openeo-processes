@@ -28,8 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `array_modify`
 - Renamed `text_merge` to `text_concat` for better alignment with `array_concat` and existing implementations.
 - `apply_neighborhood`: Allow `null` as default value for units.
-- Added a more concrete `DataCubeEmpty` exception to `save_result`.
-- Added a `NoDataAvailable` exception to `load_collection`.
+- `run_udf`: Allow all data types instead of just objects in the `context` parameter. [#376](https://github.com/Open-EO/openeo-processes/issues/376)
+- `load_collection` and `load_result`: Require at least one band if not set to `null`. [#372](https://github.com/Open-EO/openeo-processes/issues/372)
+- `load_collection`: Added a `NoDataAvailable` exception
+- `inspect`: The parameter `message` has been moved to be the second argument. [#369](https://github.com/Open-EO/openeo-processes/issues/369)
+- `save_result`: Added a more concrete `DataCubeEmpty` exception.
 
 ### Removed
 
@@ -44,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `apply_neighborhood`: Parameter `overlap` was optional but had no default value and no schena for the default value defined.
 - `array_contains` and `array_find`: Clarify that giving `null` as `value` always returns `false` or `null` respectively, also fixed the incorrect examples. [#348](https://github.com/Open-EO/openeo-processes/issues/348)
 - `array_interpolate_linear`: Return value was incorrectly specified as `number` or `null`. It must return an array instead. [#333](https://github.com/Open-EO/openeo-processes/issues/333)
+- `is_nan`: Fixed a wrong description of the return value and simplified/clarified the process descriptions overall. [#360](https://github.com/Open-EO/openeo-processes/issues/360)
 - `is_nodata`: Clarified that `NaN` can be considered as a no-data value only if it is explicitly specified as no-data value. [#361](https://github.com/Open-EO/openeo-processes/issues/361)
 - `rename_labels`: Clarified that the `LabelsNotEnumerated` exception is thrown if `source` is empty instead of if `target` is empty. [#321](https://github.com/Open-EO/openeo-processes/issues/321)
 - `round`: Clarify that the rounding for ties applies not only for integers. [#326](https://github.com/Open-EO/openeo-processes/issues/326)
@@ -169,7 +173,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - `any` and `all`: Renamed parameter `values` to `data`. [#147](https://github.com/Open-EO/openeo-processes/issues/147)
-- `load_collection`: Parameter `properties` has subtype `metdata-filter`.
+- `load_collection`: Parameter `properties` has subtype `metadata-filter`.
 - Examples adapted to latest API version for `aggregate_temporal`, `array_contains`, `array_find`, `filter_labels`, `load_collection` and `rename_labels`. [#136](https://github.com/Open-EO/openeo-processes/issues/136), [API#285](https://github.com/Open-EO/openeo-api/issues/285)
 - Some processes were assigned to different categories.
 
