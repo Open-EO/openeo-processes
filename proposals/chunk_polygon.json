@@ -32,7 +32,7 @@
                 "parameters": [
                     {
                         "name": "data",
-                        "description": "A chunk of the original data cube.",
+                        "description": "A chunk of the original data cube. The data cube provided for each chunk uses the smallest possible grid-aligned extent covering the polygon. All pixels outside of the polygon are replaced with the value given in `mask_value`, which is no-data (`null`) by default.",
                         "schema": {
                             "type": "object",
                             "subtype": "raster-cube"
@@ -59,6 +59,26 @@
                     }
                 }
             }
+        },
+        {
+            "name": "mask_value",
+            "description": "All pixels for which the point at the pixel center **does not** intersect with the polygon (as defined in the Simple Features standard by the OGC) are replaced with the given value, which defaults to `null` (no data).\n\nThis can be used to provide a distinction between no data values within the polygon and masked pixels outside of it.",
+            "schema": [
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "boolean"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null,
+            "optional": true
         },
         {
             "name": "context",
