@@ -950,6 +950,7 @@
     "description": "Computes anomalies based on normals for temporal periods. It compares the data for each label in the temporal dimension with the corresponding data in the normals data cube by subtracting the normal from the data.",
     "categories": [
       "climatology",
+      "cubes",
       "math"
     ],
     "parameters": [
@@ -2964,6 +2965,7 @@
     "summary": "Compute climatology normals",
     "description": "Climatological normal period is a usually 30 year average of a weather variable. Climatological normals are used as an average or baseline to evaluate climate events and provide context for yearly, monthly, daily or seasonal variability. The default climatology period is from 1981 until 2010 (both inclusive).",
     "categories": [
+      "cubes",
       "climatology"
     ],
     "parameters": [
@@ -6870,6 +6872,7 @@
     "summary": "Normalized Difference Vegetation Index",
     "description": "Computes the Normalized Difference Vegetation Index (NDVI). The NDVI is computed as *`(nir - red) / (nir + red)`*.\n\nThe `data` parameter expects a raster data cube with a dimension of type `bands` or a `DimensionAmbiguous` exception is thrown otherwise. By default, the dimension must have at least two bands with the common names `red` and `nir` assigned. Otherwise, the user has to specify the parameters `nir` and `red`. If neither is the case, either the exception `NirBandAmbiguous` or `RedBandAmbiguous` is thrown. The common names for each band are specified in the collection's band metadata and are *not* equal to the band names.\n\nBy default, the dimension of type `bands` is dropped by this process. To keep the dimension specify a new band name in the parameter `target_band`. This adds a new dimension label with the specified name to the dimension, which can be used to access the computed values. If a band with the specified name exists, a `BandExists` is thrown.\n\nThis process is very similar to the process ``normalized_difference()``, but determines the bands automatically based on the common names (`red`/`nir`) specified in the metadata.",
     "categories": [
+      "cubes",
       "math > indices",
       "vegetation indices"
     ],

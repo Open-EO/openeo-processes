@@ -4,6 +4,7 @@
     "description": "Computes anomalies based on normals for temporal periods. It compares the data for each label in the temporal dimension with the corresponding data in the normals data cube by subtracting the normal from the data.",
     "categories": [
         "climatology",
+        "cubes",
         "math"
     ],
     "parameters": [
