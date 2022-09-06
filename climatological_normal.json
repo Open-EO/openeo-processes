@@ -3,6 +3,7 @@
     "summary": "Compute climatology normals",
     "description": "Climatological normal period is a usually 30 year average of a weather variable. Climatological normals are used as an average or baseline to evaluate climate events and provide context for yearly, monthly, daily or seasonal variability. The default climatology period is from 1981 until 2010 (both inclusive).",
     "categories": [
+        "cubes",
         "climatology"
     ],
     "parameters": [
