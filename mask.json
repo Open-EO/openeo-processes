@@ -12,7 +12,16 @@
             "description": "A raster data cube.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    }
+                ]
             }
         },
         {
@@ -20,7 +29,16 @@
             "description": "A mask as a raster data cube. Every pixel in `data` must have a corresponding element in `mask`.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    }
+                ]
             }
         },
         {
@@ -42,7 +60,16 @@
         "description": "A masked raster data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "spatial",
+                    "axis": [
+                        "x",
+                        "y"
+                    ]
+                }
+            ]
         }
     }
 }

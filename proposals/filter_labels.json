@@ -13,7 +13,7 @@
             "description": "A data cube.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube"
             }
         },
         {
@@ -74,7 +74,7 @@
         "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the given dimension has less (or the same) dimension labels.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube"
         }
     },
     "exceptions": {

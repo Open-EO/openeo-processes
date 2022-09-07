@@ -17,7 +17,12 @@
                 },
                 {
                     "type": "object",
-                    "subtype": "vector-cube"
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "vector"
+                        }
+                    ]
                 }
             ]
         },
@@ -36,7 +41,12 @@
         "description": "Returns a vector data cube with the computed new geometries.",
         "schema": {
             "type": "object",
-            "subtype": "vector-cube"
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "vector"
+                }
+            ]
         }
     }
 }

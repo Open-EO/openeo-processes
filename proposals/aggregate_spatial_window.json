@@ -13,7 +13,16 @@
             "description": "A raster data cube with exactly two horizontal spatial dimensions and an arbitrary number of additional dimensions. The process is applied to all additional dimensions individually.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    }
+                ]
             }
         },
         {
@@ -103,10 +112,19 @@
         }
     ],
     "returns": {
-        "description": "A data cube with the newly computed values and the same dimensions.\n\nThe resolution will change depending on the chosen values for the `size` and `boundary` parameter. It usually decreases for the dimensions which have the corresponding parameter `size` set to values greater than 1.\n\nThe dimension labels will be set to the coordinate at the center of the window. The other dimension properties (name, type and reference system) remain unchanged.",
+        "description": "A raster data cube with the newly computed values and the same dimensions.\n\nThe resolution will change depending on the chosen values for the `size` and `boundary` parameter. It usually decreases for the dimensions which have the corresponding parameter `size` set to values greater than 1.\n\nThe dimension labels will be set to the coordinate at the center of the window. The other dimension properties (name, type and reference system) remain unchanged.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "spatial",
+                    "axis": [
+                        "x",
+                        "y"
+                    ]
+                }
+            ]
         }
     },
     "links": [

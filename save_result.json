@@ -10,16 +10,10 @@
         {
             "name": "data",
             "description": "The data to deliver in the given file format.",
-            "schema": [
-                {
-                    "type": "object",
-                    "subtype": "raster-cube"
-                },
-                {
-                    "type": "object",
-                    "subtype": "vector-cube"
-                }
-            ]
+            "schema": {
+                "type": "object",
+                "subtype": "datacube"
+            }
         },
         {
             "name": "format",

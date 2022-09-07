@@ -13,7 +13,12 @@
             "description": "A data cube with one or more temporal dimensions.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "temporal"
+                    }
+                ]
             }
         },
         {
@@ -21,7 +26,12 @@
             "description": "A data cube that describes the temporal target resolution.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "temporal"
+                    }
+                ]
             }
         },
         {
@@ -53,7 +63,12 @@
         "description": "A raster data cube with the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-temporal dimensions. For the temporal dimension, the name and type remain unchanged, but the dimension labels, resolution and reference system may change.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "temporal"
+                }
+            ]
         }
     },
     "exceptions": {

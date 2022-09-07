@@ -12,7 +12,23 @@
             "description": "A data cube.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    [
+                        {
+                            "type": "spatial",
+                            "axis": [
+                                "x",
+                                "y"
+                            ]
+                        }
+                    ],
+                    [
+                        {
+                            "type": "vector"
+                        }
+                    ]
+                ]
             }
         },
         {
@@ -94,7 +110,23 @@
         "description": "A data cube restricted to the bounding box. The dimensions and dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the spatial dimensions have less (or the same) dimension labels.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube",
+            "dimensions": [
+                [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "type": "vector"
+                    }
+                ]
+            ]
         }
     },
     "links": [

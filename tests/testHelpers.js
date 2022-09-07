@@ -106,7 +106,67 @@ async function getAjv() {
 		},
 		compile: function (subtype, schema) {
 			if (schema.type != subtypes.definitions[subtype].type) {
-				throw "Subtype '"+subtype+"' not allowed for type '"+schema.type+"'."
+				throw "Subtype '"+subtype+"' not allowed for type '"+schema.type+"'.";
+			}
+			if (subtypes.definitions[subtype].deprecated) {
+				throw "Deprecated subtypes not allowed.";
+			}
+			return () => true;
+		},
+		errors: false
+	});
+	let dimensionSchema = {
+		type: "array",
+		minItems: 1,
+		items: {
+			type: "object",
+			required: ["type"],
+			oneOf: [
+				{
+					properties: {
+						type: {
+							type: "string",
+							const: "spatial"
+						},
+						axis: {
+							type: "array",
+							minItems: 1,
+							items: {
+								type: "string",
+								enum: ["x", "y", "z"]
+							}
+						}
+					}
+				},
+				{
+					properties: {
+						type: {
+							type: "string",
+							enum: ["bands", "temporal", "vector", "other"]
+						}
+					}
+				}
+			]
+		}
+	};
+	jsv.addKeyword("dimensions", {
+		dependencies: [
+			"type",
+			"subtype"
+		],
+		metaSchema: {
+			oneOf: [
+				dimensionSchema,
+				{
+					type: "array",
+					minItems: 2,
+					items: dimensionSchema
+				}
+			]
+		},
+		compile: function (_, schema) {
+			if (schema.subtype != 'datacube') {
+				throw "Dimensions only allowed for subtype 'datacube'."
 			}
 			return () => true;
 		},
@@ -169,7 +229,7 @@ function checkSpelling(text, p = null) {
 		if (p && p.id) {
 			pre += " in " + p.id;
 		}
-		console.warn(pre + ": " + JSON.stringify(errors));
+		throw (pre + ": " + JSON.stringify(errors));
 	}
 }
 

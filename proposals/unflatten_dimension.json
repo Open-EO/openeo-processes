@@ -12,7 +12,7 @@
             "description": "A data cube that is consistently structured so that operation can execute flawlessly (e.g. the dimension labels need to contain the `label_separator` exactly 1 time for two target dimensions, 2 times for three target dimensions etc.).",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube"
             }
         },
         {
@@ -48,7 +48,7 @@
         "description": "A data cube with the new shape. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube"
         }
     },
     "exceptions": {

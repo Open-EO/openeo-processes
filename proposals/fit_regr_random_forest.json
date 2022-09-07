@@ -12,7 +12,12 @@
             "description": "The predictors for the regression model as a vector data cube. Aggregated to the features (vectors) of the target input variable.",
             "schema": {
                 "type": "object",
-                "subtype": "vector-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "vector"
+                    }
+                ]
             }
         },
         {
@@ -20,7 +25,12 @@
             "description": "The training sites for the regression model as a vector data cube. This is associated with the target variable for the Random Forest model. The geometry has to associated with a value to predict (e.g. fractional forest canopy cover).",
             "schema": {
                 "type": "object",
-                "subtype": "vector-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "vector"
+                    }
+                ]
             }
         },
         {

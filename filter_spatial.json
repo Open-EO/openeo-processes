@@ -12,23 +12,66 @@
             "description": "A data cube.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    [
+                        {
+                            "type": "spatial",
+                            "axis": [
+                                "x",
+                                "y"
+                            ]
+                        }
+                    ],
+                    [
+                        {
+                            "type": "vector"
+                        }
+                    ]
+                ]
             }
         },
         {
             "name": "geometries",
-            "description": "One or more geometries used for filtering, specified as GeoJSON.",
-            "schema": {
-                "type": "object",
-                "subtype": "geojson"
-            }
+            "description": "One or more geometries used for filtering, given as GeoJSON or vector data cube.\n\nLimits the data cube to the bounding box of the given geometries. No implicit masking gets applied. To mask the pixels of the data cube use ``mask_polygon()``.",
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "geojson"
+                },
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "vector"
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "returns": {
         "description": "A data cube restricted to the specified geometries. The dimensions and dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the spatial dimensions have less (or the same) dimension labels.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube",
+            "dimensions": [
+                [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "type": "vector"
+                    }
+                ]
+            ]
         }
     },
     "links": [

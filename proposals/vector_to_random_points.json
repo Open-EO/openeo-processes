@@ -18,7 +18,12 @@
                 },
                 {
                     "type": "object",
-                    "subtype": "vector-cube"
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "vector"
+                        }
+                    ]
                 }
             ]
         },
@@ -80,7 +85,12 @@
         "description": "Returns a vector data cube with the sampled points.",
         "schema": {
             "type": "object",
-            "subtype": "vector-cube"
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "vector"
+                }
+            ]
         }
     },
     "exceptions": {

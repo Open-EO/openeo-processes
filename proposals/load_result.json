@@ -1,7 +1,7 @@
 {
     "id": "load_result",
     "summary": "Load batch job results",
-    "description": "Loads batch job results and returns them as a processable data cube. A batch job result can be loaded by ID or URL:\n\n* **ID**: The identifier for a finished batch job. The job must have been submitted by the authenticated user on the back-end currently connected to.\n* **URL**: The URL to the STAC metadata for a batch job result. This is usually a signed URL that is provided by some back-ends since openEO API version 1.1.0 through the `canonical` link relation in the batch job result metadata.\n\nIf supported by the underlying metadata and file format, the data that is added to the data cube can be restricted with the parameters `spatial_extent`, `temporal_extent` and `bands`.\n\n**Remarks:**\n\n* The bands (and all dimensions that specify nominal dimension labels) are expected to be ordered as specified in the metadata if the `bands` parameter is set to `null`.\n* If no additional parameter is specified this would imply that the whole data set is expected to be loaded. Due to the large size of many data sets, this is not recommended and may be optimized by back-ends to only load the data that is actually required after evaluating subsequent processes such as filters. This means that the pixel values should be processed only after the data has been limited to the required extent and as a consequence also to a manageable size.",
+    "description": "Loads batch job results and returns them as a processable data cube. A batch job result can be loaded by ID or URL:\n\n* **ID**: The identifier for a finished batch job. The job must have been submitted by the authenticated user on the back-end currently connected to.\n* **URL**: The URL to the STAC metadata for a batch job result. This is usually a signed URL that is provided by some back-ends since openEO API version 1.1.0 through the `canonical` link relation in the batch job result metadata.\n\nIf supported by the underlying metadata and file format, the data that is added to the data cube can be restricted with the parameters `spatial_extent`, `temporal_extent` and `bands`.\n\n**Remarks:**\n\n* The bands (and all dimensions that specify nominal dimension labels) are expected to be ordered as specified in the metadata if the `bands` parameter is set to `null`.\n* If no additional parameter is specified this would imply that the whole data set is expected to be loaded. Due to the large size of many data sets, this is not recommended and may be optimized by back-ends to only load the data that is actually required after evaluating subsequent processes such as filters. This means that the values should be processed only after the data has been limited to the required extent and as a consequence also to a manageable size.",
     "categories": [
         "cubes",
         "import"
@@ -109,6 +109,17 @@
                     "subtype": "geojson"
                 },
                 {
+                    "title": "Vector data cube",
+                    "description": "Limits the data cube to the bounding box of the given geometries in the vector data cube. All pixels inside the bounding box that do not intersect with any of the polygons will be set to no data (`null`).",
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "vector"
+                        }
+                    ]
+                },
+                {
                     "title": "No filter",
                     "description": "Don't filter spatially. All data is included in the data cube.",
                     "type": "null"
@@ -196,7 +207,7 @@
         "description": "A data cube for further processing.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube"
         }
     }
 }

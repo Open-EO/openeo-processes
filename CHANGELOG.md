@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Changes for vector cubes
+
+- Update the processes based on `raster-cubes` to work with `datacube` instead
+- Renamed `create_raster_cube` to `create_data_cube`
+- `add_dimension`: Added new dimension type `vector`
+- New definition for `aggregate_spatial`:
+    - Allows more than 3 input dimensions
+    - Allow to not export statistics by changing the parameter `target_dimenaion`
+    - Clarified how the resulting vector cube looks like
+
 ## Unreleased / Draft
 
 ### Added
