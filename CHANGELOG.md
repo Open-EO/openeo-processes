@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New processes in proposal state:
+    - `filter_vector`
     - `fit_class_random_forest`
     - `fit_regr_random_forest`
     - `flatten_dimensions`

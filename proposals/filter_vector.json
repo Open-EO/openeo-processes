@@ -1,0 +1,92 @@
+{
+    "id": "filter_vector",
+    "summary": "Spatial vector filter using geometries",
+    "description": "Limits the vector data cube to the specified geometries. The process works on geometries as defined in the Simple Features standard by the OGC.",
+    "categories": [
+        "cubes",
+        "filter",
+        "vector"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A vector data cube with the candidate geometries.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "vector"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "geometries",
+            "description": "One or more base geometries used for filtering, given as GeoJSON or vector data cube.\n\nTo maximize interoperability, `GeometryCollection` and multi geometries (e.g. `MultiPolygon`) should be be avoided.",
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "geojson"
+                },
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "vector"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "relation",
+            "description": "The spatial filter predicate for comparing the geometries provided through (a) `geometries` (base geometries) and (b) `data` (candidate geometries).",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "intersects",
+                    "disjoint",
+                    "equals",
+                    "touches",
+                    "crosses",
+                    "overlaps",
+                    "contains",
+                    "within"
+                ]
+            },
+            "optional": true,
+            "default": "intersects"
+        }
+    ],
+    "returns": {
+        "description": "A vector data cube restricted to the specified geometries. The dimensions and dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the vector dimension has less (or the same) dimension labels.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "spatial",
+                    "axis": [
+                        "x",
+                        "y"
+                    ]
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#filter",
+            "rel": "about",
+            "title": "Filters explained in the openEO documentation"
+        },
+        {
+            "href": "http://www.opengeospatial.org/standards/sfa",
+            "rel": "about",
+            "title": "Simple Features standard by the OGC"
+        }
+    ]
+}
