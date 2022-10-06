@@ -115,54 +115,44 @@ async function getAjv() {
 		},
 		errors: false
 	});
-	let dimensionSchema = {
-		type: "array",
-		minItems: 1,
-		items: {
-			type: "object",
-			required: ["type"],
-			oneOf: [
-				{
-					properties: {
-						type: {
-							type: "string",
-							const: "spatial"
-						},
-						axis: {
-							type: "array",
-							minItems: 1,
-							items: {
-								type: "string",
-								enum: ["x", "y", "z"]
-							}
-						}
-					}
-				},
-				{
-					properties: {
-						type: {
-							type: "string",
-							enum: ["bands", "temporal", "vector", "other"]
-						}
-					}
-				}
-			]
-		}
-	};
 	jsv.addKeyword("dimensions", {
 		dependencies: [
 			"type",
 			"subtype"
 		],
 		metaSchema: {
-			oneOf: [
-				dimensionSchema,
-				{
-					type: "array",
-					minItems: 2,
-					items: dimensionSchema
-				}
-			]
+			type: "array",
+			minItems: 1,
+			items: {
+				type: "object",
+				required: ["type"],
+				oneOf: [
+					{
+						properties: {
+							type: {
+								type: "string",
+								const: "spatial"
+							},
+							axis: {
+								type: "array",
+								minItems: 1,
+								items: {
+									type: "string",
+									enum: ["x", "y", "z"]
+								}
+							}
+						}
+					},
+					{
+						properties: {
+							type: {
+								type: "string",
+								enum: ["bands", "temporal", "vector", "other"]
+							}
+						}
+					}
+				]
+			}
 		},
 		compile: function (_, schema) {
 			if (schema.subtype != 'datacube') {
