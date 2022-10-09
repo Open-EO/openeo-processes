@@ -147,7 +147,23 @@ async function getAjv() {
 						properties: {
 							type: {
 								type: "string",
-								enum: ["bands", "temporal", "vector", "other"]
+								const: "vector"
+							},
+							geometry_type: {
+								type: "array",
+								minItems: 1,
+								items: {
+									type: "string",
+									enum: ["Point", "LineString", "Polygon", "MultiPoint", "MultiLineString", "MultiPolygon", "GeometryCollection"]
+								}
+							}
+						}
+					},
+					{
+						properties: {
+							type: {
+								type: "string",
+								enum: ["bands", "temporal", "other"]
 							}
 						}
 					}

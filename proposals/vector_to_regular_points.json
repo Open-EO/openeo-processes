@@ -52,7 +52,11 @@
             "subtype": "datacube",
             "dimensions": [
                 {
-                    "type": "vector"
+                    "type": "vector",
+                    "geometry_type": [
+                        "Point",
+                        "MultiPoint"
+                    ]
                 }
             ]
         }

@@ -37,7 +37,12 @@
                     "subtype": "datacube",
                     "dimensions": [
                         {
-                            "type": "vector"
+                            "type": "vector",
+                            "geometry_type": [
+                                "Polygon",
+                                "MultiPolygon",
+                                "GeometryCollection"
+                            ]
                         }
                     ]
                 }
