@@ -27,7 +27,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `array_concat`
     - `array_modify`
 - Renamed `text_merge` to `text_concat` for better alignment with `array_concat` and existing implementations.
-- `apply_neighborhood`: Allow `null` as default value for units.
+- `apply_neighborhood`:
+    - Allow `null` as default value for units.
+    - Input and Output for the `process` can either be data cubes or arrays (if one-dimensional). [#387](https://github.com/Open-EO/openeo-processes/issues/387)
 - `run_udf`: Allow all data types instead of just objects in the `context` parameter. [#376](https://github.com/Open-EO/openeo-processes/issues/376)
 - `load_collection` and `load_result`:
     - Require at least one band if not set to `null`. [#372](https://github.com/Open-EO/openeo-processes/issues/372)
@@ -42,10 +44,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - `aggregate_spatial`:
-  - Clarified that vector properties are preserved for vector data cubes and all GeoJSON Features. [#270](https://github.com/Open-EO/openeo-processes/issues/270)
-  - Clarified that a `TargetDimensionExists` exception is thrown if the target dimension exists.
+    - Clarified that vector properties are preserved for vector data cubes and all GeoJSON Features. [#270](https://github.com/Open-EO/openeo-processes/issues/270)
+    - Clarified that a `TargetDimensionExists` exception is thrown if the target dimension exists.
 - `apply` and `array_apply`: Fixed broken references to the `absolute` process
-- `apply_neighborhood`: Parameter `overlap` was optional but had no default value and no schena for the default value defined.
+- `apply_neighborhood`:
+    - Parameter `overlap` was optional but had no default value and no schena for the default value  defined.
+    - Clarified that the overlap must be included in the returned data cube and can't be modified. [#386](https://github.com/Open-EO/openeo-processes/issues/386)
+    - Removed a conflicting statement that dimension labels can be changed. [#385](https://github.com/Open-EO/openeo-processes/issues/385)
 - `array_contains` and `array_find`: Clarify that giving `null` as `value` always returns `false` or `null` respectively, also fixed the incorrect examples. [#348](https://github.com/Open-EO/openeo-processes/issues/348)
 - `array_interpolate_linear`: Return value was incorrectly specified as `number` or `null`. It must return an array instead. [#333](https://github.com/Open-EO/openeo-processes/issues/333)
 - `is_nan`: Fixed a wrong description of the return value and simplified/clarified the process descriptions overall. [#360](https://github.com/Open-EO/openeo-processes/issues/360)
