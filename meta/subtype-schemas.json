@@ -296,7 +296,7 @@
             "type": "object",
             "subtype": "raster-cube",
             "title": "Raster data cube",
-            "description": "A vector data cube, which is a data cube with two dimension of type spatial (x and y). This has been deprecated in favour of `datacube`.",
+            "description": "A raster data cube, which is a data cube with two dimension of type spatial (x and y). This has been deprecated in favour of `datacube`.",
             "deprecated": true
         },
         "temporal-interval": {
