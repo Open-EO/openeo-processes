@@ -80,7 +80,7 @@
         },
         {
             "name": "target_dimension",
-            "description": "By default (which is `null`), the process only computes the results and doesn't add a new dimension. If this parameter contains a new dimension name, the computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) for each computed value. These values are added as a new dimension. The new dimension of type `other` has the dimension labels `value`, `total_count` and `valid_count`.",
+            "description": "By default (which is `null`), the process only computes the results and doesn't add a new dimension.\n\nIf this parameter contains a new dimension name, the computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) for each computed value. These values are added as a new dimension. The new dimension of type `other` has the dimension labels `value`, `total_count` and `valid_count`.\n\nFails with a `TargetDimensionExists` exception if a dimension with the specified name exists.",
             "schema": {
                 "type": [
                     "string",
