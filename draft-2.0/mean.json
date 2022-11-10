@@ -1,0 +1,166 @@
+{
+    "id": "mean",
+    "summary": "Arithmetic mean (average)",
+    "description": "The arithmetic mean of an array of numbers is the quantity commonly called the average. It is defined as the sum of all elements divided by the number of elements.\n\nAn array without non-`null` elements resolves always with `null`.",
+    "categories": [
+        "math > statistics",
+        "reducer"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "An array of numbers.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "ignore_nodata",
+            "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is returned if any value is such a value.",
+            "schema": {
+                "type": "boolean"
+            },
+            "default": true,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "The computed arithmetic mean.",
+        "schema": {
+            "type": [
+                "number",
+                "null"
+            ]
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    0,
+                    3,
+                    2
+                ]
+            },
+            "returns": 1.5
+        },
+        {
+            "arguments": {
+                "data": [
+                    9,
+                    2.5,
+                    null,
+                    -2.5
+                ]
+            },
+            "returns": 3
+        },
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    null
+                ],
+                "ignore_nodata": false
+            },
+            "returns": null
+        },
+        {
+            "description": "The input array is empty: return `null`.",
+            "arguments": {
+                "data": []
+            },
+            "returns": null
+        },
+        {
+            "description": "The input array has only `null` elements: return `null`.",
+            "arguments": {
+                "data": [
+                    null,
+                    null
+                ]
+            },
+            "returns": null
+        }
+    ],
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://mathworld.wolfram.com/ArithmeticMean.html",
+            "title": "Arithmetic mean explained by Wolfram MathWorld"
+        }
+    ],
+    "process_graph": {
+        "count_condition": {
+            "process_id": "if",
+            "arguments": {
+                "value": {
+                    "from_parameter": "ignore_nodata"
+                },
+                "accept": null,
+                "reject": true
+            }
+        },
+        "count": {
+            "process_id": "count",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "condition": {
+                    "from_node": "count_condition"
+                }
+            }
+        },
+        "sum": {
+            "process_id": "sum",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "ignore_nodata": {
+                    "from_parameter": "ignore_nodata"
+                }
+            }
+        },
+        "divide": {
+            "process_id": "divide",
+            "arguments": {
+                "x": {
+                    "from_node": "sum"
+                },
+                "y": {
+                    "from_node": "count"
+                }
+            }
+        },
+        "neq": {
+            "process_id": "neq",
+            "arguments": {
+                "x": {
+                    "from_node": "count"
+                },
+                "y": 0
+            }
+        },
+        "if": {
+            "process_id": "if",
+            "arguments": {
+                "value": {
+                    "from_node": "neq"
+                },
+                "accept": {
+                    "from_node": "divide"
+                }
+            },
+            "result": true
+        }
+    }
+}

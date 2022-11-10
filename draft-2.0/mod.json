@@ -1,0 +1,95 @@
+{
+    "id": "mod",
+    "summary": "Modulo",
+    "description": "Remainder after a division of `x` by `y` for both integers and floating-point numbers.\n\nThe result of a modulo operation has the sign of the divisor. The handling regarding the sign of the result [differs between programming languages](https://en.wikipedia.org/wiki/Modulo_operation#In_programming_languages) and needs careful consideration to avoid unexpected results.\n\nThe no-data value `null` is passed through and therefore gets propagated if any of the arguments is `null`. A modulo by zero results in ±infinity if the processing environment supports it. Otherwise, a `DivisionByZero` exception must the thrown.",
+    "categories": [
+        "math"
+    ],
+    "parameters": [
+        {
+            "name": "x",
+            "description": "A number to be used as the dividend.",
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            }
+        },
+        {
+            "name": "y",
+            "description": "A number to be used as the divisor.",
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "The remainder after division.",
+        "schema": {
+            "type": [
+                "number",
+                "null"
+            ]
+        }
+    },
+    "exceptions": {
+        "DivisionByZero": {
+            "message": "Division by zero is not supported."
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "x": 27,
+                "y": 5
+            },
+            "returns": 2
+        },
+        {
+            "arguments": {
+                "x": -27,
+                "y": 5
+            },
+            "returns": 3
+        },
+        {
+            "arguments": {
+                "x": 3.14,
+                "y": -2
+            },
+            "returns": -0.86
+        },
+        {
+            "arguments": {
+                "x": -27,
+                "y": -5
+            },
+            "returns": -2
+        },
+        {
+            "arguments": {
+                "x": 27,
+                "y": null
+            },
+            "returns": null
+        },
+        {
+            "arguments": {
+                "x": null,
+                "y": 5
+            },
+            "returns": null
+        }
+    ],
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://en.wikipedia.org/wiki/Modulo_operation",
+            "title": "Modulo explained by Wikipedia"
+        }
+    ]
+}

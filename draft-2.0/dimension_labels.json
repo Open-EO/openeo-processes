@@ -1,0 +1,42 @@
+{
+    "id": "dimension_labels",
+    "summary": "Get the dimension labels",
+    "description": "Gives all labels for a dimension in the data cube. The labels have the same order as in the data cube.\n\nIf a dimension with the specified name does not exist, the process fails with a `DimensionNotAvailable` exception.",
+    "categories": [
+        "cubes"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "dimension",
+            "description": "The name of the dimension to get the labels for.",
+            "schema": {
+                "type": "string"
+            }
+        }
+    ],
+    "returns": {
+        "description": "The labels as an array.",
+        "schema": {
+            "type": "array",
+            "items": {
+                "type": [
+                    "number",
+                    "string"
+                ]
+            }
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
+        }
+    }
+}

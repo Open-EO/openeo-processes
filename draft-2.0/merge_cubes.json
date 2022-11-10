@@ -1,0 +1,95 @@
+{
+    "id": "merge_cubes",
+    "summary": "Merge two data cubes",
+    "description": "The data cubes have to be compatible. A merge operation without overlap should be reversible with (a set of) filter operations for each of the two cubes. The process performs the join on overlapping dimensions, with the same name and type.\n\nAn overlapping dimension has the same name, type, reference system and resolution in both dimensions, but can have different labels. One of the dimensions can have different labels, for all other dimensions the labels must be equal. If data overlaps, the parameter `overlap_resolver` must be specified to resolve the overlap.\n\n**Examples for merging two data cubes:**\n\n1. Data cubes with the dimensions (`x`, `y`, `t`, `bands`) have the same dimension labels in `x`, `y` and `t`, but the labels for the dimension `bands` are `B1` and `B2` for the first cube and `B3` and `B4`. An overlap resolver is *not needed*. The merged data cube has the dimensions `x`, `y`, `t` and `bands` and the dimension `bands` has four dimension labels: `B1`, `B2`, `B3`, `B4`.\n2. Data cubes with the dimensions (`x`, `y`, `t`, `bands`) have the same dimension labels in `x`, `y` and `t`, but the labels for the dimension `bands` are `B1` and `B2` for the first data cube and `B2` and `B3` for the second. An overlap resolver is *required* to resolve overlap in band `B2`. The merged data cube has the dimensions `x`, `y`, `t` and `bands` and the dimension `bands` has three dimension labels: `B1`, `B2`, `B3`.\n3. Data cubes with the dimensions (`x`, `y`, `t`) have the same dimension labels in `x`, `y` and `t`. There are two options:\n   1. Keep the overlapping values separately in the merged data cube: An overlap resolver is *not needed*, but for each data cube you need to add a new dimension using ``add_dimension()``. The new dimensions must be equal, except that the labels for the new dimensions must differ by name. The merged data cube has the same dimensions and labels as the original data cubes, plus the dimension added with ``add_dimension()``, which has the two dimension labels after the merge.\n   2. Combine the overlapping values into a single value: An overlap resolver is *required* to resolve the overlap for all pixels. The merged data cube has the same dimensions and labels as the original data cubes, but all pixel values have been processed by the overlap resolver.\n4. A data cube with dimensions (`x`, `y`, `t` / `bands`) or (`x`, `y`, `t`, `bands`) and another data cube with dimensions (`x`, `y`) have the same dimension labels in `x` and `y`. Merging them will join dimensions `x` and `y`, so the lower dimension cube is merged with each time step and band available in the higher dimensional cube. This can for instance be used to apply a digital elevation model to a spatio-temporal data cube. An overlap resolver is *required* to resolve the overlap for all pixels.\n\nAfter the merge, the dimensions with a natural/inherent label order (with a reference system this is each spatial and temporal dimensions) still have all dimension labels sorted. For other dimensions where there is no inherent order, including bands, the dimension labels keep the order in which they are present in the original data cubes and the dimension labels of `cube2` are appended to the dimension labels of `cube1`.",
+    "categories": [
+        "cubes"
+    ],
+    "parameters": [
+        {
+            "name": "cube1",
+            "description": "The first data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "cube2",
+            "description": "The second data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "overlap_resolver",
+            "description": "A reduction operator that resolves the conflict if the data overlaps. The reducer must return a value of the same data type as the input values are. The reduction operator may be a single process such as ``multiply()`` or consist of multiple sub-processes. `null` (the default) can be specified if no overlap resolver is required.",
+            "schema": {
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": [
+                    {
+                        "name": "x",
+                        "description": "The overlapping value from the first data cube `cube1`.",
+                        "schema": {
+                            "description": "Any data type."
+                        }
+                    },
+                    {
+                        "name": "y",
+                        "description": "The overlapping value from the second data cube `cube2`.",
+                        "schema": {
+                            "description": "Any data type."
+                        }
+                    },
+                    {
+                        "name": "context",
+                        "description": "Additional data passed by the user.",
+                        "schema": {
+                            "description": "Any data type."
+                        },
+                        "optional": true,
+                        "default": null
+                    }
+                ],
+                "returns": {
+                    "description": "The value to be set in the merged data cube.",
+                    "schema": {
+                        "description": "Any data type."
+                    }
+                }
+            },
+            "default": null,
+            "optional": true
+        },
+        {
+            "name": "context",
+            "description": "Additional data to be passed to the overlap resolver.",
+            "schema": {
+                "description": "Any data type."
+            },
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "The merged data cube. See the process description for details regarding the dimensions and dimension properties (name, type, labels, reference system and resolution).",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "exceptions": {
+        "OverlapResolverMissing": {
+            "message": "Overlapping data cubes, but no overlap resolver has been specified."
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://en.wikipedia.org/wiki/Reduction_Operator",
+            "title": "Background information on reduction operators (binary reducers) by Wikipedia"
+        }
+    ]
+}

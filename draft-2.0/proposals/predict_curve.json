@@ -1,0 +1,112 @@
+{
+    "id": "predict_curve",
+    "summary": "Predict values",
+    "description": "Predict values using a model function and pre-computed parameters. The process is primarily intended to compute values for new labels, but it can also fill gaps where existing labels contain no-data (`null`) values.",
+    "categories": [
+        "cubes",
+        "math"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube to predict values for.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "parameters",
+            "description": "A data cube with optimal values from a result of e.g. ``fit_curve()``.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "function",
+            "description": "The model function. It must take the parameters to fit as array through the first argument and the independent variable `x` as the second argument.\n\nIt is recommended to store the model function as a user-defined process on the back-end.",
+            "schema": {
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": [
+                    {
+                        "name": "x",
+                        "description": "The value for the independent variable `x`.",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "parameters",
+                        "description": "The parameters for the model function, contains at least one parameter.",
+                        "schema": {
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                                "type": "number"
+                            }
+                        }
+                    }
+                ],
+                "returns": {
+                    "description": "The computed value `y` value for the given independent variable `x` and the parameters.",
+                    "schema": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        {
+            "name": "dimension",
+            "description": "The name of the dimension for predictions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "labels",
+            "description": "The labels to predict values for. If no labels are given, predicts values only for no-data (`null`) values in the data cube.",
+            "optional": true,
+            "default": null,
+            "schema": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string",
+                                "format": "date",
+                                "subtype": "date"
+                            },
+                            {
+                                "type": "string",
+                                "format": "date-time",
+                                "subtype": "date-time"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "returns": {
+        "description": "A data cube with the predicted values.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
+        }
+    }
+}

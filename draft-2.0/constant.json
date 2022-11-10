@@ -1,0 +1,23 @@
+{
+    "id": "constant",
+    "summary": "Define a constant value",
+    "description": "Defines a constant value that can be reused in multiple places of a process.",
+    "categories": [
+        "math > constants"
+    ],
+    "parameters": [
+        {
+            "name": "x",
+            "description": "The value of the constant.",
+            "schema": {
+                "description": "Any data type."
+            }
+        }
+    ],
+    "returns": {
+        "description": "The value of the constant.",
+        "schema": {
+            "description": "Any data type."
+        }
+    }
+}

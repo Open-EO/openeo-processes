@@ -1,0 +1,237 @@
+{
+    "id": "aggregate_temporal",
+    "summary": "Temporal aggregations",
+    "description": "Computes a temporal aggregation based on an array of temporal intervals.\n\nFor common regular calendar hierarchies such as year, month, week or seasons ``aggregate_temporal_period()`` can be used. Other calendar hierarchies must be transformed into specific intervals by the clients.\n\nFor each interval, all data along the dimension will be passed through the reducer.\n\nThe computed values will be projected to the labels. If no labels are specified, the start of the temporal interval will be used as label for the corresponding values. In case of a conflict (i.e. the user-specified values for the start times of the temporal intervals are not distinct), the user-defined labels must be specified in the parameter `labels` as otherwise a `DistinctDimensionLabelsRequired` exception would be thrown. The number of user-defined labels and the number of intervals need to be equal.\n\nIf the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension.",
+    "categories": [
+        "cubes",
+        "aggregate & resample"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "intervals",
+            "description": "Left-closed temporal intervals, which are allowed to overlap. Each temporal interval in the array has exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html). Although [RFC 3339 prohibits the hour to be '24'](https://www.rfc-editor.org/rfc/rfc3339.html#section-5.7), **this process allows the value '24' for the hour** of an end time in order to make it possible that left-closed time intervals can fully cover the day.",
+            "schema": {
+                "type": "array",
+                "subtype": "temporal-intervals",
+                "minItems": 1,
+                "items": {
+                    "type": "array",
+                    "subtype": "temporal-interval",
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time",
+                                "subtype": "date-time"
+                            },
+                            {
+                                "type": "string",
+                                "format": "date",
+                                "subtype": "date"
+                            },
+                            {
+                                "type": "string",
+                                "format": "time",
+                                "subtype": "time"
+                            },
+                            {
+                                "type": "string",
+                                "subtype": "year",
+                                "minLength": 4,
+                                "maxLength": 4,
+                                "pattern": "^\\d{4}$"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "examples": [
+                    [
+                        [
+                            "2015-01-01",
+                            "2016-01-01"
+                        ],
+                        [
+                            "2016-01-01",
+                            "2017-01-01"
+                        ],
+                        [
+                            "2017-01-01",
+                            "2018-01-01"
+                        ]
+                    ],
+                    [
+                        [
+                            "00:00:00Z",
+                            "12:00:00Z"
+                        ],
+                        [
+                            "12:00:00Z",
+                            "24:00:00Z"
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "name": "reducer",
+            "description": "A reducer to be applied for the values contained in each interval. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes. Intervals may not contain any values, which for most reducers leads to no-data (`null`) values by default.",
+            "schema": {
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "description": "A labeled array with elements of any type. If there's no data for the interval, the array is empty.",
+                        "schema": {
+                            "type": "array",
+                            "subtype": "labeled-array",
+                            "items": {
+                                "description": "Any data type."
+                            }
+                        }
+                    },
+                    {
+                        "name": "context",
+                        "description": "Additional data passed by the user.",
+                        "schema": {
+                            "description": "Any data type."
+                        },
+                        "optional": true,
+                        "default": null
+                    }
+                ],
+                "returns": {
+                    "description": "The value to be set in the new data cube.",
+                    "schema": {
+                        "description": "Any data type."
+                    }
+                }
+            }
+        },
+        {
+            "name": "labels",
+            "description": "Distinct labels for the intervals, which can contain dates and/or times. Is only required to be specified if the values for the start of the temporal intervals are not distinct and thus the default labels would not be unique. The number of labels and the number of groups need to be equal.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": [
+                        "number",
+                        "string"
+                    ]
+                }
+            },
+            "default": [],
+            "optional": true
+        },
+        {
+            "name": "dimension",
+            "description": "The name of the temporal dimension for aggregation. All data along the dimension is passed through the specified reducer. If the dimension is not set or set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` exception if it has more dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+            "schema": {
+                "type": [
+                    "string",
+                    "null"
+                ]
+            },
+            "default": null,
+            "optional": true
+        },
+        {
+            "name": "context",
+            "description": "Additional data to be passed to the reducer.",
+            "schema": {
+                "description": "Any data type."
+            },
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "A new data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except for the resolution and dimension labels of the given temporal dimension.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "intervals": [
+                    [
+                        "2015-01-01",
+                        "2016-01-01"
+                    ],
+                    [
+                        "2016-01-01",
+                        "2017-01-01"
+                    ],
+                    [
+                        "2017-01-01",
+                        "2018-01-01"
+                    ],
+                    [
+                        "2018-01-01",
+                        "2019-01-01"
+                    ],
+                    [
+                        "2019-01-01",
+                        "2020-01-01"
+                    ]
+                ],
+                "labels": [
+                    "2015",
+                    "2016",
+                    "2017",
+                    "2018",
+                    "2019"
+                ],
+                "reducer": {
+                    "process_graph": {
+                        "mean1": {
+                            "process_id": "mean",
+                            "arguments": {
+                                "data": {
+                                    "from_parameter": "data"
+                                }
+                            },
+                            "result": true
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "exceptions": {
+        "TooManyDimensions": {
+            "message": "The data cube contains multiple temporal dimensions. The parameter `dimension` must be specified."
+        },
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
+        },
+        "DistinctDimensionLabelsRequired": {
+            "message": "The dimension labels have duplicate values. Distinct labels must be specified."
+        }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#aggregate",
+            "rel": "about",
+            "title": "Aggregation explained in the openEO documentation"
+        }
+    ]
+}
