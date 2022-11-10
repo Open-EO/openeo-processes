@@ -1,7 +1,7 @@
 {
     "id": "climatological_normal",
     "summary": "Compute climatology normals",
-    "description": "Climatological normal period is a usually 30 year average of a weather variable. Climatological normals are used as an average or baseline to evaluate climate events and provide context for yearly, monthly, daily or seasonal variability. The default climatology period is from 1981 until 2010 (both inclusive).",
+    "description": "Climatological normal period is a usually 30 year average of a weather variable. Climatological normals are used as an average or baseline to evaluate climate events and provide context for yearly, monthly, daily or seasonal variability.",
     "categories": [
         "cubes",
         "climatology"
@@ -31,7 +31,7 @@
         },
         {
             "name": "climatology_period",
-            "description": "The climatology period as a closed temporal interval. The first element of the array is the first year to be fully included in the temporal interval. The second element is the last year to be fully included in the temporal interval. The default period is from 1981 until 2010 (both inclusive).",
+            "description": "The climatology period as a closed temporal interval. The first element of the array is the first year to be fully included in the temporal interval. The second element is the last year to be fully included in the temporal interval.\n\nThe default climatology period is from 1981 until 2010 (both inclusive) right now, but this might be updated over time to what is commonly used in climatology. If you don't want to keep your research to be reproducible, please explicitly specify a period.",
             "schema": {
                 "type": "array",
                 "subtype": "temporal-interval",
