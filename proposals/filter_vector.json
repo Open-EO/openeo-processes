@@ -24,11 +24,12 @@
         },
         {
             "name": "geometries",
-            "description": "One or more base geometries used for filtering, given as GeoJSON or vector data cube.\n\nTo maximize interoperability, `GeometryCollection` and multi geometries (e.g. `MultiPolygon`) should be be avoided.",
+            "description": "One or more base geometries used for filtering, given as GeoJSON or vector data cube.",
             "schema": [
                 {
                     "type": "object",
-                    "subtype": "geojson"
+                    "subtype": "geojson",
+                    "description": "The GeoJSON type `GeometryCollection` is not supported."
                 },
                 {
                     "type": "object",

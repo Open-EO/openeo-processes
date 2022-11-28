@@ -10,11 +10,12 @@
     "parameters": [
         {
             "name": "data",
-            "description": "Input geometries for sample extraction.\n\nTo maximize interoperability, a nested `GeometryCollection` should be avoided. Furthermore, a `GeometryCollection` composed of a single type of geometries should be avoided in favour of the corresponding multi-part type (e.g. `MultiPolygon`).",
+            "description": "Input geometries for sample extraction.",
             "schema": [
                 {
                     "type": "object",
-                    "subtype": "geojson"
+                    "subtype": "geojson",
+                    "description": "The GeoJSON type `GeometryCollection` is not supported."
                 },
                 {
                     "type": "object",

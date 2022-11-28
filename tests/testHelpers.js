@@ -154,7 +154,7 @@ async function getAjv() {
 								minItems: 1,
 								items: {
 									type: "string",
-									enum: ["Point", "LineString", "Polygon", "MultiPoint", "MultiLineString", "MultiPolygon", "GeometryCollection"]
+									enum: ["Point", "LineString", "Polygon", "MultiPoint", "MultiLineString", "MultiPolygon"]
 								}
 							}
 						}
