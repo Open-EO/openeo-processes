@@ -13,7 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `fit_regr_random_forest`
     - `flatten_dimensions`
     - `load_ml_model`
-    - `predict_random_forest`
+    - `predict_ml_model`
+    - `predict_ml_model_probabilities`
     - `save_ml_model`
     - `unflatten_dimension`
     - `vector_buffer`
