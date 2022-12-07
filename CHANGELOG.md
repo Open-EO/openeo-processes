@@ -48,7 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Clarified that a `TargetDimensionExists` exception is thrown if the target dimension exists.
 - `apply` and `array_apply`: Fixed broken references to the `absolute` process
 - `apply_neighborhood`:
-    - Parameter `overlap` was optional but had no default value and no schena for the default value  defined.
+    - Parameter `overlap` was optional but had no default value and no schema for the default value defined.
     - Clarified that the overlap must be included in the returned data cube and can't be modified. [#386](https://github.com/Open-EO/openeo-processes/issues/386)
     - Removed a conflicting statement that dimension labels can be changed. [#385](https://github.com/Open-EO/openeo-processes/issues/385)
 - `array_contains` and `array_find`: Clarify that giving `null` as `value` always returns `false` or `null` respectively, also fixed the incorrect examples. [#348](https://github.com/Open-EO/openeo-processes/issues/348)
