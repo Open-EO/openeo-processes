@@ -111,6 +111,7 @@
                 {
                     "type": "array",
                     "subtype": "temporal-interval",
+                    "uniqueItems": true,
                     "minItems": 2,
                     "maxItems": 2,
                     "items": {
