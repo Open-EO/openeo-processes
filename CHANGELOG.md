@@ -7,12 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Changes for vector cubes
 
 - Update the processes based on `raster-cubes` to work with `datacube` instead
-- Renamed `create_raster_cube` to `create_data_cube`
+- Rename `create_raster_cube` to `create_data_cube`
 - `add_dimension`: Added new dimension type `vector`
 - New definition for `aggregate_spatial`:
     - Allows more than 3 input dimensions
-    - Allow to not export statistics by changing the parameter `target_dimenaion`
-    - Clarified how the resulting vector cube looks like
+    - Allow to not export statistics by changing the parameter `target_dimension`
+    - Clarify how the resulting vector cube looks like
 
 ## Unreleased / Draft
 
