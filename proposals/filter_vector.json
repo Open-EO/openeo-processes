@@ -1,7 +1,7 @@
 {
     "id": "filter_vector",
     "summary": "Spatial vector filter using geometries",
-    "description": "Limits the vector data cube to the specified geometries. The process works on geometries as defined in the Simple Features standard by the OGC.",
+    "description": "Limits the vector data cube to the specified geometries. The process works on geometries as defined in the Simple Features standard by the OGC. Alternatively, use ``filter_bbox()`` to filter by bounding box.",
     "categories": [
         "cubes",
         "filter",
@@ -17,7 +17,7 @@
                 "subtype": "datacube",
                 "dimensions": [
                     {
-                        "type": "vector"
+                        "type": "geometries"
                     }
                 ]
             }
@@ -35,7 +35,7 @@
                     "subtype": "datacube",
                     "dimensions": [
                         {
-                            "type": "vector"
+                            "type": "geometries"
                         }
                     ]
                 }
@@ -62,17 +62,13 @@
         }
     ],
     "returns": {
-        "description": "A vector data cube restricted to the specified geometries. The dimensions and dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the vector dimension has less (or the same) dimension labels.",
+        "description": "A vector data cube restricted to the specified geometries. The dimensions and dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the geometries dimension has less (or the same) dimension labels.",
         "schema": {
             "type": "object",
             "subtype": "datacube",
             "dimensions": [
                 {
-                    "type": "spatial",
-                    "axis": [
-                        "x",
-                        "y"
-                    ]
+                    "type": "geometries"
                 }
             ]
         }

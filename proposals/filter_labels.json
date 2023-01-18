@@ -25,7 +25,7 @@
                 "parameters": [
                     {
                         "name": "value",
-                        "description": "A single dimension label to compare against. The data type of the parameter depends on the dimension labels set for the dimension.",
+                        "description": "A single dimension label to compare against. The data type of the parameter depends on the dimension labels set for the dimension. Please note that for some dimension types a representation is used, e.g.\n\n* dates and/or times are usually strings compliant to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601),\n* geometries can be a WKT string or an identifier.",
                         "schema": [
                             {
                                 "type": "number"

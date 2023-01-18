@@ -40,9 +40,9 @@
                 "type": "string",
                 "enum": [
                     "bands",
+                    "geometries",
                     "spatial",
                     "temporal",
-                    "vector",
                     "other"
                 ]
             },

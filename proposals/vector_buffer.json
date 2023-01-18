@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "geometries",
-            "description": "Geometries to apply the buffer on. Vector properties are preserved for vector data cubes and all GeoJSON Features.\n\nTo maximize interoperability, a nested `GeometryCollection` should be avoided. Furthermore, a `GeometryCollection` composed of a single type of geometries should be avoided in favour of the corresponding multi-part type (e.g. `MultiPolygon`).",
+            "description": "Geometries to apply the buffer on. Feature properties are preserved for vector data cubes and all GeoJSON Features.\n\nTo maximize interoperability, a nested `GeometryCollection` should be avoided. Furthermore, a `GeometryCollection` composed of a single type of geometries should be avoided in favour of the corresponding multi-part type (e.g. `MultiPolygon`).",
             "schema": [
                 {
                     "type": "object",
@@ -20,7 +20,7 @@
                     "subtype": "datacube",
                     "dimensions": [
                         {
-                            "type": "vector"
+                            "type": "geometries"
                         }
                     ]
                 }
@@ -44,7 +44,7 @@
             "subtype": "datacube",
             "dimensions": [
                 {
-                    "type": "vector"
+                    "type": "geometries"
                 }
             ]
         }
