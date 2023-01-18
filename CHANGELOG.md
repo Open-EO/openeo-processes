@@ -4,16 +4,6 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Changes for vector cubes
-
-- Update the processes based on `raster-cube` or `vector-cube` to work with `datacube` instead
-- Rename `create_raster_cube` to `create_data_cube`
-- `add_dimension`: Added new dimension type `geometries`
-- New definition for `aggregate_spatial`:
-    - Allows more than 3 input dimensions
-    - Allow to not export statistics by changing the parameter `target_dimension`
-    - Clarify how the resulting vector cube looks like
-
 ## Unreleased / Draft
 
 ### Added
@@ -30,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `vector_buffer`
     - `vector_to_random_points`
     - `vector_to_regular_points`
+- `add_dimension`: Added new dimension type `geometries`. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
 
 ### Changed
 
@@ -45,6 +36,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Added a `NoDataAvailable` exception
 - `inspect`: The parameter `message` has been moved to be the second argument. [#369](https://github.com/Open-EO/openeo-processes/issues/369)
 - `save_result`: Added a more concrete `DataCubeEmpty` exception.
+- New definition for `aggregate_spatial`:
+    - Allows more than 3 input dimensions [#126](https://github.com/Open-EO/openeo-processes/issues/126)
+    - Allow to not export statistics by changing the parameter `target_dimension` [#366](https://github.com/Open-EO/openeo-processes/issues/366)
+    - Clarify how the resulting vector data cube looks like  [#356](https://github.com/Open-EO/openeo-processes/issues/356)
+- Renamed `create_raster_cube` to `create_data_cube`. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
+- Updated the processes based on the subtypes `raster-cube` or `vector-cube` to work with the subtype `datacube` instead. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
 
 ### Removed
 

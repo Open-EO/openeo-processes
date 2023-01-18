@@ -10,15 +10,32 @@
         {
             "name": "predictors",
             "description": "The predictors for the classification model as a vector data cube. Aggregated to the features (vectors) of the target input variable.",
-            "schema": {
-                "type": "object",
-                "subtype": "datacube",
-                "dimensions": [
-                    {
-                        "type": "geometries"
-                    }
-                ]
-            }
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometries"
+                        },
+                        {
+                            "type": "bands"
+                        }
+                    ]
+                },
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometries"
+                        },
+                        {
+                            "type": "other"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "name": "target",
