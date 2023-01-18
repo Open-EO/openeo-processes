@@ -6,13 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Changes for vector cubes
 
-- Update the processes based on `raster-cubes` to work with `datacube` instead
-- Renamed `create_raster_cube` to `create_data_cube`
-- `add_dimension`: Added new dimension type `vector`
+- Update the processes based on `raster-cube` or `vector-cube` to work with `datacube` instead
+- Rename `create_raster_cube` to `create_data_cube`
+- `add_dimension`: Added new dimension type `geometries`
 - New definition for `aggregate_spatial`:
     - Allows more than 3 input dimensions
-    - Allow to not export statistics by changing the parameter `target_dimenaion`
-    - Clarified how the resulting vector cube looks like
+    - Allow to not export statistics by changing the parameter `target_dimension`
+    - Clarify how the resulting vector cube looks like
 
 ## Unreleased / Draft
 
@@ -54,7 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - `aggregate_spatial`:
-  - Clarified that vector properties are preserved for vector data cubes and all GeoJSON Features. [#270](https://github.com/Open-EO/openeo-processes/issues/270)
+  - Clarified that feature properties are preserved for vector data cubes and all GeoJSON Features. [#270](https://github.com/Open-EO/openeo-processes/issues/270)
   - Clarified that a `TargetDimensionExists` exception is thrown if the target dimension exists.
 - `apply` and `array_apply`: Fixed broken references to the `absolute` process
 - `apply_neighborhood`: Parameter `overlap` was optional but had no default value and no schena for the default value defined.

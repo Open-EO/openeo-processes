@@ -15,7 +15,7 @@
                 "subtype": "datacube",
                 "dimensions": [
                     {
-                        "type": "vector"
+                        "type": "geometries"
                     }
                 ]
             }
@@ -28,7 +28,7 @@
                 "subtype": "datacube",
                 "dimensions": [
                     {
-                        "type": "vector"
+                        "type": "geometries"
                     }
                 ]
             }

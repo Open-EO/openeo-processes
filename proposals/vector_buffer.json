@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "geometries",
-            "description": "Geometries to apply the buffer on. Vector properties are preserved for vector data cubes and all GeoJSON Features.",
+            "description": "Geometries to apply the buffer on. Feature properties are preserved for vector data cubes and all GeoJSON Features.",
             "schema": [
                 {
                     "type": "object",
@@ -21,7 +21,7 @@
                     "subtype": "datacube",
                     "dimensions": [
                         {
-                            "type": "vector"
+                            "type": "geometries"
                         }
                     ]
                 }
@@ -45,7 +45,7 @@
             "subtype": "datacube",
             "dimensions": [
                 {
-                    "type": "vector"
+                    "type": "geometries"
                 }
             ]
         }
