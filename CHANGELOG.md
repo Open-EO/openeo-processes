@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Changes for vector cubes
 
-- Update the processes based on `raster-cubes` to work with `datacube` instead
+- Update the processes based on `raster-cube` or `vector-cube` to work with `datacube` instead
 - Rename `create_raster_cube` to `create_data_cube`
 - `add_dimension`: Added new dimension type `vector`
 - New definition for `aggregate_spatial`:
