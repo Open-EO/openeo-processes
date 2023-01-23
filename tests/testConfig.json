@@ -1,0 +1,13 @@
+{
+	"folder": "../",
+	"proposalsFolder": "../proposals/",
+	"ignoredWords": ".words",
+	"anyOfRequired": [
+		"array_element",
+		"quantiles"
+	],
+	"subtypeSchemas": "../meta/subtype-schemas.json",
+	"checkSubtypeSchemas": true,
+	"forbidDeprecatedTypes": false,
+	"verbose": false
+}
