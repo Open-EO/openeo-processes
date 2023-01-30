@@ -8,10 +8,19 @@
     "parameters": [
         {
             "name": "data",
-            "description": "A data cube.",
+            "description": "A raster data cube.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    }
+                ]
             }
         },
         {
@@ -26,7 +35,16 @@
                         "description": "A subset of the data cube as specified in `size` and `overlap`.",
                         "schema": {
                             "type": "object",
-                            "subtype": "raster-cube"
+                            "subtype": "datacube",
+                            "dimensions": [
+                                {
+                                    "type": "spatial",
+                                    "axis": [
+                                        "x",
+                                        "y"
+                                    ]
+                                }
+                            ]
                         }
                     },
                     {
@@ -43,7 +61,16 @@
                     "description": "The data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) must remain unchanged, otherwise a `DataCubePropertiesImmutable` exception will be thrown.",
                     "schema": {
                         "type": "object",
-                        "subtype": "raster-cube"
+                        "subtype": "datacube",
+                        "dimensions": [
+                            {
+                                "type": "spatial",
+                                "axis": [
+                                    "x",
+                                    "y"
+                                ]
+                            }
+                        ]
                     }
                 }
             }
@@ -184,10 +211,19 @@
         }
     ],
     "returns": {
-        "description": "A data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
+        "description": "A raster data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "spatial",
+                    "axis": [
+                        "x",
+                        "y"
+                    ]
+                }
+            ]
         }
     },
     "examples": [

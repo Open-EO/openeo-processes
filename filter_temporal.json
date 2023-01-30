@@ -12,7 +12,12 @@
             "description": "A data cube.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "temporal"
+                    }
+                ]
             }
         },
         {
@@ -76,7 +81,12 @@
         "description": "A data cube restricted to the specified temporal extent. The dimensions and dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the temporal dimensions (determined by `dimensions` parameter) may have less dimension labels.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "temporal"
+                }
+            ]
         }
     },
     "exceptions": {
