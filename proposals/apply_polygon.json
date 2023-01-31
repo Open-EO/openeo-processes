@@ -1,5 +1,5 @@
 {
-    "id": "chunk_polygon",
+    "id": "apply_polygon",
     "summary": "Apply a process to spatial chunks of a data cube",
     "description": "The given data cube is chunked by the given polygons and applies the given process to each individual chunk.",
     "categories": [
