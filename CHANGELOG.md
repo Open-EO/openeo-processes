@@ -66,6 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `is_nodata`: Clarified that `NaN` can be considered as a no-data value only if it is explicitly specified as no-data value. [#361](https://github.com/Open-EO/openeo-processes/issues/361)
 - `rename_labels`: Clarified that the `LabelsNotEnumerated` exception is thrown if `source` is empty instead of if `target` is empty. [#321](https://github.com/Open-EO/openeo-processes/issues/321)
 - `round`: Clarify that the rounding for ties applies not only for integers. [#326](https://github.com/Open-EO/openeo-processes/issues/326)
+- `save_result`: Clarified that the process always returns `true` (and otherwise throws). [#334](https://github.com/Open-EO/openeo-processes/issues/334)
 
 ## [1.2.0] - 2021-12-13
 
