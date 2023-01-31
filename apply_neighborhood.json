@@ -8,10 +8,19 @@
     "parameters": [
         {
             "name": "data",
-            "description": "A data cube.",
+            "description": "A raster data cube.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    }
+                ]
             }
         },
         {
@@ -28,7 +37,16 @@
                             {
                                 "title": "Multi-dimensional data",
                                 "type": "object",
-                                "subtype": "raster-cube"
+                                "subtype": "datacube",
+                                "dimensions": [
+                                    {
+                                        "type": "spatial",
+                                        "axis": [
+                                            "x",
+                                            "y"
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "title": "One-dimensional data",
@@ -53,7 +71,16 @@
                         {
                             "title": "Multi-dimensional data",
                             "type": "object",
-                            "subtype": "raster-cube"
+                            "subtype": "datacube",
+                            "dimensions": [
+                                {
+                                    "type": "spatial",
+                                    "axis": [
+                                        "x",
+                                        "y"
+                                    ]
+                                }
+                            ]
                         },
                         {
                             "title": "One-dimensional data",
@@ -199,10 +226,19 @@
         }
     ],
     "returns": {
-        "description": "A data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
+        "description": "A raster data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "spatial",
+                    "axis": [
+                        "x",
+                        "y"
+                    ]
+                }
+            ]
         }
     },
     "examples": [
