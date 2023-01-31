@@ -296,7 +296,7 @@
             "type": "array",
             "subtype": "temporal-interval",
             "title": "Single temporal interval",
-            "description": "Left-closed temporal interval, represented as two-element array with the following elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html). `null` can be used to specify open intervals.",
+            "description": "Left-closed temporal interval, represented as two-element array with the following elements:\n\n1. The first element is the start of the temporal interval. The specified time instant is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified time instant is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html). `null` can be used to specify unbounded intervals.",
             "uniqueItems": true,
             "minItems": 2,
             "maxItems": 2,

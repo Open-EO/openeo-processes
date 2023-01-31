@@ -17,7 +17,7 @@
         },
         {
             "name": "intervals",
-            "description": "Left-closed temporal intervals, which are allowed to overlap. Each temporal interval in the array has exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe second element must always be greater/later than the first element. Otherwise, a `TemporalExtentEmpty` exception is thrown.\n\nThe specified temporal strings follow [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html).",
+            "description": "Left-closed temporal intervals, which are allowed to overlap. Each temporal interval in the array has exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified time instant is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified time instant is **excluded** from the interval.\n\nThe second element must always be greater/later than the first element. Otherwise, a `TemporalExtentEmpty` exception is thrown.\n\nThe specified temporal strings follow [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html).",
             "schema": {
                 "type": "array",
                 "subtype": "temporal-intervals",
