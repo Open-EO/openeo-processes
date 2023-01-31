@@ -11,10 +11,19 @@
     "parameters": [
         {
             "name": "data",
-            "description": "A data cube.",
+            "description": "A raster data cube.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    }
+                ]
             }
         },
         {
@@ -66,7 +75,7 @@
         "description": "A data cube with the newly computed values. It is missing the horizontal spatial dimensions, the number of dimensions decreases by two. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube"
         }
     },
     "links": [

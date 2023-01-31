@@ -12,7 +12,12 @@
             "description": "A data cube.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "temporal"
+                    }
+                ]
             }
         },
         {
@@ -162,7 +167,12 @@
         "description": "A new data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except for the resolution and dimension labels of the given temporal dimension.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "temporal"
+                }
+            ]
         }
     },
     "examples": [
