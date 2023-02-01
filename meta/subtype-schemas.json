@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://processes.openeo.org/1.2.0/meta/subtype-schemas.json",
+    "$id": "https://processes.openeo.org/1.2.0/meta/subtype-schemas.json",
     "title": "Subtype Schemas",
     "description": "This file defines the schemas for subtypes we define for openEO processes.",
     "definitions": {
@@ -111,6 +111,12 @@
             "title": "Collection ID",
             "description": "A collection identifier from the list of supported collections.",
             "pattern": "^[\\w\\-\\.~/]+$"
+        },
+        "datacube": {
+            "type": "object",
+            "subtype": "datacube",
+            "title": "Data Cube",
+            "description": "A data cube that consists of an arbitrary number of dimensions and doesn't require any dimension type specifically."
         },
         "date": {
             "type": "string",
@@ -290,7 +296,8 @@
             "type": "object",
             "subtype": "raster-cube",
             "title": "Raster data cube",
-            "description": "A raster data cube, an image collection stored at the back-end. Different back-ends have different internal representations for this data structure."
+            "description": "A raster data cube, which is a data cube with two dimension of type spatial (x and y). This has been deprecated in favour of `datacube`.",
+            "deprecated": true
         },
         "temporal-interval": {
             "type": "array",
@@ -417,7 +424,8 @@
             "type": "object",
             "subtype": "vector-cube",
             "title": "Vector data cube",
-            "description": "A vector data cube, a vector collection stored at the back-end. Different back-ends have different internal representations for this data structure"
+            "description": "A vector data cube, which is a data cube with a dimension of type vector. This has been deprecated in favour of `datacube`.",
+            "deprecated": true
         },
         "wkt2-definition": {
             "type": "string",

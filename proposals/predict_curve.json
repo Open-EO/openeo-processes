@@ -13,15 +13,15 @@
             "description": "A data cube to predict values for.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube"
             }
         },
         {
             "name": "parameters",
-            "description": "A data cube with optimal values from a result of e.g. ``fit_curve()``.",
+            "description": "A data cube with optimal values, e.g. computed by the process ``fit_curve()``.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube"
             }
         },
         {
@@ -101,7 +101,7 @@
         "description": "A data cube with the predicted values.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube"
         }
     },
     "exceptions": {

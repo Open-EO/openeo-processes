@@ -1,7 +1,7 @@
 {
     "id": "vector_to_regular_points",
     "summary": "Sample regular points from geometries",
-    "description": "Generate a vector data cube of points by sampling regularly-spaced points from input geometries. Vector properties are preserved.",
+    "description": "Generate a vector data cube of points by sampling regularly-spaced points from input geometries. Feature properties are preserved.",
     "categories": [
         "cubes",
         "vector"
@@ -10,15 +10,21 @@
     "parameters": [
         {
             "name": "data",
-            "description": "Input geometries for sample extraction.\n\nTo maximize interoperability, a nested `GeometryCollection` should be avoided. Furthermore, a `GeometryCollection` composed of a single type of geometries should be avoided in favour of the corresponding multi-part type (e.g. `MultiPolygon`).",
+            "description": "Input geometries for sample extraction.",
             "schema": [
                 {
                     "type": "object",
-                    "subtype": "geojson"
+                    "subtype": "geojson",
+                    "description": "The GeoJSON type `GeometryCollection` is not supported."
                 },
                 {
                     "type": "object",
-                    "subtype": "vector-cube"
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometries"
+                        }
+                    ]
                 }
             ]
         },
@@ -44,7 +50,16 @@
         "description": "Returns a vector data cube with the sampled points.",
         "schema": {
             "type": "object",
-            "subtype": "vector-cube"
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "geometries",
+                    "geometry_type": [
+                        "Point",
+                        "MultiPoint"
+                    ]
+                }
+            ]
         }
     }
 }

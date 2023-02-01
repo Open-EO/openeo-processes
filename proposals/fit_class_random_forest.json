@@ -10,17 +10,44 @@
         {
             "name": "predictors",
             "description": "The predictors for the classification model as a vector data cube. Aggregated to the features (vectors) of the target input variable.",
-            "schema": {
-                "type": "object",
-                "subtype": "vector-cube"
-            }
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometries"
+                        },
+                        {
+                            "type": "bands"
+                        }
+                    ]
+                },
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometries"
+                        },
+                        {
+                            "type": "other"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "name": "target",
             "description": "The training sites for the classification model as a vector data cube. This is associated with the target variable for the Random Forest model. The geometry has to associated with a value to predict (e.g. fractional forest canopy cover).",
             "schema": {
                 "type": "object",
-                "subtype": "vector-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "geometries"
+                    }
+                ]
             }
         },
         {
