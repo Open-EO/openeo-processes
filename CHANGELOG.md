@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `flatten_dimensions`
     - `load_ml_model`
     - `predict_random_forest`
+    - `resample_vector`
     - `save_ml_model`
     - `unflatten_dimension`
     - `vector_buffer`

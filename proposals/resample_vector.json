@@ -1,0 +1,80 @@
+{
+    "id": "resample_vector",
+    "summary": "Reprojects the vector dimension",
+    "description": "Converts the geometries stored in the vector dimension to a different projection.\n\nTo spatially align two data cubes with each other, better use the process ``resample_cube_spatial()``.",
+    "categories": [
+        "cubes",
+        "aggregate & resample",
+        "vector"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A vector data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "geometries"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "projection",
+            "description": "Reprojects the geometries stored in the vector dimension to the given projection, specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html), [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html).",
+            "schema": [
+                {
+                    "title": "EPSG Code",
+                    "type": "integer",
+                    "subtype": "epsg-code",
+                    "minimum": 1000,
+                    "examples": [
+                        3857
+                    ]
+                },
+                {
+                    "title": "WKT2",
+                    "type": "string",
+                    "subtype": "wkt2-definition"
+                }
+            ]
+        }
+    ],
+    "returns": {
+        "description": "A vector data cube with geometries converted into the new projection. The reference system of the vector dimension changes, all other dimensions and properties remain unchanged.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "geometries"
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#resample",
+            "rel": "about",
+            "title": "Resampling explained in the openEO documentation"
+        },
+        {
+            "rel": "about",
+            "href": "https://proj.org/usage/projections.html",
+            "title": "PROJ parameters for cartographic projections"
+        },
+        {
+            "rel": "about",
+            "href": "http://www.epsg-registry.org",
+            "title": "Official EPSG code registry"
+        },
+        {
+            "rel": "about",
+            "href": "http://www.epsg.io",
+            "title": "Unofficial EPSG code database"
+        }
+    ]
+}
