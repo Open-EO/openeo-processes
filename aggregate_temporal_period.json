@@ -13,7 +13,12 @@
             "description": "The source data cube.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "temporal"
+                    }
+                ]
             }
         },
         {
@@ -97,7 +102,12 @@
         "description": "A new data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except for the resolution and dimension labels of the given temporal dimension. The specified temporal dimension has the following dimension labels (`YYYY` = four-digit year, `MM` = two-digit month, `DD` two-digit day of month):\n\n* `hour`: `YYYY-MM-DD-00` - `YYYY-MM-DD-23`\n* `day`: `YYYY-001` - `YYYY-365`\n* `week`: `YYYY-01` - `YYYY-52`\n* `dekad`: `YYYY-00` - `YYYY-36`\n* `month`: `YYYY-01` - `YYYY-12`\n* `season`: `YYYY-djf` (December - February), `YYYY-mam` (March - May), `YYYY-jja` (June - August), `YYYY-son` (September - November).\n* `tropical-season`: `YYYY-ndjfma` (November - April), `YYYY-mjjaso` (May - October).\n* `year`: `YYYY`\n* `decade`: `YYY0`\n* `decade-ad`: `YYY1`\n\nThe dimension labels in the new data cube are complete for the whole extent of the source data cube. For example, if `period` is set to `day` and the source data cube has two dimension labels at the beginning of the year (`2020-01-01`) and the end of a year (`2020-12-31`), the process returns a data cube with 365 dimension labels (`2020-001`, `2020-002`, ..., `2020-365`). In contrast, if `period` is set to `day` and the source data cube has just one dimension label `2020-01-05`, the process returns a data cube with just a single dimension label (`2020-005`).",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "temporal"
+                }
+            ]
         }
     },
     "exceptions": {

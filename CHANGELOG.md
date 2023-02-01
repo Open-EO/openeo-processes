@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New processes in proposal state:
+    - `filter_vector`
     - `fit_class_random_forest`
     - `fit_regr_random_forest`
     - `flatten_dimensions`
@@ -19,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `vector_buffer`
     - `vector_to_random_points`
     - `vector_to_regular_points`
+- `add_dimension`: Added new dimension type `geometries`. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
 
 ### Changed
 
@@ -27,25 +29,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `array_concat`
     - `array_modify`
 - Renamed `text_merge` to `text_concat` for better alignment with `array_concat` and existing implementations.
-- `apply_neighborhood`: Allow `null` as default value for units.
+- `apply_neighborhood`:
+    - Allow `null` as default value for units.
+    - Input and Output for the `process` can either be data cubes or arrays (if one-dimensional). [#387](https://github.com/Open-EO/openeo-processes/issues/387)
 - `run_udf`: Allow all data types instead of just objects in the `context` parameter. [#376](https://github.com/Open-EO/openeo-processes/issues/376)
 - `load_collection` and `load_result`:
     - Require at least one band if not set to `null`. [#372](https://github.com/Open-EO/openeo-processes/issues/372)
     - Added a `NoDataAvailable` exception
 - `inspect`: The parameter `message` has been moved to be the second argument. [#369](https://github.com/Open-EO/openeo-processes/issues/369)
 - `save_result`: Added a more concrete `DataCubeEmpty` exception.
+- New definition for `aggregate_spatial`:
+    - Allows more than 3 input dimensions [#126](https://github.com/Open-EO/openeo-processes/issues/126)
+    - Allow to not export statistics by changing the parameter `target_dimension` [#366](https://github.com/Open-EO/openeo-processes/issues/366)
+    - Clarify how the resulting vector data cube looks like  [#356](https://github.com/Open-EO/openeo-processes/issues/356)
+- Renamed `create_raster_cube` to `create_data_cube`. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
+- Updated the processes based on the subtypes `raster-cube` or `vector-cube` to work with the subtype `datacube` instead. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
 
 ### Removed
 
 - The `examples` folder has been migrated to the [openEO Community Examples](https://github.com/Open-EO/openeo-community-examples/tree/main/processes) repository.
+- Deprecated `GeometryCollections` are not supported any longer. [#389](https://github.com/Open-EO/openeo-processes/issues/389)
 
 ### Fixed
 
 - `aggregate_spatial`:
-  - Clarified that vector properties are preserved for vector data cubes and all GeoJSON Features. [#270](https://github.com/Open-EO/openeo-processes/issues/270)
-  - Clarified that a `TargetDimensionExists` exception is thrown if the target dimension exists.
+    - Clarified that feature properties are preserved for vector data cubes and all GeoJSON Features. [#270](https://github.com/Open-EO/openeo-processes/issues/270)
+    - Clarified that a `TargetDimensionExists` exception is thrown if the target dimension exists.
 - `apply` and `array_apply`: Fixed broken references to the `absolute` process
-- `apply_neighborhood`: Parameter `overlap` was optional but had no default value and no schena for the default value defined.
+- `apply_neighborhood`:
+    - Parameter `overlap` was optional but had no default value and no schema for the default value defined.
+    - Clarified that the overlap must be included in the returned data cube but value changes are ignored. [#386](https://github.com/Open-EO/openeo-processes/issues/386)
+    - Removed a conflicting statement that dimension labels can be changed. [#385](https://github.com/Open-EO/openeo-processes/issues/385)
 - `array_contains` and `array_find`: Clarify that giving `null` as `value` always returns `false` or `null` respectively, also fixed the incorrect examples. [#348](https://github.com/Open-EO/openeo-processes/issues/348)
 - `array_interpolate_linear`: Return value was incorrectly specified as `number` or `null`. It must return an array instead. [#333](https://github.com/Open-EO/openeo-processes/issues/333)
 - `is_nan`: Fixed a wrong description of the return value and simplified/clarified the process descriptions overall. [#360](https://github.com/Open-EO/openeo-processes/issues/360)
