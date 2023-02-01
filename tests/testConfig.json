@@ -9,5 +9,6 @@
 	"subtypeSchemas": "../meta/subtype-schemas.json",
 	"checkSubtypeSchemas": true,
 	"forbidDeprecatedTypes": false,
+	"checkProcessLinks": true,
 	"verbose": false
 }
