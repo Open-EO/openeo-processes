@@ -4281,7 +4281,7 @@
               "default": null
             },
             "crs": {
-              "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html) or [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
+              "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
               "anyOf": [
                 {
                   "title": "EPSG Code",
@@ -4296,12 +4296,6 @@
                   "title": "WKT2",
                   "type": "string",
                   "subtype": "wkt2-definition"
-                },
-                {
-                  "title": "PROJ definition",
-                  "type": "string",
-                  "subtype": "proj-definition",
-                  "deprecated": true
                 }
               ],
               "default": 4326
@@ -5630,7 +5624,7 @@
                 "default": null
               },
               "crs": {
-                "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html) or [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
+                "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
                 "anyOf": [
                   {
                     "title": "EPSG Code",
@@ -5645,12 +5639,6 @@
                     "title": "WKT2",
                     "type": "string",
                     "subtype": "wkt2-definition"
-                  },
-                  {
-                    "title": "PROJ definition",
-                    "type": "string",
-                    "subtype": "proj-definition",
-                    "deprecated": true
                   }
                 ],
                 "default": 4326
@@ -10701,7 +10689,7 @@
                 "default": null
               },
               "crs": {
-                "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html) or [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
+                "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
                 "anyOf": [
                   {
                     "title": "EPSG Code",
@@ -10716,12 +10704,6 @@
                     "title": "WKT2",
                     "type": "string",
                     "subtype": "wkt2-definition"
-                  },
-                  {
-                    "title": "PROJ definition",
-                    "type": "string",
-                    "subtype": "proj-definition",
-                    "deprecated": true
                   }
                 ],
                 "default": 4326
@@ -12498,7 +12480,7 @@
       },
       {
         "name": "projection",
-        "description": "Warps the data cube to the target projection, specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html), [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html). By default (`null`), the projection is not changed.",
+        "description": "Warps the data cube to the target projection, specified as as [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). By default (`null`), the projection is not changed.",
         "schema": [
           {
             "title": "EPSG Code",
@@ -12513,12 +12495,6 @@
             "title": "WKT2",
             "type": "string",
             "subtype": "wkt2-definition"
-          },
-          {
-            "title": "PROJ definition",
-            "type": "string",
-            "subtype": "proj-definition",
-            "deprecated": true
           },
           {
             "title": "Don't change projection",
