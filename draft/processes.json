@@ -4598,7 +4598,7 @@
   {
     "id": "gt",
     "summary": "Greater than comparison",
-    "description": "Compares whether `x` is strictly greater than `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is not a `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings use ``date_difference()``.",
+    "description": "Compares whether `x` is strictly greater than `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is not a `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
     "categories": [
       "comparison"
     ],
@@ -4689,7 +4689,7 @@
   {
     "id": "gte",
     "summary": "Greater than or equal to comparison",
-    "description": "Compares whether `x` is greater than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* If the operands are not equal (see process ``eq()``) and any of them is not a `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings use ``date_difference()``.",
+    "description": "Compares whether `x` is greater than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* If the operands are not equal (see process ``eq()``) and any of them is not a `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
     "categories": [
       "comparison"
     ],
@@ -5861,7 +5861,7 @@
   {
     "id": "lt",
     "summary": "Less than comparison",
-    "description": "Compares whether `x` is strictly less than `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is not a `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings use ``date_difference()``.",
+    "description": "Compares whether `x` is strictly less than `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is not a `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
     "categories": [
       "comparison"
     ],
@@ -5952,7 +5952,7 @@
   {
     "id": "lte",
     "summary": "Less than or equal to comparison",
-    "description": "Compares whether `x` is less than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* If the operands are not equal (see process ``eq()``) and any of them is not a `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings use ``date_difference()``.",
+    "description": "Compares whether `x` is less than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* If the operands are not equal (see process ``eq()``) and any of them is not a `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
     "categories": [
       "comparison"
     ],
@@ -7174,7 +7174,7 @@
   {
     "id": "neq",
     "summary": "Not equal to comparison",
-    "description": "Compares whether `x` is **not** strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings are normal strings. To compare temporal strings use ``date_difference()``.",
+    "description": "Compares whether `x` is **not** strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
     "categories": [
       "texts",
       "comparison"
