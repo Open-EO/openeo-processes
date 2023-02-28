@@ -57,6 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Clarified that feature properties are preserved for vector data cubes and all GeoJSON Features. [#270](https://github.com/Open-EO/openeo-processes/issues/270)
     - Clarified that a `TargetDimensionExists` exception is thrown if the target dimension exists.
 - `apply` and `array_apply`: Fixed broken references to the `absolute` process
+- `apply_dimension`: Clarify the behavior for when a dimension gets 'dropped'.  [#357](https://github.com/Open-EO/openeo-processes/issues/357)
 - `apply_neighborhood`:
     - Parameter `overlap` was optional but had no default value and no schema for the default value defined.
     - Clarified that the overlap must be included in the returned data cube but value changes are ignored. [#386](https://github.com/Open-EO/openeo-processes/issues/386)
