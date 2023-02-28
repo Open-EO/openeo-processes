@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New processes in proposal state:
+    - `date_difference`
     - `filter_vector`
     - `fit_class_random_forest`
     - `fit_regr_random_forest`
@@ -38,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Added a `NoDataAvailable` exception
 - `inspect`: The parameter `message` has been moved to be the second argument. [#369](https://github.com/Open-EO/openeo-processes/issues/369)
 - `save_result`: Added a more concrete `DataCubeEmpty` exception.
+- The comparison processes `eq`, `neq`, `lt`, `lte`, `gt`, `gte` don't support temporal comparison any longer. Instead explicitly use `date_difference`.
 - New definition for `aggregate_spatial`:
     - Allows more than 3 input dimensions [#126](https://github.com/Open-EO/openeo-processes/issues/126)
     - Allow to not export statistics by changing the parameter `target_dimension` [#366](https://github.com/Open-EO/openeo-processes/issues/366)
@@ -48,6 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - The `examples` folder has been migrated to the [openEO Community Examples](https://github.com/Open-EO/openeo-community-examples/tree/main/processes) repository.
+- `between`: Support for temporal comparison.
 - Deprecated `GeometryCollections` are not supported any longer. [#389](https://github.com/Open-EO/openeo-processes/issues/389)
 - Deprecated PROJ definitions for the CRS are not supported any longer.
 
