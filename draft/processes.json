@@ -2818,50 +2818,16 @@
       {
         "name": "min",
         "description": "Lower boundary (inclusive) to check against.",
-        "schema": [
-          {
-            "type": "number"
-          },
-          {
-            "type": "string",
-            "format": "date-time",
-            "subtype": "date-time"
-          },
-          {
-            "type": "string",
-            "format": "date",
-            "subtype": "date"
-          },
-          {
-            "type": "string",
-            "format": "time",
-            "subtype": "time"
-          }
-        ]
+        "schema": {
+          "type": "number"
+        }
       },
       {
         "name": "max",
         "description": "Upper boundary (inclusive) to check against.",
-        "schema": [
-          {
-            "type": "number"
-          },
-          {
-            "type": "string",
-            "format": "date-time",
-            "subtype": "date-time"
-          },
-          {
-            "type": "string",
-            "format": "date",
-            "subtype": "date"
-          },
-          {
-            "type": "string",
-            "format": "time",
-            "subtype": "time"
-          }
-        ]
+        "schema": {
+          "type": "number"
+        }
       },
       {
         "name": "exclude_max",
@@ -2924,47 +2890,6 @@
           "max": 0
         },
         "returns": true
-      },
-      {
-        "arguments": {
-          "x": "00:59:59Z",
-          "min": "01:00:00+01:00",
-          "max": "01:00:00Z"
-        },
-        "returns": true
-      },
-      {
-        "arguments": {
-          "x": "2018-07-23T17:22:45Z",
-          "min": "2018-01-01T00:00:00Z",
-          "max": "2018-12-31T23:59:59Z"
-        },
-        "returns": true
-      },
-      {
-        "arguments": {
-          "x": "2000-01-01",
-          "min": "2018-01-01",
-          "max": "2020-01-01"
-        },
-        "returns": false
-      },
-      {
-        "arguments": {
-          "x": "2018-12-31T17:22:45Z",
-          "min": "2018-01-01",
-          "max": "2018-12-31"
-        },
-        "returns": true
-      },
-      {
-        "arguments": {
-          "x": "2018-12-31T17:22:45Z",
-          "min": "2018-01-01",
-          "max": "2018-12-31",
-          "exclude_max": true
-        },
-        "returns": false
       }
     ],
     "process_graph": {
@@ -3747,7 +3672,7 @@
   {
     "id": "eq",
     "summary": "Equal to comparison",
-    "description": "Compares whether `x` is strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`. Therefore, `eq(null, null)` returns `null` instead of `true`.\n* If any operand is an array or object, the return value is `false`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings MUST be compared differently than other strings and MUST NOT be compared based on their string representation due to different possible representations. For example, the time zone representation `Z` (for UTC) has the same meaning as `+00:00`.",
+    "description": "Compares whether `x` is strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
     "categories": [
       "texts",
       "comparison"
@@ -3883,26 +3808,10 @@
       },
       {
         "arguments": {
-          "x": "00:00:00+00:00",
-          "y": "00:00:00Z"
-        },
-        "returns": true
-      },
-      {
-        "description": "`y` is not a valid date-time representation and therefore will be treated as a string so that the provided values are not equal.",
-        "arguments": {
-          "x": "2018-01-01T12:00:00Z",
-          "y": "2018-01-01T12:00:00"
+          "x": "2018-01-01T00:00:00Z",
+          "y": "2018-01-01T00:00:00+00:00"
         },
         "returns": false
-      },
-      {
-        "description": "01:00 in the time zone +1 is equal to 00:00 in UTC.",
-        "arguments": {
-          "x": "2018-01-01T00:00:00Z",
-          "y": "2018-01-01T01:00:00+01:00"
-        },
-        "returns": true
       },
       {
         "arguments": {
@@ -3918,6 +3827,13 @@
           ]
         },
         "returns": false
+      },
+      {
+        "arguments": {
+          "x": null,
+          "y": null
+        },
+        "returns": null
       }
     ]
   },
@@ -4682,7 +4598,7 @@
   {
     "id": "gt",
     "summary": "Greater than comparison",
-    "description": "Compares whether `x` is strictly greater than `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* If any operand is not a `number` or temporal string (`date`, `time` or `date-time`), the process returns `false`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
+    "description": "Compares whether `x` is strictly greater than `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is not a `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings use ``date_difference()``.",
     "categories": [
       "comparison"
     ],
@@ -4742,22 +4658,8 @@
       },
       {
         "arguments": {
-          "x": "00:00:00Z",
-          "y": "00:00:00+01:00"
-        },
-        "returns": true
-      },
-      {
-        "arguments": {
-          "x": "1950-01-01T00:00:00Z",
-          "y": "2018-01-01T12:00:00Z"
-        },
-        "returns": false
-      },
-      {
-        "arguments": {
-          "x": "2018-01-01T12:00:00+00:00",
-          "y": "2018-01-01T12:00:00Z"
+          "x": "2018-01-02T00:00:00Z",
+          "y": "2018-01-01T00:00:00Z"
         },
         "returns": false
       },
@@ -4774,13 +4676,20 @@
           "y": false
         },
         "returns": false
+      },
+      {
+        "arguments": {
+          "x": null,
+          "y": null
+        },
+        "returns": null
       }
     ]
   },
   {
     "id": "gte",
     "summary": "Greater than or equal to comparison",
-    "description": "Compares whether `x` is greater than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`. Therefore, `gte(null, null)` returns `null` instead of `true`.\n* If any operand is an array or object, the return value is `false`.\n* If the operands are not equal (see process ``eq()``) and any of them is not a `number` or temporal string (`date`, `time` or `date-time`), the process returns `false`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
+    "description": "Compares whether `x` is greater than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* If the operands are not equal (see process ``eq()``) and any of them is not a `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings use ``date_difference()``.",
     "categories": [
       "comparison"
     ],
@@ -4840,24 +4749,10 @@
       },
       {
         "arguments": {
-          "x": "00:00:00Z",
-          "y": "00:00:00+01:00"
-        },
-        "returns": true
-      },
-      {
-        "arguments": {
-          "x": "1950-01-01T00:00:00Z",
-          "y": "2018-01-01T12:00:00Z"
+          "x": "2018-01-01T00:00:00Z",
+          "y": "2018-01-01T00:00:00+00:00"
         },
         "returns": false
-      },
-      {
-        "arguments": {
-          "x": "2018-01-01T12:00:00+00:00",
-          "y": "2018-01-01T12:00:00Z"
-        },
-        "returns": true
       },
       {
         "arguments": {
@@ -4880,6 +4775,13 @@
           ]
         },
         "returns": false
+      },
+      {
+        "arguments": {
+          "x": null,
+          "y": null
+        },
+        "returns": null
       }
     ],
     "process_graph": {
@@ -5959,7 +5861,7 @@
   {
     "id": "lt",
     "summary": "Less than comparison",
-    "description": "Compares whether `x` is strictly less than `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* If any operand is not a `number` or temporal string (`date`, `time` or `date-time`), the process returns `false`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
+    "description": "Compares whether `x` is strictly less than `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is not a `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings use ``date_difference()``.",
     "categories": [
       "comparison"
     ],
@@ -6019,22 +5921,8 @@
       },
       {
         "arguments": {
-          "x": "00:00:00+01:00",
-          "y": "00:00:00Z"
-        },
-        "returns": true
-      },
-      {
-        "arguments": {
-          "x": "1950-01-01T00:00:00Z",
-          "y": "2018-01-01T12:00:00Z"
-        },
-        "returns": true
-      },
-      {
-        "arguments": {
-          "x": "2018-01-01T12:00:00+00:00",
-          "y": "2018-01-01T12:00:00Z"
+          "x": "2018-01-01T00:00:00Z",
+          "y": "2018-01-02T00:00:00Z"
         },
         "returns": false
       },
@@ -6051,13 +5939,20 @@
           "y": true
         },
         "returns": false
+      },
+      {
+        "arguments": {
+          "x": null,
+          "y": null
+        },
+        "returns": null
       }
     ]
   },
   {
     "id": "lte",
     "summary": "Less than or equal to comparison",
-    "description": "Compares whether `x` is less than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`. Therefore, `lte(null, null)` returns `null` instead of `true`.\n* If any operand is an array or object, the return value is `false`.\n* If the operands are not equal (see process ``eq()``) and any of them is not a `number` or temporal string (`date`, `time` or `date-time`), the process returns `false`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
+    "description": "Compares whether `x` is less than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* If the operands are not equal (see process ``eq()``) and any of them is not a `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings use ``date_difference()``.",
     "categories": [
       "comparison"
     ],
@@ -6117,24 +6012,10 @@
       },
       {
         "arguments": {
-          "x": "00:00:00+01:00",
-          "y": "00:00:00Z"
+          "x": "2018-01-01T00:00:00Z",
+          "y": "2018-01-01T00:00:00+00:00"
         },
-        "returns": true
-      },
-      {
-        "arguments": {
-          "x": "1950-01-01T00:00:00Z",
-          "y": "2018-01-01T12:00:00Z"
-        },
-        "returns": true
-      },
-      {
-        "arguments": {
-          "x": "2018-01-01T12:00:00+00:00",
-          "y": "2018-01-01T12:00:00Z"
-        },
-        "returns": true
+        "returns": false
       },
       {
         "arguments": {
@@ -6157,6 +6038,13 @@
           ]
         },
         "returns": false
+      },
+      {
+        "arguments": {
+          "x": null,
+          "y": null
+        },
+        "returns": null
       }
     ],
     "process_graph": {
@@ -7286,7 +7174,7 @@
   {
     "id": "neq",
     "summary": "Not equal to comparison",
-    "description": "Compares whether `x` is *not* strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`. Therefore, `neq(null, null)` returns `null` instead of `false`.\n* If any operand is an array or object, the return value is `false`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings MUST be compared differently than other strings and MUST NOT be compared based on their string representation due to different possible representations. For example, the time zone representation `Z` (for UTC) has the same meaning as `+00:00`.",
+    "description": "Compares whether `x` is **not** strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings are normal strings. To compare temporal strings use ``date_difference()``.",
     "categories": [
       "texts",
       "comparison"
@@ -7415,26 +7303,10 @@
       },
       {
         "arguments": {
-          "x": "00:00:00+00:00",
-          "y": "00:00:00Z"
-        },
-        "returns": false
-      },
-      {
-        "description": "`y` is not a valid date-time representation and therefore will be treated as a string so that the provided values are not equal.",
-        "arguments": {
-          "x": "2018-01-01T12:00:00Z",
-          "y": "2018-01-01T12:00:00"
+          "x": "2018-01-01T00:00:00Z",
+          "y": "2018-01-01T00:00:00+00:00"
         },
         "returns": true
-      },
-      {
-        "description": "01:00 in the time zone +1 is equal to 00:00 in UTC.",
-        "arguments": {
-          "x": "2018-01-01T00:00:00Z",
-          "y": "2018-01-01T01:00:00+01:00"
-        },
-        "returns": false
       },
       {
         "arguments": {
@@ -7450,6 +7322,13 @@
           ]
         },
         "returns": false
+      },
+      {
+        "arguments": {
+          "x": null,
+          "y": null
+        },
+        "returns": null
       }
     ],
     "process_graph": {
@@ -9754,9 +9633,108 @@
     ]
   },
   {
+    "id": "date_difference",
+    "summary": "Computes the difference between two time instants",
+    "description": "Computes the difference between two instants in time and returns the difference between them in the unit given.\n\nThe process converts the given dates into numerical timestamps and returns the result of subtracting the other date from the base date. If a given date doesn't include the time, the process assumes that the time component is `00:00:00Z` (i.e. midnight, in UTC). The millisecond part of the times are optional and default to `0` if not given. The process doesn't take daylight saving time (DST) into account as only dates and times in UTC (with potential numerical time zone modifier) are supported.",
+    "categories": [
+      "comparison",
+      "date & time"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "date1",
+        "description": "The base date, optionally with a time component.",
+        "schema": [
+          {
+            "type": "string",
+            "format": "date-time",
+            "subtype": "date-time"
+          },
+          {
+            "type": "string",
+            "format": "date",
+            "subtype": "date"
+          }
+        ]
+      },
+      {
+        "name": "date2",
+        "description": "The other date, optionally with a time component.",
+        "schema": [
+          {
+            "type": "string",
+            "format": "date-time",
+            "subtype": "date-time"
+          },
+          {
+            "type": "string",
+            "format": "date",
+            "subtype": "date"
+          }
+        ]
+      },
+      {
+        "name": "unit",
+        "description": "The unit for the returned value. The following units are available:\n\n- millisecond\n- second - leap seconds are ignored in computations.\n- minute\n- hour\n- day\n- month\n- year",
+        "optional": true,
+        "default": "second",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "millisecond",
+            "second",
+            "minute",
+            "hour",
+            "day",
+            "month",
+            "year"
+          ]
+        }
+      }
+    ],
+    "returns": {
+      "description": "Returns the difference between date1 and date2 in the given unit (seconds by default), including a fractional part if required.\n\nFor comparison purposes this means:\n\n- If `date1` < `date2`, the returned value is positive.\n- If `date1` = `date2`, the returned value is 0.\n- If `date1` > `date2`, the returned value is negative.",
+      "schema": {
+        "type": "number"
+      }
+    },
+    "examples": [
+      {
+        "arguments": {
+          "date1": "2020-01-01T00:00:00.0Z",
+          "date2": "2020-01-01T00:00:15.5Z"
+        },
+        "returns": 15.5
+      },
+      {
+        "arguments": {
+          "date1": "2020-01-01T00:00:00Z",
+          "date2": "2020-01-01T01:00:00+01:00"
+        },
+        "returns": 0
+      },
+      {
+        "arguments": {
+          "date1": "2020-01-02",
+          "date2": "2020-01-01"
+        },
+        "returns": -86400
+      },
+      {
+        "arguments": {
+          "date1": "2020-01-02",
+          "date2": "2020-01-01",
+          "unit": "day"
+        },
+        "returns": -1
+      }
+    ]
+  },
+  {
     "id": "date_shift",
     "summary": "Manipulates dates and times by addition or subtraction",
-    "description": "Based on a given date (and optionally time), calculates a new date (and time if given) by adding or subtracting a given temporal period.\n\nSome specifics about dates and times need to be taken into account:\n\n* This process doesn't have any effect on the time zone.\n* It doesn't take daylight saving time (DST) into account as only dates and time in UTC (with potential numerical time zone modifier) are supported.\n* Leap years are implemented in a way that computations handle them gracefully (see parameter `unit` for details).\n* Leap seconds are mostly ignored in manipulations as they don't follow a regular pattern. Leap seconds can be passed to the process, but will never be returned.",
+    "description": "Based on a given date (and optionally time), calculates a new date (and time if given) by adding or subtracting a given temporal period.\n\nSome specifics about dates and times need to be taken into account:\n\n* This process doesn't have any effect on the time zone.\n* It doesn't take daylight saving time (DST) into account as only dates and times in UTC (with potential numerical time zone modifier) are supported.\n* Leap years are implemented in a way that computations handle them gracefully (see parameter `unit` for details).\n* Leap seconds are mostly ignored in manipulations as they don't follow a regular pattern. Leap seconds can be passed to the process, but will never be returned.",
     "categories": [
       "date & time"
     ],
