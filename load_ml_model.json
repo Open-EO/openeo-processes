@@ -1,0 +1,63 @@
+{
+    "id":"load_ml_model",
+    "categories":[
+       "machine learning",
+       "import"
+    ],
+    "deprecated":false,
+    "description":"Loads a machine learning model from a job-id.\n\nSuch a model could be trained and saved as part of a previous batch job with processes such as  ``fit_regr_random_forest()`` and ``save_ml_model()``.",
+    "exceptions":{
+       
+    },
+    "experimental":true,
+    "links":[
+       {
+          "href":"https://github.com/stac-extensions/ml-model",
+          "rel":"about",
+          "title":"STAC ml-model extension",
+          "type":"text/html"
+       }
+    ],
+    "parameters":[
+       {
+          "deprecated":false,
+          "description":"The job-id to load the machine learning model from.",
+          "experimental":false,
+          "name":"model",
+          "optional":false,
+          "schema":[
+             {
+                "format":"uri",
+                "pattern":"^https?://",
+                "subtype":"uri",
+                "title":"URL",
+                "type":"string"
+             },
+             {
+                "description":"Loading a model by batch job ID is possible only if a single model has been saved by the job. Otherwise, you have to load a specific model from a batch job by URL.",
+                "pattern":"^[\\w\\-\\.~]+$",
+                "subtype":"job-id",
+                "title":"Batch Job ID",
+                "type":"string"
+             },
+             {
+                "pattern":"^[^\r\n\\:'\"]+$",
+                "subtype":"file-path",
+                "title":"User-uploaded Files",
+                "type":"string"
+             }
+          ]
+       }
+    ],
+    "process_graph":{
+       
+    },
+    "returns":{
+       "description":"A machine learning model to be used with machine learning processes such as ``predict_random_forest()``.",
+       "schema":{
+          "subtype":"ml-model",
+          "type":"object"
+       }
+    },
+    "summary":"Load a ML model"
+ }

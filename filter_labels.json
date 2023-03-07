@@ -1,0 +1,118 @@
+{
+    "id": "filter_labels",
+    "summary": "Filter dimension labels based on a condition",
+    "description": "Filters the dimension labels in the data cube for the given dimension. Only the dimension labels that match the specified condition are preserved, all other labels with their corresponding data get removed.",
+    "categories": [
+        "cubes",
+        "filter"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "condition",
+            "description": "A condition that is evaluated against each dimension label in the specified dimension. A dimension label and the corresponding data is preserved for the given dimension, if the condition returns `true`.",
+            "schema": {
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": [
+                    {
+                        "name": "value",
+                        "description": "A single dimension label to compare against. The data type of the parameter depends on the dimension labels set for the dimension.",
+                        "schema": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "context",
+                        "description": "Additional data passed by the user.",
+                        "schema": {
+                            "description": "Any data type."
+                        },
+                        "optional": true,
+                        "default": null
+                    }
+                ],
+                "returns": {
+                    "description": "`true` if the dimension label should be kept in the data cube, otherwise `false`.",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            }
+        },
+        {
+            "name": "dimension",
+            "description": "The name of the dimension to filter on. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "context",
+            "description": "Additional data to be passed to the condition.",
+            "schema": {
+                "description": "Any data type."
+            },
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the given dimension has less (or the same) dimension labels.",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
+        }
+    },
+    "examples": [
+        {
+            "description": "Filters the data cube to only contain data from platform Sentinel-2A. This example assumes that the data cube has a dimension `platform` so that computations can distinguish between Sentinel-2A and Sentinel-2B data.",
+            "arguments": {
+                "data": {
+                    "from_parameter": "sentinel2_data"
+                },
+                "condition": {
+                    "process_graph": {
+                        "eq": {
+                            "process_id": "eq",
+                            "arguments": {
+                                "x": {
+                                    "from_parameter": "value"
+                                },
+                                "y": "Sentinel-2A",
+                                "case_sensitive": false
+                            },
+                            "result": true
+                        }
+                    }
+                },
+                "dimension": "platform"
+            }
+        }
+    ],
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#filter",
+            "rel": "about",
+            "title": "Filters explained in the openEO documentation"
+        }
+    ]
+}

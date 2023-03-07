@@ -1,0 +1,146 @@
+{
+    "id": "sar_backscatter",
+    "summary": "Computes backscatter from SAR input",
+    "description": "Computes backscatter from SAR input.\n\nNote that backscatter computation may require instrument specific metadata that is tightly coupled to the original SAR products. As a result, this process may only work in combination with loading data from specific collections, not with general data cubes.\n\nThis process uses bilinear interpolation, both for resampling the DEM and the backscatter.",
+    "categories": [
+        "cubes",
+        "sar"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The source data cube containing SAR input.",
+            "schema": {
+                "subtype": "raster-cube",
+                "type": "object"
+            }
+        },
+        {
+            "name": "coefficient",
+            "description": "Select the radiometric correction coefficient. The following options are available:\n\n* `beta0`: radar brightness\n* `sigma0-ellipsoid`: ground area computed with ellipsoid earth model\n* `sigma0-terrain`: ground area computed with terrain earth model\n* `gamma0-ellipsoid`: ground area computed with ellipsoid earth model in sensor line of sight\n* `gamma0-terrain`: ground area computed with terrain earth model in sensor line of sight (default)\n* `null`: non-normalized backscatter",
+            "optional": true,
+            "default": "gamma0-terrain",
+            "schema": [
+                {
+                    "type": "string",
+                    "enum": [
+                        "beta0",
+                        "sigma0-ellipsoid",
+                        "sigma0-terrain",
+                        "gamma0-ellipsoid",
+                        "gamma0-terrain"
+                    ]
+                },
+                {
+                    "title": "Non-normalized backscatter",
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "name": "elevation_model",
+            "description": "The digital elevation model to use. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
+            "optional": true,
+            "default": null,
+            "schema": [
+                {
+                    "type": "string",
+                    "subtype": "collection-id"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "name": "mask",
+            "description": "If set to `true`, a data mask is added to the bands with the name `mask`. It indicates which values are valid (1), invalid (0) or contain no-data (null).",
+            "optional": true,
+            "default": false,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "contributing_area",
+            "description": "If set to `true`, a DEM-based local contributing area band named `contributing_area` is added. The values are given in square meters.",
+            "optional": true,
+            "default": false,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "local_incidence_angle",
+            "description": "If set to `true`, a DEM-based local incidence angle band named `local_incidence_angle` is added. The values are given in degrees.",
+            "optional": true,
+            "default": false,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "ellipsoid_incidence_angle",
+            "description": "If set to `true`, an ellipsoidal incidence angle band named `ellipsoid_incidence_angle` is added. The values are given in degrees.",
+            "optional": true,
+            "default": false,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "noise_removal",
+            "description": "If set to `false`, no noise removal is applied. Defaults to `true`, which removes noise.",
+            "optional": true,
+            "default": true,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "description": "Proprietary options for the backscatter computations. Specifying proprietary options will reduce portability.",
+            "name": "options",
+            "optional": true,
+            "default": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": false
+            }
+        }
+    ],
+    "returns": {
+        "description": "Backscatter values corresponding to the chosen parametrization. The values are given in linear scale.",
+        "schema": {
+            "subtype": "raster-cube",
+            "type": "object"
+        }
+    },
+    "exceptions": {
+        "DigitalElevationModelInvalid": {
+            "message": "The digital elevation model specified is either not a DEM or can't be used with the data cube given."
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://bok.eo4geo.eu/PP2-2-4-3",
+            "title": "Gamma nought (0) explained by EO4GEO body of knowledge."
+        },
+        {
+            "rel": "about",
+            "href": "https://bok.eo4geo.eu/PP2-2-4-2",
+            "title": "Sigma nought (0) explained by EO4GEO body of knowledge."
+        },
+        {
+            "rel": "about",
+            "href": "https://www.geo.uzh.ch/microsite/rsl-documents/research/publications/peer-reviewed-articles/201108-TGRS-Small-tcGamma-3809999360/201108-TGRS-Small-tcGamma.pdf",
+            "title": "Flattening Gamma: Radiometric Terrain Correction for SAR Imagery"
+        },
+        {
+            "rel": "about",
+            "href": "https://doi.org/10.3390/data4030093",
+            "title": "Reasoning behind the choice of bilinear resampling"
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+{
+    "categories":[
+       "cubes",
+       "vector"
+    ],
+    "deprecated":false,
+    "description":"Saves a vector cube as part of a batch job.\n",
+    "exceptions":{
+       
+    },
+    "experimental":true,
+    "id":"save_vector_cube",
+    "links":[
+       {
+          "href":"https://github.com/Open-EO/openeo-processes-python/blob/load-save-vector-cube/src/openeo_processes/cubes.py#L2271",
+          "rel":"about",
+          "title":"Save vector cube",
+          "type":"text/html"
+       }
+    ],
+    "parameters":[
+       {
+          "deprecated":false,
+          "description":"The data to store as a vector cube.",
+          "experimental":false,
+          "name":"data",
+          "optional":false,
+          "schema":{
+             "subtype":"vector-cube",
+             "type":"object"
+          }
+       }
+    ],
+    "process_graph":{
+       
+    },
+    "returns":{
+       "description":"Returns `false` if the process failed to store the vector cube, `true` otherwise.",
+       "schema":{
+          "type":"boolean"
+       }
+    },
+    "summary":"Save a vector cube to a .json"
+ }
