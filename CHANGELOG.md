@@ -53,6 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `between`: Support for temporal comparison.
 - Deprecated `GeometryCollections` are not supported any longer. [#389](https://github.com/Open-EO/openeo-processes/issues/389)
 - Deprecated PROJ definitions for the CRS are not supported any longer.
+- `load_result`: Subtype `job-id` removed in favor of providing a URL. [#384](https://github.com/Open-EO/openeo-processes/issues/384)
 
 ### Fixed
 

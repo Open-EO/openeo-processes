@@ -10,21 +10,15 @@
     "parameters": [
         {
             "name": "id",
-            "description": "The STAC Item to load the machine learning model from. The STAC Item must implement the `ml-model` extension.",
+            "description": "The STAC Item that implements the `ml-model` extension to load the machine learning model from. Loading a model is possible only if a single model can be identified unambiguously.",
             "schema": [
                 {
                     "title": "URL",
+                    "description": "Either a URL to an external STAC Item or a batch job result.",
                     "type": "string",
                     "format": "uri",
                     "subtype": "uri",
                     "pattern": "^https?://"
-                },
-                {
-                    "title": "Batch Job ID",
-                    "description": "Loading a model by batch job ID is possible only if a single model has been saved by the job. Otherwise, you have to load a specific model from a batch job by URL.",
-                    "type": "string",
-                    "subtype": "job-id",
-                    "pattern": "^[\\w\\-\\.~]+$"
                 },
                 {
                     "title": "User-uploaded File",
