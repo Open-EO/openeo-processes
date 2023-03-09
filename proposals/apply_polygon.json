@@ -1,7 +1,7 @@
 {
     "id": "apply_polygon",
-    "summary": "Apply a process to spatial chunks of a data cube",
-    "description": "The given data cube is chunked by the given polygons and applies the given process to each individual chunk.",
+    "summary": "Apply a process to segments of the data cube",
+    "description": "Applies a process to segments of the data cube that are defined by the given polygons. For each polygon provided, all pixels for which the point at the pixel center intersects with the polygon (as defined in the Simple Features standard by the OGC) are collected into sub data cubes. Each sub data cube is passed individually to the given process.",
     "categories": [
         "cubes"
     ],
@@ -16,23 +16,39 @@
             }
         },
         {
-            "name": "chunks",
-            "description": "A GeoJSON object containing at least one polygon. The provided feature types can be one of the following:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry,\n* a `FeatureCollection` containing at least one `Feature` with `Polygon` or `MultiPolygon` geometries, or\n* a `GeometryCollection` containing `Polygon` or `MultiPolygon` geometries. To maximize interoperability, `GeometryCollection` should be avoided in favour of one of the alternatives above.",
-            "schema": {
-                "type": "object",
-                "subtype": "geojson"
-            }
+            "name": "polygons",
+            "description": "A GeoJSON object or a vector data cube containing at least one polygon. The provided vector data can be one of the following:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry, or\n* a `FeatureCollection` containing at least one `Feature` with `Polygon` or `MultiPolygon` geometries.",
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "geojson",
+                    "description": "The GeoJSON type `GeometryCollection` is not supported."
+                },
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometries",
+                            "geometry_type": [
+                                "Polygon",
+                                "MultiPolygon"
+                            ]
+                        }
+                    ]
+                }
+            ]
         },
         {
             "name": "process",
-            "description": "A process that accepts and returns a single data cube and is applied on each individual chunk. The process may consist of multiple sub-processes.",
+            "description": "A process that accepts and returns a single data cube and is applied on each individual sub data cube. The process may consist of multiple sub-processes.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
                 "parameters": [
                     {
                         "name": "data",
-                        "description": "A chunk of the original data cube. The data cube provided for each chunk uses the smallest possible grid-aligned extent covering the polygon. All pixels outside of the polygon are replaced with the value given in `mask_value`, which is no-data (`null`) by default.",
+                        "description": "A sub data cube of the original data cube. The sub data cubes provided cover the smallest possible grid-aligned extent of the corresponding polygon and all pixels outside of the polygon are replaced with the value given in `mask_value`.",
                         "schema": {
                             "type": "object",
                             "subtype": "raster-cube"
@@ -49,7 +65,7 @@
                     }
                 ],
                 "returns": {
-                    "description": "The updated data cube.",
+                    "description": "The updated sub data cube with the newly computed values and the same dimensions. The dimension properties (name, type, reference system and resolution) must remain unchanged. The labels can change, but the number of labels must remain unchanged.",
                     "schema": {
                         "description": "A data cube.",
                         "schema": {
@@ -62,7 +78,7 @@
         },
         {
             "name": "mask_value",
-            "description": "All pixels for which the point at the pixel center **does not** intersect with the polygon (as defined in the Simple Features standard by the OGC) are replaced with the given value, which defaults to `null` (no data).\n\nThis can be used to provide a distinction between no data values within the polygon and masked pixels outside of it.",
+            "description": "All pixels for which the point at the pixel center **does not** intersect with the polygon are replaced with the given value, which defaults to `null` (no data).\n\nIt can provide a distinction between no data values within the polygon and masked pixels outside of it.",
             "schema": [
                 {
                     "type": "number"
@@ -96,5 +112,12 @@
             "type": "object",
             "subtype": "raster-cube"
         }
-    }
+    },
+    "links": [
+        {
+            "href": "http://www.opengeospatial.org/standards/sfa",
+            "rel": "about",
+            "title": "Simple Features standard by the OGC"
+        }
+    ]
 }
