@@ -12,16 +12,41 @@
             "description": "A raster data cube.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    }
+                ]
             }
         },
         {
             "name": "mask",
-            "description": "A GeoJSON object containing at least one polygon. The provided feature types can be one of the following:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry,\n* a `FeatureCollection` containing at least one `Feature` with `Polygon` or `MultiPolygon` geometries, or\n* a `GeometryCollection` containing `Polygon` or `MultiPolygon` geometries. To maximize interoperability, `GeometryCollection` should be avoided in favour of one of the alternatives above.",
-            "schema": {
-                "type": "object",
-                "subtype": "geojson"
-            }
+            "description": "A GeoJSON object or a vector data cube containing at least one polygon. The provided vector data can be one of the following:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry, or\n* a `FeatureCollection` containing at least one `Feature` with `Polygon` or `MultiPolygon` geometries.",
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "geojson",
+                    "description": "The GeoJSON type `GeometryCollection` is not supported."
+                },
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometries",
+                            "geometry_type": [
+                                "Polygon",
+                                "MultiPolygon"
+                            ]
+                        }
+                    ]
+                }
+            ]
         },
         {
             "name": "replacement",
@@ -57,7 +82,16 @@
         "description": "A masked raster data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "spatial",
+                    "axis": [
+                        "x",
+                        "y"
+                    ]
+                }
+            ]
         }
     },
     "links": [

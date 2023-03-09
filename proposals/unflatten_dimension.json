@@ -1,0 +1,62 @@
+{
+    "id": "unflatten_dimension",
+    "summary": "Split a single dimensions into multiple dimensions",
+    "description": "Splits a single dimension into multiple dimensions by systematically extracting values and splitting the dimension labels by the given `label_separator`. This process is the opposite of the process ``flatten_dimensions()`` but executing both processes subsequently doesn't necessarily create a data cube that is equal to the original data cube.\n\nExample: Executing the process with a data cube with one dimension `X` (labels: `2020~B1`, `2020~B2`, `2021~B1` and `2021~B2`) and the data `[1,2,3,4]` and the parameters `dimension` = `X` and `target_dimensions` = `[A,B]` will result in a data cube with two dimensions `A` (labels: `2020` and `2021`) and B (labels: `B1` and `B2`) and the data `[[1,2],[3,4]]`.",
+    "categories": [
+        "cubes"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube that is consistently structured so that operation can execute flawlessly (e.g. the dimension labels need to contain the `label_separator` exactly 1 time for two target dimensions, 2 times for three target dimensions etc.).",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube"
+            }
+        },
+        {
+            "name": "dimension",
+            "description": "The name of the dimension to split.",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "target_dimensions",
+            "description": "The names of the new target dimensions. New dimensions will be created with the given names and type `other` (see ``add_dimension()``). Fails with a `TargetDimensionExists` exception if any of the dimensions exists.\n\nThe order of the array defines the order in which the dimensions and dimension labels are added to the data cube (see the example in the process description).",
+            "schema": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                    "type": "string"
+                }
+            }
+        },
+        {
+            "name": "label_separator",
+            "description": "The string that will be used as a separator to split the dimension labels.",
+            "optional": true,
+            "default": "~",
+            "schema": {
+                "type": "string",
+                "minLength": 1
+            }
+        }
+    ],
+    "returns": {
+        "description": "A data cube with the new shape. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube"
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
+        },
+        "TargetDimensionExists": {
+            "message": "A dimension with the specified target dimension name already exists."
+        }
+    }
+}

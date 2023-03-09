@@ -1,7 +1,7 @@
 {
     "id": "is_nodata",
-    "summary": "Value is not a no-data value",
-    "description": "Checks whether the specified data is a missing data, i.e. equals to `null` or any of the no-data values specified in the metadata. The special numerical value `NaN` (not a number) as defined by the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) is not considered no-data and must return `false`.",
+    "summary": "Value is a no-data value",
+    "description": "Checks whether the specified data is missing data, i.e. equals to `null` or any of the no-data values specified in the metadata.\n\nThe special numerical value `NaN` (not a number) as defined by the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) is only considered as no-data value if specified as no-data value in the metadata.",
     "categories": [
         "comparison"
     ],
