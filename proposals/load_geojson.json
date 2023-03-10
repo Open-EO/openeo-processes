@@ -1,0 +1,68 @@
+{
+    "id": "load_geojson",
+    "summary": "Load GeoJSON data",
+    "description": "Loads GeoJSON data as defined by [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946.html) into a vector data cube. Feature properties are preserved.",
+    "categories": [
+        "import",
+        "vector"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The GeoJSON data. Can either be inline GeoJSON, a user-uploaded file, or point to a remote URL. The GeoJSON type `GeometryCollection` is not supported. Each geometry in the GeoJSON data results in a dimension label in the `geometries` dimension.",
+            "schema": [
+                {
+                    "title": "GeoJSON",
+                    "description": "GeoJSON (inline)",
+                    "type": "object",
+                    "subtype": "geojson"
+                },
+                {
+                    "title": "URL",
+                    "type": "string",
+                    "format": "uri",
+                    "subtype": "uri",
+                    "pattern": "^https?://"
+                },
+                {
+                    "title": "User-uploaded file",
+                    "type": "string",
+                    "subtype": "file-path",
+                    "pattern": "^[^\r\n\\:'\"]+$"
+                }
+            ]
+        },
+        {
+            "name": "properties",
+            "description": "One or more properties from the GeoJSON file to construct a additional dimension from. Only applies for GeoJSON Features and FeatureCollections. Missing values in are generally set to no-data (`null`).\n\nDepending on the number of properties provided the process constructs and names the dimension differently:\n\n- Single property with scalar values: A single dimension label with the name of the property and a single value per geometry.\n- Single property of type array: The dimension labels correspond to the array indices. There are as many values and labels per geometry as there are for the largest array.\n- Multiple properties with scalar values: The dimension labels correspond to the property names. There are as many values and labels per geometry as there are properties provided here.\n\nDepending on the number of properties the dimension name is:\n\n- Single property: Name of the property\n- Multiple properties: `properties`.",
+            "schema": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                    "type": "string"
+                }
+            }
+        }
+    ],
+    "returns": {
+        "description": "A vector data cube containing the geometries, either one or two dimensional.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "geometries"
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "href": "https://www.rfc-editor.org/rfc/rfc7946.html",
+            "title": "RFC 7946: The GeoJSON Format",
+            "type": "text/html",
+            "rel": "about"
+        }
+    ]
+}

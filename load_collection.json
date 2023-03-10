@@ -86,10 +86,11 @@
                     }
                 },
                 {
-                    "title": "GeoJSON",
+                    "title": "GeoJSON (deprecated)",
                     "description": "Limits the data cube to the bounding box of the given geometries. For raster data, all pixels inside the bounding box that do not intersect with any of the polygons will be set to no data (`null`).\n\nThe GeoJSON type `GeometryCollection` is not supported.",
                     "type": "object",
-                    "subtype": "geojson"
+                    "subtype": "geojson",
+                    "deprecated": true
                 },
                 {
                     "title": "Vector data cube",

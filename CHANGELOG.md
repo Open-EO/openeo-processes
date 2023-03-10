@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `fit_class_random_forest`
     - `fit_regr_random_forest`
     - `flatten_dimensions`
+    - `load_geojson`
     - `load_ml_model`
     - `predict_random_forest`
     - `save_ml_model`
@@ -47,12 +48,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed `create_raster_cube` to `create_data_cube`. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
 - Updated the processes based on the subtypes `raster-cube` or `vector-cube` to work with the subtype `datacube` instead. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
 
+### Deprecated
+
+- `aggregate_spatial`, `filter_spatial`, `load_collection`, `mask_polygon`: GeoJSON input is deprecated. Use `load_geojson` instead. [#346](https://github.com/Open-EO/openeo-processes/issues/346)
+
 ### Removed
 
 - The `examples` folder has been migrated to the [openEO Community Examples](https://github.com/Open-EO/openeo-community-examples/tree/main/processes) repository.
 - `between`: Support for temporal comparison.
 - Deprecated `GeometryCollections` are not supported any longer. [#389](https://github.com/Open-EO/openeo-processes/issues/389)
 - Deprecated PROJ definitions for the CRS are not supported any longer.
+- `load_result`: GeoJSON input is not supported any longer. Use `load_geojson` instead. [#346](https://github.com/Open-EO/openeo-processes/issues/346)
 
 ### Fixed
 
