@@ -1,10 +1,10 @@
 {
-    "id": "resample_vector",
-    "summary": "Reprojects the vector dimension",
-    "description": "Converts the geometries stored in the vector dimension to a different projection.\n\nTo spatially align two data cubes with each other, better use the process ``resample_cube_spatial()``.",
+    "id": "vector_reproject",
+    "summary": "Reprojects the geometry dimension",
+    "description": "Converts the geometries stored in the geometry dimensions to a different projection.\n\nTo spatially align two data cubes with each other, better use the process ``resample_cube_spatial()``.",
     "categories": [
         "cubes",
-        "aggregate & resample",
+        "reproject",
         "vector"
     ],
     "experimental": true,
@@ -24,7 +24,7 @@
         },
         {
             "name": "projection",
-            "description": "Reprojects the geometries stored in the vector dimension to the given projection, specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html), [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html).",
+            "description": "Reprojects the geometries stored in the geometry dimensions to the given projection, specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html), [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html).",
             "schema": [
                 {
                     "title": "EPSG Code",
@@ -44,7 +44,7 @@
         }
     ],
     "returns": {
-        "description": "A vector data cube with geometries converted into the new projection. The reference system of the vector dimension changes, all other dimensions and properties remain unchanged.",
+        "description": "A vector data cube with geometries converted into the new projection. The reference system of the vector dimensions changes all other dimensions and properties remain unchanged.",
         "schema": {
             "type": "object",
             "subtype": "datacube",
