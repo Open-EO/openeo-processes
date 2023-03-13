@@ -10,14 +10,22 @@
     "parameters": [
         {
             "name": "id",
-            "description": "The URL of a batch job with results.",
-            "schema": {
-                "title": "URL",
-                "type": "string",
-                "format": "uri",
-                "subtype": "uri",
-                "pattern": "^https?://"
-            }
+            "description": "The id of a batch job with results.",
+            "schema": [
+                {
+                    "title": "ID",
+                    "type": "string",
+                    "subtype": "job-id",
+                    "pattern": "^[\\w\\-\\.~]+$"
+                },
+                {
+                    "title": "URL",
+                    "type": "string",
+                    "format": "uri",
+                    "subtype": "uri",
+                    "pattern": "^https?://"
+                }
+            ]
         },
         {
             "name": "spatial_extent",
@@ -101,7 +109,7 @@
                     "subtype": "datacube",
                     "dimensions": [
                         {
-                            "type": "geometries"
+                            "type": "geometry"
                         }
                     ]
                 },

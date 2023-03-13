@@ -139,7 +139,7 @@
           "type": "string",
           "enum": [
             "bands",
-            "geometries",
+            "geometry",
             "spatial",
             "temporal",
             "other"
@@ -293,7 +293,7 @@
             "subtype": "datacube",
             "dimensions": [
               {
-                "type": "geometries"
+                "type": "geometry"
               }
             ]
           }
@@ -363,7 +363,7 @@
         "subtype": "datacube",
         "dimensions": [
           {
-            "type": "geometries"
+            "type": "geometry"
           }
         ]
       }
@@ -4145,7 +4145,7 @@
             "subtype": "datacube",
             "dimensions": [
               {
-                "type": "geometries"
+                "type": "geometry"
               }
             ]
           }
@@ -4243,7 +4243,7 @@
           "subtype": "datacube",
           "dimensions": [
             {
-              "type": "geometries"
+              "type": "geometry"
             }
           ]
         }
@@ -4316,7 +4316,7 @@
             "subtype": "datacube",
             "dimensions": [
               {
-                "type": "geometries"
+                "type": "geometry"
               }
             ]
           }
@@ -5560,7 +5560,7 @@
             "subtype": "datacube",
             "dimensions": [
               {
-                "type": "geometries"
+                "type": "geometry"
               }
             ]
           },
@@ -6124,7 +6124,7 @@
             "subtype": "datacube",
             "dimensions": [
               {
-                "type": "geometries",
+                "type": "geometry",
                 "geometry_type": [
                   "Polygon",
                   "MultiPolygon"
@@ -10021,7 +10021,7 @@
           "subtype": "datacube",
           "dimensions": [
             {
-              "type": "geometries"
+              "type": "geometry"
             }
           ]
         }
@@ -10040,7 +10040,7 @@
             "subtype": "datacube",
             "dimensions": [
               {
-                "type": "geometries"
+                "type": "geometry"
               }
             ]
           }
@@ -10073,7 +10073,7 @@
         "subtype": "datacube",
         "dimensions": [
           {
-            "type": "geometries"
+            "type": "geometry"
           }
         ]
       }
@@ -10109,7 +10109,7 @@
             "subtype": "datacube",
             "dimensions": [
               {
-                "type": "geometries"
+                "type": "geometry"
               },
               {
                 "type": "bands"
@@ -10121,7 +10121,7 @@
             "subtype": "datacube",
             "dimensions": [
               {
-                "type": "geometries"
+                "type": "geometry"
               },
               {
                 "type": "other"
@@ -10138,7 +10138,7 @@
           "subtype": "datacube",
           "dimensions": [
             {
-              "type": "geometries"
+              "type": "geometry"
             }
           ]
         }
@@ -10313,7 +10313,7 @@
             "subtype": "datacube",
             "dimensions": [
               {
-                "type": "geometries"
+                "type": "geometry"
               },
               {
                 "type": "bands"
@@ -10325,7 +10325,7 @@
             "subtype": "datacube",
             "dimensions": [
               {
-                "type": "geometries"
+                "type": "geometry"
               },
               {
                 "type": "other"
@@ -10342,7 +10342,7 @@
           "subtype": "datacube",
           "dimensions": [
             {
-              "type": "geometries"
+              "type": "geometry"
             }
           ]
         }
@@ -10566,15 +10566,21 @@
     "parameters": [
       {
         "name": "id",
-        "description": "The STAC Item that implements the `ml-model` extension to load the machine learning model from. Loading a model is possible only if a single model can be identified unambiguously.",
+        "description": "The STAC Item to load the machine learning model from. The STAC Item must implement the `ml-model` extension.",
         "schema": [
           {
             "title": "URL",
-            "description": "Either a URL to an external STAC Item or a batch job result.",
             "type": "string",
             "format": "uri",
             "subtype": "uri",
             "pattern": "^https?://"
+          },
+          {
+            "title": "Batch Job ID",
+            "description": "Loading a model by batch job ID is possible only if a single model has been saved by the job. Otherwise, you have to load a specific model from a batch job by URL.",
+            "type": "string",
+            "subtype": "job-id",
+            "pattern": "^[\\w\\-\\.~]+$"
           },
           {
             "title": "User-uploaded File",
@@ -10613,14 +10619,22 @@
     "parameters": [
       {
         "name": "id",
-        "description": "The URL of a batch job with results.",
-        "schema": {
-          "title": "URL",
-          "type": "string",
-          "format": "uri",
-          "subtype": "uri",
-          "pattern": "^https?://"
-        }
+        "description": "The id of a batch job with results.",
+        "schema": [
+          {
+            "title": "ID",
+            "type": "string",
+            "subtype": "job-id",
+            "pattern": "^[\\w\\-\\.~]+$"
+          },
+          {
+            "title": "URL",
+            "type": "string",
+            "format": "uri",
+            "subtype": "uri",
+            "pattern": "^https?://"
+          }
+        ]
       },
       {
         "name": "spatial_extent",
@@ -10704,7 +10718,7 @@
             "subtype": "datacube",
             "dimensions": [
               {
-                "type": "geometries"
+                "type": "geometry"
               }
             ]
           },
@@ -11587,7 +11601,7 @@
             "subtype": "datacube",
             "dimensions": [
               {
-                "type": "geometries"
+                "type": "geometry"
               }
             ]
           }
@@ -11611,11 +11625,108 @@
         "subtype": "datacube",
         "dimensions": [
           {
-            "type": "geometries"
+            "type": "geometry"
           }
         ]
       }
     }
+  },
+  {
+    "id": "vector_reproject",
+    "summary": "Reprojects the geometry dimension",
+    "description": "Converts the geometries stored in a geometry dimensions to a different projection.\n\nTo spatially align two data cubes with each other, better use the process ``resample_cube_spatial()``.",
+    "categories": [
+      "cubes",
+      "reproject",
+      "vector"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "A vector data cube.",
+        "schema": {
+          "type": "object",
+          "subtype": "datacube",
+          "dimensions": [
+            {
+              "type": "geometry"
+            }
+          ]
+        }
+      },
+      {
+        "name": "projection",
+        "description": "Projection to reproject to. specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html), [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html).",
+        "schema": [
+          {
+            "title": "EPSG Code",
+            "type": "integer",
+            "subtype": "epsg-code",
+            "minimum": 1000,
+            "examples": [
+              3857
+            ]
+          },
+          {
+            "title": "WKT2",
+            "type": "string",
+            "subtype": "wkt2-definition"
+          }
+        ]
+      },
+      {
+        "name": "dimension",
+        "description": "The name of the geometry dimension to reproject. If no specific dimension is specified, the filter applies to all geometry dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+        "schema": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "default": null,
+        "optional": true
+      }
+    ],
+    "returns": {
+      "description": "A vector data cube with geometries projected to the new projection. The reference system of the geometry dimension changes, all other dimensions and properties remain unchanged.",
+      "schema": {
+        "type": "object",
+        "subtype": "datacube",
+        "dimensions": [
+          {
+            "type": "geometry"
+          }
+        ]
+      }
+    },
+    "exceptions": {
+      "DimensionNotAvailable": {
+        "message": "A dimension with the specified name does not exist."
+      }
+    },
+    "links": [
+      {
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#resample",
+        "rel": "about",
+        "title": "Resampling explained in the openEO documentation"
+      },
+      {
+        "rel": "about",
+        "href": "https://proj.org/usage/projections.html",
+        "title": "PROJ parameters for cartographic projections"
+      },
+      {
+        "rel": "about",
+        "href": "http://www.epsg-registry.org",
+        "title": "Official EPSG code registry"
+      },
+      {
+        "rel": "about",
+        "href": "http://www.epsg.io",
+        "title": "Unofficial EPSG code database"
+      }
+    ]
   },
   {
     "id": "vector_to_random_points",
@@ -11641,7 +11752,7 @@
             "subtype": "datacube",
             "dimensions": [
               {
-                "type": "geometries"
+                "type": "geometry"
               }
             ]
           }
@@ -11708,7 +11819,7 @@
         "subtype": "datacube",
         "dimensions": [
           {
-            "type": "geometries",
+            "type": "geometry",
             "geometry_type": [
               "Point",
               "MultiPoint"
@@ -11747,7 +11858,7 @@
             "subtype": "datacube",
             "dimensions": [
               {
-                "type": "geometries"
+                "type": "geometry"
               }
             ]
           }
@@ -11778,7 +11889,7 @@
         "subtype": "datacube",
         "dimensions": [
           {
-            "type": "geometries",
+            "type": "geometry",
             "geometry_type": [
               "Point",
               "MultiPoint"
