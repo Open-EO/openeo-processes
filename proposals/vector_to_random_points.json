@@ -16,7 +16,7 @@
                 "subtype": "datacube",
                 "dimensions": [
                     {
-                        "type": "geometries"
+                        "type": "geometry"
                     }
                 ]
             }
@@ -82,7 +82,7 @@
             "subtype": "datacube",
             "dimensions": [
                 {
-                    "type": "geometries",
+                    "type": "geometry",
                     "geometry_type": [
                         "Point",
                         "MultiPoint"
