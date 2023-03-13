@@ -14,7 +14,7 @@
             "type": "object",
             "subtype": "bounding-box",
             "title": "Bounding Box",
-            "description": "A bounding box with the required fields `west`, `south`, `east`, `north` and optionally `base`, `height`, `crs`. The `crs` is a EPSG code, a WKT2:2018 string or a PROJ definition (deprecated).",
+            "description": "A bounding box with the required fields `west`, `south`, `east`, `north` and optionally `base`, `height`, `crs`. The `crs` is a EPSG code or a WKT2:2018 string.",
             "required": [
                 "west",
                 "south",
@@ -55,16 +55,13 @@
                     "default": null
                 },
                 "crs": {
-                    "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html) or [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
+                    "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
                     "anyOf": [
                         {
                             "$ref": "#/definitions/epsg-code"
                         },
                         {
                             "$ref": "#/definitions/wkt2-definition"
-                        },
-                        {
-                            "$ref": "#/definitions/proj-definition"
                         }
                     ],
                     "default": 4326
@@ -285,12 +282,6 @@
                     }
                 }
             }
-        },
-        "proj-definition": {
-            "type": "string",
-            "subtype": "proj-definition",
-            "title": "PROJ definition",
-            "description": "**DEPRECATED.** Specifies details about cartographic projections as [PROJ](https://proj.org/usage/quickstart.html) definition."
         },
         "raster-cube": {
             "type": "object",
