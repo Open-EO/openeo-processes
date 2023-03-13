@@ -62,7 +62,7 @@
             "subtype": "datacube",
             "dimensions": [
                 {
-                    "type": "geometry"
+                    "type": "geometries"
                 }
             ]
         }
