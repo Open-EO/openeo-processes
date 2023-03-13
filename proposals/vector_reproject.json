@@ -1,7 +1,7 @@
 {
     "id": "vector_reproject",
     "summary": "Reprojects the geometry dimension",
-    "description": "Converts the geometries stored in the geometry dimensions to a different projection.\n\nTo spatially align two data cubes with each other, better use the process ``resample_cube_spatial()``.",
+    "description": "Converts the geometries stored in a geometry dimensions to a different projection.\n\nTo spatially align two data cubes with each other, better use the process ``resample_cube_spatial()``.",
     "categories": [
         "cubes",
         "reproject",
@@ -24,7 +24,7 @@
         },
         {
             "name": "projection",
-            "description": "Reprojects the geometries stored in the geometry dimensions to the given projection, specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html), [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html).",
+            "description": "Projection to reproject to. specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html), [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html).",
             "schema": [
                 {
                     "title": "EPSG Code",
@@ -41,18 +41,35 @@
                     "subtype": "wkt2-definition"
                 }
             ]
+        },
+        {
+            "name": "dimension",
+            "description": "The name of the geometry dimension to reproject. If no specific dimension is specified, the filter applies to all geometry dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+            "schema": {
+                "type": [
+                    "string",
+                    "null"
+                ]
+            },
+            "default": null,
+            "optional": true
         }
     ],
     "returns": {
-        "description": "A vector data cube with geometries converted into the new projection. The reference system of the vector dimensions changes all other dimensions and properties remain unchanged.",
+        "description": "A vector data cube with geometries projected to the new projection. The reference system of the geometry dimension changes, all other dimensions and properties remain unchanged.",
         "schema": {
             "type": "object",
             "subtype": "datacube",
             "dimensions": [
                 {
-                    "type": "geometries"
+                    "type": "geometry"
                 }
             ]
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
         }
     },
     "links": [
