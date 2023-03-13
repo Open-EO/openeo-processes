@@ -1,0 +1,97 @@
+{
+    "id": "ard_surface_reflectance",
+    "summary": "CARD4L compliant Surface Reflectance generation",
+    "description": "Computes CARD4L compliant surface (bottom of atmosphere/top of canopy) reflectance values from optical input.",
+    "categories": [
+        "cubes",
+        "optical",
+        "ard"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "description": "The source data cube containing multi-spectral optical top of the atmosphere (TOA) reflectances. There must be a single dimension of type `bands` available.",
+            "name": "data",
+            "schema": {
+                "subtype": "raster-cube",
+                "type": "object"
+            }
+        },
+        {
+            "description": "The atmospheric correction method to use.",
+            "name": "atmospheric_correction_method",
+            "schema": {
+                "type": [
+                    "string"
+                ],
+                "enum": [
+                    "FORCE",
+                    "iCOR"
+                ]
+            }
+        },
+        {
+            "description": "The cloud detection method to use.\n\nEach method supports detecting different atmospheric disturbances such as clouds, cloud shadows, aerosols, haze, ozone and/or water vapour in optical imagery.",
+            "name": "cloud_detection_method",
+            "schema": {
+                "type": [
+                    "string"
+                ],
+                "enum": [
+                    "Fmask",
+                    "s2cloudless",
+                    "Sen2Cor"
+                ]
+            }
+        },
+        {
+            "description": "The digital elevation model to use. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
+            "name": "elevation_model",
+            "optional": true,
+            "default": null,
+            "schema": [
+                {
+                    "type": "string",
+                    "subtype": "collection-id"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "description": "Proprietary options for the atmospheric correction method. Specifying proprietary options will reduce portability.",
+            "name": "atmospheric_correction_options",
+            "optional": true,
+            "default": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": false
+            }
+        },
+        {
+            "description": "Proprietary options for the cloud detection method. Specifying proprietary options will reduce portability.",
+            "name": "cloud_detection_options",
+            "optional": true,
+            "default": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": false
+            }
+        }
+    ],
+    "returns": {
+        "description": "Data cube containing bottom of atmosphere reflectances for each spectral band in the source data cube, with atmospheric disturbances like clouds and cloud shadows removed. No-data values (null) are directly set in the bands. Depending on the methods used, several additional bands will be added to the data cube:\n\nData cube containing bottom of atmosphere reflectances for each spectral band in the source data cube, with atmospheric disturbances like clouds and cloud shadows removed. Depending on the methods used, several additional bands will be added to the data cube:\n\n- `date` (optional): Specifies per-pixel acquisition timestamps.\n- `incomplete-testing` (required): Identifies pixels with a value of 1 for which the per-pixel tests (at least saturation, cloud and cloud shadows, see CARD4L specification for details) have not all been successfully completed. Otherwise, the value is 0.\n- `saturation` (required) / `saturation_{band}` (optional): Indicates where pixels in the input spectral bands are saturated (1) or not (0). If the saturation is given per band, the band names are `saturation_{band}` with `{band}` being the band name from the source data cube.\n- `cloud`, `shadow` (both required),`aerosol`, `haze`, `ozone`, `water_vapor` (all optional): Indicates the probability of pixels being an atmospheric disturbance such as clouds. All bands have values between 0 (clear) and 1, which describes the probability that it is an atmospheric disturbance.\n- `snow-ice` (optional): Points to a file that indicates whether a pixel is assessed as being snow/ice (1) or not (0). All values describe the probability and must be between 0 and 1.\n- `land-water` (optional): Indicates whether a pixel is assessed as being land (1) or water (0). All values describe the probability and must be between 0 and 1.\n- `incidence-angle` (optional): Specifies per-pixel incidence angles in degrees.\n- `azimuth` (optional): Specifies per-pixel azimuth angles in degrees.\n- `sun-azimuth:` (optional): Specifies per-pixel sun azimuth angles in degrees.\n- `sun-elevation` (optional): Specifies per-pixel sun elevation angles in degrees.\n- `terrain-shadow` (optional): Indicates with a value of 1 whether a pixel is not directly illuminated due to terrain shadowing. Otherwise, the value is 0.\n- `terrain-occlusion` (optional): Indicates with a value of 1 whether a pixel is not visible to the sensor due to terrain occlusion during off-nadir viewing. Otherwise, the value is 0.\n- `terrain-illumination` (optional): Contains coefficients used for terrain illumination correction are provided for each pixel.\n\nThe data returned is CARD4L compliant with corresponding metadata.",
+        "schema": {
+            "subtype": "raster-cube",
+            "type": "object"
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://ceos.org/ard/files/PFS/SR/v5.0/CARD4L_Product_Family_Specification_Surface_Reflectance-v5.0.pdf",
+            "title": "CEOS CARD4L specification"
+        }
+    ]
+}

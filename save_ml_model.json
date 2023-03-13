@@ -1,0 +1,44 @@
+{
+    "categories":[
+       "machine learning",
+       "import"
+    ],
+    "deprecated":false,
+    "description":"Saves a machine learning model as part of a batch job.\n\nThe model will be accompanied by a separate STAC Item that implements the [ml-model extension](https://github.com/stac-extensions/ml-model).",
+    "exceptions":{
+       
+    },
+    "experimental":true,
+    "id":"save_ml_model",
+    "links":[
+       {
+          "href":"https://github.com/stac-extensions/ml-model",
+          "rel":"about",
+          "title":"STAC ml-model extension",
+          "type":"text/html"
+       }
+    ],
+    "parameters":[
+       {
+          "deprecated":false,
+          "description":"The data to store as a machine learning model.",
+          "experimental":false,
+          "name":"model",
+          "optional":false,
+          "schema":{
+             "subtype":"ml-model",
+             "type":"object"
+          }
+       }
+    ],
+    "process_graph":{
+       
+    },
+    "returns":{
+       "description":"Returns `false` if the process failed to store the model, `true` otherwise.",
+       "schema":{
+          "type":"boolean"
+       }
+    },
+    "summary":"Save a ML model"
+ }

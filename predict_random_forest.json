@@ -1,0 +1,70 @@
+{
+    "categories":[
+       "machine learning",
+       "reducer"
+    ],
+    "deprecated":false,
+    "description":"Applies a Random Forest machine learning model to an array and predict a value for it. This process is still experimental and limited in temporal and spatial extent. Please only use data with small extents in the order of 1628000 pixels. ",
+    "exceptions":{
+       
+    },
+    "experimental":true,
+    "id":"predict_random_forest",
+    "parameters":[
+       {
+          "deprecated":false,
+          "description":"An array of numbers.",
+          "experimental":false,
+          "name":"data",
+          "optional":false,
+          "schema":{
+             "items":{
+                "type":[
+                   "number",
+                   "null"
+                ]
+             },
+             "type":"array"
+          }
+       },
+       {
+          "deprecated":false,
+          "description":"A model object that can be trained with the processes ``fit_regr_random_forest()`` (regression) and ``fit_class_random_forest()`` (classification).",
+          "experimental":false,
+          "name":"model",
+          "optional":false,
+          "schema":{
+             "subtype":"ml-model",
+             "type":"object"
+          }
+       },
+       {
+          "deprecated":false,
+          "description":"The dimension which is used for the prediction.",
+          "experimental":false,
+          "name":"dimension",
+          "optional":false,
+          "schema":{
+             "items":{
+                "type":[
+                   "string"
+                ]
+             },
+             "type":"string"
+          }
+       }
+    ],
+    "process_graph":{
+       
+    },
+    "returns":{
+       "description":"The predicted value. Returns `null` if any of the given values in the array is a no-data value.",
+       "schema":{
+          "type":[
+             "number",
+             "null"
+          ]
+       }
+    },
+    "summary":"Predict values from a Random Forest model"
+ }

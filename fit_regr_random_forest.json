@@ -1,0 +1,116 @@
+{
+    "categories":[
+       "machine learning"
+    ],
+    "deprecated":false,
+    "description":"Executes the fit of a random forest regression based on training data. The process does not include a separate split of the data in test, validation and training data. The Random Forest regression model is based on the approach by Breiman (2001).",
+    "exceptions":{
+       
+    },
+    "experimental":true,
+    "id":"fit_regr_random_forest",
+    "links":[
+       {
+          "href":"https://doi.org/10.1023/A:1010933404324",
+          "rel":"about",
+          "title":"Breiman (2001): Random Forests",
+          "type":"text/html"
+       }
+    ],
+    "parameters":[
+       {
+          "deprecated":false,
+          "description":"The data for the regression model as a vector data cube. The data needs to include the features (vectors) of the target input variable as well as the target variable.",
+          "experimental":false,
+          "name":"data",
+          "optional":false,
+          "schema":{
+             "subtype":"vector-cube",
+             "type":"object"
+          }
+       },
+       {
+          "deprecated":false,
+          "description":"Specifies how many split variables will be used at a node.\n\nThe following options are available:\n\n- *integer*: The given number of variables are considered for each split.\n- `all`: All variables are considered for each split.\n- `log2`: The logarithm with base 2 of the number of variables are considered for each split.\n- `onethird`: A third of the number of variables are considered for each split. This is often the default for regression.\n- `sqrt`: The square root of the number of variables are considered for each split.",
+          "experimental":false,
+          "name":"max_variables",
+          "optional":false,
+          "schema":[
+             {
+                "minimum":1,
+                "type":"integer"
+             },
+             {
+                "enum":[
+                   "all",
+                   "log2",
+                   "onethird",
+                   "sqrt"
+                ],
+                "type":"string"
+             }
+          ]
+       },
+       {
+          "default":100,
+          "deprecated":false,
+          "description":"The number of trees build within the Random Forest regression.",
+          "experimental":false,
+          "name":"num_trees",
+          "optional":true,
+          "schema":{
+             "minimum":1,
+             "type":"integer"
+          }
+       },
+       {
+          "deprecated":false,
+          "description":"A randomization seed to use for the random sampling in training. If not given or `null`, no seed is used and results may differ on subsequent use.",
+          "experimental":false,
+          "name":"seed",
+          "optional":true,
+          "schema":{
+             "type":[
+                "integer",
+                "null"
+             ]
+          }
+       },
+       {
+          "deprecated":false,
+          "description":"List of columns in the predictors vector-cube that is used for the model training.",
+          "experimental":false,
+          "name":"predictors_vars",
+          "optional":false,
+          "schema":{
+             "examples":[
+                "B04",
+                "B08"
+             ],
+             "type":"array"
+          }
+       },
+       {
+          "deprecated":false,
+          "description":"Column in the target vector-cube that is used for the model training.",
+          "experimental":false,
+          "name":"target_var",
+          "optional":false,
+          "schema":{
+             "examples":"target_canopy_cover",
+             "type":"string"
+          }
+       }
+    ],
+    "process_graph":{
+       
+    },
+    "returns":{
+       "description":"A model object that can be saved with ``save_ml_model()`` and restored with ``load_ml_model()``.",
+       "schema":{
+          "subtype":"ml-model",
+          "type":"object"
+       }
+    },
+    "summary":"Train a random forest regression model"
+ }

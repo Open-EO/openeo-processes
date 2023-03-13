@@ -1,0 +1,55 @@
+{
+    "id":"load_vector_cube",
+    "categories":[
+       "cubes",
+       "vector"
+    ],
+    "deprecated":false,
+    "description":"Loads a vector cube as part of a batch job. Vector cubes can be stored with save_vector_cube before.\n",
+    "exceptions":{
+       
+    },
+    "experimental":true,
+    "links":[
+       {
+          "href":"https://github.com/Open-EO/openeo-processes-python/blob/load-save-vector-cube/src/openeo_processes/cubes.py#L2271",
+          "rel":"about",
+          "title":"Load vector cube",
+          "type":"text/html"
+       }
+    ],
+    "parameters":[
+       {
+          "deprecated":false,
+          "description":"The job-id to load the vector cube from.",
+          "experimental":false,
+          "name":"job_id",
+          "optional":false,
+          "schema":{
+             "subtype":"vector-cube",
+             "type":"string"
+          }
+       },
+       {
+          "deprecated":false,
+          "description":"The url to load the vector cube from.",
+          "experimental":false,
+          "name":"URL",
+          "optional":false,
+          "schema":{
+             "subtype":"vector-cube",
+             "type":"string"
+          }
+       }
+    ],
+    "process_graph":{
+       
+    },
+    "returns":{
+       "description":"Returns `false` if the process failed to store the vector cube, `true` otherwise.",
+       "schema":{
+          "type":"boolean"
+       }
+    },
+    "summary":"Load a vector cube from a batch job or from a URL."
+ }
