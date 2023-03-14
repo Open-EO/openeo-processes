@@ -24,7 +24,7 @@
         },
         {
             "name": "projection",
-            "description": "Coordinate reference system to reproject to. Specified as an [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html), [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html).",
+            "description": "Coordinate reference system to reproject to. Specified as an [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html).",
             "schema": [
                 {
                     "title": "EPSG Code",
