@@ -259,7 +259,7 @@
     "description": "Aggregates statistics for one or more geometries (e.g. zonal statistics for polygons) over the spatial dimensions. The given data cube can have multiple additional dimensions and for all these dimensions results will be computed individually.\n\nAn 'unbounded' aggregation over the full extent of the horizontal spatial dimensions can be computed with the process ``reduce_spatial()``.\n\nThis process passes a list of values to the reducer. The list of values has an undefined order, therefore processes such as ``last()`` and ``first()`` that depend on the order of the values will lead to unpredictable results.",
     "categories": [
       "cubes",
-      "aggregate & resample"
+      "aggregate"
     ],
     "parameters": [
       {
@@ -391,7 +391,7 @@
     "summary": "Temporal aggregations based on calendar hierarchies",
     "description": "Computes a temporal aggregation based on calendar hierarchies such as years, months or seasons. For other calendar hierarchies ``aggregate_temporal()`` can be used.\n\nFor each interval, all data along the dimension will be passed through the reducer.\n\nIf the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension.",
     "categories": [
-      "aggregate & resample",
+      "aggregate",
       "climatology",
       "cubes"
     ],
@@ -523,7 +523,7 @@
     "description": "Computes a temporal aggregation based on an array of temporal intervals.\n\nFor common regular calendar hierarchies such as year, month, week or seasons ``aggregate_temporal_period()`` can be used. Other calendar hierarchies must be transformed into specific intervals by the clients.\n\nFor each interval, all data along the dimension will be passed through the reducer.\n\nThe computed values will be projected to the labels. If no labels are specified, the start of the temporal interval will be used as label for the corresponding values. In case of a conflict (i.e. the user-specified values for the start times of the temporal intervals are not distinct), the user-defined labels must be specified in the parameter `labels` as otherwise a `DistinctDimensionLabelsRequired` exception would be thrown. The number of user-defined labels and the number of intervals need to be equal.\n\nIf the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension.",
     "categories": [
       "cubes",
-      "aggregate & resample"
+      "aggregate"
     ],
     "parameters": [
       {
@@ -4420,7 +4420,7 @@
       },
       {
         "name": "dimension",
-        "description": "The name of the temporal dimension to filter on. If no specific dimension is specified or it is set to `null`, the filter applies to all temporal dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+        "description": "The name of the temporal dimension to filter on. If no specific dimension is specified, the filter applies to all temporal dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
         "schema": {
           "type": [
             "string",
@@ -8029,7 +8029,7 @@
     "description": "Aggregates statistics over the horizontal spatial dimensions (axes `x` and `y`) of the data cube.\n\nThe pixel grid for the axes `x` and `y` is divided into non-overlapping windows with the size specified in the parameter `size`. If the number of values for the axes `x` and `y` is not a multiple of the corresponding window size, the behavior specified in the parameters `boundary` and `align` is applied.\nFor each of these windows, the reducer process computes the result.",
     "categories": [
       "cubes",
-      "aggregate & resample"
+      "aggregate"
     ],
     "experimental": true,
     "parameters": [
@@ -10746,7 +10746,7 @@
     "summary": "Reduce spatial dimensions 'x' and 'y'",
     "description": "Applies a reducer to a data cube by collapsing all the pixel values along the horizontal spatial dimensions (i.e. axes `x` and `y`) into an output value computed by the reducer. The horizontal spatial dimensions are dropped.\n\nAn aggregation over certain spatial areas can be computed with the process ``aggregate_spatial()``.\n\nThis process passes a list of values to the reducer. The list of values has an undefined order, therefore processes such as ``last()`` and ``first()`` that depend on the order of the values will lead to unpredictable results.",
     "categories": [
-      "aggregate & resample",
+      "aggregate",
       "cubes",
       "reducer"
     ],
@@ -10835,7 +10835,7 @@
     "description": "Resamples one or more given temporal dimensions from a source data cube to align with the corresponding dimensions of the given target data cube using the nearest neighbor method. Returns a new data cube with the resampled dimensions.\n\nBy default, this process simply takes the nearest neighbor independent of the value (including values such as no-data / `null`). Depending on the data cubes this may lead to values being assigned to two target timestamps. To only consider valid values in a specific range around the target timestamps, use the parameter `valid_within`.\n\nThe rare case of ties is resolved by choosing the earlier timestamps.",
     "categories": [
       "cubes",
-      "aggregate & resample"
+      "reproject"
     ],
     "experimental": true,
     "parameters": [
@@ -11271,6 +11271,103 @@
         ]
       }
     }
+  },
+  {
+    "id": "vector_reproject",
+    "summary": "Reprojects the geometry dimension",
+    "description": "Converts the geometries stored in a geometry dimension to a different coordinate reference system.",
+    "categories": [
+      "cubes",
+      "reproject",
+      "vector"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "A vector data cube.",
+        "schema": {
+          "type": "object",
+          "subtype": "datacube",
+          "dimensions": [
+            {
+              "type": "geometry"
+            }
+          ]
+        }
+      },
+      {
+        "name": "projection",
+        "description": "Coordinate reference system to reproject to. Specified as an [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html).",
+        "schema": [
+          {
+            "title": "EPSG Code",
+            "type": "integer",
+            "subtype": "epsg-code",
+            "minimum": 1000,
+            "examples": [
+              3857
+            ]
+          },
+          {
+            "title": "WKT2",
+            "type": "string",
+            "subtype": "wkt2-definition"
+          }
+        ]
+      },
+      {
+        "name": "dimension",
+        "description": "The name of the geometry dimension to reproject. If no specific dimension is specified, the filter applies to all geometry dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+        "schema": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "default": null,
+        "optional": true
+      }
+    ],
+    "returns": {
+      "description": "A vector data cube with geometries projected to the new coordinate reference system. The reference system of the geometry dimension changes, all other dimensions and properties remain unchanged.",
+      "schema": {
+        "type": "object",
+        "subtype": "datacube",
+        "dimensions": [
+          {
+            "type": "geometry"
+          }
+        ]
+      }
+    },
+    "exceptions": {
+      "DimensionNotAvailable": {
+        "message": "A dimension with the specified name does not exist."
+      }
+    },
+    "links": [
+      {
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#resample",
+        "rel": "about",
+        "title": "Resampling explained in the openEO documentation"
+      },
+      {
+        "rel": "about",
+        "href": "https://proj.org/usage/projections.html",
+        "title": "PROJ parameters for cartographic projections"
+      },
+      {
+        "rel": "about",
+        "href": "http://www.epsg-registry.org",
+        "title": "Official EPSG code registry"
+      },
+      {
+        "rel": "about",
+        "href": "http://www.epsg.io",
+        "title": "Unofficial EPSG code database"
+      }
+    ]
   },
   {
     "id": "vector_to_random_points",
@@ -11978,7 +12075,7 @@
     "description": "Resamples the spatial dimensions (x,y) from a source data cube to align with the corresponding dimensions of the given target data cube. Returns a new data cube with the resampled dimensions.\n\nTo resample a data cube to a specific resolution or projection regardless of an existing target data cube, refer to ``resample_spatial()``.",
     "categories": [
       "cubes",
-      "aggregate & resample"
+      "reproject"
     ],
     "parameters": [
       {
@@ -12071,7 +12168,7 @@
     "description": "Resamples the spatial dimensions (x,y) of the data cube to a specified resolution and/or warps the data cube to the target projection. At least `resolution` or `projection` must be specified.\n\nRelated processes:\n\n* Use ``filter_bbox()`` to set the target spatial extent.\n* To spatially align two data cubes with each other (e.g. for merging), better use the process ``resample_cube_spatial()``.",
     "categories": [
       "cubes",
-      "aggregate & resample"
+      "reproject"
     ],
     "parameters": [
       {

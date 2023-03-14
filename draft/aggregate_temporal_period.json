@@ -3,7 +3,7 @@
     "summary": "Temporal aggregations based on calendar hierarchies",
     "description": "Computes a temporal aggregation based on calendar hierarchies such as years, months or seasons. For other calendar hierarchies ``aggregate_temporal()`` can be used.\n\nFor each interval, all data along the dimension will be passed through the reducer.\n\nIf the dimension is not set or is set to `null`, the data cube is expected to only have one temporal dimension.",
     "categories": [
-        "aggregate & resample",
+        "aggregate",
         "climatology",
         "cubes"
     ],
