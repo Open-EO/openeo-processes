@@ -25,6 +25,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Moved from proposals to stable processes:
+    - `array_append`
+    - `array_concat`
+    - `array_create`
+    - `array_interpolate_linear`
+    - `resample_cube_temporal`
 - Added better support for labeled arrays. Labels are not discarded in all cases anymore. Affected processes:
     - `array_append`
     - `array_concat`
