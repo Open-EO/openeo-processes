@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `array_append`
     - `array_concat`
     - `array_modify`
+- `array_modify`: Change the default value for `length` from `1` to `0`. [#312](https://github.com/Open-EO/openeo-processes/issues/312)
 - Renamed `text_merge` to `text_concat` for better alignment with `array_concat` and existing implementations.
 - `apply_neighborhood`:
     - Allow `null` as default value for units.
