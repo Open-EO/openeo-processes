@@ -1,0 +1,110 @@
+{
+    "id": "fit_class_random_forest",
+    "summary": "Train a random forest classification model",
+    "description": "Executes the fit of a random forest classification based on training data. The process does not include a separate split of the data in test, validation and training data. The Random Forest classification model is based on the approach by Breiman (2001).",
+    "categories": [
+        "machine learning"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "predictors",
+            "description": "The predictors for the classification model as a vector data cube. Aggregated to the features (vectors) of the target input variable.",
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometry"
+                        },
+                        {
+                            "type": "bands"
+                        }
+                    ]
+                },
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometry"
+                        },
+                        {
+                            "type": "other"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "target",
+            "description": "The training sites for the classification model as a vector data cube. This is associated with the target variable for the Random Forest model. The geometry has to associated with a value to predict (e.g. fractional forest canopy cover).",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "geometry"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "max_variables",
+            "description": "Specifies how many split variables will be used at a node.\n\nThe following options are available:\n\n- *integer*: The given number of variables are considered for each split.\n- `all`: All variables are considered for each split.\n- `log2`: The logarithm with base 2 of the number of variables are considered for each split.\n- `onethird`: A third of the number of variables are considered for each split.\n- `sqrt`: The square root of the number of variables are considered for each split. This is often the default for classification.",
+            "schema": [
+                {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                {
+                    "type": "string",
+                    "enum": [
+                        "all",
+                        "log2",
+                        "onethird",
+                        "sqrt"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "num_trees",
+            "description": "The number of trees build within the Random Forest classification.",
+            "optional": true,
+            "default": 100,
+            "schema": {
+                "type": "integer",
+                "minimum": 1
+            }
+        },
+        {
+            "name": "seed",
+            "description": "A randomization seed to use for the random sampling in training. If not given or `null`, no seed is used and results may differ on subsequent use.",
+            "optional": true,
+            "default": null,
+            "schema": {
+                "type": [
+                    "integer",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "A model object that can be saved with ``save_ml_model()`` and restored with ``load_ml_model()``.",
+        "schema": {
+            "type": "object",
+            "subtype": "ml-model"
+        }
+    },
+    "links": [
+        {
+            "href": "https://doi.org/10.1023/A:1010933404324",
+            "title": "Breiman (2001): Random Forests",
+            "type": "text/html",
+            "rel": "about"
+        }
+    ]
+}
