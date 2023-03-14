@@ -9,7 +9,7 @@
     "experimental": true,
     "parameters": [
         {
-            "name": "id",
+            "name": "url",
             "description": "The URL of a static STAC or a STAC API Collection.",
             "schema": {
                 "title": "URL",
@@ -238,13 +238,13 @@
         {
             "title": "Load from a static STAC / batch job result",
             "arguments": {
-                "id": "https://example.com/api/v1.0/jobs/123/results"
+                "url": "https://example.com/api/v1.0/jobs/123/results"
             }
         },
         {
             "title": "Load from a STAC API",
             "arguments": {
-                "id": "https://example.com/collections/SENTINEL2",
+                "url": "https://example.com/collections/SENTINEL2",
                 "spatial_extent": {
                     "west": 16.1,
                     "east": 16.6,
