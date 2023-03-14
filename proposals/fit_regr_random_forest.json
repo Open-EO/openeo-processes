@@ -16,7 +16,7 @@
                     "subtype": "datacube",
                     "dimensions": [
                         {
-                            "type": "geometries"
+                            "type": "geometry"
                         },
                         {
                             "type": "bands"
@@ -28,7 +28,7 @@
                     "subtype": "datacube",
                     "dimensions": [
                         {
-                            "type": "geometries"
+                            "type": "geometry"
                         },
                         {
                             "type": "other"
@@ -45,7 +45,7 @@
                 "subtype": "datacube",
                 "dimensions": [
                     {
-                        "type": "geometries"
+                        "type": "geometry"
                     }
                 ]
             }
