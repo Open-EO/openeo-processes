@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `flatten_dimensions`
     - `unflatten_dimension`
     - `vector_buffer`
+    - `vector_reproject`
     - `vector_to_random_points`
     - `vector_to_regular_points`
 - `add_dimension`: Added new dimension type `geometries`. [#68](https://github.com/Open-EO/openeo-processes/issues/68)

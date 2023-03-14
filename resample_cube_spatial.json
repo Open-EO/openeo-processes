@@ -4,7 +4,7 @@
     "description": "Resamples the spatial dimensions (x,y) from a source data cube to align with the corresponding dimensions of the given target data cube. Returns a new data cube with the resampled dimensions.\n\nTo resample a data cube to a specific resolution or projection regardless of an existing target data cube, refer to ``resample_spatial()``.",
     "categories": [
         "cubes",
-        "aggregate & resample"
+        "reproject"
     ],
     "parameters": [
         {
