@@ -10,14 +10,24 @@
             "name": "x",
             "description": "First operand.",
             "schema": {
-                "description": "Any data type is allowed."
+                "type": [
+                    "number",
+                    "boolean",
+                    "string",
+                    "null"
+                ]
             }
         },
         {
             "name": "y",
             "description": "Second operand.",
             "schema": {
-                "description": "Any data type is allowed."
+                "type": [
+                    "number",
+                    "boolean",
+                    "string",
+                    "null"
+                ]
             }
         }
     ],
