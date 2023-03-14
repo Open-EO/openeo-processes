@@ -1,7 +1,7 @@
 {
     "id": "apply_polygon",
     "summary": "Apply a process to segments of the data cube",
-    "description": "Applies a process to segments of the data cube that are defined by the given polygons. For each polygon provided, all pixels for which the point at the pixel center intersects with the polygon (as defined in the Simple Features standard by the OGC) are collected into sub data cubes. Each sub data cube is passed individually to the given process.",
+    "description": "Applies a process to segments of the data cube that are defined by the given polygons. For each polygon provided, all pixels for which the point at the pixel center intersects with the polygon (as defined in the Simple Features standard by the OGC) are collected into sub data cubes. If a pixel is part of multiple of the provided polygons (e.g., when the polygons overlap), the `GeometriesOverlap` exception is thrown. Each sub data cube is passed individually to the given process.",
     "categories": [
         "cubes"
     ],
@@ -111,6 +111,11 @@
         "schema": {
             "type": "object",
             "subtype": "raster-cube"
+        }
+    },
+    "exceptions": {
+        "GeometriesOverlap": {
+            "message": "Geometries are not allowed to overlap to avoid that pixel values are processed multiple times."
         }
     },
     "links": [
