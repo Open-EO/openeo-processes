@@ -1,7 +1,7 @@
 {
     "id": "neq",
     "summary": "Not equal to comparison",
-    "description": "Compares whether `x` is *not* strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`. Therefore, `neq(null, null)` returns `null` instead of `false`.\n* If any operand is an array or object, the return value is `false`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings MUST be compared differently than other strings and MUST NOT be compared based on their string representation due to different possible representations. For example, the time zone representation `Z` (for UTC) has the same meaning as `+00:00`.",
+    "description": "Compares whether `x` is **not** strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
     "categories": [
         "texts",
         "comparison"
@@ -130,26 +130,10 @@
         },
         {
             "arguments": {
-                "x": "00:00:00+00:00",
-                "y": "00:00:00Z"
-            },
-            "returns": false
-        },
-        {
-            "description": "`y` is not a valid date-time representation and therefore will be treated as a string so that the provided values are not equal.",
-            "arguments": {
-                "x": "2018-01-01T12:00:00Z",
-                "y": "2018-01-01T12:00:00"
+                "x": "2018-01-01T00:00:00Z",
+                "y": "2018-01-01T00:00:00+00:00"
             },
             "returns": true
-        },
-        {
-            "description": "01:00 in the time zone +1 is equal to 00:00 in UTC.",
-            "arguments": {
-                "x": "2018-01-01T00:00:00Z",
-                "y": "2018-01-01T01:00:00+01:00"
-            },
-            "returns": false
         },
         {
             "arguments": {
@@ -165,6 +149,13 @@
                 ]
             },
             "returns": false
+        },
+        {
+            "arguments": {
+                "x": null,
+                "y": null
+            },
+            "returns": null
         }
     ],
     "process_graph": {

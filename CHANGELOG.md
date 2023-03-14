@@ -9,13 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New processes in proposal state:
+    - `date_difference`
     - `filter_vector`
-    - `fit_class_random_forest`
-    - `fit_regr_random_forest`
     - `flatten_dimensions`
-    - `load_ml_model`
-    - `predict_random_forest`
-    - `save_ml_model`
     - `unflatten_dimension`
     - `vector_buffer`
     - `vector_to_random_points`
@@ -37,18 +33,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Require at least one band if not set to `null`. [#372](https://github.com/Open-EO/openeo-processes/issues/372)
     - Added a `NoDataAvailable` exception
 - `inspect`: The parameter `message` has been moved to be the second argument. [#369](https://github.com/Open-EO/openeo-processes/issues/369)
+- `mask` and `merge_cubes`: The spatial dimensions `x` and `y` can now be resampled implicitly instead of throwing an error. [#402](https://github.com/Open-EO/openeo-processes/issues/402)
 - `save_result`: Added a more concrete `DataCubeEmpty` exception.
+- The comparison processes `eq`, `neq`, `lt`, `lte`, `gt`, `gte` don't support temporal comparison any longer. Instead explicitly use `date_difference`.
 - New definition for `aggregate_spatial`:
     - Allows more than 3 input dimensions [#126](https://github.com/Open-EO/openeo-processes/issues/126)
     - Allow to not export statistics by changing the parameter `target_dimension` [#366](https://github.com/Open-EO/openeo-processes/issues/366)
     - Clarify how the resulting vector data cube looks like  [#356](https://github.com/Open-EO/openeo-processes/issues/356)
 - Renamed `create_raster_cube` to `create_data_cube`. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
 - Updated the processes based on the subtypes `raster-cube` or `vector-cube` to work with the subtype `datacube` instead. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
+- `sort` and `order`: The ordering of ties is not defined anymore. [#409](https://github.com/Open-EO/openeo-processes/issues/409)
 
 ### Removed
 
 - The `examples` folder has been migrated to the [openEO Community Examples](https://github.com/Open-EO/openeo-community-examples/tree/main/processes) repository.
+- `between`: Support for temporal comparison.
 - Deprecated `GeometryCollections` are not supported any longer. [#389](https://github.com/Open-EO/openeo-processes/issues/389)
+- Deprecated PROJ definitions for the CRS are not supported any longer.
 
 ### Fixed
 
@@ -56,6 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Clarified that feature properties are preserved for vector data cubes and all GeoJSON Features. [#270](https://github.com/Open-EO/openeo-processes/issues/270)
     - Clarified that a `TargetDimensionExists` exception is thrown if the target dimension exists.
 - `apply` and `array_apply`: Fixed broken references to the `absolute` process
+- `apply_dimension`: Clarify the behavior for when a dimension gets 'dropped'.  [#357](https://github.com/Open-EO/openeo-processes/issues/357)
 - `apply_neighborhood`:
     - Parameter `overlap` was optional but had no default value and no schema for the default value defined.
     - Clarified that the overlap must be included in the returned data cube but value changes are ignored. [#386](https://github.com/Open-EO/openeo-processes/issues/386)
@@ -64,6 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `array_interpolate_linear`: Return value was incorrectly specified as `number` or `null`. It must return an array instead. [#333](https://github.com/Open-EO/openeo-processes/issues/333)
 - `is_nan`: Fixed a wrong description of the return value and simplified/clarified the process descriptions overall. [#360](https://github.com/Open-EO/openeo-processes/issues/360)
 - `is_nodata`: Clarified that `NaN` can be considered as a no-data value only if it is explicitly specified as no-data value. [#361](https://github.com/Open-EO/openeo-processes/issues/361)
+- `merge_cubes`: Clarified descriptions to better describe when a merge is possible. [#379](https://github.com/Open-EO/openeo-processes/issues/379)
 - `rename_labels`: Clarified that the `LabelsNotEnumerated` exception is thrown if `source` is empty instead of if `target` is empty. [#321](https://github.com/Open-EO/openeo-processes/issues/321)
 - `round`: Clarify that the rounding for ties applies not only for integers. [#326](https://github.com/Open-EO/openeo-processes/issues/326)
 - `save_result`: Clarified that the process always returns `true` (and otherwise throws). [#334](https://github.com/Open-EO/openeo-processes/issues/334)
