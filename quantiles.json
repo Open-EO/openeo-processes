@@ -1,7 +1,7 @@
 {
     "id": "quantiles",
     "summary": "Quantiles",
-    "description": "Calculates quantiles, which are cut points dividing the range of a sample distribution into either\n\n1. intervals corresponding to the given probabilities *or*\n2. equal-sized intervals (q-quantiles).\n\nEither the parameter `probabilities` or `q` must be specified, otherwise the `QuantilesParameterMissing` exception is thrown. If both parameters are set the `QuantilesParameterConflict` exception is thrown.",
+    "description": "Calculates quantiles, which are cut points dividing the range of a sample distribution into either\n\n1. intervals corresponding to the given probabilities *or*\n2. equal-sized intervals (q-quantiles).\n\nEither the parameter `probabilities` or `q` must be specified, otherwise the `QuantilesParameterMissing` exception is thrown. If both parameters are set the `QuantilesParameterConflict` exception is thrown.\n\nSample quantiles can be computed with several different algorithms. Hyndman and Fan (1996) have concluded on nine different types, which are commonly implemented in statistical software packages. This process is implementing type 7, which is implemented widely and often also the default type (e.g. in Excel, Julia, Python, R and S).",
     "categories": [
         "math > statistics"
     ],
@@ -182,6 +182,12 @@
             "rel": "about",
             "href": "https://en.wikipedia.org/wiki/Quantile",
             "title": "Quantiles explained by Wikipedia"
+        },
+        {
+            "rel": "about",
+            "href": "https://www.amherst.edu/media/view/129116/original/Sample+Quantiles.pdf",
+            "type": "application/pdf",
+            "title": "Hyndman and Fan (1996): Sample Quantiles in Statistical Packages"
         }
     ]
 }

@@ -1,0 +1,106 @@
+{
+    "id": "vector_to_random_points",
+    "summary": "Sample random points from geometries",
+    "description": "Generate a vector data cube of points by sampling random points from input geometries. At least one point is sampled per input geometry. Feature properties are preserved.\n\nIf `geometry_count` and `total_count` are both unrestricted (i.e. set to `null`, which is the default), one sample per geometry is used.",
+    "categories": [
+        "cubes",
+        "vector"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "Input geometries for sample extraction.",
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "geojson",
+                    "description": "The GeoJSON type `GeometryCollection` is not supported."
+                },
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometry"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "geometry_count",
+            "description": "The maximum number of points to compute per geometry.\n\nPoints in the input geometries can be selected only once by the sampling.",
+            "optional": true,
+            "default": null,
+            "schema": [
+                {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                {
+                    "title": "Unrestricted",
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "name": "total_count",
+            "description": "The maximum number of points to compute overall.\n\nThrows a `CountMismatch` exception if the specified value is less than the provided number of geometries.",
+            "optional": true,
+            "default": null,
+            "schema": [
+                {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                {
+                    "title": "Unrestricted",
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "name": "group",
+            "description": "Specifies whether the sampled points should be grouped by input geometry (default) or be generated as independent points.\n\n* If the sampled points are grouped, the process generates a `MultiPoint` per geometry given which keeps the original identifier if present.\n* Otherwise, each sampled point is generated as a distinct `Point` geometry without identifier.",
+            "optional": true,
+            "default": true,
+            "schema": {
+                "type": "boolean"
+            }
+        },
+        {
+            "name": "seed",
+            "description": "A randomization seed to use for random sampling. If not given or `null`, no seed is used and results may differ on subsequent use.",
+            "optional": true,
+            "default": null,
+            "schema": {
+                "type": [
+                    "integer",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "Returns a vector data cube with the sampled points.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "geometry",
+                    "geometry_type": [
+                        "Point",
+                        "MultiPoint"
+                    ]
+                }
+            ]
+        }
+    },
+    "exceptions": {
+        "CountMismatch": {
+            "message": "The total number of points is lower than the number of geometries."
+        }
+    }
+}

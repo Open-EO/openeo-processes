@@ -4,6 +4,7 @@
     "description": "Computes anomalies based on normals for temporal periods. It compares the data for each label in the temporal dimension with the corresponding data in the normals data cube by subtracting the normal from the data.",
     "categories": [
         "climatology",
+        "cubes",
         "math"
     ],
     "parameters": [
@@ -12,7 +13,12 @@
             "description": "A data cube with exactly one temporal dimension and the following dimension labels for the given period (`YYYY` = four-digit year, `MM` = two-digit month, `DD` two-digit day of month):\n\n* `hour`: `YYYY-MM-DD-00` - `YYYY-MM-DD-23`\n* `day`: `YYYY-001` - `YYYY-365`\n* `week`: `YYYY-01` - `YYYY-52`\n* `dekad`: `YYYY-00` - `YYYY-36`\n* `month`: `YYYY-01` - `YYYY-12`\n* `season`: `YYYY-djf` (December - February), `YYYY-mam` (March - May), `YYYY-jja` (June - August), `YYYY-son` (September - November).\n* `tropical-season`: `YYYY-ndjfma` (November - April), `YYYY-mjjaso` (May - October).\n* `year`: `YYYY`\n* `decade`: `YYY0`\n* `decade-ad`: `YYY1`\n* `single-period` / `climatology-period`: Any\n\n``aggregate_temporal_period()`` can compute such a data cube.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "temporal"
+                    }
+                ]
             }
         },
         {
@@ -20,7 +26,12 @@
             "description": "A data cube with normals, e.g. daily, monthly or yearly values computed from a process such as ``climatological_normal()``. Must contain exactly one temporal dimension with the following dimension labels for the given period:\n\n* `hour`: `00` - `23`\n* `day`: `001` - `365`\n* `week`: `01` - `52`\n* `dekad`: `00` - `36`\n* `month`: `01` - `12`\n* `season`: `djf` (December - February), `mam` (March - May), `jja` (June - August), `son` (September - November)\n* `tropical-season`: `ndjfma` (November - April), `mjjaso` (May - October)\n* `year`: Four-digit year numbers\n* `decade`: Four-digit year numbers, the last digit being a `0`\n* `decade-ad`: Four-digit year numbers, the last digit being a `1`\n* `single-period` / `climatology-period`: A single dimension label with any name is expected.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "temporal"
+                    }
+                ]
             }
         },
         {
@@ -49,7 +60,12 @@
         "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "temporal"
+                }
+            ]
         }
     }
 }

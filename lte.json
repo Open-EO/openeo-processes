@@ -1,7 +1,7 @@
 {
     "id": "lte",
     "summary": "Less than or equal to comparison",
-    "description": "Compares whether `x` is less than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`. Therefore, `lte(null, null)` returns `null` instead of `true`.\n* If any operand is an array or object, the return value is `false`.\n* If the operands are not equal (see process ``eq()``) and any of them is not a `number` or temporal string (`date`, `time` or `date-time`), the process returns `false`.\n* Temporal strings can *not* be compared based on their string representation due to the time zone / time-offset representations.",
+    "description": "Compares whether `x` is less than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* If the operands are not equal (see process ``eq()``) and any of them is not a `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
     "categories": [
         "comparison"
     ],
@@ -61,24 +61,10 @@
         },
         {
             "arguments": {
-                "x": "00:00:00+01:00",
-                "y": "00:00:00Z"
+                "x": "2018-01-01T00:00:00Z",
+                "y": "2018-01-01T00:00:00+00:00"
             },
-            "returns": true
-        },
-        {
-            "arguments": {
-                "x": "1950-01-01T00:00:00Z",
-                "y": "2018-01-01T12:00:00Z"
-            },
-            "returns": true
-        },
-        {
-            "arguments": {
-                "x": "2018-01-01T12:00:00+00:00",
-                "y": "2018-01-01T12:00:00Z"
-            },
-            "returns": true
+            "returns": false
         },
         {
             "arguments": {
@@ -101,6 +87,13 @@
                 ]
             },
             "returns": false
+        },
+        {
+            "arguments": {
+                "x": null,
+                "y": null
+            },
+            "returns": null
         }
     ],
     "process_graph": {
