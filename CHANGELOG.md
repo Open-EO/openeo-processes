@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New processes in proposal state:
+    - `date_difference`
     - `filter_vector`
     - `fit_class_random_forest`
     - `fit_regr_random_forest`
@@ -39,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `inspect`: The parameter `message` has been moved to be the second argument. [#369](https://github.com/Open-EO/openeo-processes/issues/369)
 - `mask` and `merge_cubes`: The spatial dimensions `x` and `y` can now be resampled implicitly instead of throwing an error. [#402](https://github.com/Open-EO/openeo-processes/issues/402)
 - `save_result`: Added a more concrete `DataCubeEmpty` exception.
+- The comparison processes `eq`, `neq`, `lt`, `lte`, `gt`, `gte` don't support temporal comparison any longer. Instead explicitly use `date_difference`.
 - New definition for `aggregate_spatial`:
     - Allows more than 3 input dimensions [#126](https://github.com/Open-EO/openeo-processes/issues/126)
     - Allow to not export statistics by changing the parameter `target_dimension` [#366](https://github.com/Open-EO/openeo-processes/issues/366)
@@ -49,7 +51,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - The `examples` folder has been migrated to the [openEO Community Examples](https://github.com/Open-EO/openeo-community-examples/tree/main/processes) repository.
+- `between`: Support for temporal comparison.
 - Deprecated `GeometryCollections` are not supported any longer. [#389](https://github.com/Open-EO/openeo-processes/issues/389)
+- Deprecated PROJ definitions for the CRS are not supported any longer.
 
 ### Fixed
 
@@ -57,6 +61,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Clarified that feature properties are preserved for vector data cubes and all GeoJSON Features. [#270](https://github.com/Open-EO/openeo-processes/issues/270)
     - Clarified that a `TargetDimensionExists` exception is thrown if the target dimension exists.
 - `apply` and `array_apply`: Fixed broken references to the `absolute` process
+- `apply_dimension`: Clarify the behavior for when a dimension gets 'dropped'.  [#357](https://github.com/Open-EO/openeo-processes/issues/357)
 - `apply_neighborhood`:
     - Parameter `overlap` was optional but had no default value and no schema for the default value defined.
     - Clarified that the overlap must be included in the returned data cube but value changes are ignored. [#386](https://github.com/Open-EO/openeo-processes/issues/386)

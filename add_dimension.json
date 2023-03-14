@@ -40,7 +40,7 @@
                 "type": "string",
                 "enum": [
                     "bands",
-                    "geometries",
+                    "geometry",
                     "spatial",
                     "temporal",
                     "other"
