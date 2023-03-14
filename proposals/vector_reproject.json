@@ -1,7 +1,7 @@
 {
     "id": "vector_reproject",
     "summary": "Reprojects the geometry dimension",
-    "description": "Converts the geometries stored in a geometry dimensions to a different projection.",
+    "description": "Converts the geometries stored in a geometry dimension to a different coordinate reference system.",
     "categories": [
         "cubes",
         "reproject",
@@ -24,7 +24,7 @@
         },
         {
             "name": "projection",
-            "description": "Projection to reproject to. specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html), [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html).",
+            "description": "Coordinate reference system to reproject to. specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html), [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html).",
             "schema": [
                 {
                     "title": "EPSG Code",
@@ -56,7 +56,7 @@
         }
     ],
     "returns": {
-        "description": "A vector data cube with geometries projected to the new projection. The reference system of the geometry dimension changes, all other dimensions and properties remain unchanged.",
+        "description": "A vector data cube with geometries projected to the new coordinate reference system. The reference system of the geometry dimension changes, all other dimensions and properties remain unchanged.",
         "schema": {
             "type": "object",
             "subtype": "datacube",
