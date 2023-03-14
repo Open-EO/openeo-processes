@@ -1,7 +1,7 @@
 {
     "id": "vector_reproject",
     "summary": "Reprojects the geometry dimension",
-    "description": "Converts the geometries stored in a geometry dimensions to a different projection.\n\nTo spatially align two data cubes with each other, better use the process ``resample_cube_spatial()``.",
+    "description": "Converts the geometries stored in a geometry dimensions to a different projection.",
     "categories": [
         "cubes",
         "reproject",
