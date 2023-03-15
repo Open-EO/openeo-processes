@@ -1,6 +1,6 @@
 {
     "id": "order",
-    "summary": "Create a permutation",
+    "summary": "Get the order of array items",
     "description": "Computes a permutation which allows rearranging the data into ascending or descending order. In other words, this process computes the ranked (sorted) element positions in the original list.\n\n**Remarks:**\n\n* The positions in the result are zero-based.\n* The ordering of ties is implementation-dependent.\n* Temporal strings can *not* be compared based on their string representation due to the time zone/time-offset representations.",
     "categories": [
         "arrays",
