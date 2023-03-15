@@ -78,6 +78,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New processes in proposal state
+    - `apply_polygon`
     - `fit_curve`
     - `predict_curve`
 - `ard_normalized_radar_backscatter` and `sar_backscatter`: Added `options` parameter
