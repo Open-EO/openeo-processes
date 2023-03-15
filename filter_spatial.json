@@ -26,7 +26,7 @@
         },
         {
             "name": "geometries",
-            "description": "One or more geometries used for filtering, given as GeoJSON or vector data cube. If multiple geometries are provided, the union of them is used.\n\nLimits the data cube to the bounding box of the given geometries. No implicit masking gets applied. To mask the pixels of the data cube use ``mask_polygon()``.",
+            "description": "One or more geometries used for filtering, given as GeoJSON or vector data cube. If multiple geometries are provided, the union of them is used. Empty geometries get ignored.\n\nLimits the data cube to the bounding box of the given geometries. No implicit masking gets applied. To mask the pixels of the data cube use ``mask_polygon()``.",
             "schema": [
                 {
                     "type": "object",
