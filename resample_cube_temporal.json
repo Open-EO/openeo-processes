@@ -6,7 +6,6 @@
         "cubes",
         "reproject"
     ],
-    "experimental": true,
     "parameters": [
         {
             "name": "data",
