@@ -37,7 +37,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `inspect`: The parameter `message` has been moved to be the second argument. [#369](https://github.com/Open-EO/openeo-processes/issues/369)
 - `mask` and `merge_cubes`: The spatial dimensions `x` and `y` can now be resampled implicitly instead of throwing an error. [#402](https://github.com/Open-EO/openeo-processes/issues/402)
 - `save_result`: Added a more concrete `DataCubeEmpty` exception.
-- The comparison processes `eq`, `neq`, `lt`, `lte`, `gt`, `gte` don't support temporal comparison any longer. Instead explicitly use `date_difference`.
 - New definition for `aggregate_spatial`:
     - Allows more than 3 input dimensions [#126](https://github.com/Open-EO/openeo-processes/issues/126)
     - Allow to not export statistics by changing the parameter `target_dimension` [#366](https://github.com/Open-EO/openeo-processes/issues/366)
@@ -52,6 +51,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `between`: Support for temporal comparison.
 - Deprecated `GeometryCollections` are not supported any longer. [#389](https://github.com/Open-EO/openeo-processes/issues/389)
 - Deprecated PROJ definitions for the CRS are not supported any longer.
+- The comparison processes `eq`, `neq`, `lt`, `lte`, `gt`, `gte` and `array_contains`:
+    - Removed support for temporal comparison. Instead explicitly use `date_difference`.
+    - Removed support for the input data types array and object. [#208](https://github.com/Open-EO/openeo-processes/issues/208)
 
 ### Fixed
 
