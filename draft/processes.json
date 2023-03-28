@@ -2046,6 +2046,75 @@
     ]
   },
   {
+    "id": "array_append",
+    "summary": "Append a value to an array",
+    "description": "Appends a new value to the end of the array, which may also include a new label for labeled arrays.",
+    "categories": [
+      "arrays"
+    ],
+    "parameters": [
+      {
+        "name": "data",
+        "description": "An array.",
+        "schema": {
+          "type": "array",
+          "items": {
+            "description": "Any data type is allowed."
+          }
+        }
+      },
+      {
+        "name": "value",
+        "description": "Value to append to the array.",
+        "schema": {
+          "description": "Any data type is allowed."
+        }
+      },
+      {
+        "name": "label",
+        "description": "If the given array is a labeled array, a new label for the new value should be given. If not given or `null`, the array index as string is used as the label. If in any case the label exists, a `LabelExists` exception is thrown.",
+        "optional": true,
+        "default": null,
+        "schema": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    ],
+    "returns": {
+      "description": "The new array with the value being appended.",
+      "schema": {
+        "type": "array",
+        "items": {
+          "description": "Any data type is allowed."
+        }
+      }
+    },
+    "exceptions": {
+      "LabelExists": {
+        "message": "An array element with the specified label already exists."
+      }
+    },
+    "examples": [
+      {
+        "arguments": {
+          "data": [
+            1,
+            2
+          ],
+          "value": 3
+        },
+        "returns": [
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
     "id": "array_apply",
     "summary": "Apply a process to each array element",
     "description": "Applies a process to each individual value in the array. This is basically what other languages call either a `for each` loop or a `map` function.",
@@ -2139,6 +2208,88 @@
         }
       }
     }
+  },
+  {
+    "id": "array_concat",
+    "summary": "Merge two arrays",
+    "description": "Concatenates two arrays into a single array by appending the second array to the first array.\n\nArray labels are kept only if both given arrays are labeled. Otherwise, the labels get discarded from both arrays. The process fails with an `ArrayLabelConflict` exception if a label is present in both arrays. Conflicts must be resolved beforehand.",
+    "categories": [
+      "arrays"
+    ],
+    "parameters": [
+      {
+        "name": "array1",
+        "description": "The first array.",
+        "schema": {
+          "type": "array",
+          "items": {
+            "description": "Any data type is allowed."
+          }
+        }
+      },
+      {
+        "name": "array2",
+        "description": "The second array.",
+        "schema": {
+          "type": "array",
+          "items": {
+            "description": "Any data type is allowed."
+          }
+        }
+      }
+    ],
+    "returns": {
+      "description": "The merged array.",
+      "schema": {
+        "type": "array",
+        "items": {
+          "description": "Any data type is allowed."
+        }
+      }
+    },
+    "exceptions": {
+      "ArrayLabelConflict": {
+        "message": "At least one label exists in both arrays and the conflict must be resolved before."
+      }
+    },
+    "examples": [
+      {
+        "description": "Concatenates two numerical arrays.",
+        "arguments": {
+          "array1": [
+            1.5,
+            2.5
+          ],
+          "array2": [
+            5
+          ]
+        },
+        "returns": [
+          1.5,
+          2.5,
+          5
+        ]
+      },
+      {
+        "description": "Concatenates two arrays containing different data type, may not always be supported.",
+        "arguments": {
+          "array1": [
+            "a",
+            "b"
+          ],
+          "array2": [
+            1,
+            2
+          ]
+        },
+        "returns": [
+          "a",
+          "b",
+          1,
+          2
+        ]
+      }
+    ]
   },
   {
     "id": "array_contains",
@@ -2279,6 +2430,100 @@
         "result": true
       }
     }
+  },
+  {
+    "id": "array_create",
+    "summary": "Create an array",
+    "description": "Creates a new array, which by default is empty.\n\nThe second parameter `repeat` allows to add the given array multiple times to the new array.\n\nIn most cases you can simply pass a (native) array to processes directly, but this process is especially useful to create a new array that is getting returned by a child process, for example in ``apply_dimension()``.",
+    "categories": [
+      "arrays"
+    ],
+    "parameters": [
+      {
+        "name": "data",
+        "description": "A (native) array to fill the newly created array with. Defaults to an empty array.",
+        "optional": true,
+        "default": [],
+        "schema": {
+          "type": "array",
+          "items": {
+            "description": "Any data type is allowed."
+          }
+        }
+      },
+      {
+        "name": "repeat",
+        "description": "The number of times the (native) array specified in `data` is repeatedly added after each other to the new array being created. Defaults to `1`.",
+        "optional": true,
+        "default": 1,
+        "schema": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    ],
+    "returns": {
+      "description": "The newly created array.",
+      "schema": {
+        "type": "array",
+        "items": {
+          "description": "Any data type is allowed."
+        }
+      }
+    },
+    "examples": [
+      {
+        "arguments": {},
+        "returns": []
+      },
+      {
+        "arguments": {
+          "data": [
+            "this",
+            "is",
+            "a",
+            "test"
+          ]
+        },
+        "returns": [
+          "this",
+          "is",
+          "a",
+          "test"
+        ]
+      },
+      {
+        "arguments": {
+          "data": [
+            null
+          ],
+          "repeat": 3
+        },
+        "returns": [
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "arguments": {
+          "data": [
+            1,
+            2,
+            3
+          ],
+          "repeat": 2
+        },
+        "returns": [
+          1,
+          2,
+          3,
+          1,
+          2,
+          3
+        ]
+      }
+    ]
   },
   {
     "id": "array_element",
@@ -2650,6 +2895,88 @@
         "type": "application/json",
         "href": "https://raw.githubusercontent.com/Open-EO/openeo-community-examples/main/processes/array_find_nodata.json",
         "title": "Find no-data values in arrays"
+      }
+    ]
+  },
+  {
+    "id": "array_interpolate_linear",
+    "summary": "One-dimensional linear interpolation for arrays",
+    "description": "Performs a linear interpolation for each of the no-data values (`null`) in the array given, except for leading and trailing no-data values.\n\nThe linear interpolants are defined by the array indices or labels (x) and the values in the array (y).",
+    "categories": [
+      "arrays",
+      "math",
+      "math > interpolation"
+    ],
+    "parameters": [
+      {
+        "name": "data",
+        "description": "An array of numbers and no-data values.\n\nIf the given array is a labeled array, the labels must have a natural/inherent label order and the process expects the labels to be sorted accordingly. This is the default behavior in openEO for spatial and temporal dimensions.",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        }
+      }
+    ],
+    "returns": {
+      "description": "An array with no-data values being replaced with interpolated values. If not at least 2 numerical values are available in the array, the array stays the same.",
+      "schema": {
+        "type": "array",
+        "items": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    },
+    "examples": [
+      {
+        "arguments": {
+          "data": [
+            null,
+            1,
+            null,
+            6,
+            null,
+            -8
+          ]
+        },
+        "returns": [
+          null,
+          1,
+          3.5,
+          6,
+          -1,
+          -8
+        ]
+      },
+      {
+        "arguments": {
+          "data": [
+            null,
+            1,
+            null,
+            null
+          ]
+        },
+        "returns": [
+          null,
+          1,
+          null,
+          null
+        ]
+      }
+    ],
+    "links": [
+      {
+        "rel": "about",
+        "href": "https://en.wikipedia.org/wiki/Linear_interpolation",
+        "title": "Linear interpolation explained by Wikipedia"
       }
     ]
   },
@@ -8535,159 +8862,6 @@
     ]
   },
   {
-    "id": "array_append",
-    "summary": "Append a value to an array",
-    "description": "Appends a new value to the end of the array, which may also include a new label for labeled arrays.",
-    "categories": [
-      "arrays"
-    ],
-    "experimental": true,
-    "parameters": [
-      {
-        "name": "data",
-        "description": "An array.",
-        "schema": {
-          "type": "array",
-          "items": {
-            "description": "Any data type is allowed."
-          }
-        }
-      },
-      {
-        "name": "value",
-        "description": "Value to append to the array.",
-        "schema": {
-          "description": "Any data type is allowed."
-        }
-      },
-      {
-        "name": "label",
-        "description": "If the given array is a labeled array, a new label for the new value should be given. If not given or `null`, the array index as string is used as the label. If in any case the label exists, a `LabelExists` exception is thrown.",
-        "optional": true,
-        "default": null,
-        "schema": {
-          "type": [
-            "string",
-            "null"
-          ]
-        }
-      }
-    ],
-    "returns": {
-      "description": "The new array with the value being appended.",
-      "schema": {
-        "type": "array",
-        "items": {
-          "description": "Any data type is allowed."
-        }
-      }
-    },
-    "exceptions": {
-      "LabelExists": {
-        "message": "An array element with the specified label already exists."
-      }
-    },
-    "examples": [
-      {
-        "arguments": {
-          "data": [
-            1,
-            2
-          ],
-          "value": 3
-        },
-        "returns": [
-          1,
-          2,
-          3
-        ]
-      }
-    ]
-  },
-  {
-    "id": "array_concat",
-    "summary": "Merge two arrays",
-    "description": "Concatenates two arrays into a single array by appending the second array to the first array.\n\nArray labels are kept only if both given arrays are labeled. Otherwise, the labels get discarded from both arrays. The process fails with an `ArrayLabelConflict` exception if a label is present in both arrays. Conflicts must be resolved beforehand.",
-    "categories": [
-      "arrays"
-    ],
-    "experimental": true,
-    "parameters": [
-      {
-        "name": "array1",
-        "description": "The first array.",
-        "schema": {
-          "type": "array",
-          "items": {
-            "description": "Any data type is allowed."
-          }
-        }
-      },
-      {
-        "name": "array2",
-        "description": "The second array.",
-        "schema": {
-          "type": "array",
-          "items": {
-            "description": "Any data type is allowed."
-          }
-        }
-      }
-    ],
-    "returns": {
-      "description": "The merged array.",
-      "schema": {
-        "type": "array",
-        "items": {
-          "description": "Any data type is allowed."
-        }
-      }
-    },
-    "exceptions": {
-      "ArrayLabelConflict": {
-        "message": "At least one label exists in both arrays and the conflict must be resolved before."
-      }
-    },
-    "examples": [
-      {
-        "description": "Concatenates two numerical arrays.",
-        "arguments": {
-          "array1": [
-            1.5,
-            2.5
-          ],
-          "array2": [
-            5
-          ]
-        },
-        "returns": [
-          1.5,
-          2.5,
-          5
-        ]
-      },
-      {
-        "description": "Concatenates two arrays containing different data type, may not always be supported.",
-        "arguments": {
-          "array1": [
-            "a",
-            "b"
-          ],
-          "array2": [
-            1,
-            2
-          ]
-        },
-        "returns": [
-          "a",
-          "b",
-          1,
-          2
-        ]
-      }
-    ]
-  },
-  {
     "id": "array_create_labeled",
     "summary": "Create a labeled array",
     "description": "Creates a new labeled array by using the values from the `labels` array as labels and the values from the `data` array as the corresponding values.\n\nThe exception `ArrayLengthMismatch` is thrown, if the number of the values in the given arrays don't match exactly.\n\nThe primary use case here is to be able to transmit labeled arrays from the client to the server as JSON doesn't support this data type.",
@@ -8734,101 +8908,6 @@
     }
   },
   {
-    "id": "array_create",
-    "summary": "Create an array",
-    "description": "Creates a new array, which by default is empty.\n\nThe second parameter `repeat` allows to add the given array multiple times to the new array.\n\nIn most cases you can simply pass a (native) array to processes directly, but this process is especially useful to create a new array that is getting returned by a child process, for example in ``apply_dimension()``.",
-    "categories": [
-      "arrays"
-    ],
-    "experimental": true,
-    "parameters": [
-      {
-        "name": "data",
-        "description": "A (native) array to fill the newly created array with. Defaults to an empty array.",
-        "optional": true,
-        "default": [],
-        "schema": {
-          "type": "array",
-          "items": {
-            "description": "Any data type is allowed."
-          }
-        }
-      },
-      {
-        "name": "repeat",
-        "description": "The number of times the (native) array specified in `data` is repeatedly added after each other to the new array being created. Defaults to `1`.",
-        "optional": true,
-        "default": 1,
-        "schema": {
-          "type": "integer",
-          "minimum": 1
-        }
-      }
-    ],
-    "returns": {
-      "description": "The newly created array.",
-      "schema": {
-        "type": "array",
-        "items": {
-          "description": "Any data type is allowed."
-        }
-      }
-    },
-    "examples": [
-      {
-        "arguments": {},
-        "returns": []
-      },
-      {
-        "arguments": {
-          "data": [
-            "this",
-            "is",
-            "a",
-            "test"
-          ]
-        },
-        "returns": [
-          "this",
-          "is",
-          "a",
-          "test"
-        ]
-      },
-      {
-        "arguments": {
-          "data": [
-            null
-          ],
-          "repeat": 3
-        },
-        "returns": [
-          null,
-          null,
-          null
-        ]
-      },
-      {
-        "arguments": {
-          "data": [
-            1,
-            2,
-            3
-          ],
-          "repeat": 2
-        },
-        "returns": [
-          1,
-          2,
-          3,
-          1,
-          2,
-          3
-        ]
-      }
-    ]
-  },
-  {
     "id": "array_find_label",
     "summary": "Get the index for a label in a labeled array",
     "description": "Checks whether the labeled array specified for `data` has the label specified in `label` and returns the zero-based index for it. If there's no match as either the label doesn't exist or the array is not labeled, `null` is returned.\n\nUse ``array_find()`` to find the index for a given value in the array.",
@@ -8873,89 +8952,6 @@
         }
       ]
     }
-  },
-  {
-    "id": "array_interpolate_linear",
-    "summary": "One-dimensional linear interpolation for arrays",
-    "description": "Performs a linear interpolation for each of the no-data values (`null`) in the array given, except for leading and trailing no-data values.\n\nThe linear interpolants are defined by the array indices or labels (x) and the values in the array (y).",
-    "categories": [
-      "arrays",
-      "math",
-      "math > interpolation"
-    ],
-    "experimental": true,
-    "parameters": [
-      {
-        "name": "data",
-        "description": "An array of numbers and no-data values.\n\nIf the given array is a labeled array, the labels must have a natural/inherent label order and the process expects the labels to be sorted accordingly. This is the default behavior in openEO for spatial and temporal dimensions.",
-        "schema": {
-          "type": "array",
-          "items": {
-            "type": [
-              "number",
-              "null"
-            ]
-          }
-        }
-      }
-    ],
-    "returns": {
-      "description": "An array with no-data values being replaced with interpolated values. If not at least 2 numerical values are available in the array, the array stays the same.",
-      "schema": {
-        "type": "array",
-        "items": {
-          "type": [
-            "number",
-            "null"
-          ]
-        }
-      }
-    },
-    "examples": [
-      {
-        "arguments": {
-          "data": [
-            null,
-            1,
-            null,
-            6,
-            null,
-            -8
-          ]
-        },
-        "returns": [
-          null,
-          1,
-          3.5,
-          6,
-          -1,
-          -8
-        ]
-      },
-      {
-        "arguments": {
-          "data": [
-            null,
-            1,
-            null,
-            null
-          ]
-        },
-        "returns": [
-          null,
-          1,
-          null,
-          null
-        ]
-      }
-    ],
-    "links": [
-      {
-        "rel": "about",
-        "href": "https://en.wikipedia.org/wiki/Linear_interpolation",
-        "title": "Linear interpolation explained by Wikipedia"
-      }
-    ]
   },
   {
     "id": "array_modify",
@@ -10928,95 +10924,6 @@
     ]
   },
   {
-    "id": "resample_cube_temporal",
-    "summary": "Resample temporal dimensions to match a target data cube",
-    "description": "Resamples one or more given temporal dimensions from a source data cube to align with the corresponding dimensions of the given target data cube using the nearest neighbor method. Returns a new data cube with the resampled dimensions.\n\nBy default, this process simply takes the nearest neighbor independent of the value (including values such as no-data / `null`). Depending on the data cubes this may lead to values being assigned to two target timestamps. To only consider valid values in a specific range around the target timestamps, use the parameter `valid_within`.\n\nThe rare case of ties is resolved by choosing the earlier timestamps.",
-    "categories": [
-      "cubes",
-      "reproject"
-    ],
-    "experimental": true,
-    "parameters": [
-      {
-        "name": "data",
-        "description": "A data cube with one or more temporal dimensions.",
-        "schema": {
-          "type": "object",
-          "subtype": "datacube",
-          "dimensions": [
-            {
-              "type": "temporal"
-            }
-          ]
-        }
-      },
-      {
-        "name": "target",
-        "description": "A data cube that describes the temporal target resolution.",
-        "schema": {
-          "type": "object",
-          "subtype": "datacube",
-          "dimensions": [
-            {
-              "type": "temporal"
-            }
-          ]
-        }
-      },
-      {
-        "name": "dimension",
-        "description": "The name of the temporal dimension to resample, which must exist with this name in both data cubes. If the dimension is not set or is set to `null`, the process resamples all temporal dimensions that exist with the same names in both data cubes.\n\nThe following exceptions may occur:\n\n* A dimension is given, but it does not exist in any of the data cubes: `DimensionNotAvailable`\n* A dimension is given, but one of them is not temporal: `DimensionMismatch`\n\n* No specific dimension name is given and there are no temporal dimensions with the same name in the data: `DimensionMismatch`",
-        "schema": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "default": null,
-        "optional": true
-      },
-      {
-        "name": "valid_within",
-        "description": "Setting this parameter to a numerical value enables that the process searches for valid values within the given period of days before and after the target timestamps. Valid values are determined based on the function ``is_valid()``. For example, the limit of `7` for the target timestamps `2020-01-15 12:00:00` looks for a nearest neighbor after `2020-01-08 12:00:00` and before `2020-01-22 12:00:00`. If no valid value is found within the given period, the value will be set to no-data (`null`).",
-        "schema": {
-          "type": [
-            "number",
-            "null"
-          ]
-        },
-        "default": null,
-        "optional": true
-      }
-    ],
-    "returns": {
-      "description": "A data cube with the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-temporal dimensions. For the temporal dimension, the name and type remain unchanged, but the dimension labels, resolution and reference system may change.",
-      "schema": {
-        "type": "object",
-        "subtype": "datacube",
-        "dimensions": [
-          {
-            "type": "temporal"
-          }
-        ]
-      }
-    },
-    "exceptions": {
-      "DimensionMismatch": {
-        "message": "The temporal dimensions for resampling don't match."
-      },
-      "DimensionNotAvailable": {
-        "message": "A dimension with the specified name does not exist."
-      }
-    },
-    "links": [
-      {
-        "href": "https://openeo.org/documentation/1.0/datacubes.html#resample",
-        "rel": "about",
-        "title": "Resampling explained in the openEO documentation"
-      }
-    ]
-  },
-  {
     "id": "run_udf_externally",
     "summary": "Run an externally hosted UDF container",
     "description": "Runs a compatible UDF container that is either externally hosted by a service provider or running on a local machine of the user. The UDF container must follow the [openEO UDF specification](https://openeo.org/documentation/1.0/udfs.html).\n\nThe referenced UDF service can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case, an array is passed instead of a data cube. The user must ensure that the data is given in a way that the UDF code can make sense of it.",
@@ -12250,6 +12157,94 @@
             ]
           }
         ]
+      }
+    },
+    "links": [
+      {
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#resample",
+        "rel": "about",
+        "title": "Resampling explained in the openEO documentation"
+      }
+    ]
+  },
+  {
+    "id": "resample_cube_temporal",
+    "summary": "Resample temporal dimensions to match a target data cube",
+    "description": "Resamples one or more given temporal dimensions from a source data cube to align with the corresponding dimensions of the given target data cube using the nearest neighbor method. Returns a new data cube with the resampled dimensions.\n\nBy default, this process simply takes the nearest neighbor independent of the value (including values such as no-data / `null`). Depending on the data cubes this may lead to values being assigned to two target timestamps. To only consider valid values in a specific range around the target timestamps, use the parameter `valid_within`.\n\nThe rare case of ties is resolved by choosing the earlier timestamps.",
+    "categories": [
+      "cubes",
+      "reproject"
+    ],
+    "parameters": [
+      {
+        "name": "data",
+        "description": "A data cube with one or more temporal dimensions.",
+        "schema": {
+          "type": "object",
+          "subtype": "datacube",
+          "dimensions": [
+            {
+              "type": "temporal"
+            }
+          ]
+        }
+      },
+      {
+        "name": "target",
+        "description": "A data cube that describes the temporal target resolution.",
+        "schema": {
+          "type": "object",
+          "subtype": "datacube",
+          "dimensions": [
+            {
+              "type": "temporal"
+            }
+          ]
+        }
+      },
+      {
+        "name": "dimension",
+        "description": "The name of the temporal dimension to resample, which must exist with this name in both data cubes. If the dimension is not set or is set to `null`, the process resamples all temporal dimensions that exist with the same names in both data cubes.\n\nThe following exceptions may occur:\n\n* A dimension is given, but it does not exist in any of the data cubes: `DimensionNotAvailable`\n* A dimension is given, but one of them is not temporal: `DimensionMismatch`\n\n* No specific dimension name is given and there are no temporal dimensions with the same name in the data: `DimensionMismatch`",
+        "schema": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "default": null,
+        "optional": true
+      },
+      {
+        "name": "valid_within",
+        "description": "Setting this parameter to a numerical value enables that the process searches for valid values within the given period of days before and after the target timestamps. Valid values are determined based on the function ``is_valid()``. For example, the limit of `7` for the target timestamps `2020-01-15 12:00:00` looks for a nearest neighbor after `2020-01-08 12:00:00` and before `2020-01-22 12:00:00`. If no valid value is found within the given period, the value will be set to no-data (`null`).",
+        "schema": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "default": null,
+        "optional": true
+      }
+    ],
+    "returns": {
+      "description": "A data cube with the same dimensions and the same dimension properties (name, type, labels, reference system and resolution) for all non-temporal dimensions. For the temporal dimension, the name and type remain unchanged, but the dimension labels, resolution and reference system may change.",
+      "schema": {
+        "type": "object",
+        "subtype": "datacube",
+        "dimensions": [
+          {
+            "type": "temporal"
+          }
+        ]
+      }
+    },
+    "exceptions": {
+      "DimensionMismatch": {
+        "message": "The temporal dimensions for resampling don't match."
+      },
+      "DimensionNotAvailable": {
+        "message": "A dimension with the specified name does not exist."
       }
     },
     "links": [
