@@ -1,7 +1,7 @@
 {
     "id": "eq",
     "summary": "Equal to comparison",
-    "description": "Compares whether `x` is strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`.\n* If any operand is an array or object, the return value is `false`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
+    "description": "Compares whether `x` is strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
     "categories": [
         "texts",
         "comparison"
@@ -11,14 +11,24 @@
             "name": "x",
             "description": "First operand.",
             "schema": {
-                "description": "Any data type is allowed."
+                "type": [
+                    "number",
+                    "boolean",
+                    "string",
+                    "null"
+                ]
             }
         },
         {
             "name": "y",
             "description": "Second operand.",
             "schema": {
-                "description": "Any data type is allowed."
+                "type": [
+                    "number",
+                    "boolean",
+                    "string",
+                    "null"
+                ]
             }
         },
         {
@@ -139,21 +149,6 @@
             "arguments": {
                 "x": "2018-01-01T00:00:00Z",
                 "y": "2018-01-01T00:00:00+00:00"
-            },
-            "returns": false
-        },
-        {
-            "arguments": {
-                "x": [
-                    1,
-                    2,
-                    3
-                ],
-                "y": [
-                    1,
-                    2,
-                    3
-                ]
             },
             "returns": false
         },

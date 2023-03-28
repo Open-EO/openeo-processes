@@ -35,9 +35,10 @@
         }
     ],
     "returns": {
-        "description": "Returns `false` if the process failed to make the data available, `true` otherwise.",
+        "description": "Always returns `true` as in case of an error an exception is thrown which aborts the execution of the process.",
         "schema": {
-            "type": "boolean"
+            "type": "boolean",
+            "const": true
         }
     },
     "exceptions": {
