@@ -43,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed `create_raster_cube` to `create_data_cube`. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
 - Updated the processes based on the subtypes `raster-cube` or `vector-cube` to work with the subtype `datacube` instead. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
 - `sort` and `order`: The ordering of ties is not defined anymore. [#409](https://github.com/Open-EO/openeo-processes/issues/409)
+- `quantiles`: Parameter `probabilities` provided as array must be in ascending order. [#297](https://github.com/Open-EO/openeo-processes/pull/297)
 
 ### Removed
 

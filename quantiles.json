@@ -21,11 +21,12 @@
         },
         {
             "name": "probabilities",
-            "description": "Quantiles to calculate. Either a list of probabilities or the number of intervals:\n\n* Provide an array with a list of probabilities to calculate quantiles for. The probabilities must be between 0 and 1 (inclusive).\n* Provide an integer to specify the number of intervals to calculate quantiles for. Calculates q-quantiles with equal-sized intervals.",
+            "description": "Quantiles to calculate. Either a list of probabilities or the number of intervals:\n\n* Provide an array with a sorted list of probabilities in ascending order to calculate quantiles for. The probabilities must be between 0 and 1 (inclusive). If not sorted in ascending order, an `AscendingProbabilitiesRequired` exception is thrown.\n* Provide an integer to specify the number of intervals to calculate quantiles for. Calculates q-quantiles with equal-sized intervals.",
             "schema": [
                 {
                     "title": "List of probabilities",
                     "type": "array",
+                    "uniqueItems": true,
                     "items": {
                         "type": "number",
                         "minimum": 0,
@@ -78,6 +79,9 @@
         },
         "QuantilesParameterConflict": {
             "message": "The process `quantiles` only allows that either the `probabilities` or the `q` parameter is set."
+        },
+        "AscendingProbabilitiesRequired": {
+            "message": "The values passed for parameter `probabilities` must be sorted in ascending order."
         }
     },
     "examples": [
