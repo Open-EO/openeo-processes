@@ -1,7 +1,7 @@
 {
     "id": "filter_vector",
     "summary": "Spatial vector filter using geometries",
-    "description": "Limits the vector data cube to the specified geometries. The process works on geometries as defined in the Simple Features standard by the OGC. Empty geometries get removed from the data cube. Alternatively, use ``filter_bbox()`` to filter by bounding box.",
+    "description": "Limits the vector data cube to the specified geometries. The process works on geometries as defined in the Simple Features standard by the OGC. All geometries that were empty or get empty will be removed from the data cube. Alternatively, use ``filter_bbox()`` to filter by bounding box.",
     "categories": [
         "cubes",
         "filter",
@@ -24,7 +24,7 @@
         },
         {
             "name": "geometries",
-            "description": "One or more base geometries used for filtering, given as GeoJSON or vector data cube. If multiple base geometries are provided, the union of them is used. Empty geometries get ignored.",
+            "description": "One or more base geometries used for filtering, given as GeoJSON or vector data cube. If multiple base geometries are provided, the union of them is used. Empty geometries are ignored.",
             "schema": [
                 {
                     "type": "object",
