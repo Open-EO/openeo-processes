@@ -7,7 +7,6 @@
         "math",
         "math > interpolation"
     ],
-    "experimental": true,
     "parameters": [
         {
             "name": "data",

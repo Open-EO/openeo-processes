@@ -39,7 +39,7 @@
             "name": "length",
             "description": "The number of elements in the `data` array to remove (or replace) starting from the given index. If the array contains fewer elements, the process simply removes all elements up to the end.",
             "optional": true,
-            "default": 1,
+            "default": 0,
             "schema": {
                 "type": "integer",
                 "minimum": 0
@@ -75,7 +75,8 @@
                 "values": [
                     "b"
                 ],
-                "index": 1
+                "index": 1,
+                "length": 1
             },
             "returns": [
                 "a",
@@ -118,8 +119,7 @@
                 "values": [
                     "b"
                 ],
-                "index": 1,
-                "length": 0
+                "index": 1
             },
             "returns": [
                 "a",
