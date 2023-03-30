@@ -31,6 +31,8 @@ Sentinel-2A
 Sentinel-2B
 signum
 STAC
+catalog
+Catalog
 summand
 UDFs
 gdalwarp
