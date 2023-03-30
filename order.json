@@ -1,7 +1,7 @@
 {
     "id": "order",
-    "summary": "Get the order of array items",
-    "description": "Computes a permutation which allows rearranging the data into ascending or descending order. In other words, this process computes the ranked (sorted) element positions in the original list.\n\n**Remarks:**\n\n* The positions in the result are zero-based.\n* The ordering of ties is implementation-dependent.\n* Temporal strings can *not* be compared based on their string representation due to the time zone/time-offset representations.",
+    "summary": "Get the order of array elements",
+    "description": "Computes the ranked (sorted) element positions in the original list (i.e., a permutation), either in ascending or descending order. The process ``rearrange()`` allows sorting the data based on the computed permutation.\n\n**Remarks:**\n\n* The positions in the result are zero-based.\n* The ordering of ties is implementation-dependent.\n* Temporal strings can *not* be compared based on their string representation due to the time zone/time-offset representations.",
     "categories": [
         "arrays",
         "sorting"
