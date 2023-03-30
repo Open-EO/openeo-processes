@@ -1,7 +1,7 @@
 {
     "id": "vector_buffer",
     "summary": "Buffer geometries by distance",
-    "description": "Buffers each input geometry by a given distance, which can either expand (dilate) or a shrink (erode) the geometry. Buffers can be applied to points, lines and polygons, but the results are always polygons. Multi-part types (e.g. `MultiPoint`) are also allowed.",
+    "description": "Buffers each input geometry by a given distance, which can either expand (dilate) or a shrink (erode) the geometry. Buffers can be applied to points, lines and polygons, but the results are always polygons. Empty geometries are passed through and negative buffers may result in empty geometries. Multi-part types (e.g. `MultiPoint`) are also allowed.",
     "categories": [
         "vector"
     ],
@@ -39,7 +39,7 @@
         }
     ],
     "returns": {
-        "description": "Returns a vector data cube with the computed new geometries.",
+        "description": "Returns a vector data cube with the computed new geometries of which some may be empty.",
         "schema": {
             "type": "object",
             "subtype": "datacube",
