@@ -1,7 +1,7 @@
 {
     "id": "sort",
     "summary": "Sort data",
-    "description": "Sorts an array into ascending (default) or descending order.\n\n**Remarks:**\n\n* Ties will be left in their original ordering.\n* Temporal strings can *not* be compared based on their string representation due to the time zone/time-offset representations.",
+    "description": "Sorts an array into ascending (default) or descending order.\n\n**Remarks:**\n\n* The ordering of ties is implementation-dependent.\n* Temporal strings can *not* be compared based on their string representation due to the time zone/time-offset representations.",
     "categories": [
         "arrays",
         "sorting"
