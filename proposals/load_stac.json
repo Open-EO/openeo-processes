@@ -290,7 +290,7 @@
             "message": "There is no data available for the given extents."
         },
         "TemporalExtentEmpty": {
-            "message": "The temporal extent is empty. The second instance must always be greater/later than the first instance."
+            "message": "The temporal extent is empty. The second instant in time must always be greater/later than the first instant in time."
         }
     },
     "links": [
