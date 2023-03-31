@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `date_difference`
     - `filter_vector`
     - `flatten_dimensions`
+    - `load_geojson`
     - `unflatten_dimension`
     - `vector_buffer`
     - `vector_reproject`
@@ -54,7 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Deprecated
 
-- `aggregate_spatial`, `filter_spatial`, `load_collection`, `mask_polygon`: GeoJSON input is deprecated. [#346](https://github.com/Open-EO/openeo-processes/issues/346)
+- `aggregate_spatial`, `filter_spatial`, `load_collection`, `mask_polygon`: GeoJSON input is deprecated in favor of `load_geojson`. [#346](https://github.com/Open-EO/openeo-processes/issues/346)
 
 ### Removed
 
@@ -65,7 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `load_result`:
     - Renamed to `load_stac`
     - The subtype `job-id` was removed in favor of providing a URL. [#322](https://github.com/Open-EO/openeo-processes/issues/322), [#377](https://github.com/Open-EO/openeo-processes/issues/377), [#384](https://github.com/Open-EO/openeo-processes/issues/384)
-    - GeoJSON input is not supported any longer. [#346](https://github.com/Open-EO/openeo-processes/issues/346)
+    - GeoJSON input is not supported any longer. Use `load_geojson` instead. [#346](https://github.com/Open-EO/openeo-processes/issues/346)
 - The comparison processes `eq`, `neq`, `lt`, `lte`, `gt`, `gte` and `array_contains`:
     - Removed support for temporal comparison. Instead explicitly use `date_difference`.
     - Removed support for the input data types array and object. [#208](https://github.com/Open-EO/openeo-processes/issues/208)
