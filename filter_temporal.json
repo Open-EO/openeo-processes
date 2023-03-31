@@ -12,7 +12,12 @@
             "description": "A data cube.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "temporal"
+                    }
+                ]
             }
         },
         {
@@ -61,7 +66,7 @@
         },
         {
             "name": "dimension",
-            "description": "The name of the temporal dimension to filter on. If no specific dimension is specified or it is set to `null`, the filter applies to all temporal dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+            "description": "The name of the temporal dimension to filter on. If no specific dimension is specified, the filter applies to all temporal dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
             "schema": {
                 "type": [
                     "string",
@@ -76,7 +81,12 @@
         "description": "A data cube restricted to the specified temporal extent. The dimensions and dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the temporal dimensions (determined by `dimensions` parameter) may have less dimension labels.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "temporal"
+                }
+            ]
         }
     },
     "exceptions": {

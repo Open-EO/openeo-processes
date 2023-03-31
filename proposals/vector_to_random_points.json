@@ -1,7 +1,7 @@
 {
     "id": "vector_to_random_points",
     "summary": "Sample random points from geometries",
-    "description": "Generate a vector data cube of points by sampling random points from input geometries. At least one point is sampled per input geometry. Vector properties are preserved.\n\nIf `geometry_count` and `total_count` are both unrestricted (i.e. set to `null`, which is the default), one sample per geometry is used.",
+    "description": "Generate a vector data cube of points by sampling random points from input geometries. At least one point is sampled per input geometry.  Empty geometries are passed through without any points assigned. Feature properties are preserved.\n\nIf `geometry_count` and `total_count` are both unrestricted (i.e. set to `null`, which is the default), one sample per geometry is used.",
     "categories": [
         "cubes",
         "vector"
@@ -10,17 +10,16 @@
     "parameters": [
         {
             "name": "data",
-            "description": "Input geometries for sample extraction.\n\nTo maximize interoperability, a nested `GeometryCollection` should be avoided. Furthermore, a `GeometryCollection` composed of a single type of geometries should be avoided in favour of the corresponding multi-part type (e.g. `MultiPolygon`).",
-            "schema": [
-                {
-                    "type": "object",
-                    "subtype": "geojson"
-                },
-                {
-                    "type": "object",
-                    "subtype": "vector-cube"
-                }
-            ]
+            "description": "Input geometries for sample extraction.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "geometry"
+                    }
+                ]
+            }
         },
         {
             "name": "geometry_count",
@@ -80,7 +79,16 @@
         "description": "Returns a vector data cube with the sampled points.",
         "schema": {
             "type": "object",
-            "subtype": "vector-cube"
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "geometry",
+                    "geometry_type": [
+                        "Point",
+                        "MultiPoint"
+                    ]
+                }
+            ]
         }
     },
     "exceptions": {

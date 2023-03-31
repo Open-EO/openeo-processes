@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://processes.openeo.org/1.2.0/meta/subtype-schemas.json",
+    "$id": "https://processes.openeo.org/1.2.0/meta/subtype-schemas.json",
     "title": "Subtype Schemas",
     "description": "This file defines the schemas for subtypes we define for openEO processes.",
     "definitions": {
@@ -14,7 +14,7 @@
             "type": "object",
             "subtype": "bounding-box",
             "title": "Bounding Box",
-            "description": "A bounding box with the required fields `west`, `south`, `east`, `north` and optionally `base`, `height`, `crs`. The `crs` is a EPSG code, a WKT2:2018 string or a PROJ definition (deprecated).",
+            "description": "A bounding box with the required fields `west`, `south`, `east`, `north` and optionally `base`, `height`, `crs`. The `crs` is a EPSG code or a WKT2:2018 string.",
             "required": [
                 "west",
                 "south",
@@ -55,16 +55,13 @@
                     "default": null
                 },
                 "crs": {
-                    "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html) or [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
+                    "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
                     "anyOf": [
                         {
                             "$ref": "#/definitions/epsg-code"
                         },
                         {
                             "$ref": "#/definitions/wkt2-definition"
-                        },
-                        {
-                            "$ref": "#/definitions/proj-definition"
                         }
                     ],
                     "default": 4326
@@ -111,6 +108,12 @@
             "title": "Collection ID",
             "description": "A collection identifier from the list of supported collections.",
             "pattern": "^[\\w\\-\\.~/]+$"
+        },
+        "datacube": {
+            "type": "object",
+            "subtype": "datacube",
+            "title": "Data Cube",
+            "description": "A data cube that consists of an arbitrary number of dimensions and doesn't require any dimension type specifically."
         },
         "date": {
             "type": "string",
@@ -163,7 +166,8 @@
             "type": "object",
             "subtype": "geojson",
             "title": "GeoJSON",
-            "description": "GeoJSON as defined by [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946.html).",
+            "description": "Deprecated. GeoJSON as defined by [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946.html). The GeoJSON type `GeometryCollection` is not supported.",
+            "deprecated": true,
             "allOf": [
                 {
                     "$ref": "https://geojson.org/schema/GeoJSON.json"
@@ -181,13 +185,6 @@
             "subtype": "input-format-options",
             "title": "Options for Input File Formats",
             "description": "Key-value-pairs with arguments for the input format options supported by the back-end."
-        },
-        "job-id": {
-            "type": "string",
-            "subtype": "job-id",
-            "title": "Batch Job ID",
-            "description": "A batch job id, either one of the jobs a user has stored or a publicly available job.",
-            "pattern": "^[\\w\\-\\.~]+$"
         },
         "kernel": {
             "type": "array",
@@ -235,12 +232,6 @@
                 }
             }
         },
-        "ml-model": {
-            "type": "object",
-            "subtype": "ml-model",
-            "title": "Machine Learning Model",
-            "description": "A machine learning model, accompanied with STAC metadata that implements the the STAC ml-model extension."
-        },
         "output-format": {
             "type": "string",
             "subtype": "output-format",
@@ -280,17 +271,12 @@
                 }
             }
         },
-        "proj-definition": {
-            "type": "string",
-            "subtype": "proj-definition",
-            "title": "PROJ definition",
-            "description": "**DEPRECATED.** Specifies details about cartographic projections as [PROJ](https://proj.org/usage/quickstart.html) definition."
-        },
         "raster-cube": {
             "type": "object",
             "subtype": "raster-cube",
             "title": "Raster data cube",
-            "description": "A raster data cube, an image collection stored at the back-end. Different back-ends have different internal representations for this data structure."
+            "description": "A raster data cube, which is a data cube with two dimension of type spatial (x and y). This has been deprecated in favour of `datacube`.",
+            "deprecated": true
         },
         "temporal-interval": {
             "type": "array",
@@ -418,7 +404,8 @@
             "type": "object",
             "subtype": "vector-cube",
             "title": "Vector data cube",
-            "description": "A vector data cube, a vector collection stored at the back-end. Different back-ends have different internal representations for this data structure"
+            "description": "A vector data cube, which is a data cube with a dimension of type vector. This has been deprecated in favour of `datacube`.",
+            "deprecated": true
         },
         "wkt2-definition": {
             "type": "string",

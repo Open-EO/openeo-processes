@@ -5,7 +5,6 @@
     "categories": [
         "arrays"
     ],
-    "experimental": true,
     "parameters": [
         {
             "name": "array1",
@@ -44,7 +43,24 @@
     },
     "examples": [
         {
-            "description": "Concatenates two arrays containing different data type.",
+            "description": "Concatenates two numerical arrays.",
+            "arguments": {
+                "array1": [
+                    1.5,
+                    2.5
+                ],
+                "array2": [
+                    5
+                ]
+            },
+            "returns": [
+                1.5,
+                2.5,
+                5
+            ]
+        },
+        {
+            "description": "Concatenates two arrays containing different data type, may not always be supported.",
             "arguments": {
                 "array1": [
                     "a",

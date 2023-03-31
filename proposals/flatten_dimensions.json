@@ -12,7 +12,7 @@
             "description": "A data cube.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube"
             }
         },
         {
@@ -47,7 +47,7 @@
         "description": "A data cube with the new shape. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube"
         }
     },
     "exceptions": {

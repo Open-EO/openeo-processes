@@ -12,8 +12,20 @@
             "name": "data",
             "description": "The source data cube containing SAR input.",
             "schema": {
-                "subtype": "raster-cube",
-                "type": "object"
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    },
+                    {
+                        "type": "bands"
+                    }
+                ]
             }
         },
         {
@@ -112,8 +124,20 @@
     "returns": {
         "description": "Backscatter values corresponding to the chosen parametrization. The values are given in linear scale.",
         "schema": {
-            "subtype": "raster-cube",
-            "type": "object"
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "spatial",
+                    "axis": [
+                        "x",
+                        "y"
+                    ]
+                },
+                {
+                    "type": "bands"
+                }
+            ]
         }
     },
     "exceptions": {

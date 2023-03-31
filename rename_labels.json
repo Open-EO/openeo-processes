@@ -11,7 +11,7 @@
             "description": "The data cube.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube"
             }
         },
         {
@@ -54,7 +54,7 @@
         "description": "The data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that for the given dimension the labels change. The old labels can not be referred to any longer. The number of labels remains the same.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube"
         }
     },
     "exceptions": {
