@@ -120,25 +120,24 @@
                     "uniqueItems": true,
                     "minItems": 2,
                     "maxItems": 2,
-                    "items": {
-                        "anyOf": [
-                            {
-                                "type": "string",
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": ["string", "null"],
                                 "format": "date-time",
                                 "subtype": "date-time",
                                 "description": "Date and time with a time zone."
-                            },
-                            {
-                                "type": "string",
+                            }
+                        },
+                        {
+                            "items": {
+                                "type": ["string", "null"],
                                 "format": "date",
                                 "subtype": "date",
                                 "description": "Date only, formatted as `YYYY-MM-DD`. The time zone is UTC. Missing time components are all 0."
-                            },
-                            {
-                                "type": "null"
                             }
-                        ]
-                    },
+                        }
+                    ],
                     "examples": [
                         [
                             "2015-01-01T00:00:00Z",

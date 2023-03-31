@@ -33,31 +33,32 @@
                     "uniqueItems": true,
                     "minItems": 2,
                     "maxItems": 2,
-                    "items": {
-                        "anyOf": [
-                            {
-                                "type": "string",
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": ["string", "null"],
                                 "format": "date-time",
                                 "subtype": "date-time",
                                 "description": "Date and time with a time zone."
-                            },
-                            {
-                                "type": "string",
+                            }
+                        },
+                        {
+                            "items": {
+                                "type": ["string", "null"],
                                 "format": "date",
                                 "subtype": "date",
                                 "description": "Date only, formatted as `YYYY-MM-DD`. The time zone is UTC. Missing time components are all 0."
-                            },
-                            {
-                                "type": "string",
+                            }
+                        },
+                        {
+                            "items": {
+                                "type": ["string", "null"],
                                 "subtype": "time",
                                 "pattern": "^\\d{2}:\\d{2}:\\d{2}$",
                                 "description": "Time only, formatted as `HH:MM:SS`. The time zone is UTC."
-                            },
-                            {
-                                "type": "null"
                             }
-                        ]
-                    }
+                        }
+                    ]
                 },
                 "examples": [
                     [
@@ -76,12 +77,12 @@
                     ],
                     [
                         [
-                            "00:00:00Z",
-                            "12:00:00Z"
+                            "06:00:00Z",
+                            "18:00:00Z"
                         ],
                         [
-                            "12:00:00Z",
-                            "00:00:00Z"
+                            "18:00:00Z",
+                            "06:00:00Z"
                         ]
                     ]
                 ]

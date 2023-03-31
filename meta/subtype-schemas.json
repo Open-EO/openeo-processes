@@ -286,26 +286,41 @@
             "uniqueItems": true,
             "minItems": 2,
             "maxItems": 2,
-            "items": {
-                "description": "Processes and implementations may choose to only implement a subset of the subtypes specified here. Clients must check what back-ends / processes actually support.",
-                "anyOf": [
-                    {
-                        "$ref": "#/definitions/date-time"
-                    },
-                    {
-                        "$ref": "#/definitions/date"
-                    },
-                    {
-                        "$ref": "#/definitions/time"
-                    },
-                    {
-                        "$ref": "#/definitions/year"
-                    },
-                    {
-                        "type": "null"
+            "$comment": "Processes and implementations may choose to only implement a subset of the subtypes specified here. Clients must check what back-ends / processes actually support.",
+            "anyOf": [
+                {
+                    "items": {
+                        "oneOf": [
+                            {"type": "null"},
+                            {"$ref": "#/definitions/date-time"}
+                        ]
                     }
-                ]
-            },
+                },
+                {
+                    "items": {
+                        "oneOf": [
+                            {"type": "null"},
+                            {"$ref": "#/definitions/date"}
+                        ]
+                    }
+                },
+                {
+                    "items": {
+                        "oneOf": [
+                            {"type": "null"},
+                            {"$ref": "#/definitions/time"}
+                        ]
+                    }
+                },
+                {
+                    "items": {
+                        "oneOf": [
+                            {"type": "null"},
+                            {"$ref": "#/definitions/year"}
+                        ]
+                    }
+                }
+            ],
             "examples": [
                 [
                     "2015-01-01T00:00:00Z",
@@ -316,8 +331,8 @@
                     "2016-01-01"
                 ],
                 [
-                    "00:00:00Z",
-                    "12:00:00Z"
+                    "00:00:00",
+                    "12:00:00"
                 ],
                 [
                     "2015-01-01",
@@ -351,11 +366,11 @@
                 ],
                 [
                     [
-                        "00:00:00Z",
-                        "12:00:00Z"
+                        "00:00:00",
+                        "12:00:00"
                     ],
                     [
-                        "12:00:00Z",
+                        "12:00:00",
                         null
                     ]
                 ],
