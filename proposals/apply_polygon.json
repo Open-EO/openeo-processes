@@ -17,27 +17,20 @@
         },
         {
             "name": "polygons",
-            "description": "A GeoJSON object or a vector data cube containing at least one polygon. The provided vector data can be one of the following:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry, or\n* a `FeatureCollection` containing at least one `Feature` with `Polygon` or `MultiPolygon` geometries.\n* Empty geometries are ignored.",
-            "schema": [
-                {
-                    "type": "object",
-                    "subtype": "geojson",
-                    "description": "The GeoJSON type `GeometryCollection` is not supported."
-                },
-                {
-                    "type": "object",
-                    "subtype": "datacube",
-                    "dimensions": [
-                        {
-                            "type": "geometry",
-                            "geometry_type": [
-                                "Polygon",
-                                "MultiPolygon"
-                            ]
-                        }
-                    ]
-                }
-            ]
+            "description": "A vector data cube containing at least one polygon. The provided vector data can be one of the following:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry, or\n* a `FeatureCollection` containing at least one `Feature` with `Polygon` or `MultiPolygon` geometries.\n* Empty geometries are ignored.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "geometry",
+                        "geometry_type": [
+                            "Polygon",
+                            "MultiPolygon"
+                        ]
+                    }
+                ]
+            }
         },
         {
             "name": "process",
