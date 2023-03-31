@@ -24,23 +24,16 @@
         },
         {
             "name": "geometries",
-            "description": "One or more base geometries used for filtering, given as GeoJSON or vector data cube. If multiple base geometries are provided, the union of them is used. Empty geometries are ignored.",
-            "schema": [
-                {
-                    "type": "object",
-                    "subtype": "geojson",
-                    "description": "The GeoJSON type `GeometryCollection` is not supported."
-                },
-                {
-                    "type": "object",
-                    "subtype": "datacube",
-                    "dimensions": [
-                        {
-                            "type": "geometry"
-                        }
-                    ]
-                }
-            ]
+            "description": "One or more base geometries used for filtering, given as vector data cube. If multiple base geometries are provided, the union of them is used.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "geometry"
+                    }
+                ]
+            }
         },
         {
             "name": "relation",

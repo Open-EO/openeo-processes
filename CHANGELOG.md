@@ -52,13 +52,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `sort` and `order`: The ordering of ties is not defined anymore. [#409](https://github.com/Open-EO/openeo-processes/issues/409)
 - `quantiles`: Parameter `probabilities` provided as array must be in ascending order. [#297](https://github.com/Open-EO/openeo-processes/pull/297)
 
+### Deprecated
+
+- `aggregate_spatial`, `filter_spatial`, `load_collection`, `mask_polygon`: GeoJSON input is deprecated. [#346](https://github.com/Open-EO/openeo-processes/issues/346)
+
 ### Removed
 
 - The `examples` folder has been migrated to the [openEO Community Examples](https://github.com/Open-EO/openeo-community-examples/tree/main/processes) repository.
 - `between`: Support for temporal comparison.
 - Deprecated `GeometryCollections` are not supported any longer. [#389](https://github.com/Open-EO/openeo-processes/issues/389)
 - Deprecated PROJ definitions for the CRS are not supported any longer.
-- `load_result`: Renamed to `load_stac` and the subtype `job-id` was removed in favor of providing a URL. [#322](https://github.com/Open-EO/openeo-processes/issues/322), [#377](https://github.com/Open-EO/openeo-processes/issues/377), [#384](https://github.com/Open-EO/openeo-processes/issues/384)
+- `load_result`:
+    - Renamed to `load_stac`
+    - The subtype `job-id` was removed in favor of providing a URL. [#322](https://github.com/Open-EO/openeo-processes/issues/322), [#377](https://github.com/Open-EO/openeo-processes/issues/377), [#384](https://github.com/Open-EO/openeo-processes/issues/384)
+    - GeoJSON input is not supported any longer. [#346](https://github.com/Open-EO/openeo-processes/issues/346)
 - The comparison processes `eq`, `neq`, `lt`, `lte`, `gt`, `gte` and `array_contains`:
     - Removed support for temporal comparison. Instead explicitly use `date_difference`.
     - Removed support for the input data types array and object. [#208](https://github.com/Open-EO/openeo-processes/issues/208)

@@ -11,22 +11,15 @@
         {
             "name": "data",
             "description": "Input geometries for sample extraction.",
-            "schema": [
-                {
-                    "type": "object",
-                    "subtype": "geojson",
-                    "description": "The GeoJSON type `GeometryCollection` is not supported."
-                },
-                {
-                    "type": "object",
-                    "subtype": "datacube",
-                    "dimensions": [
-                        {
-                            "type": "geometry"
-                        }
-                    ]
-                }
-            ]
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "geometry"
+                    }
+                ]
+            }
         },
         {
             "name": "distance",
