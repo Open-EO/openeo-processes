@@ -22,7 +22,7 @@
         },
         {
             "name": "intervals",
-            "description": "Left-closed temporal intervals, which are allowed to overlap. Each temporal interval in the array has exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified time instant is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified time instant is **excluded** from the interval.\n\nThe second element must always be greater/later than the first element, except for times. Otherwise, a `TemporalExtentEmpty` exception is thrown.",
+            "description": "Left-closed temporal intervals, which are allowed to overlap. Each temporal interval in the array has exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified time instant is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified time instant is **excluded** from the interval.\n\nThe second element must always be greater/later than the first element, except when using time without date. Otherwise, a `TemporalExtentEmpty` exception is thrown.",
             "schema": {
                 "type": "array",
                 "subtype": "temporal-intervals",
@@ -234,7 +234,7 @@
             "message": "The dimension labels have duplicate values. Distinct labels must be specified."
         },
         "TemporalExtentEmpty": {
-            "message": "At least one of the intervals is empty. The second instances in time must always be greater/later than the first instances."
+            "message": "At least one of the intervals is empty. The second instant in time must always be greater/later than the first instant."
         }
     },
     "links": [

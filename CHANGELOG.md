@@ -39,7 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Input and Output for the `process` can either be data cubes or arrays (if one-dimensional). [#387](https://github.com/Open-EO/openeo-processes/issues/387)
 - `run_udf`: Allow all data types instead of just objects in the `context` parameter. [#376](https://github.com/Open-EO/openeo-processes/issues/376)
 - `load_collection` and `load_result`/`load_stac`:
-    - Require at least one band "if not set to `null`. [#372](https://github.com/Open-EO/openeo-processes/issues/372)
+    - Require at least one band if not set to `null`. [#372](https://github.com/Open-EO/openeo-processes/issues/372)
     - Added a `NoDataAvailable` exception
 - `aggregate_temporal`, `filter_temporal`, `load_collection` and `load_result`/`load_stac`:
     - The temporal intervals must always be non-empty, i.e. the second instance in time must be after the first instance in time. [#331](https://github.com/Open-EO/openeo-processes/issues/331)
