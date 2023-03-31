@@ -13,12 +13,6 @@
             "description": "The GeoJSON data. Can either be inline GeoJSON, a user-uploaded file, or point to a remote URL. The GeoJSON type `GeometryCollection` is not supported. Each geometry in the GeoJSON data results in a dimension label in the `geometries` dimension.",
             "schema": [
                 {
-                    "title": "GeoJSON",
-                    "description": "GeoJSON (inline)",
-                    "type": "object",
-                    "subtype": "geojson"
-                },
-                {
                     "title": "URL",
                     "type": "string",
                     "format": "uri",
