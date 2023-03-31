@@ -9,23 +9,16 @@
     "parameters": [
         {
             "name": "geometries",
-            "description": "Geometries to apply the buffer on. Feature properties are preserved for vector data cubes and all GeoJSON Features.",
-            "schema": [
-                {
-                    "type": "object",
-                    "subtype": "geojson",
-                    "description": "The GeoJSON type `GeometryCollection` is not supported."
-                },
-                {
-                    "type": "object",
-                    "subtype": "datacube",
-                    "dimensions": [
-                        {
-                            "type": "geometry"
-                        }
-                    ]
-                }
-            ]
+            "description": "Geometries to apply the buffer on. Feature properties are preserved.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "geometry"
+                    }
+                ]
+            }
         },
         {
             "name": "distance",

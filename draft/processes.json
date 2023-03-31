@@ -284,11 +284,7 @@
         "description": "Geometries for which the aggregation will be computed. Feature properties are preserved for vector data cubes and all GeoJSON Features.\n\nOne value will be computed per label in the dimension of type `geometries`, GeoJSON `Feature` or `Geometry`. For a `FeatureCollection` multiple values will be computed, one value per contained `Feature`. No values will be computed for empty geometries. For example, a single value will be computed for a `MultiPolygon`, but two values will be computed for a `FeatureCollection` containing two polygons.\n\n- For **polygons**, the process considers all pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n- For **points**, the process considers the closest pixel center.\n- For **lines** (line strings), the process considers all the pixels whose centers are closest to at least one point on the line.\n\nThus, pixels may be part of multiple geometries and be part of multiple aggregations. No operation is applied to geometries that are outside of the bounds of the data.",
         "schema": [
           {
-            "type": "object",
-            "subtype": "geojson",
-            "description": "The GeoJSON type `GeometryCollection` is not supported."
-          },
-          {
+            "title": "Vector Data Cube",
             "type": "object",
             "subtype": "datacube",
             "dimensions": [
@@ -296,6 +292,13 @@
                 "type": "geometry"
               }
             ]
+          },
+          {
+            "title": "GeoJSON",
+            "type": "object",
+            "subtype": "geojson",
+            "description": "Deprecated. The GeoJSON type `GeometryCollection` is not supported.",
+            "deprecated": true
           }
         ]
       },
@@ -4600,10 +4603,7 @@
         "description": "One or more geometries used for filtering, given as GeoJSON or vector data cube. If multiple geometries are provided, the union of them is used. Empty geometries are ignored.\n\nLimits the data cube to the bounding box of the given geometries. No implicit masking gets applied. To mask the pixels of the data cube use ``mask_polygon()``.",
         "schema": [
           {
-            "type": "object",
-            "subtype": "geojson"
-          },
-          {
+            "title": "Vector Data Cube",
             "type": "object",
             "subtype": "datacube",
             "dimensions": [
@@ -4611,6 +4611,13 @@
                 "type": "geometry"
               }
             ]
+          },
+          {
+            "title": "GeoJSON",
+            "type": "object",
+            "subtype": "geojson",
+            "description": "Deprecated. The GeoJSON type `GeometryCollection` is not supported.",
+            "deprecated": true
           }
         ]
       }
@@ -5846,9 +5853,10 @@
           },
           {
             "title": "GeoJSON",
-            "description": "Limits the data cube to the bounding box of the given geometries. For raster data, all pixels inside the bounding box that do not intersect with any of the polygons will be set to no data (`null`).\n\nThe GeoJSON type `GeometryCollection` is not supported. Empty geometries are ignored.",
+            "description": "Deprecated. Limits the data cube to the bounding box of the given geometries. For raster data, all pixels inside the bounding box that do not intersect with any of the polygons will be set to no data (`null`).\n\nThe GeoJSON type `GeometryCollection` is not supported. Empty geometries are ignored.",
             "type": "object",
-            "subtype": "geojson"
+            "subtype": "geojson",
+            "deprecated": true
           },
           {
             "title": "Vector data cube",
@@ -6417,11 +6425,7 @@
         "description": "A GeoJSON object or a vector data cube containing at least one polygon. The provided vector data can be one of the following:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry, or\n* a `FeatureCollection` containing at least one `Feature` with `Polygon` or `MultiPolygon` geometries.\n* Empty geometries are ignored.",
         "schema": [
           {
-            "type": "object",
-            "subtype": "geojson",
-            "description": "The GeoJSON type `GeometryCollection` is not supported."
-          },
-          {
+            "title": "Vector Data Cube",
             "type": "object",
             "subtype": "datacube",
             "dimensions": [
@@ -6433,6 +6437,13 @@
                 ]
               }
             ]
+          },
+          {
+            "title": "GeoJSON",
+            "type": "object",
+            "subtype": "geojson",
+            "description": "Deprecated. The GeoJSON type `GeometryCollection` is not supported.",
+            "deprecated": true
           }
         ]
       },
@@ -10122,23 +10133,16 @@
       },
       {
         "name": "geometries",
-        "description": "One or more base geometries used for filtering, given as GeoJSON or vector data cube. If multiple base geometries are provided, the union of them is used. Empty geometries are ignored.",
-        "schema": [
-          {
-            "type": "object",
-            "subtype": "geojson",
-            "description": "The GeoJSON type `GeometryCollection` is not supported."
-          },
-          {
-            "type": "object",
-            "subtype": "datacube",
-            "dimensions": [
-              {
-                "type": "geometry"
-              }
-            ]
-          }
-        ]
+        "description": "One or more base geometries used for filtering, given as vector data cube. If multiple base geometries are provided, the union of them is used.",
+        "schema": {
+          "type": "object",
+          "subtype": "datacube",
+          "dimensions": [
+            {
+              "type": "geometry"
+            }
+          ]
+        }
       },
       {
         "name": "relation",
@@ -11321,23 +11325,16 @@
     "parameters": [
       {
         "name": "geometries",
-        "description": "Geometries to apply the buffer on. Feature properties are preserved for vector data cubes and all GeoJSON Features.",
-        "schema": [
-          {
-            "type": "object",
-            "subtype": "geojson",
-            "description": "The GeoJSON type `GeometryCollection` is not supported."
-          },
-          {
-            "type": "object",
-            "subtype": "datacube",
-            "dimensions": [
-              {
-                "type": "geometry"
-              }
-            ]
-          }
-        ]
+        "description": "Geometries to apply the buffer on. Feature properties are preserved.",
+        "schema": {
+          "type": "object",
+          "subtype": "datacube",
+          "dimensions": [
+            {
+              "type": "geometry"
+            }
+          ]
+        }
       },
       {
         "name": "distance",
@@ -11473,22 +11470,15 @@
       {
         "name": "data",
         "description": "Input geometries for sample extraction.",
-        "schema": [
-          {
-            "type": "object",
-            "subtype": "geojson",
-            "description": "The GeoJSON type `GeometryCollection` is not supported."
-          },
-          {
-            "type": "object",
-            "subtype": "datacube",
-            "dimensions": [
-              {
-                "type": "geometry"
-              }
-            ]
-          }
-        ]
+        "schema": {
+          "type": "object",
+          "subtype": "datacube",
+          "dimensions": [
+            {
+              "type": "geometry"
+            }
+          ]
+        }
       },
       {
         "name": "geometry_count",
@@ -11579,22 +11569,15 @@
       {
         "name": "data",
         "description": "Input geometries for sample extraction.",
-        "schema": [
-          {
-            "type": "object",
-            "subtype": "geojson",
-            "description": "The GeoJSON type `GeometryCollection` is not supported."
-          },
-          {
-            "type": "object",
-            "subtype": "datacube",
-            "dimensions": [
-              {
-                "type": "geometry"
-              }
-            ]
-          }
-        ]
+        "schema": {
+          "type": "object",
+          "subtype": "datacube",
+          "dimensions": [
+            {
+              "type": "geometry"
+            }
+          ]
+        }
       },
       {
         "name": "distance",
