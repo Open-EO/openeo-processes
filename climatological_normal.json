@@ -43,16 +43,13 @@
                 "minItems": 2,
                 "maxItems": 2,
                 "items": {
-                    "type": "string",
-                    "subtype": "year",
-                    "minLength": 4,
-                    "maxLength": 4,
-                    "pattern": "^\\d{4}$"
+                    "type": "integer",
+                    "subtype": "year"
                 }
             },
             "default": [
-                "1981",
-                "2010"
+                1981,
+                2010
             ],
             "optional": true
         }

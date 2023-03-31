@@ -29,11 +29,6 @@
                             "type": "string",
                             "format": "date",
                             "subtype": "date"
-                        },
-                        {
-                            "type": "string",
-                            "format": "time",
-                            "subtype": "time"
                         }
                     ]
                 }
@@ -82,11 +77,6 @@
                         "type": "string",
                         "format": "date",
                         "subtype": "date"
-                    },
-                    {
-                        "type": "string",
-                        "format": "time",
-                        "subtype": "time"
                     }
                 ]
             }

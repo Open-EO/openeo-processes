@@ -22,7 +22,7 @@
         },
         {
             "name": "intervals",
-            "description": "Left-closed temporal intervals, which are allowed to overlap. Each temporal interval in the array has exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified time instant is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified time instant is **excluded** from the interval.\n\nThe second element must always be greater/later than the first element. Otherwise, a `TemporalExtentEmpty` exception is thrown.\n\nThe specified temporal strings follow [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html).",
+            "description": "Left-closed temporal intervals, which are allowed to overlap. Each temporal interval in the array has exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified time instant is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified time instant is **excluded** from the interval.\n\nThe second element must always be greater/later than the first element, except for times. Otherwise, a `TemporalExtentEmpty` exception is thrown.",
             "schema": {
                 "type": "array",
                 "subtype": "temporal-intervals",
@@ -38,24 +38,20 @@
                             {
                                 "type": "string",
                                 "format": "date-time",
-                                "subtype": "date-time"
+                                "subtype": "date-time",
+                                "description": "Date and time with a time zone."
                             },
                             {
                                 "type": "string",
                                 "format": "date",
-                                "subtype": "date"
+                                "subtype": "date",
+                                "description": "Date only, formatted as `YYYY-MM-DD`. The time zone is UTC. Missing time components are all 0."
                             },
                             {
                                 "type": "string",
-                                "format": "time",
-                                "subtype": "time"
-                            },
-                            {
-                                "type": "string",
-                                "subtype": "year",
-                                "minLength": 4,
-                                "maxLength": 4,
-                                "pattern": "^\\d{4}$"
+                                "subtype": "time",
+                                "pattern": "^\\d{2}:\\d{2}:\\d{2}$",
+                                "description": "Time only, formatted as `HH:MM:SS`. The time zone is UTC."
                             },
                             {
                                 "type": "null"
@@ -85,7 +81,7 @@
                         ],
                         [
                             "12:00:00Z",
-                            null
+                            "00:00:00Z"
                         ]
                     ]
                 ]
@@ -246,6 +242,11 @@
             "href": "https://openeo.org/documentation/1.0/datacubes.html#aggregate",
             "rel": "about",
             "title": "Aggregation explained in the openEO documentation"
+        },
+        {
+            "href": "https://www.rfc-editor.org/rfc/rfc3339.html",
+            "rel": "about",
+            "title": "RFC3339: Details about formatting temporal strings"
         }
     ]
 }
