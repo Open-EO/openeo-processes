@@ -14,7 +14,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `fit_class_random_forest`
     - `fit_regr_random_forest`
     - `flatten_dimensions`
-    - `load_geojson`
     - `load_ml_model`
     - `predict_random_forest`
     - `save_ml_model`
@@ -50,7 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Deprecated
 
-- `aggregate_spatial`, `filter_spatial`, `load_collection`, `mask_polygon`: GeoJSON input is deprecated. Use `load_geojson` instead. [#346](https://github.com/Open-EO/openeo-processes/issues/346)
+- `aggregate_spatial`, `filter_spatial`, `load_collection`, `mask_polygon`: GeoJSON input is deprecated. [#346](https://github.com/Open-EO/openeo-processes/issues/346)
 
 ### Removed
 
