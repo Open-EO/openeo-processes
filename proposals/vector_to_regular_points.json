@@ -1,7 +1,7 @@
 {
     "id": "vector_to_regular_points",
     "summary": "Sample regular points from geometries",
-    "description": "Generate a vector data cube of points by sampling regularly-spaced points from input geometries. Feature properties are preserved.",
+    "description": "Generate a vector data cube of points by sampling regularly-spaced points from input geometries. Empty geometries are passed through without any points assigned. Feature properties are preserved.",
     "categories": [
         "cubes",
         "vector"

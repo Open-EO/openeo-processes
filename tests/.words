@@ -22,6 +22,8 @@ orthorectification
 orthorectified
 radiometrically
 reflectances
+reproject
+Reprojects
 resample
 resampled
 resamples
@@ -32,6 +34,8 @@ Sentinel-2A
 Sentinel-2B
 signum
 STAC
+catalog
+Catalog
 summand
 UDFs
 gdalwarp

@@ -186,13 +186,6 @@
             "title": "Options for Input File Formats",
             "description": "Key-value-pairs with arguments for the input format options supported by the back-end."
         },
-        "job-id": {
-            "type": "string",
-            "subtype": "job-id",
-            "title": "Batch Job ID",
-            "description": "A batch job id, either one of the jobs a user has stored or a publicly available job.",
-            "pattern": "^[\\w\\-\\.~]+$"
-        },
         "kernel": {
             "type": "array",
             "subtype": "kernel",
@@ -238,12 +231,6 @@
                     }
                 }
             }
-        },
-        "ml-model": {
-            "type": "object",
-            "subtype": "ml-model",
-            "title": "Machine Learning Model",
-            "description": "A machine learning model, accompanied with STAC metadata that implements the the STAC ml-model extension."
         },
         "output-format": {
             "type": "string",
