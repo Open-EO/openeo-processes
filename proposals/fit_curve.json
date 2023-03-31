@@ -1,7 +1,7 @@
 {
     "id": "fit_curve",
     "summary": "Curve fitting",
-    "description": "Use non-linear least squares to fit a model function `y = f(x, parameters)` to data.\n\nThe process throws an `InvalidValues` exception if invalid values are encountered. Invalid values are finite numbers (see also ``is_valid()``).",
+    "description": "Use non-linear least squares to fit a model function `y = f(x, parameters)` to data.\n\nThe process throws an `InvalidValues` exception if invalid values are encountered. Valid values are finite numbers (see also ``is_valid()``).",
     "categories": [
         "cubes",
         "math"
