@@ -1,6 +1,6 @@
 {
     "id": "load_url",
-    "summary": "Load files from the a URL",
+    "summary": "Load data from a URL",
     "description": "Loads a file from a URL (supported protocols: HTTP and HTTPS).",
     "categories": [
         "cubes",
@@ -10,7 +10,7 @@
     "parameters": [
         {
             "name": "url",
-            "description": "The URLs to read from. Authentication details such as API keys or tokens may need to be included in the URL.",
+            "description": "The URL to read from. Authentication details such as API keys or tokens may need to be included in the URL.",
             "schema": {
                 "title": "URL",
                 "type": "string",
@@ -21,7 +21,7 @@
         },
         {
             "name": "format",
-            "description": "The file format to read from. It must be one of the values that the server reports as supported input file formats, which usually correspond to the short GDAL/OGR codes. If the format is not suitable for loading the data, a `FormatUnsuitable` exception will be thrown. This parameter is *case insensitive*.",
+            "description": "The file format to use when loading the data. It must be one of the values that the server reports as supported input file formats, which usually correspond to the short GDAL/OGR codes. If the format is not suitable for loading the data, a `FormatUnsuitable` exception will be thrown. This parameter is *case insensitive*.",
             "schema": {
                 "type": "string",
                 "subtype": "input-format"
@@ -29,7 +29,7 @@
         },
         {
             "name": "options",
-            "description": "The file format parameters to be used to read the files. Must correspond to the parameters that the server reports as supported parameters for the chosen `format`. The parameter names and valid values usually correspond to the GDAL/OGR format options.",
+            "description": "The file format parameters to use when reading the data. Must correspond to the parameters that the server reports as supported parameters for the chosen `format`. The parameter names and valid values usually correspond to the GDAL/OGR format options.",
             "schema": {
                 "type": "object",
                 "subtype": "input-format-options"
