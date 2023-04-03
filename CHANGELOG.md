@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `filter_vector`
     - `flatten_dimensions`
     - `load_geojson`
+    - `load_url`
     - `unflatten_dimension`
     - `vector_buffer`
     - `vector_reproject`
