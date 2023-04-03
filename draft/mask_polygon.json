@@ -46,7 +46,7 @@
                     "title": "GeoJSON",
                     "type": "object",
                     "subtype": "geojson",
-                    "description": "Deprecated. The GeoJSON type `GeometryCollection` is not supported.",
+                    "description": "Deprecated in favor of ``load_geojson()``. The GeoJSON type `GeometryCollection` is not supported.",
                     "deprecated": true
                 }
             ]
