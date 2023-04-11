@@ -1,0 +1,39 @@
+{
+    "id": "sen2like",
+    "summary": "Run the Sen2like processor ",
+    "description": "The Sen2like processor generates Sentinel-2-like harmonised/fused surface reflectances with higher periodicity by integrating additional compatible optical mission sensors. The source code is available at https://github.com/senbox-org/sen2like.",
+    "categories": [
+        "cubes"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The datacube for which to generate L2F & L2H level data.",
+            "schema": {
+                "type": "object",
+                "subtype": "raster-cube"
+            }
+        }
+    ],
+    "returns": {
+        "description": "",
+        "schema": {
+            "type": "object",
+            "subtype": "raster-cube"
+        }
+    },
+    
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html",
+            "rel": "about",
+            "title": "Data Cubes explained in the openEO documentation"
+        },
+        {
+            "rel": "about",
+            "href": "https://github.com/senbox-org/sen2like",
+            "title": "Source code for the sen2like processor"
+        }
+    ]
+}
