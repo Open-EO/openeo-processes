@@ -1,7 +1,7 @@
 {
     "id": "date_replace",
     "summary": "Replaces a part of a date",
-    "description": "Replaces a part of a given date string with a new value based on the provided unit, allowing for easy manipulation of dates.",
+    "description": "Replaces a part of a given date string with a new value based on the provided unit, allowing for easy replacing of dates.",
     "categories": [
         "date & time"
     ],
@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "date",
-            "description": "The date (and optionally time) to manipulate.\n\nIf the given date doesn't include the time, the process assumes that the time component is `00:00:00Z` (i.e. midnight, in UTC). The millisecond part of the time is optional and defaults to `0` if not given.",
+            "description": "The date (and optionally time) to replace.\n\nIf the given date doesn't include the time, the process assumes that the time component is `00:00:00Z` (i.e. midnight, in UTC). The millisecond part of the time is optional and defaults to `0` if not given.",
             "schema": [
                 {
                     "type": "string",
@@ -25,14 +25,14 @@
         },
         {
             "name": "value",
-            "description": "The period of time in the unit given that is added (positive numbers) or subtracted (negative numbers). The value `0` doesn't have any effect.",
+            "description": "The period of time in the unit given to replace the existing value.",
             "schema": {
                 "type": "integer"
             }
         },
         {
             "name": "unit",
-            "description": "The unit for the value given. The following pre-defined units are available:\n\n- millisecond: Milliseconds\n- second: Seconds - leap seconds are ignored in computations.\n- minute: Minutes\n- hour: Hours\n- day: Days - changes only the the day part of a date\n- week: Weeks (equivalent to 7 days)\n- month: Months\n- year: Years\n\nManipulations with the unit `year`, `month`, `week` or `day` do never change the time. If any of the manipulations result in an invalid date or time, the corresponding part is rounded down to the next valid date or time respectively. For example, adding a month to `2020-01-31` would result in `2020-02-29`.",
+            "description": "The unit for the value given. The following pre-defined units are available:\n\n- millisecond: Milliseconds\n- second: Seconds .\n- minute: Minutes\n- hour: Hours\n- day: Days - changes only the the day part of a date\n- month: Months\n- year: Years\n\nReplacements with the unit `year`, `month` or `day` do never change the time.",
             "schema": {
                 "type": "string",
                 "enum": [
@@ -41,7 +41,6 @@
                     "minute",
                     "hour",
                     "day",
-                    "week",
                     "month",
                     "year"
                 ]
@@ -49,7 +48,7 @@
         }
     ],
     "returns": {
-        "description": "The manipulated date. If a time component was given in the parameter `date`, the time component is returned with the date.",
+        "description": "The date with replaced value. If a time component was given in the parameter `date`, the time component is returned with the date.",
         "schema": [
             {
                 "type": "string",
