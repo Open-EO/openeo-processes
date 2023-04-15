@@ -1,5 +1,5 @@
 {
-    "id": "date_replace",
+    "id": "date_get",
     "summary": "Gets a part of a date",
     "description": "Gets a part of a given date.",
     "categories": [

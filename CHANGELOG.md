@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - New processes in proposal state:
     - `date_difference`
+    - `date_get`
     - `date_replace`
     - `filter_vector`
     - `flatten_dimensions`
