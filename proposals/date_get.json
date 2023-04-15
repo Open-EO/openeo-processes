@@ -1,0 +1,81 @@
+{
+    "id": "date_replace",
+    "summary": "Gets a part of a date",
+    "description": "Gets a part of a given date.",
+    "categories": [
+        "date & time"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "date",
+            "description": "The date (and optionally time) to to get a part of.",
+            "schema": [
+                {
+                    "type": "string",
+                    "format": "date-time",
+                    "subtype": "date-time"
+                },
+                {
+                    "type": "string",
+                    "format": "date",
+                    "subtype": "date"
+                }
+            ]
+        },
+        {
+            "name": "unit",
+            "description": "The unit for the value given. The following pre-defined units are available:\n\n- millisecond: Milliseconds\n- second: Seconds .\n- minute: Minutes\n- hour: Hours\n- day: Days - changes only the the day part of a date\n- month: Months\n- year: Years\n\nReplacements with the unit `year`, `month` or `day` do never change the time.",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "millisecond",
+                    "second",
+                    "minute",
+                    "hour",
+                    "day",
+                    "month",
+                    "year"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "Returns a part of date.",
+        "schema": {
+            "type": [
+                "number"
+            ]
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "date": "2023-02-01T17:22:45Z",
+                "unit": "month"
+            },
+            "returns": "02"
+        },
+        {
+            "arguments": {
+                "date": "2023-03-31T00:00:00+02:00",
+                "unit": "day"
+            },
+            "returns": "31"
+        },
+        {
+            "arguments": {
+                "date": "2023-01-01",
+                "unit": "year"
+            },
+            "returns": "2023"
+        },
+        {
+            "arguments": {
+                "date": "2023-01-01",
+                "unit": "month"
+            },
+            "returns": "01"
+        }
+    ]
+}
