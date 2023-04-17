@@ -1,7 +1,7 @@
 {
     "id": "sen2like",
     "summary": "Run the Sen2like processor ",
-    "description": "The Sen2like processor generates Sentinel-2-like harmonised/fused surface reflectances with higher periodicity by integrating additional compatible optical mission sensors. A new dimension called `product` is added to differentiate between L2F and L2H output levels. The source code is available at https://github.com/senbox-org/sen2like.",
+    "description": "The Sen2like processor generates Sentinel-2-like fused surface reflectances with higher periodicity by integrating additional compatible optical mission sensors. Currently only the L2F output level is supported. The source code is available at https://github.com/senbox-org/sen2like.",
     "categories": [
         "cubes"
     ],
@@ -9,29 +9,15 @@
     "parameters": [
         {
             "name": "data",
-            "description": "The datacube for which to generate L2F & L2H level data.",
+            "description": "The datacube for which to generate L2F data.",
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
             }
-        },
-        {
-            "name": "target_product",
-            "description": "Which products to generate.",
-            "schema": {
-                "type": "string",
-                "enum": [
-                    "L2F",
-                    "L2H",
-                    "L2F+L2H"
-                ]
-            },
-            "default": "L2F"
         }
-    
     ],
     "returns": {
-        "description": "Sen2like enriched data cube. A new dimension called `product` is added to differentiate between L2F and L2H output levels.",
+        "description": "Sen2like enriched data cube",
         "schema": {
             "type": "object",
             "subtype": "raster-cube"
