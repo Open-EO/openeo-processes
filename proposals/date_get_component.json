@@ -1,6 +1,6 @@
 {
-    "id": "date_get",
-    "summary": "Gets a part of a date",
+    "id": "date_get_component",
+    "summary": "Gets a part/component of a date",
     "description": "Retrieves a specified portion of a given date object.\n It enables the extraction of specific details from a date object, such as year, month, or day.",
     "categories": [
         "date & time"
@@ -24,8 +24,8 @@
             ]
         },
         {
-            "name": "unit",
-            "description": "The unit for the value given. The following pre-defined units are available:\n\n- millisecond: Milliseconds\n- second: Seconds .\n- minute: Minutes\n- hour: Hours\n- day: Days - changes only the the day part of a date\n- month: Months\n- year: Years\n\nReplacements with the unit `year`, `month` or `day` do never change the time.",
+            "name": "component",
+            "description": "The component for the value given. The following pre-defined components are available:\n\n- millisecond: Milliseconds\n- second: Seconds .\n- minute: Minutes\n- hour: Hours\n- day: Days - changes only the the day part of a date\n- day of week: Day of Week\n- day of year: Day of Year\n- week: Weeks (equivalent to 7 days)\n- week number: Week Number\n- month: Months\n- year: Years\n\nReplacements with the component `year`, `month` or `day` do never change the time.",
             "schema": {
                 "type": "string",
                 "enum": [
@@ -34,6 +34,10 @@
                     "minute",
                     "hour",
                     "day",
+                    "day of week",
+                    "day of year",
+                    "week",
+                    "week number",
                     "month",
                     "year"
                 ]
@@ -43,39 +47,37 @@
     "returns": {
         "description": "Returns retrieved portion of a date.",
         "schema": {
-            "type": [
-                "number"
-            ]
+            "type": "number"
         }
     },
     "examples": [
         {
             "arguments": {
                 "date": "2023-02-01T17:22:45Z",
-                "unit": "month"
+                "component": "month"
             },
-            "returns": "02"
+            "returns": 2
         },
         {
             "arguments": {
                 "date": "2023-03-31T00:00:00+02:00",
-                "unit": "day"
+                "component": "day"
             },
-            "returns": "31"
+            "returns": 31
         },
         {
             "arguments": {
                 "date": "2023-01-01",
-                "unit": "year"
+                "component": "year"
             },
-            "returns": "2023"
+            "returns": 2023
         },
         {
             "arguments": {
                 "date": "2023-01-01",
-                "unit": "month"
+                "component": "month"
             },
-            "returns": "01"
+            "returns": 1
         }
     ]
 }
