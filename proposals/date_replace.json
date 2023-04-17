@@ -48,7 +48,7 @@
         }
     ],
     "returns": {
-        "description":  "The date with replaced value. If a time component was given in the parameter date, the time component is returned with the date. If the date parameter only includes a date component and a time component is replaced, the resulting output will include the time component as well.",
+        "description": "The date with replaced value. If a time component was given in the parameter date, the time component is returned with the date. If the date parameter only includes a date component and a time component is replaced, the resulting output will include the time component as well.",
         "schema": [
             {
                 "type": "string",
