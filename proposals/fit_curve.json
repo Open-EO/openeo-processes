@@ -10,9 +10,10 @@
     "parameters": [
         {
             "name": "data",
-            "description": "An array.",
+            "description": "A labeled array, the labels correspond to the variable `y` and the values correspond to the variable `x`.",
             "schema": {
                 "type": "array",
+                "subtype": "labeled-array",
                 "items": {
                     "type": "number"
                 }
