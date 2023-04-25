@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New processes in proposal state:
+    - `raster_to_vector`
     - `date_difference`
     - `filter_vector`
     - `flatten_dimensions`
