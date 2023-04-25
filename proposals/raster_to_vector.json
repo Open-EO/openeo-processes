@@ -1,0 +1,52 @@
+{
+    "id": "raster_to_vector",
+    "summary": "Converts a raster to a vector.",
+    "description": "Converts a raster data cube into a vector data cube. The bounding polygon of homogenous areas of pixels is constructed.",
+    "categories": [
+        "cubes"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube"
+            }
+        },
+        {
+            "name": "tranform",
+            "description": "Coordinate reference system to tranform the converted vector. Specified as an [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html).\n The default value is of the  input raster cube.",
+            "schema": [
+                {
+                    "title": "EPSG Code",
+                    "type": "integer",
+                    "subtype": "epsg-code",
+                    "minimum": 1000,
+                    "examples": [
+                        3857
+                    ]
+                },
+                {
+                    "title": "WKT2",
+                    "type": "string",
+                    "subtype": "wkt2-definition"
+                }
+            ],
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "Returns a converted vector data cube.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "geometry"
+                }
+            ]
+        }
+    }
+}
