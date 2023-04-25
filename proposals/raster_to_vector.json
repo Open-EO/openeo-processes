@@ -1,10 +1,11 @@
 {
     "id": "raster_to_vector",
-    "summary": "Converts a raster to a vector.",
+    "summary": "Converts a raster to a vector",
     "description": "Converts a raster data cube into a vector data cube. The bounding polygon of homogenous areas of pixels is constructed.",
     "categories": [
         "cubes"
     ],
+    "experimental": true,
     "parameters": [
         {
             "name": "data",
