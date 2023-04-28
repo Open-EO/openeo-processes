@@ -151,7 +151,7 @@
             }
         },
         {
-            "description": "Per default the target_resolution is 10 m for the bands 'B02', 'B03', 'B04'. Set to 20 m to retrieve 20 m resolution results of 'B8A', 'B11', 'B12'.",
+            "description": "Per default the target_resolution is 10 m for the bands 'B02', 'B03', 'B04'. Set to 20 to retrieve 20 m resolution results of 'B8A', 'B11', 'B12' or to 60 for 'B01'.",
             "name": "target_resolution",
             "optional": true,
             "default": 10,
