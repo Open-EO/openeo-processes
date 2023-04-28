@@ -1,7 +1,7 @@
 {
     "id": "raster_to_vector",
-    "summary": "Converts raster data to vector data",
-    "description": "Converts a raster data cube into a vector data cube. The bounding polygon of similar areas of pixels is constructed.",
+    "summary": "Converts single band raster data cube to vector data",
+    "description": "Converts a single band raster data cube into a vector data cube. The bounding polygon of uniform areas of pixels is constructed.",
     "categories": [
         "cubes"
     ],
@@ -17,7 +17,7 @@
         },
         {
             "name": "projection",
-            "description": "Coordinate reference system to reproject the converted vector. Specified as an [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html).\nThe default value is of the  input raster cube.",
+            "description": "Coordinate reference system to reproject the converted vector. Specified as an [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html).\n When no projection (or null) is given, the reference system of the input raster data cube is used.",
             "schema": [
                 {
                     "title": "EPSG Code",
