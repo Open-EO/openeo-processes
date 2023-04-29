@@ -544,7 +544,7 @@
       },
       {
         "name": "intervals",
-        "description": "Left-closed temporal intervals, which are allowed to overlap. Each temporal interval in the array has exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html). Although [RFC 3339 prohibits the hour to be '24'](https://www.rfc-editor.org/rfc/rfc3339.html#section-5.7), **this process allows the value '24' for the hour** of an end time in order to make it possible that left-closed time intervals can fully cover the day.",
+        "description": "Left-closed temporal intervals, which are allowed to overlap. Each temporal interval in the array has exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified time instant is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified time instant is **excluded** from the interval.\n\nThe second element must always be greater/later than the first element, except when using time without date. Otherwise, a `TemporalExtentEmpty` exception is thrown.",
         "schema": {
           "type": "array",
           "subtype": "temporal-intervals",
@@ -552,6 +552,7 @@
           "items": {
             "type": "array",
             "subtype": "temporal-interval",
+            "uniqueItems": true,
             "minItems": 2,
             "maxItems": 2,
             "items": {
@@ -559,24 +560,20 @@
                 {
                   "type": "string",
                   "format": "date-time",
-                  "subtype": "date-time"
+                  "subtype": "date-time",
+                  "description": "Date and time with a time zone."
                 },
                 {
                   "type": "string",
                   "format": "date",
-                  "subtype": "date"
+                  "subtype": "date",
+                  "description": "Date only, formatted as `YYYY-MM-DD`. The time zone is UTC. Missing time components are all 0."
                 },
                 {
                   "type": "string",
-                  "format": "time",
-                  "subtype": "time"
-                },
-                {
-                  "type": "string",
-                  "subtype": "year",
-                  "minLength": 4,
-                  "maxLength": 4,
-                  "pattern": "^\\d{4}$"
+                  "subtype": "time",
+                  "pattern": "^\\d{2}:\\d{2}:\\d{2}$",
+                  "description": "Time only, formatted as `HH:MM:SS`. The time zone is UTC."
                 },
                 {
                   "type": "null"
@@ -601,12 +598,12 @@
             ],
             [
               [
-                "00:00:00Z",
-                "12:00:00Z"
+                "06:00:00",
+                "18:00:00"
               ],
               [
-                "12:00:00Z",
-                "24:00:00Z"
+                "18:00:00",
+                "06:00:00"
               ]
             ]
           ]
@@ -757,6 +754,9 @@
       },
       "DistinctDimensionLabelsRequired": {
         "message": "The dimension labels have duplicate values. Distinct labels must be specified."
+      },
+      "TemporalExtentEmpty": {
+        "message": "At least one of the intervals is empty. The second instant in time must always be greater/later than the first instant."
       }
     },
     "links": [
@@ -764,6 +764,11 @@
         "href": "https://openeo.org/documentation/1.0/datacubes.html#aggregate",
         "rel": "about",
         "title": "Aggregation explained in the openEO documentation"
+      },
+      {
+        "href": "https://www.rfc-editor.org/rfc/rfc3339.html",
+        "rel": "about",
+        "title": "RFC3339: Details about formatting temporal strings"
       }
     ]
   },
@@ -3357,20 +3362,17 @@
         "description": "The climatology period as a closed temporal interval. The first element of the array is the first year to be fully included in the temporal interval. The second element is the last year to be fully included in the temporal interval.\n\nThe default climatology period is from 1981 until 2010 (both inclusive) right now, but this might be updated over time to what is commonly used in climatology. If you don't want to keep your research to be reproducible, please explicitly specify a period.",
         "schema": {
           "type": "array",
-          "subtype": "temporal-interval",
+          "uniqueItems": true,
           "minItems": 2,
           "maxItems": 2,
           "items": {
-            "type": "string",
-            "subtype": "year",
-            "minLength": 4,
-            "maxLength": 4,
-            "pattern": "^\\d{4}$"
+            "type": "integer",
+            "subtype": "year"
           }
         },
         "default": [
-          "1981",
-          "2010"
+          1981,
+          2010
         ],
         "optional": true
       }
@@ -4675,7 +4677,7 @@
       },
       {
         "name": "extent",
-        "description": "Left-closed temporal interval, i.e. an array with exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html). Also supports open intervals by setting one of the boundaries to `null`, but never both.",
+        "description": "Left-closed temporal interval, i.e. an array with exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified time instant is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified time instant is **excluded** from the interval.\n\nThe second element must always be greater/later than the first element. Otherwise, a `TemporalExtentEmpty` exception is thrown.\n\nAlso supports unbounded intervals by setting one of the boundaries to `null`, but never both.",
         "schema": {
           "type": "array",
           "subtype": "temporal-interval",
@@ -4686,19 +4688,14 @@
               {
                 "type": "string",
                 "format": "date-time",
-                "subtype": "date-time"
+                "subtype": "date-time",
+                "description": "Date and time with a time zone."
               },
               {
                 "type": "string",
                 "format": "date",
-                "subtype": "date"
-              },
-              {
-                "type": "string",
-                "subtype": "year",
-                "minLength": 4,
-                "maxLength": 4,
-                "pattern": "^\\d{4}$"
+                "subtype": "date",
+                "description": "Date only, formatted as `YYYY-MM-DD`. The time zone is UTC. Missing time components are all 0."
               },
               {
                 "type": "null"
@@ -4745,6 +4742,9 @@
     "exceptions": {
       "DimensionNotAvailable": {
         "message": "A dimension with the specified name does not exist."
+      },
+      "TemporalExtentEmpty": {
+        "message": "The temporal extent is empty. The second instant in time must always be greater/later than the first instant in time."
       }
     },
     "links": [
@@ -4752,6 +4752,11 @@
         "href": "https://openeo.org/documentation/1.0/datacubes.html#filter",
         "rel": "about",
         "title": "Filters explained in the openEO documentation"
+      },
+      {
+        "href": "https://www.rfc-editor.org/rfc/rfc3339.html",
+        "rel": "about",
+        "title": "RFC3339: Details about formatting temporal strings"
       }
     ]
   },
@@ -5878,11 +5883,12 @@
       },
       {
         "name": "temporal_extent",
-        "description": "Limits the data to load from the collection to the specified left-closed temporal interval. Applies to all temporal dimensions. The interval has to be specified as an array with exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html). Also supports open intervals by setting one of the boundaries to `null`, but never both.\n\nSet this parameter to `null` to set no limit for the temporal extent. Be careful with this when loading large datasets! It is recommended to use this parameter instead of using ``filter_temporal()`` directly after loading unbounded data.",
+        "description": "Limits the data to load from the collection to the specified left-closed temporal interval. Applies to all temporal dimensions. The interval has to be specified as an array with exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified time instant is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified time instant is **excluded** from the interval.\n\nThe second element must always be greater/later than the first element. Otherwise, a `TemporalExtentEmpty` exception is thrown.\n\nAlso supports unbounded intervals by setting one of the boundaries to `null`, but never both.\n\nSet this parameter to `null` to set no limit for the temporal extent. Be careful with this when loading large datasets! It is recommended to use this parameter instead of using ``filter_temporal()`` directly after loading unbounded data.",
         "schema": [
           {
             "type": "array",
             "subtype": "temporal-interval",
+            "uniqueItems": true,
             "minItems": 2,
             "maxItems": 2,
             "items": {
@@ -5890,19 +5896,14 @@
                 {
                   "type": "string",
                   "format": "date-time",
-                  "subtype": "date-time"
+                  "subtype": "date-time",
+                  "description": "Date and time with a time zone."
                 },
                 {
                   "type": "string",
                   "format": "date",
-                  "subtype": "date"
-                },
-                {
-                  "type": "string",
-                  "subtype": "year",
-                  "minLength": 4,
-                  "maxLength": 4,
-                  "pattern": "^\\d{4}$"
+                  "subtype": "date",
+                  "description": "Date only, formatted as `YYYY-MM-DD`. The time zone is UTC. Missing time components are all 0."
                 },
                 {
                   "type": "null"
@@ -5997,6 +5998,9 @@
     "exceptions": {
       "NoDataAvailable": {
         "message": "There is no data available for the given extents."
+      },
+      "TemporalExtentEmpty": {
+        "message": "The temporal extent is empty. The second instant in time must always be greater/later than the first instant in time."
       }
     },
     "examples": [
@@ -6079,6 +6083,11 @@
         "rel": "about",
         "href": "https://github.com/radiantearth/stac-spec/tree/master/extensions/eo#common-band-names",
         "title": "List of common band names as specified by the STAC specification"
+      },
+      {
+        "href": "https://www.rfc-editor.org/rfc/rfc3339.html",
+        "rel": "about",
+        "title": "RFC3339: Details about formatting temporal strings"
       }
     ]
   },
@@ -7927,11 +7936,6 @@
                 "type": "string",
                 "format": "date",
                 "subtype": "date"
-              },
-              {
-                "type": "string",
-                "format": "time",
-                "subtype": "time"
               }
             ]
           }
@@ -9748,6 +9752,118 @@
     ]
   },
   {
+    "id": "date_between",
+    "summary": "Between comparison for dates and times",
+    "description": "By default, this process checks whether `x` is later than or equal to `min` and before or equal to `max`.\n\nIf `exclude_max` is set to `true` the upper bound is excluded so that the process checks whether `x` is later than or equal to `min` and before `max`.\n\nLower and upper bounds are not allowed to be swapped. So `min` MUST be before or equal to `max` or otherwise the process always returns `false`.",
+    "categories": [
+      "comparison",
+      "date & time"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "x",
+        "description": "The value to check.",
+        "schema": [
+          {
+            "type": "string",
+            "format": "date-time",
+            "subtype": "date-time",
+            "description": "Date and time with a time zone."
+          },
+          {
+            "type": "string",
+            "format": "date",
+            "subtype": "date",
+            "description": "Date only, formatted as `YYYY-MM-DD`. The time zone is UTC. Missing time components are all 0."
+          },
+          {
+            "type": "string",
+            "subtype": "time",
+            "pattern": "^\\d{2}:\\d{2}:\\d{2}$",
+            "description": "Time only, formatted as HH:MM:SS. The time zone is UTC."
+          }
+        ]
+      },
+      {
+        "name": "min",
+        "description": "Lower boundary (inclusive) to check against.",
+        "schema": [
+          {
+            "type": "string",
+            "format": "date-time",
+            "subtype": "date-time",
+            "description": "Date and time with a time zone."
+          },
+          {
+            "type": "string",
+            "format": "date",
+            "subtype": "date",
+            "description": "Date only, formatted as `YYYY-MM-DD`. The time zone is UTC. Missing time components are all 0."
+          },
+          {
+            "type": "string",
+            "subtype": "time",
+            "pattern": "^\\d{2}:\\d{2}:\\d{2}$",
+            "description": "Time only, formatted as HH:MM:SS. The time zone is UTC."
+          }
+        ]
+      },
+      {
+        "name": "max",
+        "description": "Upper boundary (inclusive) to check against.",
+        "schema": [
+          {
+            "type": "string",
+            "format": "date-time",
+            "subtype": "date-time",
+            "description": "Date and time with a time zone."
+          },
+          {
+            "type": "string",
+            "format": "date",
+            "subtype": "date",
+            "description": "Date only, formatted as `YYYY-MM-DD`. The time zone is UTC. Missing time components are all 0."
+          },
+          {
+            "type": "string",
+            "subtype": "time",
+            "pattern": "^\\d{2}:\\d{2}:\\d{2}$",
+            "description": "Time only, formatted as HH:MM:SS. The time zone is UTC."
+          }
+        ]
+      },
+      {
+        "name": "exclude_max",
+        "description": "Exclude the upper boundary `max` if set to `true`. Defaults to `false`.",
+        "schema": {
+          "type": "boolean"
+        },
+        "default": false,
+        "optional": true
+      }
+    ],
+    "returns": {
+      "description": "`true` if `x` is between the specified bounds, otherwise `false`.",
+      "schema": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      }
+    },
+    "examples": [
+      {
+        "arguments": {
+          "x": "2020-01-01",
+          "min": "2021-01-01",
+          "max": "2022-01-01"
+        },
+        "returns": false
+      }
+    ]
+  },
+  {
     "id": "date_difference",
     "summary": "Computes the difference between two time instants",
     "description": "Computes the difference between two instants in time and returns the difference between them in the unit given.\n\nThe process converts the given dates into numerical timestamps and returns the result of subtracting the other date from the base date. If a given date doesn't include the time, the process assumes that the time component is `00:00:00Z` (i.e. midnight, in UTC). The millisecond part of the times are optional and default to `0` if not given. The process doesn't take daylight saving time (DST) into account as only dates and times in UTC (with potential numerical time zone modifier) are supported.",
@@ -10596,11 +10712,12 @@
       },
       {
         "name": "temporal_extent",
-        "description": "Limits the data to load to the specified left-closed temporal interval. Applies to all temporal dimensions. The interval has to be specified as an array with exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html). Also supports open intervals by setting one of the boundaries to `null`, but never both.\n\nSet this parameter to `null` to set no limit for the temporal extent. Be careful with this when loading large datasets! It is recommended to use this parameter instead of using ``filter_temporal()`` directly after loading unbounded data.",
+        "description": "Limits the data to load to the specified left-closed temporal interval. Applies to all temporal dimensions. The interval has to be specified as an array with exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe second element must always be greater/later than the first element. Otherwise, a `TemporalExtentEmpty` exception is thrown.\n\nAlso supports open intervals by setting one of the boundaries to `null`, but never both.\n\nSet this parameter to `null` to set no limit for the temporal extent. Be careful with this when loading large datasets! It is recommended to use this parameter instead of using ``filter_temporal()`` directly after loading unbounded data.",
         "schema": [
           {
             "type": "array",
             "subtype": "temporal-interval",
+            "uniqueItems": true,
             "minItems": 2,
             "maxItems": 2,
             "items": {
@@ -10608,19 +10725,14 @@
                 {
                   "type": "string",
                   "format": "date-time",
-                  "subtype": "date-time"
+                  "subtype": "date-time",
+                  "description": "Date and time with a time zone."
                 },
                 {
                   "type": "string",
                   "format": "date",
-                  "subtype": "date"
-                },
-                {
-                  "type": "string",
-                  "subtype": "year",
-                  "minLength": 4,
-                  "maxLength": 4,
-                  "pattern": "^\\d{4}$"
+                  "subtype": "date",
+                  "description": "Date only, formatted as `YYYY-MM-DD`. The time zone is UTC. Missing time components are all 0."
                 },
                 {
                   "type": "null"
@@ -10773,8 +10885,48 @@
     "exceptions": {
       "NoDataAvailable": {
         "message": "There is no data available for the given extents."
+      },
+      "TemporalExtentEmpty": {
+        "message": "The temporal extent is empty. The second instant in time must always be greater/later than the first instant in time."
       }
-    }
+    },
+    "links": [
+      {
+        "href": "https://openeo.org/documentation/1.0/datacubes.html",
+        "rel": "about",
+        "title": "Data Cubes explained in the openEO documentation"
+      },
+      {
+        "rel": "about",
+        "href": "https://proj.org/usage/projections.html",
+        "title": "PROJ parameters for cartographic projections"
+      },
+      {
+        "rel": "about",
+        "href": "http://www.epsg-registry.org",
+        "title": "Official EPSG code registry"
+      },
+      {
+        "rel": "about",
+        "href": "http://www.epsg.io",
+        "title": "Unofficial EPSG code database"
+      },
+      {
+        "href": "http://www.opengeospatial.org/standards/sfa",
+        "rel": "about",
+        "title": "Simple Features standard by the OGC"
+      },
+      {
+        "rel": "about",
+        "href": "https://github.com/radiantearth/stac-spec/tree/master/extensions/eo#common-band-names",
+        "title": "List of common band names as specified by the STAC specification"
+      },
+      {
+        "href": "https://www.rfc-editor.org/rfc/rfc3339.html",
+        "rel": "about",
+        "title": "RFC3339: Details about formatting temporal strings"
+      }
+    ]
   },
   {
     "id": "load_uploaded_files",
@@ -13198,11 +13350,6 @@
                 "type": "string",
                 "format": "date",
                 "subtype": "date"
-              },
-              {
-                "type": "string",
-                "format": "time",
-                "subtype": "time"
               }
             ]
           }
@@ -13251,11 +13398,6 @@
               "type": "string",
               "format": "date",
               "subtype": "date"
-            },
-            {
-              "type": "string",
-              "format": "time",
-              "subtype": "time"
             }
           ]
         }
