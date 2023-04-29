@@ -10,6 +10,7 @@ DEM-based
 Domini
 gamma0
 GeoJSON
+FeatureCollections
 labeled
 MathWorld
 n-ary
@@ -33,6 +34,8 @@ Sentinel-2A
 Sentinel-2B
 signum
 STAC
+catalog
+Catalog
 summand
 UDFs
 gdalwarp
@@ -43,3 +46,4 @@ Breiman
 Hyndman
 date1
 date2
+favor

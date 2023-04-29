@@ -1,24 +1,27 @@
 {
-    "id": "load_collection",
-    "summary": "Load a collection",
-    "description": "Loads a collection from the current back-end by its id and returns it as a processable data cube. The data that is added to the data cube can be restricted with the parameters `spatial_extent`, `temporal_extent`, `bands` and `properties`. If no data is available for the given extents, a `NoDataAvailable` exception is thrown.\n\n**Remarks:**\n\n* The bands (and all dimensions that specify nominal dimension labels) are expected to be ordered as specified in the metadata if the `bands` parameter is set to `null`.\n* If no additional parameter is specified this would imply that the whole data set is expected to be loaded. Due to the large size of many data sets, this is not recommended and may be optimized by back-ends to only load the data that is actually required after evaluating subsequent processes such as filters. This means that the values in the data cube should be processed only after the data has been limited to the required extent and as a consequence also to a manageable size.",
+    "id": "load_stac",
+    "summary": "Loads data from STAC",
+    "description": "Loads data from a static STAC catalog or a STAC API Collection and returns the data as a processable data cube. A batch job result can be loaded by providing a reference to it.\n\nIf supported by the underlying metadata and file format, the data that is added to the data cube can be restricted with the parameters `spatial_extent`, `temporal_extent` and `bands`. If no data is available for the given extents, a `NoDataAvailable` exception is thrown.\n\n**Remarks:**\n\n* The bands (and all dimensions that specify nominal dimension labels) are expected to be ordered as specified in the metadata if the `bands` parameter is set to `null`.\n* If no additional parameter is specified this would imply that the whole data set is expected to be loaded. Due to the large size of many data sets, this is not recommended and may be optimized by back-ends to only load the data that is actually required after evaluating subsequent processes such as filters. This means that the values should be processed only after the data has been limited to the required extent and as a consequence also to a manageable size.",
     "categories": [
         "cubes",
         "import"
     ],
+    "experimental": true,
     "parameters": [
         {
-            "name": "id",
-            "description": "The collection id.",
+            "name": "url",
+            "description": "The URL to a static STAC catalog (STAC Item, STAC Collection, or STAC Catalog) or a specific STAC API Collection that allows to filter items and to download assets. This includes batch job results, which itself are compliant to STAC. For external URLs, authentication details such as API keys or tokens may need to be included in the URL.\n\nBatch job results can be specified in two ways:\n\n- For Batch job results at the same back-end, a URL pointing to the corresponding batch job results endpoint should be provided. The URL usually ends with `/jobs/{id}/results` and `{id}` is the corresponding batch job ID.\n- For external results, a signed URL must be provided. Not all back-ends support signed URLs, which are provided as a link with the link relation `canonical` in the batch job result metadata.",
             "schema": {
+                "title": "URL",
                 "type": "string",
-                "subtype": "collection-id",
-                "pattern": "^[\\w\\-\\.~/]+$"
+                "format": "uri",
+                "subtype": "uri",
+                "pattern": "^https?://"
             }
         },
         {
             "name": "spatial_extent",
-            "description": "Limits the data to load from the collection to the specified bounding box or polygons.\n\n* For raster data, the process loads the pixel into the data cube if the point at the pixel center intersects with the bounding box or any of the polygons (as defined in the Simple Features standard by the OGC).\n* For vector data, the process loads the geometry into the data cube if the geometry is fully *within* the bounding box or any of the polygons (as defined in the Simple Features standard by the OGC). Empty geometries may only be in the data cube if no spatial extent has been provided.\n\nThe GeoJSON can be one of the following feature types:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry, or\n* a `FeatureCollection` containing at least one `Feature` with `Polygon` or `MultiPolygon` geometries.\n* Empty geometries are ignored.\n\nSet this parameter to `null` to set no limit for the spatial extent. Be careful with this when loading large datasets! It is recommended to use this parameter instead of using ``filter_bbox()`` or ``filter_spatial()`` directly after loading unbounded data.",
+            "description": "Limits the data to load to the specified bounding box or polygons.\n\n* For raster data, the process loads the pixel into the data cube if the point at the pixel center intersects with the bounding box or any of the polygons (as defined in the Simple Features standard by the OGC).\n* For vector data, the process loads the geometry into the data cube if the geometry is fully within the bounding box or any of the polygons (as defined in the Simple Features standard by the OGC). Empty geometries may only be in the data cube if no spatial extent has been provided.\n\nThe GeoJSON can be one of the following feature types:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry, or\n* a `FeatureCollection` containing at least one `Feature` with `Polygon` or `MultiPolygon` geometries.\n\nSet this parameter to `null` to set no limit for the spatial extent. Be careful with this when loading large datasets! It is recommended to use this parameter instead of using ``filter_bbox()`` or ``filter_spatial()`` directly after loading unbounded data.",
             "schema": [
                 {
                     "title": "Bounding Box",
@@ -87,14 +90,13 @@
                 },
                 {
                     "title": "GeoJSON",
-                    "description": "Deprecated in favor of ``load_geojson()``. Limits the data cube to the bounding box of the given geometries. For raster data, all pixels inside the bounding box that do not intersect with any of the polygons will be set to no data (`null`).\n\nThe GeoJSON type `GeometryCollection` is not supported. Empty geometries are ignored.",
+                    "description": "Limits the data cube to the bounding box of the given geometries. For raster data, all pixels inside the bounding box that do not intersect with any of the polygons will be set to no data (`null`).\n\nThe GeoJSON type `GeometryCollection` is not supported. Empty geometries are ignored.",
                     "type": "object",
-                    "subtype": "geojson",
-                    "deprecated": true
+                    "subtype": "geojson"
                 },
                 {
                     "title": "Vector data cube",
-                    "description": "Limits the data cube to the bounding box of the given geometries in the vector data cube. For raster data, all pixels inside the bounding box that do not intersect with any of the polygons will be set to no data (`null`). Empty geometries are ignored.",
+                    "description": "Limits the data cube to the bounding box of the given geometries in the vector data cube. All pixels inside the bounding box that do not intersect with any of the polygons will be set to no data (`null`). Empty geometries are ignored.",
                     "type": "object",
                     "subtype": "datacube",
                     "dimensions": [
@@ -108,11 +110,13 @@
                     "description": "Don't filter spatially. All data is included in the data cube.",
                     "type": "null"
                 }
-            ]
+            ],
+            "default": null,
+            "optional": true
         },
         {
             "name": "temporal_extent",
-            "description": "Limits the data to load from the collection to the specified left-closed temporal interval. Applies to all temporal dimensions. The interval has to be specified as an array with exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified time instant is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified time instant is **excluded** from the interval.\n\nThe second element must always be greater/later than the first element. Otherwise, a `TemporalExtentEmpty` exception is thrown.\n\nAlso supports unbounded intervals by setting one of the boundaries to `null`, but never both.\n\nSet this parameter to `null` to set no limit for the temporal extent. Be careful with this when loading large datasets! It is recommended to use this parameter instead of using ``filter_temporal()`` directly after loading unbounded data.",
+            "description": "Limits the data to load to the specified left-closed temporal interval. Applies to all temporal dimensions. The interval has to be specified as an array with exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe second element must always be greater/later than the first element. Otherwise, a `TemporalExtentEmpty` exception is thrown.\n\nAlso supports open intervals by setting one of the boundaries to `null`, but never both.\n\nSet this parameter to `null` to set no limit for the temporal extent. Be careful with this when loading large datasets! It is recommended to use this parameter instead of using ``filter_temporal()`` directly after loading unbounded data.",
             "schema": [
                 {
                     "type": "array",
@@ -155,7 +159,9 @@
                     "description": "Don't filter temporally. All data is included in the data cube.",
                     "type": "null"
                 }
-            ]
+            ],
+            "default": null,
+            "optional": true
         },
         {
             "name": "bands",
@@ -180,7 +186,7 @@
         },
         {
             "name": "properties",
-            "description": "Limits the data by metadata properties to include only data in the data cube which all given conditions return `true` for (AND operation).\n\nSpecify key-value-pairs with the key being the name of the metadata property, which can be retrieved with the openEO Data Discovery for Collections. The value must be a condition (user-defined process) to be evaluated against the collection metadata, see the example.",
+            "description": "Limits the data by metadata properties to include only data in the data cube which all given conditions return `true` for (AND operation).\n\nSpecify key-value-pairs with the key being the name of the metadata property, which can be retrieved with the openEO Data Discovery for Collections. The value must be a condition (user-defined process) to be evaluated against a STAC API. This parameter is not supported for static STAC.",
             "schema": [
                 {
                     "type": "object",
@@ -218,25 +224,23 @@
         }
     ],
     "returns": {
-        "description": "A data cube for further processing. The dimensions and dimension properties (name, type, labels, reference system and resolution) correspond to the collection's metadata, but the dimension labels are restricted as specified in the parameters.",
+        "description": "A data cube for further processing.",
         "schema": {
             "type": "object",
             "subtype": "datacube"
         }
     },
-    "exceptions": {
-        "NoDataAvailable": {
-            "message": "There is no data available for the given extents."
-        },
-        "TemporalExtentEmpty": {
-            "message": "The temporal extent is empty. The second instant in time must always be greater/later than the first instant in time."
-        }
-    },
     "examples": [
         {
-            "description": "Loading `Sentinel-2B` data from a `Sentinel-2` collection for 2018, but only with cloud cover between 0 and 50%.",
+            "title": "Load from a static STAC / batch job result",
             "arguments": {
-                "id": "Sentinel-2",
+                "url": "https://example.com/api/v1.0/jobs/123/results"
+            }
+        },
+        {
+            "title": "Load from a STAC API",
+            "arguments": {
+                "url": "https://example.com/collections/SENTINEL2",
                 "spatial_extent": {
                     "west": 16.1,
                     "east": 16.6,
@@ -282,6 +286,14 @@
             }
         }
     ],
+    "exceptions": {
+        "NoDataAvailable": {
+            "message": "There is no data available for the given extents."
+        },
+        "TemporalExtentEmpty": {
+            "message": "The temporal extent is empty. The second instant in time must always be greater/later than the first instant in time."
+        }
+    },
     "links": [
         {
             "href": "https://openeo.org/documentation/1.0/datacubes.html",

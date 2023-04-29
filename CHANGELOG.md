@@ -9,9 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New processes in proposal state:
+    - `date_between`
     - `date_difference`
     - `filter_vector`
     - `flatten_dimensions`
+    - `load_geojson`
+    - `load_url`
     - `unflatten_dimension`
     - `vector_buffer`
     - `vector_reproject`
@@ -37,9 +40,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Allow `null` as default value for units.
     - Input and Output for the `process` can either be data cubes or arrays (if one-dimensional). [#387](https://github.com/Open-EO/openeo-processes/issues/387)
 - `run_udf`: Allow all data types instead of just objects in the `context` parameter. [#376](https://github.com/Open-EO/openeo-processes/issues/376)
-- `load_collection` and `load_result`:
+- `load_collection` and `load_result`/`load_stac`:
     - Require at least one band if not set to `null`. [#372](https://github.com/Open-EO/openeo-processes/issues/372)
     - Added a `NoDataAvailable` exception
+- `aggregate_temporal`, `filter_temporal`, `load_collection` and `load_result`/`load_stac`:
+    - The temporal intervals must always be non-empty, i.e. the second instance in time must be after the first instance in time. [#331](https://github.com/Open-EO/openeo-processes/issues/331)
+    - `24` as the hour is not allowed anymore. [#331](https://github.com/Open-EO/openeo-processes/issues/331)
 - `inspect`: The parameter `message` has been moved to be the second argument. [#369](https://github.com/Open-EO/openeo-processes/issues/369)
 - `mask` and `merge_cubes`: The spatial dimensions `x` and `y` can now be resampled implicitly instead of throwing an error. [#402](https://github.com/Open-EO/openeo-processes/issues/402)
 - `save_result`: Added a more concrete `DataCubeEmpty` exception.
@@ -52,16 +58,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `sort` and `order`: The ordering of ties is not defined anymore. [#409](https://github.com/Open-EO/openeo-processes/issues/409)
 - `quantiles`: Parameter `probabilities` provided as array must be in ascending order. [#297](https://github.com/Open-EO/openeo-processes/pull/297)
 - `fit_curve` and `predict_curve`: Heavily modified specifications. `fit_curve` works on arrays instead of data cubes, `predict_curve` doesn't support gap filling anymore, clarify no-data handling, ... [#425](https://github.com/Open-EO/openeo-processes/issues/425)
+- `climatological_normal`: The `climatology_period` parameter accepts an array of integers instead of strings. [#331](https://github.com/Open-EO/openeo-processes/issues/331)
+
+### Deprecated
+
+- `aggregate_spatial`, `filter_spatial`, `load_collection`, `mask_polygon`: GeoJSON input is deprecated in favor of `load_geojson`. [#346](https://github.com/Open-EO/openeo-processes/issues/346)
 
 ### Removed
 
 - The `examples` folder has been migrated to the [openEO Community Examples](https://github.com/Open-EO/openeo-community-examples/tree/main/processes) repository.
-- `between`: Support for temporal comparison.
+- `between`: Support for temporal comparison. Use `date_between` instead. [#331](https://github.com/Open-EO/openeo-processes/issues/331)
 - Deprecated `GeometryCollections` are not supported any longer. [#389](https://github.com/Open-EO/openeo-processes/issues/389)
 - Deprecated PROJ definitions for the CRS are not supported any longer.
+- `load_result`:
+    - Renamed to `load_stac`
+    - The subtype `job-id` was removed in favor of providing a URL. [#322](https://github.com/Open-EO/openeo-processes/issues/322), [#377](https://github.com/Open-EO/openeo-processes/issues/377), [#384](https://github.com/Open-EO/openeo-processes/issues/384)
+    - GeoJSON input is not supported any longer. Use `load_geojson` instead. [#346](https://github.com/Open-EO/openeo-processes/issues/346)
 - The comparison processes `eq`, `neq`, `lt`, `lte`, `gt`, `gte` and `array_contains`:
     - Removed support for temporal comparison. Instead explicitly use `date_difference`.
     - Removed support for the input data types array and object. [#208](https://github.com/Open-EO/openeo-processes/issues/208)
+- `sort` and `order`: Removed support for time-only values. [#331](https://github.com/Open-EO/openeo-processes/issues/331)
 
 ### Fixed
 
@@ -82,6 +98,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `rename_labels`: Clarified that the `LabelsNotEnumerated` exception is thrown if `source` is empty instead of if `target` is empty. [#321](https://github.com/Open-EO/openeo-processes/issues/321)
 - `round`: Clarify that the rounding for ties applies not only for integers. [#326](https://github.com/Open-EO/openeo-processes/issues/326)
 - `save_result`: Clarified that the process always returns `true` (and otherwise throws). [#334](https://github.com/Open-EO/openeo-processes/issues/334)
+- Handling of empty geometries is clarified throughout the processes. [#404](https://github.com/Open-EO/openeo-processes/issues/404)
 
 ## [1.2.0] - 2021-12-13
 
