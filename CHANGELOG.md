@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `date_difference`
     - `filter_vector`
     - `flatten_dimensions`
+    - `load_geojson`
+    - `load_url`
     - `unflatten_dimension`
     - `vector_buffer`
     - `vector_reproject`
@@ -55,11 +57,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated the processes based on the subtypes `raster-cube` or `vector-cube` to work with the subtype `datacube` instead. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
 - `sort` and `order`: The ordering of ties is not defined anymore. [#409](https://github.com/Open-EO/openeo-processes/issues/409)
 - `quantiles`: Parameter `probabilities` provided as array must be in ascending order. [#297](https://github.com/Open-EO/openeo-processes/pull/297)
+- `fit_curve` and `predict_curve`: Heavily modified specifications. `fit_curve` works on arrays instead of data cubes, `predict_curve` doesn't support gap filling anymore, clarify no-data handling, ... [#425](https://github.com/Open-EO/openeo-processes/issues/425)
 - `climatological_normal`: The `climatology_period` parameter accepts an array of integers instead of strings. [#331](https://github.com/Open-EO/openeo-processes/issues/331)
 
 ### Deprecated
 
-- `aggregate_spatial`, `filter_spatial`, `load_collection`, `mask_polygon`: GeoJSON input is deprecated. [#346](https://github.com/Open-EO/openeo-processes/issues/346)
+- `aggregate_spatial`, `filter_spatial`, `load_collection`, `mask_polygon`: GeoJSON input is deprecated in favor of `load_geojson`. [#346](https://github.com/Open-EO/openeo-processes/issues/346)
 
 ### Removed
 
@@ -70,7 +73,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `load_result`:
     - Renamed to `load_stac`
     - The subtype `job-id` was removed in favor of providing a URL. [#322](https://github.com/Open-EO/openeo-processes/issues/322), [#377](https://github.com/Open-EO/openeo-processes/issues/377), [#384](https://github.com/Open-EO/openeo-processes/issues/384)
-    - GeoJSON input is not supported any longer. [#346](https://github.com/Open-EO/openeo-processes/issues/346)
+    - GeoJSON input is not supported any longer. Use `load_geojson` instead. [#346](https://github.com/Open-EO/openeo-processes/issues/346)
 - The comparison processes `eq`, `neq`, `lt`, `lte`, `gt`, `gte` and `array_contains`:
     - Removed support for temporal comparison. Instead explicitly use `date_difference`.
     - Removed support for the input data types array and object. [#208](https://github.com/Open-EO/openeo-processes/issues/208)

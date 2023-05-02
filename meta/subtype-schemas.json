@@ -166,7 +166,7 @@
             "type": "object",
             "subtype": "geojson",
             "title": "GeoJSON",
-            "description": "Deprecated. GeoJSON as defined by [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946.html). The GeoJSON type `GeometryCollection` is not supported.",
+            "description": "GeoJSON as defined by [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946.html). The GeoJSON type `GeometryCollection` is not supported.",
             "deprecated": true,
             "allOf": [
                 {
