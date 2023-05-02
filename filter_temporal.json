@@ -22,7 +22,7 @@
         },
         {
             "name": "extent",
-            "description": "Left-closed temporal interval, i.e. an array with exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html). Also supports open intervals by setting one of the boundaries to `null`, but never both.",
+            "description": "Left-closed temporal interval, i.e. an array with exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified time instant is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified time instant is **excluded** from the interval.\n\nThe second element must always be greater/later than the first element. Otherwise, a `TemporalExtentEmpty` exception is thrown.\n\nAlso supports unbounded intervals by setting one of the boundaries to `null`, but never both.",
             "schema": {
                 "type": "array",
                 "subtype": "temporal-interval",
@@ -33,19 +33,14 @@
                         {
                             "type": "string",
                             "format": "date-time",
-                            "subtype": "date-time"
+                            "subtype": "date-time",
+                            "description": "Date and time with a time zone."
                         },
                         {
                             "type": "string",
                             "format": "date",
-                            "subtype": "date"
-                        },
-                        {
-                            "type": "string",
-                            "subtype": "year",
-                            "minLength": 4,
-                            "maxLength": 4,
-                            "pattern": "^\\d{4}$"
+                            "subtype": "date",
+                            "description": "Date only, formatted as `YYYY-MM-DD`. The time zone is UTC. Missing time components are all 0."
                         },
                         {
                             "type": "null"
@@ -92,6 +87,9 @@
     "exceptions": {
         "DimensionNotAvailable": {
             "message": "A dimension with the specified name does not exist."
+        },
+        "TemporalExtentEmpty": {
+            "message": "The temporal extent is empty. The second instant in time must always be greater/later than the first instant in time."
         }
     },
     "links": [
@@ -99,6 +97,11 @@
             "href": "https://openeo.org/documentation/1.0/datacubes.html#filter",
             "rel": "about",
             "title": "Filters explained in the openEO documentation"
+        },
+        {
+            "href": "https://www.rfc-editor.org/rfc/rfc3339.html",
+            "rel": "about",
+            "title": "RFC3339: Details about formatting temporal strings"
         }
     ]
 }
