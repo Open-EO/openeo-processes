@@ -34,8 +34,7 @@
                     "subtype": "wkt2-definition"
                 }
             ],
-            "optional": true,
-            "default": null
+            "optional": true
         }
     ],
     "returns": {
