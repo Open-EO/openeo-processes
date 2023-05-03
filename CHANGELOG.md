@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased / Draft
 
+## [2.0.0-rc.1] - 2023-05-31
+
 ### Added
 
 - New processes in proposal state:
@@ -363,7 +365,8 @@ First version which is separated from the openEO API. Complete rework of all pro
 Older versions of the processes were released as part of the openEO API, see the corresponding changelog for more information.
 
 
-[Unreleased]: <https://github.com/Open-EO/openeo-processes/compare/1.2.0...HEAD>
+[Unreleased]: <https://github.com/Open-EO/openeo-processes/compare/2.0.0-rc.1...HEAD>
+[2.0.0-rc.1]: <https://github.com/Open-EO/openeo-processes/compare/1.2.0...2.0.0-rc.1>
 [1.2.0]: <https://github.com/Open-EO/openeo-processes/compare/1.1.0...1.2.0>
 [1.1.0]: <https://github.com/Open-EO/openeo-processes/compare/1.0.0...1.1.0>
 [1.0.0]: <https://github.com/Open-EO/openeo-processes/compare/1.0.0-rc.1...1.0.0>
