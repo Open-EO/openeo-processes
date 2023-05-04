@@ -22,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `vector_reproject`
     - `vector_to_random_points`
     - `vector_to_regular_points`
-- `add_dimension`: Added new dimension type `geometries`. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
+- `add_dimension`: Added new dimension type `geometry`. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
 
 ### Changed
 
