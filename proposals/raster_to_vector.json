@@ -32,9 +32,13 @@
                     "title": "WKT2",
                     "type": "string",
                     "subtype": "wkt2-definition"
+                },
+                {
+                    "type": null
                 }
             ],
-            "optional": true
+            "optional": true,
+            "default": null
         }
     ],
     "returns": {
