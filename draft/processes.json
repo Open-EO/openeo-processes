@@ -4412,7 +4412,7 @@
   {
     "id": "filter_bbox",
     "summary": "Spatial filter using a bounding box",
-    "description": "Limits the data cube to the specified bounding box.\n\n* For raster data cubes, the filter retains a pixel in the data cube if the point at the pixel center intersects with the bounding box (as defined in the Simple Features standard by the OGC). Alternatively, ``filter_spatial()`` can be used to filter by geometry.\n* For vector data cubes, the filter retains the geometry in the data cube if the geometry is fully within the bounding box (as defined in the Simple Features standard by the OGC). All geometries that were empty or get empty will be removed from the data cube. Alternatively, ``filter_vector()`` can be used to filter by geometry.",
+    "description": "Limits the data cube to the specified bounding box.\n\n* For raster data cubes, the filter retains a pixel in the data cube if the point at the pixel center intersects with the bounding box (as defined in the Simple Features standard by the OGC). Alternatively, ``filter_spatial()`` can be used to filter by geometry.\n* For vector data cubes, the filter retains the geometry in the data cube if the geometry is fully within the bounding box (as defined in the Simple Features standard by the OGC). All geometries that were empty or not contained fully within the bounding box will be removed from the data cube.\n\nAlternatively, ``filter_vector()`` can be used to filter by geometry.",
     "categories": [
       "cubes",
       "filter"
@@ -10219,7 +10219,7 @@
   {
     "id": "filter_vector",
     "summary": "Spatial vector filter using geometries",
-    "description": "Limits the vector data cube to the specified geometries. The process works on geometries as defined in the Simple Features standard by the OGC. All geometries that were empty or get empty will be removed from the data cube. Alternatively, use ``filter_bbox()`` to filter by bounding box.",
+    "description": "Limits the vector data cube to the specified geometries. The process works on geometries as defined in the Simple Features standard by the OGC. All geometries that were empty or become empty will be removed from the data cube. Alternatively, use ``filter_bbox()`` to filter by bounding box.",
     "categories": [
       "cubes",
       "filter",
