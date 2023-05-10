@@ -1,7 +1,7 @@
 {
     "id": "sen2like",
     "summary": "Run the Sen2like processor ",
-    "description": "The Sen2like processor generates Sentinel-2-like fused surface reflectances with higher periodicity by integrating additional compatible optical mission sensors. Currently only the L2F output level is supported. The source code is available at https://github.com/senbox-org/sen2like.",
+    "description": "The Sen2like processor generates Sentinel-2-like harmonised or fused surface reflectances with higher periodicity by integrating additional compatible optical mission sensors. The source code is available at https://github.com/senbox-org/sen2like.",
     "categories": [
         "cubes"
     ],
@@ -9,10 +9,164 @@
     "parameters": [
         {
             "name": "data",
-            "description": "The datacube for which to generate L2F data.",
+            "optional": true,
+            "description": "The datacube for which to generate L2F & L2H level data.",
             "schema": {
                 "type": "object",
                 "subtype": "raster-cube"
+            }
+        },
+        {
+            "name": "spatial_extent",
+            "optional": true,
+            "description": "Limits the data to load from the collection to the specified bounding box or polygons.\n\nThe process puts a pixel into the data cube if the point at the pixel center intersects with the bounding box or any of the polygons (as defined in the Simple Features standard by the OGC).\n\nThe GeoJSON can be one of the following feature types:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry,\n* a `FeatureCollection` containing at least one `Feature` with `Polygon` or `MultiPolygon` geometries, or\n* a `GeometryCollection` containing `Polygon` or `MultiPolygon` geometries. To maximize interoperability, `GeometryCollection` should be avoided in favour of one of the alternatives above.\n\nSet this parameter to `null` to set no limit for the spatial extent. Be careful with this when loading large datasets! It is recommended to use this parameter instead of using ``filter_bbox()`` or ``filter_spatial()`` directly after loading unbounded data.",
+            "schema": [
+                {
+                    "title": "Bounding Box",
+                    "type": "object",
+                    "subtype": "bounding-box",
+                    "required": [
+                        "west",
+                        "south",
+                        "east",
+                        "north"
+                    ],
+                    "properties": {
+                        "west": {
+                            "description": "West (lower left corner, coordinate axis 1).",
+                            "type": "number"
+                        },
+                        "south": {
+                            "description": "South (lower left corner, coordinate axis 2).",
+                            "type": "number"
+                        },
+                        "east": {
+                            "description": "East (upper right corner, coordinate axis 1).",
+                            "type": "number"
+                        },
+                        "north": {
+                            "description": "North (upper right corner, coordinate axis 2).",
+                            "type": "number"
+                        },
+                        "base": {
+                            "description": "Base (optional, lower left corner, coordinate axis 3).",
+                            "type": [
+                                "number",
+                                "null"
+                            ],
+                            "default": null
+                        },
+                        "height": {
+                            "description": "Height (optional, upper right corner, coordinate axis 3).",
+                            "type": [
+                                "number",
+                                "null"
+                            ],
+                            "default": null
+                        },
+                        "crs": {
+                            "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/), [WKT2 (ISO 19162) string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html) or [PROJ definition (deprecated)](https://proj.org/usage/quickstart.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
+                            "anyOf": [
+                                {
+                                    "title": "EPSG Code",
+                                    "type": "integer",
+                                    "subtype": "epsg-code",
+                                    "minimum": 1000,
+                                    "examples": [
+                                        3857
+                                    ]
+                                },
+                                {
+                                    "title": "WKT2",
+                                    "type": "string",
+                                    "subtype": "wkt2-definition"
+                                },
+                                {
+                                    "title": "PROJ definition",
+                                    "type": "string",
+                                    "subtype": "proj-definition",
+                                    "deprecated": true
+                                }
+                            ],
+                            "default": 4326
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "temporal_extent",
+            "optional": true,
+            "description": "Limits the data to load from the collection to the specified left-closed temporal interval. Applies to all temporal dimensions. The interval has to be specified as an array with exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified instance in time is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified instance in time is **excluded** from the interval.\n\nThe specified temporal strings follow [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html). Also supports open intervals by setting one of the boundaries to `null`, but never both.\n\nSet this parameter to `null` to set no limit for the temporal extent. Be careful with this when loading large datasets! It is recommended to use this parameter instead of using ``filter_temporal()`` directly after loading unbounded data.",
+            "schema": [
+                {
+                    "type": "array",
+                    "subtype": "temporal-interval",
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time",
+                                "subtype": "date-time"
+                            },
+                            {
+                                "type": "string",
+                                "format": "date",
+                                "subtype": "date"
+                            },
+                            {
+                                "type": "string",
+                                "subtype": "year",
+                                "minLength": 4,
+                                "maxLength": 4,
+                                "pattern": "^\\d{4}$"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "examples": [
+                        [
+                            "2015-01-01T00:00:00Z",
+                            "2016-01-01T00:00:00Z"
+                        ],
+                        [
+                            "2015-01-01",
+                            "2016-01-01"
+                        ]
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Per default the target_product is set to 'L2F' to generate the fused sen2like product. Set to 'L2H' to generate the harmonised product.",
+            "name": "target_product",
+            "optional": true,
+            "default": "L2F",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "description": "Per default the target_resolution is 10 m for the bands 'B02', 'B03', 'B04'. Set to 20 to retrieve 20 m resolution results of 'B8A', 'B11', 'B12' or to 60 for 'B01'.",
+            "name": "target_resolution",
+            "optional": true,
+            "default": 10,
+            "schema": {
+                "type": "number"
+            }
+        },
+        {
+            "description": "Proprietary options for the sen2like processing.",
+            "name": "options",
+            "optional": true,
+            "default": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": false
             }
         }
     ],
