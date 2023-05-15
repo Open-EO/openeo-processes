@@ -1,0 +1,42 @@
+{
+    "id": "predict_ml_model",
+    "summary": "Predict values values using a ML model",
+    "description": "Applies a machine learning model to an array and predicts a value/class for it.",
+    "categories": [
+        "machine learning",
+        "reducer"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "An array of numbers.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "model",
+            "description": "A ML model that can be trained with one of the ML processes such as ``fit_class_random_forest()``.",
+            "schema": {
+                "type": "object",
+                "subtype": "ml-model"
+            }
+        }
+    ],
+    "returns": {
+        "description": "The predicted value. Returns `null` if any of the given values in the array is a no-data value.",
+        "schema": {
+            "type": [
+                "number",
+                "null"
+            ]
+        }
+    }
+}

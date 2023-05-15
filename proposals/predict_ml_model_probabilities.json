@@ -1,7 +1,7 @@
 {
-    "id": "predict_random_forest",
-    "summary": "Predict values based on a Random Forest model",
-    "description": "Applies a Random Forest machine learning model to an array and predict a value for it.",
+    "id": "predict_ml_model_probabilities",
+    "summary": "Predict class probabilities using a ML model",
+    "description": "Applies a machine learning model to an array and predicts (class) probabilities for them.",
     "categories": [
         "machine learning",
         "reducer"
@@ -23,7 +23,7 @@
         },
         {
             "name": "model",
-            "description": "A model object that can be trained with the processes ``fit_regr_random_forest()`` (regression) and ``fit_class_random_forest()`` (classification).",
+            "description": "A ML model that can be trained with one of the ML processes such as ``fit_regr_random_forest()``.",
             "schema": {
                 "type": "object",
                 "subtype": "ml-model"
@@ -31,12 +31,15 @@
         }
     ],
     "returns": {
-        "description": "The predicted value. Returns `null` if any of the given values in the array is a no-data value.",
+        "description": "The predicted (class) probabilities. Returns `null` if any of the given values in the array is a no-data value.",
         "schema": {
-            "type": [
-                "number",
-                "null"
-            ]
+            "type": "array",
+            "items": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            }
         }
     }
 }
