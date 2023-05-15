@@ -1,0 +1,45 @@
+{
+    "id": "predict_dl_model",
+    "summary": "Predict values values using a DL model",
+    "description": "Applies a machine learning model to a data cube and predicts a values/classes for it. This process can be used as process in ``apply_neighborhood()`` to specify the patch size and overlap.",
+    "categories": [
+        "deep learning",
+        "machine learning"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The input data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube"
+            }
+        },
+        {
+            "name": "model",
+            "description": "A DL model that can be trained with one of the DL `fit_*` processes.",
+            "schema": {
+                "type": "object",
+                "subtype": "ml-model"
+            }
+        },
+        {
+            "name": "dimensions",
+            "description": "Dimensions to remove.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            }
+        }
+    ],
+    "returns": {
+        "description": "The data cube with predicted value.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube"
+        }
+    }
+}
