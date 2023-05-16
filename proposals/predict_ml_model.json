@@ -1,24 +1,18 @@
 {
     "id": "predict_ml_model",
     "summary": "Predict values values using a ML model",
-    "description": "Applies a machine learning model to an array and predicts a value/class for it.",
+    "description": "Applies a machine learning model to a datacube and predicts values/classes for it.",
     "categories": [
-        "machine learning",
-        "reducer"
+        "machine learning"
     ],
     "experimental": true,
     "parameters": [
         {
             "name": "data",
-            "description": "An array of numbers.",
+            "description": "The input data cube.",
             "schema": {
-                "type": "array",
-                "items": {
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                }
+                "type": "object",
+                "subtype": "datacube"
             }
         },
         {
@@ -28,15 +22,25 @@
                 "type": "object",
                 "subtype": "ml-model"
             }
+        },
+        {
+            "name": "dimension",
+            "description": "The name of the dimension that the model applies to. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+            "schema": {
+                "type": "string"
+            }
         }
     ],
     "returns": {
-        "description": "The predicted value. Returns `null` if any of the given values in the array is a no-data value.",
+        "description": "The data cube with the predicted values. It removes the specified dimension.",
         "schema": {
-            "type": [
-                "number",
-                "null"
-            ]
+            "type": "object",
+            "subtype": "datacube"
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
         }
     }
 }

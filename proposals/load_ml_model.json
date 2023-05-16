@@ -20,13 +20,6 @@
                     "pattern": "^https?://"
                 },
                 {
-                    "title": "Batch Job ID",
-                    "description": "Loading a model by batch job ID is possible only if a single model has been saved by the job. Otherwise, you have to load a specific model from a batch job by URL.",
-                    "type": "string",
-                    "subtype": "job-id",
-                    "pattern": "^[\\w\\-\\.~]+$"
-                },
-                {
                     "title": "User-uploaded File",
                     "type": "string",
                     "subtype": "file-path",

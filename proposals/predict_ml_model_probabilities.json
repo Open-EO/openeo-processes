@@ -1,24 +1,18 @@
 {
     "id": "predict_ml_model_probabilities",
     "summary": "Predict class probabilities using a ML model",
-    "description": "Applies a machine learning model to an array and predicts (class) probabilities for them.",
+    "description": "Applies a machine learning model to a data cube and predicts (class) probabilities.",
     "categories": [
-        "machine learning",
-        "reducer"
+        "machine learning"
     ],
     "experimental": true,
     "parameters": [
         {
             "name": "data",
-            "description": "An array of numbers.",
+            "description": "The input data cube.",
             "schema": {
-                "type": "array",
-                "items": {
-                    "type": [
-                        "number",
-                        "null"
-                    ]
-                }
+                "type": "object",
+                "subtype": "datacube"
             }
         },
         {
@@ -28,18 +22,25 @@
                 "type": "object",
                 "subtype": "ml-model"
             }
+        },
+        {
+            "name": "dimension",
+            "description": "The name of the dimension that the model applies to. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+            "schema": {
+                "type": "string"
+            }
         }
     ],
     "returns": {
-        "description": "The predicted (class) probabilities. Returns `null` if any of the given values in the array is a no-data value.",
+        "description": "A data cube with the predicted (class) probabilities. It removes the specified dimension and adds a dimension for the class probabilities. It has the name `probabilities` and is of type `other`.",
         "schema": {
-            "type": "array",
-            "items": {
-                "type": [
-                    "number",
-                    "null"
-                ]
-            }
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "other"
+                }
+            ]
         }
     }
 }
