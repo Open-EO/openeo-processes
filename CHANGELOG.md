@@ -18,7 +18,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `ml_fit_class_random_forest`
     - `ml_fit_regr_random_forest`
     - `ml_predict`
-    - `ml_predict_probabilities`
     - `save_ml_model`
     - `unflatten_dimension`
     - `vector_buffer`
