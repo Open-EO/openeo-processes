@@ -1,5 +1,5 @@
 {
-    "id": "fit_class_random_forest",
+    "id": "ml_fit_class_random_forest",
     "summary": "Train a random forest classification model",
     "description": "Executes the fit of a random forest classification based on training data. The process does not include a separate split of the data in test, validation and training data. The Random Forest classification model is based on the approach by Breiman (2001).",
     "categories": [

@@ -1,5 +1,5 @@
 {
-    "id": "predict_ml_model",
+    "id": "ml_predict",
     "summary": "Predict classification or regression values using ML",
     "description": "Applies a machine learning model to a data cube of input features and predicts output values or classes for it.",
     "categories": [
@@ -17,7 +17,7 @@
         },
         {
             "name": "model",
-            "description": "A ML model that was trained with one of the ML training processes such as ``fit_class_random_forest()``.",
+            "description": "A ML model that was trained with one of the ML training processes such as ``ml_fit_class_random_forest()``.",
             "schema": {
                 "type": "object",
                 "subtype": "ml-model"

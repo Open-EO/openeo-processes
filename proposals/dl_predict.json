@@ -1,6 +1,6 @@
 {
-    "id": "predict_dl_model",
-    "summary": "Predict values values using DL",
+    "id": "dl_predict",
+    "summary": "Predict classification or regression values using DL",
     "description": "Applies a machine learning model to a data cube of input features and predicts output values or classes for it. This process can be used as process in ``apply_neighborhood()`` to specify the patch size and overlap.",
     "categories": [
         "deep learning",
