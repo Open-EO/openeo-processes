@@ -9,7 +9,7 @@
     "experimental": true,
     "parameters": [
         {
-            "name": "id",
+            "name": "uri",
             "description": "The STAC Item to load the machine learning model from. The STAC Item must implement the `ml-model` extension.",
             "schema": [
                 {
@@ -29,7 +29,7 @@
         }
     ],
     "returns": {
-        "description": "A machine learning model to be used with machine learning processes such as ``ml_predict()`` or ``ml_predict_probabilities()``.",
+        "description": "A machine learning model to be used with machine learning processes such as ``ml_predict()``.",
         "schema": {
             "type": "object",
             "subtype": "ml-model"
