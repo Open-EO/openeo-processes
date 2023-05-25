@@ -1,7 +1,7 @@
 {
     "id": "predict_curve",
     "summary": "Predict values",
-    "description": "Predict values using a model function and pre-computed parameters. The process is primarily intended to compute values for new labels, but it can also fill gaps where existing labels contain no-data (`null`) values.",
+    "description": "Predict values using a model function and pre-computed parameters. The process is intended to compute values for new labels.",
     "categories": [
         "cubes",
         "math"
@@ -9,19 +9,11 @@
     "experimental": true,
     "parameters": [
         {
-            "name": "data",
-            "description": "A data cube to predict values for.",
-            "schema": {
-                "type": "object",
-                "subtype": "raster-cube"
-            }
-        },
-        {
             "name": "parameters",
-            "description": "A data cube with optimal values from a result of e.g. ``fit_curve()``.",
+            "description": "A data cube with optimal values, e.g. computed by the process ``fit_curve()``.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube"
             }
         },
         {
@@ -60,7 +52,7 @@
         },
         {
             "name": "dimension",
-            "description": "The name of the dimension for predictions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+            "description": "The name of the dimension for predictions.",
             "schema": {
                 "type": "string"
             }
@@ -98,15 +90,10 @@
         }
     ],
     "returns": {
-        "description": "A data cube with the predicted values.",
+        "description": "A data cube with the predicted values with the provided dimension `dimension` having as many labels as provided through `labels`.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
-        }
-    },
-    "exceptions": {
-        "DimensionNotAvailable": {
-            "message": "A dimension with the specified name does not exist."
+            "subtype": "datacube"
         }
     }
 }

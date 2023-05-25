@@ -160,7 +160,7 @@ For the data types boolean, numbers, strings and null it is recommended to log t
 
 #### Arrays
 
-It is recommended to summarize arrays with as follows:
+It is recommended to summarize arrays as follows:
 ```js
 {
 	"data": [3,1,6,4,8], // Return a reasonable excerpt of the data, e.g. the first 5 or 10 elements
@@ -207,7 +207,7 @@ The top-level object and/or each dimension can be enhanced with additional stats
 			"values": ["NDVI"]
 		}
 	},
-	// optional: Return additional statstics for the data cube if possible, ideally use the corresponsing openEO process names as keys
+	// optional: Return additional data or statstics for the data cube if possible (see also the chapter for "Arrays" above).
 	"min": -1,
 	"max": 1
 }

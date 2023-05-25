@@ -4,23 +4,41 @@
     "description": "Resamples the spatial dimensions (x,y) from a source data cube to align with the corresponding dimensions of the given target data cube. Returns a new data cube with the resampled dimensions.\n\nTo resample a data cube to a specific resolution or projection regardless of an existing target data cube, refer to ``resample_spatial()``.",
     "categories": [
         "cubes",
-        "aggregate & resample"
+        "reproject"
     ],
     "parameters": [
         {
             "name": "data",
-            "description": "A data cube.",
+            "description": "A raster data cube.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    }
+                ]
             }
         },
         {
             "name": "target",
-            "description": "A data cube that describes the spatial target resolution.",
+            "description": "A raster data cube that describes the spatial target resolution.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    }
+                ]
             }
         },
         {
@@ -50,10 +68,19 @@
         }
     ],
     "returns": {
-        "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except for the resolution and dimension labels of the spatial dimensions.",
+        "description": "A raster data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except for the resolution and dimension labels of the spatial dimensions.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "spatial",
+                    "axis": [
+                        "x",
+                        "y"
+                    ]
+                }
+            ]
         }
     },
     "links": [
