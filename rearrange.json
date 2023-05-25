@@ -1,7 +1,7 @@
 {
     "id": "rearrange",
-    "summary": "Rearrange an array based on a permutation",
-    "description": "Rearranges an array based on a permutation, i.e. a ranked list of element positions in the original list. The positions must be zero-based.",
+    "summary": "Sort an array based on a permutation",
+    "description": "Rearranges an array based on a ranked list of element positions in the original list (i.e., a permutation). The positions must be zero-based. The process ``order()`` can compute such a permutation.",
     "categories": [
         "arrays",
         "sorting"

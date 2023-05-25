@@ -11,7 +11,7 @@
             "description": "A data cube to add the dimension to.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube"
             }
         },
         {
@@ -39,9 +39,10 @@
             "schema": {
                 "type": "string",
                 "enum": [
+                    "bands",
+                    "geometry",
                     "spatial",
                     "temporal",
-                    "bands",
                     "other"
                 ]
             },
@@ -53,7 +54,7 @@
         "description": "The data cube with a newly added dimension. The new dimension has exactly one dimension label. All other dimensions remain unchanged.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube"
         }
     },
     "exceptions": {

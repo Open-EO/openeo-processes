@@ -11,7 +11,7 @@
             "description": "The data cube to drop a dimension from.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube"
             }
         },
         {
@@ -26,7 +26,7 @@
         "description": "A data cube without the specified dimension. The number of dimensions decreases by one, but the dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube"
         }
     },
     "exceptions": {
