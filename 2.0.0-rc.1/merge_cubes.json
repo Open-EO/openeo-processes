@@ -1,0 +1,103 @@
+{
+    "id": "merge_cubes",
+    "summary": "Merge two data cubes",
+    "description": "The process merges two 'compatible' data cubes.\n\nThe data cubes have to be compatible, which means that they must share a common subset of equal dimensions. To conveniently get to such a subset of equal dimensions, the process tries to align the horizontal spatial dimensions (axes `x` and `y`) implicitly with ``resample_cube_spatial()`` if required. `cube1` is the target data cube for resampling and the default parameters of ``resample_cube_spatial()`` apply. The equality for geometries follows the definition in the Simple Features standard by the OGC.\n\nAll dimensions share the same properties, such as name, type, reference system, and resolution. Dimensions can have disjoint or overlapping labels. If there is any overlap between the dimension labels, the parameter `overlap_resolver` must be specified to combine the two values for these overlapping labels. A merge operation without overlap should be reversible with (a set of) filter operations for each of the two cubes, if no implicit resampling was applied.\n\nIt is not possible to merge a vector and a raster data cube. Merging vector data cubes with different base geometry types (points, lines/line strings, polygons) is not possible and throws the `IncompatibleGeometryTypes` exception. The base geometry types can be merged with their corresponding multi geometry types.\n\nAfter the merge, the dimensions with a natural/inherent label order (with a reference system this is each spatial and temporal dimensions) still have all dimension labels sorted. For other dimensions without inherent order, including bands, the dimension labels keep the order in which they are present in the original data cubes, and the dimension labels of `cube2` get appended to the dimension labels of `cube1`.\n\n**Examples for merging two data cubes:**\n\n1. Data cubes with the dimensions (`x`, `y`, `t`, `bands`) have the same dimension labels in `x`, `y` and `t`, but the labels for the dimension `bands` are `B1` and `B2` for the base data cube and `B3` and `B4` for the other. An overlap resolver is *not needed*. The merged data cube has the dimensions `x`, `y`, `t`, `bands`, and the dimension `bands` has four dimension labels: `B1`, `B2`, `B3`, `B4`.\n2. Data cubes with the dimensions (`x`, `y`, `t`, `bands`) have the same dimension labels in `x`, `y` and `t`, but the labels for the dimension `bands` are `B1` and `B2` for the base data cube and `B2` and `B3` for the other. An overlap resolver is *required* to resolve overlap in band `B2`. The merged data cube has the dimensions `x`, `y`, `t` and `bands` and the dimension `bands` has three dimension labels: `B1`, `B2`, `B3`.\n3. Data cubes with the dimensions (`x`, `y`, `t`) have the same dimension labels in `x`, `y` and `t`. There are two options:\n   1. Keep the overlapping values separately in the merged data cube: An overlap resolver is *not needed*, but for each data cube you need to add a new dimension using ``add_dimension()``. The new dimensions must be equal, except that the labels for the new dimensions must differ. The merged data cube has the same dimensions and labels as the original data cubes, plus the dimension added with ``add_dimension()``, which has the two dimension labels after the merge.\n   2. Combine the overlapping values into a single value: An overlap resolver is *required* to resolve the overlap for all values. The merged data cube has the same dimensions and labels as the original data cubes, but all values have been processed by the overlap resolver.\n4. A data cube with dimensions (`x`, `y`, `t` / `bands`) or (`x`, `y`, `t`, `bands`) and another data cube with dimensions (`x`, `y`) have the same dimension labels in `x` and `y`. Merging them will join dimensions `x` and `y`, so the lower dimension cube is merged with each time step and band available in the higher dimensional cube. A use case for this is applying a digital elevation model to a spatio-temporal data cube. An overlap resolver is *required* to resolve the overlap for all pixels.",
+    "categories": [
+        "cubes"
+    ],
+    "parameters": [
+        {
+            "name": "cube1",
+            "description": "The base data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube"
+            }
+        },
+        {
+            "name": "cube2",
+            "description": "The other data cube to be merged with the base data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube"
+            }
+        },
+        {
+            "name": "overlap_resolver",
+            "description": "A reduction operator that resolves the conflict if the data overlaps. The reducer must return a value of the same data type as the input values are. The reduction operator may be a single process such as ``multiply()`` or consist of multiple sub-processes. `null` (the default) can be specified if no overlap resolver is required.",
+            "schema": {
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": [
+                    {
+                        "name": "x",
+                        "description": "The overlapping value from the base data cube `cube1`.",
+                        "schema": {
+                            "description": "Any data type."
+                        }
+                    },
+                    {
+                        "name": "y",
+                        "description": "The overlapping value from the other data cube `cube2`.",
+                        "schema": {
+                            "description": "Any data type."
+                        }
+                    },
+                    {
+                        "name": "context",
+                        "description": "Additional data passed by the user.",
+                        "schema": {
+                            "description": "Any data type."
+                        },
+                        "optional": true,
+                        "default": null
+                    }
+                ],
+                "returns": {
+                    "description": "The value to be set in the merged data cube.",
+                    "schema": {
+                        "description": "Any data type."
+                    }
+                }
+            },
+            "default": null,
+            "optional": true
+        },
+        {
+            "name": "context",
+            "description": "Additional data to be passed to the overlap resolver.",
+            "schema": {
+                "description": "Any data type."
+            },
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "The merged data cube. See the process description for details regarding the dimensions and dimension properties (name, type, labels, reference system and resolution).",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube"
+        }
+    },
+    "exceptions": {
+        "OverlapResolverMissing": {
+            "message": "Overlapping data cubes, but no overlap resolver has been specified."
+        },
+        "IncompatibleGeometryTypes": {
+            "message": "The geometry types are not compatible and can't be merged."
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://en.wikipedia.org/wiki/Reduction_Operator",
+            "title": "Background information on reduction operators (binary reducers) by Wikipedia"
+        },
+        {
+            "href": "http://www.opengeospatial.org/standards/sfa",
+            "rel": "about",
+            "title": "Simple Features standard by the OGC"
+        }
+    ]
+}

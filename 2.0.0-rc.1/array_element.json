@@ -1,0 +1,106 @@
+{
+    "id": "array_element",
+    "summary": "Get an element from an array",
+    "description": "Gives the element with the specified index or label from the array.\n\nEither the parameter `index` or `label` must be specified, otherwise the `ArrayElementParameterMissing` exception is thrown. If both parameters are set the `ArrayElementParameterConflict` exception is thrown.",
+    "categories": [
+        "arrays",
+        "reducer"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "An array.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
+            }
+        },
+        {
+            "name": "index",
+            "description": "The zero-based index of the element to retrieve.",
+            "schema": {
+                "type": "integer",
+                "minimum": 0
+            },
+            "optional": true
+        },
+        {
+            "name": "label",
+            "description": "The label of the element to retrieve. Throws an `ArrayNotLabeled` exception, if the given array is not a labeled array and this parameter is set.",
+            "schema": [
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "string"
+                }
+            ],
+            "optional": true
+        },
+        {
+            "name": "return_nodata",
+            "description": "By default this process throws an `ArrayElementNotAvailable` exception if the index or label is invalid. If you want to return `null` instead, set this flag to `true`.",
+            "schema": {
+                "type": "boolean"
+            },
+            "default": false,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "The value of the requested element.",
+        "schema": {
+            "description": "Any data type is allowed."
+        }
+    },
+    "exceptions": {
+        "ArrayElementNotAvailable": {
+            "message": "The array has no element with the specified index or label."
+        },
+        "ArrayElementParameterMissing": {
+            "message": "The process `array_element` requires either the `index` or `labels` parameter to be set."
+        },
+        "ArrayElementParameterConflict": {
+            "message": "The process `array_element` only allows that either the `index` or the `labels` parameter is set."
+        },
+        "ArrayNotLabeled": {
+            "message": "The array is not a labeled array, but the `label` parameter is set. Use the `index` instead."
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "data": [
+                    9,
+                    8,
+                    7,
+                    6,
+                    5
+                ],
+                "index": 2
+            },
+            "returns": 7
+        },
+        {
+            "arguments": {
+                "data": [
+                    "A",
+                    "B",
+                    "C"
+                ],
+                "index": 0
+            },
+            "returns": "A"
+        },
+        {
+            "arguments": {
+                "data": [],
+                "index": 0,
+                "return_nodata": true
+            },
+            "returns": null
+        }
+    ]
+}

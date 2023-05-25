@@ -1,0 +1,136 @@
+{
+    "id": "aggregate_spatial",
+    "summary": "Zonal statistics for geometries",
+    "description": "Aggregates statistics for one or more geometries (e.g. zonal statistics for polygons) over the spatial dimensions. The given data cube can have multiple additional dimensions and for all these dimensions results will be computed individually.\n\nAn 'unbounded' aggregation over the full extent of the horizontal spatial dimensions can be computed with the process ``reduce_spatial()``.\n\nThis process passes a list of values to the reducer. The list of values has an undefined order, therefore processes such as ``last()`` and ``first()`` that depend on the order of the values will lead to unpredictable results.",
+    "categories": [
+        "cubes",
+        "aggregate"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A raster data cube with at least two spatial dimensions.\n\nThe data cube implicitly gets restricted to the bounds of the geometries as if ``filter_spatial()`` would have been used with the same values for the corresponding parameters immediately before this process.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "name": "geometries",
+            "description": "Geometries for which the aggregation will be computed. Feature properties are preserved for vector data cubes and all GeoJSON Features.\n\nOne value will be computed per label in the dimension of type `geometries`, GeoJSON `Feature` or `Geometry`. For a `FeatureCollection` multiple values will be computed, one value per contained `Feature`. No values will be computed for empty geometries. For example, a single value will be computed for a `MultiPolygon`, but two values will be computed for a `FeatureCollection` containing two polygons.\n\n- For **polygons**, the process considers all pixels for which the point at the pixel center intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n- For **points**, the process considers the closest pixel center.\n- For **lines** (line strings), the process considers all the pixels whose centers are closest to at least one point on the line.\n\nThus, pixels may be part of multiple geometries and be part of multiple aggregations. No operation is applied to geometries that are outside of the bounds of the data.",
+            "schema": [
+                {
+                    "title": "Vector Data Cube",
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometry"
+                        }
+                    ]
+                },
+                {
+                    "title": "GeoJSON",
+                    "type": "object",
+                    "subtype": "geojson",
+                    "description": "Deprecated in favor of ``load_geojson()``. The GeoJSON type `GeometryCollection` is not supported.",
+                    "deprecated": true
+                }
+            ]
+        },
+        {
+            "name": "reducer",
+            "description": "A reducer to be applied on all values of each geometry. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes.",
+            "schema": {
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "description": "An array with elements of any type.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "description": "Any data type."
+                            }
+                        }
+                    },
+                    {
+                        "name": "context",
+                        "description": "Additional data passed by the user.",
+                        "schema": {
+                            "description": "Any data type."
+                        },
+                        "optional": true,
+                        "default": null
+                    }
+                ],
+                "returns": {
+                    "description": "The value to be set in the vector data cube.",
+                    "schema": {
+                        "description": "Any data type."
+                    }
+                }
+            }
+        },
+        {
+            "name": "target_dimension",
+            "description": "By default (which is `null`), the process only computes the results and doesn't add a new dimension.\n\nIf this parameter contains a new dimension name, the computation also stores information about the total count of pixels (valid + invalid pixels) and the number of valid pixels (see ``is_valid()``) for each computed value. These values are added as a new dimension. The new dimension of type `other` has the dimension labels `value`, `total_count` and `valid_count`.\n\nFails with a `TargetDimensionExists` exception if a dimension with the specified name exists.",
+            "schema": {
+                "type": [
+                    "string",
+                    "null"
+                ]
+            },
+            "default": null,
+            "optional": true
+        },
+        {
+            "name": "context",
+            "description": "Additional data to be passed to the reducer.",
+            "schema": {
+                "description": "Any data type."
+            },
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "A vector data cube with the computed results. Empty geometries still exist but without any aggregated values (i.e. no-data). The spatial dimensions are replaced by a dimension of type 'geometries' and if `target_dimension` is not `null`, a new dimension is added.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "geometry"
+                }
+            ]
+        }
+    },
+    "exceptions": {
+        "TargetDimensionExists": {
+            "message": "A dimension with the specified target dimension name already exists."
+        }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#aggregate",
+            "rel": "about",
+            "title": "Aggregation explained in the openEO documentation"
+        },
+        {
+            "href": "http://www.opengeospatial.org/standards/sfa",
+            "rel": "about",
+            "title": "Simple Features standard by the OGC"
+        }
+    ]
+}

@@ -1,0 +1,147 @@
+{
+    "id": "median",
+    "summary": "Statistical median",
+    "description": "The statistical median of an array of numbers is the value separating the higher half from the lower half of the data.\n\nAn array without non-`null` elements resolves always with `null`.\n\n**Remarks:**\n\n* For symmetric arrays, the result is equal to the ``mean()``.\n* The median can also be calculated by computing the ``quantiles()`` with a probability of *0.5*.",
+    "categories": [
+        "math > statistics",
+        "reducer"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "An array of numbers.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "ignore_nodata",
+            "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is returned if any value is such a value.",
+            "schema": {
+                "type": "boolean"
+            },
+            "default": true,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "The computed statistical median.",
+        "schema": {
+            "type": [
+                "number",
+                "null"
+            ]
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    3,
+                    3,
+                    6,
+                    7,
+                    8,
+                    9
+                ]
+            },
+            "returns": 6
+        },
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    8,
+                    9
+                ]
+            },
+            "returns": 4.5
+        },
+        {
+            "arguments": {
+                "data": [
+                    -1,
+                    -0.5,
+                    null,
+                    1
+                ]
+            },
+            "returns": -0.5
+        },
+        {
+            "arguments": {
+                "data": [
+                    -1,
+                    0,
+                    null,
+                    1
+                ],
+                "ignore_nodata": false
+            },
+            "returns": null
+        },
+        {
+            "description": "The input array is empty: return `null`.",
+            "arguments": {
+                "data": []
+            },
+            "returns": null
+        },
+        {
+            "description": "The input array has only `null` elements: return `null`.",
+            "arguments": {
+                "data": [
+                    null,
+                    null
+                ]
+            },
+            "returns": null
+        }
+    ],
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://mathworld.wolfram.com/StatisticalMedian.html",
+            "title": "Statistical Median explained by Wolfram MathWorld"
+        }
+    ],
+    "process_graph": {
+        "quantiles": {
+            "process_id": "quantiles",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "probabilities": [
+                    0.5
+                ],
+                "ignore_nodata": {
+                    "from_parameter": "ignore_nodata"
+                }
+            }
+        },
+        "array_element": {
+            "process_id": "array_element",
+            "arguments": {
+                "data": {
+                    "from_node": "quantiles"
+                },
+                "return_nodata": true,
+                "index": 0
+            },
+            "result": true
+        }
+    }
+}

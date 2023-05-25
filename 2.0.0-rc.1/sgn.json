@@ -1,0 +1,107 @@
+{
+    "id": "sgn",
+    "summary": "Signum",
+    "description": "The signum (also known as *sign*) of `x` is defined as:\n\n* *1* if *x > 0*\n* *0* if *x = 0*\n* *-1* if *x < 0*\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "categories": [
+        "math"
+    ],
+    "parameters": [
+        {
+            "name": "x",
+            "description": "A number.",
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "The computed signum value of `x`.",
+        "schema": {
+            "type": [
+                "number",
+                "null"
+            ]
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "x": -2
+            },
+            "returns": -1
+        },
+        {
+            "arguments": {
+                "x": 3.5
+            },
+            "returns": 1
+        },
+        {
+            "arguments": {
+                "x": 0
+            },
+            "returns": 0
+        },
+        {
+            "arguments": {
+                "x": null
+            },
+            "returns": null
+        }
+    ],
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://mathworld.wolfram.com/Sign.html",
+            "title": "Sign explained by Wolfram MathWorld"
+        }
+    ],
+    "process_graph": {
+        "gt0": {
+            "process_id": "gt",
+            "arguments": {
+                "x": {
+                    "from_parameter": "x"
+                },
+                "y": 0
+            }
+        },
+        "lt0": {
+            "process_id": "lt",
+            "arguments": {
+                "x": {
+                    "from_parameter": "x"
+                },
+                "y": 0
+            }
+        },
+        "if_gt0": {
+            "process_id": "if",
+            "arguments": {
+                "value": {
+                    "from_node": "gt0"
+                },
+                "accept": 1,
+                "reject": {
+                    "from_parameter": "x"
+                }
+            }
+        },
+        "if_lt0": {
+            "process_id": "if",
+            "arguments": {
+                "value": {
+                    "from_node": "lt0"
+                },
+                "accept": -1,
+                "reject": {
+                    "from_node": "if_gt0"
+                }
+            },
+            "result": true
+        }
+    }
+}

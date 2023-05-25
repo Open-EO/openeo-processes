@@ -1,0 +1,98 @@
+{
+    "id": "filter_bands",
+    "summary": "Filter the bands by names",
+    "description": "Filters the bands in the data cube so that bands that don't match any of the criteria are dropped from the data cube. The data cube is expected to have only one dimension of type `bands`. Fails with a `DimensionMissing` exception if no such dimension exists.\n\nThe following criteria can be used to select bands:\n\n* `bands`: band name or common band name (e.g. `B01`, `B8A`, `red` or `nir`)\n* `wavelengths`: ranges of wavelengths in micrometers (μm) (e.g. 0.5 - 0.6)\n\nAll these information are exposed in the band metadata of the collection. To keep algorithms interoperable it is recommended to prefer the common band names or the wavelengths over band names that are specific to the collection and/or back-end.\n\nIf multiple criteria are specified, any of them must match and not all of them, i.e. they are combined with an OR-operation. If no criteria are specified, the `BandFilterParameterMissing` exception must be thrown.\n\n**Important:** The order of the specified array defines the order of the bands in the data cube, which can be important for subsequent processes. If multiple bands are matched by a single criterion (e.g. a range of wavelengths), they stay in the original order.",
+    "categories": [
+        "cubes",
+        "filter"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube with bands.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "bands"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "bands",
+            "description": "A list of band names. Either the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands). If the unique band name and the common name conflict, the unique band name has a higher priority.\n\nThe order of the specified array defines the order of the bands in the data cube. If multiple bands match a common name, all matched bands are included in the original order.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "subtype": "band-name"
+                }
+            },
+            "default": [],
+            "optional": true
+        },
+        {
+            "name": "wavelengths",
+            "description": "A list of sub-lists with each sub-list consisting of two elements. The first element is the minimum wavelength and the second element is the maximum wavelength. Wavelengths are specified in micrometers (μm).\n\nThe order of the specified array defines the order of the bands in the data cube. If multiple bands match the wavelengths, all matched bands are included in the original order.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                        "type": "number"
+                    },
+                    "examples": [
+                        [
+                            [
+                                0.45,
+                                0.5
+                            ],
+                            [
+                                0.6,
+                                0.7
+                            ]
+                        ]
+                    ]
+                }
+            },
+            "default": [],
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "A data cube limited to a subset of its original bands. The dimensions and dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the dimension of type `bands` has less (or the same) dimension labels.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "bands"
+                }
+            ]
+        }
+    },
+    "exceptions": {
+        "BandFilterParameterMissing": {
+            "message": "The process `filter_bands` requires any of the parameters `bands`, `common_names` or `wavelengths` to be set."
+        },
+        "DimensionMissing": {
+            "message": "A band dimension is missing."
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://github.com/radiantearth/stac-spec/tree/master/extensions/eo#common-band-names",
+            "title": "List of common band names as specified by the STAC specification"
+        },
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#filter",
+            "rel": "about",
+            "title": "Filters explained in the openEO documentation"
+        }
+    ]
+}
