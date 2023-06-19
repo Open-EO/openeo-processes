@@ -1,0 +1,34 @@
+{
+    "id": "regularize_data_cube",
+    "summary": "Converts irregular data cubes into consistent datacubes in space and time.",
+    "description": "Convert irregular data cubes into consistent and complete data cubes, ensuring compatibility with machine learning and deep learning classification algorithms.\n\nThis process eliminates gaps and missing values, enabling the use of machine learning and deep learning algorithms for remote sensing data.A batch job result can be loaded by providing a reference to it.", 
+    "categories": [
+        "cubes"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube"
+            }
+        },
+        {
+            "name": "period",
+            "description": "The parameter allows you to specify the time interval between images in a data cube. The values for the period parameter follow the ISO8601 time period specification format. This format represents time intervals as P[n]Y[n]M[n]D, where Y represents years, M represents months, and D represents days. For example, if you set the period as P1M, it signifies a one-month interval, while P15D represents a fifteen-day interval.",
+            "schema": {
+                "type": "string"
+            }
+        }
+    ],
+    "returns": {
+        "description": "A regular data cube in space and time.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube"
+        }
+    }
+
+}
