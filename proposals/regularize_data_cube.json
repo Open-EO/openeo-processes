@@ -21,6 +21,74 @@
             "schema": {
                 "type": "string"
             }
+        },
+        {
+            "name": "extent",
+            "description": "A bounding box, which may include a vertical axis (see `base` and `height`).",
+            "schema": {
+                "type": "object",
+                "subtype": "bounding-box",
+                "required": [
+                    "west",
+                    "south",
+                    "east",
+                    "north"
+                ],
+                "properties": {
+                    "west": {
+                        "description": "West (lower left corner, coordinate axis 1).",
+                        "type": "number"
+                    },
+                    "south": {
+                        "description": "South (lower left corner, coordinate axis 2).",
+                        "type": "number"
+                    },
+                    "east": {
+                        "description": "East (upper right corner, coordinate axis 1).",
+                        "type": "number"
+                    },
+                    "north": {
+                        "description": "North (upper right corner, coordinate axis 2).",
+                        "type": "number"
+                    },
+                    "base": {
+                        "description": "Base (optional, lower left corner, coordinate axis 3).",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "default": null
+                    },
+                    "height": {
+                        "description": "Height (optional, upper right corner, coordinate axis 3).",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "default": null
+                    },
+                    "crs": {
+                        "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
+                        "anyOf": [
+                            {
+                                "title": "EPSG Code",
+                                "type": "integer",
+                                "subtype": "epsg-code",
+                                "minimum": 1000,
+                                "examples": [
+                                    3857
+                                ]
+                            },
+                            {
+                                "title": "WKT2",
+                                "type": "string",
+                                "subtype": "wkt2-definition"
+                            }
+                        ],
+                        "default": 4326
+                    }
+                }
+            }
         }
     ],
     "returns": {
