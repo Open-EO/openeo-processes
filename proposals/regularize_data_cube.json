@@ -1,7 +1,7 @@
 {
     "id": "regularize_data_cube",
-    "summary": "Converts irregular datacubes into consistent datacubes.",
-    "description": "Convert irregular data cubes into consistent (in space and time) and complete data cubes, ensuring compatibility with machine learning and deep learning classification algorithms.\nThis process eliminates gaps and missing values, enabling the use of machine learning and deep learning algorithms for remote sensing data.\nA batch job result can be loaded by providing a reference to it.", 
+    "summary": "Converts irregular data cubes into regular data cubes.",
+    "description": "Convert irregular data cubes into regular and complete data cubes in space and time, ensuring compatibility with machine learning and deep learning classification algorithms.\nThis process eliminates gaps and missing values, enabling the use of machine learning and deep learning algorithms for remote sensing data.\nA batch job result can be loaded by providing a reference to it.", 
     "categories": ["cubes"],
     "experimental": true,
     "parameters": [
@@ -43,7 +43,7 @@
             "default": 30
         },
         {
-            "name": "resampling-method",
+            "name": "resampling_method",
             "description": "Resampling method to use. The following options are available and are meant to align with [`gdalwarp`](https://gdal.org/programs/gdalwarp.html#cmdoption-gdalwarp-r):\n\n* `average`: average (mean) resampling, computes the weighted average of all valid pixels\n* `bilinear`: bilinear resampling\n* `cubic`: cubic resampling\n* `cubicspline`: cubic spline resampling\n* `lanczos`: Lanczos windowed sinc resampling\n* `max`: maximum resampling, selects the maximum value from all valid pixels\n* `med`: median resampling, selects the median value of all valid pixels\n* `min`: minimum resampling, selects the minimum value from all valid pixels\n* `mode`: mode resampling, selects the value which appears most often of all the sampled points\n* `near`: nearest neighbour resampling (default)\n* `q1`: first quartile resampling, selects the first quartile value of all valid pixels\n* `q3`: third quartile resampling, selects the third quartile value of all valid pixels\n* `rms` root mean square (quadratic mean) of all valid pixels\n* `sum`: compute the weighted sum of all valid pixels\n\nValid pixels are determined based on the function ``is_valid()``.",
             "schema": {
                 "type": "string",
@@ -68,7 +68,7 @@
             "optional": true
         },
         {
-            "name": "spatial-extent",
+            "name": "spatial_extent",
             "description": "A bounding box, which may include a vertical axis (see `base` and `height`).",
             "schema": {
                 "type": "object",
@@ -138,7 +138,7 @@
             "optional": true
         },
         {
-            "name": "temporal-extent",
+            "name": "temporal_extent",
             "description": "Left-closed temporal interval, i.e. an array with exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified time instant is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified time instant is **excluded** from the interval.\n\nThe second element must always be greater/later than the first element. Otherwise, a `TemporalExtentEmpty` exception is thrown.\n\nAlso supports unbounded intervals by setting one of the boundaries to `null`, but never both.",
             "schema": {
                 "type": "array",
@@ -180,7 +180,7 @@
         }
     ],
     "returns": {
-        "description": "A regular datacube in space and time.",
+        "description": "A regular data cube in space and time.",
         "schema": {
             "type": "object",
             "subtype": "datacube"
