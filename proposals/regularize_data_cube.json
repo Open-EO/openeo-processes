@@ -40,8 +40,7 @@
                     }
                 }
             ],
-            "default": 0,
-            "optional": true
+            "default": 30
         },
         {
             "name": "resampling-method",
