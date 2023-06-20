@@ -17,7 +17,7 @@
         },
         {
             "name": "period",
-            "description": "The parameter allows you to specify the time interval between images in a data cube. The values for the period parameter follow the ISO8601 time period specification format. This format represents time intervals as P[n]Y[n]M[n]D, where Y represents years, M represents months, and D represents days. For example, if you set the period as P1M, it signifies a one-month interval, while P15D represents a fifteen-day interval.",
+            "description": "The parameter allows you to specify the time interval between images in a data cube. The values for the period parameter follow the `ISO8601` time period specification format. This format represents time intervals as `P[n]Y[n]M[n]D`, where `Y` represents years, `M` represents months, and `D` represents days. For example, if you set the period as `P1M`, it signifies a one-month interval, while `P15D` represents a fifteen-day interval.",
             "schema": {
                 "type": "string"
             }
