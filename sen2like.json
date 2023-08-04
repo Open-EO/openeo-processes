@@ -168,6 +168,15 @@
                 "type": "object",
                 "additionalProperties": false
             }
+        },
+        {
+            "description": "Sen2like produces outputs following the Sentinel 2 .SAFE convention. To enable the download for these, set this to True. ",
+            "name": "export_original_files",
+            "optional": true,
+            "default": false,
+            "schema": {
+                "type": "boolean"
+            }
         }
     ],
     "returns": {
