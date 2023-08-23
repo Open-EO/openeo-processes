@@ -1,0 +1,22 @@
+{
+    "id": "i",
+    "summary": "Imaginary unit",
+    "description": "The imaginary unit or unit imaginary number (i) is a solution to the quadratic equation x^2+1=0.",
+    "categories": [
+        "math > constants"
+		],
+    "parameters": [],
+    "returns": {
+        "description": "The imaginary unit.",
+        "schema": {
+            "type": "number"
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://mathworld.wolfram.com/ImaginaryUnit.html",
+            "title": "Imaginary Unit i explained by Wolfram MathWorld"
+        }
+    ]
+}
