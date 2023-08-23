@@ -1,7 +1,7 @@
 {
     "id": "i",
     "summary": "Imaginary unit (i)",
-    "description": "The imaginary unit or unit imaginary number (i) is a solution to the quadratic equation x^2+1=0.",
+    "description": "The imaginary unit or unit imaginary number *i* is a solution to the quadratic equation *`x^2+1=0`*.",
     "categories": [
         "math > constants"
     ],
