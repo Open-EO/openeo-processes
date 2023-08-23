@@ -9,14 +9,6 @@
     "experimental": true,
     "parameters": [
         {
-            "name": "data",
-            "description": "A data cube to predict values for.",
-            "schema": {
-                "type": "object",
-                "subtype": "datacube"
-            }
-        },
-        {
             "name": "parameters",
             "description": "A data cube with optimal values, e.g. computed by the process ``fit_curve()``.",
             "schema": {
@@ -60,7 +52,7 @@
         },
         {
             "name": "dimension",
-            "description": "The name of the dimension for predictions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+            "description": "The name of the dimension for predictions.",
             "schema": {
                 "type": "string"
             }
@@ -98,15 +90,10 @@
         }
     ],
     "returns": {
-        "description": "A data cube with the predicted values.",
+        "description": "A data cube with the predicted values with the provided dimension `dimension` having as many labels as provided through `labels`.",
         "schema": {
             "type": "object",
             "subtype": "datacube"
-        }
-    },
-    "exceptions": {
-        "DimensionNotAvailable": {
-            "message": "A dimension with the specified name does not exist."
         }
     }
 }
