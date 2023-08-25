@@ -3,20 +3,17 @@
     "summary": "Curve fitting",
     "description": "Use non-linear least squares to fit a model function `y = f(x, parameters)` to data.",
     "categories": [
-        "arrays",
+        "cubes",
         "math"
     ],
     "experimental": true,
     "parameters": [
         {
             "name": "data",
-            "description": "A labeled array, the labels correspond to the variable `y` and the values correspond to the variable `x`.",
+            "description": "A data cube.",
             "schema": {
-                "type": "array",
-                "subtype": "labeled-array",
-                "items": {
-                    "type": "number"
-                }
+                "type": "object",
+                "subtype": "raster-cube"
             }
         },
         {
@@ -85,13 +82,10 @@
         }
     ],
     "returns": {
-        "description": "An array with the optimal values for the parameters.",
+        "description": "A data cube with the optimal values for the parameters.",
         "schema": {
-            "type": "array",
-            "minItems": 1,
-            "items": {
-                "type": "number"
-            }
+            "type": "object",
+            "subtype": "raster-cube"
         }
     }
 }
