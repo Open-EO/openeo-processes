@@ -1,0 +1,62 @@
+{
+    "id": "vector_to_raster",
+    "description": "Creates a raster cube as output based on a vector cube. The values in the output raster cube are based on the numeric properties in the input vector cube.",
+    "summary": "Converts a vector cube to a raster cube.",
+    "categories": [
+        "cubes",
+        "vector"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A vector data cube.",
+            "optional": false,
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "geometry"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "target",
+            "description": "A raster data cube used as reference for the target's extent, spatial resolution, and projection.",
+            "optional": false,
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "A raster datacube with the provided extent, spatial resolution, and projection. The output cube contains bands where each pixel inside the provided polygons has the value related to that polygon in the vector cube and all pixels outside have NoData values.
+
+        ",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "spatial",
+                    "axis": [
+                        "x",
+                        "y"
+                    ]
+                }
+            ]
+        }
+    }
+}
