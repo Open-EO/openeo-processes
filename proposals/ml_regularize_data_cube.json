@@ -1,7 +1,7 @@
 {
     "id": "ml_regularize_data_cube",
     "summary": "Converts irregular data cubes into regular data cubes",
-    "description": "Converts irregular data cubes into regular and complete data cubes in space and time, ensuring compatibility with machine learning and deep learning classification algorithms.\nThis process eliminates gaps and missing values, enabling the use of machine learning and deep learning algorithms for remote sensing data.", 
+    "description": "Converts irregular data cubes into regular and complete data cubes in space and time, ensuring compatibility with machine learning and deep learning classification algorithms. This process eliminates gaps and missing values, enabling the use of machine learning and deep learning algorithms for remote sensing data.",
     "categories": [
         "cubes",
         "machine learning"
