@@ -1,5 +1,5 @@
 {
-    "id": "date_replace",
+    "id": "date_replace_component",
     "summary": "Replaces a part of a date",
     "description": "Replaces a part of a given date string with a new value based on the provided component, allowing for easy replacing of dates.\n\n In case a date/time overflow, the component will be clipped to their respective bounds e.g. if hour is set to 27, it can be clipped to 23. Similarly, if day is set to -40, it can be clipped to the first day of the month",
     "categories": [
@@ -24,13 +24,6 @@
             ]
         },
         {
-            "name": "value",
-            "description": "The period of time in the component given to replace the existing value.",
-            "schema": {
-                "type": "integer"
-            }
-        },
-        {
             "name": "component",
             "description": "The component for the value given. The following pre-defined components are available:\n\n- millisecond: Milliseconds\n- second: Seconds .\n- minute: Minutes\n- hour: Hours\n- day: Days - changes only the the day part of a date\n- month: Months\n- year: Years\n\nReplacements with the component `year`, `month` or `day` do never change the time.",
             "schema": {
@@ -44,6 +37,13 @@
                     "month",
                     "year"
                 ]
+            }
+        },
+        {
+            "name": "value",
+            "description": "The period of time in the component given to replace the existing value.",
+            "schema": {
+                "type": "integer"
             }
         }
     ],
@@ -66,32 +66,32 @@
         {
             "arguments": {
                 "date": "2020-02-01T17:22:45Z",
-                "value": 6,
-                "component": "month"
+                "component": "month",
+                "value": 6
             },
             "returns": "2020-06-01T17:22:45Z"
         },
         {
             "arguments": {
                 "date": "2021-03-31T00:00:00+02:00",
-                "value": 7,
-                "component": "day"
+                "component": "day",
+                "value": 7
             },
             "returns": "2021-03-07T00:00:00+02:00"
         },
         {
             "arguments": {
                 "date": "2018-01-01",
-                "value": 2023,
-                "component": "year"
+                "component": "year",
+                "value": 2023
             },
             "returns": "2023-01-01"
         },
         {
             "arguments": {
                 "date": "2018-01-01",
-                "value": 5,
-                "component": "month"
+                "component": "month",
+                "value": 5
             },
             "returns": "2017-05-01"
         },
@@ -99,8 +99,8 @@
             "description": "A date overflow is clipped to the respective bound of the date component.",
             "arguments": {
                 "date": "2023-01-30",
-                "value": -40,
-                "component": "day"
+                "component": "day",
+                "value": -40
             },
             "returns": "2023-01-01"
         }
