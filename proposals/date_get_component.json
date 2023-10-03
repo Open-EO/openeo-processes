@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "date",
-            "description": "The date (and optionally time) to to get a part of.",
+            "description": "The date (and optionally time) to get a part of.",
             "schema": [
                 {
                     "type": "string",
