@@ -1,7 +1,7 @@
 {
     "id": "date_replace_component",
     "summary": "Replaces a part of a date",
-    "description": "Replaces a part of a given date string with a new value based on the provided component, allowing for easy replacing of dates.\n\n In case a date/time overflow, the component will be clipped to their respective bounds e.g. if hour is set to 27, it can be clipped to 23. Similarly, if day is set to -40, it can be clipped to the first day of the month",
+    "description": "Replaces a part of a given date string with a new value based on the provided component, allowing for easy replacing of dates.\n\nIn case a date/time overflow, the component will be clipped to their respective bounds e.g. if hour is set to 27, it can be clipped to 23. Similarly, if day is set to -40, it can be clipped to the first day of the month.",
     "categories": [
         "date & time"
     ],
