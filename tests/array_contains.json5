@@ -1,0 +1,64 @@
+{
+  "tests": [
+    {
+      "arguments": {
+        "data": [
+          1,
+          2,
+          3
+        ],
+        "value": 2
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "data": [
+          "A",
+          "B",
+          "C"
+        ],
+        "value": "b"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          2,
+          3
+        ],
+        "value": "2"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          2,
+          null
+        ],
+        "value": null
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "data": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "value": 2
+      },
+      "returns": false
+    }
+  ]
+}

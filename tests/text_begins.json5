@@ -1,0 +1,48 @@
+{
+  "tests": [
+    {
+      "arguments": {
+        "data": "Lorem ipsum dolor sit amet",
+        "pattern": "amet"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "data": "Lorem ipsum dolor sit amet",
+        "pattern": "Lorem"
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "data": "Lorem ipsum dolor sit amet",
+        "pattern": "lorem"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "data": "Lorem ipsum dolor sit amet",
+        "pattern": "lorem",
+        "case_sensitive": false
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "data": "Ä",
+        "pattern": "ä",
+        "case_sensitive": false
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "data": null,
+        "pattern": "null"
+      },
+      "returns": null
+    }
+  ]
+}

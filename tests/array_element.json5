@@ -1,0 +1,36 @@
+{
+  "tests": [
+    {
+      "arguments": {
+        "data": [
+          9,
+          8,
+          7,
+          6,
+          5
+        ],
+        "index": 2
+      },
+      "returns": 7
+    },
+    {
+      "arguments": {
+        "data": [
+          "A",
+          "B",
+          "C"
+        ],
+        "index": 0
+      },
+      "returns": "A"
+    },
+    {
+      "arguments": {
+        "data": [],
+        "index": 0,
+        "return_nodata": true
+      },
+      "returns": null
+    }
+  ]
+}

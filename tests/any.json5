@@ -1,0 +1,94 @@
+{
+  "tests": [
+    {
+      "arguments": {
+        "data": [
+          false,
+          null
+        ]
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "data": [
+          true,
+          null
+        ]
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "data": [
+          false,
+          null
+        ],
+        "ignore_nodata": false
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "data": [
+          true,
+          null
+        ],
+        "ignore_nodata": false
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "data": [
+          true,
+          false,
+          true,
+          false
+        ]
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "data": [
+          true,
+          false
+        ]
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "data": [
+          false,
+          false
+        ]
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "data": [
+          true
+        ]
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "data": [
+          null
+        ],
+        "ignore_nodata": false
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "data": []
+      },
+      "returns": null
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "tests": [
+    {
+      "arguments": {
+        "x": 1
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": "Test"
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": null
+      },
+      "returns": true
+    }
+  ]
+}

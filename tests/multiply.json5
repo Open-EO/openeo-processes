@@ -1,0 +1,25 @@
+{
+  "tests": [
+    {
+      "arguments": {
+        "x": 5,
+        "y": 2.5
+      },
+      "returns": 12.5
+    },
+    {
+      "arguments": {
+        "x": -2,
+        "y": -4
+      },
+      "returns": 8
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "y": null
+      },
+      "returns": null
+    }
+  ]
+}

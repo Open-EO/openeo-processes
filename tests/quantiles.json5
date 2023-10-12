@@ -1,0 +1,99 @@
+{
+  "tests": [
+    {
+      "arguments": {
+        "data": [
+          2,
+          4,
+          4,
+          4,
+          5,
+          5,
+          7,
+          9
+        ],
+        "probabilities": [
+          0.005,
+          0.01,
+          0.02,
+          0.05,
+          0.1,
+          0.5
+        ]
+      },
+      "returns": [
+        2.07,
+        2.14,
+        2.28,
+        2.7,
+        3.4,
+        4.5
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          2,
+          4,
+          4,
+          4,
+          5,
+          5,
+          7,
+          9
+        ],
+        "probabilities": 4
+      },
+      "returns": [
+        4,
+        4.5,
+        5.5
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          -1,
+          -0.5,
+          null,
+          1
+        ],
+        "probabilities": 2
+      },
+      "returns": [
+        -0.5
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          -1,
+          -0.5,
+          null,
+          1
+        ],
+        "probabilities": 4,
+        "ignore_nodata": false
+      },
+      "returns": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "title": "Empty array",
+      "arguments": {
+        "data": [],
+        "probabilities": [
+          0.1,
+          0.5
+        ]
+      },
+      "returns": [
+        null,
+        null
+      ]
+    }
+  ]
+}

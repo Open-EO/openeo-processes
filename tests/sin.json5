@@ -1,0 +1,10 @@
+{
+  "tests": [
+    {
+      "arguments": {
+        "x": 0
+      },
+      "returns": 0
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "tests": [
+    {
+      "arguments": {
+        "data": [
+          5,
+          0
+        ]
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "data": [
+          -2,
+          4,
+          2.5
+        ]
+      },
+      "returns": -20
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          null
+        ],
+        "ignore_nodata": false
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "data": [
+          -1
+        ]
+      },
+      "returns": -1
+    },
+    {
+      "arguments": {
+        "data": [
+          null
+        ],
+        "ignore_nodata": false
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "data": []
+      },
+      "returns": null
+    }
+  ]
+}

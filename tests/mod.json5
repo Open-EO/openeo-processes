@@ -1,0 +1,46 @@
+{
+  "tests": [
+    {
+      "arguments": {
+        "x": 27,
+        "y": 5
+      },
+      "returns": 2
+    },
+    {
+      "arguments": {
+        "x": -27,
+        "y": 5
+      },
+      "returns": 3
+    },
+    {
+      "arguments": {
+        "x": 3.14,
+        "y": -2
+      },
+      "returns": -0.86
+    },
+    {
+      "arguments": {
+        "x": -27,
+        "y": -5
+      },
+      "returns": -2
+    },
+    {
+      "arguments": {
+        "x": 27,
+        "y": null
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "x": null,
+        "y": 5
+      },
+      "returns": null
+    }
+  ]
+}

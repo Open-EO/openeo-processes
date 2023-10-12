@@ -1,0 +1,41 @@
+{
+  "tests": [
+    {
+      "arguments": {
+        "x": 0.3,
+        "inputMin": -1,
+        "inputMax": 1,
+        "outputMin": 0,
+        "outputMax": 255
+      },
+      "returns": 165.75
+    },
+    {
+      "arguments": {
+        "x": 25.5,
+        "inputMin": 0,
+        "inputMax": 255
+      },
+      "returns": 0.1
+    },
+    {
+      "arguments": {
+        "x": null,
+        "inputMin": 0,
+        "inputMax": 100
+      },
+      "returns": null
+    },
+    {
+      "description": "Shows that the input data is clipped.",
+      "arguments": {
+        "x": 1.12,
+        "inputMin": 0,
+        "inputMax": 1,
+        "outputMin": 0,
+        "outputMax": 255
+      },
+      "returns": 255
+    }
+  ]
+}

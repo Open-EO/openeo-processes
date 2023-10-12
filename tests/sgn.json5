@@ -1,0 +1,28 @@
+{
+  "tests": [
+    {
+      "arguments": {
+        "x": -2
+      },
+      "returns": -1
+    },
+    {
+      "arguments": {
+        "x": 3.5
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "x": 0
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "x": null
+      },
+      "returns": null
+    }
+  ]
+}
