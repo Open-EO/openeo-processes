@@ -19,7 +19,7 @@ jobs:
       - run: |
           npm install
           npm run generate
-        working-directory: tests
+        working-directory: dev
       - name: clone gh-pages and clean-up
         if: ${{ env.GITHUB_REF_SLUG == 'master' }}
         run: |
@@ -31,8 +31,8 @@ jobs:
         if: ${{ env.GITHUB_REF_SLUG != 'master' }}
         run: mkdir gh-pages
       - run: |
-          cp tests/docs.html index.html
-          cp tests/processes.json processes.json
+          cp dev/docs.html index.html
+          cp dev/processes.json processes.json
           rsync -vrm --include='*.json' --include='*.html' --include='meta/***' --include='proposals/***' --exclude='*' . gh-pages
       - name: deploy to root (master)
         uses: peaceiris/actions-gh-pages@v3
