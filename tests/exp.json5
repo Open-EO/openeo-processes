@@ -1,0 +1,16 @@
+{
+  "tests": [
+    {
+      "arguments": {
+        "p": 0
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "p": null
+      },
+      "returns": null
+    }
+  ]
+}

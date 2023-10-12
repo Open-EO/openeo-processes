@@ -1,0 +1,39 @@
+{
+  "tests": [
+    {
+      "arguments": {
+        "x": true,
+        "y": true
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": true,
+        "y": false
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": false,
+        "y": false
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": false,
+        "y": null
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": true,
+        "y": null
+      },
+      "returns": null
+    }
+  ]
+}

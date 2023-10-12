@@ -1,0 +1,24 @@
+{
+  "tests": [
+    {
+      "title": "Rename named labels",
+      "description": "Renaming the bands from `B1` to `red`, from `B2` to `green` and from `B3` to `blue`.",
+      "arguments": {
+        "data": {
+          "from_parameter": "data"
+        },
+        "dimension": "bands",
+        "source": [
+          "B1",
+          "B2",
+          "B3"
+        ],
+        "target": [
+          "red",
+          "green",
+          "blue"
+        ]
+      }
+    }
+  ]
+}

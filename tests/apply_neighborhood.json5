@@ -1,0 +1,58 @@
+{
+  "tests": [
+    {
+      "arguments": {
+        "data": {
+          "from_parameter": "data"
+        },
+        "process": {
+          "process_graph": {
+            "udf": {
+              "process_id": "run_udf",
+              "arguments": {
+                "data": {
+                  "from_parameter": "data"
+                },
+                "udf": "ml.py",
+                "runtime": "Python"
+              },
+              "result": true
+            }
+          }
+        },
+        "size": [
+          {
+            "dimension": "x",
+            "value": 128,
+            "unit": "px"
+          },
+          {
+            "dimension": "y",
+            "value": 128,
+            "unit": "px"
+          },
+          {
+            "dimension": "t",
+            "value": "P5D"
+          }
+        ],
+        "overlap": [
+          {
+            "dimension": "x",
+            "value": 16,
+            "unit": "px"
+          },
+          {
+            "dimension": "y",
+            "value": 16,
+            "unit": "px"
+          },
+          {
+            "dimension": "t",
+            "value": "P3D"
+          }
+        ]
+      }
+    }
+  ]
+}

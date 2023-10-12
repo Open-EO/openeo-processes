@@ -1,0 +1,32 @@
+{
+  "tests": [
+    {
+      "arguments": {
+        "x": 10,
+        "base": 10
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "x": 2,
+        "base": 2
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "x": 4,
+        "base": 2
+      },
+      "returns": 2
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "base": 16
+      },
+      "returns": 0
+    }
+  ]
+}

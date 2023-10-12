@@ -1,0 +1,93 @@
+{
+  "tests": [
+    {
+      "arguments": {
+        "x": 1,
+        "y": null
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "y": 1
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "y": "1"
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": 0,
+        "y": false
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": 1.02,
+        "y": 1,
+        "delta": 0.01
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": -1,
+        "y": -1.001,
+        "delta": 0.01
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": 115,
+        "y": 110,
+        "delta": 10
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": "Test",
+        "y": "test"
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": "Test",
+        "y": "test",
+        "case_sensitive": false
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": "Ä",
+        "y": "ä",
+        "case_sensitive": false
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": "2018-01-01T00:00:00Z",
+        "y": "2018-01-01T00:00:00+00:00"
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": null,
+        "y": null
+      },
+      "returns": null
+    }
+  ]
+}

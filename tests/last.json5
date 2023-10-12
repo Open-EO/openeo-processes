@@ -1,0 +1,43 @@
+{
+  "tests": [
+    {
+      "arguments": {
+        "data": [
+          1,
+          0,
+          3,
+          2
+        ]
+      },
+      "returns": 2
+    },
+    {
+      "arguments": {
+        "data": [
+          "A",
+          "B",
+          null
+        ]
+      },
+      "returns": "B"
+    },
+    {
+      "arguments": {
+        "data": [
+          0,
+          1,
+          null
+        ],
+        "ignore_nodata": false
+      },
+      "returns": null
+    },
+    {
+      "description": "The input array is empty: return `null`.",
+      "arguments": {
+        "data": []
+      },
+      "returns": null
+    }
+  ]
+}
