@@ -1,3 +1,102 @@
 {
-  "tests": []
+  "tests": [
+    {
+      "arguments": {
+        "x": 0
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "x": -260
+      },
+      "returns": -260
+    },
+    {
+      "arguments": {
+        "x": 66666
+      },
+      "returns": 66666
+    },
+    {
+      "arguments": {
+        "x": 0.123456789
+      },
+      "returns": 0.123456789
+    },
+    {
+      "arguments": {
+        "x": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": Infinity
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "x": -Infinity
+      },
+      "returns": -Infinity
+    },
+    {
+      "arguments": {
+        "x": true
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": false
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": null
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "x": "test"
+      },
+      "returns": "test"
+    },
+    {
+      "arguments": {
+        "x": []
+      },
+      "returns": []
+    },
+    {
+      "arguments": {
+        "x": [1,2,3,-4]
+      },
+      "returns": [1,2,3,-4]
+    },
+    {
+      "arguments": {
+        "x": [0,NaN,null,false,""]
+      },
+      "returns": [0,NaN,null,false,""]
+    },
+    {
+      "arguments": {
+        "x": {
+          "a": "b",
+          "b": 123,
+          "c": []
+        }
+      },
+      "returns": {
+          "a": "b",
+          "b": 123,
+          "c": []
+        }
+    }
+  ]
 }

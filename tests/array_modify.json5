@@ -1,7 +1,7 @@
 {
   "tests": [
     {
-      "description": "Replace a single value in the array.",
+       // Replace a single value in the array.
       "arguments": {
         "data": [
           "a",
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "description": "Replace multiple values in the array.",
+      // Replace multiple values in the array.
       "arguments": {
         "data": [
           "a",
@@ -46,7 +46,7 @@
       ]
     },
     {
-      "description": "Insert a value to the array at a given position.",
+      // Insert a value to the array at a given position.
       "arguments": {
         "data": [
           "a",
@@ -64,7 +64,7 @@
       ]
     },
     {
-      "description": "Remove a single value from the array.",
+      // Remove a single value from the array.
       "arguments": {
         "data": [
           "a",
@@ -82,7 +82,7 @@
       ]
     },
     {
-      "description": "Remove multiple values from the array.",
+      // Remove multiple values from the array.
       "arguments": {
         "data": [
           null,
@@ -102,7 +102,7 @@
       ]
     },
     {
-      "description": "Remove multiple values from the end of the array and ignore that the given length is exceeding the size of the array.",
+      // Remove multiple values from the end of the array and ignore that the given length is exceeding the size of the array.
       "arguments": {
         "data": [
           "a",

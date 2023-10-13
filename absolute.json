@@ -30,12 +30,6 @@
     "examples": [
         {
             "arguments": {
-                "x": 0
-            },
-            "returns": 0
-        },
-        {
-            "arguments": {
                 "x": 3.5
             },
             "returns": 3.5
@@ -45,12 +39,6 @@
                 "x": -0.4
             },
             "returns": 0.4
-        },
-        {
-            "arguments": {
-                "x": -3.5
-            },
-            "returns": 3.5
         }
     ],
     "links": [

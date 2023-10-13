@@ -27,7 +27,7 @@
       "returns": null
     },
     {
-      "description": "Shows that the input data is clipped.",
+      // Shows that the input data is clipped.
       "arguments": {
         "x": 1.12,
         "inputMin": 0,

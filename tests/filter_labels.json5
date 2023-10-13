@@ -1,7 +1,7 @@
 {
   "tests": [
     {
-      "description": "Filters the data cube to only contain data from platform Sentinel-2A. This example assumes that the data cube has a dimension `platform` so that computations can distinguish between Sentinel-2A and Sentinel-2B data.",
+      // Filters the data cube to only contain data from platform Sentinel-2A. This example assumes that the data cube has a dimension `platform` so that computations can distinguish between Sentinel-2A and Sentinel-2B data.
       "arguments": {
         "data": {
           "from_parameter": "sentinel2_data"

@@ -33,7 +33,7 @@
       "returns": null
     },
     {
-      "description": "The input array is empty: return `null`.",
+      // The input array is empty: return `null`.
       "arguments": {
         "data": []
       },

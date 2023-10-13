@@ -17,7 +17,7 @@
       "returns": "2021-03-24T00:00:00+02:00"
     },
     {
-      "description": "Adding a year to February 29th in a leap year will result in February 28th in the next (non-leap) year.",
+      // Adding a year to February 29th in a leap year will result in February 28th in the next (non-leap) year.
       "arguments": {
         "date": "2020-02-29T17:22:45Z",
         "value": 1,
@@ -26,7 +26,7 @@
       "returns": "2021-02-28T17:22:45Z"
     },
     {
-      "description": "Adding a month to January 31th will result in February 29th in leap years.",
+      // Adding a month to January 31th will result in February 29th in leap years.
       "arguments": {
         "date": "2020-01-31",
         "value": 1,
@@ -35,7 +35,7 @@
       "returns": "2020-02-29"
     },
     {
-      "description": "The process skips over the leap second `2016-12-31T23:59:60Z`.",
+      // The process skips over the leap second `2016-12-31T23:59:60Z`.
       "arguments": {
         "date": "2016-12-31T23:59:59Z",
         "value": 1,
@@ -44,7 +44,7 @@
       "returns": "2017-01-01T00:00:00Z"
     },
     {
-      "description": "Milliseconds can be added or subtracted. If not given, the default value is `0`.",
+      // Milliseconds can be added or subtracted. If not given, the default value is `0`.
       "arguments": {
         "date": "2018-12-31T17:22:45Z",
         "value": 1150,

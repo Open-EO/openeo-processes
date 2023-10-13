@@ -1,3 +1,9 @@
 {
-  "tests": []
+  "tests": [
+    {
+      "arguments": {},
+      "returns": 3.14159265,
+      "delta": 0.00000001
+    }
+  ]
 }
