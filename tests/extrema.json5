@@ -45,7 +45,7 @@
       ]
     },
     {
-      "description": "The input array is empty: return two `null` values.",
+      // The input array is empty: return two `null` values.
       "arguments": {
         "data": []
       },

@@ -2,7 +2,7 @@
   "tests": [
     {
       "title": "Rename named labels",
-      "description": "Renaming the bands from `B1` to `red`, from `B2` to `green` and from `B3` to `blue`.",
+      // Renaming the bands from `B1` to `red`, from `B2` to `green` and from `B3` to `blue`.
       "arguments": {
         "data": {
           "from_parameter": "data"

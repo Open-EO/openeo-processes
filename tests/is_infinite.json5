@@ -1,3 +1,112 @@
 {
-  "tests": []
+  "tests": [
+    {
+      "arguments": {
+        "x": Infinity
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": -Infinity
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": 1
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": -123456789.0
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": NaN
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": true
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": false
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": [Infinity]
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": []
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": {}
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": {"inf": Infinity}
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": "-infinity"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": "-Infinity"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": "-inf"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": "infinity"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": "Infinity"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": "inf"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": null
+      },
+      "returns": false
+    }
+  ]
 }
