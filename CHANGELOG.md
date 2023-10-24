@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased / Draft
 
+### Fixed
+
+- `divide`: Clarified behavior for division by 0
+- `ln` and `log`: Clarified that for x = 0 -infinity is returned
+- `mod`: Clarified behavior for y = 0
+
 ## [2.0.0-rc.1] - 2023-05-25
 
 ### Added
