@@ -5,6 +5,48 @@
         "x": 0
       },
       "returns": 0
+    },
+    {
+      "arguments": {
+        "x": 1
+      },
+      "returns": 1.55740772465
+    },
+    {
+      "arguments": {
+        "x": 10
+      },
+      "returns": 0.64836082746
+    },
+    {
+      "arguments": {
+        "x": -1
+      },
+      "returns": 0.64836082746
+    },
+    {
+      "arguments": {
+        "x": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": Infinity
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": -Infinity
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": null
+      },
+      "returns": null
     }
   ]
 }

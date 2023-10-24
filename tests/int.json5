@@ -8,9 +8,27 @@
     },
     {
       "arguments": {
+        "x": 1
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "x": -1
+      },
+      "returns": -1
+    },
+    {
+      "arguments": {
         "x": 3.5
       },
       "returns": 3
+    },
+    {
+      "arguments": {
+        "x": -3.5
+      },
+      "returns": -3
     },
     {
       "arguments": {
@@ -20,9 +38,54 @@
     },
     {
       "arguments": {
-        "x": -3.5
+        "x": 0.1234567890
       },
-      "returns": -3
+      "returns": 0
+    },
+    {
+      // Supports more than byte-sized unsigned integers
+      "arguments": {
+        "x": 256
+      },
+      "returns": 256
+    },
+    {
+      // Supports more than 2 byte-sized unsigned integers
+      "arguments": {
+        "x": 65536
+      },
+      "returns": 65536
+    },
+    {
+      // Supports more than 4 byte-sized unsigned integers
+      "arguments": {
+        "x": 4294967296
+      },
+      "returns": 4294967296
+    },
+    {
+      "arguments": {
+        "x": Infinity
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "x": -Infinity
+      },
+      "returns": -Infinity
+    },
+    {
+      "arguments": {
+        "x": NaN
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "x": null
+      },
+      "returns": null
     }
   ]
 }

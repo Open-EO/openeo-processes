@@ -23,6 +23,24 @@
         "x": null
       },
       "returns": null
-    }
+    },
+    {
+      "arguments": {
+        "x": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": Infinity
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "x": -Infinity
+      },
+      "returns": -1
+    },
   ]
 }

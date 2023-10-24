@@ -52,6 +52,30 @@
         "p": -2
       },
       "returns": 1200
+    },
+    {
+      "arguments": {
+        "x": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": Infinity
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "x": -Infinity
+      },
+      "returns": -Infinity
+    },
+    {
+      "arguments": {
+        "x": null
+      },
+      "returns": null
     }
   ]
 }
