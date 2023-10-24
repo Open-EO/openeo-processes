@@ -23,7 +23,8 @@
             "type": [
                 "number",
                 "null"
-            ]
+            ],
+            "minimum": 1
         }
     },
     "examples": [

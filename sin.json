@@ -23,7 +23,9 @@
             "type": [
                 "number",
                 "null"
-            ]
+            ],
+            "minimum": -1,
+            "maximum": 1
         }
     },
     "examples": [

@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased / Draft
 
+### Fixed
+
+- Trigonometric functions: Clarified that NaN is returned outside of their defined input range and defined output ranges where possible.
+
 ## [2.0.0-rc.1] - 2023-05-25
 
 ### Added

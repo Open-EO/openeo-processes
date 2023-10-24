@@ -1,7 +1,7 @@
 {
     "id": "artanh",
     "summary": "Inverse hyperbolic tangent",
-    "description": "Computes the inverse hyperbolic tangent of `x`. It is the inverse function of the hyperbolic tangent so that *`artanh(tanh(x)) = x`*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the inverse hyperbolic tangent of `x`. It is the inverse function of the hyperbolic tangent so that *`artanh(tanh(x)) = x`*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated. `NaN` is returned for values <= -1 and >= 1.",
     "categories": [
         "math > trigonometric"
     ],
@@ -13,7 +13,9 @@
                 "type": [
                     "number",
                     "null"
-                ]
+                ],
+                "minimumExclusive": -1,
+                "maximumExclusive": 1
             }
         }
     ],
