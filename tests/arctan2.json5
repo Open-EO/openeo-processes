@@ -9,8 +9,141 @@
     },
     {
       "arguments": {
+        "y": 1,
+        "x": 1
+      },
+      "returns": 0.7853981634
+    },
+    {
+      "arguments": {
+        "y": 1,
+        "x": -1
+      },
+      "returns": 2.3561944902
+    },
+    {
+      "arguments": {
+        "y": -1,
+        "x": 1
+      },
+      "returns": -0.7853981634
+    },
+    {
+      "arguments": {
+        "y": -1,
+        "x": -1
+      },
+      "returns": -2.3561944902
+    },
+    {
+      "arguments": {
+        "y": 0,
+        "x": 1
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "y": 0,
+        "x": -1
+      },
+      "returns": 3.1415926536
+    },
+    {
+      "arguments": {
+        "y": 1,
+        "x": 0
+      },
+      "returns": 1.5707963268
+    },
+    {
+      "arguments": {
+        "y": -1,
+        "x": 0
+      },
+      "returns": -1.5707963268
+    },
+    {
+      "arguments": {
+        "y": NaN,
+        "x": 1
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "y": 1,
+        "x": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "y": NaN,
+        "x": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "y": Infinity,
+        "x": 1
+      },
+      "returns": 1.5707963268
+    },
+    {
+      "arguments": {
+        "y": 1,
+        "x": Infinity
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "y": Infinity,
+        "x": Infinity
+      },
+      "returns": 0.7853981634
+    },
+    {
+      "arguments": {
+        "y": -Infinity,
+        "x": 1
+      },
+      "returns": -1.5707963268
+    },
+    {
+      "arguments": {
+        "y": 1,
+        "x": -Infinity
+      },
+      "returns": 3.1415926536
+    },
+    {
+      "arguments": {
+        "y": -Infinity,
+        "x": -Infinity
+      },
+      "returns": -2.3561944902
+    },
+    {
+      "arguments": {
         "y": null,
-        "x": 1.5
+        "x": 1
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "y": 1,
+        "x": null
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "y": null,
+        "x": null
       },
       "returns": null
     }

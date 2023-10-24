@@ -2,21 +2,161 @@
   "tests": [
     {
       "arguments": {
-        "x": 5,
-        "y": 2.5
+        "x": 0,
+        "y": 0
       },
-      "returns": 12.5
+      "returns": 0
     },
     {
       "arguments": {
-        "x": -2,
-        "y": -4
+        "x": 100,
+        "y": 0
       },
-      "returns": 8
+      "returns": 0
     },
     {
       "arguments": {
         "x": 1,
+        "y": 2
+      },
+      "returns": 2
+    },
+    {
+      "arguments": {
+        "x": -1,
+        "y": 2
+      },
+      "returns": -2
+    },
+    {
+      "arguments": {
+        "x": 2.5,
+        "y": 3.5
+      },
+      "returns": 8.75
+    },
+    {
+      "arguments": {
+        "x": -2.5,
+        "y": 3.5
+      },
+      "returns": -8.75
+    },
+    {
+      "arguments": {
+        "x": -250,
+        "y": -10
+      },
+      "returns": -2500
+    },
+    {
+      "arguments": {
+        "x": NaN,
+        "y": 1
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "y": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": NaN,
+        "y": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": Infinity,
+        "y": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": NaN,
+        "y": -Infinity
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": -1,
+        "y": Infinity
+      },
+      "returns": -Infinity
+    },
+    {
+      "arguments": {
+        "x": Infinity,
+        "y": 1
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "x": Infinity,
+        "y": Infinity
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "x": -Infinity,
+        "y": 1
+      },
+      "returns": -Infinity
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "y": -Infinity
+      },
+      "returns": -Infinity
+    },
+    {
+      "arguments": {
+        "x": -Infinity,
+        "y": -Infinity
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "x": -Infinity,
+        "y": null
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "x": null,
+        "y": Infinity
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "x": null,
+        "y": 1
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "y": null
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "x": null,
         "y": null
       },
       "returns": null

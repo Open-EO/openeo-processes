@@ -2,13 +2,55 @@
   "tests": [
     {
       "arguments": {
-        "p": 0
+        "x": 0
       },
       "returns": 1
     },
     {
       "arguments": {
-        "p": null
+        "x": 1
+      },
+      "returns": 2.71828182846
+    },
+    {
+      "arguments": {
+        "x": -1
+      },
+      "returns": 0.36787944117
+    },
+    {
+      "arguments": {
+        "x": 2
+      },
+      "returns": 7.38905609893
+    },
+    {
+      "arguments": {
+        "x": -2
+      },
+      "returns": 0.13533528324
+    },
+    {
+      "arguments": {
+        "x": Infinity
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "x": -Infinity
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "x": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": null
       },
       "returns": null
     }

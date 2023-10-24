@@ -2,6 +2,20 @@
   "tests": [
     {
       "arguments": {
+        "x": 0,
+        "y": 1
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "y": 1
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
         "x": 27,
         "y": 5
       },
@@ -30,7 +44,94 @@
     },
     {
       "arguments": {
-        "x": 27,
+        "x": 2,
+        "y": 0
+      },
+      "returns": Infinity,
+      "throws": "DivisionByZero"
+    },
+    {
+      "arguments": {
+        "x": -2,
+        "y": 0
+      },
+      "returns": -Infinity,
+      "throws": "DivisionByZero"
+    },
+    {
+      "arguments": {
+        "x": 0,
+        "y": 0
+      },
+      "returns": NaN,
+      "throws": "DivisionByZero"
+    },
+    {
+      "arguments": {
+        "x": NaN,
+        "y": 2
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": 2,
+        "y": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": NaN,
+        "y": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": Infinity,
+        "y": 2
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": 2,
+        "y": Infinity
+      },
+      "returns": 2
+    },
+    {
+      "arguments": {
+        "x": Infinity,
+        "y": Infinity
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": -Infinity,
+        "y": 2
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": 2,
+        "y": -Infinity
+      },
+      "returns": -2
+    },
+    {
+      "arguments": {
+        "x": -Infinity,
+        "y": -Infinity
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": -Infinity,
         "y": null
       },
       "returns": null
@@ -38,7 +139,28 @@
     {
       "arguments": {
         "x": null,
-        "y": 5
+        "y": Infinity
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "x": null,
+        "y": 2
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "x": 2,
+        "y": null
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "x": null,
+        "y": null
       },
       "returns": null
     }

@@ -20,11 +20,11 @@ This folder contains test cases for the openEO processes.
 - [ ] apply_kernel
 - [ ] apply_neighborhood
 - [ ] apply_polygon
-- [ ] arccos
-- [ ] arcosh
-- [ ] arcsin
-- [ ] arctan
-- [ ] arctan2
+- [x] arccos - <https://github.com/Open-EO/openeo-processes/pull/476>
+- [x] arcosh - <https://github.com/Open-EO/openeo-processes/pull/476>
+- [x] arcsin - <https://github.com/Open-EO/openeo-processes/pull/476>
+- [x] arctan
+- [x] arctan2
 - [ ] array_append
 - [ ] array_apply
 - [ ] array_concat
@@ -38,15 +38,15 @@ This folder contains test cases for the openEO processes.
 - [ ] array_interpolate_linear
 - [ ] array_labels
 - [ ] array_modify
-- [ ] arsinh
-- [ ] artanh
+- [x] arsinh
+- [x] artanh - <https://github.com/Open-EO/openeo-processes/pull/476>
 - [ ] between
-- [ ] ceil
+- [x] ceil
 - [ ] climatological_normal
-- [ ] clip
+- [x] clip - missing: <https://github.com/Open-EO/openeo-processes/issues/472>
 - [x] constant
-- [ ] cos
-- [ ] cosh
+- [x] cos - <https://github.com/Open-EO/openeo-processes/pull/476>
+- [x] cosh - <https://github.com/Open-EO/openeo-processes/pull/476>
 - [ ] count
 - [ ] create_data_cube
 - [ ] cummax
@@ -57,11 +57,11 @@ This folder contains test cases for the openEO processes.
 - [ ] date_difference
 - [ ] date_shift
 - [ ] dimension_labels
-- [ ] divide
+- [x] divide - <https://github.com/Open-EO/openeo-processes/pull/473>
 - [ ] drop_dimension
 - [x] e
 - [ ] eq
-- [ ] exp
+- [x] exp
 - [ ] extrema
 - [ ] filter_bands
 - [ ] filter_bbox
@@ -71,22 +71,22 @@ This folder contains test cases for the openEO processes.
 - [ ] filter_vector
 - [ ] first
 - [ ] flatten_dimensions
-- [ ] floor
+- [x] floor
 - [ ] gt
 - [ ] gte
 - [ ] if
-- [ ] int
+- [x] int
 - [ ] is_infinite
 - [x] is_nan
 - [ ] is_valid
 - [ ] last
 - [ ] linear_scale_range
-- [ ] ln
+- [x] ln - <https://github.com/Open-EO/openeo-processes/pull/473>
 - [ ] load_geojson
 - [ ] load_stac
 - [ ] load_uploaded_files
 - [ ] load_url
-- [ ] log
+- [x] log - <https://github.com/Open-EO/openeo-processes/pull/473>
 - [ ] lt
 - [ ] lte
 - [ ] mask
@@ -96,7 +96,7 @@ This folder contains test cases for the openEO processes.
 - [ ] median
 - [ ] merge_cubes
 - [ ] min
-- [ ] mod
+- [x] mod - <https://github.com/Open-EO/openeo-processes/pull/473>
 - [ ] multiply
 - [x] nan
 - [ ] ndvi
@@ -117,17 +117,17 @@ This folder contains test cases for the openEO processes.
 - [ ] resample_cube_spatial
 - [ ] resample_cube_temporal
 - [ ] resample_spatial
-- [ ] round
+- [x] round
 - [ ] sd
-- [ ] sgn
-- [ ] sin
-- [ ] sinh
+- [x] sgn
+- [x] sin - <https://github.com/Open-EO/openeo-processes/pull/476>
+- [x] sinh
 - [ ] sort
-- [ ] sqrt
+- [x] sqrt - missing: <https://github.com/Open-EO/openeo-processes/issues/474>
 - [x] subtract
 - [ ] sum
-- [ ] tan
-- [ ] tanh
+- [x] tan - <https://github.com/Open-EO/openeo-processes/pull/476>
+- [x] tanh - <https://github.com/Open-EO/openeo-processes/pull/476>
 - [x] text_begins
 - [x] text_concat
 - [x] text_contains
@@ -172,6 +172,7 @@ The test cases assume a couple of things as they are an abstraction and not boun
 - The input and output values for no-data values are `null`, so there's no mapping to e.g. `0` as no-data value.
 - Input that is not valid according to the schemas, will be rejected upfront and will not be checked on. For example, the absolute process only tests against the data types `number` and `null`. There are no tests for a boolean or string input.
 - Numerical data types such as uint8 don't matter, i.e. tests don't check for overflows etc. This suite can't provide such tests as the underlying data type is not known.
+- If not otherwise specified for numbers, a precision of 10 decimals is checked so return values should have at least 11 decimals.
 
 ## Test Files
 
@@ -189,36 +190,42 @@ properties:
     description: A list of test cases without a specific order
     type: array
     items:
-      description: A test case with a set of arguments and a specific return value or exception
+      description: |-
+        A test case with a set of arguments and a specific return value or exception
+
+        If both `returns` and `throws` are provided, it means that either of it should be true.
+        So either the process retuens as specified or throws the specified error.
       type: object
       required:
         - arguments
+      oneOf:
+        - required:
+            - returns
+        - required:
+            - throws
       properties:
         arguments:
           description: A key-value pair for an argument. Key = Parameter name, Value = Argument value
           type: object
           additionalProperties:
             description: An argument, can be of any type
-      oneOf:
-        - required:
-            - returns
-          properties:
-            returns:
-              description: The return value, can be of any type
-            delta:
-              description: If set to a positive number the equality of the actual return value and the expected return value is checked against a delta value to circumvent problems with floating-point inaccuracy.
-              type: number
-        - required:
-            - throws
-          properties:
-            throws:
-              oneOf:
-                - description: Specify an exception name from the process specification
-                  type: string
-                  minLength: 1
-                - description: Use true if the type of exception is unknown
-                  type: boolean
-                  const: true
+        optional:
+          description: Marks optional test so a failure produces only a warning.
+          type: boolean
+          default: false
+        returns:
+          description: The return value, can be of any type
+        delta:
+          description: If set to a positive number the equality of the actual return value and the expected return value is checked against a delta value to circumvent problems with floating-point inaccuracy.
+          type: number
+        throws:
+          oneOf:
+            - description: Specify an exception name from the process specification
+              type: string
+              minLength: 1
+            - description: Use true if the type of exception is unknown
+              type: boolean
+              const: true
 ```
 
 Arguments and return values can point to external files, e.g.

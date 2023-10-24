@@ -5,6 +5,66 @@
         "x": 0
       },
       "returns": 0
+    },
+    {
+      "arguments": {
+        "x": 0.5
+      },
+      "returns": 0.54930614433
+    },
+    {
+      "arguments": {
+        "x": -0.5
+      },
+      "returns": -0.54930614433
+    },
+    {
+      "arguments": {
+        "x": 1
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "x": -1
+      },
+      "returns": -Infinity
+    },
+    {
+      "arguments": {
+        "x": 2
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": -2
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": Infinity
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": -Infinity
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": null
+      },
+      "returns": null
     }
   ]
 }
