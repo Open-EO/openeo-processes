@@ -16,6 +16,20 @@
     },
     {
       "arguments": {
+        "x": true,
+        "y": null
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "x": false,
+        "y": true
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
         "x": false,
         "y": false
       },
@@ -30,7 +44,21 @@
     },
     {
       "arguments": {
-        "x": true,
+        "x": null,
+        "y": true
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "x": null,
+        "y": false
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": null,
         "y": null
       },
       "returns": null

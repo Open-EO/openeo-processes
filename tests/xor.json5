@@ -9,13 +9,6 @@
     },
     {
       "arguments": {
-        "x": false,
-        "y": false
-      },
-      "returns": false
-    },
-    {
-      "arguments": {
         "x": true,
         "y": false
       },
@@ -31,6 +24,41 @@
     {
       "arguments": {
         "x": false,
+        "y": true
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": false,
+        "y": false
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": false,
+        "y": null
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "x": null,
+        "y": true
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "x": null,
+        "y": false
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "x": null,
         "y": null
       },
       "returns": null

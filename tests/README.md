@@ -8,7 +8,6 @@ This folder contains test cases for the openEO processes.
 - [x] add
 - [ ] add_dimension
 - [ ] aggregate_spatial
-- [ ] aggregate_spatial_window
 - [ ] aggregate_temporal
 - [ ] aggregate_temporal_period
 - [x] all
@@ -19,7 +18,6 @@ This folder contains test cases for the openEO processes.
 - [ ] apply_dimension
 - [ ] apply_kernel
 - [ ] apply_neighborhood
-- [ ] apply_polygon
 - [x] arccos - <https://github.com/Open-EO/openeo-processes/pull/476>
 - [x] arcosh - <https://github.com/Open-EO/openeo-processes/pull/476>
 - [x] arcsin - <https://github.com/Open-EO/openeo-processes/pull/476>
@@ -30,14 +28,12 @@ This folder contains test cases for the openEO processes.
 - [ ] array_concat
 - [ ] array_contains
 - [ ] array_create
-- [ ] array_create_labeled
 - [ ] array_element
 - [ ] array_filter
 - [ ] array_find
-- [ ] array_find_label
 - [ ] array_interpolate_linear
 - [ ] array_labels
-- [ ] array_modify
+- [x] array_modify (experimental) - could use some more tests
 - [x] arsinh
 - [x] artanh - <https://github.com/Open-EO/openeo-processes/pull/476>
 - [ ] between
@@ -48,14 +44,14 @@ This folder contains test cases for the openEO processes.
 - [x] cos - <https://github.com/Open-EO/openeo-processes/pull/476>
 - [x] cosh - <https://github.com/Open-EO/openeo-processes/pull/476>
 - [ ] count
+- [x] cummax (experimental) - could use some more tests
+- [x] cummin (experimental) - could use some more tests
+- [x] cumproduct (experimental) - could use some more tests
+- [x] cumsum (experimental) - could use some more tests
 - [ ] create_data_cube
-- [ ] cummax
-- [ ] cummin
-- [ ] cumproduct
-- [ ] cumsum
-- [ ] date_between
-- [ ] date_difference
-- [ ] date_shift
+- [ ] date_between (experimental) - could use some more tests
+- [ ] date_difference (experimental) - could use some more tests
+- [ ] date_shift (experimental) - could use some more tests
 - [ ] dimension_labels
 - [x] divide - <https://github.com/Open-EO/openeo-processes/pull/473>
 - [ ] drop_dimension
@@ -65,27 +61,19 @@ This folder contains test cases for the openEO processes.
 - [ ] extrema
 - [ ] filter_bands
 - [ ] filter_bbox
-- [ ] filter_labels
 - [ ] filter_spatial
 - [ ] filter_temporal
-- [ ] filter_vector
 - [ ] first
-- [ ] flatten_dimensions
 - [x] floor
 - [ ] gt
 - [ ] gte
-- [ ] if
+- [x] if
 - [x] int
-- [ ] is_infinite
+- [x] is_infinite (experimental)
 - [x] is_nan
-- [ ] is_valid
 - [ ] last
 - [ ] linear_scale_range
 - [x] ln - <https://github.com/Open-EO/openeo-processes/pull/473>
-- [ ] load_geojson
-- [ ] load_stac
-- [ ] load_uploaded_files
-- [ ] load_url
 - [x] log - <https://github.com/Open-EO/openeo-processes/pull/473>
 - [ ] lt
 - [ ] lte
@@ -98,7 +86,7 @@ This folder contains test cases for the openEO processes.
 - [ ] min
 - [x] mod - <https://github.com/Open-EO/openeo-processes/pull/473>
 - [ ] multiply
-- [x] nan
+- [x] nan (experimental)
 - [ ] ndvi
 - [ ] neq
 - [ ] normalized_difference
@@ -111,7 +99,6 @@ This folder contains test cases for the openEO processes.
 - [ ] quantiles
 - [ ] rearrange
 - [ ] reduce_dimension
-- [ ] reduce_spatial
 - [ ] rename_dimension
 - [ ] rename_labels
 - [ ] resample_cube_spatial
@@ -133,11 +120,7 @@ This folder contains test cases for the openEO processes.
 - [x] text_contains
 - [x] text_ends
 - [ ] trim_cube
-- [ ] unflatten_dimension
 - [ ] variance
-- [ ] vector_buffer
-- [ ] vector_reproject
-- [ ] vector_to_regular_points
 - [x] xor
 
 ## Incomplete processes
@@ -150,20 +133,38 @@ The following processes have no test cases as the results heavily depend on the 
 or need an external services to be available for testing (e.g. loading files from the user workspace or a UDF server).
 We don't expect that we can provide meaningful test cases for these processes.
 
-- [ ] ard_normalized_radar_backscatter
-- [ ] ard_surface_reflectance
-- [ ] atmospheric_correction
-- [ ] cloud_detection
-- [ ] fit_curve
-- [ ] inspect
+- [ ] ard_normalized_radar_backscatter (experimental)
+- [ ] ard_surface_reflectance (experimental)
+- [ ] atmospheric_correction (experimental)
+- [ ] cloud_detection (experimental)
+- [ ] fit_curve (experimental)
+- [ ] inspect (experimental)
 - [ ] load_collection
-- [ ] load_uploaded_files
-- [ ] predict_curve
+- [ ] load_stac (experimental)
+- [ ] load_uploaded_files (experimental)
+- [ ] predict_curve (experimental)
 - [ ] run_udf
-- [ ] run_udf_externally
-- [ ] sar_backscatter
+- [ ] run_udf_externally (experimental)
+- [ ] sar_backscatter (experimental)
 - [ ] save_result
-- [ ] vector_to_random_points
+- [ ] vector_to_random_points (experimental)
+
+The following processes are in proposal state (i.e. experimental) and may be added later:
+
+- [ ] aggregate_spatial_window (experimental)
+- [ ] apply_polygon (experimental)
+- [ ] array_create_labeled (experimental)
+- [ ] array_find_label (experimental)
+- [ ] filter_labels (experimental)
+- [ ] filter_vector (experimental)
+- [ ] flatten_dimensions (experimental)
+- [ ] load_geojson (experimental)
+- [ ] load_url (experimental)
+- [ ] reduce_spatial (experimental)
+- [ ] unflatten_dimension (experimental)
+- [ ] vector_buffer (experimental)
+- [ ] vector_reproject (experimental)
+- [ ] vector_to_regular_points (experimental)
 
 ## Assumptions
 
@@ -232,6 +233,45 @@ Arguments and return values can point to external files, e.g.
 ```json
 {
   "$ref": "https://host.example/file.nc"
+}
+```
+
+There are a couple of data types that can't be represented in JSON5 and will be provided as an object instead.
+
+**Labeled arrays:**
+```json
+{
+  "type": "labeled-array",
+  "data": [
+    {
+      "key": "B01",
+      "value": 1.23
+    },
+    {
+      "key": "B02",
+      "value": 0.98
+    }
+    // ...
+  ]
+}
+```
+
+**Data Cube Metadata:**
+```json
+{
+  "type": "datacube",
+  "data": {
+    // uses the STAC datacube extension
+    "bands": {
+        "type": "bands",
+        "values": [
+          "B01",
+          "B02",
+          "Bo3"
+        ]
+    }
+    // ...
+  }
 }
 ```
 
