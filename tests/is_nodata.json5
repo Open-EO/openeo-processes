@@ -12,7 +12,9 @@
       "arguments": {
         "x": 1
       },
-      "returns": false
+      "returns": false,
+      // Optional to avoid an error in case the no-data value is 1
+      "optional": true
     },
     {
       "arguments": {

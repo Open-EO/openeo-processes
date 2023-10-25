@@ -9,10 +9,10 @@
     },
     {
       "arguments": {
-        "x": false,
+        "x": true,
         "y": false
       },
-      "returns": false
+      "returns": true
     },
     {
       "arguments": {
@@ -23,7 +23,7 @@
     },
     {
       "arguments": {
-        "x": null,
+        "x": false,
         "y": true
       },
       "returns": true
@@ -31,6 +31,34 @@
     {
       "arguments": {
         "x": false,
+        "y": false
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": false,
+        "y": null
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "x": null,
+        "y": true
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": null,
+        "y": false
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "x": null,
         "y": null
       },
       "returns": null

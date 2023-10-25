@@ -20,7 +20,13 @@
     },
     {
       "arguments": {
-        "x": -123456789.0
+        "x": 4294967296
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": -4294967296.0
       },
       "returns": false
     },
@@ -99,6 +105,24 @@
     {
       "arguments": {
         "x": "inf"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": "+infinity"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": "+Infinity"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": "+inf"
       },
       "returns": false
     },
