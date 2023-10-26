@@ -23,16 +23,16 @@ This folder contains test cases for the openEO processes.
 - [x] arcsin - <https://github.com/Open-EO/openeo-processes/pull/476>
 - [x] arctan
 - [x] arctan2
-- [ ] array_append
+- [x] array_append - <https://github.com/Open-EO/openeo-processes/pull/478>
 - [ ] array_apply
-- [ ] array_concat
-- [ ] array_contains
-- [ ] array_create
-- [ ] array_element
+- [x] array_concat
+- [x] array_contains
+- [x] array_create
+- [x] array_element
 - [ ] array_filter
-- [ ] array_find
+- [x] array_find
 - [ ] array_interpolate_linear
-- [ ] array_labels
+- [x] array_labels
 - [x] array_modify (experimental) - could use some more tests
 - [x] arsinh
 - [x] artanh - <https://github.com/Open-EO/openeo-processes/pull/476>
