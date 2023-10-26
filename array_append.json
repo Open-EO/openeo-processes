@@ -25,15 +25,20 @@
         },
         {
             "name": "label",
-            "description": "If the given array is a labeled array, a new label for the new value should be given. If not given or `null`, the array index as string is used as the label. If in any case the label exists, a `LabelExists` exception is thrown.",
+            "description": "If the given array is a labeled array, a new label for the new value should be given. If not given or `null`, the array index as number is used as the label. If in any case the label exists, a `LabelExists` exception is thrown.",
             "optional": true,
             "default": null,
-            "schema": {
-                "type": [
-                    "string",
-                    "null"
-                ]
-            }
+            "schema": [
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ]
         }
     ],
     "returns": {

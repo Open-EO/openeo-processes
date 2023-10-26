@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.0-rc.1] - 2023-05-25
 
+### Fixed
+
+- `array_append`: Added `number` type for labels to be consistent with other processes. Default to numerical index instead of string.
+
 ### Added
 
 - New processes in proposal state:
