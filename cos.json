@@ -18,7 +18,7 @@
         }
     ],
     "returns": {
-        "description": "The computed cosine of `x`.",
+        "description": "The computed cosine in the range *[-1, 1]*.",
         "schema": {
             "type": [
                 "number",

@@ -18,7 +18,7 @@
         }
     ],
     "returns": {
-        "description": "The computed hyperbolic cosine of `x`.",
+        "description": "The computed hyperbolic cosine in the range *[1, +∞)*.",
         "schema": {
             "type": [
                 "number",

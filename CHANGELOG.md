@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Trigonometric functions: Clarified that NaN is returned outside of their defined input range and defined output ranges where possible.
+- Clarified for various mathematical functions the defined input and output ranges. Mention that `NaN` is returned outside of the defined input range where possible.
 
 ## [2.0.0-rc.1] - 2023-05-25
 

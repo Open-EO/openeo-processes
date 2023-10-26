@@ -18,7 +18,7 @@
         }
     ],
     "returns": {
-        "description": "The computed hyperbolic sine of `x`.",
+        "description": "The computed hyperbolic sine.",
         "schema": {
             "type": [
                 "number",

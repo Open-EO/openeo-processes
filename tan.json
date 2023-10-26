@@ -18,7 +18,7 @@
         }
     ],
     "returns": {
-        "description": "The computed tangent of `x`.",
+        "description": "The computed tangent.",
         "schema": {
             "type": [
                 "number",
