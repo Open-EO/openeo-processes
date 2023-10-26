@@ -2,6 +2,29 @@
   "tests": [
     {
       "arguments": {
+        "data": [],
+        "value": 0
+      },
+      "returns": [
+        1
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          2
+        ],
+        "value": null
+      },
+      "returns": [
+        1,
+        2,
+        null
+      ]
+    },
+    {
+      "arguments": {
         "data": [
           1,
           2
@@ -13,6 +36,164 @@
         2,
         3
       ]
+    },
+    {
+      "arguments": {
+        "data": [
+          true,
+          false
+        ],
+        "value": true
+      },
+      "returns": [
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          true,
+          false
+        ],
+        "value": null
+      },
+      "returns": [
+        true,
+        false,
+        null
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          "a",
+          "b"
+        ],
+        "value": "c"
+      },
+      "returns": [
+        "a",
+        "b"
+        "3"
+      ],
+      "optional": true
+    },
+    {
+      "arguments": {
+        "data": [
+          null,
+          2
+        ],
+        "value": "3"
+      },
+      "returns": [
+        null,
+        2,
+        "3"
+      ],
+      // mixing data types is optional
+      "optional": true
+    },
+    {
+      "arguments": {
+        "data": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": "B01",
+              "value": 1.23
+            },
+            {
+              "key": "B02",
+              "value": 0.98
+            }
+          ]
+        },
+        "value": 4.56,
+        "label": "B03"
+      },
+      "returns": {
+        "type": "labeled-array",
+        "data": [
+          {
+            "key": "B01",
+            "value": 1.23
+          },
+          {
+            "key": "B02",
+            "value": 0.98
+          },
+          {
+            "key": "B03",
+            "value": 4.56
+          }
+        ]
+      }
+    },
+    {
+      "arguments": {
+        "data": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": 2,
+              "value": 1.23
+            },
+            {
+              "key": 3,
+              "value": 0.98
+            }
+          ]
+        },
+        "value": 4.56,
+        "label": 5
+      },
+      "returns": {
+        "type": "labeled-array",
+        "data": [
+          {
+            "key": 2,
+            "value": 1.23
+          },
+          {
+            "key": 3,
+            "value": 0.98
+          },
+          {
+            "key": 5,
+            "value": 4.56
+          }
+        ]
+      }
+    },
+    {
+      "arguments": {
+        "data": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": "B01",
+              "value": 1.23
+            }
+          ]
+        },
+        "value": 4.56
+      },
+      "returns": {
+        "type": "labeled-array",
+        "data": [
+          {
+            "key": "B01",
+            "value": 1.23
+          },
+          {
+            "key": 1,
+            "value": 4.56
+          }
+        ]
+      }
     }
   ]
 }

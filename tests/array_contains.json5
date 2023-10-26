@@ -25,6 +25,26 @@
     {
       "arguments": {
         "data": [
+          false,
+          false
+        ],
+        "value": false
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "data": [
+          true,
+          true
+        ],
+        "value": false
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "data": [
           1,
           2,
           3

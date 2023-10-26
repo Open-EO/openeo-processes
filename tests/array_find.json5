@@ -41,6 +41,56 @@
     {
       "arguments": {
         "data": [
+          false,
+          false
+        ],
+        "value": false
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "data": [
+          false,
+          false
+        ],
+        "value": false,
+        "reverse": true
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "data": [
+          true,
+          true
+        ],
+        "value": false
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "data": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": "B03",
+              "value": 3
+            },
+            {
+              "key": "B04",
+              "value": 4
+            }
+          ]
+        },
+        "value": 3
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "data": [
           1,
           2,
           3

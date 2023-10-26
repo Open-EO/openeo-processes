@@ -31,6 +31,125 @@
         "return_nodata": true
       },
       "returns": null
-    }
+    },
+    {
+      "arguments": {
+        "data": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": "B01",
+              "value": 4
+            },
+            {
+              "key": "B02",
+              "value": 5
+            },
+            {
+              "key": "B03",
+              "value": 6
+            }
+          ]
+        },
+        "label": "BO2"
+      },
+      "returns": 5
+    },
+    {
+      "arguments": {
+        "data": [
+          1
+        ]
+      },
+      "throws": "ArrayElementParameterMissing"
+    },
+    {
+      "arguments": {
+        "data": [
+          1
+        ],
+        "index": 0,
+        "label": 0
+      },
+      "throws": "ArrayElementParameterConflict"
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          2
+        ],
+        "index": 2
+      },
+      "throws": "ArrayElementNotAvailable"
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          2
+        ],
+        "index": -1
+      },
+      "throws": "ArrayElementNotAvailable"
+    },
+    {
+      "arguments": {
+        "data": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": "B01",
+              "value": 4
+            },
+            {
+              "key": "B02",
+              "value": 5
+            },
+            {
+              "key": "B03",
+              "value": 6
+            }
+          ]
+        },
+        "label": "BO4"
+      },
+      "throws": "ArrayElementNotAvailable"
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          2
+        ],
+        "index": 2,
+        "return_nodata": true
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "data": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": "B01",
+              "value": 4
+            },
+            {
+              "key": "B02",
+              "value": 5
+            },
+            {
+              "key": "B03",
+              "value": 6
+            }
+          ]
+        },
+        "label": "BO4",
+        "return_nodata": true
+      },
+      "returns": null
+    },
   ]
 }
