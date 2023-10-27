@@ -13,8 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Clarified for various mathematical functions the defined input and output ranges. Mention that `NaN` is returned outside of the defined input range where possible.
+- `divide`: Clarified behavior for division by 0
 - `filter_bbox`, `load_collection`, `load_stac`: Clarified that the bounding box is reprojected to the CRS of the spatial data cube dimensions if required.
 - `filter_spatial`: Clarified that masking is applied using the given geometries. [#469](https://github.com/Open-EO/openeo-processes/issues/469)
+- `mod`: Clarified behavior for y = 0
 - `sqrt`: Clarified that NaN is returned for negative numbers.
 
 ## [2.0.0-rc.1] - 2023-05-25
