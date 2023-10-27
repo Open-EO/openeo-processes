@@ -6,9 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased / Draft
 
+### Changed
+
+- `clip`: Throw an exception if min > max [#472](https://github.com/Open-EO/openeo-processes/issues/472)
+
 ### Fixed
 
 - Clarified for various mathematical functions the defined input and output ranges. Mention that `NaN` is returned outside of the defined input range where possible.
+- `sqrt`: Clarified that NaN is returned for negative numbers.
 
 ## [2.0.0-rc.1] - 2023-05-25
 
