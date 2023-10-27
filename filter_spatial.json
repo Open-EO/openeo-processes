@@ -1,7 +1,7 @@
 {
     "id": "filter_spatial",
     "summary": "Spatial filter raster data cubes using geometries",
-    "description": "Limits the raster data cube over the spatial dimensions to the specified geometries.\n\n- For **polygons**, the filter retains a pixel in the data cube if the point at the pixel center intersects with at least one of the polygons (as defined in the Simple Features standard by the OGC).\n- For **points**, the process considers the closest pixel center.\n- For **lines** (line strings), the process considers all the pixels whose centers are closest to at least one point on the line.\n\nMore specifically, pixels outside of the bounding box of the given geometry will not be available after filtering. All pixels inside the bounding box that are not retained will be set to `null` (no data).\n\n Alternatively, use ``filter_bbox()`` to filter with a bounding box or ``filter_vector()`` to filter a vector data cube based on geometries.",
+    "description": "Limits the raster data cube over the spatial dimensions to the specified geometries.\n\n- For **polygons**, the filter retains a pixel in the data cube if the point at the pixel center intersects with at least one of the polygons (as defined in the Simple Features standard by the OGC).\n- For **points**, the process considers the closest pixel center.\n- For **lines** (line strings), the process considers all the pixels whose centers are closest to at least one point on the line.\n\nMore specifically, pixels outside of the bounding box of the given geometries will not be available after filtering. All pixels inside the bounding box that are not retained will be set to `null` (no data).\n\n Alternatively, use ``filter_bbox()`` to filter with a bounding box or ``filter_vector()`` to filter a vector data cube based on geometries. Use ``mask_polygon()`` to mask without changing the spatial extent of your data cube.",
     "categories": [
         "cubes",
         "filter"
@@ -26,7 +26,7 @@
         },
         {
             "name": "geometries",
-            "description": "One or more geometries used for filtering, given as GeoJSON or vector data cube. If multiple geometries are provided, the union of them is used. Empty geometries are ignored.\n\nLimits the data cube to the bounding box of the given geometries. No implicit masking gets applied. To mask the pixels of the data cube use ``mask_polygon()``.",
+            "description": "One or more geometries used for spatial filtering and masking, given as GeoJSON or vector data cube.",
             "schema": [
                 {
                     "title": "Vector Data Cube",
