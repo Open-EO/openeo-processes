@@ -39,7 +39,7 @@
         },
         {
             "name": "extent",
-            "description": "A bounding box, which may include a vertical axis (see `base` and `height`).",
+            "description": "A bounding box, which may include a vertical axis (see `base` and `height`).\n\nIf the bounding box is not provided in the coordinate reference system (CRS) of the data cube, the bounding box is reprojected to the CRS of the spatial data cube dimensions.",
             "schema": {
                 "type": "object",
                 "subtype": "bounding-box",
