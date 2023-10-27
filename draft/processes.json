@@ -13490,7 +13490,7 @@
   {
     "id": "sqrt",
     "summary": "Square root",
-    "description": "Computes the square root of a real number `x`, which is equal to calculating `x` to the power of *0.5*.\n\nA square root of x is a number a such that *`a² = x`*. Therefore, the square root is the inverse function of a to the power of 2, but only for *a >= 0*.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the square root of a real number `x`, which is equal to calculating `x` to the power of *0.5*. For negative `x`, the process returns `NaN`.\n\nA square root of x is a number a such that *`a² = x`*. Therefore, the square root is the inverse function of a to the power of 2, but only for *a >= 0*.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "math",
       "math > exponential & logarithmic"
@@ -13547,6 +13547,11 @@
         "rel": "about",
         "href": "http://mathworld.wolfram.com/SquareRoot.html",
         "title": "Square root explained by Wolfram MathWorld"
+      },
+      {
+        "rel": "about",
+        "href": "https://ieeexplore.ieee.org/document/8766229",
+        "title": "IEEE Standard 754-2019 for Floating-Point Arithmetic"
       }
     ],
     "process_graph": {
