@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- `array_append`: Added `number` type for labels to be consistent with other processes. Default to numerical index instead of string.
+- `array_append`: Added `number` type for labels to be consistent with other processes. Default to numerical index instead of string. Clarify that the `label` parameter only applies to labeled arrays.
 
 ### Added
 
