@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- `array_interpolate_linear`: Apply interpolation also on NaN values.
+- `array_interpolate_linear`: Apply interpolation to NaN and no-data values.
 - `clip`: Throw an exception if min > max [#472](https://github.com/Open-EO/openeo-processes/issues/472)
 
 ### Fixed
