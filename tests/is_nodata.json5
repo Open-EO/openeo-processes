@@ -1,4 +1,5 @@
 {
+  "id": "is_nodata",
   // We can't check for other no-data values than `null`
   // as it depends on the data cube / metadata / context, which can't influence
   "tests": [

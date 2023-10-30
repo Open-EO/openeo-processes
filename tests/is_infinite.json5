@@ -1,4 +1,6 @@
 {
+  "id": "is_infinite",
+  "experimental": true,
   "tests": [
     {
       "arguments": {

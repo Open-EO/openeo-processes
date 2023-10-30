@@ -1,4 +1,5 @@
 {
+  "id": "aggregate_temporal",
   "tests": [
     {
       "arguments": {

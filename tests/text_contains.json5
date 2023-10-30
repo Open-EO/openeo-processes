@@ -1,4 +1,5 @@
 {
+  "id": "text_contains",
   "tests": [
     {
       "arguments": {

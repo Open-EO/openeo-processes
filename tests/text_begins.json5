@@ -1,4 +1,5 @@
 {
+  "id": "text_begins",
   "tests": [
     {
       "arguments": {

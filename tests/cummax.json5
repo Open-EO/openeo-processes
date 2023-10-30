@@ -1,4 +1,6 @@
 {
+  "id": "cummax",
+  "experimental": true,
   "tests": [
     {
       "arguments": {
