@@ -3,15 +3,15 @@
   "tests": [
     {
       "arguments": {
-        "x": 1,
-        "y": null
+        "x": 0,
+        "y": 0
       },
-      "returns": null
+      "returns": true
     },
     {
       "arguments": {
-        "x": 0,
-        "y": 0
+        "x": 1,
+        "y": 1.0
       },
       "returns": true
     },
@@ -24,8 +24,36 @@
     },
     {
       "arguments": {
+        "x": "1",
+        "y": 2
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "y": "1"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": "a",
+        "y": "b"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
         "x": -0.5,
         "y": -0.6
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": "2018-01-01T00:00:00Z",
+        "y": "2018-01-02T00:00:00Z"
       },
       "returns": false
     },
@@ -45,10 +73,45 @@
     },
     {
       "arguments": {
+        "x": 1,
+        "y": null
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
         "x": null,
         "y": null
       },
       "returns": null
+    },
+    {
+      "arguments": {
+        "x": NaN,
+        "y": NaN
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": Infinity,
+        "y": Infinity
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": -Infinity,
+        "y": Infinity
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": Infinity,
+        "y": -Infinity
+      },
+      "returns": false
     }
   ]
 }

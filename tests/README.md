@@ -31,12 +31,12 @@ This folder contains test cases for the openEO processes.
 - [x] array_element
 - [ ] array_filter
 - [x] array_find
-- [ ] array_interpolate_linear
+- [x] array_interpolate_linear
 - [x] array_labels
 - [x] array_modify (experimental) - could use some more tests
 - [x] arsinh
 - [x] artanh - <https://github.com/Open-EO/openeo-processes/pull/476>
-- [ ] between
+- [x] between
 - [x] ceil
 - [ ] climatological_normal
 - [x] clip - missing: <https://github.com/Open-EO/openeo-processes/issues/472>
@@ -56,7 +56,7 @@ This folder contains test cases for the openEO processes.
 - [x] divide - <https://github.com/Open-EO/openeo-processes/pull/473>
 - [ ] drop_dimension
 - [x] e
-- [ ] eq
+- [x] eq
 - [x] exp
 - [ ] extrema
 - [ ] filter_bands
@@ -65,8 +65,8 @@ This folder contains test cases for the openEO processes.
 - [ ] filter_temporal
 - [ ] first
 - [x] floor
-- [ ] gt
-- [ ] gte
+- [x] gt
+- [x] gte
 - [x] if
 - [x] int
 - [x] is_infinite (experimental)
@@ -75,8 +75,8 @@ This folder contains test cases for the openEO processes.
 - [ ] linear_scale_range
 - [x] ln - <https://github.com/Open-EO/openeo-processes/pull/473>
 - [x] log - <https://github.com/Open-EO/openeo-processes/pull/473>
-- [ ] lt
-- [ ] lte
+- [x] lt
+- [x] lte
 - [ ] mask
 - [ ] mask_polygon
 - [ ] max
@@ -88,7 +88,7 @@ This folder contains test cases for the openEO processes.
 - [ ] multiply
 - [x] nan (experimental)
 - [ ] ndvi
-- [ ] neq
+- [x] neq
 - [ ] normalized_difference
 - [x] not
 - [x] or
