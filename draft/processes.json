@@ -3123,7 +3123,7 @@
     "parameters": [
       {
         "name": "x",
-        "description": "The value to check.",
+        "description": "The value to check.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
         "schema": {
           "description": "Any data type is allowed."
         }
@@ -3153,7 +3153,7 @@
       }
     ],
     "returns": {
-      "description": "`true` if `x` is between the specified bounds, otherwise `false`.",
+      "description": "`true` if `x` is between the specified bounds, `null` if `x` is a no-data value, `false` otherwise.",
       "schema": {
         "type": [
           "boolean",
