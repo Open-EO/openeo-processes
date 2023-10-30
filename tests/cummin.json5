@@ -1,4 +1,6 @@
 {
+  "id": "cummin",
+  "experimental": true,
   "tests": [
     {
       "arguments": {

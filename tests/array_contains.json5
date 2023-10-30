@@ -1,4 +1,5 @@
 {
+  "id": "array_contains",
   "tests": [
     {
       "arguments": {

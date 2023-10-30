@@ -1,4 +1,6 @@
 {
+  "id": "array_modify",
+  "experimental": true,
   "tests": [
     {
        // Replace a single value in the array.

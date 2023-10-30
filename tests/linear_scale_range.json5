@@ -1,4 +1,5 @@
 {
+  "id": "linear_scale_range",
   "tests": [
     {
       "arguments": {

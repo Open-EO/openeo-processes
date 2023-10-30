@@ -184,9 +184,19 @@ The test files have the following schema:
 ```yaml
 description: A document with test cases for a specific openEO process
 type: object
-required: 
+required:
+  - id
+  - experimental
   - tests
 properties:
+  id:
+    type: string
+    description: The identifier for the process.
+    pattern: '^\w+$'
+  experimental:
+    type: boolean
+    description: Declares that the process is experimental, tests may fail.
+    default: false
   tests:
     description: A list of test cases without a specific order
     type: array

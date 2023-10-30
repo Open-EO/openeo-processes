@@ -1,4 +1,6 @@
 {
+  "id": "cumsum",
+  "experimental": true,
   "tests": [
     {
       "arguments": {

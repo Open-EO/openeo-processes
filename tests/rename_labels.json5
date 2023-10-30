@@ -1,4 +1,5 @@
 {
+  "id": "rename_labels",
   "tests": [
     {
       "title": "Rename named labels",

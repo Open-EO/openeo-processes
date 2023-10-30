@@ -1,4 +1,6 @@
 {
+  "id": "cumproduct",
+  "experimental": true,
   "tests": [
     {
       "arguments": {
