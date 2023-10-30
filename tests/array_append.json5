@@ -76,9 +76,8 @@
       "returns": [
         "a",
         "b"
-        "3"
-      ],
-      "optional": true
+        "c"
+      ]
     },
     {
       "arguments": {
@@ -94,7 +93,7 @@
         "3"
       ],
       // mixing data types is optional
-      "optional": true
+      "throws": true
     },
     {
       "arguments": {

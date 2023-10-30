@@ -210,16 +210,15 @@ properties:
           type: object
           additionalProperties:
             description: An argument, can be of any type
-        optional:
-          description: Marks optional test so a failure produces only a warning.
-          type: boolean
-          default: false
         returns:
           description: The return value, can be of any type
         delta:
           description: If set to a positive number the equality of the actual return value and the expected return value is checked against a delta value to circumvent problems with floating-point inaccuracy.
           type: number
         throws:
+          description: >-
+            Specifies whether the execution is meant to throw an exception.
+            If used in combination with a return value, it makes the test effectively optional.
           oneOf:
             - description: Specify an exception name from the process specification
               type: string

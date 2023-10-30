@@ -42,7 +42,7 @@
       ]
     },
     {
-      // Concatenates two arrays containing different data type, may not always be supported.
+      // Concatenates two arrays containing different data type
       "arguments": {
         "array1": [
           "a",
@@ -59,7 +59,8 @@
         1,
         2
       ],
-      "optional": true
+      // May not always be supported
+      "throws": true
     },
     {
       // Check that a normal array and a labeled array lead to a normal array (labels get dropped)

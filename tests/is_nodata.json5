@@ -14,7 +14,7 @@
       },
       "returns": false,
       // Optional to avoid an error in case the no-data value is 1
-      "optional": true
+      "throws": true
     },
     {
       "arguments": {
