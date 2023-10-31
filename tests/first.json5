@@ -34,11 +34,42 @@
       "returns": null
     },
     {
+      "arguments": {
+        "data": [
+          null,
+          null,
+          null,
+          -1
+        ]
+      },
+      "returns": -1
+    },
+    {
+      "arguments": {
+        "data": [
+          null,
+          null
+        ]
+      },
+      "returns": null
+    },
+    {
       // The input array is empty: return `null`.
       "arguments": {
         "data": []
       },
       "returns": null
+    },
+    {
+      "arguments": {
+        "data": [
+          NaN,
+          1,
+          2,
+          3
+        ]
+      },
+      "returns": NaN
     }
   ]
 }

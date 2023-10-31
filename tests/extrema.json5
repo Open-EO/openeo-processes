@@ -46,6 +46,61 @@
       ]
     },
     {
+      "arguments": {
+        "data": [
+          NaN,
+          1,
+          2,
+          3
+        ]
+      },
+      "returns": [
+        NaN,
+        NaN
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          2,
+          Infinity,
+          3
+        ]
+      },
+      "returns": [
+        1,
+        Infinity
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          -Infinity,
+          2,
+          3
+        ]
+      },
+      "returns": [
+        -Infinity,
+        3
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          1.12345678903,
+          1.12345678901,
+          1.12345678902
+        ]
+      },
+      "returns": [
+        1.12345678901,
+        1.12345678903
+      ]
+    },
+    {
       // The input array is empty: return two `null` values.
       "arguments": {
         "data": []

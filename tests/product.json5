@@ -23,6 +23,18 @@
     {
       "arguments": {
         "data": [
+          null,
+          -2,
+          -2.0,
+          -2,
+          -2.0
+        ]
+      },
+      "returns": 16
+    },
+    {
+      "arguments": {
+        "data": [
           1,
           null
         ],
@@ -52,6 +64,47 @@
         "data": []
       },
       "returns": null
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          NaN,
+          3
+        ]
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          Infinity,
+          3
+        ]
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          -Infinity,
+          3
+        ]
+      },
+      "returns": -Infinity
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          -Infinity,
+          3,
+          Infinity
+        ]
+      },
+      "returns": NaN
     }
   ]
 }
