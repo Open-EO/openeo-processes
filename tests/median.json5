@@ -33,6 +33,58 @@
     {
       "arguments": {
         "data": [
+          8,
+          2,
+          5,
+          9,
+          3,
+          6,
+          1,
+          4
+        ]
+      },
+      "returns": 4.5
+    },
+    {
+      "arguments": {
+        "data": [
+          -0.1,
+          0,
+          0.56,
+          -0.76,
+          0.87,
+          -0.237
+        ]
+      },
+      "returns": -0.05
+    },
+    {
+      "arguments": {
+        "data": [
+          -Infinity,
+          3,
+          3,
+          5,
+          Infinity
+        ]
+      },
+      "returns": 3
+    },
+    {
+      "arguments": {
+        "data": [
+          NaN,
+          3,
+          3,
+          NaN,
+          5
+        ]
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "data": [
           -1,
           -0.5,
           null,

@@ -194,6 +194,38 @@
           }
         ]
       }
+    },
+    {
+      "arguments": {
+        "data": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": "B01",
+              "value": 1.23
+            },
+            {
+              "key": "B02",
+              "value": 0.98
+            }
+          ]
+        },
+        "value": 4.56,
+        "label": "B01"
+      },
+      "throws": "LabelExists"
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          2,
+          3
+        ],
+        "value": 4,
+        "label": "B01"
+      },
+      "throws": "ArrayNotLabeled"
     }
   ]
 }

@@ -24,6 +24,13 @@
     },
     {
       "arguments": {
+        "base": -3.5,
+        "p": 5
+      },
+      "returns": -525.21875
+    },
+    {
+      "arguments": {
         "base": 5,
         "p": -1
       },
@@ -49,6 +56,69 @@
         "p": 2
       },
       "returns": null
+    },
+    {
+      "arguments": {
+        "base": NaN,
+        "p": 2
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "base": 2,
+        "p": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "base": Infinity,
+        "p": 2
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "base": 2,
+        "p": Infinity
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "base": Infinity,
+        "p": Infinity
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "base": -Infinity,
+        "p": 2
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "base": -Infinity,
+        "p": 3
+      },
+      "returns": -Infinity
+    },
+    {
+      "arguments": {
+        "base": 2,
+        "p": -Infinity
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "base": -Infinity,
+        "p": -Infinity
+      },
+      "returns": 0
     }
   ]
 }

@@ -21,14 +21,26 @@
     },
     {
       "arguments": {
-        "x": null,
-        "inputMin": 0,
-        "inputMax": 100
+        "x": 0.2,
+        "inputMin": 0.1,
+        "inputMax": 0.4,
+        "outputMin": -1.5,
+        "outputMax": 1.5
       },
-      "returns": null
+      "returns": -0.5
     },
     {
-      // Shows that the input data is clipped.
+      "arguments": {
+        "x": 0.2,
+        "inputMin": 0.1,
+        "inputMax": 0.3,
+        "outputMin": -1.5,
+        "outputMax": 1.5
+      },
+      "returns": 0
+    },
+    {
+      // Shows that the input data is getting clipped.
       "arguments": {
         "x": 1.12,
         "inputMin": 0,
@@ -37,6 +49,129 @@
         "outputMax": 255
       },
       "returns": 255
+    },
+    {
+      // Minimum and maximum input value are swapped
+      "arguments": {
+        "x": 10,
+        "inputMin": 100,
+        "inputMax": 0
+      },
+      "returns": 0.9
+    },
+    {
+      // Minimum and maximum output value are swapped
+      "arguments": {
+        "x": 10,
+        "inputMin": 0,
+        "inputMax": 100,
+        "outputMin": 255,
+        "outputMax": 0
+      },
+      "returns": 229.5
+    },
+    {
+      // Both ranges are swapped
+      "arguments": {
+        "x": 10,
+        "inputMin": 100,
+        "inputMax": 0,
+        "outputMin": 255,
+        "outputMax": 0
+      },
+      "returns": 25.5
+    },
+    {
+      "arguments": {
+        "x": 1.12,
+        "inputMin": 0,
+        "inputMax": 1,
+        "outputMin": 0,
+        "outputMax": 255
+      },
+      "returns": 255
+    },
+    {
+      "arguments": {
+        "x": Infinity,
+        "inputMin": 0,
+        "inputMax": 100
+      },
+      "returns": 100
+    },
+    {
+      "arguments": {
+        "x": -Infinity,
+        "inputMin": 0,
+        "inputMax": 100
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "x": 10,
+        "inputMin": 0,
+        "inputMax": Infinity,
+        "outputMin": 0,
+        "outputMax": 255
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "x": 0,
+        "inputMin": -Infinity,
+        "inputMax": Infinity,
+        "outputMin": 0,
+        "outputMax": 255
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": 0,
+        "inputMin": -Infinity,
+        "inputMax": 0,
+        "outputMin": 0,
+        "outputMax": 255
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": 50,
+        "inputMin": 0,
+        "inputMax": 100,
+        "outputMin": 0,
+        "outputMax": Infinity
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "x": 50,
+        "inputMin": 0,
+        "inputMax": 100,
+        "outputMin": -Infinity,
+        "outputMax": 0
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": NaN,
+        "inputMin": 0,
+        "inputMax": 100
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": null,
+        "inputMin": 0,
+        "inputMax": 100
+      },
+      "returns": null
     }
   ]
 }

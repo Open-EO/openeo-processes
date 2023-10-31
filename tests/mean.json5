@@ -26,7 +26,62 @@
     {
       "arguments": {
         "data": [
+          1005.5,
+          -5.7,
+          -3.575,
+        ]
+      },
+      "returns": 332.075
+    },
+    {
+      "arguments": {
+        "data": [
+          -Infinity,
+          3,
+          5
+        ]
+      },
+      "returns": -Infinity
+    },
+    {
+      "arguments": {
+        "data": [
+          3,
+          5,
+          Infinity
+        ]
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "data": [
+          -Infinity,
+          3,
+          3,
+          5,
+          Infinity
+        ]
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "data": [
+          NaN,
+          3,
+          3,
+          NaN,
+          5
+        ]
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "data": [
           1,
+          2,
           null
         ],
         "ignore_nodata": false
@@ -47,6 +102,16 @@
           null,
           null
         ]
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "data": [
+          null,
+          null
+        ],
+        "ignore_nodata": false
       },
       "returns": null
     }
