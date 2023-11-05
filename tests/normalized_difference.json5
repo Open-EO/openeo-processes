@@ -1,4 +1,61 @@
 {
   "id": "normalized_difference",
-  "tests": []
+  "tests": [
+    {
+      "arguments": {
+        "x": 1,
+        "y": 1
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "x": 2,
+        "y": 1
+      },
+      "returns": 0.33333333333
+    },
+    {
+      "arguments": {
+        "x": 200.546,
+        "y": 56.873
+      },
+      "returns": 0.55812896483
+    },
+    {
+      "arguments": {
+        "x": null,
+        "y": 1
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "x": NaN,
+        "y": 1
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": Infinity,
+        "y": 1
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": -Infinity,
+        "y": 1
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": 1.12345678901,
+        "y": 2.12345678901
+      },
+      "returns": -0.30769230769
+    }
+  ]
 }

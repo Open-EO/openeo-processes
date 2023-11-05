@@ -89,14 +89,14 @@ This folder contains test cases for the openEO processes.
 - [x] nan (experimental)
 - [ ] ndvi
 - [x] neq
-- [ ] normalized_difference
+- [x] normalized_difference
 - [x] not
 - [x] or
 - [ ] order
 - [x] pi
 - [x] power
 - [x] product
-- [ ] quantiles
+- [x] quantiles
 - [ ] rearrange
 - [ ] reduce_dimension
 - [ ] rename_dimension
@@ -105,7 +105,7 @@ This folder contains test cases for the openEO processes.
 - [ ] resample_cube_temporal
 - [ ] resample_spatial
 - [x] round
-- [ ] sd
+- [x] sd
 - [x] sgn
 - [x] sin
 - [x] sinh
@@ -120,7 +120,7 @@ This folder contains test cases for the openEO processes.
 - [x] text_contains
 - [x] text_ends
 - [ ] trim_cube
-- [ ] variance
+- [x] variance
 - [x] xor
 
 **Important:** The differentiation of null and NaN is to be discussed and reflected in the tests.

@@ -25,6 +25,54 @@
       "returns": null
     },
     {
+      "arguments": {
+        "data": [
+          -1,
+          0,
+          1
+        ]
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "data": [
+          2.5,
+          2.5,
+          2.5
+        ]
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "data": [
+          -1,
+          0,
+          Infinity
+        ]
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "data": [
+          -Infinity,
+          5
+        ]
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "data": [
+          NaN,
+          5
+        ]
+      },
+      "returns": NaN
+    },
+    {
       // The input array is empty: return `null`.
       "arguments": {
         "data": []
