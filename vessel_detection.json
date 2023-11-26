@@ -12,17 +12,13 @@
     "parameters": [
         {
             "name": "data",
-            "description": "The raster cube to apply the thresholding to.",
+            "description": "The raster cube to apply the thresholding to. The raster cube must belong to the SENTINEL1_GRD collection.",
             "schema": [
                 {
                     "type": "object",
                     "subtype": "raster-cube"
                 }
             ]
-        },
-        {
-            "name": "export_cog",
-            "description": 
         }
     ],
     "returns": {
