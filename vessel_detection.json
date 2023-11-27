@@ -1,0 +1,40 @@
+{
+    "id": "vessel_detection",
+    "summary": "Apply vessel detection thresholding.",
+    "description": "Apply vessel detection thresholding on Ellipsoid Corrected SENTINEL1_GRD data. The process will export the thresholding results to a GeoJson FeatureCollection.",
+    "categories": [
+        "cubes",
+        "vector",
+        "raster"
+    ],
+    "experimental": true,
+    "deprecated": false,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The raster cube to apply the thresholding to. The raster cube must belong to the SENTINEL1_GRD collection.",
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "raster-cube"
+                }
+            ]
+        }
+    ],
+    "returns": {
+        "description": "Returns `false` if the process failed to complete the thresholding, or the output could not be exported  GeoJson FeatureCollection."
+        "schema": {
+            "type": "boolean"
+        }
+    },
+    "exceptions": {
+      
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html",
+            "rel": "about",
+            "title": "Data Cubes explained in the openEO documentation"
+        }
+    ]
+}
