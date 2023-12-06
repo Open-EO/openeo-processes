@@ -39,7 +39,7 @@
         },
         {
             "name": "target",
-            "description": "The training sites for the classification model as a vector data cube. This is associated with the target variable for the support vector classification model. The geometry has to be associated with a class label.",
+            "description": "Labeled information for training the support vector classification model. Each entry corresponds to a set of features (predictors).",
             "schema": {
                 "type": "object",
                 "subtype": "datacube",
