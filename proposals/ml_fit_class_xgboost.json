@@ -1,0 +1,155 @@
+{
+    "id": "ml_fit_class_xgboost",
+    "summary": "Train an XGBoost classification model",
+    "description": "Executes the fit of an XGBoost classification model based on training data.",
+    "categories": [
+        "machine learning"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "predictors",
+            "description": "The predictors for the XGBoost classification model as a vector data cube. Aggregated to the features (vectors) of the target input variable.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "geometry"
+                    },
+                    {
+                        "type": "bands"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "target",
+            "description": "Labeled data for XGBoost classification, aligning with predictor values based on a shared geometry dimension. This ensures a clear connection between predictor rows and labels, allowing the model to associate specific predictor values with rows during training.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "geometry"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "learning_rate",
+            "description": "Step size shrinkage used in update to prevent overfitting.",
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "default": 0.15
+            }
+        },
+        {
+            "name": "max_depth",
+            "description": "Maximum depth of a tree.",
+            "schema": {
+                "type": "integer",
+                "minimum": 1,
+                "default": 5
+            }
+        },
+        {
+            "name": "min_child_weight",
+            "description": "Minimum sum of instance weight (hessian) needed in a child.",
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "default": 1
+            }
+        },
+        {
+            "name": "subsample",
+            "description": "Subsample ratio of the training instance.",
+            "optional": true,
+            "default": 0.8,
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+            }
+        },
+        {
+            "name": "min_split_loss",
+            "description": "Minimum loss reduction required to make a further partition on a leaf node of the tree.",
+            "optional": true,
+            "default": 1,
+            "schema": {
+                "type": "number",
+                "minimum": 0
+            }
+        },
+        {
+            "name": "max_delta_step",
+            "description": "Maximum delta step we allow each tree's weight estimation to be.",
+            "optional": true,
+            "default": 1,
+            "schema": {
+                "type": "number",
+                "minimum": 0
+            }
+        },
+        {
+            "name": "nfold",
+            "description": "Number of folds for cross-validation.",
+            "optional": true,
+            "default": 5,
+            "schema": {
+                "type": "integer",
+                "minimum": 2
+            }
+        },
+        {
+            "name": "nrounds",
+            "description": "Number of boosting rounds.",
+            "optional": true,
+            "default": 100,
+            "schema": {
+                "type": "integer",
+                "minimum": 1
+            }
+        },
+        {
+            "name": "early_stopping_rounds",
+            "description": "Activates early stopping. Validation metric needs to improve at least once in every early_stopping_rounds round(s) to continue training.",
+            "optional": true,
+            "default": 20,
+            "schema": {
+                "type": "integer",
+                "minimum": 1
+            }
+        },
+        {
+            "name": "seed",
+            "description": "A randomization seed to use for the random sampling in training. If not given or `null`, no seed is used and results may differ on subsequent use.",
+            "optional": true,
+            "default": null,
+            "schema": {
+                "type": [
+                    "integer",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "A model object that can be saved with `save_ml_model()` and restored with `load_ml_model()`.",
+        "schema": {
+            "type": "object",
+            "subtype": "ml-model"
+        }
+    },
+    "links": [
+        {
+            "href": "https://dl.acm.org/doi/10.1145/2939672.2939785",
+            "title": "Chen and Guestrin (2016), XGBoost: A Scalable Tree Boosting System",
+            "type": "text/html",
+            "rel": "about"
+        }
+    ]
+}
