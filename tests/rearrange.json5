@@ -2,7 +2,7 @@
   "id": "rearrange",
   "tests": [
     {
-      "title": "Reverse a list",
+      // Reverse a list
       "arguments": {
         "data": [
           5,
@@ -22,7 +22,7 @@
       ]
     },
     {
-      "title": "Remove two elements",
+      // Remove two elements
       "arguments": {
         "data": [
           5,
@@ -41,7 +41,7 @@
       ]
     },
     {
-      "title": "Swap two elements",
+      // Swap two elements
       "arguments": {
         "data": [
           5,

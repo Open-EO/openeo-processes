@@ -186,7 +186,7 @@
       ]
     },
     {
-      "title": "Empty array",
+      // Empty array
       "arguments": {
         "data": [],
         "probabilities": [
