@@ -2,7 +2,7 @@
   {
     "id": "absolute",
     "summary": "Absolute value",
-    "description": "Computes the absolute value of a real number `x`, which is the \"unsigned\" portion of x and often denoted as *|x|*.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the absolute value of a real number `x`, which is the \"unsigned\" portion of `x` and often denoted as *|x|*.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "math"
     ],
@@ -1818,29 +1818,32 @@
   {
     "id": "arccos",
     "summary": "Inverse cosine",
-    "description": "Computes the arc cosine of `x`. The arc cosine is the inverse function of the cosine so that *`arccos(cos(x)) = x`*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the arc cosine of `x`. The arc cosine is the inverse function of the cosine so that *`arccos(cos(x)) = x`*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated. `NaN` is returned for values outside of the allowed range.",
     "categories": [
       "math > trigonometric"
     ],
     "parameters": [
       {
         "name": "x",
-        "description": "A number.",
+        "description": "A number in the range *[-1, 1]*.",
         "schema": {
           "type": [
             "number",
             "null"
-          ]
+          ],
+          "minimum": -1,
+          "maximum": 1
         }
       }
     ],
     "returns": {
-      "description": "The computed angle in radians.",
+      "description": "The computed angle in radians in the range *[0, π]*.",
       "schema": {
         "type": [
           "number",
           "null"
-        ]
+        ],
+        "minimum": 0
       }
     },
     "examples": [
@@ -1862,29 +1865,31 @@
   {
     "id": "arcosh",
     "summary": "Inverse hyperbolic cosine",
-    "description": "Computes the inverse hyperbolic cosine of `x`. It is the inverse function of the hyperbolic cosine so that *`arcosh(cosh(x)) = x`*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the inverse hyperbolic cosine of `x`. It is the inverse function of the hyperbolic cosine so that *`arcosh(cosh(x)) = x`*.\n\nThe no-data value `null` is passed through and therefore gets propagated. `NaN` is returned for values outside of the allowed range.",
     "categories": [
       "math > trigonometric"
     ],
     "parameters": [
       {
         "name": "x",
-        "description": "A number.",
+        "description": "A number in the range *[1, +∞)*.",
         "schema": {
           "type": [
             "number",
             "null"
           ]
-        }
+        },
+        "minimum": 1
       }
     ],
     "returns": {
-      "description": "The computed angle in radians.",
+      "description": "The computed hyperbolic angle in radians in the range *[0, +∞)*.",
       "schema": {
         "type": [
           "number",
           "null"
-        ]
+        ],
+        "minimum": 0
       }
     },
     "examples": [
@@ -1906,24 +1911,26 @@
   {
     "id": "arcsin",
     "summary": "Inverse sine",
-    "description": "Computes the arc sine of `x`. The arc sine is the inverse function of the sine so that *`arcsin(sin(x)) = x`*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the arc sine of `x`. The arc sine is the inverse function of the sine so that *`arcsin(sin(x)) = x`*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated. `NaN` is returned for values < -1 and > 1.",
     "categories": [
       "math > trigonometric"
     ],
     "parameters": [
       {
         "name": "x",
-        "description": "A number.",
+        "description": "A number in the range *[-1, 1]*.",
         "schema": {
           "type": [
             "number",
             "null"
-          ]
+          ],
+          "minimum": -1,
+          "maximum": 1
         }
       }
     ],
     "returns": {
-      "description": "The computed angle in radians.",
+      "description": "The computed angle in radians in the range *[-π/2, π/2]*.",
       "schema": {
         "type": [
           "number",
@@ -1967,7 +1974,7 @@
       }
     ],
     "returns": {
-      "description": "The computed angle in radians.",
+      "description": "The computed angle in radians in the range *(−π/2, π/2)*.",
       "schema": {
         "type": [
           "number",
@@ -3028,7 +3035,7 @@
   {
     "id": "arsinh",
     "summary": "Inverse hyperbolic sine",
-    "description": "Computes the inverse hyperbolic sine of `x`. It is the inverse function of the hyperbolic sine so that *`arsinh(sinh(x)) = x`*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the inverse hyperbolic sine of `x`. It is the inverse function of the hyperbolic sine so that *`arsinh(sinh(x)) = x`*.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "math > trigonometric"
     ],
@@ -3045,7 +3052,7 @@
       }
     ],
     "returns": {
-      "description": "The computed angle in radians.",
+      "description": "The computed hyperbolic angle in radians.",
       "schema": {
         "type": [
           "number",
@@ -3072,24 +3079,26 @@
   {
     "id": "artanh",
     "summary": "Inverse hyperbolic tangent",
-    "description": "Computes the inverse hyperbolic tangent of `x`. It is the inverse function of the hyperbolic tangent so that *`artanh(tanh(x)) = x`*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the inverse hyperbolic tangent of `x`. It is the inverse function of the hyperbolic tangent so that *`artanh(tanh(x)) = x`*.\n\nThe no-data value `null` is passed through and therefore gets propagated. `NaN` is returned for values outside of the allowed range. The computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, `x` = 1 results in +infinity and `x` = 0 results in -infinity. Otherwise, an exception is thrown.",
     "categories": [
       "math > trigonometric"
     ],
     "parameters": [
       {
         "name": "x",
-        "description": "A number.",
+        "description": "A number in the range *(-1, 1)*.",
         "schema": {
           "type": [
             "number",
             "null"
-          ]
+          ],
+          "minimumExclusive": -1,
+          "maximumExclusive": 1
         }
       }
     ],
     "returns": {
-      "description": "The computed angle in radians.",
+      "description": "The computed hyperbolic angle in radians.",
       "schema": {
         "type": [
           "number",
@@ -3110,6 +3119,11 @@
         "rel": "about",
         "href": "http://mathworld.wolfram.com/InverseHyperbolicTangent.html",
         "title": "Inverse hyperbolic tangent explained by Wolfram MathWorld"
+      },
+      {
+        "rel": "about",
+        "href": "https://ieeexplore.ieee.org/document/4610935",
+        "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
       }
     ]
   },
@@ -3530,12 +3544,14 @@
       }
     ],
     "returns": {
-      "description": "The computed cosine of `x`.",
+      "description": "The computed cosine in the range *[-1, 1]*.",
       "schema": {
         "type": [
           "number",
           "null"
-        ]
+        ],
+        "minimum": -1,
+        "maximum": 1
       }
     },
     "examples": [
@@ -3557,14 +3573,14 @@
   {
     "id": "cosh",
     "summary": "Hyperbolic cosine",
-    "description": "Computes the hyperbolic cosine of `x`.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the hyperbolic cosine of `x`.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "math > trigonometric"
     ],
     "parameters": [
       {
         "name": "x",
-        "description": "An angle in radians.",
+        "description": "An hyperbolic angle in radians.",
         "schema": {
           "type": [
             "number",
@@ -3574,12 +3590,13 @@
       }
     ],
     "returns": {
-      "description": "The computed hyperbolic cosine of `x`.",
+      "description": "The computed hyperbolic cosine in the range *[1, +∞)*.",
       "schema": {
         "type": [
           "number",
           "null"
-        ]
+        ],
+        "minimum": 1
       }
     },
     "examples": [
@@ -3816,7 +3833,7 @@
   {
     "id": "divide",
     "summary": "Division of two numbers",
-    "description": "Divides argument `x` by the argument `y` (*`x / y`*) and returns the computed result.\n\nNo-data values are taken into account so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, a division by zero results in ±infinity if the processing environment supports it. Otherwise, a `DivisionByZero` exception must the thrown.",
+    "description": "Divides argument `x` by the argument `y` (*`x / y`*) and returns the computed result.\n\nNo-data values are taken into account so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. A division by zero results in:\n\n- +infinity for `x` > 0,\n- -infinity for `x` < 0,\n- `NaN` for `x` = 0,\n- or otherwise, throws a `DivisionByZero` exception if the other options are not supported by the processing environment.",
     "categories": [
       "math"
     ],
@@ -4139,12 +4156,13 @@
       }
     ],
     "returns": {
-      "description": "The computed value for *e* raised to the power of `p`.",
+      "description": "The computed value for *e* raised to the power of `p`. Value is in the range of *(0, +∞)*",
       "schema": {
         "type": [
           "number",
           "null"
-        ]
+        ],
+        "minimumExclusive": 0
       }
     },
     "examples": [
@@ -5690,19 +5708,20 @@
   {
     "id": "ln",
     "summary": "Natural logarithm",
-    "description": "The natural logarithm is the logarithm to the base *e* of the number `x`, which equals to using the *log* process with the base set to *e*. The natural logarithm is the inverse function of taking *e* to the power x.\n\nThe no-data value `null` is passed through.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, *`ln(0)`* results in ±infinity if the processing environment supports it or otherwise an exception is thrown.",
+    "description": "The natural logarithm is the logarithm to the base *e* of the number `x`, which equals to using the *log* process with the base set to *e*. The natural logarithm is the inverse function of taking *e* to the power x.\n\nThe no-data value `null` is passed through.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, *`ln(0)`* results in -infinity if the processing environment supports it or otherwise an exception is thrown. `NaN` is returned for values outside of the allowed range.",
     "categories": [
       "math > exponential & logarithmic"
     ],
     "parameters": [
       {
         "name": "x",
-        "description": "A number to compute the natural logarithm for.",
+        "description": "A number to compute the natural logarithm for in the range *[0, +∞)*.",
         "schema": {
           "type": [
             "number",
             "null"
-          ]
+          ],
+          "minimum": 0
         }
       }
     ],
@@ -6079,19 +6098,20 @@
   {
     "id": "log",
     "summary": "Logarithm to a base",
-    "description": "Logarithm to the base `base` of the number `x` is defined to be the inverse function of taking b to the power of x.\n\nThe no-data value `null` is passed through and therefore gets propagated if any of the arguments is `null`.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, `log(0, 2)` results in ±infinity if the processing environment supports it or otherwise an exception is thrown.",
+    "description": "Logarithm to the base `base` of the number `x` is defined to be the inverse function of taking b to the power of x.\n\nThe no-data value `null` is passed through and therefore gets propagated if any of the arguments is `null`.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, having `x` set to `0` with any base results in -infinity if the processing environment supports it or otherwise an exception is thrown. `NaN` is returned for values outside of the allowed range.",
     "categories": [
       "math > exponential & logarithmic"
     ],
     "parameters": [
       {
         "name": "x",
-        "description": "A number to compute the logarithm for.",
+        "description": "A number to compute the logarithm for in the range *[0, +∞)*.",
         "schema": {
           "type": [
             "number",
             "null"
-          ]
+          ],
+          "minimum": 0
         }
       },
       {
@@ -7176,7 +7196,7 @@
   {
     "id": "mod",
     "summary": "Modulo",
-    "description": "Remainder after a division of `x` by `y` for both integers and floating-point numbers.\n\nThe result of a modulo operation has the sign of the divisor. The handling regarding the sign of the result [differs between programming languages](https://en.wikipedia.org/wiki/Modulo_operation#In_programming_languages) and needs careful consideration to avoid unexpected results.\n\nThe no-data value `null` is passed through and therefore gets propagated if any of the arguments is `null`. A modulo by zero results in ±infinity if the processing environment supports it. Otherwise, a `DivisionByZero` exception must the thrown.",
+    "description": "Remainder after a division of `x` by `y` for both integers and floating-point numbers.\n\nThe result of a modulo operation has the sign of the divisor. The handling regarding the sign of the result [differs between programming languages](https://en.wikipedia.org/wiki/Modulo_operation#In_programming_languages) and needs careful consideration to avoid unexpected results.\n\nThe no-data value `null` is passed through and therefore gets propagated if any of the arguments is `null`. If `y` is set to 0 this results in:\n\n- +infinity for `x` > 0,\n- -infinity for `x` < 0,\n- `NaN` for `x` = 0,\n- or otherwise, throws a `DivisionByZero` exception if the other options are not supported by the processing environment.",
     "categories": [
       "math"
     ],
@@ -13128,6 +13148,12 @@
         "type": [
           "number",
           "null"
+        ],
+        "enum": [
+          -1,
+          0,
+          1,
+          null
         ]
       }
     },
@@ -13230,12 +13256,14 @@
       }
     ],
     "returns": {
-      "description": "The computed sine of `x`.",
+      "description": "The computed sine in the range *[-1, 1]*.",
       "schema": {
         "type": [
           "number",
           "null"
-        ]
+        ],
+        "minimum": -1,
+        "maximum": 1
       }
     },
     "examples": [
@@ -13257,14 +13285,14 @@
   {
     "id": "sinh",
     "summary": "Hyperbolic sine",
-    "description": "Computes the hyperbolic sine of `x`.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the hyperbolic sine of `x`.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "math > trigonometric"
     ],
     "parameters": [
       {
         "name": "x",
-        "description": "An angle in radians.",
+        "description": "An hyperbolic angle in radians.",
         "schema": {
           "type": [
             "number",
@@ -13274,7 +13302,7 @@
       }
     ],
     "returns": {
-      "description": "The computed hyperbolic sine of `x`.",
+      "description": "The computed hyperbolic sine.",
       "schema": {
         "type": [
           "number",
@@ -13738,7 +13766,7 @@
   {
     "id": "tan",
     "summary": "Tangent",
-    "description": "Computes the tangent of `x`. The tangent is defined to be the sine of x divided by the cosine of x.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the tangent of `x`. The tangent is defined to be the sine of x divided by the cosine of x.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, *`tan(pi()/2 + multipliy(pi(), n))`* with `n` being any integer results in ±infinity. -infinity for negative values passed to `tan`, +infinity otherwise. If the processing environment does not supports it, an exception is thrown.",
     "categories": [
       "math > trigonometric"
     ],
@@ -13755,7 +13783,7 @@
       }
     ],
     "returns": {
-      "description": "The computed tangent of `x`.",
+      "description": "The computed tangent.",
       "schema": {
         "type": [
           "number",
@@ -13776,20 +13804,25 @@
         "rel": "about",
         "href": "http://mathworld.wolfram.com/Tangent.html",
         "title": "Tangent explained by Wolfram MathWorld"
+      },
+      {
+        "rel": "about",
+        "href": "https://ieeexplore.ieee.org/document/4610935",
+        "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
       }
     ]
   },
   {
     "id": "tanh",
     "summary": "Hyperbolic tangent",
-    "description": "Computes the hyperbolic tangent of `x`. The tangent is defined to be the hyperbolic sine of x divided by the hyperbolic cosine of x.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the hyperbolic tangent of `x`. The tangent is defined to be the hyperbolic sine of x divided by the hyperbolic cosine of x.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
       "math > trigonometric"
     ],
     "parameters": [
       {
         "name": "x",
-        "description": "An angle in radians.",
+        "description": "An hyperbolic angle in radians.",
         "schema": {
           "type": [
             "number",
@@ -13799,12 +13832,14 @@
       }
     ],
     "returns": {
-      "description": "The computed hyperbolic tangent of `x`.",
+      "description": "The computed hyperbolic tangent in the range *(-1, 1)*.",
       "schema": {
         "type": [
           "number",
           "null"
-        ]
+        ],
+        "minimumExclusive": -1,
+        "maximumExclusive": 1
       }
     },
     "examples": [
