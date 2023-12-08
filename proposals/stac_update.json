@@ -1,0 +1,41 @@
+{
+    "id": "stac_update",
+    "summary": "Export data to an openEO collection",
+    "description": "Exports the given processing results made available through a STAC resource (e.g., a STAC Collection or Item) to the given openEO collection. The STAC resource itself is exported with all STAC resources and assets underneath.",
+    "categories": [
+        "stac"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The existing STAC resource.",
+            "schema": {
+                "type": "object",
+                "subtype": "stac"
+            }
+        },
+        {
+            "name": "merge",
+            "description": "A potentially incomplete STAC resource that should be merged with the existing STAC resource. It follows the [RFC 7386: JSON Merge Path](https://tools.ietf.org/html/rfc7386) specification.",
+            "schema": {
+                "type": "object"
+            }
+        }
+    ],
+    "returns": {
+        "description": "Returns the updated STAC resource.",
+        "schema": {
+            "type": "object",
+            "subtype": "stac"
+        }
+    },
+    "links": [
+        {
+            "href": "https://www.rfc-editor.org/rfc/rfc7386.html",
+            "title": "RFC 7386: JSON Merge Path",
+            "type": "text/html",
+            "rel": "about"
+        }
+    ]
+}
