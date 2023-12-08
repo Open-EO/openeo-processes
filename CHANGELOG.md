@@ -36,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `flatten_dimensions`
     - `load_geojson`
     - `load_url`
+    - `ml_regularize_data_cube`
     - `unflatten_dimension`
     - `vector_buffer`
     - `vector_reproject`
