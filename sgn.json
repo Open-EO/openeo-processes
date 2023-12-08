@@ -23,6 +23,12 @@
             "type": [
                 "number",
                 "null"
+            ],
+            "enum": [
+                -1,
+                0,
+                1,
+                null
             ]
         }
     },

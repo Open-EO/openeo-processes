@@ -1,14 +1,14 @@
 {
     "id": "tanh",
     "summary": "Hyperbolic tangent",
-    "description": "Computes the hyperbolic tangent of `x`. The tangent is defined to be the hyperbolic sine of x divided by the hyperbolic cosine of x.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the hyperbolic tangent of `x`. The tangent is defined to be the hyperbolic sine of x divided by the hyperbolic cosine of x.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
     "categories": [
         "math > trigonometric"
     ],
     "parameters": [
         {
             "name": "x",
-            "description": "An angle in radians.",
+            "description": "An hyperbolic angle in radians.",
             "schema": {
                 "type": [
                     "number",
@@ -18,12 +18,14 @@
         }
     ],
     "returns": {
-        "description": "The computed hyperbolic tangent of `x`.",
+        "description": "The computed hyperbolic tangent in the range *(-1, 1)*.",
         "schema": {
             "type": [
                 "number",
                 "null"
-            ]
+            ],
+            "minimumExclusive": -1,
+            "maximumExclusive": 1
         }
     },
     "examples": [

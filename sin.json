@@ -18,12 +18,14 @@
         }
     ],
     "returns": {
-        "description": "The computed sine of `x`.",
+        "description": "The computed sine in the range *[-1, 1]*.",
         "schema": {
             "type": [
                 "number",
                 "null"
-            ]
+            ],
+            "minimum": -1,
+            "maximum": 1
         }
     },
     "examples": [
