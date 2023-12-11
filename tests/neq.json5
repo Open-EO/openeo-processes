@@ -99,6 +99,20 @@
     },
     {
       "arguments": {
+        "x": 5,
+        "y": NaN
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": NaN,
+        "y": 5
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
         "x": NaN,
         "y": NaN
       },

@@ -1,4 +1,338 @@
 {
   "id": "array_apply",
-  "tests": []
+  "tests": [
+    {
+      // empty array
+      "required": [
+        "absolute"
+      ],
+      "arguments": {
+        "data": [],
+        "process": {
+          "process_graph": {
+            "absolute": {
+              "process_id": "absolute",
+              "arguments": {
+                "x": {
+                  "from_argument": "x"
+                }
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "returns": []
+    },
+    {
+      // single math process applied to a normal array
+      "required": [
+        "absolute"
+      ],
+      "arguments": {
+        "data": [
+          1,
+          -2,
+          3.5,
+          -4.725,
+          NaN
+        ],
+        "process": {
+          "process_graph": {
+            "absolute": {
+              "process_id": "absolute",
+              "arguments": {
+                "x": {
+                  "from_argument": "x"
+                }
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "returns": [
+          1,
+          2,
+          3.5,
+          4.725,
+          NaN
+      ]
+    },
+    {
+      // single math process applied to a normal array, with context parameter
+      "required": [
+        "multiply"
+      ],
+      "arguments": {
+        "data": [
+          1,
+          2.5
+        ],
+        "process": {
+          "process_graph": {
+            "absolute": {
+              "process_id": "multiply",
+              "arguments": {
+                "x": {
+                  "from_argument": "x"
+                },
+                "y": {
+                  "from_argument": "context"
+                }
+              },
+              "result": true
+            }
+          }
+        },
+        "context": 2.5
+      },
+      "returns": [
+          2.5,
+          6.25
+      ]
+    },
+    {
+      // single comparison process with datatype change applied to a normal array
+      "required": [
+        "gt"
+      ],
+      "arguments": {
+        "data": [
+          1,
+          -2,
+          3.5,
+          -4.725,
+          NaN
+        ],
+        "process": {
+          "process_graph": {
+            "gt": {
+              "process_id": "gt",
+              "arguments": {
+                "x": {
+                  "from_argument": "x"
+                },
+                "y": 3
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "returns": [
+          false,
+          false,
+          true,
+          true,
+          false
+      ]
+    },
+    {
+      // handle index from a normal array
+      "required": [
+        "constant"
+      ],
+      "arguments": {
+        "data": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "process": {
+          "process_graph": {
+            "const": {
+              "process_id": "constant",
+              "arguments": {
+                "x": {
+                  "from_argument": "index"
+                }
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "returns": [
+          0,
+          1,
+          2,
+          3
+      ]
+    },
+    {
+      // handle label from a labeled array
+      "required": [
+        "constant"
+      ],
+      "arguments": {
+        "data": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": "B01",
+              "value": 1.23
+            },
+            {
+              "key": "B02",
+              "value": 0.98
+            }
+          ]
+        },
+        "process": {
+          "process_graph": {
+            "const": {
+              "process_id": "constant",
+              "arguments": {
+                "x": {
+                  "from_argument": "label"
+                }
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "returns": [
+          "B01",
+          "B02"
+      ]
+    },
+    {
+      // handle index and value from a labeled array
+      "required": [
+        "add"
+      ],
+      "arguments": {
+        "data": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": "B01",
+              "value": 1.23
+            },
+            {
+              "key": "B02",
+              "value": 0.98
+            }
+          ]
+        },
+        "process": {
+          "process_graph": {
+            "const": {
+              "process_id": "add",
+              "arguments": {
+                "x": {
+                  "from_argument": "index"
+                },
+                "y": {
+                  "from_argument": "x"
+                }
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "returns": [
+          1.23,
+          1.98
+      ]
+    },
+    {
+      // single math process applied to a labeled array
+      "required": [
+        "subtract"
+      ],
+      "arguments": {
+        "data": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": "B01",
+              "value": 1.23
+            },
+            {
+              "key": "B02",
+              "value": 0.98
+            }
+          ]
+        },
+        "process": {
+          "process_graph": {
+            "const": {
+              "process_id": "subtract",
+              "arguments": {
+                "x": {
+                  "from_argument": "x"
+                },
+                "y": 1
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "returns": {
+        "type": "labeled-array",
+        "data": [
+          {
+            "key": "B01",
+            "value": 0.23
+          },
+          {
+            "key": "B02",
+            "value": -0.02
+          }
+        ]
+      }
+    },
+    {
+      // apply multiple math process to a labeled array
+      "required": [
+        "add",
+        "multiply"
+      ],
+      "arguments": {
+        "data": [
+          1,
+          -2,
+          3.5,
+          -4.725,
+          NaN
+        ],
+        "process": {
+          "process_graph": {
+            "add": {
+              "process_id": "add",
+              "arguments": {
+                "x": {
+                  "from_argument": "x"
+                },
+                "y": 1.5
+              }
+            },
+            "mulitply": {
+              "process_id": "mulitply",
+              "arguments": {
+                "x": {
+                  "from_node": "add"
+                },
+                "y": 2
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "returns": [
+          5,
+          -1,
+          10,
+          6.45,
+          NaN
+      ]
+    }
+  ]
 }
