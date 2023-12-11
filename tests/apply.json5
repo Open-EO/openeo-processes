@@ -1,4 +1,65 @@
 {
   "id": "apply",
-  "tests": []
+  "tests": [
+    {
+      "required": [
+        "add"
+      ],
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal.json5"
+        },
+        "process": {
+          "process_graph": {
+            "add": {
+              "process_id": "add",
+              "arguments": {
+                "x": {
+                  "from_parameter": "x"
+                },
+                "y": 1
+              }
+            }
+          }
+        }
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "dimensions": [
+          {
+            "name": "t",
+            "type": "temporal",
+            "values": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z"]
+          },
+          {
+            "name": "y",
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          {
+            "name": "x",
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        ],
+        "data": [
+          [
+            [18.5, 54.75, -26.1, -63.25],
+            [-17.0, 9.45, -2.11, -19.5],
+            [51.4, 50.24, 26.16, -80.6]
+          ],
+          [
+            [-62.65, 10.0, -67.52, -7.0],
+            [2.05, -62.8, 74.05, 52.05],
+            [49.86, -20.30, NaN, 47.15]
+          ]
+        ]
+      }
+    }
+  ]
 }
