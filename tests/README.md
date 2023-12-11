@@ -24,7 +24,7 @@ This folder contains test cases for the openEO processes.
 - [x] arctan
 - [x] arctan2
 - [x] array_append
-- [ ] array_apply
+- [x] array_apply
 - [x] array_concat
 - [x] array_contains
 - [x] array_create
@@ -226,6 +226,15 @@ properties:
             description: An argument, can be of any type
         returns:
           description: The return value, can be of any type
+        required:
+          description: >-
+            A list of processes that is required for this test (except for the process provided in `id`).
+            This is usually required for processes that run a sub-process (callback) so that the test suite can skip tests for processes that are not supported.
+          type: array
+          items:
+            type: string
+            description: The identifier for the sub-process.
+            pattern: '^\w+$'
         delta:
           description: If set to a positive number the equality of the actual return value and the expected return value is checked against a delta value to circumvent problems with floating-point inaccuracy.
           type: number
