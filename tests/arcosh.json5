@@ -21,12 +21,6 @@
     },
     {
       "arguments": {
-        "x": 0.5
-      },
-      "returns": 0.96242365012
-    },
-    {
-      "arguments": {
         "x": NaN
       },
       "returns": NaN
@@ -39,13 +33,13 @@
     },
     {
       "arguments": {
-        "x": -1
+        "x": 0.5
       },
       "returns": NaN
     },
     {
       "arguments": {
-        "x": -0.5
+        "x": -1
       },
       "returns": NaN
     },
