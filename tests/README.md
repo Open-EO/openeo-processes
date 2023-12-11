@@ -253,16 +253,20 @@ properties:
               const: true
 ```
 
+### External references
+
 Arguments and return values can point to external files, e.g.
+
 ```json
 {
-  "$ref": "https://host.example/file.nc"
+  "$ref": "https://host.example/datacube.json"
 }
 ```
 
-There are a couple of data types that can't be represented in JSON5 and will be provided as an object instead.
+### Labeled arrays
 
-**Labeled arrays:**
+Labeled arrays can't be represented in JSON5 and will be provided as an object instead.
+
 ```json
 {
   "type": "labeled-array",
@@ -280,29 +284,51 @@ There are a couple of data types that can't be represented in JSON5 and will be 
 }
 ```
 
-**Data Cube Metadata:**
+### Datacubes
+
+Datacubes can't be represented in JSON5 and will be provided as an object instead.
+Vector datacubes are currently not supported.
+
 ```json
 {
   "type": "datacube",
-  "data": "./assets/example.nc",
-  "metadata": {
-    // uses the STAC datacube extension
-    "bands": {
-        "type": "bands",
-        "values": [
-          "B01",
-          "B02",
-          "B03"
-        ]
+  "data": [
+    // multi-dimensional array
+  ],
+  "nodata": [
+    NaN
+  ],
+  "dimensions": [
+    // similar to the STAC datacube extension
+    // properties: name, type, axis (if type = spatial), values, and reference_system (optional)
+    {
+      "name": "bands",
+      "type": "bands",
+      "values": ["blue","green","red","nir"]
+    },
+    {
+      "name": "t",
+      "type": "temporal",
+      "values": ["2020-06-01T00:00:00Z","2020-06-03T00:00:00Z","2020-06-06T00:00:00Z"]
+    },
+    {
+      "name": "y",
+      "type": "spatial",
+      "axis": "y",
+      "values": [5757495.0,5757485.0,5757475.0,5757465.0],
+      "reference_system": "EPSG:25832"
+    },
+    {
+      "name": "x",
+      "type": "spatial",
+      "axis": "x",
+      "values": [404835.0,404845.0,404855.0,404865.0,404875.0],
+      "reference_system": "EPSG:25832"
     }
-    // ...
-  }
+  ]
 }
 ```
 
-### Assets
+### Nodata
 
-Additional assets will be provided for the test cases.
-
-- Raster data cubes will be provided as CoverageJSON.
-- Multi-dimensional vector data cubes can't be provided right now, we use GeoJSON whenever possible.
+todo
