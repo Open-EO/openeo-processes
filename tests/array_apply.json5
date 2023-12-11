@@ -52,11 +52,11 @@
         }
       },
       "returns": [
-          1,
-          2,
-          3.5,
-          4.725,
-          NaN
+        1,
+        2,
+        3.5,
+        4.725,
+        NaN
       ]
     },
     {
@@ -71,7 +71,7 @@
         ],
         "process": {
           "process_graph": {
-            "absolute": {
+            "multiply": {
               "process_id": "multiply",
               "arguments": {
                 "x": {
@@ -113,7 +113,7 @@
                 "x": {
                   "from_argument": "x"
                 },
-                "y": 3
+                "y": 1
               },
               "result": true
             }
@@ -121,11 +121,11 @@
         }
       },
       "returns": [
-          false,
-          false,
-          true,
-          true,
-          false
+        false,
+        false,
+        true,
+        false,
+        false
       ]
     },
     {
@@ -155,10 +155,10 @@
         }
       },
       "returns": [
-          0,
-          1,
-          2,
-          3
+        0,
+        1,
+        2,
+        3
       ]
     },
     {
@@ -195,8 +195,8 @@
         }
       },
       "returns": [
-          "B01",
-          "B02"
+        "B01",
+        "B02"
       ]
     },
     {
@@ -220,7 +220,7 @@
         },
         "process": {
           "process_graph": {
-            "const": {
+            "add": {
               "process_id": "add",
               "arguments": {
                 "x": {
@@ -236,8 +236,8 @@
         }
       },
       "returns": [
-          1.23,
-          1.98
+        1.23,
+        1.98
       ]
     },
     {
@@ -261,7 +261,7 @@
         },
         "process": {
           "process_graph": {
-            "const": {
+            "subtract": {
               "process_id": "subtract",
               "arguments": {
                 "x": {
@@ -327,11 +327,11 @@
         }
       },
       "returns": [
-          5,
-          -1,
-          10,
-          6.45,
-          NaN
+        5,
+        -1,
+        10,
+        6.45,
+        NaN
       ]
     }
   ]

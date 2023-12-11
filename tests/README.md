@@ -29,7 +29,7 @@ This folder contains test cases for the openEO processes.
 - [x] array_contains
 - [x] array_create
 - [x] array_element
-- [ ] array_filter
+- [x] array_filter
 - [x] array_find
 - [x] array_interpolate_linear
 - [x] array_labels

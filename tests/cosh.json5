@@ -41,7 +41,7 @@
       "arguments": {
         "x": -Infinity
       },
-      "returns": NaN
+      "returns": Infinity
     },
     {
       "arguments": {
