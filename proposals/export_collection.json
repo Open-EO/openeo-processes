@@ -1,0 +1,45 @@
+{
+    "id": "export_collection",
+    "summary": "Export data to an openEO collection",
+    "description": "Exports the given processing results made available through a STAC resource (e.g., a STAC Collection or Item) to the given openEO collection. The STAC resource itself is exported with all STAC resources and assets underneath.",
+    "categories": [
+        "export",
+        "stac"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The data to export to the openEO collection.",
+            "schema": {
+                "type": "object",
+                "subtype": "stac"
+            }
+        },
+        {
+            "name": "collection",
+            "description": "The identifier of the collection to export to. If the collection **exists**, the data will be added to the collection. If the collection **does not exist** yet, it will be created based on the given STAC metadata.",
+            "schema": [
+                {
+                    "title": "New Collection",
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_\\-\\.~/]+$"
+                },
+                {
+                    "title": "Existing Collection",
+                    "type": "string",
+                    "subtype": "collection-id",
+                    "pattern": "^[A-Za-z0-9_\\-\\.~/]+$"
+                }
+            ]
+        }
+    ],
+    "returns": {
+        "description": "Returns the collection identifier.",
+        "schema": {
+            "type": "string",
+            "subtype": "collection-id",
+            "pattern": "^[A-Za-z0-9_\\-\\.~/]+$"
+        }
+    }
+}

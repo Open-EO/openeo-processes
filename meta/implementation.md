@@ -226,3 +226,24 @@ We have found some libraries that can be used for an implementation:
 - Julia: [Statistics.quantile](https://docs.julialang.org/en/v1/stdlib/Statistics/#Statistics.quantile!), type 7 is the default.
 - Python: [numpy](https://numpy.org/doc/stable/reference/generated/numpy.quantile.html), [pandas](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.quantile.html), [xarray](http://xarray.pydata.org/en/stable/generated/xarray.DataArray.quantile.html) - type 7 (called 'linear' for the interpolation parameter) is the default for all of them. 
 - R: [quantile](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/quantile.html) - type 7 is the default.
+
+## STAC support
+
+The subtype `stac` is an abstract type that refers to a STAC resource of any type (Catalog, Collection, or Item).
+It can refer to:
+- static STAC resources, e.g. hosted on cloud storage
+- "dynamic" STAC resources made available via a STAC API
+- a STAC JSON representation embedded as an argument into an openEO user-defined process
+
+### stac_modify
+
+The process `stac_modify` updates a given STAC resource based on
+[RFC 7386: JSON Merge Patch](https://www.rfc-editor.org/rfc/rfc7386.html).
+For static STAC resources, the content of the JSON files shall be updated according to RFC 7386.
+
+If the underlying STAC resource is part of an API, the following HTTP endpoints shall be used for the updates:
+- For STAC Items: `PATCH /collections/{collectionId}/items/{featureId}`
+  according to the [Transaction Extension](https://github.com/stac-api-extensions/transaction)
+- For STAC Collections: `PATCH /collections/{collectionId}`
+  according to the [Collection Transaction Extension](https://github.com/stac-api-extensions/collection-transaction)
+- For STAC Catalogs there is no API support for updates.
