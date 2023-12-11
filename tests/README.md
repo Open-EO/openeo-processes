@@ -33,7 +33,7 @@ This folder contains test cases for the openEO processes.
 - [x] array_find
 - [x] array_interpolate_linear
 - [x] array_labels
-- [x] array_modify (experimental) - could use some more tests
+- [x] array_modify* (experimental)
 - [x] arsinh
 - [x] artanh
 - [x] between
@@ -43,15 +43,15 @@ This folder contains test cases for the openEO processes.
 - [x] constant
 - [x] cos
 - [x] cosh
-- [ ] count
-- [x] cummax (experimental) - could use some more tests
-- [x] cummin (experimental) - could use some more tests
-- [x] cumproduct (experimental) - could use some more tests
-- [x] cumsum (experimental) - could use some more tests
+- [x] count*
+- [x] cummax* (experimental)
+- [x] cummin* (experimental)
+- [x] cumproduct* (experimental)
+- [x] cumsum* (experimental)
 - [ ] create_data_cube
-- [ ] date_between (experimental) - could use some more tests
-- [ ] date_difference (experimental) - could use some more tests
-- [ ] date_shift (experimental) - could use some more tests
+- [x] date_between* (experimental)
+- [x] date_difference* (experimental)
+- [x] date_shift* (experimental)
 - [ ] dimension_labels
 - [x] divide
 - [ ] drop_dimension
@@ -92,12 +92,12 @@ This folder contains test cases for the openEO processes.
 - [x] normalized_difference
 - [x] not
 - [x] or
-- [ ] order
+- [x] order*
 - [x] pi
 - [x] power
 - [x] product
 - [x] quantiles
-- [ ] rearrange
+- [x] rearrange*
 - [ ] reduce_dimension
 - [ ] rename_dimension
 - [ ] rename_labels
@@ -109,7 +109,7 @@ This folder contains test cases for the openEO processes.
 - [x] sgn
 - [x] sin
 - [x] sinh
-- [ ] sort
+- [x] sort*
 - [x] sqrt
 - [x] subtract
 - [x] sum
@@ -122,6 +122,8 @@ This folder contains test cases for the openEO processes.
 - [ ] trim_cube
 - [x] variance
 - [x] xor
+
+\* = could use some more tests
 
 **Important:** The differentiation of null and NaN is to be discussed and reflected in the tests.
 See <https://github.com/Open-EO/openeo-processes/issues/480> for details.
@@ -290,7 +292,7 @@ There are a couple of data types that can't be represented in JSON5 and will be 
         "values": [
           "B01",
           "B02",
-          "Bo3"
+          "B03"
         ]
     }
     // ...
