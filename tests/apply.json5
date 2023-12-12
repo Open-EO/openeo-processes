@@ -18,7 +18,8 @@
                   "from_parameter": "x"
                 },
                 "y": 1
-              }
+              },
+              "result": true
             }
           }
         }
