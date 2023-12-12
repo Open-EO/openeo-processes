@@ -1,5 +1,6 @@
 {
   "id": "multiply",
+  "level": "L1",
   "tests": [
     {
       "arguments": {

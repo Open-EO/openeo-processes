@@ -1,5 +1,6 @@
 {
   "id": "array_interpolate_linear",
+  "level": "L3",
   "tests": [
     {
       "arguments": {

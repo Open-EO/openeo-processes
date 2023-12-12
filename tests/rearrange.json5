@@ -1,5 +1,6 @@
 {
   "id": "rearrange",
+  "level": "L3",
   "tests": [
     {
       // Reverse a list

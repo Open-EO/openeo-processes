@@ -1,5 +1,6 @@
 {
   "id": "quantiles",
+  "level": "L1",
   "tests": [
     {
       "arguments": {
@@ -76,7 +77,7 @@
         0.8125,
         3.625,
         Infinity,
-        Infinity 
+        Infinity
       ]
     },
     {
@@ -100,7 +101,7 @@
         -Infinity,
         0.125,
         2.5625,
-        5.75 
+        5.75
       ]
     },
     {

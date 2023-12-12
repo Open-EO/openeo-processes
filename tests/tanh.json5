@@ -1,5 +1,6 @@
 {
   "id": "tanh",
+  "level": "L2",
   "tests": [
     {
       "arguments": {

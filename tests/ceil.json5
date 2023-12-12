@@ -1,5 +1,6 @@
 {
   "id": "ceil",
+  "level": "L1",
   "tests": [
     {
       "arguments": {

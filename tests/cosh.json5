@@ -1,5 +1,6 @@
 {
   "id": "cosh",
+  "level": "L2",
   "tests": [
     {
       "arguments": {

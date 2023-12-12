@@ -1,5 +1,6 @@
 {
   "id": "array_modify",
+  "level": "L3",
   "experimental": true,
   "tests": [
     {

@@ -1,5 +1,6 @@
 {
   "id": "xor",
+  "level": "L2",
   "tests": [
     {
       "arguments": {

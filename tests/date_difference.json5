@@ -1,5 +1,6 @@
 {
   "id": "date_difference",
+  "level": "L2-Date",
   "experimental": true,
   "tests": [
     {

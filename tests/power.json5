@@ -1,5 +1,6 @@
 {
   "id": "power",
+  "level": "L1",
   "tests": [
     {
       "arguments": {

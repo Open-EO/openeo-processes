@@ -1,5 +1,6 @@
 {
   "id": "array_find",
+  "level": "L2",
   "tests": [
     {
       "arguments": {

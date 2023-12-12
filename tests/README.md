@@ -8,6 +8,7 @@ This folder contains test cases for the openEO processes.
 - [x] add
 - [ ] add_dimension
 - [ ] aggregate_spatial
+- [ ] aggregate_spatial_window (experimental)
 - [ ] aggregate_temporal
 - [ ] aggregate_temporal_period
 - [x] all
@@ -18,6 +19,7 @@ This folder contains test cases for the openEO processes.
 - [ ] apply_dimension
 - [ ] apply_kernel
 - [ ] apply_neighborhood
+- [ ] apply_polygon (experimental)
 - [x] arccos
 - [x] arcosh
 - [x] arcsin
@@ -28,9 +30,11 @@ This folder contains test cases for the openEO processes.
 - [x] array_concat
 - [x] array_contains
 - [x] array_create
+- [ ] array_create_labeled (experimental)
 - [x] array_element
 - [x] array_filter
 - [x] array_find
+- [ ] array_find_label (experimental)
 - [x] array_interpolate_linear
 - [x] array_labels
 - [x] array_modify* (experimental)
@@ -61,9 +65,12 @@ This folder contains test cases for the openEO processes.
 - [x] extrema
 - [ ] filter_bands
 - [ ] filter_bbox
+- [ ] filter_labels (experimental)
 - [ ] filter_spatial
 - [ ] filter_temporal
+- [ ] filter_vector (experimental)
 - [x] first
+- [ ] flatten_dimensions (experimental)
 - [x] floor
 - [x] gt
 - [x] gte
@@ -71,9 +78,11 @@ This folder contains test cases for the openEO processes.
 - [x] int
 - [x] is_infinite (experimental)
 - [x] is_nan
+- [x] is_nodata*
 - [x] last
 - [x] linear_scale_range
 - [x] ln
+- [ ] load_geojson (experimental)
 - [x] log
 - [x] lt
 - [x] lte
@@ -99,6 +108,7 @@ This folder contains test cases for the openEO processes.
 - [x] quantiles
 - [x] rearrange*
 - [ ] reduce_dimension
+- [ ] reduce_spatial (experimental)
 - [ ] rename_dimension
 - [ ] rename_labels
 - [ ] resample_cube_spatial
@@ -120,7 +130,11 @@ This folder contains test cases for the openEO processes.
 - [x] text_contains
 - [x] text_ends
 - [ ] trim_cube
+- [ ] unflatten_dimension (experimental)
 - [x] variance
+- [ ] vector_buffer (experimental)
+- [ ] vector_reproject (experimental)
+- [ ] vector_to_regular_points (experimental)
 - [x] xor
 
 \* = could use some more tests
@@ -128,10 +142,6 @@ This folder contains test cases for the openEO processes.
 **Important:** The differentiation of null and NaN is to be discussed and reflected in the tests.
 See <https://github.com/Open-EO/openeo-processes/issues/480> for details.
 Also, several processes would be affected by <https://github.com/Open-EO/openeo-processes/pull/476>.
-
-## Incomplete processes
-
-- [x] is_nodata - actual no-data values depends on context / metadata
 
 ## Missing processes
 
@@ -148,29 +158,13 @@ We don't expect that we can provide meaningful test cases for these processes.
 - load_collection
 - load_stac (experimental)
 - load_uploaded_files (experimental)
+- load_url (experimental)
 - predict_curve (experimental)
 - run_udf
 - run_udf_externally (experimental)
 - sar_backscatter (experimental)
 - save_result
 - vector_to_random_points (experimental)
-
-The following processes are in proposal state (i.e. experimental) and may be added later:
-
-- aggregate_spatial_window (experimental)
-- apply_polygon (experimental)
-- array_create_labeled (experimental)
-- array_find_label (experimental)
-- filter_labels (experimental)
-- filter_vector (experimental)
-- flatten_dimensions (experimental)
-- load_geojson (experimental)
-- load_url (experimental)
-- reduce_spatial (experimental)
-- unflatten_dimension (experimental)
-- vector_buffer (experimental)
-- vector_reproject (experimental)
-- vector_to_regular_points (experimental)
 
 ## Assumptions
 
@@ -203,6 +197,11 @@ properties:
     type: boolean
     description: Declares that the process is experimental, tests may fail.
     default: false
+  level:
+    type: string
+    description: openEO process profile the process is assigned to.
+    default: L4
+    pattern: 'L\d([\w-])?'
   tests:
     description: A list of test cases without a specific order
     type: array
@@ -251,6 +250,15 @@ properties:
             - description: Use true if the type of exception is unknown
               type: boolean
               const: true
+        level:
+          type:
+           - string
+           - null
+          description: >-
+            openEO process profile the test is assigned to.
+            Defaults to the level of the process.
+          default: null
+          pattern: 'L\d([\w-])?'
 ```
 
 ### External references

@@ -1,5 +1,6 @@
 {
   "id": "cummax",
+  "level": "L3",
   "experimental": true,
   "tests": [
     {

@@ -1,5 +1,6 @@
 {
   "id": "tan",
+  "level": "L1",
   "tests": [
     {
       "arguments": {

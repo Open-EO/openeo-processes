@@ -1,5 +1,6 @@
 {
   "id": "rename_labels",
+  "level": "L2",
   "tests": [
     {
       // Rename named labels:

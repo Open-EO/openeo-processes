@@ -1,5 +1,6 @@
 {
   "id": "constant",
+  "level": "L1",
   "tests": [
     {
       "arguments": {

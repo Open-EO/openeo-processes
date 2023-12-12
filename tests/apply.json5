@@ -1,5 +1,6 @@
 {
   "id": "apply",
+  "level": "L1",
   "tests": [
     {
       "required": [

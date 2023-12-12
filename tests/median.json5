@@ -1,5 +1,6 @@
 {
   "id": "median",
+  "level": "L1",
   "tests": [
     {
       "arguments": {

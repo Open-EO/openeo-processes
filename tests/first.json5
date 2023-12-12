@@ -1,5 +1,6 @@
 {
   "id": "first",
+  "level": "L1",
   "tests": [
     {
       "arguments": {

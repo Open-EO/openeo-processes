@@ -1,5 +1,6 @@
 {
   "id": "subtract",
+  "level": "L1",
   "tests": [
     {
       "arguments": {

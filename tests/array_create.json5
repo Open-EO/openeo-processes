@@ -1,5 +1,6 @@
 {
   "id": "array_create",
+  "level": "L1",
   "tests": [
     {
       "arguments": {},

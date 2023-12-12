@@ -1,5 +1,6 @@
 {
   "id": "linear_scale_range",
+  "level": "L2",
   "tests": [
     {
       "arguments": {

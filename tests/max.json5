@@ -1,5 +1,6 @@
 {
   "id": "max",
+  "level": "L1",
   "tests": [
     {
       "arguments": {

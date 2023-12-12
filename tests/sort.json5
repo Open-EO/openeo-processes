@@ -1,5 +1,6 @@
 {
   "id": "sort",
+  "level": "L2",
   "tests": [
     {
       "arguments": {

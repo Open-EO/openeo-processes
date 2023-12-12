@@ -1,5 +1,6 @@
 {
   "id": "or",
+  "level": "L1",
   "tests": [
     {
       "arguments": {
