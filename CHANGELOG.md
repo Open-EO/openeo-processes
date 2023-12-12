@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `load_ml_model`
     - `load_url`
     - `ml_fit_class_random_forest`
+    - `ml_fit_class_xgboost`
     - `ml_fit_regr_random_forest`
     - `ml_predict`
     - `save_ml_model`
