@@ -1,7 +1,7 @@
 {
     "id": "ml_fit_class_xgboost",
     "summary": "Train an XGBoost classification model",
-    "description": "Executes the fit of an XGBoost classification model based on training data.",
+    "description": "Fit an XGBoost classification model to training data. XGBoost is a high-performance, flexible, and portable distributed gradient boosting library. It implements machine learning algorithms within the Gradient Boosting framework, featuring parallel tree boosting for efficiency",
     "categories": [
         "machine learning"
     ],
@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "predictors",
-            "description": "The predictors for the XGBoost classification model as a vector data cube. Aggregated to the features (vectors) of the target input variable.",
+            "description": "The predictors for the XGBoost classification model as a vector data cube. They are the independent variables that the XGBoost algorithm analyses to learn patterns and relationships within the data.",
             "schema": {
                 "type": "object",
                 "subtype": "datacube",
@@ -25,7 +25,7 @@
         },
         {
             "name": "target",
-            "description": "Labeled data for XGBoost classification, aligning with predictor values based on a shared geometry dimension. This ensures a clear connection between predictor rows and labels, allowing the model to associate specific predictor values with rows during training.",
+            "description": "Labeled data for XGBoost classification, aligning with predictor values based on a shared geometry dimension. This ensures a clear connection between predictor rows and labels.",
             "schema": {
                 "type": "object",
                 "subtype": "datacube",
@@ -82,46 +82,6 @@
             "schema": {
                 "type": "number",
                 "minimum": 0
-            }
-        },
-        {
-            "name": "max_delta_step",
-            "description": "Maximum delta step we allow each tree's weight estimation to be.",
-            "optional": true,
-            "default": 1,
-            "schema": {
-                "type": "number",
-                "minimum": 0
-            }
-        },
-        {
-            "name": "nfold",
-            "description": "Number of folds for cross-validation.",
-            "optional": true,
-            "default": 5,
-            "schema": {
-                "type": "integer",
-                "minimum": 2
-            }
-        },
-        {
-            "name": "nrounds",
-            "description": "Number of boosting rounds.",
-            "optional": true,
-            "default": 100,
-            "schema": {
-                "type": "integer",
-                "minimum": 1
-            }
-        },
-        {
-            "name": "early_stopping_rounds",
-            "description": "Activates early stopping. Validation metric needs to improve at least once in every early_stopping_rounds round(s) to continue training.",
-            "optional": true,
-            "default": 20,
-            "schema": {
-                "type": "integer",
-                "minimum": 1
             }
         },
         {
