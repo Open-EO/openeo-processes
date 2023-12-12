@@ -1,5 +1,67 @@
 {
   "id": "apply_dimension",
   "level": "L1",
-  "tests": []
+  "tests": [
+    {
+      "required": [
+        "extrema"
+      ],
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal.json5"
+        },
+        "process": {
+          "process_graph": {
+            "extrema": {
+              "process_id": "extrema",
+              "arguments": {
+                "data": {
+                  "from_parameter": "data"
+                }
+              },
+              "result": true
+            }
+          }
+        },
+        "dimension": "t"
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "dimensions": [
+          {
+            "name": "t",
+            "type": "temporal",
+            "values": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z"]
+          },
+          {
+            "name": "y",
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          {
+            "name": "x",
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        ],
+        "data": [
+          [
+            [-63.65,   9.0 , -68.52, -64.25],
+            [-18.0 , -63.8 ,  -3.11, -20.5 ],
+            [ 47.86, -21.3 ,  25.16, -81.6 ]
+          ],
+          [
+            [ 17.5 ,  53.75, -27.1 ,  -8.0 ],
+            [  1.05,   8.45,  73.05,  51.05],
+            [ 50.4 ,  49.24,  25.16,  46.15]
+          ]
+        ]
+      }
+    }
+  ]
 }
