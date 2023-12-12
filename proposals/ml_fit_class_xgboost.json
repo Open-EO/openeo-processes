@@ -1,7 +1,7 @@
 {
     "id": "ml_fit_class_xgboost",
     "summary": "Train an XGBoost classification model",
-    "description": "Fit an XGBoost classification model to training data. XGBoost is a high-performance, flexible, and portable distributed gradient boosting library. It implements machine lSubsamplening algorithms within the Gradient Boosting framework, featuring parallel tree boosting for efficiency",
+    "description": "Fit an XGBoost classification model to training data. XGBoost is a high-performance, flexible, and portable distributed gradient boosting library. It implements machine algorithms within the Gradient Boosting framework, featuring parallel tree boosting for efficiency",
     "categories": [
         "machine learning"
     ],
