@@ -35,7 +35,7 @@ This repository contains a set of files formally describing the openEO Processes
 * [implementation.md](meta/implementation.md) in the `meta` folder provide some additional implementation details for back-ends. For back-end implementors, it's highly recommended to read them.
 * [subtype-schemas.json](meta/subtype-schemas.json) in the `meta` folder defines common data types (`subtype`s) for JSON Schema used in openEO processes.
 * Previously, an `examples` folder contained examples of user-defined processes. These have been migrated to the [openEO Community Examples](https://github.com/Open-EO/openeo-community-examples/tree/main/processes) repository.
-* The [`dev`](dev/) folder can be used to test the process specification for validity and consistent "style". It also allows rendering the processes in a web browser. Check the [development documentation](dev/README.md) for details.
+* The [`tests`](tests/) folder can be used to test the process specification for validity and consistent "style". It also allows rendering the processes in a web browser. Check the [tests documentation](tests/README.md) for details.
 
 ## Process
 

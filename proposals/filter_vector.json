@@ -1,7 +1,7 @@
 {
     "id": "filter_vector",
     "summary": "Spatial vector filter using geometries",
-    "description": "Limits the vector data cube to the specified geometries. The process works on geometries as defined in the Simple Features standard by the OGC. All geometries that were empty or become empty will be removed from the data cube. Alternatively, use ``filter_bbox()`` to filter with a bounding box or ``filter_spatial()`` to filter a raster data cube based on geometries.",
+    "description": "Limits the vector data cube to the specified geometries. The process works on geometries as defined in the Simple Features standard by the OGC. All geometries that were empty or become empty will be removed from the data cube. Alternatively, use ``filter_bbox()`` to filter by bounding box.",
     "categories": [
         "cubes",
         "filter",

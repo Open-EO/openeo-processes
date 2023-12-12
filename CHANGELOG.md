@@ -6,23 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased / Draft
 
-### Changed
-
-- `clip`: Throw an exception if min > max [#472](https://github.com/Open-EO/openeo-processes/issues/472)
-
-### Fixed
-
-- `between`: Clarify that `null` is passed through.
-- `eq` and `neq`: Explicitly set the minimum value for the `delta` parameter.
-- `filter_bbox`, `load_collection`, `load_stac`: Clarified that the bounding box is reprojected to the CRS of the spatial data cube dimensions if required.
-- `filter_spatial`: Clarified that masking is applied using the given geometries. [#469](https://github.com/Open-EO/openeo-processes/issues/469)
-- `sqrt`: Clarified that NaN is returned for negative numbers.
-
 ## [2.0.0-rc.1] - 2023-05-25
-
-### Fixed
-
-- `array_append`: Added `number` type for labels to be consistent with other processes. Default to numerical index instead of string. Clarify that the `label` parameter only applies to labeled arrays.
 
 ### Added
 
@@ -32,7 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `filter_vector`
     - `flatten_dimensions`
     - `load_geojson`
+    - `load_ml_model`
     - `load_url`
+    - `ml_fit_class_random_forest`
+    - `ml_fit_regr_random_forest`
+    - `ml_fit_class-xgboost`
+    - `ml_predict`
+    - `save_ml_model`
     - `unflatten_dimension`
     - `vector_buffer`
     - `vector_reproject`

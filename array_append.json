@@ -25,20 +25,15 @@
         },
         {
             "name": "label",
-            "description": "Provides a label for the new value. If not given or `null`, the natural next array index as number is used as the label. If in any case the label exists, a `LabelExists` exception is thrown.\n\nThis parameter only applies if the given array is a labeled array. If a non-null values is provided and the array is not labeled, an `ArrayNotLabeled` exception is thrown.",
+            "description": "If the given array is a labeled array, a new label for the new value should be given. If not given or `null`, the array index as string is used as the label. If in any case the label exists, a `LabelExists` exception is thrown.",
             "optional": true,
             "default": null,
-            "schema": [
-                {
-                    "type": "number"
-                },
-                {
-                    "type": "string"
-                },
-                {
-                    "type": "null"
-                }
-            ]
+            "schema": {
+                "type": [
+                    "string",
+                    "null"
+                ]
+            }
         }
     ],
     "returns": {
@@ -53,9 +48,6 @@
     "exceptions": {
         "LabelExists": {
             "message": "An array element with the specified label already exists."
-        },
-        "ArrayNotLabeled": {
-            "message": "A label can't be provided as the given array is not labeled."
         }
     },
     "examples": [

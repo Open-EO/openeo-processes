@@ -38,8 +38,7 @@
                 "type": [
                     "number",
                     "null"
-                ],
-                "minimumExclusive": 0
+                ]
             },
             "default": null,
             "optional": true
