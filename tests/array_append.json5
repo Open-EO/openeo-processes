@@ -1,5 +1,6 @@
 {
   "id": "array_append",
+  "level": "L3",
   "tests": [
     {
       "arguments": {

@@ -1,5 +1,6 @@
 {
   "id": "array_contains",
+  "level": "L3",
   "tests": [
     {
       "arguments": {

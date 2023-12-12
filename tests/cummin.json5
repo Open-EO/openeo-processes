@@ -1,5 +1,6 @@
 {
   "id": "cummin",
+  "level": "L3",
   "experimental": true,
   "tests": [
     {

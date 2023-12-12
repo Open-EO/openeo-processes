@@ -1,5 +1,6 @@
 {
   "id": "is_nan",
+  "level": "L2",
   "tests": [
     {
       "arguments": {

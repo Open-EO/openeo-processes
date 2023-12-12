@@ -1,5 +1,6 @@
 {
   "id": "arctan2",
+  "level": "L2",
   "tests": [
     {
       "arguments": {

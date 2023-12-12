@@ -1,5 +1,6 @@
 {
   "id": "array_concat",
+  "level": "L1",
   "tests": [
     {
       // Adds an empty array
@@ -65,6 +66,7 @@
     },
     {
       // Check that a normal array and a labeled array lead to a normal array (labels get dropped)
+      "level": "L3",
       "arguments": {
         "array1": [
           1,
@@ -93,6 +95,7 @@
     },
     {
       // Check that a labeled arrays are supported
+      "level": "L3",
       "arguments": {
         "array1": {
           "type": "labeled-array",

@@ -1,5 +1,6 @@
 {
   "id": "count",
+  "level": "L2",
   "tests": [
     {
       "arguments": {
@@ -60,6 +61,36 @@
             "result": true
           }
         }
+      },
+      "returns": 3
+    },
+    {
+      "level": "L3",
+      "arguments": {
+        "data": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          null
+        ],
+        "condition": {
+          "gt": {
+            "process_id": "gt",
+            "arguments": {
+              "x": {
+                "from_parameter": "element"
+              },
+              "y": {
+                "from_parameter": "context"
+              }
+            },
+            "result": true
+          }
+        },
+        "context": 2
       },
       "returns": 3
     }

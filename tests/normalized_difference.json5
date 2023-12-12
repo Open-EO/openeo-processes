@@ -1,5 +1,6 @@
 {
   "id": "normalized_difference",
+  "level": "L2",
   "tests": [
     {
       "arguments": {

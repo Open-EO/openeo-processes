@@ -1,5 +1,6 @@
 {
   "id": "order",
+  "level": "L3",
   "tests": [
     {
       "arguments": {

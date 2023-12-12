@@ -1,5 +1,6 @@
 {
   "id": "floor",
+  "level": "L1",
   "tests": [
     {
       "arguments": {

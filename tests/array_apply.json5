@@ -1,5 +1,6 @@
 {
   "id": "array_apply",
+  "level": "L3",
   "tests": [
     {
       // empty array

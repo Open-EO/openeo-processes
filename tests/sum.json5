@@ -1,5 +1,6 @@
 {
   "id": "sum",
+  "level": "L1",
   "tests": [
     {
       "arguments": {

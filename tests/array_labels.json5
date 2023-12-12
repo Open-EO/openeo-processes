@@ -1,5 +1,6 @@
 {
   "id": "array_labels",
+  "level": "L3",
   "tests": [
     {
       "arguments": {

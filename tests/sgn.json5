@@ -1,5 +1,6 @@
 {
   "id": "sgn",
+  "level": "L1",
   "tests": [
     {
       "arguments": {

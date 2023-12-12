@@ -1,5 +1,6 @@
 {
   "id": "array_element",
+  "level": "L1",
   "tests": [
     {
       "arguments": {
@@ -34,6 +35,7 @@
       "returns": null
     },
     {
+      "level": "L2",
       "arguments": {
         "data": {
           "type": "labeled-array",
@@ -65,6 +67,7 @@
       "throws": "ArrayElementParameterMissing"
     },
     {
+      "level": "L2",
       "arguments": {
         "data": [
           1
@@ -95,6 +98,7 @@
       "throws": "ArrayElementNotAvailable"
     },
     {
+      "level": "L2",
       "arguments": {
         "data": {
           "type": "labeled-array",
@@ -129,6 +133,7 @@
       "returns": null
     },
     {
+      "level": "L2",
       "arguments": {
         "data": {
           "type": "labeled-array",

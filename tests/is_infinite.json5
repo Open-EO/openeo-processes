@@ -1,5 +1,6 @@
 {
   "id": "is_infinite",
+  "level": "L3",
   "experimental": true,
   "tests": [
     {

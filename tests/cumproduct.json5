@@ -1,5 +1,6 @@
 {
   "id": "cumproduct",
+  "level": "L3",
   "experimental": true,
   "tests": [
     {

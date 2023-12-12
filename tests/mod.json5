@@ -1,5 +1,6 @@
 {
   "id": "mod",
+  "level": "L1",
   "tests": [
     {
       "arguments": {

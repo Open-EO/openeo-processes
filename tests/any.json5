@@ -1,5 +1,6 @@
 {
   "id": "any",
+  "level": "L2",
   "tests": [
     {
       "arguments": {

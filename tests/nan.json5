@@ -1,5 +1,6 @@
 {
   "id": "nan",
+  "level": "L2",
   "experimental": true,
   "tests": [
     {

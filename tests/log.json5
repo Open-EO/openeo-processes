@@ -1,5 +1,6 @@
 {
   "id": "log",
+  "level": "L1",
   "tests": [
     {
       "arguments": {
