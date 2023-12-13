@@ -17,7 +17,7 @@
         },
         {
             "name": "projection",
-            "description": "Coordinate reference system to reproject the converted vector. Specified as an [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html).\n When no projection (or null) is given, the reference system of the input raster data cube is used.",
+            "description": "Coordinate reference system to reproject the converted vector to. Specified as an [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html).\nWhen no projection (or null) is given, the reference system of the input raster data cube is used.",
             "schema": [
                 {
                     "title": "EPSG Code",
