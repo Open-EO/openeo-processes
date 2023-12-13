@@ -3,12 +3,13 @@
   "level": "L1",
   "tests": [
     {
+      // single process
       "required": [
         "sum"
       ],
       "arguments": {
         "data": {
-          "$ref": "assets/xyt-minimal.json5"
+          "$ref": "assets/xyt-minimal-float.json5"
         },
         "reducer": {
           "process_graph": {
@@ -48,6 +49,81 @@
           [-46.15,  62.75, -95.62, -72.25],
           [-16.95, -55.35,  69.94,  30.55],
           [ 98.26,  27.94,  25.16, -35.45]
+        ]
+      }
+    },
+    {
+      // multiple processes with labels
+      "level": "L2",
+      "required": [
+        "array_element",
+        "divide"
+      ],
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-minimal-int.json5"
+        },
+        "reducer": {
+          "process_graph": {
+            "red": {
+              "process_id": "array_element",
+              "arguments": {
+                "data": {
+                  "from_parameter": "data"
+                },
+                "label": "red"
+              },
+              "result": true
+            },
+            "blue": {
+              "process_id": "array_element",
+              "arguments": {
+                "data": {
+                  "from_parameter": "data"
+                },
+                "label": "blue"
+              },
+              "result": true
+            },
+            "divide": {
+              "process_id": "divide",
+              "arguments": {
+                "x": {
+                  "from_argument": "red"
+                },
+                "y": {
+                  "from_argument": "blue"
+                }
+              },
+              "result": true
+            }
+          }
+        },
+        "dimension": "bands"
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "dimensions": [
+          {
+            "name": "y",
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          {
+            "name": "x",
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        ],
+        "data": [
+          [0.98850574712, 0.53409090909, 1.44444444444, 1.16363636363],
+          [2.68, 3.2597402597, 2.708333333333, 11.44444444444],
+          [0.06081081081081, 1.834782608695, NaN, 1.163461538461]
         ]
       }
     }

@@ -3,12 +3,13 @@
   "level": "L1",
   "tests": [
     {
+      // single math process
       "required": [
         "add"
       ],
       "arguments": {
         "data": {
-          "$ref": "assets/xyt-minimal.json5"
+          "$ref": "assets/xyt-minimal-float.json5"
         },
         "process": {
           "process_graph": {
@@ -59,6 +60,161 @@
             [-62.65, 10.0, -67.52, -7.0],
             [2.05, -62.8, 74.05, 52.05],
             [48.86, -20.30, NaN, 47.15]
+          ]
+        ]
+      }
+    },
+    {
+      // multiple processes with a data type change
+      "required": [
+        "lt",
+        "gt",
+        "or"
+      ],
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "process": {
+          "process_graph": {
+            "lt": {
+              "process_id": "lt",
+              "arguments": {
+                "x": {
+                  "from_argument": "x"
+                },
+                "y": -50
+              }
+            },
+            "gt": {
+              "process_id": "gt",
+              "arguments": {
+                "x": {
+                  "from_argument": "x"
+                },
+                "y": 50
+              }
+            },
+            "or": {
+              "process_id": "or",
+              "arguments": {
+                "x": {
+                  "from_node": "lt"
+                },
+                "y": {
+                  "from_node": "gt"
+                }
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "dimensions": [
+          {
+            "name": "t",
+            "type": "temporal",
+            "values": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z"]
+          },
+          {
+            "name": "y",
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          {
+            "name": "x",
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        ],
+        "data": [
+          [
+            [false, true, false, true],
+            [false, false, false, false],
+            [true, false, false, true]
+          ],
+          [
+            [true, false, true, false],
+            [false, true, true, true],
+            [false, false, NaN, false]
+          ]
+        ]
+      }
+    },
+    {
+      // math on integers with context parameter
+      "level": "L3",
+      "required": [
+        "multiply"
+      ],
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-minimal-int.json5"
+        },
+        "process": {
+          "process_graph": {
+            "add": {
+              "process_id": "multiply",
+              "arguments": {
+                "x": {
+                  "from_parameter": "x"
+                },
+                "y": {
+                  "from_parameter": "context"
+                }
+              },
+              "result": true
+            }
+          }
+        },
+        "context": 10
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": 0,
+        "dimensions": [
+          {
+            "name": "bands",
+            "type": "bands",
+            "values": ["red", "green", "blue"]
+          },
+          {
+            "name": "y",
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          {
+            "name": "x",
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        ],
+        "data": [
+          [
+            [1720, 470, 1170, 1920],
+            [670, 2510, 1950, 1030],
+            [90, 2110, 0, 2420]
+          ],
+          [
+            [360, 870, 700, 2160],
+            [880, 1400, 580, 1930],
+            [2300, 390, 0, 870]
+          ],
+          [
+            [1740, 880, 810, 1650],
+            [250, 770, 720, 90],
+            [1480, 1150, 0, 2080]
           ]
         ]
       }
