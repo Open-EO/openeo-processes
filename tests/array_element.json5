@@ -157,5 +157,29 @@
       },
       "returns": null
     },
+    {
+      "level": "L2",
+      "arguments": {
+        "data": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": 1,
+              "value": 4
+            },
+            {
+              "key": 2,
+              "value": 5
+            },
+            {
+              "key": 3,
+              "value": 6
+            }
+          ]
+        },
+        "label": 1
+      },
+      "returns": 4
+    }
   ]
 }

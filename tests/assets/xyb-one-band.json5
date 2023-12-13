@@ -1,0 +1,31 @@
+{
+  "type": "datacube",
+  "dimensions": [
+    {
+      "name": "bands",
+      "type": "bands",
+      "values": ["red"]
+    },
+    {
+      "name": "y",
+      "type": "spatial",
+      "axis": "y",
+      "values": [5757495.0, 5757485.0, 5757475.0],
+      "reference_system": "EPSG:25832"
+    },
+    {
+      "name": "x",
+      "type": "spatial",
+      "axis": "x",
+      "values": [404835.0, 404845.0, 404855.0, 404865.0],
+      "reference_system": "EPSG:25832"
+    }
+  ],
+  "data": [
+    [
+      [172, 47, 117, 192],
+      [67, 251, 195, 103],
+      [9, 211, 0, 242]
+    ]
+  ]
+}

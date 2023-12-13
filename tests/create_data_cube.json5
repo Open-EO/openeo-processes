@@ -1,5 +1,14 @@
 {
   "id": "create_data_cube",
   "level": "L3",
-  "tests": []
+  "tests": [
+    {
+      "arguments": {},
+      "returns": {
+        "type": "datacube",
+        "dimensions": [],
+        "data": []
+      }
+    }
+  ]
 }

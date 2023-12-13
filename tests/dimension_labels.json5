@@ -1,5 +1,60 @@
 {
   "id": "dimension_labels",
   "level": "L2",
-  "tests": []
+  "tests": [
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "dimension": "foo"
+      },
+      "throws": "DimensionNotAvailable"
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "dimension": "x"
+      },
+      "returns": [404835.0, 404845.0, 404855.0, 404865.0]
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "dimension": "x"
+      },
+      "returns": [404835.0, 404845.0, 404855.0, 404865.0]
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "dimension": "y"
+      },
+      "returns": [5757495.0, 5757485.0, 5757475.0]
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "dimension": "t"
+      },
+      "returns": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z"]
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-minimal-int.json5"
+        },
+        "dimension": "bands"
+      },
+      "returns": ["red", "green", "blue"]
+    }
+  ]
 }

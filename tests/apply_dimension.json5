@@ -8,7 +8,7 @@
       ],
       "arguments": {
         "data": {
-          "$ref": "assets/xyt-minimal.json5"
+          "$ref": "assets/xyt-minimal-float.json5"
         },
         "process": {
           "process_graph": {
@@ -59,6 +59,74 @@
             [ 17.5 ,  53.75, -27.1 ,  -8.0 ],
             [  1.05,   8.45,  73.05,  51.05],
             [ 50.4 ,  49.24,  25.16,  46.15]
+          ]
+        ]
+      }
+    },
+    {
+      "required": [
+        "quantiles"
+      ],
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-minimal-int.json5"
+        },
+        "process": {
+          "process_graph": {
+            "quantiles": {
+              "process_id": "quantiles",
+              "arguments": {
+                "data": {
+                  "from_parameter": "data"
+                },
+                "probabilities": [0.5, 0.75, 0.9]
+              },
+              "result": true
+            }
+          }
+        },
+        "dimension": "bands",
+        "target_dimension": "quantiles",
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "dimensions": [
+          {
+            "name": "quantiles",
+            "type": "other",
+            "values": [0, 1, 2]
+          },
+          {
+            "name": "y",
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          {
+            "name": "x",
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        ],
+        "data": [
+          [
+            [172.0, 87.0, 81.0, 192.0],
+            [67.0, 140.0, 72.0, 103.0],
+            [148.0, 115.0, NaN, 208.0]
+          ],
+          [
+            [173.0, 87.5, 99.0, 204.0],
+            [77.5, 195.5, 133.5, 148.0],
+            [189.0, 163.0, NaN, 225.0]
+          ],
+          [
+            [173.6, 87.8, 109.8, 211.2],
+            [83.8, 228.8, 170.4, 175.0],
+            [213.6, 191.8, NaN, 235.2]
           ]
         ]
       }

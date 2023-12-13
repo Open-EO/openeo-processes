@@ -1,5 +1,100 @@
 {
   "id": "array_find_label",
   "level": "L3",
-  "tests": []
+  "tests": [
+    {
+      "arguments": {
+        "data": [
+          1,
+          2
+        ],
+        "label": 1
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "data": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": "B01",
+              "value": 1.23
+            },
+            {
+              "key": "B02",
+              "value": 0.98
+            }
+          ]
+        },
+        "label": "B01"
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "data": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": "B01",
+              "value": 1.23
+            },
+            {
+              "key": "B02",
+              "value": 0.98
+            }
+          ]
+        },
+        "label": "B02"
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "data": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": 2,
+              "value": 1.23
+            },
+            {
+              "key": 3,
+              "value": 0.98
+            },
+            {
+              "key": 4,
+              "value": 2.75
+            }
+          ]
+        },
+        "label": 4
+      },
+      "returns": 2
+    },
+    {
+      "arguments": {
+        "data": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": 2,
+              "value": 1.23
+            },
+            {
+              "key": 3,
+              "value": 0.98
+            },
+            {
+              "key": 4,
+              "value": 2.75
+            }
+          ]
+        },
+        "label": 1
+      },
+      "returns": null
+    }
+  ]
 }

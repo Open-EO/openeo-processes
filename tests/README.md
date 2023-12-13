@@ -6,7 +6,7 @@ This folder contains test cases for the openEO processes.
 
 - [x] absolute
 - [x] add
-- [ ] add_dimension
+- [x] add_dimension
 - [ ] aggregate_spatial
 - [ ] aggregate_spatial_window (experimental)
 - [ ] aggregate_temporal
@@ -15,8 +15,8 @@ This folder contains test cases for the openEO processes.
 - [x] and
 - [ ] anomaly
 - [x] any
-- [ ] apply
-- [ ] apply_dimension
+- [x] apply*
+- [x] apply_dimension*
 - [ ] apply_kernel
 - [ ] apply_neighborhood
 - [ ] apply_polygon (experimental)
@@ -30,11 +30,11 @@ This folder contains test cases for the openEO processes.
 - [x] array_concat
 - [x] array_contains
 - [x] array_create
-- [ ] array_create_labeled (experimental)
+- [x] array_create_labeled (experimental)
 - [x] array_element
 - [x] array_filter
 - [x] array_find
-- [ ] array_find_label (experimental)
+- [x] array_find_label (experimental)
 - [x] array_interpolate_linear
 - [x] array_labels
 - [x] array_modify* (experimental)
@@ -52,13 +52,13 @@ This folder contains test cases for the openEO processes.
 - [x] cummin* (experimental)
 - [x] cumproduct* (experimental)
 - [x] cumsum* (experimental)
-- [ ] create_data_cube
+- [x] create_data_cube
 - [x] date_between* (experimental)
 - [x] date_difference* (experimental)
 - [x] date_shift* (experimental)
-- [ ] dimension_labels
+- [x] dimension_labels
 - [x] divide
-- [ ] drop_dimension
+- [x] drop_dimension*
 - [x] e
 - [x] eq
 - [x] exp
@@ -107,10 +107,10 @@ This folder contains test cases for the openEO processes.
 - [x] product
 - [x] quantiles
 - [x] rearrange*
-- [ ] reduce_dimension
+- [x] reduce_dimension*
 - [ ] reduce_spatial (experimental)
-- [ ] rename_dimension
-- [ ] rename_labels
+- [x] rename_dimension
+- [x] rename_labels
 - [ ] resample_cube_spatial
 - [ ] resample_cube_temporal
 - [ ] resample_spatial
