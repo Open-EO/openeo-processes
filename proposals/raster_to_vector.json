@@ -1,7 +1,7 @@
 {
     "id": "raster_to_vector",
     "summary": "Converts single band raster data cube to vector data",
-    "description": "Converts a single band raster data cube into a vector data cube. The bounding polygon of uniform areas of pixels is constructed.",
+    "description": "Converts a single band raster data cube into a vector data cube. The process involves constructing the bounding polygon based on the full area covered by pixel boundaries, providing a representation of homogeneous areas within the raster dataset.",
     "categories": [
         "cubes"
     ],
