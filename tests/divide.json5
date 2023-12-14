@@ -91,10 +91,10 @@
     },
     {
       "arguments": {
-        "x": null,
+        "x": {"type": "nodata"},
         "y": 1
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     }
   ]
 }

@@ -23,7 +23,7 @@
       "arguments": {
         "data": [
           "ABC",
-          null
+          {"type": "nodata"}
         ]
       },
       "returns": 1
@@ -32,7 +32,7 @@
       "arguments": {
         "data": [
           false,
-          null
+          {"type": "nodata"}
         ],
         "condition": true
       },
@@ -47,7 +47,7 @@
           3,
           4,
           5,
-          null
+          {"type": "nodata"}
         ],
         "condition": {
           "gt": {
@@ -74,7 +74,7 @@
           3,
           4,
           5,
-          null
+          {"type": "nodata"}
         ],
         "condition": {
           "gt": {

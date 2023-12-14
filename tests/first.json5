@@ -16,7 +16,7 @@
     {
       "arguments": {
         "data": [
-          null,
+          {"type": "nodata"},
           "A",
           "B"
         ]
@@ -26,20 +26,20 @@
     {
       "arguments": {
         "data": [
-          null,
+          {"type": "nodata"},
           2,
           3
         ],
         "ignore_nodata": false
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {
         "data": [
-          null,
-          null,
-          null,
+          {"type": "nodata"},
+          {"type": "nodata"},
+          {"type": "nodata"},
           -1
         ]
       },
@@ -48,18 +48,18 @@
     {
       "arguments": {
         "data": [
-          null,
-          null
+          {"type": "nodata"},
+          {"type": "nodata"}
         ]
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
-      // The input array is empty: return `null`.
+      // The input array is empty: return `{"type": "nodata"}`.
       "arguments": {
         "data": []
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {

@@ -1,55 +1,5 @@
 {
   "id": "aggregate_temporal",
   "level": "L2",
-  "tests": [
-    {
-      "arguments": {
-        "data": {
-          "from_parameter": "data"
-        },
-        "intervals": [
-          [
-            "2015-01-01",
-            "2016-01-01"
-          ],
-          [
-            "2016-01-01",
-            "2017-01-01"
-          ],
-          [
-            "2017-01-01",
-            "2018-01-01"
-          ],
-          [
-            "2018-01-01",
-            "2019-01-01"
-          ],
-          [
-            "2019-01-01",
-            "2020-01-01"
-          ]
-        ],
-        "labels": [
-          "2015",
-          "2016",
-          "2017",
-          "2018",
-          "2019"
-        ],
-        "reducer": {
-          "process_graph": {
-            "mean1": {
-              "process_id": "mean",
-              "arguments": {
-                "data": {
-                  "from_parameter": "data"
-                }
-              },
-              "result": true
-            }
-          }
-        }
-      }
-    }
-  ]
+  "tests": []
 }

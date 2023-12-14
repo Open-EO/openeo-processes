@@ -141,7 +141,6 @@ This folder contains test cases for the openEO processes.
 
 **Important:** The differentiation of null and NaN is to be discussed and reflected in the tests.
 See <https://github.com/Open-EO/openeo-processes/issues/480> for details.
-Also, several processes would be affected by <https://github.com/Open-EO/openeo-processes/pull/476>.
 
 ## Missing processes
 
@@ -170,7 +169,7 @@ We don't expect that we can provide meaningful test cases for these processes.
 
 The test cases assume a couple of things as they are an abstraction and not bound to specific implementations:
 - The JSON Schema type `number` explicitly includes the values `+Infinity`, `-Infinity` and `NaN`.
-- The input and output values for no-data values are `null`, so there's no mapping to e.g. `0` as no-data value.
+- The input and output values for no-data values are `null` by default unless otherwise specified by a runner.
 - Input that is not valid according to the schemas, will be rejected upfront and will not be checked on. For example, the absolute process only tests against the data types `number` and `null`. There are no tests for a boolean or string input.
 - Numerical data types such as uint8 don't matter, i.e. tests don't check for overflows etc. This suite can't provide such tests as the underlying data type is not known.
 - If not otherwise specified for numbers, a precision of 10 decimals is checked so return values should have at least 11 decimals.
@@ -262,6 +261,17 @@ properties:
           pattern: 'L\d([\w-])?'
 ```
 
+### No-data values
+
+No-data values have a special encoding in tests (see below).
+The encoding is replaced with `null` unless otherwise specified by the runners.
+
+```json
+{
+  "type": "nodata"
+}
+```
+
 ### Datetimes
 
 Datetimes as strings have a varying precision, especially regarding the milliseconds.
@@ -285,6 +295,8 @@ Arguments and return values can point to external files, e.g.
   "$ref": "https://host.example/datacube.json"
 }
 ```
+
+The test suite can currently only load JSON and JSON5 files.
 
 ### Labeled arrays
 
@@ -317,6 +329,7 @@ Vector datacubes are currently not supported.
   "type": "datacube",
   "data": [
     // multi-dimensional array
+    // can be set to `null` if the data values are irrelevant for the test.
   ],
   "nodata": [
     NaN
@@ -351,7 +364,3 @@ Vector datacubes are currently not supported.
   ]
 }
 ```
-
-### Nodata
-
-todo

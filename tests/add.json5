@@ -124,37 +124,37 @@
     {
       "arguments": {
         "x": -Infinity,
-        "y": null
+        "y": {"type": "nodata"}
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {
-        "x": null,
+        "x": {"type": "nodata"},
         "y": Infinity
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {
-        "x": null,
+        "x": {"type": "nodata"},
         "y": 1
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {
         "x": 1,
-        "y": null
+        "y": {"type": "nodata"}
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {
-        "x": null,
-        "y": null
+        "x": {"type": "nodata"},
+        "y": {"type": "nodata"}
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     }
   ]
 }

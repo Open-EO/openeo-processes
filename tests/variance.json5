@@ -18,7 +18,7 @@
           2,
           3,
           3,
-          null,
+          {"type": "nodata"},
           4,
           4,
           5
@@ -31,12 +31,12 @@
         "data": [
           -1,
           1,
-          null,
+          {"type": "nodata"},
           3
         ],
         "ignore_nodata": false
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {
@@ -87,11 +87,11 @@
       "returns": NaN
     },
     {
-      // The input array is empty: return `null`.
+      // The input array is empty: return `{"type": "nodata"}`.
       "arguments": {
         "data": []
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     }
   ]
 }

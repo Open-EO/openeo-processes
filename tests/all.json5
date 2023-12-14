@@ -6,7 +6,7 @@
       "arguments": {
         "data": [
           false,
-          null
+          {"type": "nodata"}
         ]
       },
       "returns": false
@@ -15,7 +15,7 @@
       "arguments": {
         "data": [
           true,
-          null
+          {"type": "nodata"}
         ]
       },
       "returns": true
@@ -24,7 +24,7 @@
       "arguments": {
         "data": [
           false,
-          null
+          {"type": "nodata"}
         ],
         "ignore_nodata": false
       },
@@ -34,11 +34,11 @@
       "arguments": {
         "data": [
           true,
-          null
+          {"type": "nodata"}
         ],
         "ignore_nodata": false
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {
@@ -80,17 +80,17 @@
     {
       "arguments": {
         "data": [
-          null
+          {"type": "nodata"}
         ],
         "ignore_nodata": false
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {
         "data": []
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     }
   ]
 }

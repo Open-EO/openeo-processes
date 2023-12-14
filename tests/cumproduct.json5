@@ -27,7 +27,7 @@
           1,
           2,
           3,
-          null,
+          {"type": "nodata"},
           3,
           1
         ]
@@ -36,7 +36,7 @@
         1,
         2,
         6,
-        null,
+        {"type": "nodata"},
         18,
         18
       ]
@@ -47,7 +47,7 @@
           1,
           2,
           3,
-          null,
+          {"type": "nodata"},
           3,
           1
         ],
@@ -57,9 +57,9 @@
         1,
         2,
         6,
-        null,
-        null,
-        null
+        {"type": "nodata"},
+        {"type": "nodata"},
+        {"type": "nodata"}
       ]
     }
   ]

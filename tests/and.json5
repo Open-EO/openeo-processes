@@ -19,9 +19,9 @@
     {
       "arguments": {
         "x": true,
-        "y": null
+        "y": {"type": "nodata"}
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {
@@ -40,30 +40,30 @@
     {
       "arguments": {
         "x": false,
-        "y": null
+        "y": {"type": "nodata"}
       },
       "returns": false
     },
     {
       "arguments": {
-        "x": null,
+        "x": {"type": "nodata"},
         "y": true
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {
-        "x": null,
+        "x": {"type": "nodata"},
         "y": false
       },
       "returns": false
     },
     {
       "arguments": {
-        "x": null,
-        "y": null
+        "x": {"type": "nodata"},
+        "y": {"type": "nodata"}
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     }
   ]
 }

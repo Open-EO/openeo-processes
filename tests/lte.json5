@@ -75,16 +75,16 @@
     {
       "arguments": {
         "x": 1,
-        "y": null
+        "y": {"type": "nodata"}
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {
-        "x": null,
-        "y": null
+        "x": {"type": "nodata"},
+        "y": {"type": "nodata"}
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {

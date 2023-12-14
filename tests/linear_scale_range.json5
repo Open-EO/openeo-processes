@@ -168,11 +168,11 @@
     },
     {
       "arguments": {
-        "x": null,
+        "x": {"type": "nodata"},
         "inputMin": 0,
         "inputMax": 100
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     }
   ]
 }
