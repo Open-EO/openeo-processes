@@ -98,7 +98,7 @@
         "inputMin": 0,
         "inputMax": 100
       },
-      "returns": 100
+      "returns": 1
     },
     {
       "arguments": {

@@ -2,7 +2,7 @@
 
 This folder contains test cases for the openEO processes.
 
-## Supported processes
+## Processes
 
 - [x] absolute
 - [x] add
@@ -239,6 +239,7 @@ properties:
         delta:
           description: If set to a positive number the equality of the actual return value and the expected return value is checked against a delta value to circumvent problems with floating-point inaccuracy.
           type: number
+          default: 0.0000000001
         throws:
           description: >-
             Specifies whether the execution is meant to throw an exception.
@@ -259,6 +260,20 @@ properties:
             Defaults to the level of the process.
           default: null
           pattern: 'L\d([\w-])?'
+```
+
+### Datetimes
+
+Datetimes as strings have a varying precision, especially regarding the milliseconds.
+Also, sometimes timezones are differently handled.
+
+Datetimes in return values should be encoded as follows so that the results can be compared better:
+
+```json
+{
+  "type": "datetime",
+  "value": "2020-01-01T00:00:00Z"
+}
 ```
 
 ### External references

@@ -9,7 +9,10 @@
         "value": 6,
         "unit": "month"
       },
-      "returns": "2020-08-01T17:22:45Z"
+      "returns": {
+        "type": "datetime",
+        "value": "2020-08-01T17:22:45Z"
+      }
     },
     {
       "arguments": {
@@ -17,7 +20,10 @@
         "value": -7,
         "unit": "day"
       },
-      "returns": "2021-03-24T00:00:00+02:00"
+      "returns": {
+        "type": "datetime",
+        "value": "2021-03-24T00:00:00+02:00"
+      }
     },
     {
       // Adding a year to February 29th in a leap year will result in February 28th in the next (non-leap) year.
@@ -26,7 +32,10 @@
         "value": 1,
         "unit": "year"
       },
-      "returns": "2021-02-28T17:22:45Z"
+      "returns": {
+        "type": "datetime",
+        "value": "2021-02-28T17:22:45Z",
+      }
     },
     {
       // Adding a month to January 31th will result in February 29th in leap years.
@@ -44,7 +53,10 @@
         "value": 1,
         "unit": "second"
       },
-      "returns": "2017-01-01T00:00:00Z"
+      "returns": {
+        "type": "datetime",
+        "value": "2017-01-01T00:00:00Z"
+      }
     },
     {
       // Milliseconds can be added or subtracted. If not given, the default value is `0`.
@@ -53,7 +65,10 @@
         "value": 1150,
         "unit": "millisecond"
       },
-      "returns": "2018-12-31T17:22:46.150Z"
+      "returns": {
+        "type": "datetime",
+        "value": "2018-12-31T17:22:46.150Z"
+      }
     },
     {
       "arguments": {

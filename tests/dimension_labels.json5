@@ -45,7 +45,16 @@
         },
         "dimension": "t"
       },
-      "returns": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z"]
+      "returns": [
+        {
+          "type": "datetime",
+          "value": "2020-06-01T00:00:00Z"
+        },
+        {
+          "type": "datetime",
+          "value": "2020-06-03T00:00:00Z"
+        }
+      ]
     },
     {
       "arguments": {
