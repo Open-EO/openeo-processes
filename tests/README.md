@@ -63,11 +63,11 @@ This folder contains test cases for the openEO processes.
 - [x] eq
 - [x] exp
 - [x] extrema
-- [ ] filter_bands
+- [x] filter_bands*
 - [ ] filter_bbox
 - [ ] filter_labels (experimental)
 - [ ] filter_spatial
-- [ ] filter_temporal
+- [x] filter_temporal*
 - [ ] filter_vector (experimental)
 - [x] first
 - [ ] flatten_dimensions (experimental)
