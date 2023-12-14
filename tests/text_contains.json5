@@ -41,10 +41,10 @@
     },
     {
       "arguments": {
-        "data": null,
+        "data": {"type": "nodata"},
         "pattern": "null"
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     }
   ]
 }

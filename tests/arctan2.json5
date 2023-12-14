@@ -130,24 +130,24 @@
     },
     {
       "arguments": {
-        "y": null,
+        "y": {"type": "nodata"},
         "x": 1
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {
         "y": 1,
-        "x": null
+        "x": {"type": "nodata"}
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {
-        "y": null,
-        "x": null
+        "y": {"type": "nodata"},
+        "x": {"type": "nodata"}
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     }
   ]
 }

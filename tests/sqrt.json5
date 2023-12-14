@@ -28,9 +28,9 @@
     },
     {
       "arguments": {
-        "x": null
+        "x": {"type": "nodata"}
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {

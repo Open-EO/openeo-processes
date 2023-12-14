@@ -16,15 +16,15 @@
     },
     {
       "arguments": {
-        "x": null
+        "x": {"type": "nodata"}
       },
       "returns": false
     },
     {
       "arguments": {
         "x": [
-          null,
-          null
+          {"type": "nodata"},
+          {"type": "nodata"}
         ]
       },
       "returns": true

@@ -72,8 +72,7 @@
                   "from_parameter": "data"
                 },
                 "label": "red"
-              },
-              "result": true
+              }
             },
             "blue": {
               "process_id": "array_element",
@@ -82,8 +81,7 @@
                   "from_parameter": "data"
                 },
                 "label": "blue"
-              },
-              "result": true
+              }
             },
             "divide": {
               "process_id": "divide",

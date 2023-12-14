@@ -117,10 +117,10 @@
     },
     {
       "arguments": {
-        "x": null,
+        "x": {"type": "nodata"},
         "base": 10
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     }
   ]
 }

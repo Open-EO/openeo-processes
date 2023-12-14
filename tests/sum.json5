@@ -24,7 +24,7 @@
     {
       "arguments": {
         "data": [
-          null,
+          {"type": "nodata"},
           -2,
           -2,
           0
@@ -36,11 +36,11 @@
       "arguments": {
         "data": [
           1,
-          null
+          {"type": "nodata"}
         ],
         "ignore_nodata": false
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {
@@ -53,17 +53,17 @@
     {
       "arguments": {
         "data": [
-          null
+          {"type": "nodata"}
         ],
         "ignore_nodata": false
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {
         "data": []
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {

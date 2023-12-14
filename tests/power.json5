@@ -47,16 +47,16 @@
     {
       "arguments": {
         "base": 1,
-        "p": null
+        "p": {"type": "nodata"}
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {
-        "base": null,
+        "base": {"type": "nodata"},
         "p": 2
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {

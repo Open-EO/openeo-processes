@@ -129,7 +129,7 @@
         "data": [
           -1,
           -0.5,
-          null,
+          {"type": "nodata"},
           1
         ],
         "probabilities": 2
@@ -143,16 +143,16 @@
         "data": [
           -1,
           -0.5,
-          null,
+          {"type": "nodata"},
           1
         ],
         "probabilities": 4,
         "ignore_nodata": false
       },
       "returns": [
-        null,
-        null,
-        null
+        {"type": "nodata"},
+        {"type": "nodata"},
+        {"type": "nodata"}
       ]
     },
     {
@@ -196,8 +196,8 @@
         ]
       },
       "returns": [
-        null,
-        null
+        {"type": "nodata"},
+        {"type": "nodata"}
       ]
     }
   ]

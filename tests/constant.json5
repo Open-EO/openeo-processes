@@ -58,9 +58,9 @@
     },
     {
       "arguments": {
-        "x": null
+        "x": {"type": "nodata"}
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {
@@ -82,9 +82,9 @@
     },
     {
       "arguments": {
-        "x": [0,NaN,null,false,""]
+        "x": [0,false,""]
       },
-      "returns": [0,NaN,null,false,""]
+      "returns": [0,false,""]
     },
     {
       "arguments": {

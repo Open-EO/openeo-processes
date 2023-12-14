@@ -4,11 +4,11 @@
   "tests": [
     {
       "arguments": {
-        "x": null,
+        "x": {"type": "nodata"},
         "min": 0,
         "max": 1
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {

@@ -82,7 +82,7 @@
     },
     {
       "arguments": {
-        "x": null
+        "x": {"type": "nodata"}
       },
       "returns": true
     }
