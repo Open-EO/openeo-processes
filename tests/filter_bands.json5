@@ -1,5 +1,157 @@
 {
   "id": "filter_bands",
   "level": "L2A",
-  "tests": []
+  "tests": [
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-minimal-int.json5"
+        }
+      },
+      "throws": "BandFilterParameterMissing",
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "bands": [
+          "test"
+        ]
+      },
+      "throws": "DimensionMissing",
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-minimal-int.json5"
+        },
+        "bands": [
+          "foo"
+        ]
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": 0,
+        "dimensions": [
+          {
+            "name": "bands",
+            "type": "bands",
+            "values": []
+          },
+          {
+            "name": "y",
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          {
+            "name": "x",
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        ],
+        "data": []
+      }
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-minimal-int.json5"
+        },
+        "bands": [
+          "red",
+          "blue"
+        ]
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": 0,
+        "dimensions": [
+          {
+            "name": "bands",
+            "type": "bands",
+            "values": ["red", "blue"]
+          },
+          {
+            "name": "y",
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          {
+            "name": "x",
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        ],
+        "data": [
+          [
+            [172, 47, 117, 192],
+            [67, 251, 195, 103],
+            [9, 211, 0, 242]
+          ],
+          [
+            [174, 88, 81, 165],
+            [25, 77, 72, 9],
+            [148, 115, 0, 208]
+          ]
+        ]
+      }
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-minimal-int.json5"
+        },
+        "bands": [
+          "red",
+          "blue"
+        ]
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": 0,
+        "dimensions": [
+          {
+            "name": "bands",
+            "type": "bands",
+            "values": ["blue", "green"]
+          },
+          {
+            "name": "y",
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          {
+            "name": "x",
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        ],
+        "data": [
+          [
+            [174, 88, 81, 165],
+            [25, 77, 72, 9],
+            [148, 115, 0, 208]
+          ],
+          [
+            [36, 87, 70, 216],
+            [88, 140, 58, 193],
+            [230, 39, 0, 87]
+          ]
+        ]
+      }
+    }
+  ]
 }
