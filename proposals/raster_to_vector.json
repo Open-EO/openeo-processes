@@ -10,10 +10,22 @@
         {
             "name": "data",
             "description": "A data cube.",
-            "schema": {
-                "type": "object",
-                "subtype": "datacube"
-            }
+            "schema": [
+                {
+                    "title": "Raster data cube",
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "spatial",
+                            "axis": [
+                                "x",
+                                "y"
+                            ]
+                        }
+                    ]
+                }
+            ]
         },
         {
             "name": "projection",
