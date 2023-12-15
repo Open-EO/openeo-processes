@@ -1,6 +1,7 @@
 {
   "id": "array_find_label",
   "level": "L3",
+  "experimental": true,
   "tests": [
     {
       "arguments": {

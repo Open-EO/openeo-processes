@@ -1,5 +1,6 @@
 {
   "id": "aggregate_spatial_window",
   "level": "L3",
+  "experimental": true,
   "tests": []
 }

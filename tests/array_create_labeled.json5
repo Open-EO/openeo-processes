@@ -1,6 +1,7 @@
 {
   "id": "array_create_labeled",
   "level": "L3",
+  "experimental": true,
   "tests": [
     // empty array
     {

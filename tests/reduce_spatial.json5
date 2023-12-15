@@ -1,5 +1,6 @@
 {
   "id": "reduce_spatial",
   "level": "L3",
+  "experimental": true,
   "tests": []
 }
