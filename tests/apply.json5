@@ -29,27 +29,25 @@
       "returns": {
         "type": "datacube",
         "nodata": NaN,
-        "dimensions": [
-          {
-            "name": "t",
+        "order": ["t", "y", "x"],
+        "dimensions": {
+          "t": {
             "type": "temporal",
             "values": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z"]
           },
-          {
-            "name": "y",
+          "y": {
             "type": "spatial",
             "axis": "y",
             "values": [5757495.0, 5757485.0, 5757475.0],
             "reference_system": "EPSG:25832"
           },
-          {
-            "name": "x",
+          "x": {
             "type": "spatial",
             "axis": "x",
             "values": [404835.0, 404845.0, 404855.0, 404865.0],
             "reference_system": "EPSG:25832"
           }
-        ],
+        },
         "data": [
           [
             [18.5, 54.75, -26.1, -63.25],
@@ -113,27 +111,23 @@
       "returns": {
         "type": "datacube",
         "nodata": NaN,
-        "dimensions": [
-          {
-            "name": "t",
+        "order": ["t", "y", "x"],
+        "dimensions": {
+          "t": {
             "type": "temporal",
             "values": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z"]
           },
-          {
-            "name": "y",
+          "y": {
             "type": "spatial",
-            "axis": "y",
             "values": [5757495.0, 5757485.0, 5757475.0],
             "reference_system": "EPSG:25832"
           },
-          {
-            "name": "x",
+          "x": {
             "type": "spatial",
-            "axis": "x",
             "values": [404835.0, 404845.0, 404855.0, 404865.0],
             "reference_system": "EPSG:25832"
           }
-        ],
+        },
         "data": [
           [
             [false, true, false, true],
@@ -178,43 +172,41 @@
       },
       "returns": {
         "type": "datacube",
-        "nodata": 0,
-        "dimensions": [
-          {
-            "name": "bands",
+        "nodata": 255,
+        "order": ["bands", "y", "x"],
+        "dimensions": {
+          "bands": {
             "type": "bands",
             "values": ["red", "green", "blue"]
           },
-          {
-            "name": "y",
+          "y": {
             "type": "spatial",
             "axis": "y",
             "values": [5757495.0, 5757485.0, 5757475.0],
             "reference_system": "EPSG:25832"
           },
-          {
-            "name": "x",
+          "x": {
             "type": "spatial",
             "axis": "x",
             "values": [404835.0, 404845.0, 404855.0, 404865.0],
             "reference_system": "EPSG:25832"
           }
-        ],
+        },
         "data": [
           [
             [1720, 470, 1170, 1920],
             [670, 2510, 1950, 1030],
-            [90, 2110, 0, 2420]
+            [90, 2110, 255, 2420]
           ],
           [
             [360, 870, 700, 2160],
             [880, 1400, 580, 1930],
-            [2300, 390, 0, 870]
+            [2300, 390, 255, 870]
           ],
           [
             [1740, 880, 810, 1650],
             [250, 770, 720, 90],
-            [1480, 1150, 0, 2080]
+            [1480, 1150, 255, 2080]
           ]
         ]
       }

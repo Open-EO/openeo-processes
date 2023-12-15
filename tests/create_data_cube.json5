@@ -6,7 +6,8 @@
       "arguments": {},
       "returns": {
         "type": "datacube",
-        "dimensions": [],
+        "order": [],
+        "dimensions": {},
         "data": []
       }
     }

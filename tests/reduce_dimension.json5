@@ -29,22 +29,21 @@
       "returns": {
         "type": "datacube",
         "nodata": NaN,
-        "dimensions": [
-          {
-            "name": "y",
+        "order": ["y", "x"],
+        "dimensions": {
+          "y": {
             "type": "spatial",
             "axis": "y",
             "values": [5757495.0, 5757485.0, 5757475.0],
             "reference_system": "EPSG:25832"
           },
-          {
-            "name": "x",
+          "x": {
             "type": "spatial",
             "axis": "x",
             "values": [404835.0, 404845.0, 404855.0, 404865.0],
             "reference_system": "EPSG:25832"
           }
-        ],
+        },
         "data": [
           [-46.15,  62.75, -95.62, -72.25],
           [-16.95, -55.35,  69.94,  30.55],
@@ -102,22 +101,19 @@
       "returns": {
         "type": "datacube",
         "nodata": NaN,
-        "dimensions": [
-          {
-            "name": "y",
+        "order": ["y", "x"],
+        "dimensions": {
+          "y": {
             "type": "spatial",
-            "axis": "y",
             "values": [5757495.0, 5757485.0, 5757475.0],
             "reference_system": "EPSG:25832"
           },
-          {
-            "name": "x",
+          "x": {
             "type": "spatial",
-            "axis": "x",
             "values": [404835.0, 404845.0, 404855.0, 404865.0],
             "reference_system": "EPSG:25832"
           }
-        ],
+        },
         "data": [
           [0.98850574712, 0.53409090909, 1.44444444444, 1.16363636363],
           [2.68, 3.2597402597, 2.708333333333, 11.44444444444],

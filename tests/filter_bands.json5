@@ -32,28 +32,26 @@
       },
       "returns": {
         "type": "datacube",
-        "nodata": 0,
-        "dimensions": [
-          {
-            "name": "bands",
+        "nodata": 255,
+        "order": ["bands", "y", "x"],
+        "dimensions": {
+          "bands": {
             "type": "bands",
             "values": []
           },
-          {
-            "name": "y",
+          "y": {
             "type": "spatial",
             "axis": "y",
             "values": [5757495.0, 5757485.0, 5757475.0],
             "reference_system": "EPSG:25832"
           },
-          {
-            "name": "x",
+          "x": {
             "type": "spatial",
             "axis": "x",
             "values": [404835.0, 404845.0, 404855.0, 404865.0],
             "reference_system": "EPSG:25832"
           }
-        ],
+        },
         "data": []
       }
     },
@@ -69,38 +67,34 @@
       },
       "returns": {
         "type": "datacube",
-        "nodata": 0,
-        "dimensions": [
-          {
-            "name": "bands",
+        "nodata": 255,
+        "order": ["bands", "y", "x"],
+        "dimensions": {
+          "bands": {
             "type": "bands",
             "values": ["red", "blue"]
           },
-          {
-            "name": "y",
+          "y": {
             "type": "spatial",
-            "axis": "y",
             "values": [5757495.0, 5757485.0, 5757475.0],
             "reference_system": "EPSG:25832"
           },
-          {
-            "name": "x",
+          "x": {
             "type": "spatial",
-            "axis": "x",
             "values": [404835.0, 404845.0, 404855.0, 404865.0],
             "reference_system": "EPSG:25832"
           }
-        ],
+        },
         "data": [
           [
             [172, 47, 117, 192],
             [67, 251, 195, 103],
-            [9, 211, 0, 242]
+            [9, 211, 255, 242]
           ],
           [
-            [174, 88, 81, 165],
+            [174, 88, 81, 255],
             [25, 77, 72, 9],
-            [148, 115, 0, 208]
+            [148, 115, 255, 208]
           ]
         ]
       }
@@ -117,38 +111,36 @@
       },
       "returns": {
         "type": "datacube",
-        "nodata": 0,
-        "dimensions": [
-          {
-            "name": "bands",
+        "nodata": 255,
+        "order": ["bands", "y", "x"],
+        "dimensions": {
+          "bands": {
             "type": "bands",
             "values": ["blue", "green"]
           },
-          {
-            "name": "y",
+          "y": {
             "type": "spatial",
             "axis": "y",
             "values": [5757495.0, 5757485.0, 5757475.0],
             "reference_system": "EPSG:25832"
           },
-          {
-            "name": "x",
+          "x": {
             "type": "spatial",
             "axis": "x",
             "values": [404835.0, 404845.0, 404855.0, 404865.0],
             "reference_system": "EPSG:25832"
           }
-        ],
+        },
         "data": [
           [
-            [174, 88, 81, 165],
+            [174, 88, 81, 255],
             [25, 77, 72, 9],
-            [148, 115, 0, 208]
+            [148, 115, 255, 208]
           ],
           [
             [36, 87, 70, 216],
             [88, 140, 58, 193],
-            [230, 39, 0, 87]
+            [230, 39, 255, 87]
           ]
         ]
       }
