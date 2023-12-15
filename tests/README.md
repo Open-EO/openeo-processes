@@ -86,12 +86,12 @@ This folder contains test cases for the openEO processes.
 - [x] log
 - [x] lt
 - [x] lte
-- [ ] mask
+- [x] mask*
 - [ ] mask_polygon
 - [x] max
 - [x] mean
 - [x] median
-- [ ] merge_cubes
+- [x] merge_cubes*
 - [x] min
 - [x] mod
 - [x] multiply
@@ -334,33 +334,30 @@ Vector datacubes are currently not supported.
   "nodata": [
     NaN
   ],
-  "dimensions": [
+  "order": ["bands", "t", "y", "x"],
+  "dimensions": {
     // similar to the STAC datacube extension
-    // properties: name, type, axis (if type = spatial), values, and reference_system (optional)
-    {
-      "name": "bands",
+    // properties: type, axis (if type = spatial), values, and reference_system (optional)
+    "bands": {
       "type": "bands",
       "values": ["blue","green","red","nir"]
     },
-    {
-      "name": "t",
+    "t": {
       "type": "temporal",
       "values": ["2020-06-01T00:00:00Z","2020-06-03T00:00:00Z","2020-06-06T00:00:00Z"]
     },
-    {
-      "name": "y",
+    "y": {
       "type": "spatial",
       "axis": "y",
       "values": [5757495.0,5757485.0,5757475.0,5757465.0],
       "reference_system": "EPSG:25832"
     },
-    {
-      "name": "x",
+    "x": {
       "type": "spatial",
       "axis": "x",
       "values": [404835.0,404845.0,404855.0,404865.0,404875.0],
       "reference_system": "EPSG:25832"
     }
-  ]
+  }
 }
 ```

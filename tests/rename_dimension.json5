@@ -32,27 +32,25 @@
       },
       "returns": {
         "type": "datacube",
-        "dimensions": [
-          {
-            "name": "time",
+        "order": ["time", "y", "x"],
+        "dimensions": {
+          "time": {
             "type": "temporal",
             "values": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z"]
           },
-          {
-            "name": "y",
+          "y": {
             "type": "spatial",
             "axis": "y",
             "values": [5757495.0, 5757485.0, 5757475.0],
             "reference_system": "EPSG:25832"
           },
-          {
-            "name": "x",
+          "x": {
             "type": "spatial",
             "axis": "x",
             "values": [404835.0, 404845.0, 404855.0, 404865.0],
             "reference_system": "EPSG:25832"
           }
-        ],
+        },
         "data": null
       }
     },
@@ -66,27 +64,25 @@
       },
       "returns": {
         "type": "datacube",
-        "dimensions": [
-          {
-            "name": "t",
+        "order": ["t", "lon", "x"],
+        "dimensions": {
+          "t": {
             "type": "temporal",
             "values": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z"]
           },
-          {
-            "name": "lon",
+          "lon": {
             "type": "spatial",
             "axis": "y",
             "values": [5757495.0, 5757485.0, 5757475.0],
             "reference_system": "EPSG:25832"
           },
-          {
-            "name": "x",
+          "x": {
             "type": "spatial",
             "axis": "x",
             "values": [404835.0, 404845.0, 404855.0, 404865.0],
             "reference_system": "EPSG:25832"
           }
-        ],
+        },
         "data": null
       }
     },
@@ -100,27 +96,25 @@
       },
       "returns": {
         "type": "datacube",
-        "dimensions": [
-          {
-            "name": "t",
+        "order": ["t", "y", "lat"],
+        "dimensions": {
+          "t": {
             "type": "temporal",
             "values": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z"]
           },
-          {
-            "name": "y",
+          "y": {
             "type": "spatial",
             "axis": "y",
             "values": [5757495.0, 5757485.0, 5757475.0],
             "reference_system": "EPSG:25832"
           },
-          {
-            "name": "lat",
+          "lat": {
             "type": "spatial",
             "axis": "x",
             "values": [404835.0, 404845.0, 404855.0, 404865.0],
             "reference_system": "EPSG:25832"
           }
-        ],
+        },
         "data": null
       }
     },
@@ -134,27 +128,25 @@
       },
       "returns": {
         "type": "datacube",
-        "dimensions": [
-          {
-            "name": "b",
+        "order: ": ["b", "y", "x"],
+        "dimensions": {
+          "b": {
             "type": "bands",
             "values": ["red", "green", "blue"]
           },
-          {
-            "name": "y",
+          "y": {
             "type": "spatial",
             "axis": "y",
             "values": [5757495.0, 5757485.0, 5757475.0],
             "reference_system": "EPSG:25832"
           },
-          {
-            "name": "x",
+          "x": {
             "type": "spatial",
             "axis": "x",
             "values": [404835.0, 404845.0, 404855.0, 404865.0],
             "reference_system": "EPSG:25832"
           }
-        ],
+        },
         "data": null
       }
     }
