@@ -8,7 +8,7 @@ This folder contains test cases for the openEO processes.
 - [x] add
 - [x] add_dimension
 - [ ] aggregate_spatial*
-- [ ] aggregate_temporal*
+- [x] aggregate_temporal
 - [ ] aggregate_temporal_period*
 - [x] all
 - [x] and
