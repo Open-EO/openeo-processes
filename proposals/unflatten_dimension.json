@@ -27,6 +27,7 @@
             "description": "The names of the new target dimensions. New dimensions will be created with the given names and type `other` (see ``add_dimension()``). Fails with a `TargetDimensionExists` exception if any of the dimensions exists.\n\nThe order of the array defines the order in which the dimensions and dimension labels are added to the data cube (see the example in the process description).",
             "schema": {
                 "type": "array",
+                "uniqueItems": true,
                 "minItems": 2,
                 "items": {
                     "type": "string"
