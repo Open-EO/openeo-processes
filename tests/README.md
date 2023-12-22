@@ -7,19 +7,15 @@ This folder contains test cases for the openEO processes.
 - [x] absolute
 - [x] add
 - [x] add_dimension
-- [ ] aggregate_spatial
-- [ ] aggregate_spatial_window (experimental)
-- [ ] aggregate_temporal
-- [ ] aggregate_temporal_period
+- [ ] aggregate_spatial*
+- [ ] aggregate_temporal*
+- [ ] aggregate_temporal_period*
 - [x] all
 - [x] and
-- [ ] anomaly
 - [x] any
 - [x] apply*
 - [x] apply_dimension*
-- [ ] apply_kernel
-- [ ] apply_neighborhood
-- [ ] apply_polygon (experimental)
+- [x] apply_kernel
 - [x] arccos
 - [x] arcosh
 - [x] arcsin
@@ -42,7 +38,6 @@ This folder contains test cases for the openEO processes.
 - [x] artanh
 - [x] between
 - [x] ceil
-- [ ] climatological_normal
 - [x] clip
 - [x] constant
 - [x] cos
@@ -64,13 +59,10 @@ This folder contains test cases for the openEO processes.
 - [x] exp
 - [x] extrema
 - [x] filter_bands*
-- [ ] filter_bbox
-- [ ] filter_labels (experimental)
-- [ ] filter_spatial
+- [ ] filter_bbox*
+- [ ] filter_spatial*
 - [x] filter_temporal*
-- [ ] filter_vector (experimental)
 - [x] first
-- [ ] flatten_dimensions (experimental)
 - [x] floor
 - [x] gt
 - [x] gte
@@ -82,12 +74,11 @@ This folder contains test cases for the openEO processes.
 - [x] last
 - [x] linear_scale_range
 - [x] ln
-- [ ] load_geojson (experimental)
 - [x] log
 - [x] lt
 - [x] lte
 - [x] mask*
-- [ ] mask_polygon
+- [ ] mask_polygon*
 - [x] max
 - [x] mean
 - [x] median
@@ -96,7 +87,6 @@ This folder contains test cases for the openEO processes.
 - [x] mod
 - [x] multiply
 - [x] nan (experimental)
-- [ ] ndvi
 - [x] neq
 - [x] normalized_difference
 - [x] not
@@ -108,12 +98,9 @@ This folder contains test cases for the openEO processes.
 - [x] quantiles
 - [x] rearrange*
 - [x] reduce_dimension*
-- [ ] reduce_spatial (experimental)
 - [x] rename_dimension
 - [x] rename_labels
-- [ ] resample_cube_spatial
-- [ ] resample_cube_temporal
-- [ ] resample_spatial
+- [ ] resample_spatial*
 - [x] round
 - [x] sd
 - [x] sgn
@@ -129,12 +116,7 @@ This folder contains test cases for the openEO processes.
 - [x] text_concat
 - [x] text_contains
 - [x] text_ends
-- [ ] trim_cube
-- [ ] unflatten_dimension (experimental)
 - [x] variance
-- [ ] vector_buffer (experimental)
-- [ ] vector_reproject (experimental)
-- [ ] vector_to_regular_points (experimental)
 - [x] xor
 
 \* = could use some more tests
@@ -164,6 +146,27 @@ We don't expect that we can provide meaningful test cases for these processes.
 - sar_backscatter (experimental)
 - save_result
 - vector_to_random_points (experimental)
+- vector_to_regular_points (experimental)
+
+The following processes are experimental or part of a higher profile (L3+), so the tests will hopefully evolve over time:
+
+- aggregate_spatial_window (experimental)
+- anomaly
+- apply_neighborhood
+- apply_polygon (experimental)
+- climatological_normal
+- filter_labels (experimental)
+- filter_vector (experimental)
+- flatten_dimensions (experimental)
+- load_geojson (experimental)
+- ndvi
+- reduce_spatial (experimental)
+- resample_cube_spatial
+- resample_cube_temporal
+- trim_cube
+- unflatten_dimension (experimental)
+- vector_buffer (experimental)
+- vector_reproject (experimental)
 
 ## Assumptions
 
