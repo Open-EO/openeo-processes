@@ -9,10 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - `clip`: Throw an exception if min > max [#472](https://github.com/Open-EO/openeo-processes/issues/472)
+- Added a uniqueness contraint to various array-typed parameters (e.g. lists of dimension names or labels)
 
 ### Fixed
 
 - Clarified for various mathematical functions the defined input and output ranges. Mention that `NaN` is returned outside of the defined input range where possible.
+- `aggregate_temporal` and `aggregate_temporal_period`: Clarified that the process throws a `DimensionNotAvailable` exception when no temporal dimension exists.
 - `divide`: Clarified behavior for division by 0
 - `between`: Clarify that `null` is passed through.
 - `eq` and `neq`: Explicitly set the minimum value for the `delta` parameter.
