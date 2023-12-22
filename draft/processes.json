@@ -414,7 +414,7 @@
       },
       {
         "name": "period",
-        "description": "The time intervals to aggregate. The following pre-defined values are available:\n\n* `hour`: Hour of the day\n* `day`: Day of the year\n* `week`: Week of the year\n* `dekad`: Ten day periods, counted per year with three periods per month (day 1 - 10, 11 - 20 and 21 - end of month). The third dekad of the month can range from 8 to 11 days. For example, the third dekad of a year spans from January 21 till January 31 (11 days), the fourth dekad spans from February 1 till February 10 (10 days) and the sixth dekad spans from February 21 till February 28 or February 29 in a leap year (8 or 9 days respectively).\n* `month`: Month of the year\n* `season`: Three month periods of the calendar seasons (December - February, March - May, June - August, September - November).\n* `tropical-season`: Six month periods of the tropical seasons (November - April, May - October).\n* `year`: Proleptic years\n* `decade`: Ten year periods ([0-to-9 decade](https://en.wikipedia.org/wiki/Decade#0-to-9_decade)), from a year ending in a 0 to the next year ending in a 9.\n* `decade-ad`: Ten year periods ([1-to-0 decade](https://en.wikipedia.org/wiki/Decade#1-to-0_decade)) better aligned with the anno Domini (AD) calendar era, from a year ending in a 1 to the next year ending in a 0.",
+        "description": "The time intervals to aggregate. The following pre-defined values are available:\n\n* `hour`: Hour of the day\n* `day`: Day of the year\n* `week`: Week of the year as defined in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Week_dates)\n* `dekad`: Ten day periods, counted per year with three periods per month (day 1 - 10, 11 - 20 and 21 - end of month). The third dekad of the month can range from 8 to 11 days. For example, the third dekad of a year spans from January 21 till January 31 (11 days), the fourth dekad spans from February 1 till February 10 (10 days) and the sixth dekad spans from February 21 till February 28 or February 29 in a leap year (8 or 9 days respectively).\n* `month`: Month of the year\n* `season`: Three month periods of the calendar seasons (December - February, March - May, June - August, September - November).\n* `tropical-season`: Six month periods of the tropical seasons (November - April, May - October).\n* `year`: Proleptic years\n* `decade`: Ten year periods ([0-to-9 decade](https://en.wikipedia.org/wiki/Decade#0-to-9_decade)), from a year ending in a 0 to the next year ending in a 9.\n* `decade-ad`: Ten year periods ([1-to-0 decade](https://en.wikipedia.org/wiki/Decade#1-to-0_decade)) better aligned with the anno Domini (AD) calendar era, from a year ending in a 1 to the next year ending in a 0.",
         "schema": {
           "type": "string",
           "enum": [
@@ -507,9 +507,6 @@
       },
       "DimensionNotAvailable": {
         "message": "A dimension with the specified name does not exist or no temporal dimension is available."
-      },
-      "DistinctDimensionLabelsRequired": {
-        "message": "The dimension labels have duplicate values. Distinct labels must be specified."
       }
     },
     "links": [
