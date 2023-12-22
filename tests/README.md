@@ -7,9 +7,8 @@ This folder contains test cases for the openEO processes.
 - [x] absolute
 - [x] add
 - [x] add_dimension
-- [ ] aggregate_spatial*
 - [x] aggregate_temporal
-- [ ] aggregate_temporal_period*
+- [x] aggregate_temporal_period
 - [x] all
 - [x] and
 - [x] any
@@ -148,8 +147,9 @@ We don't expect that we can provide meaningful test cases for these processes.
 - vector_to_random_points (experimental)
 - vector_to_regular_points (experimental)
 
-The following processes are experimental or part of a higher profile (L3+), so the tests will hopefully evolve over time:
+The following processes are experimental, part of a higher profile (L3+), or use vector data cube, so the tests will hopefully evolve over time:
 
+- aggregate_spatial
 - aggregate_spatial_window (experimental)
 - anomaly
 - apply_neighborhood
