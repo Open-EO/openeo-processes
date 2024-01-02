@@ -1,5 +1,139 @@
 {
+  // todo: tests missing for vector data cubes and the z dimension
   "id": "filter_bbox",
   "level": "L2",
-  "tests": []
+  "tests": [
+    {
+      // bbox doesn't intersect with data, empty result
+      "arguments": {
+        "data": {
+          "$ref": "assets/xytb-s2-small.json5"
+        },
+        "extent": {
+          "west": 16.1,
+          "south": 48.1,
+          "east": 16.6,
+          "north": 48.6
+        }
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["bands", "t", "y", "x"],
+        "dimensions": {
+          "bands": {
+            "type": "bands",
+            "values": ["blue", "green", "red", "nir"],
+          },
+          "t": {
+            "type": "temporal",
+            "values": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z", "2020-06-06T00:00:00Z", "2020-06-08T00:00:00Z", "2020-06-11T00:00:00Z", "2020-06-13T00:00:00Z"],
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": null
+      }
+    },
+    {
+      // bbox fully covers the data, no change result
+      "arguments": {
+        "data": {
+          "$ref": "assets/xytb-s2-small.json5"
+        },
+        "extent": {
+          "west": -16.1,
+          "south": 40.18,
+          "east": 32.88,
+          "north": 84.73
+        }
+      },
+      "returns": {
+        "$ref": "assets/xytb-s2-small.json5"
+      }
+    },
+    {
+      // bbox (without crs) intersects partially with the data, clipped result
+      "arguments": {
+        "data": {
+          "$ref": "assets/xytb-s2-small.json5"
+        },
+        "extent": {
+          "east": 404900.0,
+          "south": 5757475.0,
+          "west": 404860.0,
+          "north": 5757500.0,
+          "crs": 25832
+        }
+      },
+      "returns": {
+        "$ref": "assets/xytb-s2-small-filtered.json5"
+      }
+    },
+    {
+      // bbox (without explicit crs) intersects partially with the data, clipped result
+      "arguments": {
+        "data": {
+          "$ref": "assets/xytb-s2-small.json5"
+        },
+        "extent": {
+          "east": 7.615929556794445,
+          "south": 51.95982196234872,
+          "west": 7.615340662408175,
+          "north": 51.96005351522534
+        }
+      },
+      "returns": {
+        "$ref": "assets/xytb-s2-small-filtered.json5"
+      }
+    },
+    {
+      // bbox (with EPSG code as crs) intersects partially with the data, clipped result
+      "arguments": {
+        "data": {
+          "$ref": "assets/xytb-s2-small.json5"
+        },
+        "extent": {
+          "east": 7.615929556794445,
+          "south": 51.95982196234872,
+          "west": 7.615340662408175,
+          "north": 51.96005351522534,
+          "crs": 4326
+        }
+      },
+      "returns": {
+        "$ref": "assets/xytb-s2-small-filtered.json5"
+      }
+    },
+    {
+      // bbox (with WKT2 code as crs) intersects partially with the data, clipped result
+      "arguments": {
+        "data": {
+          "$ref": "assets/xytb-s2-small.json5"
+        },
+        "extent": {
+          "east": 404900.0,
+          "south": 5757475.0,
+          "west": 404860.0,
+          "north": 5757500.0,
+          "crs": {
+            "$ref": "assets/epsg25832.wkt2"
+          }
+        }
+      },
+      "returns": {
+        "$ref": "assets/xytb-s2-small-filtered.json5"
+      }
+    }
+  ]
 }
