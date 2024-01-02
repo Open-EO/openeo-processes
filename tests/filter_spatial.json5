@@ -1,5 +1,160 @@
 {
+  // todo: GeoJSON as input for geometries is deprecated; migrate to Vector data cubes (missing the encoding yet)
   "id": "filter_spatial",
   "level": "L2A",
-  "tests": []
+  "tests": [
+    {
+      // geometry doesn't intersect with data, empty result
+      "arguments": {
+        "data": {
+          "$ref": "assets/xytb-s2-small.json5"
+        },
+        "geometries": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [16.1, 48.1],
+              [16.1, 48.6],
+              [16.6, 48.6],
+              [16.6, 48.1],
+              [16.1, 48.1]
+            ]
+          ]
+        }
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["bands", "t", "y", "x"],
+        "dimensions": {
+          "bands": {
+            "type": "bands",
+            "values": ["blue", "green", "red", "nir"],
+          },
+          "t": {
+            "type": "temporal",
+            "values": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z", "2020-06-06T00:00:00Z", "2020-06-08T00:00:00Z", "2020-06-11T00:00:00Z", "2020-06-13T00:00:00Z"],
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": null
+      }
+    },
+    {
+      // geometry fully covers the data, no change result
+      "arguments": {
+        "data": {
+          "$ref": "assets/xytb-s2-small.json5"
+        },
+        "geometries": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-16.1, 40.18],
+              [-16.1, 84.73],
+              [32.88, 84.73],
+              [32.88, 40.18],
+              [-16.1, 40.18]
+            ]
+          ]
+        }
+      },
+      "returns": {
+        "$ref": "assets/xytb-s2-small.json5"
+      }
+    },
+    {
+      // Polygon intersects partially with the data, clipped result
+      "arguments": {
+        "data": {
+          "$ref": "assets/xytb-s2-small.json5"
+        },
+        "geometries": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [7.615340662408175, 51.95982196234872],
+              [7.615340662408175, 51.96005351522534],
+              [7.615929556794445, 51.96005351522534],
+              [7.615929556794445, 51.95982196234872],
+              [7.615340662408175, 51.95982196234872]
+            ]
+          ]
+        }
+      },
+      "returns": {
+        "$ref": "assets/xytb-s2-small-filtered.json5"
+      }
+    },
+    {
+      // Feature intersects partially with the data, clipped result
+      "arguments": {
+        "data": {
+          "$ref": "assets/xytb-s2-small.json5"
+        },
+        "geometries": {
+          "type": "Feature",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [7.615340662408175, 51.95982196234872],
+                [7.615340662408175, 51.96005351522534],
+                [7.615929556794445, 51.96005351522534],
+                [7.615929556794445, 51.95982196234872],
+                [7.615340662408175, 51.95982196234872]
+              ]
+            ]
+          },
+          "properties": {}
+        }
+      },
+      "returns": {
+        "$ref": "assets/xytb-s2-small-filtered.json5"
+      }
+    },
+    {
+      // Feature Collection intersects partially with the data, clipped result
+      "arguments": {
+        "data": {
+          "$ref": "assets/xytb-s2-small.json5"
+        },
+        "geometries": {
+          "type": "FeatureCollection",
+          "features": [
+            {
+              "type": "Feature",
+              "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                  [
+                    [7.615340662408175, 51.95982196234872],
+                    [7.615340662408175, 51.96005351522534],
+                    [7.615929556794445, 51.96005351522534],
+                    [7.615929556794445, 51.95982196234872],
+                    [7.615340662408175, 51.95982196234872]
+                  ]
+                ]
+              },
+              "properties": {}
+            }
+          ]
+        }
+      },
+      "returns": {
+        "$ref": "assets/xytb-s2-small-filtered.json5"
+      }
+    }
+  ]
 }

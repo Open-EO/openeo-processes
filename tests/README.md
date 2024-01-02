@@ -58,8 +58,8 @@ This folder contains test cases for the openEO processes.
 - [x] exp
 - [x] extrema
 - [x] filter_bands*
-- [ ] filter_bbox*
-- [ ] filter_spatial*
+- [x] filter_bbox*
+- [x] filter_spatial*
 - [x] filter_temporal*
 - [x] first
 - [x] floor
@@ -77,7 +77,7 @@ This folder contains test cases for the openEO processes.
 - [x] lt
 - [x] lte
 - [x] mask*
-- [ ] mask_polygon*
+- [x] mask_polygon*
 - [x] max
 - [x] mean
 - [x] median
@@ -99,7 +99,6 @@ This folder contains test cases for the openEO processes.
 - [x] reduce_dimension*
 - [x] rename_dimension
 - [x] rename_labels
-- [ ] resample_spatial*
 - [x] round
 - [x] sd
 - [x] sgn
@@ -140,6 +139,7 @@ We don't expect that we can provide meaningful test cases for these processes.
 - load_uploaded_files (experimental)
 - load_url (experimental)
 - predict_curve (experimental)
+- resample_spatial
 - run_udf
 - run_udf_externally (experimental)
 - sar_backscatter (experimental)
