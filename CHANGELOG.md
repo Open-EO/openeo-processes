@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Implementation guide for implementing OGC API - Processes in openEO
+- Unit Tests (see folder `tests`, moved specification tests and CI tools to `dev`)
 - `export_collection`
 - `export_workspace`
 - `run_ogcapi`
