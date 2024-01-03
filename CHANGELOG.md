@@ -8,8 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Clarified for various mathematical functions the defined input and output ranges. Mention that `NaN` is returned outside of the defined input range where possible.
-- Clarified for various processes the handling of no-data values and null, see also the [implementation guide](meta/implementation.md).  [#480](https://github.com/Open-EO/openeo-processes/issues/480)
+- Clarified for various mathematical functions the defined input and output ranges.
+  Mention that `NaN` is returned outside of the defined input range where possible.
+- Clarified for several comparison processes how `NaN` values have to be handled. 
+- Clarified for various processes the handling of no-data values and `null`, see also the [implementation guide](meta/implementation.md#no-data-value).  [#480](https://github.com/Open-EO/openeo-processes/issues/480)
+- Added a [section about character encodings to the implementation guide](meta/implementation.md#character-encoding).
+  Removed any character encoding related wording from the process specifications itself.
 - Added a uniqueness contraint to various array-typed parameters (e.g. lists of dimension names or labels)
 - `array_interpolate_linear`: Apply interpolation to NaN and no-data values.
 - `clip`: Throw an exception if min > max. [#472](https://github.com/Open-EO/openeo-processes/issues/472)
