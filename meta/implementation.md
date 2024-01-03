@@ -2,6 +2,28 @@
 
 This file is meant to provide some additional implementation details for back-ends.
 
+## No-data value
+
+A data cube shall always keep reference of the applicable no-data values.
+The no-data value can be chosen by the back-end implementation, e.g. depending on the data type of the data.
+No-data values should be exposed for each pre-defined Collection in its metadata.
+For all data generated through openEO (e.g. through synchronous or batch jobs), the metadata and/or data
+shall expose the no-data values.
+
+The openEO process specifications generally use `null` as a generic value to express no-data values.
+This is primarily meant for the JSON encoding, this means:
+1. in the process specification (data type `null` in the schema), and
+2. in the process graph (if the no-data value exposed through the metadata can't be used in JSON).
+
+Back-ends may or may not use `null` as a no-data value internally.
+
+**NaN**: If `NaN` is the no-data value for floating-point numbers, be aware that the behavior of
+no-data values in openEO and `NaN` (IEEE 754) sometimes differs.
+
+**Array processes:** Some array processes (e.g. `array_find` or `any`) use `null` as a return value.
+In the context of data cube operations (e.g. in `reduce_dimension`), `null` values returned
+by the array processes shall be replaced with the no-data value of the data cube.
+
 ## Optimizations for conditions (e.g. `if`)
 
 None of the openEO processes per se is "special" and thus all are treated the same way by default.

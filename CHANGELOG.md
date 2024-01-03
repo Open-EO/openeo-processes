@@ -25,10 +25,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Clarified for various mathematical functions the defined input and output ranges. Mention that `NaN` is returned outside of the defined input range where possible.
-- `apply_polygon`: Replaced outdated usage of `raster-cube` subtype with `datacube` and dimensions. [#524](https://github.com/Open-EO/openeo-processes/issues/524)
+- Clarified for various processes the handling of no-data values and null, see also the [implementation guide](meta/implementation.md).  [#480](https://github.com/Open-EO/openeo-processes/issues/480)
 - `aggregate_temporal` and `aggregate_temporal_period`: Clarified that the process throws a `DimensionNotAvailable` exception when no temporal dimension exists.
-- `aggregate_temporal_period`: Removed unused exception `DistinctDimensionLabelsRequired`
-- `aggregate_temporal_period`: Clarified that the definition of weeks follows ISO 8601
+- `aggregate_temporal_period`: Removed unused exception `DistinctDimensionLabelsRequired`.
+- `aggregate_temporal_period`: Clarified that the definition of weeks follows ISO 8601.
+- `apply_polygon`: Replaced outdated usage of `raster-cube` subtype with `datacube` and dimensions. [#524](https://github.com/Open-EO/openeo-processes/issues/524)
+- `array_interpolate_linear`: Apply interpolation to NaN and no-data values.
 - `cummax`, `cummin`, `cumproduct`, `cumsum`: Clarified the descriptions around the `ignore_nodata` parameter.
 - `divide`: Clarified behavior for division by 0
 - `between`: Clarify that `null` is passed through.
