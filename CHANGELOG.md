@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased / Draft
 
+### Added
+
+- Unit Tests (see folder `tests`, moved specification tests and CI tools to `dev`)
+
 ### Changed
 
 - Clarified for various mathematical functions the defined input and output ranges.
