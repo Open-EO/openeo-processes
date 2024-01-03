@@ -1,7 +1,7 @@
 {
     "id": "date_get_component",
     "summary": "Gets a part/component of a date",
-    "description": "Retrieves a specified portion of a given date object.\nIt enables the extraction of specific details from a date object, such as year, month, or day.",
+    "description": "Retrieves a specified portion of a given date.\nIt enables the extraction of specific details from a date, such as year, month, or day.",
     "categories": [
         "date & time"
     ],
