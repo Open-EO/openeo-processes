@@ -105,13 +105,13 @@
       "arguments": {
         "data": [
           1,
-          null,
+          {"type": "nodata"},
           2,
-          null
+          {"type": "nodata"}
         ],
-        "value": null
+        "value": {"type": "nodata"}
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {

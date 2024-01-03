@@ -32,7 +32,7 @@
         "index": 0,
         "return_nodata": true
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "level": "L2",
@@ -130,7 +130,7 @@
         "index": 2,
         "return_nodata": true
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "level": "L2",
@@ -155,7 +155,7 @@
         "label": "BO4",
         "return_nodata": true
       },
-      "returns": null
+      "returns": {"type": "nodata"}
     },
     {
       "level": "L2",
