@@ -1,7 +1,7 @@
 {
     "id": "variance",
     "summary": "Variance",
-    "description": "Computes the sample variance of an array of numbers by calculating the square of the standard deviation (see ``sd()``). It is defined to be the expectation of the squared deviation of a random variable from its expected value. Basically, it measures how far the numbers in the array are spread out from their average value.\n\nAn array without non-`null` elements resolves always with `null`.",
+    "description": "Computes the sample variance of an array of numbers by calculating the square of the standard deviation (see ``sd()``). It is defined to be the expectation of the squared deviation of a random variable from its expected value. Basically, it measures how far the numbers in the array are spread out from their average value.\n\nAn array with solely no-data values returns the no-data value (or `null`).",
     "categories": [
         "math > statistics",
         "reducer"
@@ -22,7 +22,7 @@
         },
         {
             "name": "ignore_nodata",
-            "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is returned if any value is such a value.",
+            "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, any no-data value in the array results in a no-data value (or `null`).",
             "schema": {
                 "type": "boolean"
             },
@@ -73,13 +73,6 @@
                     3
                 ],
                 "ignore_nodata": false
-            },
-            "returns": null
-        },
-        {
-            "description": "The input array is empty: return `null`.",
-            "arguments": {
-                "data": []
             },
             "returns": null
         }

@@ -1,7 +1,7 @@
 {
     "id": "tan",
     "summary": "Tangent",
-    "description": "Computes the tangent of `x`. The tangent is defined to be the sine of x divided by the cosine of x.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, *`tan(pi()/2 + multipliy(pi(), n))`* with `n` being any integer results in ±infinity. -infinity for negative values passed to `tan`, +infinity otherwise. If the processing environment does not supports it, an exception is thrown.",
+    "description": "Computes the tangent of `x`. The tangent is defined to be the sine of x divided by the cosine of x.\n\nWorks on radians only.\nNo-data values are passed through and therefore get propagated.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, *`tan(pi()/2 + multipliy(pi(), n))`* with `n` being any integer results in ±infinity. -infinity for negative values passed to `tan`, +infinity otherwise. If the processing environment does not supports it, an exception is thrown.",
     "categories": [
         "math > trigonometric"
     ],

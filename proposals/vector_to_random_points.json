@@ -1,7 +1,7 @@
 {
     "id": "vector_to_random_points",
     "summary": "Sample random points from geometries",
-    "description": "Generate a vector data cube of points by sampling random points from input geometries. At least one point is sampled per input geometry.  Empty geometries are passed through without any points assigned. Feature properties are preserved.\n\nIf `geometry_count` and `total_count` are both unrestricted (i.e. set to `null`, which is the default), one sample per geometry is used.",
+    "description": "Generate a vector data cube of points by sampling random points from input geometries. At least one point is sampled per input geometry.  Empty geometries are passed through without any points assigned. Feature properties are preserved.\n\nIf `geometry_count` and `total_count` are both unrestricted (i.e. set to the default value `null`), one sample per geometry is used.",
     "categories": [
         "cubes",
         "vector"

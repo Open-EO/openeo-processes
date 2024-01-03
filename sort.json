@@ -45,7 +45,7 @@
         },
         {
             "name": "nodata",
-            "description": "Controls the handling of no-data values (`null`). By default, they are removed. If set to `true`, missing values in the data are put last; if set to `false`, they are put first.",
+            "description": "Controls the handling of no-data values. For the default value `null`, all no-data values get removed. If set to `true`, no-data values in the data are moved to the end of the array. If set to `false`, they are moved to the start of the array.",
             "schema": {
                 "type": [
                     "boolean",

@@ -1,7 +1,7 @@
 {
     "id": "last",
     "summary": "Last element",
-    "description": "Gives the last element of an array.\n\nAn array without non-`null` elements resolves always with `null`.",
+    "description": "Gives the last element of an array.\n\nAn array with solely no-data values returns the no-data value (or `null`).",
     "categories": [
         "arrays",
         "reducer"
@@ -19,7 +19,7 @@
         },
         {
             "name": "ignore_nodata",
-            "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is returned if the last value is such a value.",
+            "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, the last value of the array is returned regardless of whether it is a no-data value or not. For the default value `true`, the last non-no-data value is returned.",
             "schema": {
                 "type": "boolean"
             },
@@ -63,13 +63,6 @@
                     null
                 ],
                 "ignore_nodata": false
-            },
-            "returns": null
-        },
-        {
-            "description": "The input array is empty: return `null`.",
-            "arguments": {
-                "data": []
             },
             "returns": null
         }

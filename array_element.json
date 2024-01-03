@@ -41,7 +41,7 @@
         },
         {
             "name": "return_nodata",
-            "description": "By default this process throws an `ArrayElementNotAvailable` exception if the index or label is invalid. If you want to return `null` instead, set this flag to `true`.",
+            "description": "By default this process throws an `ArrayElementNotAvailable` exception if the index or label is invalid. If you want to return the no-data value (or `null`) instead, set this flag to `true`.",
             "schema": {
                 "type": "boolean"
             },

@@ -1,7 +1,7 @@
 {
     "id": "or",
     "summary": "Logical OR",
-    "description": "Checks if **at least one** of the values is true. Evaluates parameter `x` before `y` and stops once the outcome is unambiguous. If a component is `null`, the result will be `null` if the outcome is ambiguous.\n\n**Truth table:**\n\n```\nx \\ y || null | false | true\n----- || ---- | ----- | ----\nnull  || null | null  | true\nfalse || null | false | true\ntrue  || true | true  | true\n```",
+    "description": "Checks if **at least one** of the values is true. Evaluates parameter `x` before `y` and stops once the outcome is unambiguous. If any argument is a no-data value, the result will be the no-data value whenever the outcome is ambiguous.\n\n**Truth table:**\n\n```\nx \\ y   || no-data | false   | true\n------- || ------- | ------- | ----\nno-data || no-data | no-data | true\nfalse   || no-data | false   | true\ntrue    || true    | true    | true\n```",
     "categories": [
         "logic"
     ],
