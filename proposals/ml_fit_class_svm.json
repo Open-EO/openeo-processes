@@ -1,0 +1,153 @@
+{
+    "id": "ml_fit_class_svm",
+    "summary": "Train an SVM classification model",
+    "description": "Fit an SVM (Support Vector Machine) classification model to training data. SVM is a powerful, versatile machine learning algorithm used for classification and regression tasks. It works by finding a hyperplane in an N-dimensional space that distinctly classifies the data points.",
+    "categories": [
+        "machine learning"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "predictors",
+            "description": "The predictors for the SVM classification model as a vector data cube. These are the independent variables that the SVM algorithm analyses to learn patterns and relationships within the data.",
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometry"
+                        },
+                        {
+                            "type": "bands"
+                        }
+                    ]
+                },
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometry"
+                        },
+                        {
+                            "type": "other"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "target",
+            "description": "The dependent variable for SVM classification. These are the labeled data, aligning with predictor values based on a shared geometry dimension. This ensures a clear connection between predictor rows and labels.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "geometry"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "kernel",
+            "description": "Specifies the kernel type to be used in the algorithm.",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "linear",
+                    "poly",
+                    "rbf",
+                    "sigmoid"
+                ],
+                "default": "rbf"
+            }
+        },
+        {
+            "name": "C",
+            "description": "Regularization parameter. The strength of the regularization is inversely proportional to C. Must be strictly positive.",
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "default": 1
+            }
+        },
+        {
+            "name": "gamma",
+            "description": "Kernel coefficient for 'rbf', 'poly', and 'sigmoid'. Higher values lead to tighter fits.",
+            "optional": true,
+            "default": 1,
+            "schema": {
+                "type": "number",
+                "minimum": 0
+            }
+        },
+        {
+            "name": "degree",
+            "description": "Degree of the polynomial kernel function (only relevant for 'poly' kernel).",
+            "optional": true,
+            "default": 3,
+            "schema": {
+                "type": "integer",
+                "minimum": 1
+            }
+        },
+        {
+            "name": "coef0",
+            "description": "Independent term in the kernel function (only relevant for 'poly' and 'sigmoid' kernels).",
+            "optional": true,
+            "default": 0,
+            "schema": {
+                "type": "number"
+            }
+        },
+        {
+            "name": "tolerance",
+            "description": "Tolerance of termination criterion.",
+            "optional": true,
+            "default": 0.001,
+            "schema": {
+                "type": "number",
+                "minimum": 0
+            }
+        },
+        {
+            "name": "cachesize",
+            "description": "Size of the kernel cache in MB.",
+            "optional": true,
+            "default": 1000,
+            "schema": {
+                "type": "integer",
+                "minimum": 1
+            }
+        },
+        {
+            "name": "seed",
+            "description": "A randomization seed to use for the random sampling in training. If not given or `null`, no seed is used and results may differ on subsequent use.",
+            "optional": true,
+            "default": null,
+            "schema": {
+                "type": [
+                    "integer",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "A model object that can be saved with ``save_ml_model()`` and restored with ``load_ml_model()``.",
+        "schema": {
+            "type": "object",
+            "subtype": "ml-model"
+        }
+    },
+    "links": [
+        {
+            "href": "https://link.springer.com/article/10.1007/BF00994018",
+            "title": "C. Cortes and V. Vapnik (1995), Support-vector networks",
+            "type": "text/html",
+            "rel": "about"
+        }
+    ]
+}
