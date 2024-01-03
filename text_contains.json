@@ -1,7 +1,7 @@
 {
     "id": "text_contains",
     "summary": "Text contains another text",
-    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern`. Both are expected to be encoded in UTF-8 by default. No-data values are passed through and therefore get propagated.",
+    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern`. No-data values are passed through and therefore get propagated.",
     "categories": [
         "texts",
         "comparison"

@@ -1,7 +1,7 @@
 {
     "id": "lt",
     "summary": "Less than comparison",
-    "description": "Compares whether `x` is strictly less than `y`.\n\n**Remarks:**\n\n* If any operand is a no-data value, the result will be the no-data value (or `null`).\n* If any operand is not a `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
+    "description": "Compares whether `x` is strictly less than `y`.\n\n**Remarks:**\n\n* If any operand is a no-data value, the result will be the no-data value (or `null`).\n* The comparison of `NaN` (not a number) follows [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229).\n* If any operand is not the data type `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
     "categories": [
         "comparison"
     ],
@@ -89,6 +89,13 @@
                 "y": true
             },
             "returns": false
+        }
+    ],
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://ieeexplore.ieee.org/document/4610935",
+            "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
         }
     ]
 }
