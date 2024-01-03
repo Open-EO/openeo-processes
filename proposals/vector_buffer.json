@@ -1,0 +1,51 @@
+{
+    "id": "vector_buffer",
+    "summary": "Buffer geometries by distance",
+    "description": "Buffers each input geometry by a given distance, which can either expand (dilate) or a shrink (erode) the geometry. Buffers can be applied to points, lines and polygons, but the results are always polygons. Empty geometries are passed through and negative buffers may result in empty geometries. Multi-part types (e.g. `MultiPoint`) are also allowed.",
+    "categories": [
+        "vector"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "geometries",
+            "description": "Geometries to apply the buffer on. Feature properties are preserved.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "geometry"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "distance",
+            "description": "The distance of the buffer in meters. A positive distance expands the geometries, resulting in outward buffering (dilation), while a negative distance shrinks the geometries, resulting in inward buffering (erosion).\n\nIf the unit of the spatial reference system is not meters, a `UnitMismatch` error is thrown. Use ``vector_reproject()`` to convert the geometries to a suitable spatial reference system.",
+            "schema": {
+                "type": "number",
+                "not": {
+                    "const": 0
+                }
+            }
+        }
+    ],
+    "returns": {
+        "description": "Returns a vector data cube with the computed new geometries of which some may be empty.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "geometry"
+                }
+            ]
+        }
+    },
+    "exceptions": {
+        "UnitMismatch": {
+            "message": "The unit of the spatial reference system is not meters, but the given distance is in meters."
+        }
+    }
+}

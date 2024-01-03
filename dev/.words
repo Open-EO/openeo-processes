@@ -10,6 +10,7 @@ DEM-based
 Domini
 gamma0
 GeoJSON
+FeatureCollections
 labeled
 MathWorld
 n-ary
@@ -21,6 +22,9 @@ orthorectification
 orthorectified
 radiometrically
 reflectances
+reproject
+reprojected
+Reprojects
 resample
 resampled
 resamples
@@ -31,9 +35,16 @@ Sentinel-2A
 Sentinel-2B
 signum
 STAC
+catalog
+Catalog
 summand
 UDFs
 gdalwarp
 Lanczos
 sinc
 interpolants
+Breiman
+Hyndman
+date1
+date2
+favor

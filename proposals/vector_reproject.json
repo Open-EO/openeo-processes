@@ -1,0 +1,97 @@
+{
+    "id": "vector_reproject",
+    "summary": "Reprojects the geometry dimension",
+    "description": "Converts the geometries stored in a geometry dimension to a different coordinate reference system.",
+    "categories": [
+        "cubes",
+        "reproject",
+        "vector"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A vector data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "geometry"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "projection",
+            "description": "Coordinate reference system to reproject to. Specified as an [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html).",
+            "schema": [
+                {
+                    "title": "EPSG Code",
+                    "type": "integer",
+                    "subtype": "epsg-code",
+                    "minimum": 1000,
+                    "examples": [
+                        3857
+                    ]
+                },
+                {
+                    "title": "WKT2",
+                    "type": "string",
+                    "subtype": "wkt2-definition"
+                }
+            ]
+        },
+        {
+            "name": "dimension",
+            "description": "The name of the geometry dimension to reproject. If no specific dimension is specified, the filter applies to all geometry dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+            "schema": {
+                "type": [
+                    "string",
+                    "null"
+                ]
+            },
+            "default": null,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "A vector data cube with geometries projected to the new coordinate reference system. The reference system of the geometry dimension changes, all other dimensions and properties remain unchanged.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "geometry"
+                }
+            ]
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
+        }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#resample",
+            "rel": "about",
+            "title": "Resampling explained in the openEO documentation"
+        },
+        {
+            "rel": "about",
+            "href": "https://proj.org/usage/projections.html",
+            "title": "PROJ parameters for cartographic projections"
+        },
+        {
+            "rel": "about",
+            "href": "http://www.epsg-registry.org",
+            "title": "Official EPSG code registry"
+        },
+        {
+            "rel": "about",
+            "href": "http://www.epsg.io",
+            "title": "Unofficial EPSG code database"
+        }
+    ]
+}

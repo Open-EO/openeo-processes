@@ -18,7 +18,7 @@
         },
         {
             "name": "process",
-            "description": "A process that accepts and returns a single value and is applied on each individual value in the array. The process may consist of multiple sub-processes and could, for example, consist of processes such as ``abs()`` or ``linear_scale_range()``.",
+            "description": "A process that accepts and returns a single value and is applied on each individual value in the array. The process may consist of multiple sub-processes and could, for example, consist of processes such as ``absolute()`` or ``linear_scale_range()``.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
@@ -91,19 +91,5 @@
                 "description": "Any data type is allowed."
             }
         }
-    },
-    "links": [
-        {
-            "rel": "example",
-            "type": "application/json",
-            "href": "https://processes.openeo.org/1.1.0/examples/array_find_nodata.json",
-            "title": "Find no-data values in arrays"
-        },
-        {
-            "rel": "example",
-            "type": "application/json",
-            "href": "https://processes.openeo.org/1.1.0/examples/array_contains_nodata.json",
-            "title": "Check for no-data values in arrays"
-        }
-    ]
+    }
 }

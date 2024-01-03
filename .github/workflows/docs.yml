@@ -9,33 +9,31 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
     steps:
       - name: Inject env variables
         uses: rlespinasse/github-slug-action@v3.x
-      - uses: actions/setup-node@v1
-      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+      - uses: actions/checkout@v3
       - run: |
           npm install
           npm run generate
-        working-directory: tests
+        working-directory: dev
       - name: clone gh-pages and clean-up
         if: ${{ env.GITHUB_REF_SLUG == 'master' }}
         run: |
           git clone --branch gh-pages https://github.com/Open-EO/openeo-processes.git gh-pages
           find gh-pages -maxdepth 1 -type f -delete
-          rm -rf gh-pages/examples/
           rm -rf gh-pages/meta/
           rm -rf gh-pages/proposals/
       - name: create empty gh-pages folder
         if: ${{ env.GITHUB_REF_SLUG != 'master' }}
         run: mkdir gh-pages
       - run: |
-          cp tests/docs.html index.html
-          cp tests/processes.json processes.json
-          rsync -vrm --include='*.json' --include='*.html' --include='examples/***' --include='meta/***' --include='proposals/***' --exclude='*' . gh-pages
+          cp dev/docs.html index.html
+          cp dev/processes.json processes.json
+          rsync -vrm --include='*.json' --include='*.html' --include='meta/***' --include='proposals/***' --exclude='*' . gh-pages
       - name: deploy to root (master)
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ env.GITHUB_REF_SLUG == 'master' }}
@@ -44,6 +42,7 @@ jobs:
           publish_dir: gh-pages
           user_name: 'openEO CI'
           user_email: openeo.ci@uni-muenster.de
+          cname: processes.openeo.org
       - name: deploy to ${{ env.GITHUB_REF_SLUG }}
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ env.GITHUB_REF_SLUG != 'master' }}

@@ -1,0 +1,53 @@
+{
+    "id": "load_geojson",
+    "summary": "Converts GeoJSON into a vector data cube",
+    "description": "Converts GeoJSON data as defined by [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946.html) into a vector data cube. Feature properties are preserved.",
+    "categories": [
+        "import",
+        "vector"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A GeoJSON object to convert into a vector data cube. The GeoJSON type `GeometryCollection` is not supported. Each geometry in the GeoJSON data results in a dimension label in the `geometries` dimension.",
+            "schema": {
+                "type": "object",
+                "subtype": "geojson"
+            }
+        },
+        {
+            "name": "properties",
+            "description": "A list of properties from the GeoJSON file to construct an additional dimension from. A new dimension with the name `properties` and type `other` is created if at least one property is provided. Only applies for GeoJSON Features and FeatureCollections. Missing values are generally set to no-data (`null`).\n\nDepending on the number of properties provided, the process creates the dimension differently:\n\n- Single property with scalar values: A single dimension label with the name of the property and a single value per geometry.\n- Single property of type array: The dimension labels correspond to the array indices. There are as many values and labels per geometry as there are for the largest array.\n- Multiple properties with scalar values: The dimension labels correspond to the property names. There are as many values and labels per geometry as there are properties provided here.",
+            "schema": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                    "type": "string"
+                }
+            },
+            "default": [],
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "A vector data cube containing the geometries, either one or two dimensional.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "geometry"
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "href": "https://www.rfc-editor.org/rfc/rfc7946.html",
+            "title": "RFC 7946: The GeoJSON Format",
+            "type": "text/html",
+            "rel": "about"
+        }
+    ]
+}

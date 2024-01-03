@@ -19,6 +19,7 @@
             "description": "An array of labels to be used.",
             "schema": {
                 "type": "array",
+                "uniqueItems": true,
                 "items": {
                     "type": [
                         "number",

@@ -11,7 +11,7 @@
             "description": "The data cube.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube"
             }
         },
         {

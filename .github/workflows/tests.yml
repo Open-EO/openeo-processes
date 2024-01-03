@@ -3,14 +3,13 @@ on: [push, pull_request]
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
     steps:
-      - uses: actions/setup-node@v1
-      - uses: actions/checkout@v2
-      - name: Run tests
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+      - uses: actions/checkout@v3
+      - name: Run linter
         run: |
           npm install
-          npm run test
-        working-directory: tests
+          npm test
+        working-directory: dev

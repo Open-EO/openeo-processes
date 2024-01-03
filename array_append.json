@@ -1,0 +1,77 @@
+{
+    "id": "array_append",
+    "summary": "Append a value to an array",
+    "description": "Appends a new value to the end of the array, which may also include a new label for labeled arrays.",
+    "categories": [
+        "arrays"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "An array.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
+            }
+        },
+        {
+            "name": "value",
+            "description": "Value to append to the array.",
+            "schema": {
+                "description": "Any data type is allowed."
+            }
+        },
+        {
+            "name": "label",
+            "description": "Provides a label for the new value. If not given or `null`, the natural next array index as number is used as the label. If in any case the label exists, a `LabelExists` exception is thrown.\n\nThis parameter only applies if the given array is a labeled array. If a non-null values is provided and the array is not labeled, an `ArrayNotLabeled` exception is thrown.",
+            "optional": true,
+            "default": null,
+            "schema": [
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        }
+    ],
+    "returns": {
+        "description": "The new array with the value being appended.",
+        "schema": {
+            "type": "array",
+            "items": {
+                "description": "Any data type is allowed."
+            }
+        }
+    },
+    "exceptions": {
+        "LabelExists": {
+            "message": "An array element with the specified label already exists."
+        },
+        "ArrayNotLabeled": {
+            "message": "A label can't be provided as the given array is not labeled."
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    2
+                ],
+                "value": 3
+            },
+            "returns": [
+                1,
+                2,
+                3
+            ]
+        }
+    ]
+}

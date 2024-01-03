@@ -12,8 +12,20 @@
             "description": "Data cube containing multi-spectral optical top of atmosphere reflectances to be corrected.",
             "name": "data",
             "schema": {
-                "subtype": "raster-cube",
-                "type": "object"
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    },
+                    {
+                        "type": "bands"
+                    }
+                ]
             }
         },
         {
@@ -63,8 +75,20 @@
     "returns": {
         "description": "Data cube containing bottom of atmosphere reflectances.",
         "schema": {
-            "subtype": "raster-cube",
-            "type": "object"
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "spatial",
+                    "axis": [
+                        "x",
+                        "y"
+                    ]
+                },
+                {
+                    "type": "bands"
+                }
+            ]
         }
     },
     "exceptions": {

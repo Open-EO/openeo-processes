@@ -5,7 +5,6 @@
     "categories": [
         "arrays"
     ],
-    "experimental": true,
     "parameters": [
         {
             "name": "data",

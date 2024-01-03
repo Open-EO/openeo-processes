@@ -12,8 +12,20 @@
             "description": "The source data cube containing multi-spectral optical top of the atmosphere (TOA) reflectances on which to perform cloud detection.",
             "name": "data",
             "schema": {
-                "subtype": "raster-cube",
-                "type": "object"
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    },
+                    {
+                        "type": "bands"
+                    }
+                ]
             }
         },
         {
@@ -49,8 +61,20 @@
     "returns": {
         "description": "A data cube with bands for the atmospheric disturbances. Each of the masks contains values between 0 and 1. The data cube has the same spatial and temporal dimensions as the source data cube and a dimension that contains a dimension label for each of the supported/considered atmospheric disturbance.",
         "schema": {
-            "subtype": "raster-cube",
-            "type": "object"
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "spatial",
+                    "axis": [
+                        "x",
+                        "y"
+                    ]
+                },
+                {
+                    "type": "bands"
+                }
+            ]
         }
     },
     "links": [
