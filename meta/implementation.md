@@ -67,7 +67,7 @@ options that can be passed to the corresponsing `methods`:
 - `athmospheric_correction`: `options`
 - `cloud_detection`: `options`
 
-By default, the parameters don't allow any value except an empty opject.
+By default, the parameters don't allow any value except an empty object.
 Back-ends have to either remove the parameter or define schema to give user 
 details about the supported parameters per supported method.
 

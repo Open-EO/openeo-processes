@@ -1,0 +1,83 @@
+{
+    "id": "date_get_component",
+    "summary": "Gets a part/component of a date",
+    "description": "Retrieves a specified portion of a given date.\nIt enables the extraction of specific details from a date, such as year, month, or day.",
+    "categories": [
+        "date & time"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "date",
+            "description": "The date (and optionally time) to get a part of.",
+            "schema": [
+                {
+                    "type": "string",
+                    "format": "date-time",
+                    "subtype": "date-time"
+                },
+                {
+                    "type": "string",
+                    "format": "date",
+                    "subtype": "date"
+                }
+            ]
+        },
+        {
+            "name": "component",
+            "description": "The component for the value given. The following pre-defined components are available:\n\n- millisecond: Milliseconds\n- second: Seconds .\n- minute: Minutes\n- hour: Hours\n- day: Days - changes only the the day part of a date\n- day of week: Day of Week\n- day of year: Day of Year\n- week: Weeks (equivalent to 7 days)\n- week number: Week Number\n- month: Months\n- year: Years\n\nReplacements with the component `year`, `month` or `day` do never change the time.",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "millisecond",
+                    "second",
+                    "minute",
+                    "hour",
+                    "day",
+                    "day of week",
+                    "day of year",
+                    "week",
+                    "week number",
+                    "month",
+                    "year"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "Returns retrieved portion of a date.",
+        "schema": {
+            "type": "number"
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "date": "2023-02-01T17:22:45Z",
+                "component": "month"
+            },
+            "returns": 2
+        },
+        {
+            "arguments": {
+                "date": "2023-03-31T00:00:00+02:00",
+                "component": "day"
+            },
+            "returns": 31
+        },
+        {
+            "arguments": {
+                "date": "2023-01-01",
+                "component": "year"
+            },
+            "returns": 2023
+        },
+        {
+            "arguments": {
+                "date": "2023-01-01",
+                "component": "month"
+            },
+            "returns": 1
+        }
+    ]
+}
