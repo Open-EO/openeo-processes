@@ -1,0 +1,159 @@
+{
+    "id": "dl_fit_class_mlp",
+    "summary": "Train a Multilayer Perceptron classification model",
+    "description": "Fit a Multilayer Perceptron (MLP) classification model to training data. MLP is a class of feedforward artificial neural network (ANN) that consists of at least three layers of nodes: an input layer, a hidden layer, and an output layer. MLP utilizes a supervised learning technique called backpropagation for training.\n\nThis implementation is inspired by Z. Wang, W. Yan, and T. Oates (2017), Time Series Classification from Scratch with Deep Neural Networks: A Strong Baseline.",
+    "categories": [
+        "machine learning",
+        "deep learning"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "predictors",
+            "description": "The predictors for the MLP classification model as a vector data cube. These are the independent variables that the MLP algorithm analyses to learn patterns and relationships within the data.",
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometry"
+                        },
+                        {
+                            "type": "bands"
+                        }
+                    ]
+                },
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometry"
+                        },
+                        {
+                            "type": "other"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "target",
+            "description": "The dependent variable for MLP classification. These are the labeled data, aligning with predictor values based on a shared geometry dimension. This ensures a clear connection between predictor rows and labels.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "geometry"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "hidden_layers",
+            "description": "The number and size of hidden layers in the MLP.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "default": [
+                    512,
+                    512,
+                    512
+                ]
+            }
+        },
+        {
+            "name": "dropout_rates",
+            "description": "Dropout rates for the hidden layers. Each value corresponds to the dropout rate for a specific layer.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "default": [
+                    0.4,
+                    0.3,
+                    0.2
+                ]
+            }
+        },
+        {
+            "name": "epochs",
+            "description": "The number of epochs for training the model.",
+            "schema": {
+                "type": "integer",
+                "minimum": 1,
+                "default": 100
+            }
+        },
+        {
+            "name": "batch_size",
+            "description": "Size of minibatches for stochastic optimizers.",
+            "schema": {
+                "type": "integer",
+                "minimum": 1,
+                "default": 64
+            }
+        },
+        {
+            "name": "activation_function",
+            "description": "Activation function for the hidden layers.",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "relu",
+                    "tanh",
+                    "sigmoid"
+                ],
+                "default": "relu"
+            }
+        },
+        {
+            "name": "optimizer",
+            "description": "The gradient descent algorithm for weight optimization.",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "adam",
+                    "sgd",
+                    "lbfgs"
+                ],
+                "default": "adam"
+            }
+        },
+        {
+            "name": "random_state",
+            "description": "Sets the seed of the algorithm's internal random number generator for initializing weights, biases, and data splitting in 'sgd' or 'adam' optimizers. Use an integer for consistent results across function calls.",
+            "optional": true,
+            "default": null,
+            "schema": {
+                "type": [
+                    "integer",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "A model object that can be saved with ``save_ml_model()`` and restored with ``load_ml_model()``.",
+        "schema": {
+            "type": "object",
+            "subtype": "ml-model"
+        }
+    },
+    "links": [
+        {
+            "href": "https://arxiv.org/abs/1611.06455",
+            "title": "Z. Wang, W. Yan, and T. Oates (2017), Time Series Classification from Scratch with Deep Neural Networks: A Strong Baseline",
+            "type": "text/html",
+            "rel": "about"
+        }
+    ]
+}
