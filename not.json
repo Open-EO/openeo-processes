@@ -1,7 +1,7 @@
 {
     "id": "not",
     "summary": "Inverting a boolean",
-    "description": "Inverts a single boolean so that `true` gets `false` and `false` gets `true`.\n\nNo-data values are passed through and therefore get propagated.",
+    "description": "Inverts a single boolean so that `true` gets `false` and `false` gets `true`.\n\nNo-data values are passed through.",
     "categories": [
         "logic"
     ],

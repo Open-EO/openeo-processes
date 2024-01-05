@@ -25,6 +25,7 @@ In the context of data cube operations (e.g. in `reduce_dimension`), `null` valu
 by the array processes shall be replaced with the no-data value of the data cube.
 As the processes may be used outside of data cubes where the no-data values are undefined,
 most processes fall back to `null` in this case (reflected through the mention of "(or `null`)" in the process description).
+This effectively means that `null` is the default value for an undefined no-data value in openEO.
 
 ## Optimizations for conditions (e.g. `if`)
 

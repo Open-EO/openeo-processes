@@ -1,7 +1,7 @@
 {
     "id": "sqrt",
     "summary": "Square root",
-    "description": "Computes the square root of a real number `x`, which is equal to calculating `x` to the power of *0.5*. For negative `x`, the process returns `NaN`.\n\nA square root of x is a number a such that *`a² = x`*. Therefore, the square root is the inverse function of a to the power of 2, but only for *a >= 0*.\n\nNo-data values are passed through and therefore get propagated.",
+    "description": "Computes the square root of a real number `x`, which is equal to calculating `x` to the power of *0.5*. For negative `x`, the process returns `NaN`.\n\nA square root of x is a number a such that *`a² = x`*. Therefore, the square root is the inverse function of a to the power of 2, but only for *a >= 0*.\n\nNo-data values are passed through.",
     "categories": [
         "math",
         "math > exponential & logarithmic"

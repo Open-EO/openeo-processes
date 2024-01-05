@@ -8,7 +8,7 @@
     "parameters": [
         {
             "name": "x",
-            "description": "The value to check.\n\nNo-data values are passed through and therefore get propagated.",
+            "description": "The value to check.\n\nNo-data values are passed through.",
             "schema": {
                 "description": "Any data type is allowed."
             }

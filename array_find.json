@@ -1,7 +1,7 @@
 {
     "id": "array_find",
     "summary": "Get the index for a value in an array",
-    "description": "Returns the zero-based index of the first (or last) occurrence of the value specified by `value` in the array specified by `data` or `null` if there is no match. Use the parameter `reverse` to switch from the first to the last match.\n\n**Remarks:**\n\n* Use ``array_contains()`` to check if an array contains a value regardless of the position.\n* Use ``array_find_label()`` to find the index for a label.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. A no-data return value from ``eq()`` is handled as `false` (no match).\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating-point numbers due to floating-point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.\n* If the specified value is an array, object or null, the process always returns `null`. See the examples to find no-data values.",
+    "description": "Returns the zero-based index of the first (or last) occurrence of the value specified by `value` in the array specified by `data` or the no-data value (or `null`) if there is no match. Use the parameter `reverse` to switch from the first to the last match.\n\n**Remarks:**\n\n* Use ``array_contains()`` to check if an array contains a value regardless of the position.\n* Use ``array_find_label()`` to find the index for a label.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. A no-data return value from ``eq()`` is handled as `false` (no match).\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating-point numbers due to floating-point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.\n* If the specified value is an array, object or null, the process always returns the no-data value (or `null`). See the examples to find no-data values.",
     "categories": [
         "arrays",
         "reducer"
@@ -35,7 +35,7 @@
         }
     ],
     "returns": {
-        "description": "The index of the first element with the specified value. If no element was found, `null` is returned.",
+        "description": "The index of the first element with the specified value. If no element was found, the no-data value (or `null`) is returned.",
         "schema": [
             {
                 "type": "null"
