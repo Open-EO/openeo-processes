@@ -1,7 +1,7 @@
 {
     "id": "cosh",
     "summary": "Hyperbolic cosine",
-    "description": "Computes the hyperbolic cosine of `x`.\n\nNo-data values are passed through and therefore get propagated.",
+    "description": "Computes the hyperbolic cosine of `x`.\n\nNo-data values are passed through.",
     "categories": [
         "math > trigonometric"
     ],

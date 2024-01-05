@@ -1,7 +1,7 @@
 {
     "id": "cos",
     "summary": "Cosine",
-    "description": "Computes the cosine of `x`.\n\nWorks on radians only.\nNo-data values are passed through and therefore get propagated.",
+    "description": "Computes the cosine of `x`.\n\nWorks on radians only.\nNo-data values are passed through.",
     "categories": [
         "math > trigonometric"
     ],

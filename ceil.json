@@ -1,7 +1,7 @@
 {
     "id": "ceil",
     "summary": "Round fractions up",
-    "description": "The least integer greater than or equal to the number `x`.\n\nNo-data values are passed through and therefore get propagated.",
+    "description": "The least integer greater than or equal to the number `x`.\n\nNo-data values are passed through.",
     "categories": [
         "math > rounding"
     ],

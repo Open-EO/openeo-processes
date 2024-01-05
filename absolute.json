@@ -1,7 +1,7 @@
 {
     "id": "absolute",
     "summary": "Absolute value",
-    "description": "Computes the absolute value of a real number `x`, which is the \"unsigned\" portion of `x` and often denoted as *|x|*.\n\nNo-data values are passed through and therefore get propagated.",
+    "description": "Computes the absolute value of a real number `x`, which is the \"unsigned\" portion of `x` and often denoted as *|x|*.\n\nNo-data values are passed through.",
     "categories": [
         "math"
     ],

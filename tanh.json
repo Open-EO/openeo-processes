@@ -1,7 +1,7 @@
 {
     "id": "tanh",
     "summary": "Hyperbolic tangent",
-    "description": "Computes the hyperbolic tangent of `x`. The tangent is defined to be the hyperbolic sine of x divided by the hyperbolic cosine of x.\n\nNo-data values are passed through and therefore get propagated.",
+    "description": "Computes the hyperbolic tangent of `x`. The tangent is defined to be the hyperbolic sine of x divided by the hyperbolic cosine of x.\n\nNo-data values are passed through.",
     "categories": [
         "math > trigonometric"
     ],
