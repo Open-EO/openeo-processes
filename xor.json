@@ -1,7 +1,7 @@
 {
     "id": "xor",
     "summary": "Logical XOR (exclusive or)",
-    "description": "Checks if **exactly one** of the values is true. If a component is `null`, the result will be `null` if the outcome is ambiguous.\n\n**Truth table:**\n\n```\nx \\ y || null | false | true\n----- || ---- | ----- | -----\nnull  || null | null  | null\nfalse || null | false | true\ntrue  || null | true  | false\n```",
+    "description": "Checks if **exactly one** of the values is true. If any argument is a no-data value, the result will be the no-data value whenever the outcome is ambiguous.\n\n**Truth table:**\n\n```\nx \\ y   || no-data | false   | true\n------- || ------- | ------- | -------\nno-data || no-data | no-data | no-data\nfalse   || no-data | false   | true\ntrue    || no-data | true    | false\n```",
     "categories": [
         "logic"
     ],

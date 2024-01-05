@@ -1,7 +1,7 @@
 {
     "id": "artanh",
     "summary": "Inverse hyperbolic tangent",
-    "description": "Computes the inverse hyperbolic tangent of `x`. It is the inverse function of the hyperbolic tangent so that *`artanh(tanh(x)) = x`*.\n\nThe no-data value `null` is passed through and therefore gets propagated. `NaN` is returned for values outside of the allowed range. The computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, `x` = 1 results in +infinity and `x` = 0 results in -infinity. Otherwise, an exception is thrown.",
+    "description": "Computes the inverse hyperbolic tangent of `x`. It is the inverse function of the hyperbolic tangent so that *`artanh(tanh(x)) = x`*.\n\nNo-data values are passed through. `NaN` is returned for values outside of the allowed range. The computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, `x` = 1 results in +infinity and `x` = 0 results in -infinity. Otherwise, an exception is thrown.",
     "categories": [
         "math > trigonometric"
     ],

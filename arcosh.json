@@ -1,7 +1,7 @@
 {
     "id": "arcosh",
     "summary": "Inverse hyperbolic cosine",
-    "description": "Computes the inverse hyperbolic cosine of `x`. It is the inverse function of the hyperbolic cosine so that *`arcosh(cosh(x)) = x`*.\n\nThe no-data value `null` is passed through and therefore gets propagated. `NaN` is returned for values outside of the allowed range.",
+    "description": "Computes the inverse hyperbolic cosine of `x`. It is the inverse function of the hyperbolic cosine so that *`arcosh(cosh(x)) = x`*.\n\nNo-data values are passed through. `NaN` is returned for values outside of the allowed range.",
     "categories": [
         "math > trigonometric"
     ],

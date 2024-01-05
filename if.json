@@ -27,7 +27,7 @@
         },
         {
             "name": "reject",
-            "description": "A value that is returned if the boolean value is **not** `true`. Defaults to `null`.",
+            "description": "A value that is returned if the boolean value is **not** `true`. Defaults to the no-data value (or `null`).",
             "schema": {
                 "description": "Any data type is allowed."
             },
