@@ -1,0 +1,314 @@
+{
+  "id": "apply_kernel",
+  "level": "L2A",
+  "tests": [
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "kernel": [
+          [1, 2],
+          [2, 4],
+        ]
+      },
+      "throws": "KernelDimensionsUneven"
+    },
+    {
+      // all default values
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "kernel": [
+          [1, 2, 1],
+          [2, 4, 2],
+          [1, 2, 1]
+        ]
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["t", "y", "x"],
+        "dimensions": {
+          "t": {
+            "type": "temporal",
+            "values": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z"]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [
+            [149.95, 191.59, -147.67, -355.31],
+            [183.69, 263.52, -83.28, -381.86],
+            [272.53, 343.87, 17.65, -320.19]
+          ],
+          [
+            [-298.3, -281.84, -138.73, 6.11],
+            [-167.28, -215.91, 155.51, 358.08],
+            [87.14, -42.98, 183.05, 359.75]
+          ]
+        ]
+      }
+    },
+    {
+      // border = replicate
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "kernel": [
+          [1, 2, 1],
+          [2, 4, 2],
+          [1, 2, 1]
+        ],
+        "border": "replicate"
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["t", "y", "x"],
+        "dimensions": {
+          "t": {
+            "type": "temporal",
+            "values": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z"]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [
+            [273.2, 289.49, -212.37, -724.16],
+            [215.59, 263.52, -83.28, -568.71],
+            [555.77, 517.91, 35.61, -723.53]
+          ],
+          [
+            [-606.5, -396.01, -274.77, -51.36],
+            [-180.97, -215.91, 155.51, 498.33],
+            [306.19, -37.72, 207.9, 641.55]
+          ]
+        ]
+      }
+    },
+    {
+      // border = reflect_pixel
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "kernel": [
+          [1, 2, 1],
+          [2, 4, 2],
+          [1, 2, 1]
+        ],
+        "border": "reflect_pixel"
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["t", "y", "x"],
+        "dimensions": {
+          "t": {
+            "type": "temporal",
+            "values": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z"]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [
+            [246.8, 187.38, -165.94, -459.84],
+            [303.58, 263.52, -83.28, -390.02],
+            [360.36, 339.66, -0.62, -320.2]
+          ],
+          [
+            [-469.6, -335.34, -5.38, 190.32],
+            [-307.18, -215.91, 155.51, 435.66],
+            [-144.76, -96.48, 316.4, 681.0]
+          ]
+        ]
+      }
+    },
+    {
+      // border = wrap
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "kernel": [
+          [1, 2, 1],
+          [2, 4, 2],
+          [1, 2, 1]
+        ],
+        "border": "wrap"
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["t", "y", "x"],
+        "dimensions": {
+          "t": {
+            "type": "temporal",
+            "values": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z"]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [
+            [69.39, 365.63, -129.71, -425.95],
+            [-3.16, 263.52, -83.28, -349.96],
+            [113.33, 441.77, -47.05, -375.49]
+          ],
+          [
+            [-142.68, -276.58, -113.88, 20.02],
+            [-27.03, -215.91, 155.51, 344.39],
+            [104.19, -157.15, 47.01, 308.35]
+          ]
+        ]
+      }
+    },
+    {
+      // border = 1, replace_invalid = 1
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "kernel": [
+          [1, 2, 1],
+          [2, 4, 2],
+          [1, 2, 1]
+        ],
+        "border": 1,
+        "replace_invalid": 1
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["t", "y", "x"],
+        "dimensions": {
+          "t": {
+            "type": "temporal",
+            "values": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z"]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [
+            [156.95, 195.59, -143.67, -348.31],
+            [187.69, 263.52, -83.28, -377.86],
+            [279.53, 347.87, 21.65, -313.19]
+          ],
+          [
+            [-291.3, -277.84, -134.73, 13.11],
+            [-163.28, -214.91, 157.51, 363.08],
+            [94.14, -36.98, 191.05, 368.75]
+          ]
+        ]
+      }
+    },
+    {
+      // border = -1, replace_invalid = -1, factor = 0.11111111111
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "kernel": [
+          [1, 2, 1],
+          [2, 4, 2],
+          [1, 2, 1]
+        ],
+        "border": -1,
+        "replace_invalid": -1,
+        "factor": 0.11111111111
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["t", "y", "x"],
+        "dimensions": {
+          "t": {
+            "type": "temporal",
+            "values": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z"]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [
+            [15.88333333317, 20.84333333312, -16.85222222205, -40.25666666626],
+            [19.96555555536, 29.27999999971, -9.25333333324, -42.8733333329],
+            [29.50333333304, 37.76333333296, 1.51666666665, -36.35444444408]
+          ],
+          [
+            [-33.92222222188, -31.75999999968, -15.85888888873, -0.09888888889],
+            [-19.03111111092, -24.10111111087, 17.0566666665, 39.23111111072],
+            [8.90444444436, -5.44222222217, 19.44999999981, 38.97222222183]
+          ]
+        ]
+      }
+    }
+  ]
+}

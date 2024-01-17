@@ -1,0 +1,62 @@
+{
+  "id": "cummin",
+  "level": "L3",
+  "experimental": true,
+  "tests": [
+    {
+      "arguments": {
+        "data": [
+          5,
+          3,
+          1,
+          3,
+          5
+        ]
+      },
+      "returns": [
+        5,
+        3,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          5,
+          3,
+          {"type": "nodata"},
+          1,
+          5
+        ]
+      },
+      "returns": [
+        5,
+        3,
+        {"type": "nodata"},
+        1,
+        1
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          5,
+          3,
+          {"type": "nodata"},
+          1,
+          5
+        ],
+        "ignore_nodata": false
+      },
+      "returns": [
+        5,
+        3,
+        {"type": "nodata"},
+        {"type": "nodata"},
+        {"type": "nodata"}
+      ]
+    }
+  ]
+}

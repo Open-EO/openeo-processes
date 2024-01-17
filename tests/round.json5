@@ -1,0 +1,83 @@
+{
+  "id": "round",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {
+        "x": 0
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "x": 3.56,
+        "p": 1
+      },
+      "returns": 3.6
+    },
+    {
+      "arguments": {
+        "x": -0.4444444,
+        "p": 2
+      },
+      "returns": -0.44
+    },
+    {
+      "arguments": {
+        "x": -2.5
+      },
+      "returns": -2
+    },
+    {
+      "arguments": {
+        "x": -3.5
+      },
+      "returns": -4
+    },
+    {
+      "arguments": {
+        "x": 0.25,
+        "p": 1
+      },
+      "returns": 0.2
+    },
+    {
+      "arguments": {
+        "x": 0.35,
+        "p": 1
+      },
+      "returns": 0.4
+    },
+    {
+      "arguments": {
+        "x": 1234.5,
+        "p": -2
+      },
+      "returns": 1200
+    },
+    {
+      "arguments": {
+        "x": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": Infinity
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "x": -Infinity
+      },
+      "returns": -Infinity
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    }
+  ]
+}

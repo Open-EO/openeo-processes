@@ -1,0 +1,120 @@
+{
+  "id": "mean",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {
+        "data": [
+          1,
+          0,
+          3,
+          2
+        ]
+      },
+      "returns": 1.5
+    },
+    {
+      "arguments": {
+        "data": [
+          9,
+          2.5,
+          {"type": "nodata"},
+          -2.5
+        ]
+      },
+      "returns": 3
+    },
+    {
+      "arguments": {
+        "data": [
+          1005.5,
+          -5.7,
+          -3.575,
+        ]
+      },
+      "returns": 332.075
+    },
+    {
+      "arguments": {
+        "data": [
+          -Infinity,
+          3,
+          5
+        ]
+      },
+      "returns": -Infinity
+    },
+    {
+      "arguments": {
+        "data": [
+          3,
+          5,
+          Infinity
+        ]
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "data": [
+          -Infinity,
+          3,
+          3,
+          5,
+          Infinity
+        ]
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "data": [
+          NaN,
+          3,
+          3,
+          NaN,
+          5
+        ]
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          2,
+          {"type": "nodata"}
+        ],
+        "ignore_nodata": false
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      // The input array is empty: return `{"type": "nodata"}`.
+      "arguments": {
+        "data": []
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      // The input array has only `{"type": "nodata"}` elements: return `{"type": "nodata"}`.
+      "arguments": {
+        "data": [
+          {"type": "nodata"},
+          {"type": "nodata"}
+        ]
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "data": [
+          {"type": "nodata"},
+          {"type": "nodata"}
+        ],
+        "ignore_nodata": false
+      },
+      "returns": {"type": "nodata"}
+    }
+  ]
+}

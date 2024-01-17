@@ -1,0 +1,90 @@
+{
+  "id": "is_nan",
+  "level": "L2",
+  "tests": [
+    {
+      "arguments": {
+        "x": 1
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": -123456789.0
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": Infinity
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": -Infinity
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": NaN
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": true
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": false
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": [NaN]
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": []
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": {}
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": {"nan": NaN}
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": "NaN"
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": "nan"
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"}
+      },
+      "returns": true
+    }
+  ]
+}

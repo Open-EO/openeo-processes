@@ -1,0 +1,62 @@
+{
+  "id": "cummax",
+  "level": "L3",
+  "experimental": true,
+  "tests": [
+    {
+      "arguments": {
+        "data": [
+          1,
+          3,
+          5,
+          3,
+          1
+        ]
+      },
+      "returns": [
+        1,
+        3,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          3,
+          {"type": "nodata"},
+          5,
+          1
+        ]
+      },
+      "returns": [
+        1,
+        3,
+        {"type": "nodata"},
+        5,
+        5
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          3,
+          {"type": "nodata"},
+          5,
+          1
+        ],
+        "ignore_nodata": false
+      },
+      "returns": [
+        1,
+        3,
+        {"type": "nodata"},
+        {"type": "nodata"},
+        {"type": "nodata"}
+      ]
+    }
+  ]
+}

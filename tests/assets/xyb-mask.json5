@@ -1,0 +1,23 @@
+{
+  "type": "datacube",
+  "order": ["y", "x"],
+  "dimensions": {
+    "y": {
+      "type": "spatial",
+      "axis": "y",
+      "values": [5757495.0, 5757485.0, 5757475.0],
+      "reference_system": "EPSG:25832"
+    },
+    "x": {
+      "type": "spatial",
+      "axis": "x",
+      "values": [404835.0, 404845.0, 404855.0, 404865.0],
+      "reference_system": "EPSG:25832"
+    }
+  },
+  "data": [
+    [1, 1, 1, 1],
+    [1, 0, 0, 1],
+    [0, 0, 1, 0]
+  ]
+}

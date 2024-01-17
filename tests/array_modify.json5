@@ -1,0 +1,124 @@
+{
+  "id": "array_modify",
+  "level": "L3",
+  "experimental": true,
+  "tests": [
+    {
+       // Replace a single value in the array.
+      "arguments": {
+        "data": [
+          "a",
+          "d",
+          "c"
+        ],
+        "values": [
+          "b"
+        ],
+        "index": 1,
+        "length": 1
+      },
+      "returns": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      // Replace multiple values in the array.
+      "arguments": {
+        "data": [
+          "a",
+          "b",
+          4,
+          5
+        ],
+        "values": [
+          1,
+          2,
+          3
+        ],
+        "index": 0,
+        "length": 2
+      },
+      "returns": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      // Insert a value to the array at a given position.
+      "arguments": {
+        "data": [
+          "a",
+          "c"
+        ],
+        "values": [
+          "b"
+        ],
+        "index": 1
+      },
+      "returns": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      // Remove a single value from the array.
+      "arguments": {
+        "data": [
+          "a",
+          "b",
+          null,
+          "c"
+        ],
+        "values": [],
+        "index": 2
+      },
+      "returns": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      // Remove multiple values from the array.
+      "arguments": {
+        "data": [
+          null,
+          null,
+          "a",
+          "b",
+          "c"
+        ],
+        "values": [],
+        "index": 0,
+        "length": 2
+      },
+      "returns": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      // Remove multiple values from the end of the array and ignore that the given length is exceeding the size of the array.
+      "arguments": {
+        "data": [
+          "a",
+          "b",
+          "c"
+        ],
+        "values": [],
+        "index": 1,
+        "length": 10
+      },
+      "returns": [
+        "a"
+      ]
+    }
+  ]
+}

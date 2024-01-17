@@ -1,0 +1,35 @@
+{
+  "id": "is_nodata",
+  "level": "L2",
+  "tests": [
+    {
+      "arguments": {
+        "x": {"type": "nodata"}
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": 1
+      },
+      "returns": false,
+      // Optional to avoid an error in case the no-data value is 1
+      "throws": true
+    },
+    {
+      "arguments": {
+        "x": "Test"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": [
+          {"type": "nodata"},
+          {"type": "nodata"}
+        ]
+      },
+      "returns": false
+    }
+  ]
+}

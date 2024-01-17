@@ -1,0 +1,10 @@
+{
+  "id": "pi",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {},
+      "returns": 3.14159265359
+    }
+  ]
+}

@@ -89,7 +89,7 @@
         },
         {
             "name": "reducer",
-            "description": "A reducer to be applied for the values contained in each interval. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes. Intervals may not contain any values, which for most reducers leads to no-data (`null`) values by default.",
+            "description": "A reducer to be applied for the values contained in each interval. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes. Intervals may not contain any values, which leads to a no-data value for most reducers by default.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",

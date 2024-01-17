@@ -1,0 +1,35 @@
+{
+  "id": "drop_dimension",
+  "level": "L2",
+  "tests": [
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "name": "t"
+      },
+      "throws": "DimensionLabelCountMismatch"
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-mask-one-band.json5"
+        },
+        "name": "foo"
+      },
+      "throws": "DimensionNotAvailable"
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-mask-one-band.json5"
+        },
+        "name": "bands"
+      },
+      "returns": {
+        "$ref": "assets/xyb-mask.json5"
+      }
+    },
+  ]
+}

@@ -1,7 +1,7 @@
 {
     "id": "power",
     "summary": "Exponentiation",
-    "description": "Computes the exponentiation for the base `base` raised to the power of `p`.\n\nThe no-data value `null` is passed through and therefore gets propagated if any of the arguments is `null`.",
+    "description": "Computes the exponentiation for the base `base` raised to the power of `p`.\n\nIf any argument is a no-data value, the result will be the no-data value (or `null`).",
     "categories": [
         "math",
         "math > exponential & logarithmic"
