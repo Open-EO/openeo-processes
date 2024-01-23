@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `clip`: Throw an exception if min > max [#472](https://github.com/Open-EO/openeo-processes/issues/472)
 - Added a uniqueness contraint to various array-typed parameters (e.g. lists of dimension names or labels)
+- Renamed `create_data_cube` to `create_cube`. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
 
 ### Fixed
 
