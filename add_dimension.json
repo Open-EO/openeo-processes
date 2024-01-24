@@ -35,7 +35,7 @@
         },
         {
             "name": "type",
-            "description": "The type of dimension, defaults to `other`.",
+            "description": "The type of dimension, defaults to `other`.\n\nIf the type is `spatial`, the axis is always `z`, spatial dimensions for `x` and `y` can't be added through this process.",
             "schema": {
                 "type": "string",
                 "enum": [
