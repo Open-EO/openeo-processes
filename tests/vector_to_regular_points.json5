@@ -1,5 +1,5 @@
 {
-  "id": "vector_reproject",
+  "id": "vector_to_regular_points",
   "level": "L3",
   "experimental": true,
   "tests": []
