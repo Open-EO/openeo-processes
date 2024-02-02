@@ -1,0 +1,57 @@
+{
+    "id": "adaptive_threshold",
+    "summary": "Apply adaptive thresholding to RasterCube.",
+    "description": "Adaptive thresholding derives a rolling mean for the window size across the x/y dimensions of the datacube, the result is then multiplied by the threshold factor and then values less than the resulting number are filtered out. The resulting boolean datacube is converted to a VectorDataCube.",
+    "categories": [
+        "cubes",
+        "vector"
+    ],
+    "experimental": true,
+    "deprecated": false,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The raster cube to apply the adaptive thresholding to.",
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "raster-cube"
+                }
+            ]
+
+        },
+        {
+            "name": "window_size",
+            "description": "Numerical value for the rolling window.",
+            "schema": {
+                "type": "number"
+            },
+            "default": 30
+        },
+        {
+            "name": "threshold_factor",
+            "description": "Numerical value to multiply the rolling windows by.",
+            "schema": {
+                "type": "number"
+            },
+            "default": 3
+        }
+    ],
+    "returns": {
+        "description": "A data cube for further processing.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube"
+        }
+    },
+    "exceptions": {
+      
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html",
+            "rel": "about",
+            "title": "Data Cubes explained in the openEO documentation"
+        }
+    ]
+}
