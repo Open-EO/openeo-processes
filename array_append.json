@@ -1,0 +1,69 @@
+{
+  "id": "array_append",
+  "summary": "Append a value to an array",
+  "description": "Appends a new value to the end of the array, which may also include a new label for labeled arrays.",
+  "categories": [
+    "arrays"
+  ],
+  "parameters": [
+    {
+      "name": "data",
+      "description": "An array.",
+      "schema": {
+        "type": "array",
+        "items": {
+          "description": "Any data type is allowed."
+        }
+      }
+    },
+    {
+      "name": "value",
+      "description": "Value to append to the array.",
+      "schema": {
+        "description": "Any data type is allowed."
+      }
+    },
+    {
+      "name": "label",
+      "description": "If the given array is a labeled array, a new label for the new value should be given. If not given or `null`, the array index as string is used as the label. If in any case the label exists, a `LabelExists` exception is thrown.",
+      "optional": true,
+      "default": null,
+      "schema": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    }
+  ],
+  "returns": {
+    "description": "The new array with the value being appended.",
+    "schema": {
+      "type": "array",
+      "items": {
+        "description": "Any data type is allowed."
+      }
+    }
+  },
+  "exceptions": {
+    "LabelExists": {
+      "message": "An array element with the specified label already exists."
+    }
+  },
+  "examples": [
+    {
+      "arguments": {
+        "data": [
+          1,
+          2
+        ],
+        "value": 3
+      },
+      "returns": [
+        1,
+        2,
+        3
+      ]
+    }
+  ]
+}
