@@ -22,7 +22,7 @@
         },
         {
             "name": "window_size",
-            "description": "The value for the first band.",
+            "description": "Numerical value for the rolling window.",
             "schema": {
                 "type": "number"
             },
@@ -30,11 +30,11 @@
         },
         {
             "name": "threshold_factor",
-            "description": "The value for the first band.",
+            "description": "Numerical value to multiply the rolling windows by.",
             "schema": {
                 "type": "number"
             },
-            "default": 30
+            "default": 3
         }
     ],
     "returns": {
