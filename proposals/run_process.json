@@ -1,0 +1,43 @@
+{
+    "id": "run_process",
+    "summary": "Run a process",
+    "description": "Executes a process. This is useful for user-defined processes which should be able to execute different processes based on the user input.",
+    "categories": [
+        "development"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "id",
+            "description": "The identifier for the process to be executed.",
+            "schema": {
+                "type": "string",
+                "subtype": "process-id"
+            }
+        },
+        {
+            "name": "arguments",
+            "description": "The arguments passed to the process.",
+            "schema": {
+                "type": "object"
+            }
+        },
+        {
+            "name": "namespace",
+            "description": "The namespace of the process.\n\nDefaults to `null`, which checks both user-defined and predefined processes, but prefers user-defined processes if both are available.",
+            "schema": {
+                "type": "string",
+                "subtype": "process-namespace"
+            },
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "The data that is returned by the executed process.",
+        "schema": {
+            "title": "Any",
+            "description": "Any data type."
+        }
+    }
+}
