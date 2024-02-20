@@ -1,7 +1,7 @@
 {
-    "id": "dl_fit_class_mlp",
+    "id": "ml_fit_class_mlp",
     "summary": "Train a Multilayer Perceptron classification model",
-    "description": "Fit a Multilayer Perceptron (MLP) classification model to training data. MLP is a class of feedforward artificial neural network (ANN) that consists of at least three layers of nodes: an input layer, a hidden layer, and an output layer. MLP utilizes a supervised learning technique called backpropagation for training.\n\nThis implementation is inspired by Z. Wang, W. Yan, and T. Oates (2017), Time Series Classification from Scratch with Deep Neural Networks: A Strong Baseline.",
+    "description": "Fit a Multilayer Perceptron (MLP) classification model to training data. MLP is a class of feedforward artificial neural network (ANN) that consists of at least three layers of nodes: an input layer, a hidden layer, and an output layer. MLP utilizes a supervised learning technique called backpropagation for training.",
     "categories": [
         "machine learning",
         "deep learning"

@@ -13,12 +13,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New processes in proposal state:
     - `date_between`
     - `date_difference`
-    - `dl_fit_class_mlp`
     - `filter_vector`
     - `flatten_dimensions`
     - `load_geojson`
     - `load_ml_model`
     - `load_url`
+    - `ml_fit_class_mlp`
     - `ml_fit_class_random_forest`
     - `ml_fit_regr_random_forest`
     - `ml_predict`
