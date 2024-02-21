@@ -1,0 +1,89 @@
+{
+    "id": "ml_fit",
+    "summary": "Train a machine learning or deep learning model",
+    "description": "Fit a machine learning or deep learning model to training data. It can be used for both classification and regression tasks, determined by the nature of the labels.",
+    "categories": [
+        "machine learning",
+        "deep learning"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "predictors",
+            "description": "The predictors for the model as a vector data cube. These are the independent variables that the algorithm analyses to learn patterns and relationships within the data.",
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometry"
+                        },
+                        {
+                            "type": "bands"
+                        }
+                    ]
+                },
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometry"
+                        },
+                        {
+                            "type": "other"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "target",
+            "description": "The dependent variable for the model. These are the labeled data, aligning with predictor values based on a shared geometry dimension. This ensures a clear connection between predictor rows and labels.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "geometry"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "ml_method",
+            "description": "The machine learning method to be used for fitting the model.",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "cnn",
+                    "cnn_lstm",
+                    "mlp",
+                    "random_forest",
+                    "resnet",
+                    "svm",
+                    "tempcnn",
+                    "xgboost"
+                ],
+                "default": "random_forest"
+            }
+        },
+        {
+            "name": "parameters",
+            "description": "Additional parameters for the chosen machine learning method, passed as an object.",
+            "schema": {
+                "type": "object"
+            },
+            "default": null,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "A model object that can be saved with ``save_ml_model()`` and restored with ``load_ml_model()``.",
+        "schema": {
+            "type": "object",
+            "subtype": "ml-model"
+        }
+    }
+}
