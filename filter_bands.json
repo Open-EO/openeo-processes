@@ -12,7 +12,12 @@
             "description": "A data cube with bands.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "bands"
+                    }
+                ]
             }
         },
         {
@@ -33,7 +38,12 @@
         "description": "A data cube limited to a subset of its original bands. The dimensions and dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the dimension of type `bands` has less (or the same) dimension labels.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "bands"
+                }
+            ]
         }
     },
     "exceptions": {
