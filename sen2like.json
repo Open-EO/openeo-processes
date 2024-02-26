@@ -151,23 +151,25 @@
             }
         },
         {
-            "description": "Per default the target_resolution is 10 m for the bands 'B02', 'B03', 'B04'. Set to 20 to retrieve 20 m resolution results of 'B8A', 'B11', 'B12' or to 60 for 'B01'.",
-            "name": "target_resolution",
-            "optional": true,
-            "default": 10,
-            "schema": {
-                "type": "number"
-            }
-        },
-        {
-            "description": "Proprietary options for the sen2like processing.",
-            "name": "options",
-            "optional": true,
-            "default": {},
-            "schema": {
-                "type": "object",
-                "additionalProperties": false
-            }
+            "name": "bands",
+            "description": "Only adds the specified bands into the data cube so that bands that don't match the list of band names are not available. Applies to all dimensions of type `bands`.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If the unique band name and the common name conflict, the unique band name has a higher priority.\n\nThe order of the specified array defines the order of the bands in the data cube. If multiple bands match a common name, all matched bands are included in the original order.\n\nIt is recommended to use this parameter instead of using ``filter_bands()`` directly after loading unbounded data.",
+            "schema": [
+                {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "type": "string",
+                        "subtype": "band-name"
+                    }
+                },
+                {
+                    "title": "No filter",
+                    "description": "Don't filter bands. All bands are included in the data cube.",
+                    "type": "null"
+                }
+            ],
+            "default": null,
+            "optional": true
         },
         {
             "description": "Sen2like produces outputs following the Sentinel 2 .SAFE convention. To enable the download for these, set this to True. ",
@@ -177,13 +179,25 @@
             "schema": {
                 "type": "boolean"
             }
+        },
+        {
+            "description": "The Cloud coverage parameter (percentage) to filter MGRS image tile contaminates with strong cloud coverage. ",
+            "name": "cloud_cover",
+            "optional": true,
+            "default": 50,
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            }
         }
     ],
     "returns": {
-        "description": "Sen2like enriched data cube",
+        "description": "Sen2like enriched data cube for further processing. The dimensions and dimension properties (name, type, labels, reference system and resolution) correspond to the collection's metadata, but the dimension labels are restricted as specified in the parameters.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube"
         }
     },
     

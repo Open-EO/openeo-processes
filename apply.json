@@ -1,7 +1,7 @@
 {
     "id": "apply",
-    "summary": "Apply a process to each pixel",
-    "description": "Applies a process to each pixel value in the data cube (i.e. a local operation). In contrast, the process ``apply_dimension()`` applies a process to all pixel values along a particular dimension.",
+    "summary": "Apply a process to each value",
+    "description": "Applies a process to each value in the data cube (i.e. a local operation). In contrast, the process ``apply_dimension()`` applies a process to all values along a particular dimension.",
     "categories": [
         "cubes"
     ],
@@ -11,12 +11,12 @@
             "description": "A data cube.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube"
             }
         },
         {
             "name": "process",
-            "description": "A process that accepts and returns a single value and is applied on each individual value in the data cube. The process may consist of multiple sub-processes and could, for example, consist of processes such as ``abs()`` or ``linear_scale_range()``.",
+            "description": "A process that accepts and returns a single value and is applied on each individual value in the data cube. The process may consist of multiple sub-processes and could, for example, consist of processes such as ``absolute()`` or ``linear_scale_range()``.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
@@ -60,7 +60,7 @@
         "description": "A data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube"
         }
     },
     "links": [
