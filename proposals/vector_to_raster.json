@@ -42,7 +42,7 @@
         }
     ],
     "returns": {
-        "description": "A raster datacube with the provided extent, spatial resolution, and projection. The output cube contains bands where each pixel inside the provided polygons has the value related to that polygon in the vector cube and all pixels outside have NoData values.",
+        "description": "A raster data cube with the provided extent, spatial resolution, and projection. The output cube contains bands where each pixel inside the provided polygons has the value related to that polygon in the vector cube and all pixels outside have no-data values.",
         "schema": {
             "type": "object",
             "subtype": "datacube",
