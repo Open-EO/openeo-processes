@@ -1,7 +1,7 @@
 {
     "id": "vector_to_raster",
     "description": "Creates a raster cube as output based on a vector cube. The values in the output raster cube are based on the numeric properties in the input vector cube.",
-    "summary": "Converts a vector cube to a raster cube.",
+    "summary": "Converts a vector cube to a raster cube",
     "categories": [
         "cubes",
         "vector"
