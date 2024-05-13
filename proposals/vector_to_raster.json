@@ -25,7 +25,6 @@
         {
             "name": "target",
             "description": "A raster data cube used as reference for the target's extent, spatial resolution, and projection.",
-            "optional": false,
             "schema": {
                 "type": "object",
                 "subtype": "datacube",
