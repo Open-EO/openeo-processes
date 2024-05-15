@@ -1,0 +1,78 @@
+{
+    "id": "fapar",
+    "summary": "The Fraction of Absorbed Photosynthetically Active Radiation",
+    "description": "Computes the Fraction of Absorbed Photosynthetically Active Radiation (FAPAR). Required bands are `B03`, `B04`, `B05`, `B06`, `B07`, `B8A`, `B11`, `B12`, as well as the solar and viewing azimuth and zenith angles `SAA`, `SZA`, `VAA`, `VZA`. Note that the expected output values are in the range of [0, 1] and values outside of the range need to be considered as invalid. To keep the dimension specify a new band name in the parameter `target_band`. This adds a new dimension label with the specified name to the dimension, which can be used to access the computed values. If a band with the specified name exists, a `BandExists` is thrown.",
+    "categories": [
+        "cubes",
+        "math > indices",
+        "vegetation indices"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A raster data cube with bands `B03`, `B04`, `B05`, `B06`, `B07`, `B8A`, `B11`, `B12`, as well as the solar and viewing azimuth and zenith angles `SAA`, `SZA`, `VAA`, `VZA`.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    },
+                    {
+                        "type": "bands"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "target_band",
+            "description": "By default, the dimension of type `bands` is dropped. To keep the dimension specify a new band name in this parameter so that a new dimension label with the specified name will be added for the computed values.",
+            "schema": [
+                {
+                    "type": "string",
+                    "pattern": "^\\w+$"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "A raster data cube containing the computed FAPAR values. The structure of the data cube differs depending on the value passed to `target_band`:\n\n* `target_band` is `null`: The data cube does not contain the dimension of type `bands`, the number of dimensions decreases by one. The dimension properties (name, type, labels, reference system and resolution) for all other dimensions remain unchanged.\n* `target_band` is a string: The data cube keeps the same dimensions. The dimension properties remain unchanged, but the number of dimension labels for the dimension of type `bands` increases by one. The additional label is named as specified in `target_band`.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "spatial",
+                    "axis": [
+                        "x",
+                        "y"
+                    ]
+                }
+            ]
+        }
+    },
+    "exceptions": {
+        "DimensionAmbiguous": {
+            "message": "dimension of type `bands` is not available or is ambiguous."
+        },
+        "BandExists": {
+            "message": "A band with the specified target name exists."
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://custom-scripts.sentinel-hub.com/sentinel-2/fapar/",
+            "title": "FAPAR computation from sentinelhub"
+        }
+    ]
+}
