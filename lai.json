@@ -10,7 +10,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "A raster data cube with two bands that have the common names `red` and `nir` assigned.",
+            "description": "A raster data cube with bands `B03`, `B04`, `B05`, `B06`, `B07`, `B8A`, `B11`, `B12`, as well as the solar and viewing azimuth and zenith angles `SAA`, `SZA`, `VAA`, `VZA`.",
             "schema": {
                 "type": "object",
                 "subtype": "datacube",
