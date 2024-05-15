@@ -62,7 +62,7 @@
     },
     "exceptions": {
         "DimensionAmbiguous": {
-            "message": "dimension of type `bands` is not available or is ambiguous.."
+            "message": "dimension of type `bands` is not available or is ambiguous."
         },
         "BandExists": {
             "message": "A band with the specified target name exists."
