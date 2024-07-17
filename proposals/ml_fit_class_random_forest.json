@@ -90,7 +90,7 @@
         "description": "A model object that can be saved with ``save_ml_model()`` and restored with ``load_ml_model()``.",
         "schema": {
             "type": "object",
-            "subtype": "ml-model"
+            "subtype": "mlm-model"
         }
     },
     "links": [
