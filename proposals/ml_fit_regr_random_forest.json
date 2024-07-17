@@ -8,8 +8,8 @@
     "experimental": true,
     "parameters": [
         {
-            "name": "predictors",
-            "description": "The predictors for the regression model as a vector data cube. Aggregated to the features (vectors) of the target input variable.",
+            "name": "training_set",
+            "description": "The training set for the Random Forest regression model, provided as a vector data cube. This set contains both the independent variables and dependent variable that the Random Forest algorithm analyzes to learn patterns and relationships within the data.",
             "schema": [
                 {
                     "type": "object",
@@ -39,15 +39,9 @@
         },
         {
             "name": "target",
-            "description": "The training sites for the regression model as a vector data cube. This is associated with the target variable for the Random Forest model. The geometry has to associated with a value to predict (e.g. fractional forest canopy cover).",
+            "description": "The column name in the training set that represents the dependent variable for Random Forest regression.",
             "schema": {
-                "type": "object",
-                "subtype": "datacube",
-                "dimensions": [
-                    {
-                        "type": "geometry"
-                    }
-                ]
+                "type": "string"
             }
         },
         {
@@ -96,7 +90,7 @@
         "description": "A model object that can be saved with ``save_ml_model()`` and restored with ``load_ml_model()``.",
         "schema": {
             "type": "object",
-            "subtype": "ml-model"
+            "subtype": "mlm-model"
         }
     },
     "links": [

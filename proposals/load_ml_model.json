@@ -10,7 +10,7 @@
     "parameters": [
         {
             "name": "uri",
-            "description": "The STAC Item to load the machine learning model from. The STAC Item must implement the `ml-model` extension.",
+            "description": "The STAC Item to load the machine learning model from. The STAC Item must implement the `mlm-model` extension.",
             "schema": [
                 {
                     "title": "URL",
@@ -32,13 +32,13 @@
         "description": "A machine learning model to be used with machine learning processes such as ``ml_predict()``.",
         "schema": {
             "type": "object",
-            "subtype": "ml-model"
+            "subtype": "mlm-model"
         }
     },
     "links": [
         {
-            "href": "https://github.com/stac-extensions/ml-model",
-            "title": "STAC ml-model extension",
+            "href": "https://github.com/crim-ca/mlm-extension",
+            "title": "Machine Learning Model STAC extension",
             "type": "text/html",
             "rel": "about"
         }
