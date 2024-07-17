@@ -20,7 +20,7 @@
             "description": "A ML model that was trained with one of the ML training processes such as ``ml_fit_regr_random_forest()``.",
             "schema": {
                 "type": "object",
-                "subtype": "ml-model"
+                "subtype": "mlm-model"
             }
         },
         {

@@ -1,7 +1,7 @@
 {
     "id": "save_ml_model",
     "summary": "Save a ML model",
-    "description": "Saves a machine learning model as part of a batch job.\n\nThe model will be accompanied by a separate STAC Item that implements the [ml-model extension](https://github.com/stac-extensions/ml-model).",
+    "description": "Saves a machine learning model as part of a batch job.\n\nThe model will be accompanied by a separate STAC Item that implements the [mlm-model extension](https://github.com/crim-ca/mlm-extension).",
     "categories": [
         "machine learning",
         "import"
@@ -13,7 +13,7 @@
             "description": "The data to store as a machine learning model.",
             "schema": {
                 "type": "object",
-                "subtype": "ml-model"
+                "subtype": "mlm-model"
             }
         },
         {
@@ -35,8 +35,8 @@
     },
     "links": [
         {
-            "href": "https://github.com/stac-extensions/ml-model",
-            "title": "STAC ml-model extension",
+            "href": "https://github.com/crim-ca/mlm-extension",
+            "title": "Machine Learning Model STAC extension",
             "type": "text/html",
             "rel": "about"
         }
