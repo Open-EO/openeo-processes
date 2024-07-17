@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "training_set",
-            "description": "The training set for the Random Forest regression model, provided as a vector data cube. This set contains both the independent variables and dependent variable that the Random Forest algorithm analyzes to learn patterns and relationships within the data.",
+            "description": "The training set for the Random Forest regression model, provided as a vector data cube. This set contains both the independent variables and dependent variable that the Random Forest algorithm analyses to learn patterns and relationships within the data.",
             "schema": [
                 {
                     "type": "object",
