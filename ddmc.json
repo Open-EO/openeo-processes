@@ -1,0 +1,154 @@
+{
+    "id": "ddmc",
+    "summary": "Detecting Deep Moist Convection",
+    "description": "Deep moist convection (DC) is associated with dangerous weather phenomena such as torrential rain, flash floods, large hail and tornadoes. The release of latent heat inside deep convective clouds often plays a crucial role. Studies have shown that DC and overshooting cloud tops penetrate into the lowest stratosphere and enable the exchange of gases from the troposphere deep into the stratosphere. The Sentinel satellites offer the possibility to monitor DC around the globe, independent of the emissivity of the ground. Detecting Deep Moist Convection is a combination of Deep Moist Convection, low- and mid-level cloudiness. \nThe `data` parameter expects a raster data cube with a dimension, by the default of the type `band` or otherwise another `target_band ` must be specified. By default, the dimension must have at least five bands with the common names `nir08`, `nir09`, `cirrus`, `swir16` and `swir22` assigned. Otherwise, the user has to specify the parameters. The common names for each band are specified in the collection's band metadata and are *not* equal to the band names.\n\nBy default, the dimension of type `bands` is renamed by this process. To keep the dimension, specify a new band name in the parameter `target_band`. This adds a new dimension label with the specified name to the dimension, which can be used to access the computed values.",
+    "categories": [
+        "cubes",
+        "math > indices",
+        "disaster management and prevention algorithms"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A raster data cube with five bands that have the common names `nir08`, `nir09`, `cirrus`,  `swir16` and `swir22` assigned.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    },
+                    {
+                        "type": "bands"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "nir08",
+            "description": "The name of the NIR band. Defaults to the band that has the common name `nir` assigned.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If the unique band name and the common name conflict, the unique band name has a higher priority.",
+            "schema": {
+                "type": "string",
+                "subtype": "band-name"
+            },
+            "default": "nir08",
+            "optional": true
+        },
+	{
+            "name": "nir09",
+            "description": "The name of the Water vapour band. Defaults to the band that has the common name `nir09` assigned.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If the unique band name and the common name conflict, the unique band name has a higher priority.",
+            "schema": {
+                "type": "string",
+                "subtype": "band-name"
+            },
+            "default": "nir09",
+            "optional": true
+        },
+        {
+            "name": "cirrus",
+            "description": "The name of the SWIR – Cirrus band. Defaults to the band that has the common name `cirrus` assigned.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If the unique band name and the common name conflict, the unique band name has a higher priority.",
+            "schema": {
+                "type": "string",
+                "subtype": "band-name"
+            },
+            "default": "cirrus",
+            "optional": true
+        },
+	{
+            "name": "swir16",
+            "description": "The name of the SWIR (ca 1600 nm) band. Defaults to the band that has the common name `swir16` assigned.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If the unique band name and the common name conflict, the unique band name has a higher priority.",
+            "schema": {
+                "type": "string",
+                "subtype": "band-name"
+            },
+            "default": "swir16",
+            "optional": true
+        },
+	{
+            "name": "swir22",
+            "description": "The name of the SWIR (ca 2200 nm) band. Defaults to the band that has the common name `swir22` assigned.\n\nEither the unique band name (metadata field `name` in bands) or one of the common band names (metadata field `common_name` in bands) can be specified. If the unique band name and the common name conflict, the unique band name has a higher priority.",
+            "schema": {
+                "type": "string",
+                "subtype": "band-name"
+            },
+            "default": "swir22",
+            "optional": true
+        },
+        {
+            "name": "target_band",
+            "description": "By default, the dimension of type `band` is dropped. To keep the dimension specify a new band name in this parameter so that a new dimension label with the specified name will be added for the computed values.",
+            "schema": [
+                {
+                    "type": "string",
+                    "pattern": "^\\w+$"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": "band",
+            "optional": true
+        },
+	{
+            "name": "gain",
+            "description": "The value by which the indices are to be multiplied. By default, gain is 2.5.",
+            "schema": [
+                {
+                    "type": "double",
+                    "pattern": "^\\w+$"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": 2.5,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "A raster data cube containing the computed DDMC values. The structure of the data cube differs depending on the value passed to `target_band`:\n `target_band` is a string: The data cube keeps the same dimensions. The dimension properties remain unchanged, but the number of dimension labels for the dimension of type `bands` increases by one. The additional label is named as specified in `target_band`.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "spatial",
+                    "axis": [
+                        "x",
+                        "y"
+                    ]
+                }
+            ]
+        }
+    },
+    "exceptions": {
+        "NirBandAmbiguous": {
+            "message": "The NIR band can't be resolved, please specify the specific NIR band name."
+        },
+        "RedBandAmbiguous": {
+            "message": "The red band can't be resolved, please specify the specific red band name."
+        },
+        "DimensionAmbiguous": {
+            "message": "dimension of type `band` is not available or is ambiguous.."
+        },
+        "BandExists": {
+            "message": "A band with the specified target name exists."
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/deep_moist_convection/",
+            "title": "DDMC explained by sentinelhub"
+        },
+        {
+            "rel": "about",
+            "href": "https://earthobservatory.nasa.gov/features/MeasuringVegetation/measuring_vegetation_2.php",
+            "title": "NDVI explained by NASA"
+        }
+    ]
+}
