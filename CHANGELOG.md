@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `filter_spatial`: Clarified that masking is applied using the given geometries. [#469](https://github.com/Open-EO/openeo-processes/issues/469)
 - `mod`: Clarified behavior for y = 0
 - `sqrt`: Clarified that NaN is returned for negative numbers.
+- `run_udf` and `run_udf_externally`: Simplified and clarified the schema for `data` - no functional change. [#515](https://github.com/Open-EO/openeo-processes/issues/515)
 
 ## [2.0.0-rc.1] - 2023-05-25
 
