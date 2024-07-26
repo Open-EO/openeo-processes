@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>openEO API Processes</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7"></script>
     <script src="https://cdn.jsdelivr.net/npm/@openeo/processes-docgen@1/dist/DocGen.umd.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@openeo/processes-docgen@1/dist/DocGen.css">
     <style>
@@ -115,7 +115,9 @@
           categorize: true,
           apiVersion: '1.2.0',
           title: 'openEO processes (2.0.0-rc.1)',
-          notice: '**Note:** This is the list of all processes specified by the openEO project. Back-ends implement a varying set of processes. Thus, the processes you can use at a specific back-end may derive from the specification, may include non-standardized processes and may not implement all processes listed here. Please check each back-end individually for the processes they support. The client libraries usually have a function called `listProcesses` or `list_processes` for that.'
+          notice: '**Note:** This is the list of all processes specified by the openEO project. Back-ends implement a varying set of processes. Thus, the processes you can use at a specific back-end may derive from the specification, may include non-standardized processes and may not implement all processes listed here. Please check each back-end individually for the processes they support. The client libraries usually have a function called `listProcesses` or `list_processes` for that.',
+          showExperimentalByDefault: true,
+	        showDeprecatedByDefault: false,
         }
       })
     });
