@@ -42,6 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `flatten_dimensions`
     - `load_geojson`
     - `load_url`
+    - `raster_to_vector`
     - `unflatten_dimension`
     - `vector_buffer`
     - `vector_reproject`
