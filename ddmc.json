@@ -80,7 +80,7 @@
         },
         {
             "name": "target_band",
-            "description": "By default, the dimension of type `band` is dropped. To keep the dimension specify a new band name in this parameter so that a new dimension label with the specified name will be added for the computed values.",
+            "description": "By default, the dimension is the band dimension. You can specify a new dimension name in this parameter so that a new dimension label with the specified name will be added for the computed values.",
             "schema": [
                 {
                     "type": "string",
@@ -123,20 +123,6 @@
                     ]
                 }
             ]
-        }
-    },
-    "exceptions": {
-        "NirBandAmbiguous": {
-            "message": "The NIR band can't be resolved, please specify the specific NIR band name."
-        },
-        "RedBandAmbiguous": {
-            "message": "The red band can't be resolved, please specify the specific red band name."
-        },
-        "DimensionAmbiguous": {
-            "message": "dimension of type `band` is not available or is ambiguous.."
-        },
-        "BandExists": {
-            "message": "A band with the specified target name exists."
         }
     },
     "links": [
