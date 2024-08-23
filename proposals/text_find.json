@@ -1,0 +1,93 @@
+{
+    "id": "text_find",
+    "summary": "First position of a text in another text",
+    "description": "Checks where the text (also known as *string*) specified for `pattern` is positioned in the text specified for `data` for the first time. No-data values are passed through.",
+    "categories": [
+        "texts"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "Text in which to find something in.",
+            "schema": {
+                "type": [
+                    "string",
+                    "null"
+                ]
+            }
+        },
+        {
+            "name": "pattern",
+            "description": "Text to find in `data`. Regular expressions are not supported.",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "case_sensitive",
+            "description": "Case sensitive comparison can be disabled by setting this parameter to `false`.",
+            "schema": {
+                "type": "boolean"
+            },
+            "default": true,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "A value >= 0 that indicates the position of the text, `null` if the text was not found.",
+        "schema": {
+            "type": [
+                "integer",
+                "null"
+            ],
+            "minimum": 0
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "data": "Lorem ipsum dolor sit amet",
+                "pattern": "openEO"
+            },
+            "returns": null
+        },
+        {
+            "arguments": {
+                "data": "Lorem ipsum dolor sit amet",
+                "pattern": "ipsum dolor"
+            },
+            "returns": 6
+        },
+        {
+            "arguments": {
+                "data": "Lorem ipsum dolor sit amet",
+                "pattern": "Ipsum Dolor"
+            },
+            "returns": null
+        },
+        {
+            "arguments": {
+                "data": "Lorem ipsum dolor sit amet",
+                "pattern": "SIT",
+                "case_sensitive": false
+            },
+            "returns": 18
+        },
+        {
+            "arguments": {
+                "data": "ÄÖÜ",
+                "pattern": "ö",
+                "case_sensitive": false
+            },
+            "returns": 1
+        },
+        {
+            "arguments": {
+                "data": null,
+                "pattern": "null"
+            },
+            "returns": null
+        }
+    ]
+}
