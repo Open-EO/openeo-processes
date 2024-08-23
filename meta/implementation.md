@@ -31,16 +31,17 @@ the evaluation should stop and provide the result directly.
 This is basically the same behavior that is also described in the processes `all` and `any`.
 
 For example, the condition `A > 0 or B > 0` should only execute `B > 0` if `A > 0` is false as
-otherwise the result is already unambiguous and will be `true` regardless of the rest of the 
+otherwise the result is already unambiguous and will be `true` regardless of the rest of the
 condition.
 
-Implementing this behavior does not have any negative side-effects so that 
+Implementing this behavior does not have any negative side-effects so that
 comparability and reproducibility of the results is still given.
 
 ## Enums for processing methods
 
 There are numerours processes that provide a predefined set of processing methods.
 For example:
+
 - `ard_surface_reflectance`: `atmospheric_correction_method` and `cloud_detection_method`
 - `athmospheric_correction`: `method`
 - `cloud_detection`: `method`
@@ -63,12 +64,13 @@ This applies similarly to other enums specied in parameter schemas, e.g. the
 
 The processes mentioned above have all at least one parameter for proprietary
 options that can be passed to the corresponsing `methods`:
+
 - `ard_surface_reflectance`: `atmospheric_correction_options` and `cloud_detection_options`
 - `athmospheric_correction`: `options`
 - `cloud_detection`: `options`
 
 By default, the parameters don't allow any value except an empty opject.
-Back-ends have to either remove the parameter or define schema to give user 
+Back-ends have to either remove the parameter or define schema to give user
 details about the supported parameters per supported method.
 
 For example, if you support the methods `iCor` and `FORCE` in `atmospheric_correction`,
@@ -76,40 +78,39 @@ you may define something like the following for the parameter:
 
 ```json
 {
-	"description": "Proprietary options for the atmospheric correction method.",
-	"name": "options",
-	"optional": true,
-	"default": {},
-	"schema": [
-		{
-			"title": "FORCE options",
-			"type": "object",
-			"properties": {
-				"force_option1": {
-					"type": "number",
-					"description": "Description for option 1",
-					"default": 0
-				},
-				"force_option2": {
-					"type": "boolean",
-					"description": "Description for option 1",
-					"default": true
-				}
-			}
-		},
-		{
-			"title": "iCor options",
-			"type": "object",
-			"properties": {
-				"icor_option1": {
-					"type": "string",
-					"description": "Description for option 1",
-					"default": "example"
-				}
-			}
-		}
-
-	]
+  "description": "Proprietary options for the atmospheric correction method.",
+  "name": "options",
+  "optional": true,
+  "default": {},
+  "schema": [
+    {
+      "title": "FORCE options",
+      "type": "object",
+      "properties": {
+        "force_option1": {
+          "type": "number",
+          "description": "Description for option 1",
+          "default": 0
+        },
+        "force_option2": {
+          "type": "boolean",
+          "description": "Description for option 1",
+          "default": true
+        }
+      }
+    },
+    {
+      "title": "iCor options",
+      "type": "object",
+      "properties": {
+        "icor_option1": {
+          "type": "string",
+          "description": "Description for option 1",
+          "default": "example"
+        }
+      }
+    }
+  ]
 }
 ```
 
@@ -149,24 +150,26 @@ Back-ends should not execute the processes for log levels that are not matching 
 
 ### Data Types
 
-The process is only useful for users if a common behavior for data types passed into the `data` parameter has been agreed on across implementations. 
+The process is only useful for users if a common behavior for data types passed into the `data` parameter has been agreed on across implementations.
 
 The following chapters include some proposals for common data (sub) types, but it is incomplete and will be extended in the future.
 Also, for some data types a JSON encoding is missing, we'll add more details once agreed upon:
 <https://github.com/Open-EO/openeo-processes/issues/299>
 
 #### Scalars
+
 For the data types boolean, numbers, strings and null it is recommended to log them as given.
 
 #### Arrays
 
 It is recommended to summarize arrays as follows:
+
 ```js
 {
-	"data": [3,1,6,4,8], // Return a reasonable excerpt of the data, e.g. the first 5 or 10 elements
-	"length": 10, // Return the length of the array, this is important to determine whether the data above is complete or an excerpt
-	"min": 0, // optional: Return additional statstics if possible, ideally use the corresponsing openEO process names as keys
-	"max": 10
+  "data": [3,1,6,4,8], // Return a reasonable excerpt of the data, e.g. the first 5 or 10 elements
+  "length": 10, // Return the length of the array, this is important to determine whether the data above is complete or an excerpt
+  "min": 0, // optional: Return additional statstics if possible, ideally use the corresponsing openEO process names as keys
+  "max": 10
 }
 ```
 
@@ -178,38 +181,38 @@ The top-level object and/or each dimension can be enhanced with additional stats
 
 ```js
 {
-	"cube:dimensions": {
-		"x": {
-			"type": "spatial",
-			"axis": "x",
-			"extent": [8.253, 12.975],
-			"reference_system": 4326
-		},
-		"y": {
-			"type": "spatial",
-			"axis": "y",
-			"extent": [51.877,55.988],
-			"reference_system": 4326
-		},
-		"t": {
-			"type": "temporal",
-			"values": [
-				"2015-06-21T12:56:55Z",
-				"2015-06-23T09:12:14Z",
-				"2015-06-25T23:44:44Z",
-				"2015-06-27T21:11:34Z",
-				"2015-06-30T17:33:12Z"
-			],
-			"step": null
-		},
-		"bands": {
-			"type": "bands",
-			"values": ["NDVI"]
-		}
-	},
-	// optional: Return additional data or statstics for the data cube if possible (see also the chapter for "Arrays" above).
-	"min": -1,
-	"max": 1
+  "cube:dimensions": {
+    "x": {
+      "type": "spatial",
+      "axis": "x",
+      "extent": [8.253, 12.975],
+      "reference_system": 4326
+    },
+    "y": {
+      "type": "spatial",
+      "axis": "y",
+      "extent": [51.877,55.988],
+      "reference_system": 4326
+    },
+    "t": {
+      "type": "temporal",
+      "values": [
+        "2015-06-21T12:56:55Z",
+        "2015-06-23T09:12:14Z",
+        "2015-06-25T23:44:44Z",
+        "2015-06-27T21:11:34Z",
+        "2015-06-30T17:33:12Z"
+      ],
+      "step": null
+    },
+    "bands": {
+      "type": "bands",
+      "values": ["NDVI"]
+    }
+  },
+  // optional: Return additional data or statstics for the data cube if possible (see also the chapter for "Arrays" above).
+  "min": -1,
+  "max": 1
 }
 ```
 
@@ -221,8 +224,9 @@ To improve interoperability openEO processes, version 1.2.0 added details about 
 A survey has shown that most libraries implement type 7 and as such this was chosen to be the default.
 
 We have found some libraries that can be used for an implementation:
+
 - Java: [Apache Commons Math Percentile](http://commons.apache.org/proper/commons-math/javadocs/api-3.6/org/apache/commons/math3/stat/descriptive/rank/Percentile.html), choose the [estimation type `R_7`](http://commons.apache.org/proper/commons-math/javadocs/api-3.6/org/apache/commons/math3/stat/descriptive/rank/Percentile.EstimationType.html#R_7)
 - JavaScript: [d3](https://github.com/d3/d3-array/blob/v2.8.0/README.md#quantile), has only type 7 implemented.
 - Julia: [Statistics.quantile](https://docs.julialang.org/en/v1/stdlib/Statistics/#Statistics.quantile!), type 7 is the default.
-- Python: [numpy](https://numpy.org/doc/stable/reference/generated/numpy.quantile.html), [pandas](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.quantile.html), [xarray](http://xarray.pydata.org/en/stable/generated/xarray.DataArray.quantile.html) - type 7 (called 'linear' for the interpolation parameter) is the default for all of them. 
+- Python: [numpy](https://numpy.org/doc/stable/reference/generated/numpy.quantile.html), [pandas](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.quantile.html), [xarray](http://xarray.pydata.org/en/stable/generated/xarray.DataArray.quantile.html) - type 7 (called 'linear' for the interpolation parameter) is the default for all of them.
 - R: [quantile](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/quantile.html) - type 7 is the default.
