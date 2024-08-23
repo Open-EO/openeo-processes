@@ -230,3 +230,64 @@ We have found some libraries that can be used for an implementation:
 - Julia: [Statistics.quantile](https://docs.julialang.org/en/v1/stdlib/Statistics/#Statistics.quantile!), type 7 is the default.
 - Python: [numpy](https://numpy.org/doc/stable/reference/generated/numpy.quantile.html), [pandas](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.quantile.html), [xarray](http://xarray.pydata.org/en/stable/generated/xarray.DataArray.quantile.html) - type 7 (called 'linear' for the interpolation parameter) is the default for all of them.
 - R: [quantile](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/quantile.html) - type 7 is the default.
+
+## OGC API - Processes
+
+OGC API - Processes and OGC EO Application Packages (AP) can generally be unilized in openEO in three different ways:
+
+1. **openEO process**
+  
+   As a pre-defined process that exposes itself as a normal openEO process.
+   It is not exposed to the user that in the background an AP is invoked.
+2. **Pre-deployment through ADES**
+  
+   In addition to the openEO API, a provider can offer access to an Application Deployment and Execution Service (ADES).
+   The ADES is likely external to the openEO API tree due to the conflicting `GET /processes` endpoint.
+   As such the ADES exposes itself in the `GET /` endpoint of the openEO API instance through a link.
+   The link must have the relation type `http://www.opengis.net/def/rel/ogc/1.0/processes`, which points to the ADES `/processes` endpoint.
+   Users can deploy APs through the ADES and use them through the process `run_ogcapi`.
+  
+   If the provider doesn't offer an ADES itself, users could also deploy their AP with another provider.
+   In this case use the process `run_ogcapi_externally` instead.
+  
+   Example process node:
+  
+   ```json
+   {
+     "process_id": "run_ogcapi",
+     "arguments": {
+       "data": ..., // Data, e.g. subtypes datacube or stac
+       "id": "my-ap", // Identifier of the application package in the ADES
+       "context": { // Parameters as defined in the CWL file
+         "cwl_param1": true,
+         "param2": 99
+       }
+     }
+   }
+   ```
+3. **CWL provided at runtime (UDF runtime)**
+  
+   Providers can also provide a UDF runtime for the language CWL (instead of e.g. Python or R).
+   The runtime is exposed through the endpoint `GET /udf_runtimes`.
+  
+   Example process node:
+  
+   ```json
+   {
+     "process_id": "run_udf",
+     "arguments": {
+       "data": ..., // Data, e.g. subtypes datacube or stac
+       "udf": "...", // CWL as YAML string/JSON object, URL, or file on the API user workspace
+       "runtime": "cwl", // Assuming the UDF runtime is named "cwl"
+       "context": { // Parameters as defined in the CWL file
+         "cwl_param1": true,
+         "param2": 99
+       }
+     }
+   }
+   ```
+
+Generally, we recommend to use the following types and formats for the CWL inputs and outputs:
+
+- `type`: `File` or `File[]` depending on the capabilities of the CWL workflow
+- `format`: For STAC inputs and outputs either `stac:item`, `stac:collection`, `stac:catalog`, `stac:itemcollection`, or `stac:stac` (i.e. and of the types before).
