@@ -32,7 +32,7 @@
         "description": "A machine learning model to be used with machine learning processes such as ``ml_predict()``.",
         "schema": {
             "type": "object",
-            "subtype": "mlm-model"
+            "subtype": "ml-model"
         }
     },
     "links": [
