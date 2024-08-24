@@ -236,7 +236,7 @@
             "type": "object",
             "subtype": "mlm-model",
             "title": "Machine Learning Model",
-            "description": "A machine learning model, accompanied with STAC metadata that implements the Machine Learning Model STAC mlm-model extension."
+            "description": "A machine learning model, accompanied with STAC metadata that implements the Machine Learning Model STAC extension (mlm-model)."
         },
         "output-format": {
             "type": "string",
