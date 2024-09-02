@@ -233,7 +233,7 @@ We have found some libraries that can be used for an implementation:
 
 ## OGC API - Processes
 
-OGC API - Processes and OGC EO Application Packages (AP) can generally be unilized in openEO in three different ways:
+OGC API - Processes and OGC EO Application Packages (AP) can generally be utilized in openEO in three different ways:
 
 1. **openEO process**
   
@@ -241,7 +241,7 @@ OGC API - Processes and OGC EO Application Packages (AP) can generally be uniliz
    It is not exposed to the user that in the background an AP is invoked.
 2. **Pre-deployment through ADES**
   
-   In addition to the openEO API, a provider can offer access to an Application Deployment and Execution Service (ADES).
+   In addition to the openEO API, a provider can offer access to an [Application Deployment and Execution Service (ADES)](https://github.com/eoepca/proc-ades).
    The ADES is likely external to the openEO API tree due to the conflicting `GET /processes` endpoint.
    As such the ADES exposes itself in the `GET /` endpoint of the openEO API instance through a link.
    The link must have the relation type `http://www.opengis.net/def/rel/ogc/1.0/processes`, which points to the ADES `/processes` endpoint.
