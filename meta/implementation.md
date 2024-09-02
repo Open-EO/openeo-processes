@@ -239,15 +239,15 @@ OGC API - Processes and OGC EO Application Packages (AP) can generally be utiliz
   
    As a pre-defined process that exposes itself as a normal openEO process.
    It is not exposed to the user that in the background an AP is invoked.
-2. **Pre-deployment through ADES**
+2. **Pre-deployment through *OGC API - Processes - Part 2: Deploy, Replace, Undeploy***
+
+   In addition to the openEO API, a provider can offer access to an instance of *OGC API - Processes - Part 2: Deploy, Replace, Undeploy* (OGC DRU).
+   The OGC DRU instance is likely external to the openEO API tree due to the conflicting `GET /processes` endpoint.
+   As such the OGC DRU instance exposes itself in the `GET /` endpoint of the openEO API instance through a link.
+   The link must have the relation type `http://www.opengis.net/def/rel/ogc/1.0/processes`, which points to the `/processes` of the OGC API - Processes endpoint.
+   Users can deploy APs through the OGC DRU instance and use them through the process `run_ogcapi`.
   
-   In addition to the openEO API, a provider can offer access to an [Application Deployment and Execution Service (ADES)](https://github.com/eoepca/proc-ades).
-   The ADES is likely external to the openEO API tree due to the conflicting `GET /processes` endpoint.
-   As such the ADES exposes itself in the `GET /` endpoint of the openEO API instance through a link.
-   The link must have the relation type `http://www.opengis.net/def/rel/ogc/1.0/processes`, which points to the ADES `/processes` endpoint.
-   Users can deploy APs through the ADES and use them through the process `run_ogcapi`.
-  
-   If the provider doesn't offer an ADES itself, users could also deploy their AP with another provider.
+   If the provider doesn't offer an OGC DRU instance itself, users could also deploy their AP with another provider.
    In this case use the process `run_ogcapi_externally` instead.
   
    Example process node:
@@ -257,7 +257,7 @@ OGC API - Processes and OGC EO Application Packages (AP) can generally be utiliz
      "process_id": "run_ogcapi",
      "arguments": {
        "data": ..., // Data, e.g. subtypes datacube or stac
-       "id": "my-ap", // Identifier of the application package in the ADES
+       "id": "my-ap", // Identifier of the application package in OGC API - Processes
        "context": { // Parameters as defined in the CWL file
          "cwl_param1": true,
          "param2": 99

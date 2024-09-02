@@ -1,7 +1,7 @@
 {
     "id": "run_ogcapi",
     "summary": "Run a OGC API process",
-    "description": "Runs an OGC API - Processes process that the service provider offers through an Application Deployment and Execution Service (ADES).",
+    "description": "Runs an OGC API - Processes process that the service provider offers through an instance of OGC API - Processes - Part 2 (Deploy, Replace, Undeploy).",
     "categories": [
         "cubes",
         "import",
