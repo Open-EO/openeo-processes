@@ -42,7 +42,7 @@
                     "bands",
                     "geometry",
                     "spatial",
-                     "temporal",
+                    "temporal",
                     "other"
                 ]
             },
