@@ -236,7 +236,7 @@ We have found some libraries that can be used for an implementation:
 The subtype `stac` is an abstract type that refers to a STAC resource of any type (Catalog, Collection, or Item).
 It can refer to:
 - static STAC resources, e.g. hosted on cloud storage
-- "dynamic" STAC resources made available via a STAC API
+- dynamic STAC resources made available via a STAC API
 - a STAC JSON representation embedded as an argument into an openEO user-defined process
 
 ### stac_modify
