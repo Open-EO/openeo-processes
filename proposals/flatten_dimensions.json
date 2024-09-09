@@ -20,6 +20,7 @@
             "description": "The names of the dimension to combine. The order of the array defines the order in which the dimension labels and values are combined (see the example in the process description). Fails with a `DimensionNotAvailable` exception if at least one of the specified dimensions does not exist.",
             "schema": {
                 "type": "array",
+                "uniqueItems": true,
                 "items": {
                     "type": "string"
                 }
