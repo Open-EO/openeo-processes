@@ -1,0 +1,99 @@
+{
+    "id": "date_difference",
+    "summary": "Computes the difference between two time instants",
+    "description": "Computes the difference between two instants in time and returns the difference between them in the unit given.\n\nThe process converts the given dates into numerical timestamps and returns the result of subtracting the other date from the base date. If a given date doesn't include the time, the process assumes that the time component is `00:00:00Z` (i.e. midnight, in UTC). The millisecond part of the times are optional and default to `0` if not given. The process doesn't take daylight saving time (DST) into account as only dates and times in UTC (with potential numerical time zone modifier) are supported.",
+    "categories": [
+        "comparison",
+        "date & time"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "date1",
+            "description": "The base date, optionally with a time component.",
+            "schema": [
+                {
+                    "type": "string",
+                    "format": "date-time",
+                    "subtype": "date-time"
+                },
+                {
+                    "type": "string",
+                    "format": "date",
+                    "subtype": "date"
+                }
+            ]
+        },
+        {
+            "name": "date2",
+            "description": "The other date, optionally with a time component.",
+            "schema": [
+                {
+                    "type": "string",
+                    "format": "date-time",
+                    "subtype": "date-time"
+                },
+                {
+                    "type": "string",
+                    "format": "date",
+                    "subtype": "date"
+                }
+            ]
+        },
+        {
+            "name": "unit",
+            "description": "The unit for the returned value. The following units are available:\n\n- millisecond\n- second - leap seconds are ignored in computations.\n- minute\n- hour\n- day\n- month\n- year",
+            "optional": true,
+            "default": "second",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "millisecond",
+                    "second",
+                    "minute",
+                    "hour",
+                    "day",
+                    "month",
+                    "year"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "Returns the difference between date1 and date2 in the given unit (seconds by default), including a fractional part if required.\n\nFor comparison purposes this means:\n\n- If `date1` < `date2`, the returned value is positive.\n- If `date1` = `date2`, the returned value is 0.\n- If `date1` > `date2`, the returned value is negative.",
+        "schema": {
+            "type": "number"
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "date1": "2020-01-01T00:00:00.0Z",
+                "date2": "2020-01-01T00:00:15.5Z"
+            },
+            "returns": 15.5
+        },
+        {
+            "arguments": {
+                "date1": "2020-01-01T00:00:00Z",
+                "date2": "2020-01-01T01:00:00+01:00"
+            },
+            "returns": 0
+        },
+        {
+            "arguments": {
+                "date1": "2020-01-02",
+                "date2": "2020-01-01"
+            },
+            "returns": -86400
+        },
+        {
+            "arguments": {
+                "date1": "2020-01-02",
+                "date2": "2020-01-01",
+                "unit": "day"
+            },
+            "returns": -1
+        }
+    ]
+}
