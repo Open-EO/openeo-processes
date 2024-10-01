@@ -8,18 +8,18 @@
     "parameters": [
         {
             "name": "data",
-            "description": "A raster data cube to trim.",
+            "description": "A data cube to trim.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube"
             }
         }
     ],
     "returns": {
-        "description": "A trimmed raster data cube with the same dimensions. The dimension properties name, type, reference system and resolution remain unchanged. The number of dimension labels may decrease.",
+        "description": "A trimmed data cube with the same dimensions. The dimension properties name, type, reference system and resolution remain unchanged. The number of dimension labels may decrease.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube"
         }
     }
 }

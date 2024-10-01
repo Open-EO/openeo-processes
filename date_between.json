@@ -1,0 +1,112 @@
+{
+    "id": "date_between",
+    "summary": "Between comparison for dates and times",
+    "description": "By default, this process checks whether `x` is later than or equal to `min` and before or equal to `max`.\n\nIf `exclude_max` is set to `true` the upper bound is excluded so that the process checks whether `x` is later than or equal to `min` and before `max`.\n\nLower and upper bounds are not allowed to be swapped. So `min` MUST be before or equal to `max` or otherwise the process always returns `false`.",
+    "categories": [
+        "comparison",
+        "date & time"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "x",
+            "description": "The value to check.",
+            "schema": [
+                {
+                    "type": "string",
+                    "format": "date-time",
+                    "subtype": "date-time",
+                    "description": "Date and time with a time zone."
+                },
+                {
+                    "type": "string",
+                    "format": "date",
+                    "subtype": "date",
+                    "description": "Date only, formatted as `YYYY-MM-DD`. The time zone is UTC. Missing time components are all 0."
+                },
+                {
+                    "type": "string",
+                    "subtype": "time",
+                    "pattern": "^\\d{2}:\\d{2}:\\d{2}$",
+                    "description": "Time only, formatted as HH:MM:SS. The time zone is UTC."
+                }
+            ]
+        },
+        {
+            "name": "min",
+            "description": "Lower boundary (inclusive) to check against.",
+            "schema": [
+                {
+                    "type": "string",
+                    "format": "date-time",
+                    "subtype": "date-time",
+                    "description": "Date and time with a time zone."
+                },
+                {
+                    "type": "string",
+                    "format": "date",
+                    "subtype": "date",
+                    "description": "Date only, formatted as `YYYY-MM-DD`. The time zone is UTC. Missing time components are all 0."
+                },
+                {
+                    "type": "string",
+                    "subtype": "time",
+                    "pattern": "^\\d{2}:\\d{2}:\\d{2}$",
+                    "description": "Time only, formatted as HH:MM:SS. The time zone is UTC."
+                }
+            ]
+        },
+        {
+            "name": "max",
+            "description": "Upper boundary (inclusive) to check against.",
+            "schema": [
+                {
+                    "type": "string",
+                    "format": "date-time",
+                    "subtype": "date-time",
+                    "description": "Date and time with a time zone."
+                },
+                {
+                    "type": "string",
+                    "format": "date",
+                    "subtype": "date",
+                    "description": "Date only, formatted as `YYYY-MM-DD`. The time zone is UTC. Missing time components are all 0."
+                },
+                {
+                    "type": "string",
+                    "subtype": "time",
+                    "pattern": "^\\d{2}:\\d{2}:\\d{2}$",
+                    "description": "Time only, formatted as HH:MM:SS. The time zone is UTC."
+                }
+            ]
+        },
+        {
+            "name": "exclude_max",
+            "description": "Exclude the upper boundary `max` if set to `true`. Defaults to `false`.",
+            "schema": {
+                "type": "boolean"
+            },
+            "default": false,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "`true` if `x` is between the specified bounds, otherwise `false`.",
+        "schema": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "x": "2020-01-01",
+                "min": "2021-01-01",
+                "max": "2022-01-01"
+            },
+            "returns": false
+        }
+    ]
+}
