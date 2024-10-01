@@ -59,11 +59,11 @@
         },
         {
             "arguments": {
-                "x": 0.000001,
+                "x": 1e-06,
                 "min": 0,
                 "max": 0.02
             },
-            "returns": 0.000001
+            "returns": 1e-06
         },
         {
             "arguments": {
