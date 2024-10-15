@@ -164,7 +164,7 @@ For the data types boolean, numbers, strings and null it is recommended to log t
 
 It is recommended to summarize arrays as follows:
 
-```js
+```json5
 {
   "data": [3,1,6,4,8], // Return a reasonable excerpt of the data, e.g. the first 5 or 10 elements
   "length": 10, // Return the length of the array, this is important to determine whether the data above is complete or an excerpt
@@ -179,7 +179,7 @@ It is recommended to return them summarized in a structure compliant to the [STA
 If reasonsable, it gives a valuable benefit for users to provide all dimension labels (e.g. individual timestamps for the temporal dimension) instead of values ranges.
 The top-level object and/or each dimension can be enhanced with additional statstics if possible, ideally use the corresponsing openEO process names as keys.
 
-```js
+```json5
 {
   "cube:dimensions": {
     "x": {
@@ -252,7 +252,7 @@ OGC API - Processes and OGC EO Application Packages (AP) can generally be utiliz
   
    Example process node:
   
-   ```json
+   ```json5
    {
      "process_id": "run_ogcapi",
      "arguments": {
@@ -272,7 +272,7 @@ OGC API - Processes and OGC EO Application Packages (AP) can generally be utiliz
   
    Example process node:
   
-   ```json
+   ```json5
    {
      "process_id": "run_udf",
      "arguments": {
