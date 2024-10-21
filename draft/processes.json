@@ -10104,6 +10104,99 @@
     ]
   },
   {
+    "id": "export_collection",
+    "summary": "Export data to an openEO collection",
+    "description": "Exports the given processing results made available through a STAC resource (e.g., a STAC Collection or Item) to the given openEO collection. The STAC resource itself is exported with all STAC resources and assets underneath.",
+    "categories": [
+      "export",
+      "stac"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "The data to export to the openEO collection.",
+        "schema": {
+          "type": "object",
+          "subtype": "stac"
+        }
+      },
+      {
+        "name": "collection",
+        "description": "The identifier of the collection to export to. If the collection **exists**, the data will be added to the collection. If the collection **does not exist** yet, it will be created based on the given STAC metadata.",
+        "schema": [
+          {
+            "title": "New Collection",
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_\\-\\.~/]+$"
+          },
+          {
+            "title": "Existing Collection",
+            "type": "string",
+            "subtype": "collection-id",
+            "pattern": "^[A-Za-z0-9_\\-\\.~/]+$"
+          }
+        ]
+      }
+    ],
+    "returns": {
+      "description": "Returns the collection identifier.",
+      "schema": {
+        "type": "string",
+        "subtype": "collection-id",
+        "pattern": "^[A-Za-z0-9_\\-\\.~/]+$"
+      }
+    }
+  },
+  {
+    "id": "export_workspace",
+    "summary": "Export data to a cloud user workspace",
+    "description": "Exports the given processing results made available through a STAC resource (e.g., a STAC Collection) to the given user workspace. The STAC resource itself is exported with all STAC resources and assets underneath.",
+    "categories": [
+      "export",
+      "stac"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "The data to export to the user workspace as a STAC resource.",
+        "schema": {
+          "type": "object",
+          "subtype": "stac"
+        }
+      },
+      {
+        "name": "workspace",
+        "description": "The identifier of the workspace to export to.",
+        "schema": {
+          "type": "string",
+          "pattern": "^[\\w\\-\\.~]+$",
+          "subtype": "workspace-id"
+        }
+      },
+      {
+        "name": "merge",
+        "description": "Provides a cloud-specific path identifier to a STAC resource to merge the given STAC resource into. If not provided, the STAC resource is kept separate from any other STAC resources in the workspace.",
+        "schema": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "optional": true,
+        "default": null
+      }
+    ],
+    "returns": {
+      "description": "Returns the potentially updated STAC resource.",
+      "schema": {
+        "type": "object",
+        "subtype": "stac"
+      }
+    }
+  },
+  {
     "id": "filter_labels",
     "summary": "Filter dimension labels based on a condition",
     "description": "Filters the dimension labels in the data cube for the given dimension. Only the dimension labels that match the specified condition are preserved, all other labels with their corresponding data get removed.",
@@ -11490,6 +11583,47 @@
         "rel": "about",
         "href": "https://doi.org/10.3390/data4030093",
         "title": "Reasoning behind the choice of bilinear resampling"
+      }
+    ]
+  },
+  {
+    "id": "stac_modify",
+    "summary": "Updates an existing STAC resource",
+    "description": "Modifies the given STAC resource (e.g., a STAC Collection or Item) based on the given changeset.",
+    "categories": [
+      "stac"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "The existing STAC resource.",
+        "schema": {
+          "type": "object",
+          "subtype": "stac"
+        }
+      },
+      {
+        "name": "changes",
+        "description": "A potentially incomplete STAC resource that should be merged with the existing STAC resource. It follows the [RFC 7386: JSON Merge Patch](https://www.rfc-editor.org/rfc/rfc7386.html) specification.",
+        "schema": {
+          "type": "object"
+        }
+      }
+    ],
+    "returns": {
+      "description": "Returns the modified STAC resource.",
+      "schema": {
+        "type": "object",
+        "subtype": "stac"
+      }
+    },
+    "links": [
+      {
+        "href": "https://www.rfc-editor.org/rfc/rfc7386.html",
+        "title": "RFC 7386: JSON Merge Patch",
+        "type": "text/html",
+        "rel": "about"
       }
     ]
   },
@@ -12965,7 +13099,8 @@
     "description": "Makes the processed data available in the given file format to the corresponding medium that is relevant for the context this processes is applied in:\n\n* For **batch jobs** the data is stored on the back-end. STAC-compatible metadata is usually made available with the processed data.\n* For **synchronous processing** the data is sent to the client as a direct response to the request.\n* **Secondary web services** are provided with the processed data so that it can make use of it (e.g., visualize it). Web service may require the data in a certain format. Please refer to the documentation of the individual service types for details.",
     "categories": [
       "cubes",
-      "export"
+      "export",
+      "stac"
     ],
     "parameters": [
       {
@@ -12996,10 +13131,10 @@
       }
     ],
     "returns": {
-      "description": "Always returns `true` as in case of an error an exception is thrown which aborts the execution of the process.",
+      "description": "Returns the STAC resource that was created in the process of saving the result.",
       "schema": {
-        "type": "boolean",
-        "const": true
+        "type": "object",
+        "subtype": "stac"
       }
     },
     "exceptions": {
