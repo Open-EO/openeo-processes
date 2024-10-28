@@ -8,13 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Implementation guide for implementing OGC API - Processes in openEO
+- `export_collection`
+- `export_workspace`
 - `run_ogcapi`
 - `run_ogcapi_processes`
-- Implementation guide for implementing OGC API - Processes in openEO
+- `stac_modify`
 
 ### Changed
 
 - `clip`: Throw an exception if min > max [#472](https://github.com/Open-EO/openeo-processes/issues/472)
+- `save_results`: Returns the STAC resource instead of boolean `true` [API#376](https://github.com/Open-EO/openeo-api/issues/376)
 - Added a uniqueness contraint to various array-typed parameters (e.g. lists of dimension names or labels)
 - Renamed `create_data_cube` to `create_cube`. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
 - `apply_polygon`: Renamed `polygons` parameter to `geometries` for better alignment with other geometry handling processes. [#511](https://github.com/Open-EO/openeo-processes/issues/511)

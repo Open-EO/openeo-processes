@@ -4,7 +4,8 @@
     "description": "Makes the processed data available in the given file format to the corresponding medium that is relevant for the context this processes is applied in:\n\n* For **batch jobs** the data is stored on the back-end. STAC-compatible metadata is usually made available with the processed data.\n* For **synchronous processing** the data is sent to the client as a direct response to the request.\n* **Secondary web services** are provided with the processed data so that it can make use of it (e.g., visualize it). Web service may require the data in a certain format. Please refer to the documentation of the individual service types for details.",
     "categories": [
         "cubes",
-        "export"
+        "export",
+        "stac"
     ],
     "parameters": [
         {
@@ -35,10 +36,10 @@
         }
     ],
     "returns": {
-        "description": "Always returns `true` as in case of an error an exception is thrown which aborts the execution of the process.",
+        "description": "Returns the STAC resource that was created in the process of saving the result.",
         "schema": {
-            "type": "boolean",
-            "const": true
+            "type": "object",
+            "subtype": "stac"
         }
     },
     "exceptions": {
