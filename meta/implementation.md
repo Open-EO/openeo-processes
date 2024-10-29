@@ -311,4 +311,4 @@ OGC API - Processes and OGC EO Application Packages (AP) can generally be utiliz
 Generally, we recommend to use the following types and formats for the CWL inputs and outputs:
 
 - `type`: `File` or `File[]` depending on the capabilities of the CWL workflow
-- `format`: For STAC inputs and outputs either `stac-item`, `stac-collection`, `stac-catalog`, `stac-itemcollection`, or `stac-stac` (i.e. and of the types before).
+- `format`: For STAC inputs and outputs either `stac-item`, `stac-collection`, `stac-catalog`, `stac-itemcollection`, or `stac-stac` (i.e. any of the types before).
