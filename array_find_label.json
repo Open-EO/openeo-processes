@@ -1,0 +1,46 @@
+{
+    "id": "array_find_label",
+    "summary": "Get the index for a label in a labeled array",
+    "description": "Checks whether the labeled array specified for `data` has the label specified in `label` and returns the zero-based index for it. If there's no match as either the label doesn't exist or the array is not labeled, `null` is returned.\n\nUse ``array_find()`` to find the index for a given value in the array.",
+    "categories": [
+        "arrays",
+        "reducer"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "List to find the label in.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "description": "Any data type is allowed."
+                }
+            }
+        },
+        {
+            "name": "label",
+            "description": "Label to find in `data`.",
+            "schema": [
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        }
+    ],
+    "returns": {
+        "description": "The index of the element with the specified label assigned. If no such label was found, `null` is returned.",
+        "schema": [
+            {
+                "type": "null"
+            },
+            {
+                "type": "integer",
+                "minimum": 0
+            }
+        ]
+    }
+}
