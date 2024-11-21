@@ -9368,7 +9368,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not and ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
         "schema": {
           "type": "boolean"
         },
@@ -9470,7 +9470,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not and ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
         "schema": {
           "type": "boolean"
         },
@@ -9572,7 +9572,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not and ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
         "schema": {
           "type": "boolean"
         },
@@ -9678,7 +9678,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not and ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
         "schema": {
           "type": "boolean"
         },
