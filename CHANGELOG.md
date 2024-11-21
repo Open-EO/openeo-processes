@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `aggregate_temporal` and `aggregate_temporal_period`: Clarified that the process throws a `DimensionNotAvailable` exception when no temporal dimension exists.
 - `aggregate_temporal_period`: Removed unused exception `DistinctDimensionLabelsRequired`
 - `aggregate_temporal_period`: Clarified that the definition of weeks follows ISO 8601
+- `cummax`, `cummin`, `cumproduct`, `cumsum`: Clarified the descriptions around the `ignore_nodata` parameter.
 - `divide`: Clarified behavior for division by 0
 - `between`: Clarify that `null` is passed through.
 - `eq` and `neq`: Explicitly set the minimum value for the `delta` parameter.
