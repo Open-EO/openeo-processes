@@ -9347,7 +9347,7 @@
   {
     "id": "cummax",
     "summary": "Cumulative maxima",
-    "description": "Finds cumulative maxima of an array of numbers. Every computed element is equal to the bigger one between the current element and the previously computed element. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `true` makes that once a no-data value (`null`) is reached all following elements are set to `null` in the result.",
+    "description": "Finds cumulative maxima of an array of numbers. Every computed element is equal to the bigger one between the current element and the previously computed element. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `false` makes that once a no-data value (`null`) is reached all following elements are set to `null` in the result.",
     "categories": [
       "math > cumulative"
     ],
@@ -9449,7 +9449,7 @@
   {
     "id": "cummin",
     "summary": "Cumulative minima",
-    "description": "Finds cumulative minima of an array of numbers. Every computed element is equal to the smaller one between the current element and the previously computed element. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `true` makes that once a no-data value (`null`) is reached all following elements are set to `null` in the result.",
+    "description": "Finds cumulative minima of an array of numbers. Every computed element is equal to the smaller one between the current element and the previously computed element. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `false` makes that once a no-data value (`null`) is reached all following elements are set to `null` in the result.",
     "categories": [
       "math > cumulative"
     ],
@@ -9551,7 +9551,7 @@
   {
     "id": "cumproduct",
     "summary": "Cumulative products",
-    "description": "Computes cumulative products of an array of numbers. Every computed element is equal to the product of the current and all previous values. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `true` makes that once a no-data value (`null`) is reached all following elements are set to `null` in the result.",
+    "description": "Computes cumulative products of an array of numbers. Every computed element is equal to the product of the current and all previous values. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `false` makes that once a no-data value (`null`) is reached all following elements are set to `null` in the result.",
     "categories": [
       "math > cumulative"
     ],
@@ -9657,7 +9657,7 @@
   {
     "id": "cumsum",
     "summary": "Cumulative sums",
-    "description": "Computes cumulative sums of an array of numbers. Every computed element is equal to the sum of current and all previous values. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `true` makes that once a no-data value (`null`) is reached all following elements are set to `null` in the result.",
+    "description": "Computes cumulative sums of an array of numbers. Every computed element is equal to the sum of current and all previous values. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `false` makes that once a no-data value (`null`) is reached all following elements are set to `null` in the result.",
     "categories": [
       "math > cumulative"
     ],
