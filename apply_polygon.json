@@ -1,0 +1,121 @@
+{
+    "id": "apply_polygon",
+    "summary": "Apply a process to segments of the data cube",
+    "description": "Applies a process to segments of the data cube that are defined by the given polygons. For each polygon provided, all pixels for which the point at the pixel center intersects with the polygon (as defined in the Simple Features standard by the OGC) are collected into sub data cubes. If a pixel is part of multiple of the provided polygons (e.g., when the polygons overlap), the `GeometriesOverlap` exception is thrown. Each sub data cube is passed individually to the given process.",
+    "categories": [
+      "cubes"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "A data cube.",
+        "schema": {
+          "type": "object",
+          "subtype": "datacube"
+        }
+      },
+      {
+        "name": "polygons",
+        "description": "A vector data cube containing at least one polygon. The provided vector data can be one of the following:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry, or\n* a `FeatureCollection` containing at least one `Feature` with `Polygon` or `MultiPolygon` geometries.\n* Empty geometries are ignored.",
+        "schema": {
+          "type": "object",
+          "subtype": "datacube",
+          "dimensions": [
+            {
+              "type": "geometry",
+              "geometry_type": [
+                "Polygon",
+                "MultiPolygon"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "name": "process",
+        "description": "A process that accepts and returns a single data cube and is applied on each individual sub data cube. The process may consist of multiple sub-processes.",
+        "schema": {
+          "type": "object",
+          "subtype": "process-graph",
+          "parameters": [
+            {
+              "name": "data",
+              "description": "A sub data cube of the original data cube. The sub data cubes provided cover the smallest possible grid-aligned extent of the corresponding polygon and all pixels outside of the polygon are replaced with the value given in `mask_value`.",
+              "schema": {
+                "type": "object",
+                "subtype": "datacube"
+              }
+            },
+            {
+              "name": "context",
+              "description": "Additional data passed by the user.",
+              "schema": {
+                "description": "Any data type."
+              },
+              "optional": true,
+              "default": null
+            }
+          ],
+          "returns": {
+            "description": "The updated sub data cube with the newly computed values and the same dimensions. The dimension properties (name, type, reference system and resolution) must remain unchanged. The labels can change, but the number of labels must remain unchanged.",
+            "schema": {
+              "description": "A data cube.",
+              "schema": {
+                "type": "object",
+                "subtype": "datacube"
+              }
+            }
+          }
+        }
+      },
+      {
+        "name": "mask_value",
+        "description": "All pixels for which the point at the pixel center **does not** intersect with the polygon are replaced with the given value, which defaults to `null` (no data).\n\nIt can provide a distinction between no data values within the polygon and masked pixels outside of it.",
+        "schema": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "optional": true
+      },
+      {
+        "name": "context",
+        "description": "Additional data to be passed to the process.",
+        "schema": {
+          "description": "Any data type."
+        },
+        "optional": true,
+        "default": null
+      }
+    ],
+    "returns": {
+      "description": "A data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
+      "schema": {
+        "type": "object",
+        "subtype": "datacube"
+      }
+    },
+    "exceptions": {
+      "GeometriesOverlap": {
+        "message": "Geometries are not allowed to overlap to avoid that pixel values are processed multiple times."
+      }
+    },
+    "links": [
+      {
+        "href": "http://www.opengeospatial.org/standards/sfa",
+        "rel": "about",
+        "title": "Simple Features standard by the OGC"
+      }
+    ]
+  }
