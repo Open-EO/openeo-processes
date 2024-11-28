@@ -12,7 +12,7 @@
         "description": "A data cube.",
         "schema": {
           "type": "object",
-          "subtype": "raster-cube"
+          "subtype": "datacube"
         }
       },
       {
@@ -44,7 +44,7 @@
               "description": "A sub data cube of the original data cube. The sub data cubes provided cover the smallest possible grid-aligned extent of the corresponding polygon and all pixels outside of the polygon are replaced with the value given in `mask_value`.",
               "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube"
               }
             },
             {
@@ -63,7 +63,7 @@
               "description": "A data cube.",
               "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube"
               }
             }
           }
@@ -103,7 +103,7 @@
       "description": "A data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
       "schema": {
         "type": "object",
-        "subtype": "raster-cube"
+        "subtype": "datacube"
       }
     },
     "exceptions": {
