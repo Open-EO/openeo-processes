@@ -1,0 +1,135 @@
+{
+    "id": "aggregate",
+    "summary": "Aggregation based on general intervals",
+    "description": "Computes a aggregation based on an array of intervals.\n\nThe computed values will be projected to the labels. If no labels are specified, the lower value of the interval will be used as label for the corresponding values. In case of a conflict (i.e. the user-specified values for the lower values of the intervals are not distinct), the user-defined labels must be specified in the parameter `labels` as otherwise a `DistinctDimensionLabelsRequired` exception would be thrown. The number of user-defined labels and the number of intervals need to be equal.",
+    "categories": [
+        "cubes",
+        "aggregate"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube"
+            }
+        },
+        {
+            "name": "intervals",
+            "description": "Left-closed intervals, which are allowed to overlap. Each interval in the array has exactly two elements:\n\n1. The first element is the lower value of the interval. The specified value is **included** in the interval.\n2. The second element is the upper value of the temporal interval. The specified value is **excluded** from the interval.\n\nThe second element must always be greater than the first element. Otherwise, an `ExtentEmpty` exception is thrown.",
+            "schema": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        {
+            "name": "reducer",
+            "description": "A reducer to be applied for the values contained in each interval. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes. Intervals may not contain any values, which for most reducers leads to no-data (`null`) values by default.",
+            "schema": {
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "description": "A labeled array with elements of any type. If there's no data for the interval, the array is empty.",
+                        "schema": {
+                            "type": "array",
+                            "subtype": "labeled-array",
+                            "items": {
+                                "description": "Any data type."
+                            }
+                        }
+                    },
+                    {
+                        "name": "context",
+                        "description": "Additional data passed by the user.",
+                        "schema": {
+                            "description": "Any data type."
+                        },
+                        "optional": true,
+                        "default": null
+                    }
+                ],
+                "returns": {
+                    "description": "The value to be set in the new data cube.",
+                    "schema": {
+                        "description": "Any data type."
+                    }
+                }
+            }
+        },
+        {
+            "name": "dimension",
+            "description": "The name of the dimension for aggregation. All data along the dimension is passed through the specified reducer. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+            "schema": {
+                "type": [
+                    "string",
+                    "null"
+                ]
+            }
+        },
+        {
+            "name": "labels",
+            "description": "Distinct labels for the intervals. Is only required to be specified if the values for the lower values of the intervals are not distinct and thus the default labels would not be unique. The number of labels and the number of groups must be equal.",
+            "schema": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                    "type": "number"
+                }
+            },
+            "default": [],
+            "optional": true
+        },
+        {
+            "name": "context",
+            "description": "Additional data to be passed to the reducer.",
+            "schema": {
+                "description": "Any data type."
+            },
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "A new data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except for the resolution and dimension labels of the given temporal dimension.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "temporal"
+                }
+            ]
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
+        },
+        "DistinctDimensionLabelsRequired": {
+            "message": "The dimension labels have duplicate values. Distinct labels must be specified."
+        },
+        "ExtentEmpty": {
+            "message": "At least one of the intervals is empty. The second instant in time must always be greater than the first instant."
+        }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#aggregate",
+            "rel": "about",
+            "title": "Aggregation explained in the openEO documentation"
+        }
+    ]
+}
