@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `filter_spatial`: Clarified that masking is applied using the given geometries. [#469](https://github.com/Open-EO/openeo-processes/issues/469)
 - `mod`: Clarified behavior for y = 0
 - `sqrt`: Clarified that NaN is returned for negative numbers.
+- Clarify allowed `FeatureCollection` geometries in `load_collection`, `mask_polygon`, `apply_polygon`, and `load_stac` [#527](https://github.com/Open-EO/openeo-processes/issues/527)
 
 ## [2.0.0-rc.1] - 2023-05-25
 
