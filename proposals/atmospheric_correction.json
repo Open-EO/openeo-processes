@@ -33,9 +33,7 @@
             "name": "method",
             "schema": [
                 {
-                    "type": [
-                        "string"
-                    ],
+                    "type": "string",
                     "enum": [
                         "FORCE",
                         "iCOR"
