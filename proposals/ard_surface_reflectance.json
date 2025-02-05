@@ -33,9 +33,7 @@
             "description": "The atmospheric correction method to use.",
             "name": "atmospheric_correction_method",
             "schema": {
-                "type": [
-                    "string"
-                ],
+                "type": "string",
                 "enum": [
                     "FORCE",
                     "iCOR"
@@ -46,9 +44,7 @@
             "description": "The cloud detection method to use.\n\nEach method supports detecting different atmospheric disturbances such as clouds, cloud shadows, aerosols, haze, ozone and/or water vapour in optical imagery.",
             "name": "cloud_detection_method",
             "schema": {
-                "type": [
-                    "string"
-                ],
+                "type": "string",
                 "enum": [
                     "Fmask",
                     "s2cloudless",
