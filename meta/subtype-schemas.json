@@ -232,7 +232,7 @@
                 }
             }
         },
-        "mlm-model": {
+        "ml-model": {
             "type": "object",
             "subtype": "ml-model",
             "title": "Machine Learning Model",
