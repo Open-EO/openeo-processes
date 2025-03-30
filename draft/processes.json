@@ -11376,6 +11376,110 @@
     ]
   },
   {
+    "id": "run_ogcapi_externally",
+    "summary": "Run an externally hosted OGC API process",
+    "description": "Runs an OGC API - Processes process that is either externally hosted by a service provider or running on a local machine of the user.",
+    "categories": [
+      "cubes",
+      "import",
+      "udf"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "The data to be passed to the external process.\n\nThe data must be given in a way that the external process can understand it.",
+        "schema": {
+          "description": "A value of any data type."
+        }
+      },
+      {
+        "name": "url",
+        "description": "Absolute URL to the OGC API - Processes landing page.",
+        "schema": {
+          "type": "string",
+          "format": "uri",
+          "subtype": "uri",
+          "pattern": "^https?://"
+        }
+      },
+      {
+        "name": "id",
+        "description": "The identifier of the OGC API process.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "context",
+        "description": "Additional parameters as defined by the OGC API process.",
+        "schema": {
+          "type": "object"
+        },
+        "default": {},
+        "optional": true
+      }
+    ],
+    "exceptions": {
+      "InvalidOgcApiProcess": {
+        "message": "The specified OGC API process does not exist."
+      }
+    },
+    "returns": {
+      "description": "The data processed by the OGC API process. The returned value can be of any data type and is exactly what the OGC API process returns.",
+      "schema": {
+        "description": "Any data type."
+      }
+    }
+  },
+  {
+    "id": "run_ogcapi",
+    "summary": "Run a OGC API process",
+    "description": "Runs an OGC API - Processes process that the service provider offers through an instance of OGC API - Processes - Part 2 (Deploy, Replace, Undeploy).",
+    "categories": [
+      "cubes",
+      "import",
+      "udf"
+    ],
+    "experimental": true,
+    "parameters": [
+      {
+        "name": "data",
+        "description": "The data to be passed to the OGC API process.\n\nThe data must be given in a way that the external process can understand it.",
+        "schema": {
+          "description": "A value of any data type."
+        }
+      },
+      {
+        "name": "id",
+        "description": "The identifier of the OGC API process.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "context",
+        "description": "Additional parameters as defined by the OGC API process.",
+        "schema": {
+          "type": "object"
+        },
+        "default": {},
+        "optional": true
+      }
+    ],
+    "exceptions": {
+      "InvalidOgcApiProcess": {
+        "message": "The specified OGC API process identifier does not exist."
+      }
+    },
+    "returns": {
+      "description": "The data processed by the OGC API process. The returned value can be of any data type and is exactly what the OGC API process returns.",
+      "schema": {
+        "description": "Any data type."
+      }
+    }
+  },
+  {
     "id": "run_udf_externally",
     "summary": "Run an externally hosted UDF container",
     "description": "Runs a compatible UDF container that is either externally hosted by a service provider or running on a local machine of the user. The UDF container must follow the [openEO UDF specification](https://openeo.org/documentation/1.0/udfs.html).\n\nThe referenced UDF service can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. In this case, an array is passed instead of a data cube. The user must ensure that the data is given in a way that the UDF code can make sense of it.",

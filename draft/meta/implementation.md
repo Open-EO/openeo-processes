@@ -164,7 +164,7 @@ For the data types boolean, numbers, strings and null it is recommended to log t
 
 It is recommended to summarize arrays as follows:
 
-```js
+```json5
 {
   "data": [3,1,6,4,8], // Return a reasonable excerpt of the data, e.g. the first 5 or 10 elements
   "length": 10, // Return the length of the array, this is important to determine whether the data above is complete or an excerpt
@@ -179,7 +179,7 @@ It is recommended to return them summarized in a structure compliant to the [STA
 If reasonsable, it gives a valuable benefit for users to provide all dimension labels (e.g. individual timestamps for the temporal dimension) instead of values ranges.
 The top-level object and/or each dimension can be enhanced with additional statstics if possible, ideally use the corresponsing openEO process names as keys.
 
-```js
+```json5
 {
   "cube:dimensions": {
     "x": {
@@ -251,3 +251,69 @@ If the underlying STAC resource is part of an API, the following HTTP endpoints 
 - For STAC Collections: `PATCH /collections/{collectionId}`
   according to the [Collection Transaction Extension](https://github.com/stac-api-extensions/collection-transaction)
 - For STAC Catalogs there is no API support for updates.
+
+## OGC API - Processes
+
+OGC API - Processes and OGC EO Application Packages (AP) can generally be utilized in openEO in three different ways:
+
+1. **openEO process**
+  
+   As a pre-defined process that exposes itself as a normal openEO process.
+   It is not exposed to the user that in the background an AP is invoked.
+2. **Pre-deployment through *OGC API - Processes - Part 2: Deploy, Replace, Undeploy***
+
+   In addition to the openEO API, a provider can offer access to an instance of *OGC API - Processes - Part 2: Deploy, Replace, Undeploy* (OGC DRU).
+   The OGC DRU instance is likely external to the openEO API tree due to the conflicting `GET /processes` endpoint.
+   As such the OGC DRU instance exposes itself in the `GET /` endpoint of the openEO API instance through a link.
+   The link must have the relation type `http://www.opengis.net/def/rel/ogc/1.0/processes`, which points to the `/processes` of the OGC API - Processes endpoint.
+   Users can deploy APs through the OGC DRU instance and use them through the process `run_ogcapi`.
+  
+   If the provider doesn't offer an OGC DRU instance itself, users could also deploy their AP with another provider.
+   In this case use the process `run_ogcapi_externally` instead.
+  
+   Example process node:
+  
+   ```json5
+   {
+     "process_id": "run_ogcapi",
+     "arguments": {
+       "data": ..., // Data, e.g. subtypes datacube or stac
+       "id": "my-ap", // Identifier of the application package in OGC API - Processes
+       "context": { // Parameters as defined in the CWL file
+         "cwl_param1": true,
+         "param2": 99
+       }
+     }
+   }
+   ```
+3. **CWL provided at runtime (UDF runtime)**
+  
+   Providers can also provide a UDF runtime for the language CWL (instead of e.g. Python or R).
+   The runtime is exposed through the endpoint `GET /udf_runtimes`.
+  
+   Example process node:
+  
+   ```json5
+   {
+     "process_id": "run_udf",
+     "arguments": {
+       "data": ..., // Data, e.g. subtypes datacube or stac
+       "udf": "...", // CWL as YAML string/JSON object, URL, or file on the API user workspace
+       "runtime": "cwl", // Assuming the UDF runtime is named "cwl"
+       "context": { // Parameters as defined in the CWL file
+         "cwl_param1": true,
+         "param2": 99
+       }
+     }
+   }
+   ```
+
+Generally, we recommend to use the following types and formats for the CWL inputs and outputs:
+
+- `type`: `File` or `File[]` depending on the capabilities of the CWL workflow
+- `format`: For STAC inputs and outputs either:
+  - `stac`: any of the following STAC entities
+  - `stac-catalog`: STAC Catalog
+  - `stac-collection`: STAC Collection
+  - `stac-item`: STAC Item
+  - `stac-item-collection`: STAC (API) ItemCollection
