@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `export_collection`
 - `export_workspace`
 - `run_ogcapi`
-- `run_ogcapi_processes`
+- `run_ogcapi_externally`
 - `stac_modify`
 
 ### Changed
