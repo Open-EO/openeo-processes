@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - draft
-      - draft-2.0
       - master
 jobs:
   deploy:
