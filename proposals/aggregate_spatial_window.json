@@ -75,7 +75,7 @@
         },
         {
             "name": "boundary",
-            "description": "Behavior to apply if the number of values for the axes `x` and `y` is not a multiple of the corresponding value in the `size` parameter. Options are:\n\n- `pad` (default): pad the data cube with the no-data value `null` to fit the required window size.\n\n- `trim`: trim the data cube to fit the required window size.\n\nSet the parameter `align` to specifies to which corner the data is aligned to.",
+            "description": "Behavior to apply if the number of values for the axes `x` and `y` is not a multiple of the corresponding value in the `size` parameter. Options are:\n\n- `pad` (default): pad the data cube with the no-data value `null` to fit the required window size.\n\n- `trim`: trim the data cube to fit the required window size.\n\nUse the parameter `align` to align the data to the desired corner.",
             "schema": {
                 "type": "string",
                 "enum": [
