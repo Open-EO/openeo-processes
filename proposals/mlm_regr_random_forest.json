@@ -1,6 +1,6 @@
 {
     "id": "mlm_regr_random_forest",
-    "summary": "Initialize a random forest regression model for later training",
+    "summary": "Initialize a random forest regression model",
     "description": "Initializes a Random Forest regression model. This component prepares the model structure but does not perform training. The model can be trained later using ``ml_fit``.",
     "categories": [
         "machine learning"
@@ -53,7 +53,7 @@
         "description": "A model object that can be trained using ``ml_fit``.",
         "schema": {
             "type": "object",
-            "subtype": "mlm-model"
+            "subtype": "ml-model"
         }
     },
     "links": [

@@ -1,6 +1,6 @@
 {
     "id": "mlm_class_random_forest",
-    "summary": "Initialize a random forest classification model for later training",
+    "summary": "Initialize a random forest classification model",
     "description": "Initializes a Random Forest classification model. This component sets up the model structure but does not perform training or handle data splitting. The resulting model can be trained later using ``ml_fit``.",
     "categories": [
         "machine learning"
