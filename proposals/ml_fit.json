@@ -2,7 +2,9 @@
     "id": "ml_fit",
     "summary": "Train a machine learning model",
     "description": "Executes the fit of a specified machine learning model based on training data.\n\nThe function is generic and supports different machine learning models.",
-    "categories": ["machine learning"],
+    "categories": [
+        "machine learning"
+    ],
     "experimental": true,
     "parameters": [
         {

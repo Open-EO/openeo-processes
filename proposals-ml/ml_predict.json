@@ -2,7 +2,9 @@
     "id": "ml_predict",
     "summary": "Predict using ML",
     "description": "Applies a machine learning model to a data cube of input features and returns the predicted values.",
-    "categories": ["machine learning"],
+    "categories": [
+        "machine learning"
+    ],
     "experimental": true,
     "parameters": [
         {

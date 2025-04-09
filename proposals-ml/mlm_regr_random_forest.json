@@ -2,7 +2,9 @@
     "id": "mlm_regr_random_forest",
     "summary": "Initialize a random forest regression model",
     "description": "Initializes a Random Forest regression model. This component prepares the model structure but does not perform training. The model can be trained later using ``ml_fit``.",
-    "categories": ["machine learning"],
+    "categories": [
+        "machine learning"
+    ],
     "experimental": true,
     "parameters": [
         {
@@ -15,7 +17,12 @@
                 },
                 {
                     "type": "string",
-                    "enum": ["all", "log2", "onethird", "sqrt"]
+                    "enum": [
+                        "all", 
+                        "log2", 
+                        "onethird", 
+                        "sqrt"
+                    ]
                 }
             ]
         },
@@ -35,7 +42,10 @@
             "optional": true,
             "default": null,
             "schema": {
-                "type": ["integer", "null"]
+                "type": [
+                    "integer", 
+                    "null"
+                ]
             }
         }
     ],
