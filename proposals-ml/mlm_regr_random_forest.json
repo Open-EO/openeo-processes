@@ -18,9 +18,9 @@
                 {
                     "type": "string",
                     "enum": [
-                        "all", 
-                        "log2", 
-                        "onethird", 
+                        "all",
+                        "log2",
+                        "onethird",
                         "sqrt"
                     ]
                 }
@@ -43,7 +43,7 @@
             "default": null,
             "schema": {
                 "type": [
-                    "integer", 
+                    "integer",
                     "null"
                 ]
             }
