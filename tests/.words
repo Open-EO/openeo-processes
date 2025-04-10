@@ -64,3 +64,4 @@ minibatches
 Perceptron
 feedforward
 backpropagation
+TempCNN

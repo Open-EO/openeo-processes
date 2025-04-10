@@ -1,6 +1,6 @@
 {
     "id": "mlm_class_mlp",
-    "summary": "Initialize a Multi-Layer Perceptron (MLP) classification model",
+    "summary": "Initialize an MLP classification model",
     "description": "Initializes a Multi-Layer Perceptron (MLP) classification model. This component sets up the model structure but does not perform training or handle data splitting. The resulting model can be trained later using ``ml_fit``.",
     "categories": [
         "machine learning"
@@ -10,7 +10,11 @@
         {
             "name": "hidden_layer_sizes",
             "description": "List of integers specifying the number of neurons in each hidden layer.",
-            "default": [512, 512, 512],
+            "default": [
+                512,
+                512,
+                512
+            ],
             "schema": {
                 "type": "array",
                 "items": {
@@ -27,13 +31,21 @@
             "default": "relu",
             "schema": {
                 "type": "string",
-                "enum": ["relu", "tanh", "logistic"]
+                "enum": [
+                    "relu",
+                    "tanh",
+                    "logistic"
+                ]
             }
         },
         {
             "name": "dropout_rates",
             "description": "List of numbers between 0 and 1 specifying the dropout rate for each hidden layer.",
-            "default": [0.4, 0.3, 0.2],
+            "default": [
+                0.4,
+                0.3,
+                0.2
+            ],
             "schema": {
                 "type": "array",
                 "items": {
@@ -71,7 +83,17 @@
             "default": "adam",
             "schema": {
                 "type": "string",
-                "enum": ["adam", "adabound", "adabelief", "madagrad", "nadam", "qhadam", "radam", "swats", "yogi"]
+                "enum": [
+                    "adam",
+                    "adabound",
+                    "adabelief",
+                    "madagrad",
+                    "nadam",
+                    "qhadam",
+                    "radam",
+                    "swats",
+                    "yogi"
+                ]
             }
         },
         {

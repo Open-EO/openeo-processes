@@ -1,6 +1,6 @@
 {
     "id": "mlm_class_tempcnn",
-    "summary": "Initialize a Temporal Convolutional Neural Network (TempCNN) classification model",
+    "summary": "Initialize a TempCNN classification model",
     "description": "Initializes a Temporal Convolutional Neural Network (TempCNN) classification model. This component sets up the model structure but does not perform training or handle data splitting. The resulting model can be trained later using ``ml_fit``.",
     "categories": [
         "machine learning"
@@ -10,7 +10,11 @@
         {
             "name": "cnn_layers",
             "description": "List of integers specifying the number of filters in each convolutional layer.",
-            "default": [256, 256, 256],
+            "default": [
+                256,
+                256,
+                256
+            ],
             "schema": {
                 "type": "array",
                 "items": {
@@ -23,7 +27,11 @@
         {
             "name": "cnn_kernels",
             "description": "List of integers specifying the kernel size for each convolutional layer.",
-            "default": [7, 7, 7],
+            "default": [
+                7,
+                7,
+                7
+            ],
             "schema": {
                 "type": "array",
                 "items": {
@@ -36,7 +44,11 @@
         {
             "name": "cnn_dropout_rates",
             "description": "List of numbers between 0 and 1 specifying the dropout rate for each convolutional layer.",
-            "default": [0.2, 0.2, 0.2],
+            "default": [
+                0.2,
+                0.2,
+                0.2
+            ],
             "schema": {
                 "type": "array",
                 "items": {
@@ -93,7 +105,17 @@
             "default": "adam",
             "schema": {
                 "type": "string",
-                "enum": ["adam", "adabound", "adabelief", "madagrad", "nadam", "qhadam", "radam", "swats", "yogi"]
+                "enum": [
+                    "adam",
+                    "adabound",
+                    "adabelief",
+                    "madagrad",
+                    "nadam",
+                    "qhadam",
+                    "radam",
+                    "swats",
+                    "yogi"
+                ]
             }
         },
         {
