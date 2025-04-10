@@ -1,0 +1,115 @@
+{
+    "id": "mlm_class_mlp",
+    "summary": "Initialize a Multi-Layer Perceptron (MLP) classification model",
+    "description": "Initializes a Multi-Layer Perceptron (MLP) classification model. This component sets up the model structure but does not perform training or handle data splitting. The resulting model can be trained later using ``ml_fit``.",
+    "categories": [
+        "machine learning"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "hidden_layer_sizes",
+            "description": "List of integers specifying the number of neurons in each hidden layer.",
+            "default": [512, 512, 512],
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "minItems": 1
+            }
+        },
+        {
+            "name": "activation",
+            "description": "Activation function for the hidden layers.",
+            "optional": true,
+            "default": "relu",
+            "schema": {
+                "type": "string",
+                "enum": ["relu", "tanh", "logistic"]
+            }
+        },
+        {
+            "name": "dropout_rates",
+            "description": "List of numbers between 0 and 1 specifying the dropout rate for each hidden layer.",
+            "default": [0.4, 0.3, 0.2],
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "minItems": 1
+            }
+        },
+        {
+            "name": "epochs",
+            "description": "Number of training epochs.",
+            "optional": true,
+            "default": 100,
+            "schema": {
+                "type": "integer",
+                "minimum": 1
+            }
+        },
+        {
+            "name": "batch_size",
+            "description": "Size of the training batches.",
+            "optional": true,
+            "default": 64,
+            "schema": {
+                "type": "integer",
+                "minimum": 1
+            }
+        },
+        {
+            "name": "optimizer",
+            "description": "The optimizer to use for training.",
+            "optional": true,
+            "default": "adam",
+            "schema": {
+                "type": "string",
+                "enum": ["adam", "adabound", "adabelief", "madagrad", "nadam", "qhadam", "radam", "swats", "yogi"]
+            }
+        },
+        {
+            "name": "learning_rate",
+            "description": "The learning rate for the optimizer.",
+            "optional": true,
+            "default": 0.001,
+            "schema": {
+                "type": "number",
+                "minimum": 0
+            }
+        },
+        {
+            "name": "seed",
+            "description": "A randomization seed to use for reproducibility. If not given or `null`, no seed is used and results may differ on subsequent use.",
+            "optional": true,
+            "default": null,
+            "schema": {
+                "type": [
+                    "integer",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "A model object that can be trained using ``ml_fit``.",
+        "schema": {
+            "type": "object",
+            "subtype": "ml-model"
+        }
+    },
+    "links": [
+        {
+            "href": "https://arxiv.org/abs/1611.06455",
+            "title": "Z. Wang, W. Yan, and T. Oates (2017), Time Series Classification from Scratch with Deep Neural Networks: A Strong Baseline",
+            "type": "text/html",
+            "rel": "about"
+        }
+    ]
+}

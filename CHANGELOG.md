@@ -18,7 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `load_geojson`
     - `load_ml_model`
     - `load_url`
+    - `mlm_class_mlp`
     - `mlm_class_random_forest`
+    - `mlm_class_tempcnn`
+    - `mlm_class_xgboost`
     - `mlm_regr_random_forest`
     - `ml_fit`
     - `ml_predict`

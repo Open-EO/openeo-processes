@@ -1,0 +1,89 @@
+{
+    "id": "mlm_class_xgboost",
+    "summary": "Initialize an XGBoost classification model",
+    "description": "Initializes an XGBoost classification model. This component sets up the model structure but does not perform training or handle data splitting. The resulting model can be trained later using ``ml_fit``.",
+    "categories": [
+        "machine learning"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "learning_rate",
+            "description": "Step size shrinkage used in update to prevent overfitting.",
+            "optional": true,
+            "default": 0.15,
+            "schema": {
+                "type": "number",
+                "minimum": 0
+            }
+        },
+        {
+            "name": "max_depth",
+            "description": "Maximum depth of a tree.",
+            "optional": true,
+            "default": 5,
+            "schema": {
+                "type": "integer",
+                "minimum": 1
+            }
+        },
+        {
+            "name": "min_child_weight",
+            "description": "Minimum sum of instance weight (hessian) needed in a child.",
+            "optional": true,
+            "default": 1,
+            "schema": {
+                "type": "number",
+                "minimum": 0
+            }
+        },
+        {
+            "name": "subsample",
+            "description": "Subsample ratio of the training instance.",
+            "optional": true,
+            "default": 0.8,
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+            }
+        },
+        {
+            "name": "min_split_loss",
+            "description": "Minimum loss reduction required to make a further partition on a leaf node of the tree.",
+            "optional": true,
+            "default": 1,
+            "schema": {
+                "type": "number",
+                "minimum": 0
+            }
+        },
+        {
+            "name": "seed",
+            "description": "A randomization seed to use for reproducibility. If not given or `null`, no seed is used and results may differ on subsequent use.",
+            "optional": true,
+            "default": null,
+            "schema": {
+                "type": [
+                    "integer",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "A model object that can be trained using ``ml_fit``.",
+        "schema": {
+            "type": "object",
+            "subtype": "ml-model"
+        }
+    },
+    "links": [
+        {
+            "href": "https://dl.acm.org/doi/10.1145/2939672.2939785",
+            "title": "Chen and Guestrin (2016), XGBoost: A Scalable Tree Boosting System",
+            "type": "text/html",
+            "rel": "about"
+        }
+    ]
+}
