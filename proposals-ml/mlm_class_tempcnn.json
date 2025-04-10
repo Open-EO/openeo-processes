@@ -1,0 +1,159 @@
+{
+    "id": "mlm_class_tempcnn",
+    "summary": "Initialize a TempCNN classification model",
+    "description": "Initializes a Temporal Convolutional Neural Network (TempCNN) classification model. This component sets up the model structure but does not perform training or handle data splitting. The resulting model can be trained later using ``ml_fit``.",
+    "categories": [
+        "machine learning"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "cnn_layers",
+            "description": "List of integers specifying the number of filters in each convolutional layer.",
+            "default": [
+                256,
+                256,
+                256
+            ],
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "minItems": 1
+            }
+        },
+        {
+            "name": "cnn_kernels",
+            "description": "List of integers specifying the kernel size for each convolutional layer.",
+            "default": [
+                7,
+                7,
+                7
+            ],
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "minItems": 1
+            }
+        },
+        {
+            "name": "cnn_dropout_rates",
+            "description": "List of numbers between 0 and 1 specifying the dropout rate for each convolutional layer.",
+            "default": [
+                0.2,
+                0.2,
+                0.2
+            ],
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "minItems": 1
+            }
+        },
+        {
+            "name": "dense_layer_nodes",
+            "description": "Number of nodes in the dense layer.",
+            "default": 256,
+            "schema": {
+                "type": "integer",
+                "minimum": 1
+            }
+        },
+        {
+            "name": "dense_layer_dropout_rate",
+            "description": "Dropout rate for the dense layer.",
+            "default": 0.5,
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+            }
+        },
+        {
+            "name": "epochs",
+            "description": "Number of training epochs.",
+            "optional": true,
+            "default": 100,
+            "schema": {
+                "type": "integer",
+                "minimum": 1
+            }
+        },
+        {
+            "name": "batch_size",
+            "description": "Size of the training batches.",
+            "optional": true,
+            "default": 64,
+            "schema": {
+                "type": "integer",
+                "minimum": 1
+            }
+        },
+        {
+            "name": "optimizer",
+            "description": "The optimizer to use for training.",
+            "optional": true,
+            "default": "adam",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "adam",
+                    "adabound",
+                    "adabelief",
+                    "madagrad",
+                    "nadam",
+                    "qhadam",
+                    "radam",
+                    "swats",
+                    "yogi"
+                ]
+            }
+        },
+        {
+            "name": "learning_rate",
+            "description": "The learning rate for the optimizer.",
+            "optional": true,
+            "default": 0.001,
+            "schema": {
+                "type": "number",
+                "minimum": 0
+            }
+        },
+        {
+            "name": "seed",
+            "description": "A randomization seed to use for reproducibility. If not given or `null`, no seed is used and results may differ on subsequent use.",
+            "optional": true,
+            "default": null,
+            "schema": {
+                "type": [
+                    "integer",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "A model object that can be trained using ``ml_fit``.",
+        "schema": {
+            "type": "object",
+            "subtype": "ml-model"
+        }
+    },
+    "links": [
+        {
+            "href": "https://doi.org/10.3390/rs11050523",
+            "title": "Pelletier et al. (2019): Temporal Convolutional Neural Network for the Classification of Satellite Image Time Series",
+            "type": "text/html",
+            "rel": "about"
+        }
+    ]
+}
