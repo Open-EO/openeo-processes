@@ -61,7 +61,7 @@
             "name": "epsilon",
             "description": "A small constant for numerical stability in the optimizer.",
             "optional": true,
-            "default": 0.00000001,
+            "default": 1e-8,
             "schema": {
                 "type": "number",
                 "minimum": 0
