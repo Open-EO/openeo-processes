@@ -17,7 +17,7 @@
         },
         {
             "name": "folder",
-            "description": "The folder path within the server backend workspace where the data cube is stored. This should match the folder path used when the data cube was exported.",
+            "description": "The folder path within the workspace where the data cube is stored.",
             "schema": {
                 "type": "string"
             }

@@ -1,7 +1,7 @@
 {
     "id": "export_ml_model",
     "summary": "Export a machine learning model to a workspace",
-    "description": "Exports a machine learning model to a specified workspace location. This is designed for intermediate model storage and can use the backend language's native serialization format.\n\nUnlike save_ml_model, this process doesn't require STAC compliance or specific model formats (like ONNX), making it suitable for temporary storage and transfer of models between processes.",
+    "description": "Exports a machine learning model to a specified workspace location. This is designed for intermediate model storage and can use the implementation's native serialization format.\n\nUnlike save_ml_model, this process doesn't require STAC compliance or specific model formats (like ONNX), making it suitable for temporary storage and transfer of models between processes.",
     "categories": [
         "Export",
         "machine learning"
@@ -10,7 +10,7 @@
     "parameters": [
         {
             "name": "model",
-            "description": "The machine learning model to be exported. This can be in any format supported by the backend implementation.",
+            "description": "The machine learning model to be exported. This can be in any format supported by the implementation.",
             "schema": {
                 "type": "object",
                 "subtype": "ml-model"
@@ -25,7 +25,7 @@
         },
         {
             "name": "folder",
-            "description": "The folder path within the server backend workspace where the model should be stored.",
+            "description": "The folder path within the workspace where the model should be stored.",
             "schema": {
                 "type": "string"
             }

@@ -1,7 +1,7 @@
 {
     "id": "import_ml_model",
     "summary": "Import a machine learning model from a workspace",
-    "description": "Imports a previously exported machine learning model from a specified workspace location. This is designed for intermediate model retrieval and can handle models in the backend language's native serialization format.\n\nUnlike load_ml_model, this process doesn't require STAC compliance or specific model formats (like ONNX), making it suitable for retrieving temporarily stored models between processes.",
+    "description": "Imports a previously exported machine learning model from a specified workspace location. This is designed for intermediate model retrieval and can handle models in the implementation's native serialization format.\n\nUnlike load_ml_model, this process doesn't require STAC compliance or specific model formats (like ONNX), making it suitable for retrieving temporarily stored models between processes.",
     "categories": [
         "Import",
         "machine learning"
@@ -17,7 +17,7 @@
         },
         {
             "name": "folder",
-            "description": "The folder path within the server backend workspace where the model is stored.",
+            "description": "The folder path within the workspace where the model is stored.",
             "schema": {
                 "type": "string"
             }
