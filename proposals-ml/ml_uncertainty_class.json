@@ -17,7 +17,7 @@
         },
         {
             "name": "method",
-            "description": "The method to use for uncertainty estimation. 'margin' calculates the difference between the two highest probabilities, 'ratio' uses the ratio of the two highest probabilities, and 'least_confidence' uses 1 minus the highest probability.",
+            "description": "The method to use for uncertainty estimation. 'margin' calculates the difference between the two highest probabilities, 'ratio' uses the ratio of the two highest probabilities, and 'least-confidence' uses 1 minus the highest probability.",
             "default": "margin",
             "optional": true,
             "schema": {
@@ -25,7 +25,7 @@
                 "enum": [
                     "margin",
                     "ratio",
-                    "least_confidence"
+                    "least-confidence"
                 ]
             }
         }
