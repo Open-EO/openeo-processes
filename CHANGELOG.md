@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `ml_fit`
     - `ml_predict`
     - `ml_predict_probabilities`
+    - `ml_uncertainty_class`
     - `save_ml_model`
     - `unflatten_dimension`
     - `vector_buffer`
