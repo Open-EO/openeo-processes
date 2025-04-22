@@ -1,7 +1,7 @@
 {
     "id": "ml_smooth_class",
-    "summary": "Apply smoothing to classification probabilities results using Bayesian inference",
-    "description": "Applies spatial smoothing to classification probabilities results from a machine learning model using Bayesian inference. This process helps reduce noise and improve classification accuracy by considering spatial context and neighborhood information. The smoothing is based on a window-based approach.",
+    "summary": "Apply Bayesian smoothing to classification probability results",
+    "description": "Applies spatial smoothing to classification probabilities results from a machine learning model using Bayesian inference. This process helps reduce noise and improve classification accuracy by considering spatial context and neighbourhood information. The smoothing is based on a window-based approach.",
     "categories": [
         "machine learning"
     ],
@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "The input classification probabilities data to be smoothed. This should be a classified datacube.",
+            "description": "The input classification probabilities data to be smoothed. This should be a classified data cube.",
             "schema": {
                 "type": "object",
                 "subtype": "datacube"
@@ -28,7 +28,7 @@
         },
         {
             "name": "neighborhood_fraction",
-            "description": "The fraction of neighboring pixels to consider in the smoothing process. Controls the influence of local spatial information.",
+            "description": "The fraction of neighbouring pixels to consider in the smoothing process. Controls the influence of local spatial information.",
             "optional": true,
             "default": 0.5,
             "schema": {
