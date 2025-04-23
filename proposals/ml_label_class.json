@@ -1,0 +1,38 @@
+{
+    "id": "ml_label_class",
+    "summary": "Convert probability data cube to labeled data cube",
+    "description": "Converts a probability data cube to a labeled data cube by applying softmax normalization and selecting the class with the highest probability. Optionally allows mapping of class indices to custom labels.",
+    "categories": [
+        "machine learning"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The input probability data cube to be labeled. Each band should represent the probability of a different class.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube"
+            }
+        },
+        {
+            "name": "labels",
+            "description": "Optional dictionary mapping class indices to custom labels. The dictionary keys are the class indices (as integers) and the values are the custom labels for each class. If not provided, the class indices will be used as labels.",
+            "optional": true,
+            "default": null,
+            "schema": {
+                "type": [
+                    "object",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "A labeled data cube where each pixel contains the class label with the highest probability after softmax normalization.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube"
+        }
+    }
+} 

@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `mlm_class_xgboost`
     - `mlm_regr_random_forest`
     - `ml_fit`
+    - `ml_label_class`
     - `ml_predict`
     - `ml_predict_probabilities`
     - `ml_smooth_class`
