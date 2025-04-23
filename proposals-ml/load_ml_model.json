@@ -10,7 +10,7 @@
     "parameters": [
         {
             "name": "uri",
-            "description": "The STAC Item to load the machine learning model from. The STAC Item must implement the `mlm-model` extension.",
+            "description": "The STAC Item to load the machine learning model from. The STAC Item must implement the [`mlm`](https://github.com/stac-extensions/mlm) extension. This parameter can point to a remote STAC Item via ``URL`` or a local JSON file.",
             "schema": [
                 {
                     "title": "URL",
@@ -26,6 +26,15 @@
                     "pattern": "^[^\r\n\\:'\"]+$"
                 }
             ]
+        },
+        {
+            "name": "model_asset",
+            "description": "The Asset name of the given STAC Item which represents the actual ML model. The asset must list ``mlm:model`` as its role. If only one asset lists ``mlm:model`` as its role, this parameter is optional as this asset will be used by default. If multiple assets list ``mlm:model`` as their role, this parameter is required to determine which asset to use.",
+            "schema": {
+                "type": "string"
+            },
+            "default": null,
+            "optinoal": true
         }
     ],
     "returns": {
