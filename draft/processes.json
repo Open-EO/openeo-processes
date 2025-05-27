@@ -4495,7 +4495,7 @@
               "default": null
             },
             "crs": {
-              "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
+              "description": "Coordinate reference system of the extent, specified as [EPSG code](https://spatialreference.org/ref/epsg/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
               "anyOf": [
                 {
                   "title": "EPSG Code",
@@ -4560,8 +4560,8 @@
       },
       {
         "rel": "about",
-        "href": "http://www.epsg-registry.org",
-        "title": "Official EPSG code registry"
+        "href": "https://spatialreference.org/ref/epsg",
+        "title": "EPSG code registry"
       },
       {
         "rel": "about",
@@ -5837,7 +5837,7 @@
                 "default": null
               },
               "crs": {
-                "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system. If the bounding box is not provided in the coordinate reference system (CRS) of the data cube, the bounding box is reprojected to the CRS of the spatial data cube dimensions.",
+                "description": "Coordinate reference system of the extent, specified as [EPSG code](https://spatialreference.org/ref/epsg/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system. If the bounding box is not provided in the coordinate reference system (CRS) of the data cube, the bounding box is reprojected to the CRS of the spatial data cube dimensions.",
                 "anyOf": [
                   {
                     "title": "EPSG Code",
@@ -6068,8 +6068,8 @@
       },
       {
         "rel": "about",
-        "href": "http://www.epsg-registry.org",
-        "title": "Official EPSG code registry"
+        "href": "https://spatialreference.org/ref/epsg",
+        "title": "EPSG code registry"
       },
       {
         "rel": "about",
@@ -10786,7 +10786,7 @@
                 "default": null
               },
               "crs": {
-                "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system. If the bounding box is not provided in the coordinate reference system (CRS) of the data cube, the bounding box is reprojected to the CRS of the spatial data cube dimensions.",
+                "description": "Coordinate reference system of the extent, specified as [EPSG code](https://spatialreference.org/ref/epsg/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system. If the bounding box is not provided in the coordinate reference system (CRS) of the data cube, the bounding box is reprojected to the CRS of the spatial data cube dimensions.",
                 "anyOf": [
                   {
                     "title": "EPSG Code",
@@ -11026,8 +11026,8 @@
       },
       {
         "rel": "about",
-        "href": "http://www.epsg-registry.org",
-        "title": "Official EPSG code registry"
+        "href": "https://spatialreference.org/ref/epsg",
+        "title": "EPSG code registry"
       },
       {
         "rel": "about",
@@ -11899,7 +11899,7 @@
       },
       {
         "name": "projection",
-        "description": "Coordinate reference system to reproject to. Specified as an [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html).",
+        "description": "Coordinate reference system to reproject to. Specified as [EPSG code](https://spatialreference.org/ref/epsg/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html).",
         "schema": [
           {
             "title": "EPSG Code",
@@ -11960,8 +11960,8 @@
       },
       {
         "rel": "about",
-        "href": "http://www.epsg-registry.org",
-        "title": "Official EPSG code registry"
+        "href": "https://spatialreference.org/ref/epsg",
+        "title": "EPSG code registry"
       },
       {
         "rel": "about",
@@ -12908,7 +12908,7 @@
       },
       {
         "name": "projection",
-        "description": "Warps the data cube to the target projection, specified as as [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). By default (`null`), the projection is not changed.",
+        "description": "Warps the data cube to the target projection, specified as [EPSG code](https://spatialreference.org/ref/epsg/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). By default (`null`), the projection is not changed.",
         "schema": [
           {
             "title": "EPSG Code",
@@ -13002,8 +13002,8 @@
       },
       {
         "rel": "about",
-        "href": "http://www.epsg-registry.org",
-        "title": "Official EPSG code registry"
+        "href": "https://spatialreference.org/ref/epsg",
+        "title": "EPSG code registry"
       },
       {
         "rel": "about",
