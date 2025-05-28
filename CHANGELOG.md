@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `load_geojson`
     - `load_ml_model`
     - `load_url`
+    - `mlm_class_catboost`
     - `mlm_class_lighttae`
     - `mlm_class_mlp`
     - `mlm_class_random_forest`
@@ -30,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `mlm_class_tempcnn`
     - `mlm_class_xgboost`
     - `mlm_regr_random_forest`
+    - `mlm_regr_svm`
     - `ml_fit`
     - `ml_label_class`
     - `ml_predict`
