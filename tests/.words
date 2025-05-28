@@ -79,3 +79,7 @@ TAE
 least-confidence
 Camara
 softmax
+Khanna
+Awad
+CatBoost
+epsilon-SVR
