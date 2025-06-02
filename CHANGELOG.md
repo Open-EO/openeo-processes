@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- New processes in proposal state:
+    - `combine_cubes`
+
 - Implementation guide for implementing OGC API - Processes in openEO
 - `export_collection`
 - `export_workspace`
