@@ -21,8 +21,7 @@
             "description": "A distinct name of the model.",
             "schema": {
                 "type": "string"
-            },
-            "required": true
+            }
         },
         {
             "name": "tasks",
@@ -45,8 +44,7 @@
                         "super-resolution"
                     ]
                 }
-            },
-            "required": true
+            }
         },
         {
             "name": "options",
