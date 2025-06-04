@@ -47,7 +47,7 @@
         },
         {
             "name": "target",
-            "description": "The column in the training set that represents the dependent variable for model training.",
+            "description": "The name of the variable in the training set that serves as the target for model training.",
             "schema": {
                 "type": "string"
             }
