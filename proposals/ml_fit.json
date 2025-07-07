@@ -42,6 +42,9 @@
                             "type": "other"
                         }
                     ]
+                },
+                {
+                    "type": "string"
                 }
             ]
         },
