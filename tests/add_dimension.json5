@@ -3,6 +3,7 @@
   "level": "L2",
   "tests": [
     {
+      // todo: add spatial dimension (x, y, z each)
       // add bands dimension
       "arguments": {
         "data": {
