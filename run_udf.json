@@ -1,7 +1,7 @@
 {
     "id": "run_udf",
     "summary": "Run a UDF",
-    "description": "Runs a UDF in one of the supported runtime environments.\n\nThe process can either:\n\n1. load and run a UDF stored in a file on the server-side workspace of the authenticated user. The path to the UDF file must be relative to the root directory of the user's workspace.\n2. fetch and run a remotely stored and published UDF by absolute URI.\n3. run the source code specified inline as string.\n\nThe loaded UDF can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. The user must ensure that the data is given in a way that the UDF code can make sense of it.",
+    "description": "Runs a UDF in one of the supported runtime environments.\n\nThe process can either:\n\n1. load and run a UDF stored in a file on the server-side workspace of the authenticated user. The path to the UDF file must be relative to the root directory of the user's workspace.\n2. fetch and run a remotely stored and published UDF by absolute URI.\n3. run the source code specified inline as string.\n\nThe loaded UDF can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. The user must ensure that the data is provided in a way that the UDF code can make sense of it.",
     "categories": [
         "cubes",
         "import",
@@ -10,7 +10,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "The data to be passed to the UDF.\n\nThe data must be given in a way that the UDF can understand it. Usually, `run_udf` is executed as part of a data cube process such as `reduce_dimension` and in this case the process would expect an array of values as provided in the parameter `data` by `reduce_dimension`. Please refer to the documentation of the UDF runtime for details on how to provide the data.",
+            "description": "The data to be passed to the UDF.\n\nUsually, `run_udf` process is used as a child process of a data cube process such as ``reduce_dimension()`` or ``apply()``. These data cube processes define the actual type of this data. For example, in case of ``reduce_dimension()``, `data` will be an array of values, while in case of ``apply()`` it will be a single scalar value.",
             "schema": {
                 "description": "A value of any data type."
             }
