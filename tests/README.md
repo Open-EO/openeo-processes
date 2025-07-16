@@ -2,172 +2,6 @@
 
 This folder contains test cases for the openEO processes.
 
-## Processes
-
-- [x] absolute
-- [x] add
-- [x] add_dimension
-- [x] aggregate_temporal
-- [x] aggregate_temporal_period
-- [x] all
-- [x] and
-- [x] any
-- [x] apply*
-- [x] apply_dimension*
-- [x] apply_kernel
-- [x] arccos
-- [x] arcosh
-- [x] arcsin
-- [x] arctan
-- [x] arctan2
-- [x] array_append
-- [x] array_apply
-- [x] array_concat
-- [x] array_contains
-- [x] array_create
-- [x] array_create_labeled (experimental)
-- [x] array_element
-- [x] array_filter
-- [x] array_find
-- [x] array_find_label (experimental)
-- [x] array_interpolate_linear
-- [x] array_labels
-- [x] array_modify* (experimental)
-- [x] arsinh
-- [x] artanh
-- [x] between
-- [x] ceil
-- [x] clip
-- [x] constant
-- [x] cos
-- [x] cosh
-- [x] count*
-- [x] cummax* (experimental)
-- [x] cummin* (experimental)
-- [x] cumproduct* (experimental)
-- [x] cumsum* (experimental)
-- [x] create_data_cube
-- [x] date_between* (experimental)
-- [x] date_difference* (experimental)
-- [x] date_shift* (experimental)
-- [x] dimension_labels
-- [x] divide
-- [x] drop_dimension*
-- [x] e
-- [x] eq
-- [x] exp
-- [x] extrema
-- [x] filter_bands*
-- [x] filter_bbox*
-- [x] filter_spatial*
-- [x] filter_temporal*
-- [x] first
-- [x] floor
-- [x] gt
-- [x] gte
-- [x] if
-- [x] int
-- [x] is_infinite (experimental)
-- [x] is_nan
-- [x] is_nodata*
-- [x] last
-- [x] linear_scale_range
-- [x] ln
-- [x] log
-- [x] lt
-- [x] lte
-- [x] mask*
-- [x] mask_polygon*
-- [x] max
-- [x] mean
-- [x] median
-- [x] merge_cubes*
-- [x] min
-- [x] mod
-- [x] multiply
-- [x] nan (experimental)
-- [x] neq
-- [x] normalized_difference
-- [x] not
-- [x] or
-- [x] order*
-- [x] pi
-- [x] power
-- [x] product
-- [x] quantiles
-- [x] rearrange*
-- [x] reduce_dimension*
-- [x] rename_dimension
-- [x] rename_labels
-- [x] round
-- [x] sd
-- [x] sgn
-- [x] sin
-- [x] sinh
-- [x] sort*
-- [x] sqrt
-- [x] subtract
-- [x] sum
-- [x] tan
-- [x] tanh
-- [x] text_begins
-- [x] text_concat
-- [x] text_contains
-- [x] text_ends
-- [x] variance
-- [x] xor
-
-\* = could use some more tests
-
-**Important:** The differentiation of null and NaN is to be discussed and reflected in the tests.
-See <https://github.com/Open-EO/openeo-processes/issues/480> for details.
-
-## Missing processes
-
-The following processes have no test cases as the results heavily depend on the underlying implementation
-or need an external services to be available for testing (e.g. loading files from the user workspace or a UDF server).
-We don't expect that we can provide meaningful test cases for these processes.
-
-- ard_normalized_radar_backscatter (experimental)
-- ard_surface_reflectance (experimental)
-- atmospheric_correction (experimental)
-- cloud_detection (experimental)
-- fit_curve (experimental)
-- inspect (experimental)
-- load_collection
-- load_stac (experimental)
-- load_uploaded_files (experimental)
-- load_url (experimental)
-- predict_curve (experimental)
-- resample_spatial
-- run_udf
-- run_udf_externally (experimental)
-- sar_backscatter (experimental)
-- save_result
-- vector_to_random_points (experimental)
-- vector_to_regular_points (experimental)
-
-The following processes are experimental, part of a higher profile (L3+), or use vector data cube, so the tests will hopefully evolve over time:
-
-- aggregate_spatial
-- aggregate_spatial_window (experimental)
-- anomaly
-- apply_neighborhood
-- apply_polygon (experimental)
-- climatological_normal
-- filter_labels (experimental)
-- filter_vector (experimental)
-- flatten_dimensions (experimental)
-- load_geojson (experimental)
-- ndvi
-- reduce_spatial (experimental)
-- resample_cube_spatial
-- resample_cube_temporal
-- trim_cube
-- unflatten_dimension (experimental)
-- vector_buffer (experimental)
-- vector_reproject (experimental)
-
 ## Assumptions
 
 The test cases assume a couple of things as they are an abstraction and not bound to specific implementations:
@@ -188,7 +22,7 @@ The test files have the following schema: [schema/schema.json](./schema/schema.j
 No-data values have a special encoding in tests (see below).
 The encoding is replaced with `null` unless otherwise specified by the runners.
 
-```json
+```json5
 {
   "type": "nodata"
 }
@@ -201,7 +35,7 @@ Also, sometimes timezones are differently handled.
 
 Datetimes in return values should be encoded as follows so that the results can be compared better:
 
-```json
+```json5
 {
   "type": "datetime",
   "value": "2020-01-01T00:00:00Z"
@@ -212,7 +46,7 @@ Datetimes in return values should be encoded as follows so that the results can 
 
 Arguments and return values can point to external files, e.g.
 
-```json
+```json5
 {
   "$ref": "https://host.example/datacube.json"
 }
@@ -224,7 +58,7 @@ The test suite can currently only load JSON and JSON5 files.
 
 Labeled arrays can't be represented in JSON5 and will be provided as an object instead.
 
-```json
+```json5
 {
   "type": "labeled-array",
   "data": [
@@ -246,7 +80,7 @@ Labeled arrays can't be represented in JSON5 and will be provided as an object i
 Datacubes can't be represented in JSON5 and will be provided as an object instead.
 Vector datacubes are currently not supported.
 
-```json
+```json5
 {
   "type": "datacube",
   "data": [
