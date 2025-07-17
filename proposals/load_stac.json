@@ -186,7 +186,7 @@
         },
         {
             "name": "properties",
-            "description": "Limits the data by metadata properties to include only data in the data cube which all given conditions return `true` for (AND operation).\n\nSpecify key-value-pairs with the key being the name of the metadata property, which can be retrieved with the openEO Data Discovery for Collections. The value must be a condition (user-defined process) to be evaluated against a STAC API. This parameter is not supported for static STAC.",
+            "description": "Limits the data by metadata properties to include only data in the data cube which all given conditions return `true` for (AND operation).\n\nSpecify key-value-pairs with the key being the name of the queryable (for STAC APIs) or the metadata property name (for static STAC catalogs). Queryables can be retrieved from the Queryables endpoint of the STAC API and are often but not always aligned with the metadata property names. The value must be a condition (user-defined process) to be evaluated against a STAC API or static catalog. This parameter may not be supported for static STAC catalogs.",
             "schema": [
                 {
                     "type": "object",

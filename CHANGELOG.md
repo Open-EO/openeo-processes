@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `eq` and `neq`: Explicitly set the minimum value for the `delta` parameter.
 - `filter_bbox`, `load_collection`, `load_stac`: Clarified that the bounding box is reprojected to the CRS of the spatial data cube dimensions if required.
 - `filter_spatial`: Clarified that masking is applied using the given geometries. [#469](https://github.com/Open-EO/openeo-processes/issues/469)
+- `load_stac`: Clarify handling of the `properties` parameter in the context of STAC APIs and static catalogs. [#536](https://github.com/Open-EO/openeo-processes/issues/536)
 - `load_collection` and `load_stac`: Clarified that scale and offset are not applied automatically when loading the data. [#503](https://github.com/Open-EO/openeo-processes/issues/503)
 - `mod`: Clarified behavior for y = 0
 - `sqrt`: Clarified that NaN is returned for negative numbers.
