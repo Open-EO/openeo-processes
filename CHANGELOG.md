@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Processes that have been marked as stable: `apply_polygon`, `date_between`, `date_shift`, `filter_labels`, `inspect`
 - Clarified for various mathematical functions the defined input and output ranges.
   Mention that `NaN` is returned outside of the defined input range where possible.
 - Clarified for several comparison processes how `NaN` values have to be handled. 
