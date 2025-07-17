@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Clarified for various mathematical functions the defined input and output ranges. Mention that `NaN` is returned outside of the defined input range where possible.
 - `apply_polygon`: Replaced outdated usage of `raster-cube` subtype with `datacube` and dimensions. [#524](https://github.com/Open-EO/openeo-processes/issues/524)
 - `aggregate_spatial` and `load_geojson`: Dimensions must by of type `geometry`, not `geometries`
+- `aggregate_spatial`: Clarified that the output geometries are unchanged compared to the input geometries. [#499](https://github.com/Open-EO/openeo-processes/issues/499)
 - `aggregate_temporal` and `aggregate_temporal_period`: Clarified that the process throws a `DimensionNotAvailable` exception when no temporal dimension exists.
 - `aggregate_temporal_period`: Removed unused exception `DistinctDimensionLabelsRequired`
 - `aggregate_temporal_period`: Clarified that the definition of weeks follows ISO 8601

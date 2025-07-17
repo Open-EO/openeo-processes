@@ -105,7 +105,7 @@
         }
     ],
     "returns": {
-        "description": "A vector data cube with the computed results. Empty geometries still exist but without any aggregated values (i.e. no-data). The spatial dimensions are replaced by a dimension of type 'geometry' and if `target_dimension` is not `null`, a new dimension is added.",
+        "description": "A vector data cube with the computed results. Empty geometries still exist but without any aggregated values (i.e. no-data). The spatial dimensions are replaced by a dimension of type 'geometry' and if `target_dimension` is not `null`, a new dimension is added. The dimension of type `geometry` is unchanged with regards to its labels (geometries) and reference system compared to the geometries provided through the parameter `geometries`.",
         "schema": {
             "type": "object",
             "subtype": "datacube",
