@@ -10,7 +10,7 @@
     "parameters": [
         {
             "name": "paths",
-            "description": "The files to read. Folders can't be specified, specify all files instead. An exception is thrown if a file can't be read.",
+            "description": "The files to read. Folders can't be specified, specify all files instead. An exception is thrown if a file can't be read.\n\nFile paths are relative to the file workspace of the user. The workspace is the root folder, i.e. the paths `/folder/file.txt` and `folder/file.txt` and `./folder/file.txt` are all equivalent. Specifying paths outside of the workspace is not allowed and throws a `FileNotFound` exception.",
             "schema": {
                 "type": "array",
                 "subtype": "file-paths",
@@ -50,6 +50,9 @@
     "exceptions": {
         "FormatUnsuitable": {
             "message": "Data can't be loaded with the requested input format."
+        },
+        "FileNotFound": {
+            "message": "The specified file does not exist."
         }
     }
 }
