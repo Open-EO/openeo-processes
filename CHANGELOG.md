@@ -28,6 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added a [section about character encodings to the implementation guide](meta/implementation.md#character-encoding).
   Removed any character encoding related wording from the process specifications itself.
 - Added a uniqueness contraint to various array-typed parameters (e.g. lists of dimension names or labels)
+- `all`: For empty arrays, returns `true` instead of no-data. [#494](https://github.com/Open-EO/openeo-processes/issues/494)
+- `any`: For empty arrays, returns `false` instead of no-data. [#494](https://github.com/Open-EO/openeo-processes/issues/494)
 - `apply_polygon`: Renamed `polygons` parameter to `geometries` for better alignment with other geometry handling processes. [#511](https://github.com/Open-EO/openeo-processes/issues/511)
 - `clip`: Throw an exception if min > max [#472](https://github.com/Open-EO/openeo-processes/issues/472)
 - `is_nan`: Return `false` instead of `true` for non-numerical data types. [#486](https://github.com/Open-EO/openeo-processes/issues/486)
