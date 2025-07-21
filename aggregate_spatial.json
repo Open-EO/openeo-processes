@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "A raster data cube with at least two spatial dimensions.\n\nThe data cube implicitly gets restricted to the bounds of the geometries as if ``filter_spatial()`` would have been used with the same values for the corresponding parameters immediately before this process.",
+            "description": "A raster data cube with at least two spatial dimensions.\n\nThe data cube implicitly gets restricted to the bounds of the geometries as if ``filter_spatial()`` would have been used with the same values for the corresponding parameters immediately before this process.\n\nIf the CRS of the raster data cube doesn't match the CRS of the geometries, the raster data will be reprojected to the CRS of the geometries.",
             "schema": {
                 "type": "object",
                 "subtype": "datacube",
