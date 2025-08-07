@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Clarified for various mathematical functions the defined input and output ranges. Mention that `NaN` is returned outside of the defined input range where possible.
 - Clarified for various processes the handling of no-data values and null, see also the [implementation guide](meta/implementation.md).  [#480](https://github.com/Open-EO/openeo-processes/issues/480)
+- `add_dimension`: Clearly define behaviour for adding spatial dimensions
 - `apply_polygon`: Replaced outdated usage of `raster-cube` subtype with `datacube` and dimensions. [#524](https://github.com/Open-EO/openeo-processes/issues/524)
 - `aggregate_spatial` and `load_geojson`: Dimensions must by of type `geometry`, not `geometries`
 - `aggregate_temporal` and `aggregate_temporal_period`: Clarified that the process throws a `DimensionNotAvailable` exception when no temporal dimension exists.
