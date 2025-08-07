@@ -134,7 +134,7 @@
       },
       {
         "name": "type",
-        "description": "The type of dimension, defaults to `other`.",
+        "description": "The type of dimension, defaults to `other`.\n\nIf the type is `spatial`, the axis is the first option that does not exist yet from `x`, `y`, and `z`. This refers to the axis of the dimension, not the name of the dimension. Throws a `DimensionExists` exception if dimensions for all axes exist.",
         "schema": {
           "type": "string",
           "enum": [
