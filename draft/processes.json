@@ -10822,7 +10822,7 @@
       },
       {
         "name": "properties",
-        "description": "Limits the data by metadata properties to include only data in the data cube which all given conditions return `true` for (AND operation).\n\nSpecify key-value-pairs with the key being the name of the metadata property, which can be retrieved with the openEO Data Discovery for Collections. The value must be a condition (user-defined process) to be evaluated against a STAC API. This parameter is not supported for static STAC.",
+        "description": "Limits the data by metadata properties to include only data in the data cube which all given conditions return `true` for (AND operation).\n\nSpecify key-value-pairs with the key being the name of the queryable (for STAC APIs implementing the Filter Extension) or the metadata property name (for static STAC catalogs or STAC APIs implementing the Query Extension). Queryables can be retrieved from the Queryables endpoint of the STAC API and are often but not always aligned with the metadata property names. The value must be a condition (user-defined process) to be evaluated against a STAC API or static catalog. This parameter throws a `PropertiesUnsupported` exception if querying is not implemented for static STAC catalogs or STAC APIs that don't support the Filter or Query Extension.",
         "schema": [
           {
             "type": "object",
@@ -10928,6 +10928,9 @@
       },
       "TemporalExtentEmpty": {
         "message": "The temporal extent is empty. The second instant in time must always be greater/later than the first instant in time."
+      },
+      "PropertiesUnsupported": {
+        "message": "The `properties` parameter is not supported for the given STAC entity."
       }
     },
     "links": [
