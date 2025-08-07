@@ -1741,6 +1741,162 @@
     ]
   },
   {
+    "id": "apply_polygon",
+    "summary": "Apply a process to segments of the data cube",
+    "description": "Applies a process to segments of the data cube that are defined by the given polygons. For each polygon provided, all pixels for which the point at the pixel center intersects with the polygon (as defined in the Simple Features standard by the OGC) are collected into sub data cubes. If a pixel is part of multiple of the provided polygons (e.g., when the polygons overlap), the `GeometriesOverlap` exception is thrown. Each sub data cube is passed individually to the given process.",
+    "categories": [
+      "cubes"
+    ],
+    "parameters": [
+      {
+        "name": "data",
+        "description": "A data cube.",
+        "schema": {
+          "type": "object",
+          "subtype": "datacube",
+          "dimensions": [
+            {
+              "type": "spatial",
+              "axis": [
+                "x",
+                "y"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "name": "geometries",
+        "description": "A vector data cube containing at least one polygon. The provided vector data can be one of the following:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry, or\n* a `FeatureCollection` containing at least one `Feature`; where each `Feature` has a `Polygon` or `MultiPolygon` geometry.\n* Empty geometries are ignored.",
+        "schema": {
+          "type": "object",
+          "subtype": "datacube",
+          "dimensions": [
+            {
+              "type": "geometry",
+              "geometry_type": [
+                "Polygon",
+                "MultiPolygon"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "name": "process",
+        "description": "A process that accepts and returns a single data cube and is applied on each individual sub data cube. The process may consist of multiple sub-processes.",
+        "schema": {
+          "type": "object",
+          "subtype": "process-graph",
+          "parameters": [
+            {
+              "name": "data",
+              "description": "A sub data cube of the original data cube. The sub data cubes provided cover the smallest possible grid-aligned extent of the corresponding polygon and all pixels outside of the polygon are replaced with the value given in `mask_value`.",
+              "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                  {
+                    "type": "spatial",
+                    "axis": [
+                      "x",
+                      "y"
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "name": "context",
+              "description": "Additional data passed by the user.",
+              "schema": {
+                "description": "Any data type."
+              },
+              "optional": true,
+              "default": null
+            }
+          ],
+          "returns": {
+            "description": "The updated sub data cube with the newly computed values and the same dimensions. The dimension properties (name, type, reference system and resolution) must remain unchanged. The labels can change, but the number of labels must remain unchanged.",
+            "schema": {
+              "description": "A data cube.",
+              "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                  {
+                    "type": "spatial",
+                    "axis": [
+                      "x",
+                      "y"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      {
+        "name": "mask_value",
+        "description": "All pixels for which the point at the pixel center **does not** intersect with the polygon are replaced with the given value. The default value is `null`, which uses the no-data value of the data cube.\n\nThis parameter can provide a distinction between no-data values within the polygon and masked pixels outside of it.",
+        "schema": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "optional": true
+      },
+      {
+        "name": "context",
+        "description": "Additional data to be passed to the process.",
+        "schema": {
+          "description": "Any data type."
+        },
+        "optional": true,
+        "default": null
+      }
+    ],
+    "returns": {
+      "description": "A data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
+      "schema": {
+        "type": "object",
+        "subtype": "datacube",
+        "dimensions": [
+          {
+            "type": "spatial",
+            "axis": [
+              "x",
+              "y"
+            ]
+          }
+        ]
+      }
+    },
+    "exceptions": {
+      "GeometriesOverlap": {
+        "message": "Geometries are not allowed to overlap to avoid that pixel values are processed multiple times."
+      }
+    },
+    "links": [
+      {
+        "href": "http://www.opengeospatial.org/standards/sfa",
+        "rel": "about",
+        "title": "Simple Features standard by the OGC"
+      }
+    ]
+  },
+  {
     "id": "apply",
     "summary": "Apply a process to each value",
     "description": "Applies a process to each value in the data cube (i.e. a local operation). In contrast, the process ``apply_dimension()`` applies a process to all values along a particular dimension.",
@@ -3775,6 +3931,252 @@
     ]
   },
   {
+    "id": "date_between",
+    "summary": "Between comparison for dates and times",
+    "description": "By default, this process checks whether `x` is later than or equal to `min` and before or equal to `max`.\n\nIf `exclude_max` is set to `true` the upper bound is excluded so that the process checks whether `x` is later than or equal to `min` and before `max`.\n\nLower and upper bounds are not allowed to be swapped. So `min` MUST be before or equal to `max` or otherwise the process always returns `false`.",
+    "categories": [
+      "comparison",
+      "date & time"
+    ],
+    "parameters": [
+      {
+        "name": "x",
+        "description": "The value to check.",
+        "schema": [
+          {
+            "type": "string",
+            "format": "date-time",
+            "subtype": "date-time",
+            "description": "Date and time with a time zone."
+          },
+          {
+            "type": "string",
+            "format": "date",
+            "subtype": "date",
+            "description": "Date only, formatted as `YYYY-MM-DD`. The time zone is UTC. Missing time components are all 0."
+          },
+          {
+            "type": "string",
+            "subtype": "time",
+            "pattern": "^\\d{2}:\\d{2}:\\d{2}$",
+            "description": "Time only, formatted as HH:MM:SS. The time zone is UTC."
+          }
+        ]
+      },
+      {
+        "name": "min",
+        "description": "Lower boundary (inclusive) to check against.",
+        "schema": [
+          {
+            "type": "string",
+            "format": "date-time",
+            "subtype": "date-time",
+            "description": "Date and time with a time zone."
+          },
+          {
+            "type": "string",
+            "format": "date",
+            "subtype": "date",
+            "description": "Date only, formatted as `YYYY-MM-DD`. The time zone is UTC. Missing time components are all 0."
+          },
+          {
+            "type": "string",
+            "subtype": "time",
+            "pattern": "^\\d{2}:\\d{2}:\\d{2}$",
+            "description": "Time only, formatted as HH:MM:SS. The time zone is UTC."
+          }
+        ]
+      },
+      {
+        "name": "max",
+        "description": "Upper boundary (inclusive) to check against.",
+        "schema": [
+          {
+            "type": "string",
+            "format": "date-time",
+            "subtype": "date-time",
+            "description": "Date and time with a time zone."
+          },
+          {
+            "type": "string",
+            "format": "date",
+            "subtype": "date",
+            "description": "Date only, formatted as `YYYY-MM-DD`. The time zone is UTC. Missing time components are all 0."
+          },
+          {
+            "type": "string",
+            "subtype": "time",
+            "pattern": "^\\d{2}:\\d{2}:\\d{2}$",
+            "description": "Time only, formatted as HH:MM:SS. The time zone is UTC."
+          }
+        ]
+      },
+      {
+        "name": "exclude_max",
+        "description": "Exclude the upper boundary `max` if set to `true`. Defaults to `false`.",
+        "schema": {
+          "type": "boolean"
+        },
+        "default": false,
+        "optional": true
+      }
+    ],
+    "returns": {
+      "description": "`true` if `x` is between the specified bounds, otherwise `false`.",
+      "schema": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      }
+    },
+    "examples": [
+      {
+        "arguments": {
+          "x": "2020-01-01",
+          "min": "2021-01-01",
+          "max": "2022-01-01"
+        },
+        "returns": false
+      }
+    ]
+  },
+  {
+    "id": "date_shift",
+    "summary": "Manipulates dates and times by addition or subtraction",
+    "description": "Based on a given date (and optionally time), calculates a new date (and time if given) by adding or subtracting a given temporal period.\n\nSome specifics about dates and times need to be taken into account:\n\n* This process doesn't have any effect on the time zone.\n* It doesn't take daylight saving time (DST) into account as only dates and times in UTC (with potential numerical time zone modifier) are supported.\n* Leap years are implemented in a way that computations handle them gracefully (see parameter `unit` for details).\n* Leap seconds are mostly ignored in manipulations as they don't follow a regular pattern. Leap seconds can be passed to the process, but will never be returned.",
+    "categories": [
+      "date & time"
+    ],
+    "parameters": [
+      {
+        "name": "date",
+        "description": "The date (and optionally time) to manipulate.\n\nIf the given date doesn't include the time, the process assumes that the time component is `00:00:00Z` (i.e. midnight, in UTC). The millisecond part of the time is optional and defaults to `0` if not given.",
+        "schema": [
+          {
+            "type": "string",
+            "format": "date-time",
+            "subtype": "date-time"
+          },
+          {
+            "type": "string",
+            "format": "date",
+            "subtype": "date"
+          }
+        ]
+      },
+      {
+        "name": "value",
+        "description": "The period of time in the unit given that is added (positive numbers) or subtracted (negative numbers). The value `0` doesn't have any effect.",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "unit",
+        "description": "The unit for the value given. The following pre-defined units are available:\n\n- millisecond: Milliseconds\n- second: Seconds - leap seconds are ignored in computations.\n- minute: Minutes\n- hour: Hours\n- day: Days - changes only the the day part of a date\n- week: Weeks (equivalent to 7 days)\n- month: Months\n- year: Years\n\nManipulations with the unit `year`, `month`, `week` or `day` do never change the time. If any of the manipulations result in an invalid date or time, the corresponding part is rounded down to the next valid date or time respectively. For example, adding a month to `2020-01-31` would result in `2020-02-29`.",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "millisecond",
+            "second",
+            "minute",
+            "hour",
+            "day",
+            "week",
+            "month",
+            "year"
+          ]
+        }
+      }
+    ],
+    "returns": {
+      "description": "The manipulated date. If a time component was given in the parameter `date`, the time component is returned with the date.",
+      "schema": [
+        {
+          "type": "string",
+          "format": "date-time",
+          "subtype": "date-time"
+        },
+        {
+          "type": "string",
+          "format": "date",
+          "subtype": "date"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "arguments": {
+          "date": "2020-02-01T17:22:45Z",
+          "value": 6,
+          "unit": "month"
+        },
+        "returns": "2020-08-01T17:22:45Z"
+      },
+      {
+        "arguments": {
+          "date": "2021-03-31T00:00:00+02:00",
+          "value": -7,
+          "unit": "day"
+        },
+        "returns": "2021-03-24T00:00:00+02:00"
+      },
+      {
+        "description": "Adding a year to February 29th in a leap year will result in February 28th in the next (non-leap) year.",
+        "arguments": {
+          "date": "2020-02-29T17:22:45Z",
+          "value": 1,
+          "unit": "year"
+        },
+        "returns": "2021-02-28T17:22:45Z"
+      },
+      {
+        "description": "Adding a month to January 31th will result in February 29th in leap years.",
+        "arguments": {
+          "date": "2020-01-31",
+          "value": 1,
+          "unit": "month"
+        },
+        "returns": "2020-02-29"
+      },
+      {
+        "description": "The process skips over the leap second `2016-12-31T23:59:60Z`.",
+        "arguments": {
+          "date": "2016-12-31T23:59:59Z",
+          "value": 1,
+          "unit": "second"
+        },
+        "returns": "2017-01-01T00:00:00Z"
+      },
+      {
+        "description": "Milliseconds can be added or subtracted. If not given, the default value is `0`.",
+        "arguments": {
+          "date": "2018-12-31T17:22:45Z",
+          "value": 1150,
+          "unit": "millisecond"
+        },
+        "returns": "2018-12-31T17:22:46.150Z"
+      },
+      {
+        "arguments": {
+          "date": "2018-01-01",
+          "value": 25,
+          "unit": "hour"
+        },
+        "returns": "2018-01-02"
+      },
+      {
+        "arguments": {
+          "date": "2018-01-01",
+          "value": -1,
+          "unit": "hour"
+        },
+        "returns": "2017-12-31"
+      }
+    ]
+  },
+  {
     "id": "dimension_labels",
     "summary": "Get the dimension labels",
     "description": "Gives all labels for a dimension in the data cube. The labels have the same order as in the data cube.\n\nIf a dimension with the specified name does not exist, the process fails with a `DimensionNotAvailable` exception.",
@@ -4547,6 +4949,123 @@
     ]
   },
   {
+    "id": "filter_labels",
+    "summary": "Filter dimension labels based on a condition",
+    "description": "Filters the dimension labels in the data cube for the given dimension. Only the dimension labels that match the specified condition are preserved, all other labels with their corresponding data get removed.",
+    "categories": [
+      "cubes",
+      "filter"
+    ],
+    "parameters": [
+      {
+        "name": "data",
+        "description": "A data cube.",
+        "schema": {
+          "type": "object",
+          "subtype": "datacube"
+        }
+      },
+      {
+        "name": "condition",
+        "description": "A condition that is evaluated against each dimension label in the specified dimension. A dimension label and the corresponding data is preserved for the given dimension, if the condition returns `true`.",
+        "schema": {
+          "type": "object",
+          "subtype": "process-graph",
+          "parameters": [
+            {
+              "name": "value",
+              "description": "A single dimension label to compare against. The data type of the parameter depends on the dimension labels set for the dimension. Please note that for some dimension types a representation is used, e.g.\n\n* dates and/or times are usually strings compliant to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601),\n* geometries can be a WKT string or an identifier.",
+              "schema": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "name": "context",
+              "description": "Additional data passed by the user.",
+              "schema": {
+                "description": "Any data type."
+              },
+              "optional": true,
+              "default": null
+            }
+          ],
+          "returns": {
+            "description": "`true` if the dimension label should be kept in the data cube, otherwise `false`.",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      {
+        "name": "dimension",
+        "description": "The name of the dimension to filter on. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "context",
+        "description": "Additional data to be passed to the condition.",
+        "schema": {
+          "description": "Any data type."
+        },
+        "optional": true,
+        "default": null
+      }
+    ],
+    "returns": {
+      "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the given dimension has less (or the same) dimension labels.",
+      "schema": {
+        "type": "object",
+        "subtype": "datacube"
+      }
+    },
+    "exceptions": {
+      "DimensionNotAvailable": {
+        "message": "A dimension with the specified name does not exist."
+      }
+    },
+    "examples": [
+      {
+        "description": "Filters the data cube to only contain data from platform Sentinel-2A. This example assumes that the data cube has a dimension `platform` so that computations can distinguish between Sentinel-2A and Sentinel-2B data.",
+        "arguments": {
+          "data": {
+            "from_parameter": "sentinel2_data"
+          },
+          "condition": {
+            "process_graph": {
+              "eq": {
+                "process_id": "eq",
+                "arguments": {
+                  "x": {
+                    "from_parameter": "value"
+                  },
+                  "y": "Sentinel-2A",
+                  "case_sensitive": false
+                },
+                "result": true
+              }
+            }
+          },
+          "dimension": "platform"
+        }
+      }
+    ],
+    "links": [
+      {
+        "href": "https://openeo.org/documentation/1.0/datacubes.html#filter",
+        "rel": "about",
+        "title": "Filters explained in the openEO documentation"
+      }
+    ]
+  },
+  {
     "id": "filter_spatial",
     "summary": "Spatial filter raster data cubes using geometries",
     "description": "Limits the raster data cube over the spatial dimensions to the specified geometries.\n\n- For **polygons**, the filter retains a pixel in the data cube if the point at the pixel center intersects with at least one of the polygons (as defined in the Simple Features standard by the OGC).\n- For **points**, the process considers the closest pixel center.\n- For **lines** (line strings), the process considers all the pixels whose centers are closest to at least one point on the line.\n\nMore specifically, pixels outside of the bounding box of the given geometries will not be available after filtering. All pixels inside the bounding box that are not retained will be set to no-data values.\n\n Alternatively, use ``filter_bbox()`` to filter with a bounding box or ``filter_vector()`` to filter a vector data cube based on geometries. Use ``mask_polygon()`` to mask without changing the spatial extent of your data cube.",
@@ -5190,6 +5709,62 @@
         "returns": null
       }
     ]
+  },
+  {
+    "id": "inspect",
+    "summary": "Add information to the logs",
+    "description": "This process can be used to add runtime information to the logs, e.g. for debugging purposes. This process should be used with caution and it is recommended to remove the process in production workflows. For example, logging each value or array individually in a process such as ``apply()`` or ``reduce_dimension()`` could lead to a (too) large number of log entries. Several data structures (e.g. data cubes) are too large to log and will only return summaries of their contents.\n\nThe data provided in the parameter `data` is returned without changes.",
+    "categories": [
+      "development"
+    ],
+    "parameters": [
+      {
+        "name": "data",
+        "description": "Data to log.",
+        "schema": {
+          "description": "Any data type is allowed."
+        }
+      },
+      {
+        "name": "message",
+        "description": "A message to send in addition to the data.",
+        "schema": {
+          "type": "string"
+        },
+        "default": "",
+        "optional": true
+      },
+      {
+        "name": "code",
+        "description": "A label to help identify one or more log entries originating from this process in the list of all log entries. It can help to group or filter log entries and is usually not unique.",
+        "schema": {
+          "type": "string"
+        },
+        "default": "User",
+        "optional": true
+      },
+      {
+        "name": "level",
+        "description": "The severity level of this message, defaults to `info`.",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "error",
+            "warning",
+            "info",
+            "debug"
+          ]
+        },
+        "default": "info",
+        "optional": true
+      }
+    ],
+    "returns": {
+      "description": "The data as passed to the `data` parameter without any modification.",
+      "schema": {
+        "description": "Any data type is allowed."
+      }
+    }
   },
   {
     "id": "int",
@@ -8398,163 +8973,6 @@
     ]
   },
   {
-    "id": "apply_polygon",
-    "summary": "Apply a process to segments of the data cube",
-    "description": "Applies a process to segments of the data cube that are defined by the given polygons. For each polygon provided, all pixels for which the point at the pixel center intersects with the polygon (as defined in the Simple Features standard by the OGC) are collected into sub data cubes. If a pixel is part of multiple of the provided polygons (e.g., when the polygons overlap), the `GeometriesOverlap` exception is thrown. Each sub data cube is passed individually to the given process.",
-    "categories": [
-      "cubes"
-    ],
-    "experimental": true,
-    "parameters": [
-      {
-        "name": "data",
-        "description": "A data cube.",
-        "schema": {
-          "type": "object",
-          "subtype": "datacube",
-          "dimensions": [
-            {
-              "type": "spatial",
-              "axis": [
-                "x",
-                "y"
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "name": "geometries",
-        "description": "A vector data cube containing at least one polygon. The provided vector data can be one of the following:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry, or\n* a `FeatureCollection` containing at least one `Feature`; where each `Feature` has a `Polygon` or `MultiPolygon` geometry.\n* Empty geometries are ignored.",
-        "schema": {
-          "type": "object",
-          "subtype": "datacube",
-          "dimensions": [
-            {
-              "type": "geometry",
-              "geometry_type": [
-                "Polygon",
-                "MultiPolygon"
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "name": "process",
-        "description": "A process that accepts and returns a single data cube and is applied on each individual sub data cube. The process may consist of multiple sub-processes.",
-        "schema": {
-          "type": "object",
-          "subtype": "process-graph",
-          "parameters": [
-            {
-              "name": "data",
-              "description": "A sub data cube of the original data cube. The sub data cubes provided cover the smallest possible grid-aligned extent of the corresponding polygon and all pixels outside of the polygon are replaced with the value given in `mask_value`.",
-              "schema": {
-                "type": "object",
-                "subtype": "datacube",
-                "dimensions": [
-                  {
-                    "type": "spatial",
-                    "axis": [
-                      "x",
-                      "y"
-                    ]
-                  }
-                ]
-              }
-            },
-            {
-              "name": "context",
-              "description": "Additional data passed by the user.",
-              "schema": {
-                "description": "Any data type."
-              },
-              "optional": true,
-              "default": null
-            }
-          ],
-          "returns": {
-            "description": "The updated sub data cube with the newly computed values and the same dimensions. The dimension properties (name, type, reference system and resolution) must remain unchanged. The labels can change, but the number of labels must remain unchanged.",
-            "schema": {
-              "description": "A data cube.",
-              "schema": {
-                "type": "object",
-                "subtype": "datacube",
-                "dimensions": [
-                  {
-                    "type": "spatial",
-                    "axis": [
-                      "x",
-                      "y"
-                    ]
-                  }
-                ]
-              }
-            }
-          }
-        }
-      },
-      {
-        "name": "mask_value",
-        "description": "All pixels for which the point at the pixel center **does not** intersect with the polygon are replaced with the given value. The default value is `null`, which uses the no-data value of the data cube.\n\nThis parameter can provide a distinction between no-data values within the polygon and masked pixels outside of it.",
-        "schema": [
-          {
-            "type": "number"
-          },
-          {
-            "type": "boolean"
-          },
-          {
-            "type": "string"
-          },
-          {
-            "type": "null"
-          }
-        ],
-        "default": null,
-        "optional": true
-      },
-      {
-        "name": "context",
-        "description": "Additional data to be passed to the process.",
-        "schema": {
-          "description": "Any data type."
-        },
-        "optional": true,
-        "default": null
-      }
-    ],
-    "returns": {
-      "description": "A data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
-      "schema": {
-        "type": "object",
-        "subtype": "datacube",
-        "dimensions": [
-          {
-            "type": "spatial",
-            "axis": [
-              "x",
-              "y"
-            ]
-          }
-        ]
-      }
-    },
-    "exceptions": {
-      "GeometriesOverlap": {
-        "message": "Geometries are not allowed to overlap to avoid that pixel values are processed multiple times."
-      }
-    },
-    "links": [
-      {
-        "href": "http://www.opengeospatial.org/standards/sfa",
-        "rel": "about",
-        "title": "Simple Features standard by the OGC"
-      }
-    ]
-  },
-  {
     "id": "ard_normalized_radar_backscatter",
     "summary": "CARD4L compliant SAR NRB generation",
     "description": "Computes CARD4L compliant backscatter from SAR input. The radiometric correction coefficient is gamma0 (terrain), which is the ground area computed with terrain earth model in sensor line of sight.\n\nNote that backscatter computation may require instrument specific metadata that is tightly coupled to the original SAR products. As a result, this process may only work in combination with loading data from specific collections, not with general data cubes.\n\nThis process uses bilinear interpolation, both for resampling the DEM and the backscatter.",
@@ -9706,118 +10124,6 @@
     ]
   },
   {
-    "id": "date_between",
-    "summary": "Between comparison for dates and times",
-    "description": "By default, this process checks whether `x` is later than or equal to `min` and before or equal to `max`.\n\nIf `exclude_max` is set to `true` the upper bound is excluded so that the process checks whether `x` is later than or equal to `min` and before `max`.\n\nLower and upper bounds are not allowed to be swapped. So `min` MUST be before or equal to `max` or otherwise the process always returns `false`.",
-    "categories": [
-      "comparison",
-      "date & time"
-    ],
-    "experimental": true,
-    "parameters": [
-      {
-        "name": "x",
-        "description": "The value to check.",
-        "schema": [
-          {
-            "type": "string",
-            "format": "date-time",
-            "subtype": "date-time",
-            "description": "Date and time with a time zone."
-          },
-          {
-            "type": "string",
-            "format": "date",
-            "subtype": "date",
-            "description": "Date only, formatted as `YYYY-MM-DD`. The time zone is UTC. Missing time components are all 0."
-          },
-          {
-            "type": "string",
-            "subtype": "time",
-            "pattern": "^\\d{2}:\\d{2}:\\d{2}$",
-            "description": "Time only, formatted as HH:MM:SS. The time zone is UTC."
-          }
-        ]
-      },
-      {
-        "name": "min",
-        "description": "Lower boundary (inclusive) to check against.",
-        "schema": [
-          {
-            "type": "string",
-            "format": "date-time",
-            "subtype": "date-time",
-            "description": "Date and time with a time zone."
-          },
-          {
-            "type": "string",
-            "format": "date",
-            "subtype": "date",
-            "description": "Date only, formatted as `YYYY-MM-DD`. The time zone is UTC. Missing time components are all 0."
-          },
-          {
-            "type": "string",
-            "subtype": "time",
-            "pattern": "^\\d{2}:\\d{2}:\\d{2}$",
-            "description": "Time only, formatted as HH:MM:SS. The time zone is UTC."
-          }
-        ]
-      },
-      {
-        "name": "max",
-        "description": "Upper boundary (inclusive) to check against.",
-        "schema": [
-          {
-            "type": "string",
-            "format": "date-time",
-            "subtype": "date-time",
-            "description": "Date and time with a time zone."
-          },
-          {
-            "type": "string",
-            "format": "date",
-            "subtype": "date",
-            "description": "Date only, formatted as `YYYY-MM-DD`. The time zone is UTC. Missing time components are all 0."
-          },
-          {
-            "type": "string",
-            "subtype": "time",
-            "pattern": "^\\d{2}:\\d{2}:\\d{2}$",
-            "description": "Time only, formatted as HH:MM:SS. The time zone is UTC."
-          }
-        ]
-      },
-      {
-        "name": "exclude_max",
-        "description": "Exclude the upper boundary `max` if set to `true`. Defaults to `false`.",
-        "schema": {
-          "type": "boolean"
-        },
-        "default": false,
-        "optional": true
-      }
-    ],
-    "returns": {
-      "description": "`true` if `x` is between the specified bounds, otherwise `false`.",
-      "schema": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      }
-    },
-    "examples": [
-      {
-        "arguments": {
-          "x": "2020-01-01",
-          "min": "2021-01-01",
-          "max": "2022-01-01"
-        },
-        "returns": false
-      }
-    ]
-  },
-  {
     "id": "date_difference",
     "summary": "Computes the difference between two time instants",
     "description": "Computes the difference between two instants in time and returns the difference between them in the unit given.\n\nThe process converts the given dates into numerical timestamps and returns the result of subtracting the other date from the base date. If a given date doesn't include the time, the process assumes that the time component is `00:00:00Z` (i.e. midnight, in UTC). The millisecond part of the times are optional and default to `0` if not given. The process doesn't take daylight saving time (DST) into account as only dates and times in UTC (with potential numerical time zone modifier) are supported.",
@@ -9917,142 +10223,6 @@
     ]
   },
   {
-    "id": "date_shift",
-    "summary": "Manipulates dates and times by addition or subtraction",
-    "description": "Based on a given date (and optionally time), calculates a new date (and time if given) by adding or subtracting a given temporal period.\n\nSome specifics about dates and times need to be taken into account:\n\n* This process doesn't have any effect on the time zone.\n* It doesn't take daylight saving time (DST) into account as only dates and times in UTC (with potential numerical time zone modifier) are supported.\n* Leap years are implemented in a way that computations handle them gracefully (see parameter `unit` for details).\n* Leap seconds are mostly ignored in manipulations as they don't follow a regular pattern. Leap seconds can be passed to the process, but will never be returned.",
-    "categories": [
-      "date & time"
-    ],
-    "experimental": true,
-    "parameters": [
-      {
-        "name": "date",
-        "description": "The date (and optionally time) to manipulate.\n\nIf the given date doesn't include the time, the process assumes that the time component is `00:00:00Z` (i.e. midnight, in UTC). The millisecond part of the time is optional and defaults to `0` if not given.",
-        "schema": [
-          {
-            "type": "string",
-            "format": "date-time",
-            "subtype": "date-time"
-          },
-          {
-            "type": "string",
-            "format": "date",
-            "subtype": "date"
-          }
-        ]
-      },
-      {
-        "name": "value",
-        "description": "The period of time in the unit given that is added (positive numbers) or subtracted (negative numbers). The value `0` doesn't have any effect.",
-        "schema": {
-          "type": "integer"
-        }
-      },
-      {
-        "name": "unit",
-        "description": "The unit for the value given. The following pre-defined units are available:\n\n- millisecond: Milliseconds\n- second: Seconds - leap seconds are ignored in computations.\n- minute: Minutes\n- hour: Hours\n- day: Days - changes only the the day part of a date\n- week: Weeks (equivalent to 7 days)\n- month: Months\n- year: Years\n\nManipulations with the unit `year`, `month`, `week` or `day` do never change the time. If any of the manipulations result in an invalid date or time, the corresponding part is rounded down to the next valid date or time respectively. For example, adding a month to `2020-01-31` would result in `2020-02-29`.",
-        "schema": {
-          "type": "string",
-          "enum": [
-            "millisecond",
-            "second",
-            "minute",
-            "hour",
-            "day",
-            "week",
-            "month",
-            "year"
-          ]
-        }
-      }
-    ],
-    "returns": {
-      "description": "The manipulated date. If a time component was given in the parameter `date`, the time component is returned with the date.",
-      "schema": [
-        {
-          "type": "string",
-          "format": "date-time",
-          "subtype": "date-time"
-        },
-        {
-          "type": "string",
-          "format": "date",
-          "subtype": "date"
-        }
-      ]
-    },
-    "examples": [
-      {
-        "arguments": {
-          "date": "2020-02-01T17:22:45Z",
-          "value": 6,
-          "unit": "month"
-        },
-        "returns": "2020-08-01T17:22:45Z"
-      },
-      {
-        "arguments": {
-          "date": "2021-03-31T00:00:00+02:00",
-          "value": -7,
-          "unit": "day"
-        },
-        "returns": "2021-03-24T00:00:00+02:00"
-      },
-      {
-        "description": "Adding a year to February 29th in a leap year will result in February 28th in the next (non-leap) year.",
-        "arguments": {
-          "date": "2020-02-29T17:22:45Z",
-          "value": 1,
-          "unit": "year"
-        },
-        "returns": "2021-02-28T17:22:45Z"
-      },
-      {
-        "description": "Adding a month to January 31th will result in February 29th in leap years.",
-        "arguments": {
-          "date": "2020-01-31",
-          "value": 1,
-          "unit": "month"
-        },
-        "returns": "2020-02-29"
-      },
-      {
-        "description": "The process skips over the leap second `2016-12-31T23:59:60Z`.",
-        "arguments": {
-          "date": "2016-12-31T23:59:59Z",
-          "value": 1,
-          "unit": "second"
-        },
-        "returns": "2017-01-01T00:00:00Z"
-      },
-      {
-        "description": "Milliseconds can be added or subtracted. If not given, the default value is `0`.",
-        "arguments": {
-          "date": "2018-12-31T17:22:45Z",
-          "value": 1150,
-          "unit": "millisecond"
-        },
-        "returns": "2018-12-31T17:22:46.150Z"
-      },
-      {
-        "arguments": {
-          "date": "2018-01-01",
-          "value": 25,
-          "unit": "hour"
-        },
-        "returns": "2018-01-02"
-      },
-      {
-        "arguments": {
-          "date": "2018-01-01",
-          "value": -1,
-          "unit": "hour"
-        },
-        "returns": "2017-12-31"
-      }
-    ]
-  },
-  {
     "id": "export_collection",
     "summary": "Export data to an openEO collection",
     "description": "Exports the given processing results made available through a STAC resource (e.g., a STAC Collection or Item) to the given openEO collection. The STAC resource itself is exported with all STAC resources and assets underneath.",
@@ -10144,124 +10314,6 @@
         "subtype": "stac"
       }
     }
-  },
-  {
-    "id": "filter_labels",
-    "summary": "Filter dimension labels based on a condition",
-    "description": "Filters the dimension labels in the data cube for the given dimension. Only the dimension labels that match the specified condition are preserved, all other labels with their corresponding data get removed.",
-    "categories": [
-      "cubes",
-      "filter"
-    ],
-    "experimental": true,
-    "parameters": [
-      {
-        "name": "data",
-        "description": "A data cube.",
-        "schema": {
-          "type": "object",
-          "subtype": "datacube"
-        }
-      },
-      {
-        "name": "condition",
-        "description": "A condition that is evaluated against each dimension label in the specified dimension. A dimension label and the corresponding data is preserved for the given dimension, if the condition returns `true`.",
-        "schema": {
-          "type": "object",
-          "subtype": "process-graph",
-          "parameters": [
-            {
-              "name": "value",
-              "description": "A single dimension label to compare against. The data type of the parameter depends on the dimension labels set for the dimension. Please note that for some dimension types a representation is used, e.g.\n\n* dates and/or times are usually strings compliant to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601),\n* geometries can be a WKT string or an identifier.",
-              "schema": [
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "string"
-                }
-              ]
-            },
-            {
-              "name": "context",
-              "description": "Additional data passed by the user.",
-              "schema": {
-                "description": "Any data type."
-              },
-              "optional": true,
-              "default": null
-            }
-          ],
-          "returns": {
-            "description": "`true` if the dimension label should be kept in the data cube, otherwise `false`.",
-            "schema": {
-              "type": "boolean"
-            }
-          }
-        }
-      },
-      {
-        "name": "dimension",
-        "description": "The name of the dimension to filter on. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
-        "schema": {
-          "type": "string"
-        }
-      },
-      {
-        "name": "context",
-        "description": "Additional data to be passed to the condition.",
-        "schema": {
-          "description": "Any data type."
-        },
-        "optional": true,
-        "default": null
-      }
-    ],
-    "returns": {
-      "description": "A data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the given dimension has less (or the same) dimension labels.",
-      "schema": {
-        "type": "object",
-        "subtype": "datacube"
-      }
-    },
-    "exceptions": {
-      "DimensionNotAvailable": {
-        "message": "A dimension with the specified name does not exist."
-      }
-    },
-    "examples": [
-      {
-        "description": "Filters the data cube to only contain data from platform Sentinel-2A. This example assumes that the data cube has a dimension `platform` so that computations can distinguish between Sentinel-2A and Sentinel-2B data.",
-        "arguments": {
-          "data": {
-            "from_parameter": "sentinel2_data"
-          },
-          "condition": {
-            "process_graph": {
-              "eq": {
-                "process_id": "eq",
-                "arguments": {
-                  "x": {
-                    "from_parameter": "value"
-                  },
-                  "y": "Sentinel-2A",
-                  "case_sensitive": false
-                },
-                "result": true
-              }
-            }
-          },
-          "dimension": "platform"
-        }
-      }
-    ],
-    "links": [
-      {
-        "href": "https://openeo.org/documentation/1.0/datacubes.html#filter",
-        "rel": "about",
-        "title": "Filters explained in the openEO documentation"
-      }
-    ]
   },
   {
     "id": "filter_vector",
@@ -10494,63 +10546,6 @@
       },
       "TargetDimensionExists": {
         "message": "A dimension with the specified target dimension name already exists."
-      }
-    }
-  },
-  {
-    "id": "inspect",
-    "summary": "Add information to the logs",
-    "description": "This process can be used to add runtime information to the logs, e.g. for debugging purposes. This process should be used with caution and it is recommended to remove the process in production workflows. For example, logging each value or array individually in a process such as ``apply()`` or ``reduce_dimension()`` could lead to a (too) large number of log entries. Several data structures (e.g. data cubes) are too large to log and will only return summaries of their contents.\n\nThe data provided in the parameter `data` is returned without changes.",
-    "categories": [
-      "development"
-    ],
-    "experimental": true,
-    "parameters": [
-      {
-        "name": "data",
-        "description": "Data to log.",
-        "schema": {
-          "description": "Any data type is allowed."
-        }
-      },
-      {
-        "name": "message",
-        "description": "A message to send in addition to the data.",
-        "schema": {
-          "type": "string"
-        },
-        "default": "",
-        "optional": true
-      },
-      {
-        "name": "code",
-        "description": "A label to help identify one or more log entries originating from this process in the list of all log entries. It can help to group or filter log entries and is usually not unique.",
-        "schema": {
-          "type": "string"
-        },
-        "default": "User",
-        "optional": true
-      },
-      {
-        "name": "level",
-        "description": "The severity level of this message, defaults to `info`.",
-        "schema": {
-          "type": "string",
-          "enum": [
-            "error",
-            "warning",
-            "info",
-            "debug"
-          ]
-        },
-        "default": "info",
-        "optional": true
-      }
-    ],
-    "returns": {
-      "description": "The data as passed to the `data` parameter without any modification.",
-      "schema": {
-        "description": "Any data type is allowed."
       }
     }
   },
