@@ -10167,7 +10167,7 @@
       },
       {
         "name": "unit",
-        "description": "The unit for the returned value. The following units are available:\n\n- millisecond\n- second - leap seconds are ignored in computations.\n- minute\n- hour\n- day\n- month\n- year",
+        "description": "The unit for the returned value. The following units are available:\n\n- millisecond\n- second - leap seconds are ignored in computations.\n- minute\n- hour\n- day\n- week\n- month\n- year",
         "optional": true,
         "default": "second",
         "schema": {
@@ -10178,6 +10178,7 @@
             "minute",
             "hour",
             "day",
+            "week",
             "month",
             "year"
           ]
