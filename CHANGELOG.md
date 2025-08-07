@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `run_ogcapi`
 - `run_ogcapi_externally`
 - `stac_modify`
-- `text_position`
+- `text_find`
 
 ### Changed
 
