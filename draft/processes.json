@@ -11752,7 +11752,7 @@
       },
       {
         "name": "distance",
-        "description": "The distance of the buffer in meters. A positive distance expands the geometries, resulting in outward buffering (dilation), while a negative distance shrinks the geometries, resulting in inward buffering (erosion).\n\nIf the unit of the spatial reference system is not meters, a `UnitMismatch` error is thrown. Use ``vector_reproject()`` to convert the geometries to a suitable spatial reference system.",
+        "description": "The distance of the buffer in meters. A positive distance expands the geometries, resulting in outward buffering (dilation), while a negative distance shrinks the geometries, resulting in inward buffering (erosion).\n\nIf the unit of the spatial reference system is not meters, a `UnitMismatch` exception is thrown. Use ``vector_reproject()`` to convert the geometries to a suitable spatial reference system.",
         "schema": {
           "type": "number",
           "not": {
@@ -12000,7 +12000,7 @@
       },
       {
         "name": "distance",
-        "description": "Defines the minimum distance in meters that is required between two samples generated *inside* a single geometry. If the unit of the spatial reference system is not meters, a `UnitMismatch` error is thrown. Use ``vector_reproject()`` to convert the geometries to a suitable spatial reference system.\n\n- For **polygons**, the distance defines the cell sizes of a regular grid that starts at the upper-left bound of each polygon. The centroid of each cell is then a sample point. If the centroid is not enclosed in the polygon, no point is sampled. If no point can be sampled for the geometry at all, the first coordinate of the geometry is returned as point.\n- For **lines** (line strings), the sampling starts with a point at the first coordinate of the line and then walks along the line and samples a new point each time the distance to the previous point has been reached again.\n- For **points**, the point is returned as given.",
+        "description": "Defines the minimum distance in meters that is required between two samples generated *inside* a single geometry. If the unit of the spatial reference system is not meters, a `UnitMismatch` exception is thrown. Use ``vector_reproject()`` to convert the geometries to a suitable spatial reference system.\n\n- For **polygons**, the distance defines the cell sizes of a regular grid that starts at the upper-left bound of each polygon. The centroid of each cell is then a sample point. If the centroid is not enclosed in the polygon, no point is sampled. If no point can be sampled for the geometry at all, the first coordinate of the geometry is returned as point.\n- For **lines** (line strings), the sampling starts with a point at the first coordinate of the line and then walks along the line and samples a new point each time the distance to the previous point has been reached again.\n- For **points**, the point is returned as given.",
         "schema": {
           "type": "number",
           "minimumExclusive": 0
