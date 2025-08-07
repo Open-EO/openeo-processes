@@ -1,5 +1,5 @@
 {
-    "id": "create_cube",
+    "id": "create_data_cube",
     "summary": "Create an empty data cube",
     "description": "Creates a new data cube without dimensions. Dimensions can be added with ``add_dimension()``.",
     "categories": [

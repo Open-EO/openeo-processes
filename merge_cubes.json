@@ -24,7 +24,7 @@
         },
         {
             "name": "overlap_resolver",
-            "description": "A reduction operator that resolves the conflict if the data overlaps. The reducer must return a value of the same data type as the input values are. The reduction operator may be a single process such as ``multiply()`` or consist of multiple sub-processes. `null` (the default) can be specified if no overlap resolver is required.",
+            "description": "A reduction operator that resolves the conflict if the data overlaps. The reducer must return a value of the same data type as the input values are. The reduction operator may be a single process such as ``multiply()`` or consist of multiple sub-processes. The default value `null` can be specified if no overlap resolver is required.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
