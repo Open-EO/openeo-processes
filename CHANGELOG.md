@@ -9,12 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Implementation guide for implementing OGC API - Processes in openEO
-- `export_collection`
-- `export_workspace`
-- `run_ogcapi`
-- `run_ogcapi_externally`
-- `stac_modify`
 - `date_difference`: Allow `week` as a unit [#506](https://github.com/Open-EO/openeo-processes/issues/506)
+- `export_collection`: New process
+- `export_workspace`: New process
+- `run_ogcapi`: New process
+- `run_ogcapi_externally`: New process
+- `stac_modify`: New process
+- `text_find`: New process
 
 ### Changed
 
