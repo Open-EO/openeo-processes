@@ -98,7 +98,7 @@
         },
         {
             "name": "mask_value",
-            "description": "All pixels for which the point at the pixel center **does not** intersect with the polygon are replaced with the given value, which defaults to `null` (no data).\n\nIt can provide a distinction between no data values within the polygon and masked pixels outside of it.",
+            "description": "All pixels for which the point at the pixel center **does not** intersect with the polygon are replaced with the given value. The default value is `null`, which uses the no-data value of the data cube.\n\nThis parameter can provide a distinction between no-data values within the polygon and masked pixels outside of it.",
             "schema": [
                 {
                     "type": "number"

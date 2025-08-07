@@ -59,7 +59,7 @@
         },
         {
             "name": "labels",
-            "description": "The labels to predict values for. If no labels are given, predicts values only for no-data (`null`) values in the data cube.",
+            "description": "The labels to predict values for. If no labels are given, predicts values only for no-data values in the data cube.",
             "optional": true,
             "default": null,
             "schema": [

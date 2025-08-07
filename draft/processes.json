@@ -2,7 +2,7 @@
   {
     "id": "absolute",
     "summary": "Absolute value",
-    "description": "Computes the absolute value of a real number `x`, which is the \"unsigned\" portion of `x` and often denoted as *|x|*.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the absolute value of a real number `x`, which is the \"unsigned\" portion of `x` and often denoted as *|x|*.\n\nNo-data values are passed through.",
     "categories": [
       "math"
     ],
@@ -165,7 +165,7 @@
   {
     "id": "add",
     "summary": "Addition of two numbers",
-    "description": "Sums up the two numbers `x` and `y` (*`x + y`*) and returns the computed sum.\n\nNo-data values are taken into account so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it.",
+    "description": "Sums up the two numbers `x` and `y` (*`x + y`*) and returns the computed sum.\n\nNo-data values are taken into account so that the no-data value is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it.",
     "categories": [
       "math"
     ],
@@ -433,7 +433,7 @@
       },
       {
         "name": "reducer",
-        "description": "A reducer to be applied for the values contained in each period. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes. Periods may not contain any values, which for most reducers leads to no-data (`null`) values by default.",
+        "description": "A reducer to be applied for the values contained in each period. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes. Periods may not contain any values, which leads to a no-data value for most reducers by default.",
         "schema": {
           "type": "object",
           "subtype": "process-graph",
@@ -608,7 +608,7 @@
       },
       {
         "name": "reducer",
-        "description": "A reducer to be applied for the values contained in each interval. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes. Intervals may not contain any values, which for most reducers leads to no-data (`null`) values by default.",
+        "description": "A reducer to be applied for the values contained in each interval. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes. Intervals may not contain any values, which leads to a no-data value for most reducers by default.",
         "schema": {
           "type": "object",
           "subtype": "process-graph",
@@ -773,7 +773,7 @@
   {
     "id": "all",
     "summary": "Are all of the values true?",
-    "description": "Checks if **all** of the values in `data` are true. If no value is given (i.e. the array is empty) the process returns `null`.\n\nBy default all no-data values are ignored so that the process returns `null` if all values are no-data, `true` if all values are true and `false` otherwise. Setting the `ignore_nodata` flag to `false` takes no-data values into account and the array values are reduced pairwise according to the following truth table:\n\n```\n      || null  | false | true\n----- || ----- | ----- | -----\nnull  || null  | false | null\nfalse || false | false | false\ntrue  || null  | false | true\n```\n\n**Remark:** The process evaluates all values from the first to the last element and stops once the outcome is unambiguous. A result is ambiguous unless a value is `false` or all values have been taken into account.",
+    "description": "Checks if **all** of the values in `data` are true. If no value is given (i.e. the array is empty) the process returns  the no-data value (or `null`).\n\nBy default all no-data values are ignored so that the process returns the no-data value (or `null`) if all values are no-data, `true` if all values are true and `false` otherwise. Setting the `ignore_nodata` flag to `false` takes no-data values into account and the array values are reduced pairwise according to the following truth table:\n\n```\n        || no-data | false | true\n------- || ------- | ----- | -------\nno-data || no-data | false | no-data\nfalse   || false   | false | false\ntrue    || no-data | false | true\n```\n\n**Remark:** The process evaluates all values from the first to the last element and stops once the outcome is unambiguous. A result is ambiguous unless a value is `false` or all values have been taken into account.",
     "categories": [
       "logic",
       "reducer"
@@ -794,7 +794,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not and ignores them by default.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default.",
         "schema": {
           "type": "boolean"
         },
@@ -907,7 +907,7 @@
   {
     "id": "and",
     "summary": "Logical AND",
-    "description": "Checks if **both** values are true.\n\nEvaluates parameter `x` before `y` and stops once the outcome is unambiguous. If any argument is `null`, the result will be `null` if the outcome is ambiguous.\n\n**Truth table:**\n\n```\nx \\ y || null  | false | true\n----- || ----- | ----- | -----\nnull  || null  | false | null\nfalse || false | false | false\ntrue  || null  | false | true\n```",
+    "description": "Checks if **both** values are true.\n\nEvaluates parameter `x` before `y` and stops once the outcome is unambiguous. If any argument is a no-data value, the result will be the no-data value whenever the outcome is ambiguous.\n\n**Truth table:**\n\n```\nx \\ y   || no-data | false | true\n------- || ------- | ----- | -------\nno-data || no-data | false | no-data\nfalse   || false   | false | false\ntrue    || no-data | false | true\n```",
     "categories": [
       "logic"
     ],
@@ -1071,7 +1071,7 @@
   {
     "id": "any",
     "summary": "Is at least one value true?",
-    "description": "Checks if **any** (i.e. at least one) value in `data` is `true`. If no value is given (i.e. the array is empty) the process returns `null`.\n\nBy default all no-data values are ignored so that the process returns `null` if all values are no-data, `true` if at least one value is true and `false` otherwise. Setting the `ignore_nodata` flag to `false` takes no-data values into account and the array values are reduced pairwise according to the following truth table:\n\n```\n      || null | false | true\n----- || ---- | ----- | ----\nnull  || null | null  | true\nfalse || null | false | true\ntrue  || true | true  | true\n```\n\n**Remark:** The process evaluates all values from the first to the last element and stops once the outcome is unambiguous. A result is ambiguous unless a value is `true`.",
+    "description": "Checks if **any** (i.e. at least one) value in `data` is `true`. If no value is given (i.e. the array is empty) the process returns the no-data value (or `null`).\n\nBy default all no-data values are ignored so that the process returns the no-data value (or `null`) if all values are no-data, `true` if at least one value is true and `false` otherwise. Setting the `ignore_nodata` flag to `false` takes no-data values into account and the array values are reduced pairwise according to the following truth table:\n\n```\n        || no-data | false   | true\n------- || ------- | ------- | ----\nno-data || no-data | no-data | true\nfalse   || no-data | false   | true\ntrue    || true    | true    | true\n```\n\n**Remark:** The process evaluates all values from the first to the last element and stops once the outcome is unambiguous. A result is ambiguous unless a value is `true`.",
     "categories": [
       "logic",
       "reducer"
@@ -1092,7 +1092,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not and ignores them by default.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default.",
         "schema": {
           "type": "boolean"
         },
@@ -1428,7 +1428,7 @@
   {
     "id": "apply_neighborhood",
     "summary": "Apply a process to pixels in a n-dimensional neighborhood",
-    "description": "Applies a focal process to a data cube.\n\nA focal process is a process that works on a 'neighborhood' of pixels. The neighborhood can extend into multiple dimensions, this extent is specified by the `size` argument. It is not only (part of) the size of the input window, but also the size of the output for a given position of the sliding window. The sliding window moves with multiples of `size`.\n\nAn overlap can be specified so that neighborhoods can have overlapping boundaries. This allows for continuity of the output. The overlap region must be included in the data cube or array returned by `process`, but any changed values will be ignored. The missing overlap at the borders of the original data cube is made available as no-data (`null`) in the sub-data cubes.\n\nThe neighborhood size should be kept small enough, to avoid running beyond computational resources, but a too-small size will result in a larger number of process invocations, which may slow down processing. Window sizes for spatial dimensions typically range from 64 to 512 pixels, while overlaps of 8 to 32 pixels are common.\n\nFor the special case of 2D convolution, it is recommended to use ``apply_kernel()``.",
+    "description": "Applies a focal process to a data cube.\n\nA focal process is a process that works on a 'neighborhood' of pixels. The neighborhood can extend into multiple dimensions, this extent is specified by the `size` argument. It is not only (part of) the size of the input window, but also the size of the output for a given position of the sliding window. The sliding window moves with multiples of `size`.\n\nAn overlap can be specified so that neighborhoods can have overlapping boundaries. This allows for continuity of the output. The overlap region must be included in the data cube or array returned by `process`, but any changed values will be ignored. The missing overlap at the borders of the original data cube is made available as no-data values in the sub-data cubes.\n\nThe neighborhood size should be kept small enough, to avoid running beyond computational resources, but a too-small size will result in a larger number of process invocations, which may slow down processing. Window sizes for spatial dimensions typically range from 64 to 512 pixels, while overlaps of 8 to 32 pixels are common.\n\nFor the special case of 2D convolution, it is recommended to use ``apply_kernel()``.",
     "categories": [
       "cubes"
     ],
@@ -1816,7 +1816,7 @@
   {
     "id": "arccos",
     "summary": "Inverse cosine",
-    "description": "Computes the arc cosine of `x`. The arc cosine is the inverse function of the cosine so that *`arccos(cos(x)) = x`*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated. `NaN` is returned for values outside of the allowed range.",
+    "description": "Computes the arc cosine of `x`. The arc cosine is the inverse function of the cosine so that *`arccos(cos(x)) = x`*.\n\nWorks on radians only.\nNo-data values are passed through. `NaN` is returned for values < -1 and > 1.",
     "categories": [
       "math > trigonometric"
     ],
@@ -1863,7 +1863,7 @@
   {
     "id": "arcosh",
     "summary": "Inverse hyperbolic cosine",
-    "description": "Computes the inverse hyperbolic cosine of `x`. It is the inverse function of the hyperbolic cosine so that *`arcosh(cosh(x)) = x`*.\n\nThe no-data value `null` is passed through and therefore gets propagated. `NaN` is returned for values outside of the allowed range.",
+    "description": "Computes the inverse hyperbolic cosine of `x`. It is the inverse function of the hyperbolic cosine so that *`arcosh(cosh(x)) = x`*.\n\nNo-data values are passed through. `NaN` is returned for values outside of the allowed range.",
     "categories": [
       "math > trigonometric"
     ],
@@ -1909,7 +1909,7 @@
   {
     "id": "arcsin",
     "summary": "Inverse sine",
-    "description": "Computes the arc sine of `x`. The arc sine is the inverse function of the sine so that *`arcsin(sin(x)) = x`*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated. `NaN` is returned for values < -1 and > 1.",
+    "description": "Computes the arc sine of `x`. The arc sine is the inverse function of the sine so that *`arcsin(sin(x)) = x`*.\n\nWorks on radians only.\nNo-data values are passed through. `NaN` is returned for values < -1 and > 1.",
     "categories": [
       "math > trigonometric"
     ],
@@ -1955,7 +1955,7 @@
   {
     "id": "arctan",
     "summary": "Inverse tangent",
-    "description": "Computes the arc tangent of `x`. The arc tangent is the inverse function of the tangent so that *`arctan(tan(x)) = x`*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the arc tangent of `x`. The arc tangent is the inverse function of the tangent so that *`arctan(tan(x)) = x`*.\n\nWorks on radians only.\nNo-data values are passed through.",
     "categories": [
       "math > trigonometric"
     ],
@@ -1999,7 +1999,7 @@
   {
     "id": "arctan2",
     "summary": "Inverse tangent of two numbers",
-    "description": "Computes the arc tangent of two numbers `x` and `y`. It is similar to calculating the arc tangent of *`y / x`*, except that the signs of both arguments are used to determine the quadrant of the result.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated if any of the arguments is `null`.",
+    "description": "Computes the arc tangent of two numbers `x` and `y`. It is similar to calculating the arc tangent of *`y / x`*, except that the signs of both arguments are used to determine the quadrant of the result.\n\nWorks on radians only.\nIf any argument is a no-data value, the result will be the no-data value (or `null`).",
     "categories": [
       "math > trigonometric"
     ],
@@ -2315,7 +2315,7 @@
   {
     "id": "array_contains",
     "summary": "Check whether the array contains a given value",
-    "description": "Checks whether the array specified for `data` contains the value specified in `value`. Returns `true` if there's a match, otherwise `false`.\n\n**Remarks:**\n\n* To get the index or the label of the value found, use ``array_find()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. A `null` return value from ``eq()`` is handled exactly as `false` (no match).\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating-point numbers due to floating-point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.",
+    "description": "Checks whether the array specified for `data` contains the value specified in `value`. Returns `true` if there's a match, otherwise `false`.\n\n**Remarks:**\n\n* To get the index or the label of the value found, use ``array_find()``.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. A no-data return value from ``eq()`` is handled as `false` (no match).\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating-point numbers due to floating-point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.\n\nSee the examples to check for no-data values.",
     "categories": [
       "arrays",
       "comparison",
@@ -2334,7 +2334,7 @@
       },
       {
         "name": "value",
-        "description": "Value to find in `data`. If the value is `null`, this process returns always `false`.",
+        "description": "Value to find in `data`. If the value is no-data value (or `null`), this process returns always `false`.",
         "schema": {
           "type": [
             "number",
@@ -2589,7 +2589,7 @@
       },
       {
         "name": "return_nodata",
-        "description": "By default this process throws an `ArrayElementNotAvailable` exception if the index or label is invalid. If you want to return `null` instead, set this flag to `true`.",
+        "description": "By default this process throws an `ArrayElementNotAvailable` exception if the index or label is invalid. If you want to return the no-data value (or `null`) instead, set this flag to `true`.",
         "schema": {
           "type": "boolean"
         },
@@ -2751,7 +2751,7 @@
   {
     "id": "array_find",
     "summary": "Get the index for a value in an array",
-    "description": "Returns the zero-based index of the first (or last) occurrence of the value specified by `value` in the array specified by `data` or `null` if there is no match. Use the parameter `reverse` to switch from the first to the last match.\n\n**Remarks:**\n\n* Use ``array_contains()`` to check if an array contains a value regardless of the position.\n* Use ``array_find_label()`` to find the index for a label.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. A `null` return value from ``eq()`` is handled exactly as `false` (no match).\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating-point numbers due to floating-point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.\n* If the specified value is an array, object or null, the process always returns `null`. See the examples for one to find `null` values.",
+    "description": "Returns the zero-based index of the first (or last) occurrence of the value specified by `value` in the array specified by `data` or the no-data value (or `null`) if there is no match. Use the parameter `reverse` to switch from the first to the last match.\n\n**Remarks:**\n\n* Use ``array_contains()`` to check if an array contains a value regardless of the position.\n* Use ``array_find_label()`` to find the index for a label.\n* All definitions for the process ``eq()`` regarding the comparison of values apply here as well. A no-data return value from ``eq()`` is handled as `false` (no match).\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*.\n* An integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`. Still, this process may return unexpectedly `false` when comparing floating-point numbers due to floating-point inaccuracy in machine-based computation.\n* Temporal strings are treated as normal strings and MUST NOT be interpreted.\n* If the specified value is an array, object or null, the process always returns the no-data value (or `null`). See the examples to find no-data values.",
     "categories": [
       "arrays",
       "reducer"
@@ -2769,7 +2769,7 @@
       },
       {
         "name": "value",
-        "description": "Value to find in `data`. If the value is `null`, this process returns always `null`.",
+        "description": "Value to find in `data`. If the value is a no-data value (or `null`), this process returns the no-data value (or `null`).",
         "schema": {
           "description": "Any data type is allowed."
         }
@@ -2785,7 +2785,7 @@
       }
     ],
     "returns": {
-      "description": "The index of the first element with the specified value. If no element was found, `null` is returned.",
+      "description": "The index of the first element with the specified value. If no element was found, the no-data value (or `null`) is returned.",
       "schema": [
         {
           "type": "null"
@@ -2843,18 +2843,6 @@
             3
           ],
           "value": "2"
-        },
-        "returns": null
-      },
-      {
-        "arguments": {
-          "data": [
-            1,
-            null,
-            2,
-            null
-          ],
-          "value": null
         },
         "returns": null
       },
@@ -2922,7 +2910,7 @@
   {
     "id": "array_interpolate_linear",
     "summary": "One-dimensional linear interpolation for arrays",
-    "description": "Performs a linear interpolation for each of the no-data values (`null`) in the array given, except for leading and trailing no-data values.\n\nThe linear interpolants are defined by the array indices or labels (x) and the values in the array (y).",
+    "description": "Performs a linear interpolation for each of the NaN and no-data values in the array given, except for leading and trailing NaN and no-data values.\n\nThe linear interpolants are defined by the array indices or labels (x axis) and the values in the array (y axis).",
     "categories": [
       "arrays",
       "math",
@@ -2931,7 +2919,7 @@
     "parameters": [
       {
         "name": "data",
-        "description": "An array of numbers and no-data values.\n\nIf the given array is a labeled array, the labels must have a natural/inherent label order and the process expects the labels to be sorted accordingly. This is the default behavior in openEO for spatial and temporal dimensions.",
+        "description": "An array of numbers, which may include NaN, ±infinity, and no-data values.\n\nIf the given array is a labeled array, the labels must have a natural/inherent label order and the process expects the labels to be sorted accordingly. This is the default behavior in openEO for spatial and temporal dimensions.",
         "schema": {
           "type": "array",
           "items": {
@@ -2944,7 +2932,7 @@
       }
     ],
     "returns": {
-      "description": "An array with no-data values being replaced with interpolated values. If not at least 2 numerical values are available in the array, the array stays the same.",
+      "description": "An array with NaN and no-data values being replaced with interpolated values. If not at least 2 numerical values are available in the array, the array stays the same.",
       "schema": {
         "type": "array",
         "items": {
@@ -3033,7 +3021,7 @@
   {
     "id": "arsinh",
     "summary": "Inverse hyperbolic sine",
-    "description": "Computes the inverse hyperbolic sine of `x`. It is the inverse function of the hyperbolic sine so that *`arsinh(sinh(x)) = x`*.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the inverse hyperbolic sine of `x`. It is the inverse function of the hyperbolic sine so that *`arsinh(sinh(x)) = x`*.\n\nNo-data values are passed through.",
     "categories": [
       "math > trigonometric"
     ],
@@ -3077,7 +3065,7 @@
   {
     "id": "artanh",
     "summary": "Inverse hyperbolic tangent",
-    "description": "Computes the inverse hyperbolic tangent of `x`. It is the inverse function of the hyperbolic tangent so that *`artanh(tanh(x)) = x`*.\n\nThe no-data value `null` is passed through and therefore gets propagated. `NaN` is returned for values outside of the allowed range. The computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, `x` = 1 results in +infinity and `x` = 0 results in -infinity. Otherwise, an exception is thrown.",
+    "description": "Computes the inverse hyperbolic tangent of `x`. It is the inverse function of the hyperbolic tangent so that *`artanh(tanh(x)) = x`*.\n\nNo-data values are passed through. `NaN` is returned for values outside of the allowed range. The computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, `x` = 1 results in +infinity and `x` = 0 results in -infinity. Otherwise, an exception is thrown.",
     "categories": [
       "math > trigonometric"
     ],
@@ -3135,7 +3123,7 @@
     "parameters": [
       {
         "name": "x",
-        "description": "The value to check.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+        "description": "The value to check.\n\nNo-data values are passed through.",
         "schema": {
           "description": "Any data type is allowed."
         }
@@ -3165,7 +3153,7 @@
       }
     ],
     "returns": {
-      "description": "`true` if `x` is between the specified bounds, `null` if `x` is a no-data value, `false` otherwise.",
+      "description": "`true` if `x` is between the specified bounds, the no-data value (or `null`) if `x` is a no-data value, `false` otherwise.",
       "schema": {
         "type": [
           "boolean",
@@ -3282,7 +3270,7 @@
   {
     "id": "ceil",
     "summary": "Round fractions up",
-    "description": "The least integer greater than or equal to the number `x`.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "The least integer greater than or equal to the number `x`.\n\nNo-data values are passed through.",
     "categories": [
       "math > rounding"
     ],
@@ -3420,7 +3408,7 @@
   {
     "id": "clip",
     "summary": "Clip a value between a minimum and a maximum",
-    "description": "Clips a number between specified minimum and maximum values. A value larger than the maximum value is set to the maximum value, a value lower than the minimum value is set to the minimum value. If the maximum value is smaller than the minimum number, the process throws a `MinMaxSwapped` exception.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Clips a number between specified minimum and maximum values. A value larger than the maximum value is set to the maximum value, a value lower than the minimum value is set to the minimum value. If the maximum value is smaller than the minimum number, the process throws a `MinMaxSwapped` exception.\n\nNo-data values are passed through.",
     "categories": [
       "math"
     ],
@@ -3525,7 +3513,7 @@
   {
     "id": "cos",
     "summary": "Cosine",
-    "description": "Computes the cosine of `x`.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the cosine of `x`.\n\nWorks on radians only.\nNo-data values are passed through.",
     "categories": [
       "math > trigonometric"
     ],
@@ -3571,7 +3559,7 @@
   {
     "id": "cosh",
     "summary": "Hyperbolic cosine",
-    "description": "Computes the hyperbolic cosine of `x`.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the hyperbolic cosine of `x`.\n\nNo-data values are passed through.",
     "categories": [
       "math > trigonometric"
     ],
@@ -3831,7 +3819,7 @@
   {
     "id": "divide",
     "summary": "Division of two numbers",
-    "description": "Divides argument `x` by the argument `y` (*`x / y`*) and returns the computed result.\n\nNo-data values are taken into account so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. A division by zero results in:\n\n- +infinity for `x` > 0,\n- -infinity for `x` < 0,\n- `NaN` for `x` = 0,\n- or otherwise, throws a `DivisionByZero` exception if the other options are not supported by the processing environment.",
+    "description": "Divides argument `x` by the argument `y` (*`x / y`*) and returns the computed result.\n\nNo-data values are taken into account so that the no-data value is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. A division by zero results in:\n\n- +infinity for `x` > 0,\n- -infinity for `x` < 0,\n- `NaN` for `x` = 0,\n- or otherwise, throws a `DivisionByZero` exception if the other options are not supported by the processing environment.",
     "categories": [
       "math"
     ],
@@ -3973,7 +3961,7 @@
   {
     "id": "eq",
     "summary": "Equal to comparison",
-    "description": "Compares whether `x` is strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
+    "description": "Compares whether `x` is strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is a no-data value, the result will be the no-data value (or `null`).\n* The comparison of `NaN` (not a number) follows [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229).\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
     "categories": [
       "texts",
       "comparison"
@@ -4027,7 +4015,7 @@
       }
     ],
     "returns": {
-      "description": "`true` if `x` is equal to `y`, `null` if any operand is `null`, otherwise `false`.",
+      "description": "`true` if `x` is equal to `y`, the no-data value (or `null`) if any operand is a no-data value, otherwise `false`.",
       "schema": {
         "type": [
           "boolean",
@@ -4039,13 +4027,6 @@
       {
         "arguments": {
           "x": 1,
-          "y": null
-        },
-        "returns": null
-      },
-      {
-        "arguments": {
-          "x": null,
           "y": null
         },
         "returns": null
@@ -4124,20 +4105,20 @@
           "y": "2018-01-01T00:00:00+00:00"
         },
         "returns": false
-      },
+      }
+    ],
+    "links": [
       {
-        "arguments": {
-          "x": null,
-          "y": null
-        },
-        "returns": null
+        "rel": "about",
+        "href": "https://ieeexplore.ieee.org/document/4610935",
+        "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
       }
     ]
   },
   {
     "id": "exp",
     "summary": "Exponentiation to the base e",
-    "description": "Exponential function to the base *e* raised to the power of `p`.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Exponential function to the base *e* raised to the power of `p`.\n\nNo-data values are passed through.",
     "categories": [
       "math > exponential & logarithmic"
     ],
@@ -4226,7 +4207,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that an array with two `null` values is returned if any value is such a value.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, any no-data value in the array results in an array with two no-data (or `null`) values.",
         "schema": {
           "type": "boolean"
         },
@@ -4235,7 +4216,7 @@
       }
     ],
     "returns": {
-      "description": "An array containing the minimum and maximum values for the specified numbers. The first element is the minimum, the second element is the maximum. If the input array is empty both elements are set to `null`.",
+      "description": "An array containing the minimum and maximum values for the specified numbers. The first element is the minimum, the second element is the maximum. If the input array is empty both elements are set to the no-data value (or `null`).",
       "schema": [
         {
           "type": "array",
@@ -4294,16 +4275,6 @@
             2
           ],
           "ignore_nodata": false
-        },
-        "returns": [
-          null,
-          null
-        ]
-      },
-      {
-        "description": "The input array is empty: return two `null` values.",
-        "arguments": {
-          "data": []
         },
         "returns": [
           null,
@@ -4578,7 +4549,7 @@
   {
     "id": "filter_spatial",
     "summary": "Spatial filter raster data cubes using geometries",
-    "description": "Limits the raster data cube over the spatial dimensions to the specified geometries.\n\n- For **polygons**, the filter retains a pixel in the data cube if the point at the pixel center intersects with at least one of the polygons (as defined in the Simple Features standard by the OGC).\n- For **points**, the process considers the closest pixel center.\n- For **lines** (line strings), the process considers all the pixels whose centers are closest to at least one point on the line.\n\nMore specifically, pixels outside of the bounding box of the given geometries will not be available after filtering. All pixels inside the bounding box that are not retained will be set to `null` (no data).\n\n Alternatively, use ``filter_bbox()`` to filter with a bounding box or ``filter_vector()`` to filter a vector data cube based on geometries. Use ``mask_polygon()`` to mask without changing the spatial extent of your data cube.",
+    "description": "Limits the raster data cube over the spatial dimensions to the specified geometries.\n\n- For **polygons**, the filter retains a pixel in the data cube if the point at the pixel center intersects with at least one of the polygons (as defined in the Simple Features standard by the OGC).\n- For **points**, the process considers the closest pixel center.\n- For **lines** (line strings), the process considers all the pixels whose centers are closest to at least one point on the line.\n\nMore specifically, pixels outside of the bounding box of the given geometries will not be available after filtering. All pixels inside the bounding box that are not retained will be set to no-data values.\n\n Alternatively, use ``filter_bbox()`` to filter with a bounding box or ``filter_vector()`` to filter a vector data cube based on geometries. Use ``mask_polygon()`` to mask without changing the spatial extent of your data cube.",
     "categories": [
       "cubes",
       "filter"
@@ -4764,7 +4735,7 @@
   {
     "id": "first",
     "summary": "First element",
-    "description": "Gives the first element of an array.\n\nAn array without non-`null` elements resolves always with `null`.",
+    "description": "Gives the first element of an array.\n\nAn array with solely no-data values returns the no-data value (or `null`).",
     "categories": [
       "arrays",
       "reducer"
@@ -4782,7 +4753,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is returned if the first value is such a value.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, the first value of the array is returned regardless of whether it is a no-data value or not. For the default value `true`, the first non-no-data value is returned.",
         "schema": {
           "type": "boolean"
         },
@@ -4828,20 +4799,13 @@
           "ignore_nodata": false
         },
         "returns": null
-      },
-      {
-        "description": "The input array is empty: return `null`.",
-        "arguments": {
-          "data": []
-        },
-        "returns": null
       }
     ]
   },
   {
     "id": "floor",
     "summary": "Round fractions down",
-    "description": "The greatest integer less than or equal to the number `x`.\n\nThis process is *not* an alias for the ``int()`` process as defined by some mathematicians, see the examples for negative numbers in both processes for differences.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "The greatest integer less than or equal to the number `x`.\n\nThis process is *not* an alias for the ``int()`` process as defined by some mathematicians, see the examples for negative numbers in both processes for differences.\n\nNo-data values are passed through.",
     "categories": [
       "math > rounding"
     ],
@@ -4903,7 +4867,7 @@
   {
     "id": "gt",
     "summary": "Greater than comparison",
-    "description": "Compares whether `x` is strictly greater than `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is not a `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
+    "description": "Compares whether `x` is strictly greater than `y`.\n\n**Remarks:**\n\n* If any operand is a no-data value, the result will be the no-data value (or `null`).\n* The comparison of `NaN` (not a number) follows [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229).\n* If any operand is not the data type `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
     "categories": [
       "comparison"
     ],
@@ -4934,7 +4898,7 @@
       }
     ],
     "returns": {
-      "description": "`true` if `x` is strictly greater than `y` or `null` if any operand is `null`, otherwise `false`.",
+      "description": "`true` if `x` is strictly greater than `y`, the no-data value (or `null`) if any operand is a no-data value, otherwise `false`.",
       "schema": {
         "type": [
           "boolean",
@@ -4991,20 +4955,20 @@
           "y": false
         },
         "returns": false
-      },
+      }
+    ],
+    "links": [
       {
-        "arguments": {
-          "x": null,
-          "y": null
-        },
-        "returns": null
+        "rel": "about",
+        "href": "https://ieeexplore.ieee.org/document/4610935",
+        "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
       }
     ]
   },
   {
     "id": "gte",
     "summary": "Greater than or equal to comparison",
-    "description": "Compares whether `x` is greater than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If the operands are not equal (see process ``eq()``) and any of them is not a `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
+    "description": "Compares whether `x` is greater than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is a no-data value, the result will be the no-data value (or `null`).\n* The comparison of `NaN` (not a number) follows [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229).\n* If the operands are not equal (see process ``eq()``) and any of them is not the data type `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
     "categories": [
       "comparison"
     ],
@@ -5035,7 +4999,7 @@
       }
     ],
     "returns": {
-      "description": "`true` if `x` is greater than or equal to `y`, `null` if any operand is `null`, otherwise `false`.",
+      "description": "`true` if `x` is greater than or equal to `y`, the no-data value (or `null`) if any operand is a no-data value, otherwise `false`.",
       "schema": {
         "type": [
           "boolean",
@@ -5085,13 +5049,13 @@
           "y": false
         },
         "returns": false
-      },
+      }
+    ],
+    "links": [
       {
-        "arguments": {
-          "x": null,
-          "y": null
-        },
-        "returns": null
+        "rel": "about",
+        "href": "https://ieeexplore.ieee.org/document/4610935",
+        "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
       }
     ],
     "process_graph": {
@@ -5160,7 +5124,7 @@
       },
       {
         "name": "reject",
-        "description": "A value that is returned if the boolean value is **not** `true`. Defaults to `null`.",
+        "description": "A value that is returned if the boolean value is **not** `true`. Defaults to the no-data value (or `null`).",
         "schema": {
           "description": "Any data type is allowed."
         },
@@ -5230,7 +5194,7 @@
   {
     "id": "int",
     "summary": "Integer part of a number",
-    "description": "The integer part of the real number `x`.\n\nThis process is *not* an alias for the ``floor()`` process as defined by some mathematicians, see the examples for negative numbers in both processes for differences.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "The integer part of the real number `x`.\n\nThis process is *not* an alias for the ``floor()`` process as defined by some mathematicians, see the examples for negative numbers in both processes for differences.\n\nNo-data values are passed through.",
     "categories": [
       "math",
       "math > rounding"
@@ -5349,7 +5313,7 @@
   {
     "id": "is_nodata",
     "summary": "Value is a no-data value",
-    "description": "Checks whether the specified data is missing data, i.e. equals to `null` or any of the no-data values specified in the metadata.\n\nThe special numerical value `NaN` (not a number) as defined by the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) is only considered as no-data value if specified as no-data value in the metadata.",
+    "description": "Checks whether the specified data is no-data value, i.e. equals to any of the no-data values of the data cube (or `null`). The specific no-data values are usually provided through the collection or STAC metadata.\n\nThe special numerical value `NaN` (not a number) as defined by the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) is only considered as no-data value if explicitly specified as no-data value for the data cube.",
     "categories": [
       "comparison"
     ],
@@ -5460,7 +5424,7 @@
   {
     "id": "last",
     "summary": "Last element",
-    "description": "Gives the last element of an array.\n\nAn array without non-`null` elements resolves always with `null`.",
+    "description": "Gives the last element of an array.\n\nAn array with solely no-data values returns the no-data value (or `null`).",
     "categories": [
       "arrays",
       "reducer"
@@ -5478,7 +5442,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is returned if the last value is such a value.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, the last value of the array is returned regardless of whether it is a no-data value or not. For the default value `true`, the last non-no-data value is returned.",
         "schema": {
           "type": "boolean"
         },
@@ -5524,20 +5488,13 @@
           "ignore_nodata": false
         },
         "returns": null
-      },
-      {
-        "description": "The input array is empty: return `null`.",
-        "arguments": {
-          "data": []
-        },
-        "returns": null
       }
     ]
   },
   {
     "id": "linear_scale_range",
     "summary": "Linear transformation between two ranges",
-    "description": "Performs a linear transformation between the input and output range.\n\nThe given number in `x` is clipped to the bounds specified in `inputMin` and `inputMax` so that the underlying formula *`((x - inputMin) / (inputMax - inputMin)) * (outputMax - outputMin) + outputMin`* never returns a value outside of the range defined by `outputMin` and `outputMax`.\n\nPotential use case include\n\n* scaling values to the 8-bit range (0 - 255) often used for numeric representation of values in one of the channels of the [RGB colour model](https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations) or\n* calculating percentages (0 - 100).\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Performs a linear transformation between the input and output range.\n\nThe given number in `x` is clipped to the bounds specified in `inputMin` and `inputMax` so that the underlying formula *`((x - inputMin) / (inputMax - inputMin)) * (outputMax - outputMin) + outputMin`* never returns a value outside of the range defined by `outputMin` and `outputMax`.\n\nPotential use case include\n\n* scaling values to the 8-bit range (0 - 255) often used for numeric representation of values in one of the channels of the [RGB colour model](https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations) or\n* calculating percentages (0 - 100).\n\nNo-data values are passed through.",
     "categories": [
       "math"
     ],
@@ -5706,7 +5663,7 @@
   {
     "id": "ln",
     "summary": "Natural logarithm",
-    "description": "The natural logarithm is the logarithm to the base *e* of the number `x`, which equals to using the *log* process with the base set to *e*. The natural logarithm is the inverse function of taking *e* to the power x.\n\nThe no-data value `null` is passed through.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, *`ln(0)`* results in -infinity if the processing environment supports it or otherwise an exception is thrown. `NaN` is returned for values outside of the allowed range.",
+    "description": "The natural logarithm is the logarithm to the base *e* of the number `x`, which equals to using the *log* process with the base set to *e*. The natural logarithm is the inverse function of taking *e* to the power x.\n\nNo-data values are passed through.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, *`ln(0)`* results in -infinity if the processing environment supports it or otherwise an exception is thrown. `NaN` is returned for values outside of the allowed range.",
     "categories": [
       "math > exponential & logarithmic"
     ],
@@ -5860,14 +5817,14 @@
           },
           {
             "title": "GeoJSON",
-            "description": "Deprecated in favor of ``load_geojson()``. Limits the data cube to the bounding box of the given geometries. For raster data, all pixels inside the bounding box that do not intersect with any of the polygons will be set to no data (`null`).\n\nThe GeoJSON type `GeometryCollection` is not supported. Empty geometries are ignored.",
+            "description": "Deprecated in favor of ``load_geojson()``. Limits the data cube to the bounding box of the given geometries. For raster data, all pixels inside the bounding box that do not intersect with any of the polygons will be set to the no-data value of the data cube.\n\nThe GeoJSON type `GeometryCollection` is not supported. Empty geometries are ignored.",
             "type": "object",
             "subtype": "geojson",
             "deprecated": true
           },
           {
             "title": "Vector data cube",
-            "description": "Limits the data cube to the bounding box of the given geometries in the vector data cube. For raster data, all pixels inside the bounding box that do not intersect with any of the polygons will be set to no data (`null`). Empty geometries are ignored.",
+            "description": "Limits the data cube to the bounding box of the given geometries in the vector data cube. For raster data, all pixels inside the bounding box that do not intersect with any of the polygons will be set to the no-data value of the data cube. Empty geometries are ignored.",
             "type": "object",
             "subtype": "datacube",
             "dimensions": [
@@ -6096,7 +6053,7 @@
   {
     "id": "log",
     "summary": "Logarithm to a base",
-    "description": "Logarithm to the base `base` of the number `x` is defined to be the inverse function of taking b to the power of x.\n\nThe no-data value `null` is passed through and therefore gets propagated if any of the arguments is `null`.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, having `x` set to `0` with any base results in -infinity if the processing environment supports it or otherwise an exception is thrown. `NaN` is returned for values outside of the allowed range.",
+    "description": "Logarithm to the base `base` of the number `x` is defined to be the inverse function of taking b to the power of x.\n\nIf any argument is a no-data value, the result will be the no-data value (or `null`).\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, having `x` set to `0` with any base results in -infinity if the processing environment supports it or otherwise an exception is thrown. `NaN` is returned for values outside of the allowed range.",
     "categories": [
       "math > exponential & logarithmic"
     ],
@@ -6178,7 +6135,7 @@
   {
     "id": "lt",
     "summary": "Less than comparison",
-    "description": "Compares whether `x` is strictly less than `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If any operand is not a `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
+    "description": "Compares whether `x` is strictly less than `y`.\n\n**Remarks:**\n\n* If any operand is a no-data value, the result will be the no-data value (or `null`).\n* The comparison of `NaN` (not a number) follows [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229).\n* If any operand is not the data type `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
     "categories": [
       "comparison"
     ],
@@ -6209,7 +6166,7 @@
       }
     ],
     "returns": {
-      "description": "`true` if `x` is strictly less than `y`, `null` if any operand is `null`, otherwise `false`.",
+      "description": "`true` if `x` is strictly less than `y`, the no-data value (or `null`) if any operand is a no-data value, otherwise `false`.",
       "schema": {
         "type": [
           "boolean",
@@ -6266,20 +6223,20 @@
           "y": true
         },
         "returns": false
-      },
+      }
+    ],
+    "links": [
       {
-        "arguments": {
-          "x": null,
-          "y": null
-        },
-        "returns": null
+        "rel": "about",
+        "href": "https://ieeexplore.ieee.org/document/4610935",
+        "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
       }
     ]
   },
   {
     "id": "lte",
     "summary": "Less than or equal to comparison",
-    "description": "Compares whether `x` is less than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is `null`, the return value is `null`.\n* If the operands are not equal (see process ``eq()``) and any of them is not a `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
+    "description": "Compares whether `x` is less than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is a no-data value, the result will be the no-data value (or `null`).\n* The comparison of `NaN` (not a number) follows [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229).\n* If the operands are not equal (see process ``eq()``) and any of them is not the data type `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
     "categories": [
       "comparison"
     ],
@@ -6310,7 +6267,7 @@
       }
     ],
     "returns": {
-      "description": "`true` if `x` is less than or equal to `y`, `null` if any operand is `null`, otherwise `false`.",
+      "description": "`true` if `x` is less than or equal to `y`, the no-data value (or `null`) if any operand is a no-data value, otherwise `false`.",
       "schema": {
         "type": [
           "boolean",
@@ -6360,13 +6317,13 @@
           "y": true
         },
         "returns": false
-      },
+      }
+    ],
+    "links": [
       {
-        "arguments": {
-          "x": null,
-          "y": null
-        },
-        "returns": null
+        "rel": "about",
+        "href": "https://ieeexplore.ieee.org/document/4610935",
+        "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
       }
     ],
     "process_graph": {
@@ -6409,7 +6366,7 @@
   {
     "id": "mask_polygon",
     "summary": "Apply a polygon mask",
-    "description": "Applies a (multi) polygon mask to a raster data cube. To apply a raster mask use ``mask()``.\n\nAll pixels for which the point at the pixel center **does not** intersect with any polygon (as defined in the Simple Features standard by the OGC) are replaced. This behavior can be inverted by setting the parameter `inside` to `true`. The pixel values are replaced with the value specified for `replacement`, which defaults to `null` (no data). No data values in `data` will be left untouched by the masking operation.",
+    "description": "Applies a (multi) polygon mask to a raster data cube. To apply a raster mask use ``mask()``.\n\nAll pixels for which the point at the pixel center **does not** intersect with any polygon (as defined in the Simple Features standard by the OGC) are replaced. This behavior can be inverted by setting the parameter `inside` to `true`. The pixel values are replaced with the value specified for `replacement`, which defaults to the no-data value of the raster data cube. No data values in `data` will be left untouched by the masking operation.",
     "categories": [
       "cubes",
       "masks"
@@ -6461,7 +6418,7 @@
       },
       {
         "name": "replacement",
-        "description": "The value used to replace masked values with.",
+        "description": "The value used to replace masked values with. `null` refers to the no-data value of the data cube provided for `data`.",
         "schema": [
           {
             "type": "number"
@@ -6516,7 +6473,7 @@
   {
     "id": "mask",
     "summary": "Apply a raster mask",
-    "description": "Applies a mask to a raster data cube. To apply a polygon as a mask, use ``mask_polygon()``.\n\nA mask is a raster data cube for which corresponding pixels among `data` and `mask` are compared and those pixels in `data` are replaced whose pixels in `mask` are non-zero (for numbers) or `true` (for boolean values). The pixel values are replaced with the value specified for `replacement`, which defaults to `null` (no data).\n\nThe data cubes have to be compatible except that the horizontal spatial dimensions (axes `x` and `y`) will be aligned implicitly by ``resample_cube_spatial()``. `data` is the target data cube for resampling and the default parameters of ``resample_cube_spatial()`` apply. All other dimensions in the mask must also be available in the raster data cube with the same name, type, reference system, resolution and labels. Dimensions can be missing in the mask with the result that the mask is applied to each label of the dimension in `data` that is missing in the data cube of the mask. The process fails with a `DimensionMismatch` exception if there's an incompatibility found between the raster data cube and the mask.",
+    "description": "Applies a mask to a raster data cube. To apply a polygon as a mask, use ``mask_polygon()``.\n\nA mask is a raster data cube for which corresponding pixels among `data` and `mask` are compared and those pixels in `data` are replaced whose pixels in `mask` are non-zero (for numbers) or `true` (for boolean values). The pixel values are replaced with the value specified for `replacement`, which defaults to the no-data value of the raster data cube.\n\nThe data cubes have to be compatible except that the horizontal spatial dimensions (axes `x` and `y`) will be aligned implicitly by ``resample_cube_spatial()``. `data` is the target data cube for resampling and the default parameters of ``resample_cube_spatial()`` apply. All other dimensions in the mask must also be available in the raster data cube with the same name, type, reference system, resolution and labels. Dimensions can be missing in the mask with the result that the mask is applied to each label of the dimension in `data` that is missing in the data cube of the mask. The process fails with a `DimensionMismatch` exception if there's an incompatibility found between the raster data cube and the mask.",
     "categories": [
       "cubes",
       "masks"
@@ -6558,7 +6515,7 @@
       },
       {
         "name": "replacement",
-        "description": "The value used to replace masked values with.",
+        "description": "The value used to replace masked values with. `null` refers to the no-data value of the data cube provided for `data`.",
         "schema": {
           "type": [
             "number",
@@ -6596,7 +6553,7 @@
   {
     "id": "max",
     "summary": "Maximum value",
-    "description": "Computes the largest value of an array of numbers, which is equal to the first element of a sorted (i.e., ordered) version of the array.\n\nAn array without non-`null` elements resolves always with `null`.",
+    "description": "Computes the largest value of an array of numbers, which is equal to the first element of a sorted (i.e., ordered) version of the array.\n\nAn array with solely no-data values returns the no-data value (or `null`).",
     "categories": [
       "math",
       "math > statistics",
@@ -6618,7 +6575,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is returned if any value is such a value.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, any no-data value in the array results in a no-data value (or `null`).",
         "schema": {
           "type": "boolean"
         },
@@ -6670,13 +6627,6 @@
           "ignore_nodata": false
         },
         "returns": null
-      },
-      {
-        "description": "The input array is empty: return `null`.",
-        "arguments": {
-          "data": []
-        },
-        "returns": null
       }
     ],
     "links": [
@@ -6690,7 +6640,7 @@
   {
     "id": "mean",
     "summary": "Arithmetic mean (average)",
-    "description": "The arithmetic mean of an array of numbers is the quantity commonly called the average. It is defined as the sum of all elements divided by the number of elements.\n\nAn array without non-`null` elements resolves always with `null`.",
+    "description": "The arithmetic mean of an array of numbers is the quantity commonly called the average. It is defined as the sum of all elements divided by the number of elements.\n\nAn array with solely no-data values returns the no-data value (or `null`).",
     "categories": [
       "math > statistics",
       "reducer"
@@ -6711,7 +6661,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is returned if any value is such a value.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, any no-data value in the array results in a no-data value (or `null`).",
         "schema": {
           "type": "boolean"
         },
@@ -6758,23 +6708,6 @@
             null
           ],
           "ignore_nodata": false
-        },
-        "returns": null
-      },
-      {
-        "description": "The input array is empty: return `null`.",
-        "arguments": {
-          "data": []
-        },
-        "returns": null
-      },
-      {
-        "description": "The input array has only `null` elements: return `null`.",
-        "arguments": {
-          "data": [
-            null,
-            null
-          ]
         },
         "returns": null
       }
@@ -6856,7 +6789,7 @@
   {
     "id": "median",
     "summary": "Statistical median",
-    "description": "The statistical median of an array of numbers is the value separating the higher half from the lower half of the data.\n\nAn array without non-`null` elements resolves always with `null`.\n\n**Remarks:**\n\n* For symmetric arrays, the result is equal to the ``mean()``.\n* The median can also be calculated by computing the ``quantiles()`` with a probability of *0.5*.",
+    "description": "The statistical median of an array of numbers is the value separating the higher half from the lower half of the data.\n\nAn array with solely no-data values returns the no-data value (or `null`).\n\n**Remarks:**\n\n* For symmetric arrays, the result is equal to the ``mean()``.\n* The median can also be calculated by computing the ``quantiles()`` with a probability of *0.5*.",
     "categories": [
       "math > statistics",
       "reducer"
@@ -6877,7 +6810,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is returned if any value is such a value.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, any no-data value in the array results in a no-data value (or `null`).",
         "schema": {
           "type": "boolean"
         },
@@ -6946,23 +6879,6 @@
           "ignore_nodata": false
         },
         "returns": null
-      },
-      {
-        "description": "The input array is empty: return `null`.",
-        "arguments": {
-          "data": []
-        },
-        "returns": null
-      },
-      {
-        "description": "The input array has only `null` elements: return `null`.",
-        "arguments": {
-          "data": [
-            null,
-            null
-          ]
-        },
-        "returns": null
       }
     ],
     "links": [
@@ -7026,7 +6942,7 @@
       },
       {
         "name": "overlap_resolver",
-        "description": "A reduction operator that resolves the conflict if the data overlaps. The reducer must return a value of the same data type as the input values are. The reduction operator may be a single process such as ``multiply()`` or consist of multiple sub-processes. `null` (the default) can be specified if no overlap resolver is required.",
+        "description": "A reduction operator that resolves the conflict if the data overlaps. The reducer must return a value of the same data type as the input values are. The reduction operator may be a single process such as ``multiply()`` or consist of multiple sub-processes. The default value `null` can be specified if no overlap resolver is required.",
         "schema": {
           "type": "object",
           "subtype": "process-graph",
@@ -7106,7 +7022,7 @@
   {
     "id": "min",
     "summary": "Minimum value",
-    "description": "Computes the smallest value of an array of numbers, which is equal to the last element of a sorted (i.e., ordered) version of the array.\n\nAn array without non-`null` elements resolves always with `null`.",
+    "description": "Computes the smallest value of an array of numbers, which is equal to the last element of a sorted (i.e., ordered) version of the array.\n\nAn array with solely no-data values returns the no-data value (or `null`).",
     "categories": [
       "math",
       "math > statistics",
@@ -7128,7 +7044,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is returned if any value is such a value.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, any no-data value in the array results in a no-data value (or `null`).",
         "schema": {
           "type": "boolean"
         },
@@ -7199,7 +7115,7 @@
   {
     "id": "mod",
     "summary": "Modulo",
-    "description": "Remainder after a division of `x` by `y` for both integers and floating-point numbers.\n\nThe result of a modulo operation has the sign of the divisor. The handling regarding the sign of the result [differs between programming languages](https://en.wikipedia.org/wiki/Modulo_operation#In_programming_languages) and needs careful consideration to avoid unexpected results.\n\nThe no-data value `null` is passed through and therefore gets propagated if any of the arguments is `null`. If `y` is set to 0 this results in:\n\n- +infinity for `x` > 0,\n- -infinity for `x` < 0,\n- `NaN` for `x` = 0,\n- or otherwise, throws a `DivisionByZero` exception if the other options are not supported by the processing environment.",
+    "description": "Remainder after a division of `x` by `y` for both integers and floating-point numbers.\n\nThe result of a modulo operation has the sign of the divisor. The handling regarding the sign of the result [differs between programming languages](https://en.wikipedia.org/wiki/Modulo_operation#In_programming_languages) and needs careful consideration to avoid unexpected results.\n\nIf any argument is a no-data value, the result will be the no-data value (or `null`). If `y` is set to 0 this results in:\n\n- +infinity for `x` > 0,\n- -infinity for `x` < 0,\n- `NaN` for `x` = 0,\n- or otherwise, throws a `DivisionByZero` exception if the other options are not supported by the processing environment.",
     "categories": [
       "math"
     ],
@@ -7294,7 +7210,7 @@
   {
     "id": "multiply",
     "summary": "Multiplication of two numbers",
-    "description": "Multiplies the two numbers `x` and `y` (*`x * y`*) and returns the computed product.\n\nNo-data values are taken into account so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it.",
+    "description": "Multiplies the two numbers `x` and `y` (*`x * y`*) and returns the computed product.\n\nNo-data values are taken into account so that the no-data value is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it.",
     "categories": [
       "math"
     ],
@@ -7504,7 +7420,7 @@
   {
     "id": "neq",
     "summary": "Not equal to comparison",
-    "description": "Compares whether `x` is **not** strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`.\n* Strings are expected to be encoded in UTF-8 by default.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
+    "description": "Compares whether `x` is **not** strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is a no-data value, the result will be the no-data value (or `null`).\n* The comparison of `NaN` (not a number) follows [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229).\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
     "categories": [
       "texts",
       "comparison"
@@ -7558,7 +7474,7 @@
       }
     ],
     "returns": {
-      "description": "`true` if `x` is *not* equal to `y`, `null` if any operand is `null`, otherwise `false`.",
+      "description": "`true` if `x` is *not* equal to `y`, the no-data value (or `null`) if any operand is a no-data value, otherwise `false`.",
       "schema": {
         "type": [
           "boolean",
@@ -7648,13 +7564,13 @@
           "y": "2018-01-01T00:00:00+00:00"
         },
         "returns": true
-      },
+      }
+    ],
+    "links": [
       {
-        "arguments": {
-          "x": null,
-          "y": null
-        },
-        "returns": null
+        "rel": "about",
+        "href": "https://ieeexplore.ieee.org/document/4610935",
+        "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
       }
     ],
     "process_graph": {
@@ -7775,7 +7691,7 @@
   {
     "id": "not",
     "summary": "Inverting a boolean",
-    "description": "Inverts a single boolean so that `true` gets `false` and `false` gets `true`.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Inverts a single boolean so that `true` gets `false` and `false` gets `true`.\n\nNo-data values are passed through.",
     "categories": [
       "logic"
     ],
@@ -7824,7 +7740,7 @@
   {
     "id": "or",
     "summary": "Logical OR",
-    "description": "Checks if **at least one** of the values is true. Evaluates parameter `x` before `y` and stops once the outcome is unambiguous. If a component is `null`, the result will be `null` if the outcome is ambiguous.\n\n**Truth table:**\n\n```\nx \\ y || null | false | true\n----- || ---- | ----- | ----\nnull  || null | null  | true\nfalse || null | false | true\ntrue  || true | true  | true\n```",
+    "description": "Checks if **at least one** of the values is true. Evaluates parameter `x` before `y` and stops once the outcome is unambiguous. If any argument is a no-data value, the result will be the no-data value whenever the outcome is ambiguous.\n\n**Truth table:**\n\n```\nx \\ y   || no-data | false   | true\n------- || ------- | ------- | ----\nno-data || no-data | no-data | true\nfalse   || no-data | false   | true\ntrue    || true    | true    | true\n```",
     "categories": [
       "logic"
     ],
@@ -7961,7 +7877,7 @@
       },
       {
         "name": "nodata",
-        "description": "Controls the handling of no-data values (`null`). By default, they are removed. If set to `true`, missing values in the data are put last; if set to `false`, they are put first.",
+        "description": "Controls the handling of no-data values. For the default value `null`, all no-data values get removed. If set to `true`, no-data values in the data are moved to the end of the array. If set to `false`, they are moved to the start of the array.",
         "schema": {
           "type": [
             "boolean",
@@ -8141,7 +8057,7 @@
   {
     "id": "power",
     "summary": "Exponentiation",
-    "description": "Computes the exponentiation for the base `base` raised to the power of `p`.\n\nThe no-data value `null` is passed through and therefore gets propagated if any of the arguments is `null`.",
+    "description": "Computes the exponentiation for the base `base` raised to the power of `p`.\n\nIf any argument is a no-data value, the result will be the no-data value (or `null`).",
     "categories": [
       "math",
       "math > exponential & logarithmic"
@@ -8239,7 +8155,7 @@
   {
     "id": "product",
     "summary": "Compute the product by multiplying numbers",
-    "description": "Multiplies all elements in a sequential array of numbers and returns the computed product.\n\nBy default no-data values are ignored. Setting `ignore_nodata` to `false` considers no-data values so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it.",
+    "description": "Multiplies all elements in a sequential array of numbers and returns the computed product.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it.\n\nAn array with solely no-data values returns the no-data value (or `null`).",
     "categories": [
       "math",
       "reducer"
@@ -8260,7 +8176,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is returned if any value is such a value.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, any no-data value in the array results in a no-data value (or `null`).",
         "schema": {
           "type": "boolean"
         },
@@ -8421,7 +8337,7 @@
       },
       {
         "name": "boundary",
-        "description": "Behavior to apply if the number of values for the axes `x` and `y` is not a multiple of the corresponding value in the `size` parameter. Options are:\n\n- `pad` (default): pad the data cube with the no-data value `null` to fit the required window size.\n\n- `trim`: trim the data cube to fit the required window size.\n\nUse the parameter `align` to align the data to the desired corner.",
+        "description": "Behavior to apply if the number of values for the axes `x` and `y` is not a multiple of the corresponding value in the `size` parameter. Options are:\n\n- `pad` (default): pad the data cube with the no-data value to fit the required window size.\n\n- `trim`: trim the data cube to fit the required window size.\n\nUse the parameter `align` to align the data to the desired corner.",
         "schema": {
           "type": "string",
           "enum": [
@@ -8581,7 +8497,7 @@
       },
       {
         "name": "mask_value",
-        "description": "All pixels for which the point at the pixel center **does not** intersect with the polygon are replaced with the given value, which defaults to `null` (no data).\n\nIt can provide a distinction between no data values within the polygon and masked pixels outside of it.",
+        "description": "All pixels for which the point at the pixel center **does not** intersect with the polygon are replaced with the given value. The default value is `null`, which uses the no-data value of the data cube.\n\nThis parameter can provide a distinction between no-data values within the polygon and masked pixels outside of it.",
         "schema": [
           {
             "type": "number"
@@ -8671,7 +8587,7 @@
       },
       {
         "name": "elevation_model",
-        "description": "The digital elevation model to use. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
+        "description": "The digital elevation model to use. The default value `null` allows the back-end to choose, which will improve portability, but reduce reproducibility.",
         "optional": true,
         "default": null,
         "schema": [
@@ -8723,7 +8639,7 @@
       }
     ],
     "returns": {
-      "description": "Backscatter values expressed as gamma0 in linear scale.\n\nIn addition to the bands `contributing_area` and `ellipsoid_incidence_angle` that can optionally be added with corresponding parameters, the following bands are always added to the data cube:\n\n- `mask`: A data mask that indicates which values are valid (1), invalid (0) or contain no-data (null).\n- `local_incidence_angle`: A band with DEM-based local incidence angles in degrees.\n\nThe data returned is CARD4L compliant with corresponding metadata.",
+      "description": "Backscatter values expressed as gamma0 in linear scale.\n\nIn addition to the bands `contributing_area` and `ellipsoid_incidence_angle` that can optionally be added with corresponding parameters, the following bands are always added to the data cube:\n\n- `mask`: A data mask that indicates which values are valid (1), invalid (0), or contain a no-data value.\n- `local_incidence_angle`: A band with DEM-based local incidence angles in degrees.\n\nThe data returned is CARD4L compliant with corresponding metadata.",
       "schema": {
         "type": "object",
         "subtype": "datacube",
@@ -8848,7 +8764,7 @@
         }
       },
       {
-        "description": "The digital elevation model to use. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
+        "description": "The digital elevation model to use. The default value `null` allows the back-end to choose, which will improve portability, but reduce reproducibility.",
         "name": "elevation_model",
         "optional": true,
         "default": null,
@@ -8884,7 +8800,7 @@
       }
     ],
     "returns": {
-      "description": "Data cube containing bottom of atmosphere reflectances for each spectral band in the source data cube, with atmospheric disturbances like clouds and cloud shadows removed. No-data values (null) are directly set in the bands. Depending on the methods used, several additional bands will be added to the data cube:\n\nData cube containing bottom of atmosphere reflectances for each spectral band in the source data cube, with atmospheric disturbances like clouds and cloud shadows removed. Depending on the methods used, several additional bands will be added to the data cube:\n\n- `date` (optional): Specifies per-pixel acquisition timestamps.\n- `incomplete-testing` (required): Identifies pixels with a value of 1 for which the per-pixel tests (at least saturation, cloud and cloud shadows, see CARD4L specification for details) have not all been successfully completed. Otherwise, the value is 0.\n- `saturation` (required) / `saturation_{band}` (optional): Indicates where pixels in the input spectral bands are saturated (1) or not (0). If the saturation is given per band, the band names are `saturation_{band}` with `{band}` being the band name from the source data cube.\n- `cloud`, `shadow` (both required),`aerosol`, `haze`, `ozone`, `water_vapor` (all optional): Indicates the probability of pixels being an atmospheric disturbance such as clouds. All bands have values between 0 (clear) and 1, which describes the probability that it is an atmospheric disturbance.\n- `snow-ice` (optional): Points to a file that indicates whether a pixel is assessed as being snow/ice (1) or not (0). All values describe the probability and must be between 0 and 1.\n- `land-water` (optional): Indicates whether a pixel is assessed as being land (1) or water (0). All values describe the probability and must be between 0 and 1.\n- `incidence-angle` (optional): Specifies per-pixel incidence angles in degrees.\n- `azimuth` (optional): Specifies per-pixel azimuth angles in degrees.\n- `sun-azimuth:` (optional): Specifies per-pixel sun azimuth angles in degrees.\n- `sun-elevation` (optional): Specifies per-pixel sun elevation angles in degrees.\n- `terrain-shadow` (optional): Indicates with a value of 1 whether a pixel is not directly illuminated due to terrain shadowing. Otherwise, the value is 0.\n- `terrain-occlusion` (optional): Indicates with a value of 1 whether a pixel is not visible to the sensor due to terrain occlusion during off-nadir viewing. Otherwise, the value is 0.\n- `terrain-illumination` (optional): Contains coefficients used for terrain illumination correction are provided for each pixel.\n\nThe data returned is CARD4L compliant with corresponding metadata.",
+      "description": "Data cube containing bottom of atmosphere reflectances for each spectral band in the source data cube, with atmospheric disturbances like clouds and cloud shadows removed. No-data values are directly set in the bands. Depending on the methods used, several additional bands will be added to the data cube:\n\nData cube containing bottom of atmosphere reflectances for each spectral band in the source data cube, with atmospheric disturbances like clouds and cloud shadows removed. Depending on the methods used, several additional bands will be added to the data cube:\n\n- `date` (optional): Specifies per-pixel acquisition timestamps.\n- `incomplete-testing` (required): Identifies pixels with a value of 1 for which the per-pixel tests (at least saturation, cloud and cloud shadows, see CARD4L specification for details) have not all been successfully completed. Otherwise, the value is 0.\n- `saturation` (required) / `saturation_{band}` (optional): Indicates where pixels in the input spectral bands are saturated (1) or not (0). If the saturation is given per band, the band names are `saturation_{band}` with `{band}` being the band name from the source data cube.\n- `cloud`, `shadow` (both required),`aerosol`, `haze`, `ozone`, `water_vapor` (all optional): Indicates the probability of pixels being an atmospheric disturbance such as clouds. All bands have values between 0 (clear) and 1, which describes the probability that it is an atmospheric disturbance.\n- `snow-ice` (optional): Points to a file that indicates whether a pixel is assessed as being snow/ice (1) or not (0). All values describe the probability and must be between 0 and 1.\n- `land-water` (optional): Indicates whether a pixel is assessed as being land (1) or water (0). All values describe the probability and must be between 0 and 1.\n- `incidence-angle` (optional): Specifies per-pixel incidence angles in degrees.\n- `azimuth` (optional): Specifies per-pixel azimuth angles in degrees.\n- `sun-azimuth:` (optional): Specifies per-pixel sun azimuth angles in degrees.\n- `sun-elevation` (optional): Specifies per-pixel sun elevation angles in degrees.\n- `terrain-shadow` (optional): Indicates with a value of 1 whether a pixel is not directly illuminated due to terrain shadowing. Otherwise, the value is 0.\n- `terrain-occlusion` (optional): Indicates with a value of 1 whether a pixel is not visible to the sensor due to terrain occlusion during off-nadir viewing. Otherwise, the value is 0.\n- `terrain-illumination` (optional): Contains coefficients used for terrain illumination correction are provided for each pixel.\n\nThe data returned is CARD4L compliant with corresponding metadata.",
       "schema": {
         "type": "object",
         "subtype": "datacube",
@@ -8960,7 +8876,7 @@
   {
     "id": "array_find_label",
     "summary": "Get the index for a label in a labeled array",
-    "description": "Checks whether the labeled array specified for `data` has the label specified in `label` and returns the zero-based index for it. If there's no match as either the label doesn't exist or the array is not labeled, `null` is returned.\n\nUse ``array_find()`` to find the index for a given value in the array.",
+    "description": "Checks whether the labeled array specified for `data` has the label specified in `label` and returns the zero-based index for it. If there's no match as either the label doesn't exist or the array is not labeled, the no-data value (or `null`) is returned.\n\nUse ``array_find()`` to find the index for a given value in the array.",
     "categories": [
       "arrays",
       "reducer"
@@ -8991,7 +8907,7 @@
       }
     ],
     "returns": {
-      "description": "The index of the element with the specified label assigned. If no such label was found, `null` is returned.",
+      "description": "The index of the element with the specified label assigned. If no such label was found, the no-data value (or `null`) is returned.",
       "schema": [
         {
           "type": "null"
@@ -9235,7 +9151,7 @@
         ]
       },
       {
-        "description": "The digital elevation model to use. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
+        "description": "The digital elevation model to use. The default value `null` allows the back-end to choose, which will improve portability, but reduce reproducibility.",
         "name": "elevation_model",
         "optional": true,
         "default": null,
@@ -9380,7 +9296,7 @@
   {
     "id": "cummax",
     "summary": "Cumulative maxima",
-    "description": "Finds cumulative maxima of an array of numbers. Every computed element is equal to the bigger one between the current element and the previously computed element. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `false` makes that once a no-data value (`null`) is reached all following elements are set to `null` in the result.",
+    "description": "Finds cumulative maxima of an array of numbers. Every computed element is equal to the bigger one between the current element and the previously computed element. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `false` makes that once a no-data value is reached all following elements are set to the no-data value in the result.",
     "categories": [
       "math > cumulative"
     ],
@@ -9401,7 +9317,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, the first no-data value makes all following values also no-data values.",
         "schema": {
           "type": "boolean"
         },
@@ -9482,7 +9398,7 @@
   {
     "id": "cummin",
     "summary": "Cumulative minima",
-    "description": "Finds cumulative minima of an array of numbers. Every computed element is equal to the smaller one between the current element and the previously computed element. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `false` makes that once a no-data value (`null`) is reached all following elements are set to `null` in the result.",
+    "description": "Finds cumulative minima of an array of numbers. Every computed element is equal to the smaller one between the current element and the previously computed element. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `false` makes that once a no-data value is reached all following elements are set to the no-data value in the result.",
     "categories": [
       "math > cumulative"
     ],
@@ -9503,7 +9419,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, the first no-data value makes all following values also no-data values.",
         "schema": {
           "type": "boolean"
         },
@@ -9584,7 +9500,7 @@
   {
     "id": "cumproduct",
     "summary": "Cumulative products",
-    "description": "Computes cumulative products of an array of numbers. Every computed element is equal to the product of the current and all previous values. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `false` makes that once a no-data value (`null`) is reached all following elements are set to `null` in the result.",
+    "description": "Computes cumulative products of an array of numbers. Every computed element is equal to the product of the current and all previous values. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `false` makes that once a no-data value is reached all following elements are set to the no-data value in the result.",
     "categories": [
       "math > cumulative"
     ],
@@ -9605,7 +9521,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, the first no-data value makes all following values also no-data values.",
         "schema": {
           "type": "boolean"
         },
@@ -9690,7 +9606,7 @@
   {
     "id": "cumsum",
     "summary": "Cumulative sums",
-    "description": "Computes cumulative sums of an array of numbers. Every computed element is equal to the sum of current and all previous values. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `false` makes that once a no-data value (`null`) is reached all following elements are set to `null` in the result.",
+    "description": "Computes cumulative sums of an array of numbers. Every computed element is equal to the sum of current and all previous values. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `false` makes that once a no-data value is reached all following elements are set to the no-data value in the result.",
     "categories": [
       "math > cumulative"
     ],
@@ -9711,7 +9627,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, the first no-data value makes all following values also no-data values.",
         "schema": {
           "type": "boolean"
         },
@@ -10500,7 +10416,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is passed to the model function.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that no-data values are passed to the model function.",
         "schema": {
           "type": "boolean"
         },
@@ -10641,7 +10557,7 @@
   {
     "id": "is_infinite",
     "summary": "Value is an infinite number",
-    "description": "Checks whether the specified value `x` is an infinite number. The definition of infinite numbers follows the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935). The special numerical value `NaN` (not a number) as defined by the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935) is not an infinite number and must return `false`.",
+    "description": "Checks whether the specified value `x` is an infinite number. The definition of infinite numbers (and `NaN`) follows the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935). `NaN` (not a number) is not an infinite number and must return `false`.",
     "categories": [
       "comparison"
     ],
@@ -10689,7 +10605,7 @@
       },
       {
         "name": "properties",
-        "description": "A list of properties from the GeoJSON file to construct an additional dimension from. A new dimension with the name `properties` and type `other` is created if at least one property is provided. Only applies for GeoJSON Features and FeatureCollections. Missing values are generally set to no-data (`null`).\n\nDepending on the number of properties provided, the process creates the dimension differently:\n\n- Single property with scalar values: A single dimension label with the name of the property and a single value per geometry.\n- Single property of type array: The dimension labels correspond to the array indices. There are as many values and labels per geometry as there are for the largest array.\n- Multiple properties with scalar values: The dimension labels correspond to the property names. There are as many values and labels per geometry as there are properties provided here.",
+        "description": "A list of properties from the GeoJSON file to construct an additional dimension from. A new dimension with the name `properties` and type `other` is created if at least one property is provided. Only applies for GeoJSON Features and FeatureCollections. Missing values are generally set to the no-data value in the data cube.\n\nDepending on the number of properties provided, the process creates the dimension differently:\n\n- Single property with scalar values: A single dimension label with the name of the property and a single value per geometry.\n- Single property of type array: The dimension labels correspond to the array indices. There are as many values and labels per geometry as there are for the largest array.\n- Multiple properties with scalar values: The dimension labels correspond to the property names. There are as many values and labels per geometry as there are properties provided here.",
         "schema": {
           "type": "array",
           "uniqueItems": true,
@@ -10814,13 +10730,13 @@
           },
           {
             "title": "GeoJSON",
-            "description": "Limits the data cube to the bounding box of the given geometries. For raster data, all pixels inside the bounding box that do not intersect with any of the polygons will be set to no data (`null`).\n\nThe GeoJSON type `GeometryCollection` is not supported. Empty geometries are ignored.",
+            "description": "Limits the data cube to the bounding box of the given geometries. For raster data, all pixels inside the bounding box that do not intersect with any of the polygons will be set to the no-data value of the data cube.\n\nThe GeoJSON type `GeometryCollection` is not supported. Empty geometries are ignored.",
             "type": "object",
             "subtype": "geojson"
           },
           {
             "title": "Vector data cube",
-            "description": "Limits the data cube to the bounding box of the given geometries in the vector data cube. All pixels inside the bounding box that do not intersect with any of the polygons will be set to no data (`null`). Empty geometries are ignored.",
+            "description": "Limits the data cube to the bounding box of the given geometries in the vector data cube. All pixels inside the bounding box that do not intersect with any of the polygons will be set to the no-data value of the data cube. Empty geometries are ignored.",
             "type": "object",
             "subtype": "datacube",
             "dimensions": [
@@ -11253,7 +11169,7 @@
       },
       {
         "name": "labels",
-        "description": "The labels to predict values for. If no labels are given, predicts values only for no-data (`null`) values in the data cube.",
+        "description": "The labels to predict values for. If no labels are given, predicts values only for no-data values in the data cube.",
         "optional": true,
         "default": null,
         "schema": [
@@ -11596,7 +11512,7 @@
       },
       {
         "name": "elevation_model",
-        "description": "The digital elevation model to use. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
+        "description": "The digital elevation model to use. The default value `null` allows the back-end to choose, which will improve portability, but reduce reproducibility.",
         "optional": true,
         "default": null,
         "schema": [
@@ -11611,7 +11527,7 @@
       },
       {
         "name": "mask",
-        "description": "If set to `true`, a data mask is added to the bands with the name `mask`. It indicates which values are valid (1), invalid (0) or contain no-data (null).",
+        "description": "If set to `true`, a data mask is added to the bands with the name `mask`. It indicates which values are valid (1), invalid (0), or contain a no-data value.",
         "optional": true,
         "default": false,
         "schema": {
@@ -11967,7 +11883,7 @@
   {
     "id": "vector_to_random_points",
     "summary": "Sample random points from geometries",
-    "description": "Generate a vector data cube of points by sampling random points from input geometries. At least one point is sampled per input geometry.  Empty geometries are passed through without any points assigned. Feature properties are preserved.\n\nIf `geometry_count` and `total_count` are both unrestricted (i.e. set to `null`, which is the default), one sample per geometry is used.",
+    "description": "Generate a vector data cube of points by sampling random points from input geometries. At least one point is sampled per input geometry.  Empty geometries are passed through without any points assigned. Feature properties are preserved.\n\nIf `geometry_count` and `total_count` are both unrestricted (i.e. set to the default value `null`), one sample per geometry is used.",
     "categories": [
       "cubes",
       "vector"
@@ -12181,7 +12097,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that an array with `null` values is returned if any element is such a value.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, any no-data value in the array results in an array with solely no-data (or `null`) values.",
         "schema": {
           "type": "boolean"
         },
@@ -12766,7 +12682,7 @@
   {
     "id": "resample_cube_temporal",
     "summary": "Resample temporal dimensions to match a target data cube",
-    "description": "Resamples one or more given temporal dimensions from a source data cube to align with the corresponding dimensions of the given target data cube using the nearest neighbor method. Returns a new data cube with the resampled dimensions.\n\nBy default, this process simply takes the nearest neighbor independent of the value (including values such as no-data / `null`). Depending on the data cubes this may lead to values being assigned to two target timestamps. To only consider valid values in a specific range around the target timestamps, use the parameter `valid_within`.\n\nThe rare case of ties is resolved by choosing the earlier timestamps.",
+    "description": "Resamples one or more given temporal dimensions from a source data cube to align with the corresponding dimensions of the given target data cube using the nearest neighbor method. Returns a new data cube with the resampled dimensions.\n\nBy default, this process simply takes the nearest neighbor independent of the value (including no-data values). Depending on the data cubes this may lead to values being assigned to two target timestamps. To only consider valid values in a specific range around the target timestamps, use the parameter `valid_within`.\n\nThe rare case of ties is resolved by choosing the earlier timestamps.",
     "categories": [
       "cubes",
       "reproject"
@@ -12812,7 +12728,7 @@
       },
       {
         "name": "valid_within",
-        "description": "Setting this parameter to a numerical value enables that the process searches for valid values within the given period of days before and after the target timestamps. Valid values are determined based on the function ``is_valid()``. For example, the limit of `7` for the target timestamps `2020-01-15 12:00:00` looks for a nearest neighbor after `2020-01-08 12:00:00` and before `2020-01-22 12:00:00`. If no valid value is found within the given period, the value will be set to no-data (`null`).",
+        "description": "Setting this parameter to a numerical value enables that the process searches for valid values within the given period of days before and after the target timestamps. Valid values are determined based on the function ``is_valid()``. For example, the limit of `7` for the target timestamps `2020-01-15 12:00:00` looks for a nearest neighbor after `2020-01-08 12:00:00` and before `2020-01-22 12:00:00`. If no valid value is found within the given period, the value will be set to the no-data value of the data cube given for the parameter `data`.",
         "schema": {
           "type": [
             "number",
@@ -13014,7 +12930,7 @@
   {
     "id": "round",
     "summary": "Round to a specified precision",
-    "description": "Rounds a real number `x` to specified precision `p`.\n\nIf `x` is halfway between closest numbers of precision `p`, it is rounded to the closest even number of precision `p`.\nThis behavior follows [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) and is often called \"round to nearest (even)\" or \"banker's rounding\". It minimizes rounding errors that result from consistently rounding a midpoint value in a single direction.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Rounds a real number `x` to specified precision `p`.\n\nIf `x` is halfway between closest numbers of precision `p`, it is rounded to the closest even number of precision `p`.\nThis behavior follows [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) and is often called \"round to nearest (even)\" or \"banker's rounding\". It minimizes rounding errors that result from consistently rounding a midpoint value in a single direction.\n\nNo-data values are passed through.",
     "categories": [
       "math > rounding"
     ],
@@ -13276,7 +13192,7 @@
   {
     "id": "sd",
     "summary": "Standard deviation",
-    "description": "Computes the sample standard deviation, which quantifies the amount of variation of an array of numbers. It is defined to be the square root of the corresponding variance (see ``variance()``).\n\nA low standard deviation indicates that the values tend to be close to the expected value, while a high standard deviation indicates that the values are spread out over a wider range.\n\nAn array without non-`null` elements resolves always with `null`.",
+    "description": "Computes the sample standard deviation, which quantifies the amount of variation of an array of numbers. It is defined to be the square root of the corresponding variance (see ``variance()``).\n\nA low standard deviation indicates that the values tend to be close to the expected value, while a high standard deviation indicates that the values are spread out over a wider range.\n\nAn array with solely no-data values returns the no-data value (or `null`).",
     "categories": [
       "math > statistics",
       "reducer"
@@ -13297,7 +13213,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is returned if any value is such a value.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, any no-data value in the array results in a no-data value (or `null`).",
         "schema": {
           "type": "boolean"
         },
@@ -13337,13 +13253,6 @@
           "ignore_nodata": false
         },
         "returns": null
-      },
-      {
-        "description": "The input array is empty: return `null`.",
-        "arguments": {
-          "data": []
-        },
-        "returns": null
       }
     ],
     "links": [
@@ -13380,7 +13289,7 @@
   {
     "id": "sgn",
     "summary": "Signum",
-    "description": "The signum (also known as *sign*) of `x` is defined as:\n\n* *1* if *x > 0*\n* *0* if *x = 0*\n* *-1* if *x < 0*\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "The signum (also known as *sign*) of `x` is defined as:\n\n* *1* if *x > 0*\n* *0* if *x = 0*\n* *-1* if *x < 0*\n\nNo-data values are passed through.",
     "categories": [
       "math"
     ],
@@ -13493,7 +13402,7 @@
   {
     "id": "sin",
     "summary": "Sine",
-    "description": "Computes the sine of `x`.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the sine of `x`.\n\nWorks on radians only.\nNo-data values are passed through.",
     "categories": [
       "math > trigonometric"
     ],
@@ -13539,7 +13448,7 @@
   {
     "id": "sinh",
     "summary": "Hyperbolic sine",
-    "description": "Computes the hyperbolic sine of `x`.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the hyperbolic sine of `x`.\n\nNo-data values are passed through.",
     "categories": [
       "math > trigonometric"
     ],
@@ -13627,7 +13536,7 @@
       },
       {
         "name": "nodata",
-        "description": "Controls the handling of no-data values (`null`). By default, they are removed. If set to `true`, missing values in the data are put last; if set to `false`, they are put first.",
+        "description": "Controls the handling of no-data values. For the default value `null`, all no-data values get removed. If set to `true`, no-data values in the data are moved to the end of the array. If set to `false`, they are moved to the start of the array.",
         "schema": {
           "type": [
             "boolean",
@@ -13758,7 +13667,7 @@
   {
     "id": "sqrt",
     "summary": "Square root",
-    "description": "Computes the square root of a real number `x`, which is equal to calculating `x` to the power of *0.5*. For negative `x`, the process returns `NaN`.\n\nA square root of x is a number a such that *`a² = x`*. Therefore, the square root is the inverse function of a to the power of 2, but only for *a >= 0*.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the square root of a real number `x`, which is equal to calculating `x` to the power of *0.5*. For negative `x`, the process returns `NaN`.\n\nA square root of x is a number a such that *`a² = x`*. Therefore, the square root is the inverse function of a to the power of 2, but only for *a >= 0*.\n\nNo-data values are passed through.",
     "categories": [
       "math",
       "math > exponential & logarithmic"
@@ -13838,7 +13747,7 @@
   {
     "id": "subtract",
     "summary": "Subtraction of two numbers",
-    "description": "Subtracts argument `y` from the argument `x` (*`x - y`*) and returns the computed result.\n\nNo-data values are taken into account so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it.",
+    "description": "Subtracts argument `y` from the argument `x` (*`x - y`*) and returns the computed result.\n\nNo-data values are taken into account so that the no-data value is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it.",
     "categories": [
       "math"
     ],
@@ -13912,7 +13821,7 @@
   {
     "id": "sum",
     "summary": "Compute the sum by adding up numbers",
-    "description": "Sums up all elements in a sequential array of numbers and returns the computed sum.\n\nBy default no-data values are ignored. Setting `ignore_nodata` to `false` considers no-data values so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it.",
+    "description": "Sums up all elements in a sequential array of numbers and returns the computed sum.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it.\n\nAn array with solely no-data values returns the no-data value (or `null`).",
     "categories": [
       "math",
       "reducer"
@@ -13933,7 +13842,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is returned if any value is such a value.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, any no-data value in the array results in a no-data value (or `null`).",
         "schema": {
           "type": "boolean"
         },
@@ -14020,7 +13929,7 @@
   {
     "id": "tan",
     "summary": "Tangent",
-    "description": "Computes the tangent of `x`. The tangent is defined to be the sine of x divided by the cosine of x.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, *`tan(pi()/2 + multipliy(pi(), n))`* with `n` being any integer results in ±infinity. -infinity for negative values passed to `tan`, +infinity otherwise. If the processing environment does not supports it, an exception is thrown.",
+    "description": "Computes the tangent of `x`. The tangent is defined to be the sine of x divided by the cosine of x.\n\nWorks on radians only.\nNo-data values are passed through.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, *`tan(pi()/2 + multipliy(pi(), n))`* with `n` being any integer results in ±infinity. -infinity for negative values passed to `tan`, +infinity otherwise. If the processing environment does not supports it, an exception is thrown.",
     "categories": [
       "math > trigonometric"
     ],
@@ -14069,7 +13978,7 @@
   {
     "id": "tanh",
     "summary": "Hyperbolic tangent",
-    "description": "Computes the hyperbolic tangent of `x`. The tangent is defined to be the hyperbolic sine of x divided by the hyperbolic cosine of x.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the hyperbolic tangent of `x`. The tangent is defined to be the hyperbolic sine of x divided by the hyperbolic cosine of x.\n\nNo-data values are passed through.",
     "categories": [
       "math > trigonometric"
     ],
@@ -14115,7 +14024,7 @@
   {
     "id": "text_begins",
     "summary": "Text begins with another text",
-    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern` at the beginning. Both are expected to be encoded in UTF-8 by default. The no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern` at the beginning. No-data values are passed through.",
     "categories": [
       "texts",
       "comparison"
@@ -14311,7 +14220,7 @@
   {
     "id": "text_contains",
     "summary": "Text contains another text",
-    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern`. Both are expected to be encoded in UTF-8 by default. The no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern`. No-data values are passed through.",
     "categories": [
       "texts",
       "comparison"
@@ -14403,7 +14312,7 @@
   {
     "id": "text_ends",
     "summary": "Text ends with another text",
-    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern` at the end. Both are expected to be encoded in UTF-8 by default. The no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern` at the end. No-data values are passed through.",
     "categories": [
       "texts",
       "comparison"
@@ -14520,7 +14429,7 @@
   {
     "id": "variance",
     "summary": "Variance",
-    "description": "Computes the sample variance of an array of numbers by calculating the square of the standard deviation (see ``sd()``). It is defined to be the expectation of the squared deviation of a random variable from its expected value. Basically, it measures how far the numbers in the array are spread out from their average value.\n\nAn array without non-`null` elements resolves always with `null`.",
+    "description": "Computes the sample variance of an array of numbers by calculating the square of the standard deviation (see ``sd()``). It is defined to be the expectation of the squared deviation of a random variable from its expected value. Basically, it measures how far the numbers in the array are spread out from their average value.\n\nAn array with solely no-data values returns the no-data value (or `null`).",
     "categories": [
       "math > statistics",
       "reducer"
@@ -14541,7 +14450,7 @@
       },
       {
         "name": "ignore_nodata",
-        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is returned if any value is such a value.",
+        "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, any no-data value in the array results in a no-data value (or `null`).",
         "schema": {
           "type": "boolean"
         },
@@ -14592,13 +14501,6 @@
             3
           ],
           "ignore_nodata": false
-        },
-        "returns": null
-      },
-      {
-        "description": "The input array is empty: return `null`.",
-        "arguments": {
-          "data": []
         },
         "returns": null
       }
@@ -14672,7 +14574,7 @@
   {
     "id": "xor",
     "summary": "Logical XOR (exclusive or)",
-    "description": "Checks if **exactly one** of the values is true. If a component is `null`, the result will be `null` if the outcome is ambiguous.\n\n**Truth table:**\n\n```\nx \\ y || null | false | true\n----- || ---- | ----- | -----\nnull  || null | null  | null\nfalse || null | false | true\ntrue  || null | true  | false\n```",
+    "description": "Checks if **exactly one** of the values is true. If any argument is a no-data value, the result will be the no-data value whenever the outcome is ambiguous.\n\n**Truth table:**\n\n```\nx \\ y   || no-data | false   | true\n------- || ------- | ------- | -------\nno-data || no-data | no-data | no-data\nfalse   || no-data | false   | true\ntrue    || no-data | true    | false\n```",
     "categories": [
       "logic"
     ],

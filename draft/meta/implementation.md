@@ -2,10 +2,47 @@
 
 This file is meant to provide some additional implementation details for back-ends.
 
+## No-data value
+
+A data cube shall always keep reference of the applicable no-data value(s).
+The no-data values can be chosen by the back-end implementation, e.g. depending on the data type of the data.
+No-data values should be exposed for each pre-defined Collection in its metadata.
+For all data generated through openEO (e.g. through synchronous or batch jobs), the metadata and/or data
+shall expose the no-data values.
+
+The openEO process specifications generally uses `null` as a generic value to express no-data values.
+This is primarily meant for the JSON encoding, this means:
+1. in the process specification (data type `null` in the schema), and
+2. in the process graph (if the no-data value exposed through the metadata can't be used in JSON, e.g. `NaN`).
+
+Back-ends may or may not use `null` as a no-data value internally.
+
+**NaN**: If `NaN` is the no-data value for floating-point numbers, be aware that the behavior of
+no-data values in openEO and `NaN` (IEEE 754) sometimes differs.
+
+**Array processes:** Some array processes (e.g. `array_find` or `any`) use `null` as a return value.
+In the context of data cube operations (e.g. in `reduce_dimension`), `null` values returned
+by the array processes shall be replaced with the no-data value of the data cube.
+As the processes may be used outside of data cubes where the no-data values are undefined,
+most processes fall back to `null` in this case (reflected through the mention of "(or `null`)" in the process description).
+This effectively means that `null` is the default value for an undefined no-data value in openEO.
+
 ## Optimizations for conditions (e.g. `if`)
 
 None of the openEO processes per se is "special" and thus all are treated the same way by default.
 Nevertheless, there are some cases where a special treatment can make a huge difference.
+
+## Character encoding
+
+String-related processes previously mentioned that strings have to be "encoded in UTF-8 by default".
+This was removed and we clarify the behavior here:
+
+For data transfer through the API, the character encoding of strings is specified using HTTP headers.
+This means all strings provided in the process graph have the same encoding as specified in the HTTP headers.
+Back-ends can internally use any character encoding and as such may need to convert the character encoding
+upon receipt of the process graph.
+It is recommended to use a [Unicode](https://en.wikipedia.org/wiki/Unicode) character encoding such as UTF-8.
+In case of doubt, clients and server should assume UTF-8 as character encoding.
 
 ### Branching behavior
 
