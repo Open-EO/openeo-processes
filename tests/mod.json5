@@ -1,0 +1,170 @@
+{
+  "id": "mod",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {
+        "x": 0,
+        "y": 1
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "y": 1
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "x": 27,
+        "y": 5
+      },
+      "returns": 2
+    },
+    {
+      "arguments": {
+        "x": -27,
+        "y": 5
+      },
+      "returns": 3
+    },
+    {
+      "arguments": {
+        "x": 3.14,
+        "y": -2
+      },
+      "returns": -0.86
+    },
+    {
+      "arguments": {
+        "x": -27,
+        "y": -5
+      },
+      "returns": -2
+    },
+    {
+      "arguments": {
+        "x": 2,
+        "y": 0
+      },
+      "returns": Infinity,
+      "throws": "DivisionByZero"
+    },
+    {
+      "arguments": {
+        "x": -2,
+        "y": 0
+      },
+      "returns": -Infinity,
+      "throws": "DivisionByZero"
+    },
+    {
+      "arguments": {
+        "x": 0,
+        "y": 0
+      },
+      "returns": NaN,
+      "throws": "DivisionByZero"
+    },
+    {
+      "arguments": {
+        "x": NaN,
+        "y": 2
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": 2,
+        "y": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": NaN,
+        "y": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": Infinity,
+        "y": 2
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": 2,
+        "y": Infinity
+      },
+      "returns": 2
+    },
+    {
+      "arguments": {
+        "x": Infinity,
+        "y": Infinity
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": -Infinity,
+        "y": 2
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": 2,
+        "y": -Infinity
+      },
+      "returns": 2
+    },
+    {
+      "arguments": {
+        "x": -Infinity,
+        "y": -Infinity
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": -Infinity,
+        "y": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"},
+        "y": Infinity
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"},
+        "y": 2
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "x": 2,
+        "y": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"},
+        "y": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    }
+  ]
+}

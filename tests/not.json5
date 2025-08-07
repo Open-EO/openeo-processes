@@ -1,0 +1,24 @@
+{
+  "id": "not",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {
+        "x": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "x": false
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": true
+      },
+      "returns": false
+    }
+  ]
+}

@@ -1,0 +1,160 @@
+{
+  "id": "add",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {
+        "x": 0,
+        "y": 0
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "y": 2
+      },
+      "returns": 3
+    },
+    {
+      "arguments": {
+        "x": -1,
+        "y": 2
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "x": 2.5,
+        "y": 3.5
+      },
+      "returns": 6
+    },
+    {
+      "arguments": {
+        "x": -2.5,
+        "y": 3.5
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "x": 250,
+        "y": 10
+      },
+      "returns": 260
+    },
+    {
+      "arguments": {
+        "x": NaN,
+        "y": 1
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "y": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": NaN,
+        "y": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": Infinity,
+        "y": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": NaN,
+        "y": -Infinity
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": -1,
+        "y": Infinity
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "x": Infinity,
+        "y": 1
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "x": Infinity,
+        "y": Infinity
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "x": -Infinity,
+        "y": 1
+      },
+      "returns": -Infinity
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "y": -Infinity
+      },
+      "returns": -Infinity
+    },
+    {
+      "arguments": {
+        "x": -Infinity,
+        "y": -Infinity
+      },
+      "returns": -Infinity
+    },
+    {
+      "arguments": {
+        "x": -Infinity,
+        "y": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"},
+        "y": Infinity
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"},
+        "y": 1
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "y": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"},
+        "y": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    }
+  ]
+}

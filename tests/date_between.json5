@@ -1,0 +1,14 @@
+{
+  "id": "date_between",
+  "level": "L2-Date",
+  "tests": [
+    {
+      "arguments": {
+        "x": "2020-01-01",
+        "min": "2021-01-01",
+        "max": "2022-01-01"
+      },
+      "returns": false
+    }
+  ]
+}

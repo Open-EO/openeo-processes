@@ -1,0 +1,96 @@
+{
+  "id": "all",
+  "level": "L2",
+  "tests": [
+    {
+      "arguments": {
+        "data": [
+          false,
+          {"type": "nodata"}
+        ]
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "data": [
+          true,
+          {"type": "nodata"}
+        ]
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "data": [
+          false,
+          {"type": "nodata"}
+        ],
+        "ignore_nodata": false
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "data": [
+          true,
+          {"type": "nodata"}
+        ],
+        "ignore_nodata": false
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "data": [
+          true,
+          false,
+          true,
+          false
+        ]
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "data": [
+          true,
+          false
+        ]
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "data": [
+          true,
+          true
+        ]
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "data": [
+          true
+        ]
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "data": [
+          {"type": "nodata"}
+        ],
+        "ignore_nodata": false
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "data": []
+      },
+      "returns": {"type": "nodata"}
+    }
+  ]
+}

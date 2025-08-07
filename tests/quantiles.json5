@@ -1,0 +1,204 @@
+{
+  "id": "quantiles",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {
+        "data": [
+          2,
+          4,
+          4,
+          4,
+          5,
+          5,
+          7,
+          9
+        ],
+        "probabilities": [
+          0.005,
+          0.01,
+          0.02,
+          0.05,
+          0.1,
+          0.5
+        ]
+      },
+      "returns": [
+        2.07,
+        2.14,
+        2.28,
+        2.7,
+        3.4,
+        4.5
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          1.5,
+          0,
+          5.75,
+          -1.25
+        ],
+        "probabilities": [
+          0,
+          0.25,
+          0.5,
+          0.75,
+          1
+        ]
+      },
+      "returns": [
+        -1.25,
+        -0.3125,
+        0.75,
+        2.5625,
+        5.75
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          1.5,
+          Infinity,
+          5.75,
+          -1.25
+        ],
+        "probabilities": [
+          0,
+          0.25,
+          0.5,
+          0.75,
+          1
+        ]
+      },
+      "returns": [
+        -1.25,
+        0.8125,
+        3.625,
+        Infinity,
+        Infinity
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          1.5,
+          -Infinity,
+          5.75,
+          -1.25
+        ],
+        "probabilities": [
+          0,
+          0.25,
+          0.5,
+          0.75,
+          1
+        ]
+      },
+      "returns": [
+        -Infinity,
+        -Infinity,
+        0.125,
+        2.5625,
+        5.75
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          2,
+          4,
+          4,
+          4,
+          5,
+          5,
+          7,
+          9
+        ],
+        "probabilities": 4
+      },
+      "returns": [
+        4,
+        4.5,
+        5.5
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          -1,
+          -0.5,
+          {"type": "nodata"},
+          1
+        ],
+        "probabilities": 2
+      },
+      "returns": [
+        -0.5
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          -1,
+          -0.5,
+          {"type": "nodata"},
+          1
+        ],
+        "probabilities": 4,
+        "ignore_nodata": false
+      },
+      "returns": [
+        {"type": "nodata"},
+        {"type": "nodata"},
+        {"type": "nodata"}
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          -1,
+          -0.5,
+          NaN,
+          1
+        ],
+        "probabilities": 2
+      },
+      "returns": [
+        NaN
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          -1,
+          -0.5,
+          NaN,
+          1
+        ],
+        "probabilities": 4,
+        "ignore_nodata": false
+      },
+      "returns": [
+        NaN,
+        NaN,
+        NaN
+      ]
+    },
+    {
+      // Empty array
+      "arguments": {
+        "data": [],
+        "probabilities": [
+          0.1,
+          0.5
+        ]
+      },
+      "returns": [
+        {"type": "nodata"},
+        {"type": "nodata"}
+      ]
+    }
+  ]
+}

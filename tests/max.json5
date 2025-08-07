@@ -1,0 +1,91 @@
+{
+  "id": "max",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {
+        "data": [
+          1,
+          0,
+          3,
+          2
+        ]
+      },
+      "returns": 3
+    },
+    {
+      "arguments": {
+        "data": [
+          5,
+          2.5,
+          {"type": "nodata"},
+          -0.7
+        ]
+      },
+      "returns": 5
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          0,
+          3,
+          {"type": "nodata"},
+          2
+        ],
+        "ignore_nodata": false
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "data": [
+          NaN,
+          1,
+          2,
+          3
+        ]
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          2,
+          Infinity,
+          3
+        ]
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          -Infinity,
+          2,
+          3
+        ]
+      },
+      "returns": 3
+    },
+    {
+      "arguments": {
+        "data": [
+          1.12345678901,
+          1.12345678903,
+          1.12345678902
+        ]
+      },
+      "returns": 1.12345678903
+    },
+    {
+      // The input array is empty: return `{"type": "nodata"}`.
+      "arguments": {
+        "data": []
+      },
+      "returns": {"type": "nodata"}
+    }
+  ]
+}

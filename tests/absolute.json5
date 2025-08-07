@@ -1,0 +1,60 @@
+{
+  "id": "absolute",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {
+        "x": 0
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "x": 1
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "x": -1
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "x": 2.5
+      },
+      "returns": 2.5
+    },
+    {
+      "arguments": {
+        "x": -2.5
+      },
+      "returns": 2.5
+    },
+    {
+      "arguments": {
+        "x": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": Infinity
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "x": -Infinity
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    }
+  ]
+}

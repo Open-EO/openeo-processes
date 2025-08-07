@@ -10,7 +10,7 @@
     "parameters": [
         {
             "name": "paths",
-            "description": "The files to read. Folders can't be specified, specify all files instead. An exception is thrown if a file can't be read.",
+            "description": "The files to read. Folders can't be specified, specify all files instead. An exception is thrown if a file can't be read.\n\nAs the workspace acts as an isolated root folder, the absolute path `/folder/file.txt` and relative paths `folder/file.txt` and `./folder/file.txt` are all equivalent. Likewise, specifying a path outside of the workspace results in a `FileNotFound` error.",
             "schema": {
                 "type": "array",
                 "subtype": "file-paths",
@@ -50,6 +50,9 @@
     "exceptions": {
         "FormatUnsuitable": {
             "message": "Data can't be loaded with the requested input format."
+        },
+        "FileNotFound": {
+            "message": "The specified file does not exist."
         }
     }
 }

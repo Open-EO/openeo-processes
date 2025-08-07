@@ -1,0 +1,98 @@
+{
+  "id": "count",
+  "level": "L2",
+  "tests": [
+    {
+      "arguments": {
+        "data": []
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          0,
+          3,
+          2
+        ]
+      },
+      "returns": 4
+    },
+    {
+      "arguments": {
+        "data": [
+          "ABC",
+          {"type": "nodata"}
+        ]
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "data": [
+          false,
+          {"type": "nodata"}
+        ],
+        "condition": true
+      },
+      "returns": 2
+    },
+    {
+      "arguments": {
+        "data": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          {"type": "nodata"}
+        ],
+        "condition": {
+          "gt": {
+            "process_id": "gt",
+            "arguments": {
+              "x": {
+                "from_parameter": "element"
+              },
+              "y": 2
+            },
+            "result": true
+          }
+        }
+      },
+      "returns": 3
+    },
+    {
+      "level": "L3",
+      "arguments": {
+        "data": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          {"type": "nodata"}
+        ],
+        "condition": {
+          "gt": {
+            "process_id": "gt",
+            "arguments": {
+              "x": {
+                "from_parameter": "element"
+              },
+              "y": {
+                "from_parameter": "context"
+              }
+            },
+            "result": true
+          }
+        },
+        "context": 2
+      },
+      "returns": 3
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "is_valid",
+  "level": "L2",
+  "tests": [
+    {
+      "arguments": {
+        "x": 1
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": "Test"
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"}
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": [
+          {"type": "nodata"},
+          {"type": "nodata"}
+        ]
+      },
+      "returns": true
+    }
+  ]
+}

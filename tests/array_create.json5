@@ -1,0 +1,57 @@
+{
+  "id": "array_create",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {},
+      "returns": []
+    },
+    {
+      "arguments": {
+        "data": [
+          "this",
+          "is",
+          "a",
+          "test"
+        ]
+      },
+      "returns": [
+        "this",
+        "is",
+        "a",
+        "test"
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          null
+        ],
+        "repeat": 3
+      },
+      "returns": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          2,
+          3
+        ],
+        "repeat": 2
+      },
+      "returns": [
+        1,
+        2,
+        3,
+        1,
+        2,
+        3
+      ]
+    }
+  ]
+}

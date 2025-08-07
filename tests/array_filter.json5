@@ -1,0 +1,276 @@
+{
+  "id": "array_filter",
+  "level": "L3",
+  "tests": [
+    {
+      // empty array
+      "required": [
+        "gt"
+      ],
+      "arguments": {
+        "data": [],
+        "process": {
+          "process_graph": {
+            "gt": {
+              "process_id": "gt",
+              "arguments": {
+                "x": {
+                  "from_argument": "x"
+                },
+                "x": 3
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "returns": []
+    },
+    {
+      // single comparison process applied to a normal array
+      "required": [
+        "gt"
+      ],
+      "arguments": {
+        "data": [
+          1,
+          -2,
+          3.5,
+          -4.725,
+          NaN
+        ],
+        "process": {
+          "process_graph": {
+            "gt": {
+              "process_id": "gt",
+              "arguments": {
+                "x": {
+                  "from_argument": "x"
+                },
+                "y": 1
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "returns": [
+        3.5
+      ]
+    },
+    {
+      // handle index from a normal array
+      "required": [
+        "lt"
+      ],
+      "arguments": {
+        "data": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "process": {
+          "process_graph": {
+            "lt": {
+              "process_id": "lte",
+              "arguments": {
+                "x": {
+                  "from_argument": "index"
+                },
+                "y": 2
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "returns": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      // handle label from a labeled array
+      "required": [
+        "eq"
+      ],
+      "arguments": {
+        "data": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": "B01",
+              "value": 1.23
+            },
+            {
+              "key": "B02",
+              "value": 0.98
+            }
+          ]
+        },
+        "process": {
+          "process_graph": {
+            "eq": {
+              "process_id": "eq",
+              "arguments": {
+                "x": {
+                  "from_argument": "label"
+                },
+                "y": "B02"
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "returns": [
+        {
+          "key": "B02",
+          "value": 0.98
+        }
+      ]
+    },
+    {
+      // handle index from a labeled array
+      "required": [
+        "eq"
+      ],
+      "arguments": {
+        "data": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": "B01",
+              "value": 1.23
+            },
+            {
+              "key": "B02",
+              "value": 0.98
+            }
+          ]
+        },
+        "process": {
+          "process_graph": {
+            "eq": {
+              "process_id": "eq",
+              "arguments": {
+                "x": {
+                  "from_argument": "index"
+                },
+                "y": 0
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "returns": [
+        {
+          "key": "B01",
+          "value": 1.23
+        }
+      ]
+    },
+    {
+      // single math process applied to a labeled array
+      "required": [
+        "gt"
+      ],
+      "arguments": {
+        "data": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": "B01",
+              "value": 1.23
+            },
+            {
+              "key": "B02",
+              "value": 0.98
+            }
+          ]
+        },
+        "process": {
+          "process_graph": {
+            "const": {
+              "process_id": "subtract",
+              "arguments": {
+                "x": {
+                  "from_argument": "x"
+                },
+                "y": 1
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "returns": {
+        "type": "labeled-array",
+        "data": [
+          {
+            "key": "B01",
+            "value": 1.23
+          }
+        ]
+      }
+    },
+    {
+      // apply multiple math process to a labeled array
+      "required": [
+        "lt",
+        "gt",
+        "or"
+      ],
+      "arguments": {
+        "data": [
+          1,
+          -2,
+          3.5,
+          -4.725,
+          NaN
+        ],
+        "process": {
+          "process_graph": {
+            "lt": {
+              "process_id": "lt",
+              "arguments": {
+                "x": {
+                  "from_argument": "x"
+                },
+                "y": -2
+              }
+            },
+            "gt": {
+              "process_id": "gt",
+              "arguments": {
+                "x": {
+                  "from_argument": "x"
+                },
+                "y": 2
+              }
+            },
+            "or": {
+              "process_id": "or",
+              "arguments": {
+                "x": {
+                  "from_node": "lt"
+                },
+                "y": {
+                  "from_node": "gt"
+                }
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "returns": [
+        3.5,
+        -4.725
+      ]
+    }
+  ]
+}

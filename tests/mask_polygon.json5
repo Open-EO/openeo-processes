@@ -1,0 +1,209 @@
+{
+  // todo: GeoJSON as input for mask is deprecated; migrate to Vector data cubes (missing the encoding yet)
+  "id": "mask_polygon",
+  "level": "L2A",
+  "tests": [
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "mask": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [16.1, 48.1],
+              [16.1, 48.6],
+              [16.6, 48.6],
+              [16.6, 48.1],
+              [16.1, 48.1]
+            ]
+          ]
+        },
+        "inside": true
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["t", "y", "x"],
+        "dimensions": {
+          "t": {
+            "type": "temporal",
+            "values": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z"]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [
+            [NaN, NaN, NaN, NaN],
+            [NaN, NaN, NaN, NaN],
+            [NaN, NaN, NaN, NaN]
+          ],
+          [
+            [NaN, NaN, NaN, NaN],
+            [NaN, NaN, NaN, NaN],
+            [NaN, NaN, NaN, NaN]
+          ]
+        ]
+      }
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "mask": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [16.1, 48.1],
+              [16.1, 48.6],
+              [16.6, 48.6],
+              [16.6, 48.1],
+              [16.1, 48.1]
+            ]
+          ]
+        },
+        "inside": false
+      },
+      "returns": {
+        "$ref": "assets/xyt-minimal-float.json5"
+      }
+    },
+    {
+      // bbox fully covers the data, no change result
+      "arguments": {
+        "data": {
+          "$ref": "assets/xytb-s2-small.json5"
+        },
+        "mask": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-16.1, 40.18],
+              [-16.1, 84.73],
+              [32.88, 84.73],
+              [32.88, 40.18],
+              [-16.1, 40.18]
+            ]
+          ]
+        }
+      },
+      "returns": {
+        "$ref": "assets/xytb-s2-small.json5"
+      }
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xytb-s2-small.json5"
+        },
+        "mask": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [7.615340662408175, 51.95982196234872],
+              [7.615340662408175, 51.96005351522534],
+              [7.615929556794445, 51.96005351522534],
+              [7.615929556794445, 51.95982196234872],
+              [7.615340662408175, 51.95982196234872]
+            ]
+          ]
+        }
+      },
+      "returns": {
+        "$ref": "assets/xytb-s2-small-masked-outside.json5"
+      }
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xytb-s2-small.json5"
+        },
+        "mask": {
+          "type": "Feature",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [7.615340662408175, 51.95982196234872],
+                [7.615340662408175, 51.96005351522534],
+                [7.615929556794445, 51.96005351522534],
+                [7.615929556794445, 51.95982196234872],
+                [7.615340662408175, 51.95982196234872]
+              ]
+            ]
+          }
+        }
+      },
+      "returns": {
+        "$ref": "assets/xytb-s2-small-masked-outside.json5"
+      }
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xytb-s2-small.json5"
+        },
+        "mask": {
+          "type": "FeatureCollection",
+          "features": [
+            {
+              "type": "Feature",
+              "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                  [
+                    [7.615340662408175, 51.95982196234872],
+                    [7.615340662408175, 51.96005351522534],
+                    [7.615929556794445, 51.96005351522534],
+                    [7.615929556794445, 51.95982196234872],
+                    [7.615340662408175, 51.95982196234872]
+                  ]
+                ]
+              },
+              "properties": {}
+            }
+          ]
+        }
+      },
+      "returns": {
+        "$ref": "assets/xytb-s2-small-masked-outside.json5"
+      }
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xytb-s2-small.json5"
+        },
+        "mask": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [7.615340662408175, 51.95982196234872],
+              [7.615340662408175, 51.96005351522534],
+              [7.615929556794445, 51.96005351522534],
+              [7.615929556794445, 51.95982196234872],
+              [7.615340662408175, 51.95982196234872]
+            ]
+          ]
+        },
+        "inside": true
+      },
+      "returns": {
+        "$ref": "assets/xytb-s2-small-masked-inside.json5"
+      }
+    }
+  ]
+}

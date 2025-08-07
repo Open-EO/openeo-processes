@@ -1,0 +1,62 @@
+{
+  "id": "cumsum",
+  "level": "L3",
+  "experimental": true,
+  "tests": [
+    {
+      "arguments": {
+        "data": [
+          1,
+          3,
+          5,
+          3,
+          1
+        ]
+      },
+      "returns": [
+        1,
+        4,
+        9,
+        12,
+        13
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          3,
+          {"type": "nodata"},
+          3,
+          1
+        ]
+      },
+      "returns": [
+        1,
+        4,
+        {"type": "nodata"},
+        7,
+        8
+      ]
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          3,
+          {"type": "nodata"},
+          3,
+          1
+        ],
+        "ignore_nodata": false
+      },
+      "returns": [
+        1,
+        4,
+        {"type": "nodata"},
+        {"type": "nodata"},
+        {"type": "nodata"}
+      ]
+    }
+  ]
+}

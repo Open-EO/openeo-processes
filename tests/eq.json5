@@ -1,0 +1,137 @@
+{
+  "id": "eq",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {
+        "x": 1,
+        "y": 1
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "y": 1.0
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "y": "1"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": 0,
+        "y": false
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": 1.02,
+        "y": 1,
+        "delta": 0.01
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": -1,
+        "y": -1.001,
+        "delta": 0.01
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": 115,
+        "y": 110,
+        "delta": 10
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": "Test",
+        "y": "test"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": "Test",
+        "y": "test",
+        "case_sensitive": false
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": "Ä",
+        "y": "ä",
+        "case_sensitive": false
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": "2018-01-01T00:00:00Z",
+        "y": "2018-01-01T00:00:00+00:00"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "y": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"},
+        "y": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "x": 5,
+        "y": NaN
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": NaN,
+        "y": 5
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": NaN,
+        "y": NaN
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": Infinity,
+        "y": Infinity
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": Infinity,
+        "y": -Infinity
+      },
+      "returns": false
+    }
+  ]
+}

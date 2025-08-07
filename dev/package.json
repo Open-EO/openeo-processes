@@ -23,8 +23,15 @@
     "http-server": "^14.1.1"
   },
   "scripts": {
-    "test": "openeo-processes-lint testConfig.json",
+    "check-tests": "node check-tests.js",
+    "has-tests": "node has-tests.js",
+    "lint": "openeo-processes-lint testConfig.json",
+    "test": "npm run has-tests && npm run check-tests && npm run lint",
     "generate": "concat-json-files \"../{*,proposals/*}.json\" -t \"processes.json\"",
     "start": "npm run generate && http-server -p 9876 -o docs.html -c-1"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "json5": "^2.2.3"
   }
 }
