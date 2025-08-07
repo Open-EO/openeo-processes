@@ -10,7 +10,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "A GeoJSON object to convert into a vector data cube. The GeoJSON type `GeometryCollection` is not supported. Each geometry in the GeoJSON data results in a dimension label in the `geometries` dimension.",
+            "description": "A GeoJSON object to convert into a vector data cube. The GeoJSON type `GeometryCollection` is not supported. Each geometry in the GeoJSON data results in a dimension label in the `geometry` dimension.",
             "schema": {
                 "type": "object",
                 "subtype": "geojson"
