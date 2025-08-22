@@ -33,7 +33,7 @@ The encoding is replaced with `null` unless otherwise specified by the runners.
 Datetimes as strings have a varying precision, especially regarding the milliseconds.
 Also, sometimes timezones are differently handled.
 
-Datetimes in return values should be encoded as follows so that the results can be compared better:
+Datetimes in return values should be encoded in compliance with RFC 3339 so that the results can be compared better:
 
 ```json5
 {
