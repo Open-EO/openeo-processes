@@ -7,7 +7,7 @@ This folder contains test cases for the openEO processes.
 The test cases assume a couple of things as they are an abstraction and not bound to specific implementations:
 - The JSON Schema type `number` explicitly includes the values `+Infinity`, `-Infinity` and `NaN`.
 - The input and output values for no-data values are `null` by default unless otherwise specified by a runner.
-- Input that is not valid according to the schemas, will be rejected upfront and will not be checked on. For example, the absolute process only tests against the data types `number` and `null`. There are no tests for a boolean or string input.
+- Input that is not valid according to the process schema must be rejected upfront, without any process evaluation attempt. Consequently, cases with schema mismatches are not covered in these tests. For example, the absolute process only tests against the data types `number` and `null`. There are no tests for a boolean or string input.
 - Numerical data types such as uint8 don't matter, i.e. tests don't check for overflows etc. This suite can't provide such tests as the underlying data type is not known.
 - If not otherwise specified for numbers, a precision of 10 decimals is checked so return values should have at least 11 decimals.
 
