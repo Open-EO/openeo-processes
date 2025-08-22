@@ -38,7 +38,7 @@
                     "pattern": "^https?://"
                 },
                 {
-                    "description": "Path to a UDF uploaded to the server.\n\nFile paths are relative to the file workspace of the user. The workspace is the root folder, i.e. the paths `/folder/file.txt` and `folder/file.txt` and `./folder/file.txt` are all equivalent. Specifying paths outside of the workspace is not allowed and throws a `FileNotFound` exception.",
+                    "description": "Path to a UDF uploaded to the user workspace.\n\nAs the workspace acts as an isolated root folder, the absolute path `/folder/file.txt` and relative paths `folder/file.txt` and `./folder/file.txt` are all equivalent. Likewise, specifying a path outside of the workspace results in a `FileNotFound` error.",
                     "type": "string",
                     "subtype": "file-path",
                     "pattern": "^[^\r\n\\:'\"]+$"
