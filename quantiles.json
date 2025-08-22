@@ -53,7 +53,7 @@
         },
         {
             "name": "ignore_nodata",
-            "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that an array with `null` values is returned if any element is such a value.",
+            "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, any no-data value in the array results in an array with solely no-data (or `null`) values.",
             "schema": {
                 "type": "boolean"
             },

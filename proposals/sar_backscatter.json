@@ -52,7 +52,7 @@
         },
         {
             "name": "elevation_model",
-            "description": "The digital elevation model to use. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
+            "description": "The digital elevation model to use. The default value `null` allows the back-end to choose, which will improve portability, but reduce reproducibility.",
             "optional": true,
             "default": null,
             "schema": [
@@ -67,7 +67,7 @@
         },
         {
             "name": "mask",
-            "description": "If set to `true`, a data mask is added to the bands with the name `mask`. It indicates which values are valid (1), invalid (0) or contain no-data (null).",
+            "description": "If set to `true`, a data mask is added to the bands with the name `mask`. It indicates which values are valid (1), invalid (0), or contain a no-data value.",
             "optional": true,
             "default": false,
             "schema": {
