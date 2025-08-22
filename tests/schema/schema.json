@@ -40,7 +40,8 @@
             "description": "A list of test cases without a specific order",
             "type": "array",
             "items": {
-                "description": "A test case with a set of arguments and a specific return value or exception\n\nIf both `returns` and `throws` are provided, it means that either of it should be true.\nSo either the process retuens as specified or throws the specified error.",
+                "description": "A test case with a set of arguments and a specific return value or exception\n\nIf both `returns` and `throws` are provided, it means that either of it should be true.\nSo either the process returns as specified or throws the specified error.",
+
                 "type": "object",
                 "required": [
                     "arguments"
