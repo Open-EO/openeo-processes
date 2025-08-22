@@ -10,14 +10,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Implementation guide for implementing OGC API - Processes in openEO
 - Unit Tests (see folder `tests`, moved specification tests and CI tools to `dev`)
-- `export_collection`
-- `export_workspace`
-- `run_ogcapi`
-- `run_ogcapi_externally`
-- `stac_modify`
+- `date_difference`: Allow `week` as a unit [#506](https://github.com/Open-EO/openeo-processes/issues/506)
+- `export_collection`: New process
+- `export_workspace`: New process
+- `run_ogcapi`: New process
+- `run_ogcapi_externally`: New process
+- `stac_modify`: New process
+- `text_find`: New process
 
 ### Changed
 
+- Processes that have been marked as stable: `apply_polygon`, `date_between`, `date_shift`, `filter_labels`, `inspect`
 - Clarified for various mathematical functions the defined input and output ranges.
   Mention that `NaN` is returned outside of the defined input range where possible.
 - Clarified for several comparison processes how `NaN` values have to be handled. 
@@ -33,8 +36,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Clarified for various mathematical functions the defined input and output ranges. Mention that `NaN` is returned outside of the defined input range where possible.
 - Clarified for various processes the handling of no-data values and null, see also the [implementation guide](meta/implementation.md).  [#480](https://github.com/Open-EO/openeo-processes/issues/480)
+- `add_dimension`: Clearly define behaviour for adding spatial dimensions
 - `apply_polygon`: Replaced outdated usage of `raster-cube` subtype with `datacube` and dimensions. [#524](https://github.com/Open-EO/openeo-processes/issues/524)
 - `aggregate_spatial` and `load_geojson`: Dimensions must by of type `geometry`, not `geometries`
+- `aggregate_spatial`: Clarified that the output geometries are unchanged compared to the input geometries. [#499](https://github.com/Open-EO/openeo-processes/issues/499)
 - `aggregate_temporal` and `aggregate_temporal_period`: Clarified that the process throws a `DimensionNotAvailable` exception when no temporal dimension exists.
 - `aggregate_temporal_period`: Removed unused exception `DistinctDimensionLabelsRequired`.
 - `aggregate_temporal_period`: Clarified that the definition of weeks follows ISO 8601.
@@ -46,7 +51,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `eq` and `neq`: Explicitly set the minimum value for the `delta` parameter.
 - `filter_bbox`, `load_collection`, `load_stac`: Clarified that the bounding box is reprojected to the CRS of the spatial data cube dimensions if required.
 - `filter_spatial`: Clarified that masking is applied using the given geometries. [#469](https://github.com/Open-EO/openeo-processes/issues/469)
-- `load_collection` and `load_stac`: Clarified that scale and offset are not applied automatically when loading the data. [#503](https://github.com/Open-EO/openeo-processes/issues/503)
+- `load_collection` and `load_stac`:
+    - Clarified that scale and offset are not applied automatically when loading the data. [#503](https://github.com/Open-EO/openeo-processes/issues/503)
+    - Clarify the dimension naming and the order of dimension labels for nominal labels. [#488](https://github.com/Open-EO/openeo-processes/issues/488), [#489](https://github.com/Open-EO/openeo-processes/issues/489)
+- `load_stac`: Clarify handling of the `properties` parameter in the context of STAC APIs and static catalogs. [#536](https://github.com/Open-EO/openeo-processes/issues/536)
+- `load_uploaded_files` and `run_udf`: Clarify handling of file paths and added `FileNotFound` exception. [#461](https://github.com/Open-EO/openeo-processes/issues/461)
 - `mask`: Add missing exception `IncompatibleDataCubes` [#538](https://github.com/Open-EO/openeo-processes/issues/538)
 - `mod`: Clarified behavior for y = 0
 - `run_udf`: Simplified and clarified the schema for `data` - no functional change.

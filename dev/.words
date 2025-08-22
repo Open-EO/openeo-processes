@@ -37,6 +37,7 @@ signum
 STAC
 catalog
 Catalog
+catalogs
 summand
 UDFs
 gdalwarp
@@ -49,3 +50,5 @@ date1
 date2
 favor
 Undeploy
+queryable
+Queryables
