@@ -27,7 +27,7 @@
                     "pattern": "^https?://"
                 },
                 {
-                    "description": "Path to a UDF uploaded to the server.",
+                    "description": "Path to a UDF uploaded to the user workspace.\n\nAs the workspace acts as an isolated root folder, the absolute path `/folder/file.txt` and relative paths `folder/file.txt` and `./folder/file.txt` are all equivalent. Likewise, specifying a path outside of the workspace results in a `FileNotFound` error.",
                     "type": "string",
                     "subtype": "file-path",
                     "pattern": "^[^\r\n\\:'\"]+$"
@@ -80,6 +80,9 @@
         },
         "InvalidVersion": {
             "message": "The specified UDF runtime version is not supported."
+        },
+        "FileNotFound": {
+            "message": "The specified file does not exist."
         }
     },
     "returns": {

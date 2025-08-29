@@ -52,6 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `filter_spatial`: Clarified that masking is applied using the given geometries. [#469](https://github.com/Open-EO/openeo-processes/issues/469)
 - `load_stac`: Clarify handling of the `properties` parameter in the context of STAC APIs and static catalogs. [#536](https://github.com/Open-EO/openeo-processes/issues/536)
 - `load_collection` and `load_stac`: Clarified that scale and offset are not applied automatically when loading the data. [#503](https://github.com/Open-EO/openeo-processes/issues/503)
+- `load_uploaded_files` and `run_udf`: Clarify handling of file paths and added `FileNotFound` exception. [#461](https://github.com/Open-EO/openeo-processes/issues/461)
 - `mask`: Add missing exception `IncompatibleDataCubes` [#538](https://github.com/Open-EO/openeo-processes/issues/538)
 - `mod`: Clarified behavior for y = 0
 - `run_udf`: Simplified and clarified the schema for `data` - no functional change.

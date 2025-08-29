@@ -1,7 +1,7 @@
 {
     "id": "export_workspace",
-    "summary": "Export data to a cloud user workspace",
-    "description": "Exports the given processing results made available through a STAC resource (e.g., a STAC Collection) to the given user workspace. The STAC resource itself is exported with all STAC resources and assets underneath.",
+    "summary": "Export data to a cloud workspace",
+    "description": "Exports the given processing results made available through a STAC resource (e.g., a STAC Collection) to the given cloud workspace. The STAC resource itself is exported with all STAC resources and assets underneath.",
     "categories": [
         "export",
         "stac"
@@ -10,7 +10,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "The data to export to the user workspace as a STAC resource.",
+            "description": "The data to export to the cloud workspace as a STAC resource.",
             "schema": {
                 "type": "object",
                 "subtype": "stac"
@@ -18,7 +18,7 @@
         },
         {
             "name": "workspace",
-            "description": "The identifier of the workspace to export to.",
+            "description": "The identifier of the cloud workspace to export to.",
             "schema": {
                 "type": "string",
                 "pattern": "^[\\w\\-\\.~]+$",
