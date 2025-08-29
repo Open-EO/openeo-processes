@@ -1,7 +1,7 @@
 {
     "id": "divide",
     "summary": "Division of two numbers",
-    "description": "Divides argument `x` by the argument `y` (*`x / y`*) and returns the computed result.\n\nNo-data values are taken into account so that `null` is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. A division by zero results in:\n\n- +infinity for `x` > 0,\n- -infinity for `x` < 0,\n- `NaN` for `x` = 0,\n- or otherwise, throws a `DivisionByZero` exception if the other options are not supported by the processing environment.",
+    "description": "Divides argument `x` by the argument `y` (*`x / y`*) and returns the computed result.\n\nNo-data values are taken into account so that the no-data value is returned if any element is such a value.\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. A division by zero results in:\n\n- +infinity for `x` > 0,\n- -infinity for `x` < 0,\n- `NaN` for `x` = 0,\n- or otherwise, throws a `DivisionByZero` exception if the other options are not supported by the processing environment.",
     "categories": [
         "math"
     ],

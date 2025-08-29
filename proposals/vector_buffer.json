@@ -22,7 +22,7 @@
         },
         {
             "name": "distance",
-            "description": "The distance of the buffer in meters. A positive distance expands the geometries, resulting in outward buffering (dilation), while a negative distance shrinks the geometries, resulting in inward buffering (erosion).\n\nIf the unit of the spatial reference system is not meters, a `UnitMismatch` error is thrown. Use ``vector_reproject()`` to convert the geometries to a suitable spatial reference system.",
+            "description": "The distance of the buffer in meters. A positive distance expands the geometries, resulting in outward buffering (dilation), while a negative distance shrinks the geometries, resulting in inward buffering (erosion).\n\nIf the unit of the spatial reference system is not meters, a `UnitMismatch` exception is thrown. Use ``vector_reproject()`` to convert the geometries to a suitable spatial reference system.",
             "schema": {
                 "type": "number",
                 "not": {

@@ -1,7 +1,7 @@
 {
     "id": "run_udf",
     "summary": "Run a UDF",
-    "description": "Runs a UDF in one of the supported runtime environments.\n\nThe process can either:\n\n1. load and run a UDF stored in a file on the server-side workspace of the authenticated user. The path to the UDF file must be relative to the root directory of the user's workspace.\n2. fetch and run a remotely stored and published UDF by absolute URI.\n3. run the source code specified inline as string.\n\nThe loaded UDF can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. The user must ensure that the data is given in a way that the UDF code can make sense of it.",
+    "description": "Runs a UDF in one of the supported runtime environments.\n\nThe process can either:\n\n1. load and run a UDF stored in a file on the server-side workspace of the authenticated user. The path to the UDF file must be relative to the root directory of the user's workspace.\n2. fetch and run a remotely stored and published UDF by absolute URI.\n3. run the source code specified inline as string.\n\nThe loaded UDF can be executed in several processes such as ``aggregate_spatial()``, ``apply()``, ``apply_dimension()`` and ``reduce_dimension()``. The user must ensure that the data is provided in a way that the UDF code can make sense of it.",
     "categories": [
         "cubes",
         "import",
@@ -10,21 +10,10 @@
     "parameters": [
         {
             "name": "data",
-            "description": "The data to be passed to the UDF.",
-            "schema": [
-                {
-                    "title": "Array",
-                    "type": "array",
-                    "minItems": 1,
-                    "items": {
-                        "description": "Any data type."
-                    }
-                },
-                {
-                    "title": "Single Value",
-                    "description": "A single value of any data type."
-                }
-            ]
+            "description": "The data to be passed to the UDF.\n\nUsually, `run_udf` process is used as a child process of a data cube process such as ``reduce_dimension()`` or ``apply()``. These data cube processes define the actual type of this data. For example, in case of ``reduce_dimension()``, `data` will be an array of values, while in case of ``apply()`` it will be a single scalar value.",
+            "schema": {
+                "description": "A value of any data type."
+            }
         },
         {
             "name": "udf",
@@ -38,7 +27,7 @@
                     "pattern": "^https?://"
                 },
                 {
-                    "description": "Path to a UDF uploaded to the server.",
+                    "description": "Path to a UDF uploaded to the user workspace.\n\nAs the workspace acts as an isolated root folder, the absolute path `/folder/file.txt` and relative paths `folder/file.txt` and `./folder/file.txt` are all equivalent. Likewise, specifying a path outside of the workspace results in a `FileNotFound` error.",
                     "type": "string",
                     "subtype": "file-path",
                     "pattern": "^[^\r\n\\:'\"]+$"
@@ -91,6 +80,9 @@
         },
         "InvalidVersion": {
             "message": "The specified UDF runtime version is not supported."
+        },
+        "FileNotFound": {
+            "message": "The specified file does not exist."
         }
     },
     "returns": {

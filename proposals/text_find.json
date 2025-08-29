@@ -1,11 +1,11 @@
 {
-    "id": "text_contains",
-    "summary": "Text contains another text",
-    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern`. No-data values are passed through.",
+    "id": "text_find",
+    "summary": "First position of a text in another text",
+    "description": "Checks where the text (also known as *string*) specified for `pattern` is positioned in the text specified for `data` for the first time. No-data values are passed through.",
     "categories": [
-        "texts",
-        "comparison"
+        "texts"
     ],
+    "experimental": true,
     "parameters": [
         {
             "name": "data",
@@ -35,12 +35,13 @@
         }
     ],
     "returns": {
-        "description": "`true` if `data` contains the `pattern`, false` otherwise.",
+        "description": "A value >= 0 that indicates the position of the text, `null` if the text was not found.",
         "schema": {
             "type": [
-                "boolean",
+                "integer",
                 "null"
-            ]
+            ],
+            "minimum": 0
         }
     },
     "examples": [
@@ -49,21 +50,21 @@
                 "data": "Lorem ipsum dolor sit amet",
                 "pattern": "openEO"
             },
-            "returns": false
+            "returns": null
         },
         {
             "arguments": {
                 "data": "Lorem ipsum dolor sit amet",
                 "pattern": "ipsum dolor"
             },
-            "returns": true
+            "returns": 6
         },
         {
             "arguments": {
                 "data": "Lorem ipsum dolor sit amet",
                 "pattern": "Ipsum Dolor"
             },
-            "returns": false
+            "returns": null
         },
         {
             "arguments": {
@@ -71,7 +72,7 @@
                 "pattern": "SIT",
                 "case_sensitive": false
             },
-            "returns": true
+            "returns": 18
         },
         {
             "arguments": {
@@ -79,7 +80,7 @@
                 "pattern": "ö",
                 "case_sensitive": false
             },
-            "returns": true
+            "returns": 1
         },
         {
             "arguments": {
