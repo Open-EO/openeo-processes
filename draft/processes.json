@@ -10270,8 +10270,8 @@
   },
   {
     "id": "export_workspace",
-    "summary": "Export data to a cloud user workspace",
-    "description": "Exports the given processing results made available through a STAC resource (e.g., a STAC Collection) to the given user workspace. The STAC resource itself is exported with all STAC resources and assets underneath.",
+    "summary": "Export data to a cloud workspace",
+    "description": "Exports the given processing results made available through a STAC resource (e.g., a STAC Collection) to the given cloud workspace. The STAC resource itself is exported with all STAC resources and assets underneath.",
     "categories": [
       "export",
       "stac"
@@ -10280,7 +10280,7 @@
     "parameters": [
       {
         "name": "data",
-        "description": "The data to export to the user workspace as a STAC resource.",
+        "description": "The data to export to the cloud workspace as a STAC resource.",
         "schema": {
           "type": "object",
           "subtype": "stac"
@@ -10288,7 +10288,7 @@
       },
       {
         "name": "workspace",
-        "description": "The identifier of the workspace to export to.",
+        "description": "The identifier of the cloud workspace to export to.",
         "schema": {
           "type": "string",
           "pattern": "^[\\w\\-\\.~]+$",
@@ -10983,7 +10983,7 @@
     "parameters": [
       {
         "name": "paths",
-        "description": "The files to read. Folders can't be specified, specify all files instead. An exception is thrown if a file can't be read.",
+        "description": "The files to read. Folders can't be specified, specify all files instead. An exception is thrown if a file can't be read.\n\nAs the workspace acts as an isolated root folder, the absolute path `/folder/file.txt` and relative paths `folder/file.txt` and `./folder/file.txt` are all equivalent. Likewise, specifying a path outside of the workspace results in a `FileNotFound` error.",
         "schema": {
           "type": "array",
           "subtype": "file-paths",
@@ -11023,6 +11023,9 @@
     "exceptions": {
       "FormatUnsuitable": {
         "message": "Data can't be loaded with the requested input format."
+      },
+      "FileNotFound": {
+        "message": "The specified file does not exist."
       }
     }
   },
@@ -13153,7 +13156,7 @@
             "pattern": "^https?://"
           },
           {
-            "description": "Path to a UDF uploaded to the server.",
+            "description": "Path to a UDF uploaded to the user workspace.\n\nAs the workspace acts as an isolated root folder, the absolute path `/folder/file.txt` and relative paths `folder/file.txt` and `./folder/file.txt` are all equivalent. Likewise, specifying a path outside of the workspace results in a `FileNotFound` error.",
             "type": "string",
             "subtype": "file-path",
             "pattern": "^[^\r\n\\:'\"]+$"
@@ -13206,6 +13209,9 @@
       },
       "InvalidVersion": {
         "message": "The specified UDF runtime version is not supported."
+      },
+      "FileNotFound": {
+        "message": "The specified file does not exist."
       }
     },
     "returns": {
