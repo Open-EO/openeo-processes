@@ -1,0 +1,81 @@
+{
+    "id": "rqadeforestation",
+    "summary": "Deforestation detection using recurrence quantification analysis",
+    "description": "Wrapper of RQADeforestation.py",
+    "categories": [
+        "math > statistics",
+        "reducer"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "An array of numbers.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "threshold",
+            "description": "Describe threshold",
+            "schema": {
+                "type": "number"
+            },
+            "default": 0.5,
+            "optional": true
+        },
+        {
+            "name": "border",
+            "description": "Describe border",
+            "schema": {
+                "type": "number"
+            },
+            "default": 10,
+            "optional": true
+        },
+        {
+            "name": "theiler",
+            "description": "Describe theiler",
+            "schema": {
+                "type": "number"
+            },
+            "default": 1,
+            "optional": true
+        },
+        {
+            "name": "ignore_nodata",
+            "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is returned if any value is such a value.",
+            "schema": {
+                "type": "boolean"
+            },
+            "default": true,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "RQA TREND metric summarzing the time series of a given spatial pixel",
+        "schema": {
+            "type": [
+                "number",
+                "null"
+            ]
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://github.com/EarthyScience/rqadeforestation.py",
+            "title": "Library used to process the data"
+        },
+        {
+            "rel": "publication",
+            "href": "https://doi.org/10.1109/JSTARS.2020.3019333",
+            "title": "Publication of the underlying algorithm"
+        }
+    ]
+}
