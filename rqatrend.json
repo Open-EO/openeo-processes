@@ -6,6 +6,7 @@
         "math > statistics",
         "reducer"
     ],
+    "experimental": true,
     "parameters": [
         {
             "name": "data",
