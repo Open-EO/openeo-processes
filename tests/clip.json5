@@ -1,0 +1,150 @@
+{
+  "id": "clip",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {
+        "x": 0,
+        "min": -10,
+        "max": 10
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "min": -10,
+        "max": 10
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "x": -1,
+        "min": -10,
+        "max": 10
+      },
+      "returns": -1
+    },
+    {
+      "arguments": {
+        "x": 20,
+        "min": -10,
+        "max": 10
+      },
+      "returns": 10
+    },
+    {
+      "arguments": {
+        "x": -20,
+        "min": -10,
+        "max": 10
+      },
+      "returns": -10
+    },
+    {
+      "arguments": {
+        "x": 1.5,
+        "min": 1,
+        "max": 2
+      },
+      "returns": 1.5
+    },
+    {
+      "arguments": {
+        "x": -2.5,
+        "min": 1,
+        "max": 2
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "x": -1.5,
+        "min": -2,
+        "max": -1
+      },
+      "returns": -1.5
+    },
+    {
+      "arguments": {
+        "x": -0.5,
+        "min": -2,
+        "max": -1
+      },
+      "returns": -1
+    },
+    {
+      "arguments": {
+        "x": -1.5,
+        "min": -1,
+        "max": -2
+      },
+      "throws": "MinMaxSwapped"
+    },
+    {
+      "arguments": {
+        "x": Infinity,
+        "min": -1,
+        "max": 1
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "x": -Infinity,
+        "min": -1,
+        "max": 1
+      },
+      "returns": -1
+    },
+    {
+      "arguments": {
+        "x": -2,
+        "min": -1,
+        "max": Infinity
+      },
+      "returns": -1
+    },
+    {
+      "arguments": {
+        "x": 2,
+        "min": -Infinity,
+        "max": 1
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "x": 2,
+        "min": NaN,
+        "max": 1
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": 2,
+        "min": -1,
+        "max": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": NaN,
+        "min": -1,
+        "max": 1
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"},
+        "min": -1,
+        "max": 1
+      },
+      "returns": {"type": "nodata"}
+    }
+  ]
+}

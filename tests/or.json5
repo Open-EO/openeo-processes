@@ -1,0 +1,69 @@
+{
+  "id": "or",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {
+        "x": true,
+        "y": true
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": true,
+        "y": false
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": true,
+        "y": {"type": "nodata"}
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": false,
+        "y": true
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": false,
+        "y": false
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": false,
+        "y": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"},
+        "y": true
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"},
+        "y": false
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"},
+        "y": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    }
+  ]
+}

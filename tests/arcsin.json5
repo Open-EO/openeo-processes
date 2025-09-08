@@ -1,0 +1,72 @@
+{
+  "id": "arcsin",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {
+        "x": 0
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "x": 1
+      },
+      "returns": 1.57079632679
+    },
+    {
+      "arguments": {
+        "x": -1
+      },
+      "returns": -1.57079632679
+    },
+    {
+      "arguments": {
+        "x": 0.5
+      },
+      "returns": 0.52359877559
+    },
+    {
+      "arguments": {
+        "x": -0.5
+      },
+      "returns": -0.52359877559
+    },
+    {
+      "arguments": {
+        "x": 2
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": -2
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": Infinity
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": -Infinity
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": "text_ends",
+  "level": "L2-Text",
+  "tests": [
+    {
+      "arguments": {
+        "data": "Lorem ipsum dolor sit amet",
+        "pattern": "amet"
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "data": "Lorem ipsum dolor sit amet",
+        "pattern": "AMET"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "data": "Lorem ipsum dolor sit amet",
+        "pattern": "Lorem"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "data": "Lorem ipsum dolor sit amet",
+        "pattern": "AMET",
+        "case_sensitive": false
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "data": "Ä",
+        "pattern": "ä",
+        "case_sensitive": false
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "data": {"type": "nodata"},
+        "pattern": "null"
+      },
+      "returns": {"type": "nodata"}
+    }
+  ]
+}

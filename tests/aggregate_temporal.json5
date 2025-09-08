@@ -1,0 +1,576 @@
+{
+  "id": "aggregate_temporal",
+  "level": "L2",
+  "tests": [
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xytt-no-data.json5"
+        },
+        "intervals": [
+          ["2015-01-01", "2016-01-01"],
+          ["2016-01-01", "2017-01-01"],
+          ["2017-01-01", "2018-01-01"]
+        ],
+        "reducer": {
+          "process_graph": {
+            "mean": {
+              "process_id": "mean",
+              "arguments": {
+                "data": {
+                  "from_parameter": "data"
+                }
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "throws": "TooManyDimensions"
+    },
+    {
+      "required": [
+        "mean"
+      ],
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-minimal-int.json5"
+        },
+        "intervals": [
+          ["2015-01-01", "2016-01-01"],
+          ["2016-01-01", "2017-01-01"],
+          ["2017-01-01", "2018-01-01"]
+        ],
+        "reducer": {
+          "process_graph": {
+            "mean": {
+              "process_id": "mean",
+              "arguments": {
+                "data": {
+                  "from_parameter": "data"
+                }
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "throws": "DimensionNotAvailable"
+    },
+    {
+      "required": [
+        "mean"
+      ],
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "intervals": [
+          ["2015-01-01", "2016-01-01"],
+          ["2016-01-01", "2017-01-01"],
+          ["2017-01-01", "2018-01-01"]
+        ],
+        "reducer": {
+          "process_graph": {
+            "mean": {
+              "process_id": "mean",
+              "arguments": {
+                "data": {
+                  "from_parameter": "data"
+                }
+              },
+              "result": true
+            }
+          }
+        },
+        "dimension": "time"
+      },
+      "throws": "DimensionNotAvailable"
+    },
+    {
+      "required": [
+        "mean"
+      ],
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "intervals": [
+          ["2015-01-01", "2016-01-01"],
+          ["2017-01-01", "2016-01-01"],
+          ["2017-01-01", "2018-01-01"]
+        ],
+        "reducer": {
+          "process_graph": {
+            "mean": {
+              "process_id": "mean",
+              "arguments": {
+                "data": {
+                  "from_parameter": "data"
+                }
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "throws": "TemporalExtentEmpty"
+    },
+    {
+      "required": [
+        "mean"
+      ],
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "intervals": [
+          ["2015-01-01", "2016-01-01"],
+          ["2015-01-01", "2017-01-01"],
+          ["2015-01-01", "2018-01-01"]
+        ],
+        "reducer": {
+          "process_graph": {
+            "mean": {
+              "process_id": "mean",
+              "arguments": {
+                "data": {
+                  "from_parameter": "data"
+                }
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "throws": "DistinctDimensionLabelsRequired"
+    },
+    {
+      "required": [
+        "mean"
+      ],
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-more-timestamps.json5"
+        },
+        "intervals": [
+          ["2020-01-01", "2020-01-07"],
+          ["2020-01-07", "2020-01-14"]
+        ],
+        "reducer": {
+          "process_graph": {
+            "mean": {
+              "process_id": "mean",
+              "arguments": {
+                "data": {
+                  "from_parameter": "data"
+                }
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["t", "y", "x"],
+        "dimensions": {
+          "t": {
+            "type": "temporal",
+            "values": [
+              "2020-01-01",
+              "2020-01-07"
+            ]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [
+            [-19.85, 32.94, -17.25, 0.82],
+            [20.99, 6.25, 56.07, 2.31],
+            [9.29, -0.70, 13.21, -10.06]
+          ],
+          [
+            [29.78, 61.46, 49.70, -80.62],
+            [3.40, 48.45, -62.93, 61.37],
+            [8.78, -50.03, 78.05, 65.77]
+          ]
+        ]
+      }
+    },
+    {
+      "required": [
+        "absolute",
+        "mean"
+      ],
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-more-timestamps.json5"
+        },
+        "intervals": [
+          ["2020-01-01T00:00:00Z", "2020-01-07T00:00:00Z"],
+          ["2020-01-07T00:00:00Z", "2020-01-14T00:00:00Z"],
+          ["2020-01-14T00:00:00Z", "2020-01-21T00:00:00Z"]
+        ],
+        "reducer": {
+          "process_graph": {
+            "mean": {
+              "process_id": "mean",
+              "arguments": {
+                "data": {
+                  "from_parameter": "data"
+                }
+              }
+            },
+            "absolute": {
+              "process_id": "absolute",
+              "arguments": {
+                "x": {
+                  "from_node": "mean"
+                }
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["t", "y", "x"],
+        "dimensions": {
+          "t": {
+            "type": "temporal",
+            "values": [
+              "2020-01-01T00:00:00Z",
+              "2020-01-07T00:00:00Z",
+              "2020-01-14T00:00:00Z"
+            ]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [
+            [19.85, 32.94, 17.25, 0.82],
+            [20.99, 6.25, 56.07, 2.31],
+            [9.29, 0.70, 13.21, 10.06]
+          ],
+          [
+            [29.78, 61.46, 49.70, 80.62],
+            [3.40, 48.45, 62.93, 61.37],
+            [8.78, 50.03, 78.05, 65.77]
+          ],
+          [
+            [NaN, NaN, NaN, NaN],
+            [NaN, NaN, NaN, NaN],
+            [NaN, NaN, NaN, NaN]
+          ]
+        ]
+      }
+    },
+    {
+      "required": [
+        "mean"
+      ],
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-more-timestamps.json5"
+        },
+        "intervals": [
+          ["2020-01-01T00:00:00Z", "2020-01-07T00:00:00Z"],
+          ["2020-01-07T00:00:00Z", "2020-01-14T00:00:00Z"],
+          ["2020-01-14T00:00:00Z", "2020-01-21T00:00:00Z"]
+        ],
+        "reducer": {
+          "process_graph": {
+            "mean": {
+              "process_id": "mean",
+              "arguments": {
+                "data": {
+                  "from_parameter": "data"
+                }
+              },
+              "result": true
+            }
+          }
+        },
+        "labels": [
+          "W01",
+          "W02",
+          "W03"
+        ]
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["t", "y", "x"],
+        "dimensions": {
+          "t": {
+            "type": "temporal",
+            "values": [
+              "W01",
+              "W02",
+              "W03"
+            ]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [
+            [-19.85, 32.94, -17.25, 0.82],
+            [20.99, 6.25, 56.07, 2.31],
+            [9.29, -0.70, 13.21, -10.06]
+          ],
+          [
+            [29.78, 61.46, 49.70, -80.62],
+            [3.40, 48.45, -62.93, 61.37],
+            [8.78, -50.03, 78.05, 65.77]
+          ],
+          [
+            [NaN, NaN, NaN, NaN],
+            [NaN, NaN, NaN, NaN],
+            [NaN, NaN, NaN, NaN]
+          ]
+        ]
+      }
+    },
+    {
+      "level": "L3",
+      "required": [
+        "sum"
+      ],
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-more-timestamps.json5"
+        },
+        "intervals": [
+          ["2020-01-01T00:00:00Z", "2020-01-07T00:00:00Z"],
+          ["2020-01-07T00:00:00Z", "2020-01-14T00:00:00Z"]
+        ],
+        "reducer": {
+          "process_graph": {
+            "sum": {
+              "process_id": "sum",
+              "arguments": {
+                "data": {
+                  "from_parameter": "data"
+                },
+                "ignore_nodata": {
+                  "from_parameter": "context"
+                }
+              },
+              "result": true
+            }
+          }
+        },
+        "context": false
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["t", "y", "x"],
+        "dimensions": {
+          "t": {
+            "type": "temporal",
+            "values": [
+              "2020-01-01T00:00:00Z",
+              "2020-01-07T00:00:00Z"
+            ]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [
+            [-59.55, 98.82, -51.74, 2.47],
+            [62.97, 18.75, 168.22, 6.93],
+            [27.86, -2.09, NaN, -30.17]
+          ],
+          [
+            [59.56, NaN, 99.39, -161.24],
+            [6.81, NaN, -125.85, 122.74],
+            [17.56, -100.05, NaN, 131.53]
+          ]
+        ]
+      }
+    },
+    {
+      "required": [
+        "mean"
+      ],
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-more-timestamps.json5"
+        },
+        "intervals": [
+          [null, "2020-01-04"],
+          ["2020-01-04", null]
+        ],
+        "reducer": {
+          "process_graph": {
+            "mean": {
+              "process_id": "mean",
+              "arguments": {
+                "data": {
+                  "from_parameter": "data"
+                }
+              },
+              "result": true
+            }
+          },
+          "labels": [
+            "before",
+            "after"
+          ]
+        }
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["t", "y", "x"],
+        "dimensions": {
+          "t": {
+            "type": "temporal",
+            "values": [
+              "before",
+              "after"
+            ]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [
+            [-23.075, 31.375, -47.81, -36.125],
+            [-8.475, -27.675, 34.97, 15.275],
+            [49.13, 13.97, 25.16, -17.725]
+          ],
+          [
+            [15.387, 48.765, 47.757, -28.84],
+            [28.91, 61.275, -9.19, 33.04],
+            [-17.613, -43.36, 39.655, 45.603]
+          ]
+        ]
+      }
+    },
+    {
+      "required": [
+        "median"
+      ],
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-more-timestamps.json5"
+        },
+        "intervals": [
+          ["06:00:00", "18:00:00"],
+          ["18:00:00", "06:00:00"]
+        ],
+        "reducer": {
+          "process_graph": {
+            "mean": {
+              "process_id": "mean",
+              "arguments": {
+                "data": {
+                  "from_parameter": "data"
+                }
+              },
+              "result": true
+            }
+          }
+        }
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["t", "y", "x"],
+        "dimensions": {
+          "t": {
+            "type": "temporal",
+            "values": [
+              "06:00:00",
+              "18:00:00"
+            ]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [
+            [NaN, NaN, NaN, NaN],
+            [NaN, NaN, NaN, NaN],
+            [NaN, NaN, NaN, NaN]
+          ],
+          [
+            [-12.23, 44.91, 2.38, -64.25],
+            [1.05, 28.45, -3.11, 51.05],
+            [29.5, -30.03, 25.16, 46.15]
+          ]
+        ]
+      }
+    }
+  ]
+}

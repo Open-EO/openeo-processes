@@ -1,0 +1,60 @@
+{
+  "id": "exp",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {
+        "p": 0
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "p": 1
+      },
+      "returns": 2.71828182846
+    },
+    {
+      "arguments": {
+        "p": -1
+      },
+      "returns": 0.36787944117
+    },
+    {
+      "arguments": {
+        "p": 2
+      },
+      "returns": 7.38905609893
+    },
+    {
+      "arguments": {
+        "p": -2
+      },
+      "returns": 0.13533528324
+    },
+    {
+      "arguments": {
+        "p": Infinity
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "p": -Infinity
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "p": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "p": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    }
+  ]
+}

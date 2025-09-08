@@ -1,0 +1,128 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "A document with test cases for a specific openEO process",
+    "type": "object",
+    "required": [
+        "id",
+        "tests"
+    ],
+    "properties": {
+        "id": {
+            "type": "string",
+            "description": "The identifier for the process.",
+            "pattern": "^\\w+$"
+        },
+        "experimental": {
+            "type": "boolean",
+            "description": "Declares that the process is experimental, tests may fail.",
+            "default": false
+        },
+        "level": {
+            "type": "string",
+            "description": "openEO process profile the process is assigned to.",
+            "default": "L4",
+            "enum": [
+                "L1",
+                "L2",
+                "L2A",
+                "L2B",
+                "L2-Date",
+                "L2-Text",
+                "L3",
+                "L3-ML",
+                "L3-UDF",
+                "L3-Clim",
+                "L3-ARD",
+                "L4"
+            ]
+        },
+        "tests": {
+            "description": "A list of test cases without a specific order",
+            "type": "array",
+            "items": {
+                "description": "A test case with a set of arguments and a specific return value or exception\n\nIf both `returns` and `throws` are provided, it means that either of it should be true.\nSo either the process returns as specified or throws the specified error.",
+
+                "type": "object",
+                "required": [
+                    "arguments"
+                ],
+                "anyOf": [
+                    {
+                        "required": [
+                            "returns"
+                        ]
+                    },
+                    {
+                        "required": [
+                            "throws"
+                        ]
+                    }
+                ],
+                "properties": {
+                    "arguments": {
+                        "description": "A key-value pair for an argument. Key = Parameter name, Value = Argument value",
+                        "type": "object",
+                        "additionalProperties": {
+                            "description": "An argument, can be of any type"
+                        }
+                    },
+                    "returns": {
+                        "description": "The return value, can be of any type"
+                    },
+                    "required": {
+                        "description": "A list of processes that is required for this test (except for the process provided in `id`). This is usually required for processes that run a sub-process (callback) so that the test suite can skip tests for processes that are not supported.",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "description": "The identifier for the sub-process.",
+                            "pattern": "^\\w+$"
+                        }
+                    },
+                    "delta": {
+                        "description": "If set to a positive number the equality of the actual return value and the expected return value is checked against a delta value to circumvent problems with floating-point inaccuracy.",
+                        "type": "number",
+                        "default": 1e-10
+                    },
+                    "throws": {
+                        "description": "Specifies whether the execution is meant to throw an exception. If used in combination with a return value, it makes the test effectively optional.",
+                        "oneOf": [
+                            {
+                                "description": "Specify an exception name from the process specification",
+                                "type": "string",
+                                "minLength": 1
+                            },
+                            {
+                                "description": "Use true if the type of exception is unknown",
+                                "type": "boolean",
+                                "const": true
+                            }
+                        ]
+                    },
+                    "level": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "openEO process profile the test is assigned to. Defaults to the level of the process.",
+                        "default": null,
+                        "enum": [
+                            "L1",
+                            "L2",
+                            "L2A",
+                            "L2B",
+                            "L2-Date",
+                            "L2-Text",
+                            "L3",
+                            "L3-ML",
+                            "L3-UDF",
+                            "L3-Clim",
+                            "L3-ARD",
+                            "L4",
+                            null
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

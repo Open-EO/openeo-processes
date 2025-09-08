@@ -1,0 +1,48 @@
+{
+  "id": "sgn",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {
+        "x": -2
+      },
+      "returns": -1
+    },
+    {
+      "arguments": {
+        "x": 3.5
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "x": 0
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "x": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": Infinity
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "x": -Infinity
+      },
+      "returns": -1
+    },
+  ]
+}

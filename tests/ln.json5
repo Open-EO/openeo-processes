@@ -1,0 +1,67 @@
+{
+  "id": "ln",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {
+        "x": 1
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "x": 2.71828182846
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "x": 10
+      },
+      "returns": 2.30258509301
+    },
+    {
+      "arguments": {
+        "x": 0.5
+      },
+      "returns": -0.69314718056
+    },
+    {
+      "arguments": {
+        "x": 0
+      },
+      "returns": -Infinity,
+      "throws": true
+    },
+    {
+      "arguments": {
+        "x": -1
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": Infinity
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "x": -Infinity
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    }
+  ]
+}
