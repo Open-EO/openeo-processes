@@ -1,7 +1,6 @@
 {
   "id": "date_shift",
   "level": "L2-Date",
-  "experimental": true,
   "tests": [
     {
       "arguments": {
