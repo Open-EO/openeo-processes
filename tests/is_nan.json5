@@ -36,55 +36,55 @@
       "arguments": {
         "x": true
       },
-      "returns": true
+      "returns": false
     },
     {
       "arguments": {
         "x": false
       },
-      "returns": true
+      "returns": false
     },
     {
       "arguments": {
         "x": [NaN]
       },
-      "returns": true
+      "returns": false
     },
     {
       "arguments": {
         "x": []
       },
-      "returns": true
+      "returns": false
     },
     {
       "arguments": {
         "x": {}
       },
-      "returns": true
+      "returns": false
     },
     {
       "arguments": {
         "x": {"nan": NaN}
       },
-      "returns": true
+      "returns": false
     },
     {
       "arguments": {
         "x": "NaN"
       },
-      "returns": true
+      "returns": false
     },
     {
       "arguments": {
         "x": "nan"
       },
-      "returns": true
+      "returns": false
     },
     {
       "arguments": {
         "x": {"type": "nodata"}
       },
-      "returns": true
+      "returns": false
     }
   ]
 }
