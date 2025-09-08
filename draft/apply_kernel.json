@@ -1,7 +1,7 @@
 {
     "id": "apply_kernel",
     "summary": "Apply a spatial convolution with a kernel",
-    "description": "Applies a 2D convolution (i.e. a focal operation with a weighted kernel) on the horizontal spatial dimensions (axes `x` and `y`) of a raster data cube.\n\nEach value in the kernel is multiplied with the corresponding pixel value and all products are summed up afterwards. The sum is then multiplied with the factor.\n\nThe process can't handle non-numerical or infinite numerical values in the data cube. Boolean values are converted to integers (`false` = 0, `true` = 1), but all other non-numerical or infinite values are replaced with zeroes by default (see parameter `replace_invalid`).\n\nFor cases requiring more generic focal operations or non-numerical values, see ``apply_neighborhood()``.",
+    "description": "Applies a 2D convolution (i.e. a focal operation with a weighted kernel) on the horizontal spatial dimensions (axes `x` and `y`) of a raster data cube.\n\nEach value in the kernel is multiplied with the corresponding pixel value and all products are summed up afterwards. The sum is then multiplied with the factor.\n\nThe process can't handle non-numerical or infinite numerical values in the data cube. Boolean values are converted to integers (`false` = 0, `true` = 1), but all other non-numerical, NaN, no-data, or infinite values are replaced with zeroes by default (see parameter `replace_invalid`).\n\nFor cases requiring more generic focal operations or non-numerical values, see ``apply_neighborhood()``.",
     "categories": [
         "cubes",
         "math > image filter"
@@ -70,7 +70,7 @@
         },
         {
             "name": "replace_invalid",
-            "description": "This parameter specifies the value to replace non-numerical or infinite numerical values with. By default, those values are replaced with zeroes.",
+            "description": "This parameter specifies the value to replace non-numerical, NaN, no-data, or infinite numerical values with. By default, those values are replaced with zeroes.",
             "schema": {
                 "type": "number"
             },
