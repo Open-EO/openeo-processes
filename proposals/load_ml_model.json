@@ -35,6 +35,15 @@
             },
             "default": null,
             "optinoal": true
+        },
+        {
+            "name": "input_index",
+            "description": "STAC:MLM supports multiple ML model input specification. This parameter specifies the index of the input specification in the ``mlm:input`` array to use for prediction or training. As this is an array, the first input in the array has index 0.",
+            "schema": {
+                "type": "integer"
+            },
+            "default": 0,
+            "optional": true
         }
     ],
     "returns": {
