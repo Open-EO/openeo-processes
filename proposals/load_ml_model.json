@@ -34,7 +34,7 @@
                 "type": "string"
             },
             "default": null,
-            "optinoal": true
+            "optional": true
         },
         {
             "name": "input_index",
