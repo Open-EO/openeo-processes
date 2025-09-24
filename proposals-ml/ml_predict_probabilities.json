@@ -22,16 +22,6 @@
                 "type": "object",
                 "subtype": "ml-model"
             }
-        },
-        {
-            "name": "dimensions",
-            "description": "Zero or more dimensions that will be reduced by the model. Fails with a `DimensionNotAvailable` exception if one of the specified dimensions does not exist.",
-            "schema": {
-                "type": "array",
-                "items": {
-                    "type": "string"
-                }
-            }
         }
     ],
     "returns": {
