@@ -1,7 +1,7 @@
 {
     "id": "any",
     "summary": "Is at least one value true?",
-    "description": "Checks if **any** (i.e. at least one) value in `data` is `true`. If no value is given (i.e. the array is empty) the process returns the no-data value (or `null`).\n\nBy default all no-data values are ignored so that the process returns the no-data value (or `null`) if all values are no-data, `true` if at least one value is true and `false` otherwise. Setting the `ignore_nodata` flag to `false` takes no-data values into account and the array values are reduced pairwise according to the following truth table:\n\n```\n        || no-data | false   | true\n------- || ------- | ------- | ----\nno-data || no-data | no-data | true\nfalse   || no-data | false   | true\ntrue    || true    | true    | true\n```\n\n**Remark:** The process evaluates all values from the first to the last element and stops once the outcome is unambiguous. A result is ambiguous unless a value is `true`.",
+    "description": "Checks if **any** (i.e. at least one) value in `data` is `true`. If no value is given (i.e. the array is empty) the process returns `false`.\n\nBy default all no-data values are ignored so that the process returns `true` if at least one value is true and `false` otherwise. Setting the `ignore_nodata` flag to `false` takes no-data values into account and the array values are reduced pairwise according to the following truth table:\n\n```\n        || no-data | false   | true\n------- || ------- | ------- | ----\nno-data || no-data | no-data | true\nfalse   || no-data | false   | true\ntrue    || true    | true    | true\n```\n\n**Remark:** The process evaluates all values in an arbitrary order and stops once the outcome is unambiguous, i.e. when either a `true` value is encountered, or when all values have been taken into account.",
     "categories": [
         "logic",
         "reducer"
@@ -126,9 +126,17 @@
         },
         {
             "arguments": {
+                "data": [
+                    null
+                ]
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
                 "data": []
             },
-            "returns": null
+            "returns": false
         }
     ]
 }
