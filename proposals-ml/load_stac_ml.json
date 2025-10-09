@@ -1,7 +1,7 @@
 {
-    "id": "load_ml_model",
-    "summary": "Load a ML model",
-    "description": "Loads a machine learning model from a STAC Item.\n\nSuch a model could be trained and saved as part of a previous batch job with processes such as  ``ml_fit()`` and ``save_ml_model()``.",
+    "id": "load_stac_ml",
+    "summary": "Load a ML model from a STAC Item",
+    "description": "Loads a machine learning model from a STAC Item.\n\nSuch a model could be trained and saved as part of a previous batch job with processes such as  ``ml_fit()`` and ``save_ml_model()`` or  externally hosted models.",
     "categories": [
         "machine learning",
         "import"
