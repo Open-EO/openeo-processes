@@ -13,14 +13,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New processes in proposal state:
     - `date_between`
     - `date_difference`
-    - `export_cube`
-    - `export_ml_model`
     - `filter_vector`
     - `flatten_dimensions`
     - `import_cube`
     - `import_ml_model`
     - `load_geojson`
     - `load_ml_model`
+    - `load_stac_ml`
     - `load_url`
     - `mlm_class_catboost`
     - `mlm_class_lighttae`
