@@ -15,12 +15,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `date_difference`
     - `filter_vector`
     - `flatten_dimensions`
+    - `import_cube`
+    - `import_ml_model`
     - `load_geojson`
     - `load_ml_model`
+    - `load_stac_ml`
     - `load_url`
-    - `ml_fit_class_random_forest`
-    - `ml_fit_regr_random_forest`
+    - `mlm_class_catboost`
+    - `mlm_class_lighttae`
+    - `mlm_class_mlp`
+    - `mlm_class_random_forest`
+    - `mlm_class_svm`
+    - `mlm_class_tae`
+    - `mlm_class_tempcnn`
+    - `mlm_class_xgboost`
+    - `mlm_regr_random_forest`
+    - `mlm_regr_svm`
+    - `ml_fit`
+    - `ml_label_class`
     - `ml_predict`
+    - `ml_predict_probabilities`
+    - `ml_smooth_class`
+    - `ml_uncertainty_class`
     - `save_ml_model`
     - `unflatten_dimension`
     - `vector_buffer`
@@ -379,4 +395,3 @@ Older versions of the processes were released as part of the openEO API, see the
 [0.4.2]: <https://github.com/Open-EO/openeo-processes/compare/0.4.1...0.4.2>
 [0.4.1]: <https://github.com/Open-EO/openeo-processes/compare/0.4.0...0.4.1>
 [0.4.0]: <https://github.com/Open-EO/openeo-processes/tree/0.4.0>
-
