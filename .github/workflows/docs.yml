@@ -4,8 +4,6 @@ on:
     types: [published]
   push:
     branches:
-      - dev
-      - ml-poc
       - draft
       - master
 jobs:
