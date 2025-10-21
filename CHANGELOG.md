@@ -395,4 +395,3 @@ Older versions of the processes were released as part of the openEO API, see the
 [0.4.2]: <https://github.com/Open-EO/openeo-processes/compare/0.4.1...0.4.2>
 [0.4.1]: <https://github.com/Open-EO/openeo-processes/compare/0.4.0...0.4.1>
 [0.4.0]: <https://github.com/Open-EO/openeo-processes/tree/0.4.0>
-
