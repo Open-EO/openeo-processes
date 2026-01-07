@@ -8,19 +8,20 @@ openEO develops interoperable processes for big Earth observation cloud processi
 
 The [master branch](https://github.com/Open-EO/openeo-processes/tree/master) is the 'stable' version of the openEO processes specification. An exception is the [`proposals`](proposals/) folder, which provides experimental new processes currently under discussion. They may still change, but everyone is encouraged to implement them and give feedback.
 
-The latest release is version **2.0.0-rc.1**. The [draft branch](https://github.com/Open-EO/openeo-processes/tree/draft) is where active development takes place. PRs should be made against the draft branch.
+The latest release is version **2.0.0-rc.2**. The [draft branch](https://github.com/Open-EO/openeo-processes/tree/draft) is where active development takes place. PRs should be made against the draft branch.
 
-| Version / Branch                                             | Status                    | openEO API versions |
-| ------------------------------------------------------------ | ------------------------- | ------------------- |
-| [unreleased / draft](https://processes.openeo.org/draft)     | in development            | 1.x.x               |
-| [**2.0.0 RC1** / master](https://processes.openeo.org/2.0.0-rc.1/) | **upcoming version (RC)** | 1.x.x         |
-| [1.2.0](https://processes.openeo.org/1.2.0/)                 | **latest stable version** | 1.x.x               |
-| [1.1.0](https://processes.openeo.org/1.1.0/)                 | legacy version            | 1.x.x               |
-| [1.0.0](https://processes.openeo.org/1.0.0/)                 | legacy version            | 1.x.x               |
-| [1.0.0 RC1](https://processes.openeo.org/1.0.0-rc.1/)        | legacy version            | 1.x.x               |
-| [0.4.2](https://processes.openeo.org/0.4.2/)                 | legacy version            | 0.4.x               |
-| [0.4.1](https://processes.openeo.org/0.4.1/)                 | legacy version            | 0.4.x               |
-| [0.4.0](https://processes.openeo.org/0.4.0/)                 | legacy version            | 0.4.x               |
+| Version / Branch                                                   | Status                    | openEO API versions |
+| ------------------------------------------------------------------ | ------------------------- | ------------------- |
+| [unreleased / draft](https://processes.openeo.org/draft)           | in development            | >= 1.2.0            |
+| [**2.0.0 RC2** / master](https://processes.openeo.org/2.0.0-rc.2/) | **upcoming version (RC)** | >= 1.2.0            |
+| [2.0.0 RC1](https://processes.openeo.org/2.0.0-rc.1/)              | previous RC               | >= 1.2.0            |
+| [1.2.0](https://processes.openeo.org/1.2.0/)                       | **latest stable version** | >= 1.0.0 & < 1.2.0  |
+| [1.1.0](https://processes.openeo.org/1.1.0/)                       | legacy version            | >= 1.0.0 & < 1.2.0  |
+| [1.0.0](https://processes.openeo.org/1.0.0/)                       | legacy version            | >= 1.0.0 & < 1.2.0  |
+| [1.0.0 RC1](https://processes.openeo.org/1.0.0-rc.1/)              | legacy version            | > 0.4.2 & < 1.2.0   |
+| [0.4.2](https://processes.openeo.org/0.4.2/)                       | legacy version            | 0.4.x               |
+| [0.4.1](https://processes.openeo.org/0.4.1/)                       | legacy version            | 0.4.x               |
+| [0.4.0](https://processes.openeo.org/0.4.0/)                       | legacy version            | 0.4.x               |
 
 **Note:** [https://processes.openeo.org](https://processes.openeo.org) always points to the latest released version.
 
