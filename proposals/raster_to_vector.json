@@ -1,0 +1,65 @@
+{
+    "id": "raster_to_vector",
+    "summary": "Converts single band raster data cube to vector data",
+    "description": "Converts a single band raster data cube into a vector data cube. The process involves constructing the bounding polygon based on the full area covered by pixel boundaries, providing a representation of homogeneous areas within the raster dataset.",
+    "categories": [
+        "cubes"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A raster data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "name": "projection",
+            "description": "Coordinate reference system to reproject the converted vector to. Specified as an [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html).\nWhen no projection (or null) is given, the reference system of the input raster data cube is used.",
+            "schema": [
+                {
+                    "title": "EPSG Code",
+                    "type": "integer",
+                    "subtype": "epsg-code",
+                    "minimum": 1000,
+                    "examples": [
+                        3857
+                    ]
+                },
+                {
+                    "title": "WKT2",
+                    "type": "string",
+                    "subtype": "wkt2-definition"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "A converted vector data cube.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "geometry"
+                }
+            ]
+        }
+    }
+}
