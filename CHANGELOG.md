@@ -41,6 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `apply_polygon`: Renamed `polygons` parameter to `geometries` for better alignment with other geometry handling processes. [#511](https://github.com/Open-EO/openeo-processes/issues/511)
 - `clip`: Throw an exception if min > max [#472](https://github.com/Open-EO/openeo-processes/issues/472)
 - `is_nan`: Return `false` instead of `true` for non-numerical data types. [#486](https://github.com/Open-EO/openeo-processes/issues/486)
+- `load_geojson`: Specify behavior if `properties` parameter is empty [#448](https://github.com/Open-EO/openeo-processes/issues/448)
 - `save_results`: Returns the STAC resource instead of boolean `true` [API#376](https://github.com/Open-EO/openeo-api/issues/376)
 
 ### Fixed
