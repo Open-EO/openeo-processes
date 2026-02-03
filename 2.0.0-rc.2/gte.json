@@ -1,0 +1,130 @@
+{
+    "id": "gte",
+    "summary": "Greater than or equal to comparison",
+    "description": "Compares whether `x` is greater than or equal to `y`.\n\n**Remarks:**\n\n* If any operand is a no-data value, the result will be the no-data value (or `null`).\n* The comparison of `NaN` (not a number) follows [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229).\n* If the operands are not equal (see process ``eq()``) and any of them is not the data type `number`, the process returns `false`.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
+    "categories": [
+        "comparison"
+    ],
+    "parameters": [
+        {
+            "name": "x",
+            "description": "First operand.",
+            "schema": {
+                "type": [
+                    "number",
+                    "boolean",
+                    "string",
+                    "null"
+                ]
+            }
+        },
+        {
+            "name": "y",
+            "description": "Second operand.",
+            "schema": {
+                "type": [
+                    "number",
+                    "boolean",
+                    "string",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "`true` if `x` is greater than or equal to `y`, the no-data value (or `null`) if any operand is a no-data value, otherwise `false`.",
+        "schema": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "x": 1,
+                "y": null
+            },
+            "returns": null
+        },
+        {
+            "arguments": {
+                "x": 0,
+                "y": 0
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "x": 1,
+                "y": 2
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "x": -0.5,
+                "y": -0.6
+            },
+            "returns": true
+        },
+        {
+            "arguments": {
+                "x": "2018-01-01T00:00:00Z",
+                "y": "2018-01-01T00:00:00+00:00"
+            },
+            "returns": false
+        },
+        {
+            "arguments": {
+                "x": true,
+                "y": false
+            },
+            "returns": false
+        }
+    ],
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://ieeexplore.ieee.org/document/4610935",
+            "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
+        }
+    ],
+    "process_graph": {
+        "eq": {
+            "process_id": "eq",
+            "arguments": {
+                "x": {
+                    "from_parameter": "x"
+                },
+                "y": {
+                    "from_parameter": "y"
+                }
+            }
+        },
+        "gt": {
+            "process_id": "gt",
+            "arguments": {
+                "x": {
+                    "from_parameter": "x"
+                },
+                "y": {
+                    "from_parameter": "y"
+                }
+            }
+        },
+        "or": {
+            "process_id": "or",
+            "arguments": {
+                "x": {
+                    "from_node": "gt"
+                },
+                "y": {
+                    "from_node": "eq"
+                }
+            },
+            "result": true
+        }
+    }
+}

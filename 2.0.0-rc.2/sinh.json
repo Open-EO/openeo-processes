@@ -1,0 +1,44 @@
+{
+    "id": "sinh",
+    "summary": "Hyperbolic sine",
+    "description": "Computes the hyperbolic sine of `x`.\n\nNo-data values are passed through.",
+    "categories": [
+        "math > trigonometric"
+    ],
+    "parameters": [
+        {
+            "name": "x",
+            "description": "An hyperbolic angle in radians.",
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "The computed hyperbolic sine.",
+        "schema": {
+            "type": [
+                "number",
+                "null"
+            ]
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "x": 0
+            },
+            "returns": 0
+        }
+    ],
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://mathworld.wolfram.com/HyperbolicSine.html",
+            "title": "Hyperbolic sine explained by Wolfram MathWorld"
+        }
+    ]
+}

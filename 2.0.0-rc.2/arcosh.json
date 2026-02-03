@@ -1,0 +1,46 @@
+{
+    "id": "arcosh",
+    "summary": "Inverse hyperbolic cosine",
+    "description": "Computes the inverse hyperbolic cosine of `x`. It is the inverse function of the hyperbolic cosine so that *`arcosh(cosh(x)) = x`*.\n\nNo-data values are passed through. `NaN` is returned for values outside of the allowed range.",
+    "categories": [
+        "math > trigonometric"
+    ],
+    "parameters": [
+        {
+            "name": "x",
+            "description": "A number in the range *[1, +∞)*.",
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            },
+            "minimum": 1
+        }
+    ],
+    "returns": {
+        "description": "The computed hyperbolic angle in radians in the range *[0, +∞)*.",
+        "schema": {
+            "type": [
+                "number",
+                "null"
+            ],
+            "minimum": 0
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "x": 1
+            },
+            "returns": 0
+        }
+    ],
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://mathworld.wolfram.com/InverseHyperbolicCosine.html",
+            "title": "Inverse hyperbolic cosine explained by Wolfram MathWorld"
+        }
+    ]
+}

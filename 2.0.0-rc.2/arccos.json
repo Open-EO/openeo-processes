@@ -1,0 +1,47 @@
+{
+    "id": "arccos",
+    "summary": "Inverse cosine",
+    "description": "Computes the arc cosine of `x`. The arc cosine is the inverse function of the cosine so that *`arccos(cos(x)) = x`*.\n\nWorks on radians only.\nNo-data values are passed through. `NaN` is returned for values < -1 and > 1.",
+    "categories": [
+        "math > trigonometric"
+    ],
+    "parameters": [
+        {
+            "name": "x",
+            "description": "A number in the range *[-1, 1]*.",
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ],
+                "minimum": -1,
+                "maximum": 1
+            }
+        }
+    ],
+    "returns": {
+        "description": "The computed angle in radians in the range *[0, π]*.",
+        "schema": {
+            "type": [
+                "number",
+                "null"
+            ],
+            "minimum": 0
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "x": 1
+            },
+            "returns": 0
+        }
+    ],
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://mathworld.wolfram.com/InverseCosine.html",
+            "title": "Inverse cosine explained by Wolfram MathWorld"
+        }
+    ]
+}

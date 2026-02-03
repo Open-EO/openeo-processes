@@ -1,0 +1,106 @@
+{
+    "id": "cumproduct",
+    "summary": "Cumulative products",
+    "description": "Computes cumulative products of an array of numbers. Every computed element is equal to the product of the current and all previous values. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `false` makes that once a no-data value is reached all following elements are set to the no-data value in the result.",
+    "categories": [
+        "math > cumulative"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "An array of numbers.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "ignore_nodata",
+            "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, the first no-data value makes all following values also no-data values.",
+            "schema": {
+                "type": "boolean"
+            },
+            "default": true,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "An array with the computed cumulative products.",
+        "schema": {
+            "type": "array",
+            "items": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            }
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    3,
+                    5,
+                    3,
+                    1
+                ]
+            },
+            "returns": [
+                1,
+                3,
+                15,
+                45,
+                45
+            ]
+        },
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    2,
+                    3,
+                    null,
+                    3,
+                    1
+                ]
+            },
+            "returns": [
+                1,
+                2,
+                6,
+                null,
+                18,
+                18
+            ]
+        },
+        {
+            "arguments": {
+                "data": [
+                    1,
+                    2,
+                    3,
+                    null,
+                    3,
+                    1
+                ],
+                "ignore_nodata": false
+            },
+            "returns": [
+                1,
+                2,
+                6,
+                null,
+                null,
+                null
+            ]
+        }
+    ]
+}

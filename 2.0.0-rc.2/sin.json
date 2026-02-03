@@ -1,0 +1,46 @@
+{
+    "id": "sin",
+    "summary": "Sine",
+    "description": "Computes the sine of `x`.\n\nWorks on radians only.\nNo-data values are passed through.",
+    "categories": [
+        "math > trigonometric"
+    ],
+    "parameters": [
+        {
+            "name": "x",
+            "description": "An angle in radians.",
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "The computed sine in the range *[-1, 1]*.",
+        "schema": {
+            "type": [
+                "number",
+                "null"
+            ],
+            "minimum": -1,
+            "maximum": 1
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "x": 0
+            },
+            "returns": 0
+        }
+    ],
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://mathworld.wolfram.com/Sine.html",
+            "title": "Sine explained by Wolfram MathWorld"
+        }
+    ]
+}

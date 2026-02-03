@@ -1,0 +1,82 @@
+{
+    "id": "log",
+    "summary": "Logarithm to a base",
+    "description": "Logarithm to the base `base` of the number `x` is defined to be the inverse function of taking b to the power of x.\n\nIf any argument is a no-data value, the result will be the no-data value (or `null`).\n\nThe computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, having `x` set to `0` with any base results in -infinity if the processing environment supports it or otherwise an exception is thrown. `NaN` is returned for values outside of the allowed range.",
+    "categories": [
+        "math > exponential & logarithmic"
+    ],
+    "parameters": [
+        {
+            "name": "x",
+            "description": "A number to compute the logarithm for in the range *[0, +∞)*.",
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ],
+                "minimum": 0
+            }
+        },
+        {
+            "name": "base",
+            "description": "The numerical base.",
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "The computed logarithm.",
+        "schema": {
+            "type": [
+                "number",
+                "null"
+            ]
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "x": 10,
+                "base": 10
+            },
+            "returns": 1
+        },
+        {
+            "arguments": {
+                "x": 2,
+                "base": 2
+            },
+            "returns": 1
+        },
+        {
+            "arguments": {
+                "x": 4,
+                "base": 2
+            },
+            "returns": 2
+        },
+        {
+            "arguments": {
+                "x": 1,
+                "base": 16
+            },
+            "returns": 0
+        }
+    ],
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://mathworld.wolfram.com/Logarithm.html",
+            "title": "Logarithm explained by Wolfram MathWorld"
+        },
+        {
+            "rel": "about",
+            "href": "https://ieeexplore.ieee.org/document/8766229",
+            "title": "IEEE Standard 754-2019 for Floating-Point Arithmetic"
+        }
+    ]
+}

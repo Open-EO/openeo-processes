@@ -1,0 +1,45 @@
+{
+    "id": "cosh",
+    "summary": "Hyperbolic cosine",
+    "description": "Computes the hyperbolic cosine of `x`.\n\nNo-data values are passed through.",
+    "categories": [
+        "math > trigonometric"
+    ],
+    "parameters": [
+        {
+            "name": "x",
+            "description": "An hyperbolic angle in radians.",
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "The computed hyperbolic cosine in the range *[1, +∞)*.",
+        "schema": {
+            "type": [
+                "number",
+                "null"
+            ],
+            "minimum": 1
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "x": 0
+            },
+            "returns": 1
+        }
+    ],
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://mathworld.wolfram.com/HyperbolicCosine.html",
+            "title": "Hyperbolic cosine explained by Wolfram MathWorld"
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "id": "create_data_cube",
+    "summary": "Create an empty data cube",
+    "description": "Creates a new data cube without dimensions. Dimensions can be added with ``add_dimension()``.",
+    "categories": [
+        "cubes"
+    ],
+    "parameters": [],
+    "returns": {
+        "description": "An empty data cube with no dimensions.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube"
+        }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html",
+            "rel": "about",
+            "title": "Data Cubes explained in the openEO documentation"
+        }
+    ]
+}

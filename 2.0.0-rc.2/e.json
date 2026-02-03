@@ -1,0 +1,23 @@
+{
+    "id": "e",
+    "summary": "Euler's number (e)",
+    "description": "The real number *e* is a mathematical constant that is the base of the natural logarithm such that *`ln(e) = 1`*. The numerical value is approximately *2.71828*.",
+    "categories": [
+        "math > constants",
+        "math > exponential & logarithmic"
+    ],
+    "parameters": [],
+    "returns": {
+        "description": "The numerical value of Euler's number.",
+        "schema": {
+            "type": "number"
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://mathworld.wolfram.com/e.html",
+            "title": "Mathematical constant e explained by Wolfram MathWorld"
+        }
+    ]
+}

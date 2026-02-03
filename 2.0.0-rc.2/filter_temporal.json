@@ -1,0 +1,107 @@
+{
+    "id": "filter_temporal",
+    "summary": "Temporal filter based on temporal intervals",
+    "description": "Limits the data cube to the specified interval of dates and/or times.\n\nMore precisely, the filter checks whether each of the temporal dimension labels is greater than or equal to the lower boundary (start date/time) and less than the value of the upper boundary (end date/time). This corresponds to a left-closed interval, which contains the lower boundary but not the upper boundary.",
+    "categories": [
+        "cubes",
+        "filter"
+    ],
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "temporal"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "extent",
+            "description": "Left-closed temporal interval, i.e. an array with exactly two elements:\n\n1. The first element is the start of the temporal interval. The specified time instant is **included** in the interval.\n2. The second element is the end of the temporal interval. The specified time instant is **excluded** from the interval.\n\nThe second element must always be greater/later than the first element. Otherwise, a `TemporalExtentEmpty` exception is thrown.\n\nAlso supports unbounded intervals by setting one of the boundaries to `null`, but never both.",
+            "schema": {
+                "type": "array",
+                "subtype": "temporal-interval",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "format": "date-time",
+                            "subtype": "date-time",
+                            "description": "Date and time with a time zone."
+                        },
+                        {
+                            "type": "string",
+                            "format": "date",
+                            "subtype": "date",
+                            "description": "Date only, formatted as `YYYY-MM-DD`. The time zone is UTC. Missing time components are all 0."
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "examples": [
+                    [
+                        "2015-01-01T00:00:00Z",
+                        "2016-01-01T00:00:00Z"
+                    ],
+                    [
+                        "2015-01-01",
+                        "2016-01-01"
+                    ]
+                ]
+            }
+        },
+        {
+            "name": "dimension",
+            "description": "The name of the temporal dimension to filter on. If no specific dimension is specified, the filter applies to all temporal dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+            "schema": {
+                "type": [
+                    "string",
+                    "null"
+                ]
+            },
+            "default": null,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "A data cube restricted to the specified temporal extent. The dimensions and dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the temporal dimensions (determined by `dimensions` parameter) may have less dimension labels.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "temporal"
+                }
+            ]
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A dimension with the specified name does not exist."
+        },
+        "TemporalExtentEmpty": {
+            "message": "The temporal extent is empty. The second instant in time must always be greater/later than the first instant in time."
+        }
+    },
+    "links": [
+        {
+            "href": "https://openeo.org/documentation/1.0/datacubes.html#filter",
+            "rel": "about",
+            "title": "Filters explained in the openEO documentation"
+        },
+        {
+            "href": "https://www.rfc-editor.org/rfc/rfc3339.html",
+            "rel": "about",
+            "title": "RFC3339: Details about formatting temporal strings"
+        }
+    ]
+}

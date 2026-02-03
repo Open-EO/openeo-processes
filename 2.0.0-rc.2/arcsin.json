@@ -1,0 +1,46 @@
+{
+    "id": "arcsin",
+    "summary": "Inverse sine",
+    "description": "Computes the arc sine of `x`. The arc sine is the inverse function of the sine so that *`arcsin(sin(x)) = x`*.\n\nWorks on radians only.\nNo-data values are passed through. `NaN` is returned for values < -1 and > 1.",
+    "categories": [
+        "math > trigonometric"
+    ],
+    "parameters": [
+        {
+            "name": "x",
+            "description": "A number in the range *[-1, 1]*.",
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ],
+                "minimum": -1,
+                "maximum": 1
+            }
+        }
+    ],
+    "returns": {
+        "description": "The computed angle in radians in the range *[-π/2, π/2]*.",
+        "schema": {
+            "type": [
+                "number",
+                "null"
+            ]
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "x": 0
+            },
+            "returns": 0
+        }
+    ],
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://mathworld.wolfram.com/InverseSine.html",
+            "title": "Inverse sine explained by Wolfram MathWorld"
+        }
+    ]
+}

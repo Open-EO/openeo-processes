@@ -1,0 +1,46 @@
+{
+    "id": "tanh",
+    "summary": "Hyperbolic tangent",
+    "description": "Computes the hyperbolic tangent of `x`. The tangent is defined to be the hyperbolic sine of x divided by the hyperbolic cosine of x.\n\nNo-data values are passed through.",
+    "categories": [
+        "math > trigonometric"
+    ],
+    "parameters": [
+        {
+            "name": "x",
+            "description": "An hyperbolic angle in radians.",
+            "schema": {
+                "type": [
+                    "number",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "The computed hyperbolic tangent in the range *(-1, 1)*.",
+        "schema": {
+            "type": [
+                "number",
+                "null"
+            ],
+            "minimumExclusive": -1,
+            "maximumExclusive": 1
+        }
+    },
+    "examples": [
+        {
+            "arguments": {
+                "x": 0
+            },
+            "returns": 0
+        }
+    ],
+    "links": [
+        {
+            "rel": "about",
+            "href": "http://mathworld.wolfram.com/HyperbolicTangent.html",
+            "title": "Hyperbolic tangent explained by Wolfram MathWorld"
+        }
+    ]
+}

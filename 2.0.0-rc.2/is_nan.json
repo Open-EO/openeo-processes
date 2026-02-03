@@ -1,0 +1,36 @@
+{
+    "id": "is_nan",
+    "summary": "Value is not a number",
+    "description": "Checks whether the specified value `x` carries the special value `NaN` (not a number) as defined by the [IEEE Standard 754](https://ieeexplore.ieee.org/document/4610935), in which case it returns `true`. Returns `false` otherwise.",
+    "categories": [
+        "comparison",
+        "math > constants"
+    ],
+    "parameters": [
+        {
+            "name": "x",
+            "description": "The data to check.",
+            "schema": {
+                "description": "Any data type is allowed."
+            }
+        }
+    ],
+    "returns": {
+        "description": "Returns `true` for `NaN` and `false` otherwise.",
+        "schema": {
+            "type": "boolean"
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://ieeexplore.ieee.org/document/4610935",
+            "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
+        },
+        {
+            "rel": "about",
+            "href": "http://mathworld.wolfram.com/NaN.html",
+            "title": "NaN explained by Wolfram MathWorld"
+        }
+    ]
+}
