@@ -49,7 +49,7 @@
         },
         {
             "name": "projection",
-            "description": "Warps the data cube to the target projection, specified as as [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). By default (`null`), the projection is not changed.",
+            "description": "Warps the data cube to the target projection, specified as [EPSG code](https://spatialreference.org/ref/epsg/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). By default (`null`), the projection is not changed.",
             "schema": [
                 {
                     "title": "EPSG Code",
@@ -143,8 +143,8 @@
         },
         {
             "rel": "about",
-            "href": "http://www.epsg-registry.org",
-            "title": "Official EPSG code registry"
+            "href": "https://spatialreference.org/ref/epsg",
+            "title": "EPSG code registry"
         },
         {
             "rel": "about",

@@ -1,7 +1,7 @@
 {
     "id": "cumsum",
     "summary": "Cumulative sums",
-    "description": "Computes cumulative sums of an array of numbers. Every computed element is equal to the sum of current and all previous values. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `true` makes that once a no-data value (`null`) is reached all following elements are set to `null` in the result.",
+    "description": "Computes cumulative sums of an array of numbers. Every computed element is equal to the sum of current and all previous values. The returned array and the input array have always the same length.\n\nBy default, no-data values are skipped, but stay in the result. Setting the `ignore_nodata` flag to `false` makes that once a no-data value is reached all following elements are set to the no-data value in the result.",
     "categories": [
         "math > cumulative"
     ],
@@ -22,7 +22,7 @@
         },
         {
             "name": "ignore_nodata",
-            "description": "Indicates whether no-data values are ignored or not and ignores them by default. Setting this flag to `false` considers no-data values so that `null` is set for all the following elements.",
+            "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, the first no-data value makes all following values also no-data values.",
             "schema": {
                 "type": "boolean"
             },

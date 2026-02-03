@@ -31,7 +31,7 @@
         },
         {
             "name": "elevation_model",
-            "description": "The digital elevation model to use. Set to `null` (the default) to allow the back-end to choose, which will improve portability, but reduce reproducibility.",
+            "description": "The digital elevation model to use. The default value `null` allows the back-end to choose, which will improve portability, but reduce reproducibility.",
             "optional": true,
             "default": null,
             "schema": [
@@ -83,7 +83,7 @@
         }
     ],
     "returns": {
-        "description": "Backscatter values expressed as gamma0 in linear scale.\n\nIn addition to the bands `contributing_area` and `ellipsoid_incidence_angle` that can optionally be added with corresponding parameters, the following bands are always added to the data cube:\n\n- `mask`: A data mask that indicates which values are valid (1), invalid (0) or contain no-data (null).\n- `local_incidence_angle`: A band with DEM-based local incidence angles in degrees.\n\nThe data returned is CARD4L compliant with corresponding metadata.",
+        "description": "Backscatter values expressed as gamma0 in linear scale.\n\nIn addition to the bands `contributing_area` and `ellipsoid_incidence_angle` that can optionally be added with corresponding parameters, the following bands are always added to the data cube:\n\n- `mask`: A data mask that indicates which values are valid (1), invalid (0), or contain a no-data value.\n- `local_incidence_angle`: A band with DEM-based local incidence angles in degrees.\n\nThe data returned is CARD4L compliant with corresponding metadata.",
         "schema": {
             "type": "object",
             "subtype": "datacube",

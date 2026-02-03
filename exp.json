@@ -1,7 +1,7 @@
 {
     "id": "exp",
     "summary": "Exponentiation to the base e",
-    "description": "Exponential function to the base *e* raised to the power of `p`.\n\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Exponential function to the base *e* raised to the power of `p`.\n\nNo-data values are passed through.",
     "categories": [
         "math > exponential & logarithmic"
     ],
@@ -18,12 +18,13 @@
         }
     ],
     "returns": {
-        "description": "The computed value for *e* raised to the power of `p`.",
+        "description": "The computed value for *e* raised to the power of `p`. Value is in the range of *(0, +∞)*",
         "schema": {
             "type": [
                 "number",
                 "null"
-            ]
+            ],
+            "minimumExclusive": 0
         }
     },
     "examples": [

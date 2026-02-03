@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://processes.openeo.org/2.0.0-rc.1/meta/subtype-schemas.json",
+    "$id": "https://processes.openeo.org/2.0.0-rc.2/meta/subtype-schemas.json",
     "title": "Subtype Schemas",
     "description": "This file defines the schemas for subtypes we define for openEO processes.",
     "definitions": {
@@ -55,7 +55,7 @@
                     "default": null
                 },
                 "crs": {
-                    "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
+                    "description": "Coordinate reference system of the extent, specified as [EPSG code](https://spatialreference.org/ref/epsg/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
                     "anyOf": [
                         {
                             "$ref": "#/definitions/epsg-code"
@@ -278,6 +278,23 @@
             "description": "A raster data cube, which is a data cube with two dimension of type spatial (x and y). This has been deprecated in favour of `datacube`.",
             "deprecated": true
         },
+        "stac": {
+            "type": "object",
+            "subtype": "stac",
+            "title": "STAC resource",
+            "description": "A STAC Catalog, Collection, or Item, as defined by the [STAC specification](https://stacspec.org) version 0.9.0 or later.",
+            "oneOf": [
+                {
+                    "$ref": "http://schemas.stacspec.org/v1.0.0/catalog-spec/json-schema/catalog.json"
+                },
+                {
+                    "$ref": "http://schemas.stacspec.org/v1.0.0/collection-spec/json-schema/collection.json"
+                },
+                {
+                    "$ref": "http://schemas.stacspec.org/v1.0.0/item-spec/json-schema/item.json"
+                }
+            ]
+        },
         "temporal-interval": {
             "type": "array",
             "subtype": "temporal-interval",
@@ -412,6 +429,13 @@
             "subtype": "wkt2-definition",
             "title": "WKT2 definition",
             "description": "Specifies details about cartographic projections as WKT2 string. Refers to the latest WKT2 version (currently [WKT2:2018](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html) / ISO 19162:2018) unless otherwise stated by the process."
+        },
+        "workspace-id": {
+            "type": "string",
+            "subtype": "workspace-id",
+            "title": "Workspace ID",
+            "description": "A workspace identifier from the list of available workspaces.",
+            "pattern": "^[\\w\\-\\.~]+$"
         },
         "year": {
             "type": "integer",

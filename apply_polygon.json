@@ -5,19 +5,27 @@
     "categories": [
         "cubes"
     ],
-    "experimental": true,
     "parameters": [
         {
             "name": "data",
             "description": "A data cube.",
             "schema": {
                 "type": "object",
-                "subtype": "raster-cube"
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    }
+                ]
             }
         },
         {
-            "name": "polygons",
-            "description": "A vector data cube containing at least one polygon. The provided vector data can be one of the following:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry, or\n* a `FeatureCollection` containing at least one `Feature` with `Polygon` or `MultiPolygon` geometries.\n* Empty geometries are ignored.",
+            "name": "geometries",
+            "description": "A vector data cube containing at least one polygon. The provided vector data can be one of the following:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry, or\n* a `FeatureCollection` containing at least one `Feature`; where each `Feature` has a `Polygon` or `MultiPolygon` geometry.\n* Empty geometries are ignored.",
             "schema": {
                 "type": "object",
                 "subtype": "datacube",
@@ -44,7 +52,16 @@
                         "description": "A sub data cube of the original data cube. The sub data cubes provided cover the smallest possible grid-aligned extent of the corresponding polygon and all pixels outside of the polygon are replaced with the value given in `mask_value`.",
                         "schema": {
                             "type": "object",
-                            "subtype": "raster-cube"
+                            "subtype": "datacube",
+                            "dimensions": [
+                                {
+                                    "type": "spatial",
+                                    "axis": [
+                                        "x",
+                                        "y"
+                                    ]
+                                }
+                            ]
                         }
                     },
                     {
@@ -63,7 +80,16 @@
                         "description": "A data cube.",
                         "schema": {
                             "type": "object",
-                            "subtype": "raster-cube"
+                            "subtype": "datacube",
+                            "dimensions": [
+                                {
+                                    "type": "spatial",
+                                    "axis": [
+                                        "x",
+                                        "y"
+                                    ]
+                                }
+                            ]
                         }
                     }
                 }
@@ -71,7 +97,7 @@
         },
         {
             "name": "mask_value",
-            "description": "All pixels for which the point at the pixel center **does not** intersect with the polygon are replaced with the given value, which defaults to `null` (no data).\n\nIt can provide a distinction between no data values within the polygon and masked pixels outside of it.",
+            "description": "All pixels for which the point at the pixel center **does not** intersect with the polygon are replaced with the given value. The default value is `null`, which uses the no-data value of the data cube.\n\nThis parameter can provide a distinction between no-data values within the polygon and masked pixels outside of it.",
             "schema": [
                 {
                     "type": "number"
@@ -103,7 +129,16 @@
         "description": "A data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
         "schema": {
             "type": "object",
-            "subtype": "raster-cube"
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "spatial",
+                    "axis": [
+                        "x",
+                        "y"
+                    ]
+                }
+            ]
         }
     },
     "exceptions": {

@@ -89,7 +89,7 @@
         },
         {
             "name": "reducer",
-            "description": "A reducer to be applied for the values contained in each interval. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes. Intervals may not contain any values, which for most reducers leads to no-data (`null`) values by default.",
+            "description": "A reducer to be applied for the values contained in each interval. A reducer is a single process such as ``mean()`` or a set of processes, which computes a single value for a list of values, see the category 'reducer' for such processes. Intervals may not contain any values, which leads to a no-data value for most reducers by default.",
             "schema": {
                 "type": "object",
                 "subtype": "process-graph",
@@ -128,6 +128,7 @@
             "description": "Distinct labels for the intervals, which can contain dates and/or times. Is only required to be specified if the values for the start of the temporal intervals are not distinct and thus the default labels would not be unique. The number of labels and the number of groups need to be equal.",
             "schema": {
                 "type": "array",
+                "uniqueItems": true,
                 "items": {
                     "type": [
                         "number",
@@ -140,7 +141,7 @@
         },
         {
             "name": "dimension",
-            "description": "The name of the temporal dimension for aggregation. All data along the dimension is passed through the specified reducer. If the dimension is not set or set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` exception if it has more dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist.",
+            "description": "The name of the temporal dimension for aggregation. All data along the dimension is passed through the specified reducer. If the dimension is not set or set to `null`, the data cube is expected to only have one temporal dimension. Fails with a `TooManyDimensions` exception if it has more dimensions. Fails with a `DimensionNotAvailable` exception if the specified dimension does not exist or no temporal dimension is available.",
             "schema": {
                 "type": [
                     "string",
@@ -228,7 +229,7 @@
             "message": "The data cube contains multiple temporal dimensions. The parameter `dimension` must be specified."
         },
         "DimensionNotAvailable": {
-            "message": "A dimension with the specified name does not exist."
+            "message": "A dimension with the specified name does not exist or no temporal dimension is available."
         },
         "DistinctDimensionLabelsRequired": {
             "message": "The dimension labels have duplicate values. Distinct labels must be specified."

@@ -1,7 +1,7 @@
 {
     "id": "filter_bbox",
     "summary": "Spatial filter using a bounding box",
-    "description": "Limits the data cube to the specified bounding box.\n\n* For raster data cubes, the filter retains a pixel in the data cube if the point at the pixel center intersects with the bounding box (as defined in the Simple Features standard by the OGC). Alternatively, ``filter_spatial()`` can be used to filter by geometry.\n* For vector data cubes, the filter retains the geometry in the data cube if the geometry is fully within the bounding box (as defined in the Simple Features standard by the OGC). All geometries that were empty or not contained fully within the bounding box will be removed from the data cube.\n\nAlternatively, ``filter_vector()`` can be used to filter by geometry.",
+    "description": "Limits the data cube to the specified bounding box.\n\n* For raster data cubes, the filter retains a pixel in the data cube if the point at the pixel center intersects with the bounding box (as defined in the Simple Features standard by the OGC). Alternatively, ``filter_spatial()`` can be used to filter by geometry.\n* For vector data cubes, the filter retains the geometry in the data cube if the geometry is fully within the bounding box (as defined in the Simple Features standard by the OGC). All geometries that were empty or not contained fully within the bounding box will be removed from the data cube.\n\nAlternatively, filter spatially with geometries using ``filter_spatial()`` (on a raster data cube) or ``filter_vector()`` (on a vector data cube).",
     "categories": [
         "cubes",
         "filter"
@@ -39,7 +39,7 @@
         },
         {
             "name": "extent",
-            "description": "A bounding box, which may include a vertical axis (see `base` and `height`).",
+            "description": "A bounding box, which may include a vertical axis (see `base` and `height`).\n\nIf the bounding box is not provided in the coordinate reference system (CRS) of the data cube, the bounding box is reprojected to the CRS of the spatial data cube dimensions.",
             "schema": {
                 "type": "object",
                 "subtype": "bounding-box",
@@ -83,7 +83,7 @@
                         "default": null
                     },
                     "crs": {
-                        "description": "Coordinate reference system of the extent, specified as as [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
+                        "description": "Coordinate reference system of the extent, specified as [EPSG code](https://spatialreference.org/ref/epsg/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). Defaults to `4326` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
                         "anyOf": [
                             {
                                 "title": "EPSG Code",
@@ -148,8 +148,8 @@
         },
         {
             "rel": "about",
-            "href": "http://www.epsg-registry.org",
-            "title": "Official EPSG code registry"
+            "href": "https://spatialreference.org/ref/epsg",
+            "title": "EPSG code registry"
         },
         {
             "rel": "about",

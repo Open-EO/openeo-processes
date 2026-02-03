@@ -8,7 +8,7 @@
     "parameters": [
         {
             "name": "x",
-            "description": "The value to check.",
+            "description": "The value to check.\n\nNo-data values are passed through.",
             "schema": {
                 "description": "Any data type is allowed."
             }
@@ -38,7 +38,7 @@
         }
     ],
     "returns": {
-        "description": "`true` if `x` is between the specified bounds, otherwise `false`.",
+        "description": "`true` if `x` is between the specified bounds, the no-data value (or `null`) if `x` is a no-data value, `false` otherwise.",
         "schema": {
             "type": [
                 "boolean",

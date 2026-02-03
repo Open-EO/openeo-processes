@@ -1,7 +1,7 @@
 {
     "id": "text_ends",
     "summary": "Text ends with another text",
-    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern` at the end. Both are expected to be encoded in UTF-8 by default. The no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Checks whether the text (also known as *string*) specified for `data` contains the text specified for `pattern` at the end. No-data values are passed through.",
     "categories": [
         "texts",
         "comparison"
