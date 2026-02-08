@@ -24,29 +24,6 @@
             }
         },
         {
-            "name": "tasks",
-            "description": "Specifies the ML tasks which the model can be used for.",
-            "schema": {
-                "type": "array",
-                "items": {
-                    "type": "string",
-                    "enum": [
-                        "regression",
-                        "classification",
-                        "object-detection",
-                        "detection",
-                        "scene-classification",
-                        "segmentation",
-                        "semantic-segmentation",
-                        "similarity-search",
-                        "generative",
-                        "image-captioning",
-                        "super-resolution"
-                    ]
-                }
-            }
-        },
-        {
             "name": "options",
             "description": "Additional parameters to create the file(s).",
             "schema": {
