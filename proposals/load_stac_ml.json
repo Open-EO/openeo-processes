@@ -1,0 +1,73 @@
+{
+    "id": "load_stac_ml",
+    "summary": "Load a ML model from a STAC Item",
+    "description": "Loads a machine learning model from a STAC Item.\n\nSuch a model could be trained and saved as part of a previous batch job with processes such as  ``ml_fit()`` and ``save_ml_model()`` or  externally hosted models.",
+    "categories": [
+        "machine learning",
+        "import"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "uri",
+            "description": "The STAC Item to load the machine learning model from. The STAC Item must implement the [`mlm`](https://github.com/stac-extensions/mlm) extension. This parameter can point to a remote STAC Item via ``URL`` or a local JSON file.",
+            "schema": [
+                {
+                    "title": "URL",
+                    "type": "string",
+                    "format": "uri",
+                    "subtype": "uri",
+                    "pattern": "^https?://"
+                },
+                {
+                    "title": "User-uploaded File",
+                    "type": "string",
+                    "subtype": "file-path",
+                    "pattern": "^[^\r\n\\:'\"]+$"
+                }
+            ]
+        },
+        {
+            "name": "model_asset",
+            "description": "The Asset name of the given STAC Item which represents the actual ML model. The asset must list ``mlm:model`` as its role. If only one asset lists ``mlm:model`` as its role, this parameter is optional as this asset will be used by default. If multiple assets list ``mlm:model`` as their role, this parameter is required to determine which asset to use.",
+            "schema": {
+                "type": "string"
+            },
+            "default": null,
+            "optional": true
+        },
+        {
+            "name": "input_index",
+            "description": "STAC:MLM items supports multiple ML model input specification. This parameter specifies the index of the input specification in the ``mlm:input`` array to use for prediction or training. As ``mlm:input`` is an array, the first input in the array has index 0.",
+            "schema": {
+                "type": "integer"
+            },
+            "default": 0,
+            "optional": true
+        },
+        {
+            "name": "output_index",
+            "description": "STAC:MLM items supports multiple ML model output specification. This parameter specifies the index of the output specification in the ``mlm:output`` array to use for prediction or training. As ``mlm:output`` is an array, the first output in the array has index 0.",
+            "schema": {
+                "type": "integer"
+            },
+            "default": 0,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "A machine learning model to be used with machine learning processes such as ``ml_predict()``.",
+        "schema": {
+            "type": "object",
+            "subtype": "ml-model"
+        }
+    },
+    "links": [
+        {
+            "href": "https://github.com/stac-extensions/mlm",
+            "title": "Machine Learning Model STAC extension",
+            "type": "text/html",
+            "rel": "about"
+        }
+    ]
+}
