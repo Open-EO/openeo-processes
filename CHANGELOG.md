@@ -1,4 +1,5 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
@@ -8,10 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `reduce_spatial`: Added a recommended DGGS alternative.
-- `aggregate_spatial`, `filter_bbox`, `filter_spatial`, `load_collection`, `load_stac`, and `mask_polygon`: Added DGGS-specific behavior clarification (zone centroid inclusion rule for spatial filtering).
+- New proposal processes for DGGS-based workflows:
+  - `filter_k_ring`
+  - `resample_dggs`
+  - `resample_cube_dggs`
+  - `mask_dggs`
 
 ### Changed
+
+- `apply_kernel`, `apply_neighborhood`, `resample_spatial`, `resample_cube_spatial`, `aggregate_spatial_window`: Added explicit DGGS guidance.
+- `reduce_spatial` and `resample_cube_spatial`: Added a recommended DGGS alternative.
+- `aggregate_spatial`, `filter_bbox`, `filter_spatial`, `load_collection`, `load_stac`, and `mask_polygon`: Added DGGS-specific behavior clarification (zone centroid inclusion rule for spatial filtering/masking/aggregation).
+- `resample_spatial`: Added support for DGGS input; a DGGS data cube can be converted to raster when a suitable target projection is provided.
 
 ### Fixed
 
@@ -34,7 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Processes that have been marked as stable: `apply_polygon`, `date_between`, `date_shift`, `filter_labels`, `inspect`
 - Clarified for various mathematical functions the defined input and output ranges.
   Mention that `NaN` is returned outside of the defined input range where possible.
-- Clarified for several comparison processes how `NaN` values have to be handled. 
+- Clarified for several comparison processes how `NaN` values have to be handled.
 - Clarified for various processes the handling of no-data values and `null`, see also the [implementation guide](meta/implementation.md#no-data-value).  [#480](https://github.com/Open-EO/openeo-processes/issues/480)
 - Added a [section about character encodings to the implementation guide](meta/implementation.md#character-encoding).
   Removed any character encoding related wording from the process specifications itself.

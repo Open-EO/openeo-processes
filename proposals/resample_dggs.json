@@ -1,0 +1,119 @@
+{
+    "id": "resample_dggs",
+    "summary": "Resample a DGGS dimension to another DGGS resolution",
+    "description": "Resamples a DGGS dimension to a target DGGS resolution level without reprojection.\n\nThis process is intended for DGGS-native resolution changes and relies on zone hierarchy mappings defined by the DGGS reference system (DGGRS). It can be used for both upsampling and downsampling, depending on the selected method. For downsampling to a coarser DGGS resolution, a custom reducer can be provided to aggregate child zone values to their parent zones.",
+    "categories": [
+        "cubes",
+        "reproject",
+        "aggregate",
+        "reducer",
+        "dggs"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube with a DGGS dimension.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "dggs"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "resolution",
+            "description": "Target DGGS resolution level.",
+            "schema": {
+                "type": "integer",
+                "minimum": 0
+            }
+        },
+        {
+            "name": "method",
+            "description": "Alignment method used to map values between DGGS zones. The default `near` preserves the closest matching zone semantics. Alternatively, a custom reducer applied to all child zone values when downsampling.",
+            "schema": [
+                {
+                    "type": "string",
+                    "enum": [
+                        "near",
+                        "average",
+                        "mode",
+                        "sum",
+                        "min",
+                        "max"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "subtype": "process-graph",
+                    "parameters": [
+                        {
+                            "name": "data",
+                            "description": "A labeled array of values from child zones.",
+                            "schema": {
+                                "type": "array",
+                                "subtype": "labeled-array",
+                                "items": {
+                                    "description": "Any data type."
+                                }
+                            }
+                        },
+                        {
+                            "name": "context",
+                            "description": "Additional data passed by the user.",
+                            "schema": {
+                                "description": "Any data type."
+                            },
+                            "optional": true,
+                            "default": null
+                        }
+                    ],
+                    "returns": {
+                        "description": "The value to assign to the parent DGGS zone.",
+                        "schema": {
+                            "description": "Any data type."
+                        }
+                    }
+                }
+            ],
+            "optional": true,
+            "default": "near"
+        },
+        {
+            "name": "context",
+            "description": "Additional data to be passed to the custom reducer.",
+            "schema": {
+                "description": "Any data type."
+            },
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "A data cube with the same dimensions as the input. The DGGS dimension keeps its name and type, while labels and resolution may change depending on the given parameters.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "dggs"
+                }
+            ]
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A DGGS dimension with the specified name does not exist."
+        },
+        "ResolutionMismatch": {
+            "message": "The target DGGS resolution is incompatible with the input DGGS resolution levels."
+        },
+        "ReducerUnsupported": {
+            "message": "A custom `reducer` is only supported when resampling to a coarser DGGS resolution."
+        }
+    }
+}

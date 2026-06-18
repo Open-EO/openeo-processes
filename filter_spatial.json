@@ -1,7 +1,7 @@
 {
     "id": "filter_spatial",
-    "summary": "Spatial filter raster or DGGS data cubes using geometries",
-    "description": "Limits the raster or DGGS data cube over the spatial dimensions to the specified geometries.\n\n- For **polygons**, the filter retains a pixel in the data cube if the point at the pixel center intersects with at least one of the polygons (as defined in the Simple Features standard by the OGC).\n- For **points**, the process considers the closest pixel center.\n- For **lines** (line strings), the process considers all the pixels whose centers are closest to at least one point on the line.\n- For data cubes with a **DGGS** dimension, the filter retains a DGGS zone if the zone centroid intersects with at least one of the geometries.\n\nMore specifically, pixels outside of the bounding box of the given geometries will not be available after filtering. All pixels inside the bounding box that are not retained will be set to no-data values.\n\n Alternatively, use ``filter_bbox()`` to filter with a bounding box or ``filter_vector()`` to filter a vector data cube based on geometries. Use ``mask_polygon()`` to mask without changing the spatial extent of your data cube.",
+    "summary": "Spatially filter data cubes using geometries",
+    "description": "Limits a raster data cube over the horizontal spatial dimensions (axes `x` and `y`) or a DGGS data cube over its DGGS dimension to the specified geometries.\n\n- For **polygons**, the process considers all values for which the pixel or DGGS zone centroid intersects with the corresponding polygon (as defined in the Simple Features standard by the OGC).\n- For **points**, the process considers the closest pixel or DGGS zone based on the centroid.\n- For **lines** (line strings), the process considers all the values whose pixel or zone centroid are closest to at least one point on the line.\n\nMore specifically, pixels or DGGS zones outside of the bounding box of the given geometries will not be available after filtering. All pixels or DGGS zones with their centroids inside the bounding box that are not retained will be set to no-data values.\n\nAlternatively, use ``filter_bbox()`` to filter with a bounding box or ``filter_vector()`` to filter a vector data cube based on geometries. Use ``mask_polygon()`` to mask without changing the spatial extent of your data cube.",
     "categories": [
         "cubes",
         "filter"
@@ -62,7 +62,7 @@
         }
     ],
     "returns": {
-        "description": "A raster or DGGS data cube restricted to the specified geometries. The dimensions and dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the spatial dimensions have less (or the same) dimension labels.",
+        "description": "A data cube restricted to the specified geometries. The dimensions and dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the spatial or DGGS dimensions have less (or the same) dimension labels.",
         "schema": [
             {
                 "title": "Raster data cube",

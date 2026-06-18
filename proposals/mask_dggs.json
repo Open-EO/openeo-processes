@@ -1,0 +1,80 @@
+{
+    "id": "mask_dggs",
+    "summary": "Apply a DGGS mask",
+    "description": "Applies a mask to a DGGS data cube.\n\nA mask is a DGGS data cube for which corresponding zones among `data` and `mask` are compared and those zones in `data` are replaced whose values in `mask` are non-zero (for numbers) or `true` (for boolean values). This behavior can be inverted by setting the parameter `inside` to `true`. The zone values are replaced with the value specified for `replacement`, which defaults to the no-data value of the data cube. No-data values in `data` are left untouched by the masking operation.",
+    "categories": [
+        "cubes",
+        "masks",
+        "dggs"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube with a DGGS dimension.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "dggs"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "mask",
+            "description": "A DGGS data cube containing the mask values. Every DGGS zone in `data` must have a corresponding zone in `mask`.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "dggs"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "replacement",
+            "description": "The value used to replace masked values with. `null` refers to the no-data value of the data cube provided for `data`.",
+            "schema": [
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "boolean"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null,
+            "optional": true
+        },
+        {
+            "name": "inside",
+            "description": "If set to `true`, zones for which the corresponding value in `mask` is zero (for numbers) or `false` (for boolean values) are replaced.",
+            "schema": {
+                "type": "boolean"
+            },
+            "default": false,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "A masked DGGS data cube with the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "dggs"
+                }
+            ]
+        }
+    }
+}
