@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `reduce_spatial`: Added a recommended DGGS alternative.
+- `aggregate_spatial`, `filter_bbox`, `filter_spatial`, `load_collection`, `load_stac`, and `mask_polygon`: Added DGGS-specific behavior clarification (zone centroid inclusion rule for spatial filtering).
+
 ### Changed
 
 ### Fixed
