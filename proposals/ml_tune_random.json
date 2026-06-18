@@ -1,0 +1,185 @@
+{
+    "id": "ml_tune_random",
+    "summary": "Random search hyperparameter tuning",
+    "description": "Performs random search over hyperparameter distributions to find optimal model settings. Unlike grid search, random search samples a fixed number of parameter combinations from specified distributions, which can be more efficient for high-dimensional parameter spaces. Returns the best trained model based on the specified scoring metrics.",
+    "categories": [
+        "machine learning"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "model",
+            "description": "An untrained machine learning model to be trained and evaluated for each sampled hyperparameter combination.",
+            "schema": {
+                "type": "object",
+                "subtype": "ml-model"
+            }
+        },
+        {
+            "name": "training_set",
+            "description": "The training set for the model, provided as a vector data cube or a reference. This set contains both the independent variables and the dependent variable that the model analyzes to learn patterns and relationships within the data.",
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometry"
+                        },
+                        {
+                            "type": "bands"
+                        }
+                    ]
+                },
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometry"
+                        },
+                        {
+                            "type": "other"
+                        }
+                    ]
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "parameters",
+            "description": "Hyperparameter distributions defining the search space. Each key is a hyperparameter name. Values can be arrays (uniform sampling), or objects specifying distributions with 'type' ('uniform', 'log_uniform', 'int_uniform', 'choice') and parameters ('min', 'max', 'values').",
+            "schema": {
+                "type": "object",
+                "additionalProperties": {
+                    "anyOf": [
+                        {
+                            "type": "array",
+                            "description": "List of discrete values to sample from uniformly.",
+                            "items": {}
+                        },
+                        {
+                            "type": "object",
+                            "description": "Distribution specification.",
+                            "properties": {
+                                "type": {
+                                    "type": "string",
+                                    "enum": [
+                                        "uniform",
+                                        "log_uniform",
+                                        "int_uniform",
+                                        "choice"
+                                    ]
+                                },
+                                "min": {
+                                    "type": "number"
+                                },
+                                "max": {
+                                    "type": "number"
+                                },
+                                "values": {
+                                    "type": "array"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "n_iter",
+            "description": "Number of random parameter combinations to sample and evaluate.",
+            "optional": true,
+            "default": 10,
+            "schema": {
+                "type": "integer",
+                "minimum": 1
+            }
+        },
+        {
+            "name": "target",
+            "description": "The name of the variable in the training set that serves as the target or ground truth for model training. This may refer to class labels, continuous values, segmentation masks, or any reference variable depending on the model task. Set to `null` for unsupervised or self-supervised tasks.",
+            "optional": true,
+            "default": "label",
+            "schema": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "name": "scoring",
+            "description": "One or more metrics used to evaluate and compare model performance. The available metrics depend on the model task and the back-end implementation. Examples include 'accuracy', 'f1', 'kappa', and 'auc' for classification; 'rmse', 'mae', and 'r2' for regression; 'iou' and 'dice' for segmentation; or any custom metric supported by the back-end. If set to `null`, the back-end selects an appropriate default metric based on the model task. When multiple metrics are provided, the first metric in the list is used to select the best model.",
+            "optional": true,
+            "default": null,
+            "schema": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "minItems": 1
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "name": "cv",
+            "description": "Number of cross-validation folds. If 0 or 1, uses a single train/validation split instead of cross-validation.",
+            "optional": true,
+            "default": 5,
+            "schema": {
+                "type": "integer",
+                "minimum": 0
+            }
+        },
+        {
+            "name": "validation_split",
+            "description": "Fraction of training data used for validation when cv <= 1. Ignored when using cross-validation.",
+            "optional": true,
+            "default": 0.2,
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "exclusiveMaximum": 1
+            }
+        },
+        {
+            "name": "seed",
+            "description": "Random seed for reproducibility of parameter sampling, data splits, and model training.",
+            "optional": true,
+            "default": null,
+            "schema": {
+                "type": [
+                    "integer",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "A trained model with the best hyperparameter combination found during the random search. The model metadata includes the tuning results such as the best hyperparameters and evaluation scores.",
+        "schema": {
+            "type": "object",
+            "subtype": "ml-model"
+        }
+    },
+    "links": [
+        {
+            "href": "https://www.jmlr.org/papers/v13/bergstra12a.html",
+            "title": "Bergstra & Bengio (2012) - Random Search for Hyper-Parameter Optimization",
+            "type": "text/html",
+            "rel": "about"
+        }
+    ]
+}

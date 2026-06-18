@@ -1,0 +1,66 @@
+{
+    "id": "ml_smooth_class",
+    "summary": "Apply Bayesian smoothing to classification results",
+    "description": "Applies spatial smoothing to classification probabilities results from a machine learning model using Bayesian inference. This process helps reduce noise and improve classification accuracy by considering spatial context and neighbourhood information. The smoothing is based on a window-based approach.",
+    "categories": [
+        "machine learning"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The input classification probabilities data to be smoothed. This should be a classified data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube"
+            }
+        },
+        {
+            "name": "window_size",
+            "description": "The size of the moving window used for spatial smoothing. Must be an odd number to ensure a central pixel.",
+            "optional": true,
+            "default": 7,
+            "schema": {
+                "type": "integer",
+                "minimum": 3,
+                "multipleOf": 2
+            }
+        },
+        {
+            "name": "neighborhood_fraction",
+            "description": "The fraction of neighbouring pixels to consider in the smoothing process. Controls the influence of local spatial information.",
+            "optional": true,
+            "default": 0.5,
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+            }
+        },
+        {
+            "name": "smoothness",
+            "description": "Controls the degree of smoothing applied. Higher values result in smoother outputs but may lose fine details.",
+            "optional": true,
+            "default": 10,
+            "schema": {
+                "type": "integer",
+                "minimum": 1
+            }
+        }
+    ],
+    "returns": {
+        "description": "A smoothed classification result with reduced noise and improved spatial consistency.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube"
+        }
+    },
+    "links": [
+        {
+            "href": "https://doi.org/10.3390/rs16234572",
+            "title": "Camara et al. (2024): Bayesian Inference for Post-Processing of Remote-Sensing Image Classification",
+            "type": "text/html",
+            "rel": "about"
+        }
+    ]
+} 

@@ -1,0 +1,102 @@
+{
+    "id": "ml_validate",
+    "summary": "Validate a trained ML model",
+    "description": "Evaluates a trained machine learning model on a validation set and computes performance metrics. The model must have been previously trained using a process such as ``ml_fit()``, ``ml_tune_grid()``, or ``ml_tune_random()``.",
+    "categories": [
+        "machine learning"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "model",
+            "description": "A trained machine learning model to evaluate.",
+            "schema": {
+                "type": "object",
+                "subtype": "ml-model"
+            }
+        },
+        {
+            "name": "validation_set",
+            "description": "The validation set used to evaluate the model, provided as a vector data cube or a reference. This set must contain the same independent variables the model was trained on, along with the expected target variable for comparison.",
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometry"
+                        },
+                        {
+                            "type": "bands"
+                        }
+                    ]
+                },
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometry"
+                        },
+                        {
+                            "type": "other"
+                        }
+                    ]
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "target",
+            "description": "The name of the variable in the validation set that serves as the ground truth for evaluation. This may refer to class labels, continuous values, segmentation masks, or any reference variable depending on the model task. Set to `null` for unsupervised or self-supervised tasks.",
+            "optional": true,
+            "default": "label",
+            "schema": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "name": "scoring",
+            "description": "One or more metrics to compute for evaluating model performance. The available metrics depend on the model task and the back-end implementation. Examples include 'accuracy', 'f1', 'kappa', and 'auc' for classification; 'rmse', 'mae', and 'r2' for regression; 'iou' and 'dice' for segmentation; or any custom metric supported by the back-end. If set to `null`, the back-end selects an appropriate default metric based on the model task.",
+            "optional": true,
+            "default": null,
+            "schema": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "minItems": 1
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        }
+    ],
+    "returns": {
+        "description": "The trained model enriched with validation scores in its metadata. The model can be directly used for prediction with ``ml_predict()``.",
+        "schema": {
+            "type": "object",
+            "subtype": "ml-model"
+        }
+    },
+    "links": [
+        {
+            "href": "https://doi.org/10.1214/09-SS054",
+            "title": "Arlot & Celisse (2010) - A Survey of Cross-Validation Procedures for Model Selection",
+            "type": "text/html",
+            "rel": "about"
+        }
+    ]
+}

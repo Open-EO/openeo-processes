@@ -1,7 +1,7 @@
 {
     "id": "save_ml_model",
     "summary": "Save a ML model",
-    "description": "Saves a machine learning model as part of a batch job.\n\nThe model will be accompanied by a separate STAC Item that implements the [ml-model extension](https://github.com/stac-extensions/ml-model).",
+    "description": "Saves a machine learning model as part of a batch job.\n\nThe model will be accompanied by a separate STAC Item that implements the [mlm-model extension](https://github.com/stac-extensions/mlm).\n\nSet ``return_model`` to ``true`` when ``save_ml_model`` is followed by processes such as ``ml_predict()`` in the same process graph. The default (``false``) returns a boolean success flag, which is appropriate when saving is the job result.",
     "categories": [
         "machine learning",
         "import"
@@ -9,11 +9,18 @@
     "experimental": true,
     "parameters": [
         {
-            "name": "data",
-            "description": "The data to store as a machine learning model.",
+            "name": "model",
+            "description": "The machine learning model to store.",
             "schema": {
                 "type": "object",
                 "subtype": "ml-model"
+            }
+        },
+        {
+            "name": "name",
+            "description": "A distinct name of the model.",
+            "schema": {
+                "type": "string"
             }
         },
         {
@@ -25,18 +32,33 @@
             },
             "default": {},
             "optional": true
+        },
+        {
+            "name": "return_model",
+            "description": "If ``true``, return the input model after a successful save so it can be chained (for example with ``ml_predict()``) in the same process graph. If ``false`` (default), return ``true`` on success or ``false`` on failure.",
+            "schema": {
+                "type": "boolean"
+            },
+            "default": false,
+            "optional": true
         }
     ],
     "returns": {
-        "description": "Returns `false` if the process failed to store the model, `true` otherwise.",
-        "schema": {
-            "type": "boolean"
-        }
+        "description": "If ``return_model`` is ``false`` (default), returns ``true`` on success or ``false`` on failure. If ``return_model`` is ``true``, returns the saved ml-model on success.",
+        "schema": [
+            {
+                "type": "boolean"
+            },
+            {
+                "type": "object",
+                "subtype": "ml-model"
+            }
+        ]
     },
     "links": [
         {
-            "href": "https://github.com/stac-extensions/ml-model",
-            "title": "STAC ml-model extension",
+            "href": "https://github.com/stac-extensions/mlm",
+            "title": "Machine Learning Model STAC extension",
             "type": "text/html",
             "rel": "about"
         }

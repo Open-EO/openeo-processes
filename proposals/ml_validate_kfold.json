@@ -1,0 +1,124 @@
+{
+    "id": "ml_validate_kfold",
+    "summary": "Validate an ML model with k-fold cross-validation",
+    "description": "Evaluates a machine learning model using k-fold cross-validation. The training data is split into k folds; the model is trained k times, each time using all but one fold for training and the remaining fold for validation. Aggregated performance metrics are written to ``metrics.json`` in the job directory. The model is then refit on the full training set and returned with cross-validation scores attached in its metadata, so it can be used directly for prediction with ``ml_predict()`` or persisted with ``save_ml_model()``.\n\nThe ``metrics.json`` file has a top-level ``cv`` field (number of folds), a ``scoring`` field (list of requested metric names), and a ``metrics`` object keyed by metric name. Each metric entry contains ``mean`` and ``std`` aggregated across folds, and ``per_fold`` with the score from each fold. When a metric is computed per class (for example ``f1``), an additional ``by_class`` object maps class labels to the same structure.",
+    "categories": [
+        "machine learning"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "model",
+            "description": "A machine learning model to evaluate. Must be an untrained model specification (for example from ``mlm_class_random_forest()`` or ``mlm_class_tempcnn()``) that supports cross-validation and training.",
+            "schema": {
+                "type": "object",
+                "subtype": "ml-model"
+            }
+        },
+        {
+            "name": "training_set",
+            "description": "The training set used for cross-validation and for the final refit, provided as a vector data cube or a reference. This set contains both the independent variables and the dependent variable that the model analyzes to learn patterns and relationships within the data.",
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometry"
+                        },
+                        {
+                            "type": "bands"
+                        }
+                    ]
+                },
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometry"
+                        },
+                        {
+                            "type": "other"
+                        }
+                    ]
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "cv",
+            "description": "Number of cross-validation folds.",
+            "optional": true,
+            "default": 5,
+            "schema": {
+                "type": "integer",
+                "minimum": 2
+            }
+        },
+        {
+            "name": "target",
+            "description": "The name of the variable in the training set that serves as the ground truth for evaluation. This may refer to class labels, continuous values, segmentation masks, or any reference variable depending on the model task. Set to `null` for unsupervised or self-supervised tasks.",
+            "optional": true,
+            "default": "label",
+            "schema": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "name": "scoring",
+            "description": "One or more metrics to compute for evaluating model performance. The available metrics depend on the model task and the back-end implementation. Examples include 'accuracy', 'f1', 'kappa', and 'auc' for classification; 'rmse', 'mae', and 'r2' for regression; 'iou' and 'dice' for segmentation; or any custom metric supported by the back-end. Per-class metrics such as 'f1', 'precision', 'recall', 'sensitivity', and 'specificity' are included when requested. If set to `null`, the back-end selects an appropriate default metric based on the model task.",
+            "optional": true,
+            "default": null,
+            "schema": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "minItems": 1
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        {
+            "name": "seed",
+            "description": "Random seed for reproducibility of fold splits and model training.",
+            "optional": true,
+            "default": null,
+            "schema": {
+                "type": [
+                    "integer",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "The model refit on the full training set, enriched with cross-validation scores in its metadata. The model can be directly used for prediction with ``ml_predict()``.",
+        "schema": {
+            "type": "object",
+            "subtype": "ml-model"
+        }
+    },
+    "links": [
+        {
+            "href": "https://doi.org/10.1007/s11222-009-9153-8",
+            "title": "Fushiki (2011): Estimation of prediction error by using K-fold cross-validation",
+            "type": "text/html",
+            "rel": "about"
+        }
+    ]
+}
