@@ -33,6 +33,7 @@
                 "L3-UDF",
                 "L3-Clim",
                 "L3-ARD",
+                "L3-DGGS",
                 "L4"
             ]
         },
@@ -117,6 +118,7 @@
                             "L3-UDF",
                             "L3-Clim",
                             "L3-ARD",
+                            "L3-DGGS",
                             "L4",
                             null
                         ]

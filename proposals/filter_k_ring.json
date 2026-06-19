@@ -1,0 +1,80 @@
+{
+    "id": "filter_k_ring",
+    "summary": "Select DGGS zones within a k-ring neighborhood",
+    "description": "Selects DGGS zones from a data cube based on topological neighborhood distance in a DGGS.\n\nStarting from one or more source zone identifiers, all zones are selected that are reachable within `k` adjacency steps in the same DGGS reference system (DGGRS).\n\nIt is useful for neighborhood operations such as local smoothing, context expansion, and region growing on DGGS-based data cubes.",
+    "categories": [
+        "cubes",
+        "filter",
+        "dggs"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube with a DGGS dimension.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "dggs"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "zones",
+            "description": "One or more DGGS zone identifiers used as neighborhood seeds.",
+            "schema": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                    "type": "string"
+                }
+            }
+        },
+        {
+            "name": "k",
+            "description": "Neighborhood distance in topological adjacency steps. `0` selects only the source zones.",
+            "schema": {
+                "type": "integer",
+                "minimum": 0
+            }
+        }
+    ],
+    "returns": {
+        "description": "A data cube with the same dimensions and properties as the input, restricted to the selected DGGS zones.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "dggs"
+                }
+            ]
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A DGGS dimension with the specified name does not exist."
+        },
+        "ZoneNotAvailable": {
+            "message": "At least one of the source zone identifiers is not available in the data cube."
+        }
+    },
+    "examples": [
+        {
+            "description": "Select all zones within two adjacency steps around zone C1A.",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "zones": [
+                    "C1A"
+                ],
+                "k": 2
+            }
+        }
+    ]
+}
+
