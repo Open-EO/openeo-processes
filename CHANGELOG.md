@@ -10,14 +10,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New proposal processes for DGGS-based workflows:
-  - `filter_k_ring`
-  - `resample_dggs`
-  - `resample_cube_dggs`
-  - `mask_dggs`
+  - `aggregate_k_ring` - Aggregate values over DGGS k-ring neighborhoods, comparable to `aggregate_spatial_window`.
+  - `apply_neighborhood_dggs` - Apply custom focal processes over DGGS neighborhoods, comparable to `apply_neighborhood`,
+  - `apply_kernel_dggs` - Apply weighted DGGS neighborhood convolution based on topological distance, comparable to `apply_kernel`.
+  - `filter_k_ring` - Filter based on rings around DGGS zones.
+  - `resample_dggs` - Up- and downsample based on DGGS resolution levels, comparable to `resample_spatial`,
+  - `resample_cube_dggs` - Up and downsample based on a target DGGS data cube, comparable to `resample_cube_spatial`.
+  - `mask_dggs` - Mask a DGGS data cube based on a DGGS-based mask, comparable to `mask`.
 
 ### Changed
 
-- `apply_kernel`, `apply_neighborhood`, `resample_spatial`, `resample_cube_spatial`, `aggregate_spatial_window`: Added explicit DGGS guidance.
+- `apply_kernel`, `apply_neighborhood`, `resample_spatial`, `resample_cube_spatial`, and `aggregate_spatial_window`: Added explicit DGGS guidance and updated cross-references to DGGS-native alternatives.
 - `reduce_spatial` and `resample_cube_spatial`: Added a recommended DGGS alternative.
 - `aggregate_spatial`, `filter_bbox`, `filter_spatial`, `load_collection`, `load_stac`, and `mask_polygon`: Added DGGS-specific behavior clarification (zone centroid inclusion rule for spatial filtering/masking/aggregation).
 - `resample_spatial`: Added support for DGGS input; a DGGS data cube can be converted to raster when a suitable target projection is provided.
