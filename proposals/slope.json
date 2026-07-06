@@ -1,0 +1,27 @@
+{
+    "id": "slope",
+    "summary": "The slope of a terrain surface",
+    "description": "Compute the slope (in radians, relative to the horizontal plane) of elevation data.",
+    "categories": [
+        "cubes",
+        "math"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "parameters",
+            "description": "A data cube with n bands containing elevation data",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube"
+            }
+        }
+    ],
+    "returns": {
+        "description": "A data cube with n bands named after the n bands in the input data cube, suffixed with `_slope`. Each band contains the computed slope values (in radians, relative to the horizontal plane).",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube"
+        }
+    }
+}

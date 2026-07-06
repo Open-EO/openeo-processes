@@ -1,0 +1,27 @@
+{
+    "id": "aspect",
+    "summary": "The aspect of a terrain surface",
+    "description": "Compute the aspect (in radians, from due North) of elevation data.",
+    "categories": [
+        "cubes",
+        "math"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "parameters",
+            "description": "A data cube with n bands containing elevation data",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube"
+            }
+        }
+    ],
+    "returns": {
+        "description": "A data cube with n bands named after the n bands in the input data cube, suffixed with `aspect`. Each band contains the computed aspect values (in radians, from due North).  In case the surface is flat, the NaN value is used (since there is no direction of the gradient).",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube"
+        }
+    }
+}

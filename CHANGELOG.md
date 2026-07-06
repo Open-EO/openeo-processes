@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `slope`: New process [#556](https://github.com/Open-EO/openeo-processes/issues/556) 
+- `aspect`: New process [#557](https://github.com/Open-EO/openeo-processes/issues/557)
+
 ### Changed
 
 ### Fixed
