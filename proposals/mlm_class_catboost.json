@@ -30,10 +30,35 @@
             }
         },
         {
+            "name": "learning_rate",
+            "description": "The learning rate used for reducing the gradient step.",
+            "optional": true,
+            "default": 0.03,
+            "schema": {
+                "type": "number",
+                "exclusiveMinimum": 0
+            }
+        },
+        {
+            "name": "loss_function",
+            "description": "The metric to use in training. `MultiClass` works for binary and multi-class problems, `Logloss` and `CrossEntropy` for binary problems only.",
+            "optional": true,
+            "default": "MultiClass",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "MultiClass",
+                    "MultiClassOneVsAll",
+                    "Logloss",
+                    "CrossEntropy"
+                ]
+            }
+        },
+        {
             "name": "seed",
             "description": "The random seed used for training, for reproducibility. If not given or `null`, no seed is used and results may differ on subsequent use.",
             "optional": true,
-            "default": 0,
+            "default": null,
             "schema": {
                 "type": [
                     "integer",
@@ -59,4 +84,4 @@
             "rel": "about"
         }
     ]
-} 
+}

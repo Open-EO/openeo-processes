@@ -10,6 +10,7 @@
         {
             "name": "hidden_layer_sizes",
             "description": "List of integers specifying the number of neurons in each hidden layer.",
+            "optional": true,
             "default": [
                 512,
                 512,
@@ -41,6 +42,7 @@
         {
             "name": "dropout_rates",
             "description": "List of numbers between 0 and 1 specifying the dropout rate for each hidden layer.",
+            "optional": true,
             "default": [
                 0.4,
                 0.3,

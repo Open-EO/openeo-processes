@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "The input probability data cube to be labeled. Each band should represent the probability of a different class.",
+            "description": "The input probability data cube to be labeled, for example as returned by ``ml_predict_probabilities()``. Each label of the class dimension (named `classes` by ``ml_predict_probabilities()``) holds the probability of a different class.",
             "schema": {
                 "type": "object",
                 "subtype": "datacube"
@@ -35,4 +35,4 @@
             "subtype": "datacube"
         }
     }
-} 
+}

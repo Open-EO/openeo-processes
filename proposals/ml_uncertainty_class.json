@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "The data cube containing the classification probabilities.",
+            "description": "The data cube containing the classification probabilities, for example as returned by ``ml_predict_probabilities()``, with one label per class in the class dimension.",
             "schema": {
                 "type": "object",
                 "subtype": "datacube"
@@ -37,4 +37,4 @@
             "subtype": "datacube"
         }
     }
-} 
+}

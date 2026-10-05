@@ -17,7 +17,7 @@
         },
         {
             "name": "training_set",
-            "description": "The training set for the model, provided as a vector data cube. This set contains both the independent variables and the dependent variable that the model analyzes to learn patterns and relationships within the data.",
+            "description": "The training set for the model, provided as a vector data cube or a reference. This set contains both the independent variables and the dependent variable that the model analyzes to learn patterns and relationships within the data. Models for time series additionally require a temporal dimension, so that each sample holds an ordered series of observations per band.",
             "schema": [
                 {
                     "type": "object",
@@ -50,10 +50,17 @@
         },
         {
             "name": "target",
-            "description": "The name of the variable in the training set that serves as the target for model training.",
-            "schema": {
-                "type": "string"
-            }
+            "description": "The name of the variable in the training set that serves as the target or ground truth for model training. This may refer to class labels, continuous values, segmentation masks, or any reference variable depending on the model task. Set to `null` for unsupervised or self-supervised tasks.",
+            "optional": true,
+            "default": "label",
+            "schema": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ]
         }
     ],
     "returns": {
@@ -64,4 +71,3 @@
         }
     }
 }
-

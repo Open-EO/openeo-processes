@@ -6,6 +6,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased / Draft
 
+### Added
+
+- New processes in proposal state:
+    - `ml_tune_grid`
+    - `ml_tune_random`
+    - `ml_validate`
+    - `ml_validate_kfold`
+- `mlm_class_catboost`: Added parameters `learning_rate` and `loss_function`
+- `save_ml_model`: Added parameter `return_model` to allow chaining the saved model in the same process graph
+- `load_ml_model`, `load_stac_ml`: Added exceptions for models the back-end can't run (unsupported framework or artifact type, incompatible framework version, unavailable accelerator)
+- `ml_predict`, `ml_predict_probabilities`: Added exceptions for data cubes that don't match the model input and for model outputs that don't match `mlm:output`
+
+### Changed
+
+- `save_ml_model`: Requires STAC MLM extension v1.4 or later and lists the fields the STAC Item must contain. Changed category from `import` to `export`.
+- `load_stac_ml`: Requires STAC MLM extension v1.4 or later
+- `mlm_class_random_forest` and `mlm_regr_random_forest`: `max_variables` is optional and defaults to `sqrt` and `onethird` respectively
+- `mlm_class_catboost`: `seed` defaults to `null` instead of `0`
+- `mlm_class_mlp` and `mlm_class_tempcnn`: Parameters with default values are optional
+- `ml_fit`: `target` is optional, defaults to `label` and allows `null`, as in the other training processes
+- `ml_validate_kfold`: Moved `cv` after `target` and `scoring` to match the parameter order of `ml_tune_grid` and `ml_tune_random`
+- `ml_label_class`, `ml_smooth_class`, `ml_uncertainty_class`: The class probabilities are expected in the class dimension as returned by `ml_predict_probabilities`
+
+### Fixed
+
+- `ml_smooth_class`: `window_size` only allowed even numbers although it must be odd
+- `load_stac_ml`: `model_asset` allows `null`, which is its default value. `input_index` and `output_index` can't be negative.
+- `save_ml_model`: Removed invalid JSON Schema keyword `additionalParameters` from `options`
+
 ## [2.0.0-rc.1] - 2023-05-25
 
 ### Added
