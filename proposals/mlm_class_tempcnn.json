@@ -10,6 +10,7 @@
         {
             "name": "cnn_layers",
             "description": "List of integers specifying the number of filters in each convolutional layer.",
+            "optional": true,
             "default": [
                 256,
                 256,
@@ -27,6 +28,7 @@
         {
             "name": "cnn_kernels",
             "description": "List of integers specifying the kernel size for each convolutional layer.",
+            "optional": true,
             "default": [
                 7,
                 7,
@@ -44,6 +46,7 @@
         {
             "name": "cnn_dropout_rates",
             "description": "List of numbers between 0 and 1 specifying the dropout rate for each convolutional layer.",
+            "optional": true,
             "default": [
                 0.2,
                 0.2,
@@ -62,6 +65,7 @@
         {
             "name": "dense_layer_nodes",
             "description": "Number of nodes in the dense layer.",
+            "optional": true,
             "default": 256,
             "schema": {
                 "type": "integer",
@@ -71,6 +75,7 @@
         {
             "name": "dense_layer_dropout_rate",
             "description": "Dropout rate for the dense layer.",
+            "optional": true,
             "default": 0.5,
             "schema": {
                 "type": "number",

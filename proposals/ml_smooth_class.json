@@ -9,7 +9,7 @@
     "parameters": [
         {
             "name": "data",
-            "description": "The input classification probabilities data to be smoothed. This should be a classified data cube.",
+            "description": "The classification probabilities to be smoothed, for example as returned by ``ml_predict_probabilities()``, with one label per class in the class dimension.",
             "schema": {
                 "type": "object",
                 "subtype": "datacube"
@@ -22,8 +22,7 @@
             "default": 7,
             "schema": {
                 "type": "integer",
-                "minimum": 3,
-                "multipleOf": 2
+                "minimum": 3
             }
         },
         {
@@ -63,4 +62,4 @@
             "rel": "about"
         }
     ]
-} 
+}

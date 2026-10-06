@@ -103,3 +103,4 @@ log_uniform
 int_uniform
 iou
 dice
+artifact
