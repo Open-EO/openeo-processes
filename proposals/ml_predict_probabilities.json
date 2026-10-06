@@ -1,7 +1,7 @@
 {
-    "id": "ml_predict",
-    "summary": "Predict using ML",
-    "description": "Applies a machine learning model to a data cube of input features and returns the predicted values.\n\nBefore inference, the data cube is checked against the input specification of the model (``mlm:input``). The process fails if a dimension named in ``dim_order`` is missing, if a dimension is shorter than the model input requires, or if a band required by the model is missing and cannot be computed. If the result returned by the model does not match the shape or data type declared in ``mlm:output``, the process fails instead of reshaping the result.",
+    "id": "ml_predict_probabilities",
+    "summary": "Predict class probabilities using ML",
+    "description": "Applies a machine learning model to a data cube of input features and returns the predicted class probabilities.\n\nBefore inference, the data cube is checked against the input specification of the model (``mlm:input``). The process fails if a dimension named in ``dim_order`` is missing, if a dimension is shorter than the model input requires, or if a band required by the model is missing and cannot be computed. If the result returned by the model does not match the shape or data type declared in ``mlm:output``, the process fails instead of reshaping the result.",
     "categories": [
         "machine learning"
     ],
@@ -17,7 +17,7 @@
         },
         {
             "name": "model",
-            "description": "A ML model that was trained.",
+            "description": "A ML model that was trained and supports probability predictions.",
             "schema": {
                 "type": "object",
                 "subtype": "ml-model"
@@ -25,7 +25,7 @@
         }
     ],
     "returns": {
-        "description": "A data cube with the predicted values. The dimensions holding the input features of the model are removed and a new dimension for the predicted values is added. It has the name `predictions` and is of type `other`. If a single value is returned, the dimension has a single label with name `0`.",
+        "description": "A data cube with the predicted class probabilities. The dimensions holding the input features of the model are removed and a new dimension for the class probabilities is added. The dimension has the name `classes` and is of type `other`. Each label in the dimension represents a class, and the values are the probabilities for each class.",
         "schema": {
             "type": "object",
             "subtype": "datacube",

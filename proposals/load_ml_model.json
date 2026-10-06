@@ -1,7 +1,7 @@
 {
     "id": "load_ml_model",
-    "summary": "Load a ML model",
-    "description": "Loads a machine learning model from a STAC Item.\n\nSuch a model could be trained and saved as part of a previous batch job with processes such as  ``ml_fit_regr_random_forest()`` and ``save_ml_model()``.",
+    "summary": "Load a machine learning model by ID",
+    "description": "Loads a machine learning model that is managed by the current back-end, identified by a back-end specific model identifier.\n\nThis allows the back-end to host and optimize models for efficient inference and training (e.g., via model-specific libraries such as Terratorch). Back-end specific models can be referenced by a string identifier similar to collections. Each model is described by STAC metadata that implements the [Machine Learning Model (`mlm`) extension](https://github.com/stac-extensions/mlm).\n\nIf you want to load a model from a STAC Item implementing the `mlm` extension, use `load_stac_ml()` instead.\n\nBefore the model is used, the back-end checks whether it can run the model and fails early instead of adapting silently. The model is rejected if the back-end does not support the declared ``mlm:framework`` or ``mlm:artifact_type``, if the installed framework differs from ``mlm:framework_version`` in its major version, or if ``mlm:accelerator_constrained`` is ``true`` and the declared ``mlm:accelerator`` is not available. A difference in the minor version is allowed but must be reported in the logs.",
     "categories": [
         "machine learning",
         "import"
@@ -9,27 +9,16 @@
     "experimental": true,
     "parameters": [
         {
-            "name": "uri",
-            "description": "The STAC Item to load the machine learning model from. The STAC Item must implement the `ml-model` extension.",
-            "schema": [
-                {
-                    "title": "URL",
-                    "type": "string",
-                    "format": "uri",
-                    "subtype": "uri",
-                    "pattern": "^https?://"
-                },
-                {
-                    "title": "User-uploaded File",
-                    "type": "string",
-                    "subtype": "file-path",
-                    "pattern": "^[^\r\n\\:'\"]+$"
-                }
-            ]
+            "name": "id",
+            "description": "The back-end specific identifier of the machine learning model to load.",
+            "schema": {
+                "type": "string",
+                "pattern": "^[\\w\\-\\.~/]+$"
+            }
         }
     ],
     "returns": {
-        "description": "A machine learning model to be used with machine learning processes such as ``ml_predict()``.",
+        "description": "A machine learning model to be used with machine learning processes such as `ml_predict()`.",
         "schema": {
             "type": "object",
             "subtype": "ml-model"
@@ -37,10 +26,30 @@
     },
     "links": [
         {
-            "href": "https://github.com/stac-extensions/ml-model",
-            "title": "STAC ml-model extension",
+            "href": "https://github.com/stac-extensions/mlm",
+            "title": "Machine Learning Model STAC extension",
+            "type": "text/html",
+            "rel": "about"
+        },
+        {
+            "href": "https://openeo.org/documentation/1.0/",
+            "title": "openEO API documentation",
             "type": "text/html",
             "rel": "about"
         }
-    ]
+    ],
+    "exceptions": {
+        "ModelFrameworkUnsupported": {
+            "message": "The machine learning framework '{framework}' declared in `mlm:framework` is not supported by the back-end."
+        },
+        "ModelArtifactTypeUnsupported": {
+            "message": "The model artifact type '{type}' declared in `mlm:artifact_type` is not supported by the back-end."
+        },
+        "ModelFrameworkVersionMismatch": {
+            "message": "The model requires version {required} of the framework (`mlm:framework_version`), but the back-end provides the incompatible version {installed}."
+        },
+        "ModelAcceleratorUnavailable": {
+            "message": "The model is constrained to the accelerator '{accelerator}' (`mlm:accelerator_constrained`), which is not available."
+        }
+    }
 }

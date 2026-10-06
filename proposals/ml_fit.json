@@ -1,0 +1,73 @@
+{
+    "id": "ml_fit",
+    "summary": "Train a machine learning model",
+    "description": "Executes the fit of a specified machine learning model based on training data.\n\nThe function is generic and supports different machine learning models.",
+    "categories": [
+        "machine learning"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "model",
+            "description": "The machine learning model to be trained. This should be an instance of a model that supports the `ml_fit` method.",
+            "schema": {
+                "type": "object",
+                "subtype": "ml-model"
+            }
+        },
+        {
+            "name": "training_set",
+            "description": "The training set for the model, provided as a vector data cube or a reference. This set contains both the independent variables and the dependent variable that the model analyzes to learn patterns and relationships within the data. Models for time series additionally require a temporal dimension, so that each sample holds an ordered series of observations per band.",
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometry"
+                        },
+                        {
+                            "type": "bands"
+                        }
+                    ]
+                },
+                {
+                    "type": "object",
+                    "subtype": "datacube",
+                    "dimensions": [
+                        {
+                            "type": "geometry"
+                        },
+                        {
+                            "type": "other"
+                        }
+                    ]
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "target",
+            "description": "The name of the variable in the training set that serves as the target or ground truth for model training. This may refer to class labels, continuous values, segmentation masks, or any reference variable depending on the model task. Set to `null` for unsupervised or self-supervised tasks.",
+            "optional": true,
+            "default": "label",
+            "schema": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        }
+    ],
+    "returns": {
+        "description": "A trained model object that can be saved with `save_ml_model()` and restored with `load_ml_model()`.",
+        "schema": {
+            "type": "object",
+            "subtype": "ml-model"
+        }
+    }
+}
