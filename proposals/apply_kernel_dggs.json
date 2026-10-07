@@ -1,0 +1,72 @@
+{
+    "id": "apply_kernel_dggs",
+    "summary": "Apply a weighted DGGS neighborhood kernel",
+    "description": "Applies a weighted focal operation on DGGS neighborhoods.\n\nFor each DGGS zone, the neighborhood is defined by topological ring distance in the same DGGS reference system (DGGRS). The weight at index `d` in `weights` is applied to all zones at ring distance `d` from the center zone.\n\nThis process is DGGS-native and provides a DGGS counterpart to ``apply_kernel()`` without relying on raster x/y kernels.",
+    "categories": [
+        "cubes",
+        "math > image filter",
+        "dggs"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube with a DGGS dimension.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "dggs"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "weights",
+            "description": "Kernel weights by topological ring distance. The first value is the center-zone weight (`d = 0`), the second value applies to all zones in ring `d = 1`, and so on.",
+            "schema": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                    "type": "number"
+                }
+            }
+        },
+        {
+            "name": "factor",
+            "description": "A factor multiplied to each computed value after the weighted neighborhood sum.",
+            "schema": {
+                "type": "number"
+            },
+            "default": 1,
+            "optional": true
+        },
+        {
+            "name": "replace_invalid",
+            "description": "Value used to replace non-numerical, NaN, no-data, or infinite numerical values before applying the weighted sum.",
+            "schema": {
+                "type": "number"
+            },
+            "default": 0,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "A DGGS data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "dggs"
+                }
+            ]
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A DGGS dimension with the specified name does not exist."
+        }
+    }
+}

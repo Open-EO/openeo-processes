@@ -1,0 +1,121 @@
+{
+    "id": "aggregate_k_ring",
+    "summary": "Aggregate values over DGGS k-ring neighborhoods",
+    "description": "Aggregates values in a DGGS data cube over topological k-ring neighborhoods.\n\nFor each DGGS zone, all zones within `k` adjacency steps in the same DGGS reference system (DGGRS) are selected and passed to the reducer.\n\nFor a raster-based alternative, see ``aggregate_spatial_window()``.",
+    "categories": [
+        "cubes",
+        "aggregate",
+        "reducer",
+        "dggs"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube with a DGGS dimension.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "dggs"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "k",
+            "description": "Neighborhood distance in topological adjacency steps.",
+            "schema": {
+                "type": "integer",
+                "minimum": 0
+            }
+        },
+        {
+            "name": "reducer",
+            "description": "A reducer applied to all neighborhood values for each zone.",
+            "schema": {
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "description": "A labeled array of values from the k-ring neighborhood.",
+                        "schema": {
+                            "type": "array",
+                            "subtype": "labeled-array",
+                            "items": {
+                                "description": "Any data type."
+                            }
+                        }
+                    },
+                    {
+                        "name": "context",
+                        "description": "Additional data passed by the user.",
+                        "schema": {
+                            "description": "Any data type."
+                        },
+                        "optional": true,
+                        "default": null
+                    }
+                ],
+                "returns": {
+                    "description": "The aggregated value for the current DGGS zone.",
+                    "schema": {
+                        "description": "Any data type."
+                    }
+                }
+            }
+        },
+        {
+            "name": "context",
+            "description": "Additional data to be passed to the reducer.",
+            "schema": {
+                "description": "Any data type."
+            },
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "A DGGS data cube with aggregated values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "dggs"
+                }
+            ]
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A DGGS dimension with the specified name does not exist."
+        }
+    },
+    "examples": [
+        {
+            "description": "Aggregate each zone with the mean value of its first-ring neighborhood.",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "k": 1,
+                "reducer": {
+                    "process_graph": {
+                        "m": {
+                            "process_id": "mean",
+                            "arguments": {
+                                "data": {
+                                    "from_parameter": "data"
+                                }
+                            },
+                            "result": true
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

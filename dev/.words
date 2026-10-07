@@ -7,6 +7,10 @@ center
 centers
 dekad
 DEM-based
+DGGS
+DGGS-based
+DGGS-native
+DGGRS
 Domini
 gamma0
 GeoJSON
@@ -30,6 +34,7 @@ resampled
 resamples
 Resamples
 resampling
+reprojection
 Sentinel-2
 Sentinel-2A
 Sentinel-2B

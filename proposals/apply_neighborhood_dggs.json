@@ -1,24 +1,22 @@
 {
-    "id": "apply_neighborhood",
-    "summary": "Apply a process to pixels in a n-dimensional neighborhood",
-    "description": "Applies a focal process to a data cube.\n\nA focal process is a process that works on a 'neighborhood' of pixels. The neighborhood can extend into multiple dimensions, this extent is specified by the `size` argument. It is not only (part of) the size of the input window, but also the size of the output for a given position of the sliding window. The sliding window moves with multiples of `size`.\n\nAn overlap can be specified so that neighborhoods can have overlapping boundaries. This allows for continuity of the output. The overlap region must be included in the data cube or array returned by `process`, but any changed values will be ignored. The missing overlap at the borders of the original data cube is made available as no-data values in the sub-data cubes.\n\nThe neighborhood size should be kept small enough, to avoid running beyond computational resources, but a too-small size will result in a larger number of process invocations, which may slow down processing. Window sizes for spatial dimensions typically range from 64 to 512 pixels, while overlaps of 8 to 32 pixels are common.\n\nFor DGGS-native topological neighborhoods, see ``apply_neighborhood_dggs()``.\n\nFor the special case of 2D convolution, it is recommended to use ``apply_kernel()`` for raster data cubes and ``apply_kernel_dggs()`` for DGGS data cubes.",
+    "id": "apply_neighborhood_dggs",
+    "summary": "Apply a process to neighborhoods in a DGGS data cube",
+    "description": "Applies a focal process to a data cube with a DGGS dimension.\n\nA focal process is a process that works on a neighborhood of DGGS zones. The neighborhood can extend into the DGGS dimension and into additional dimensions, this extent is specified by the `size` argument. It is not only (part of) the size of the input neighborhood, but also the size of the output for a given position of the sliding neighborhood. Along the DGGS dimension, the neighborhood is defined by topological adjacency steps in the same DGGS reference system (DGGRS).\n\nAn overlap can be specified so that neighborhoods can have overlapping boundaries. This allows for continuity of the output. The overlap region must be included in the data cube returned by `process`, but any changed values in overlapping regions will be ignored. Along the DGGS dimension, the overlap extends the requested core neighborhood by additional k-rings. Requested adjacent zones that are not available in the original data cube are made available as no-data values in the sub-data cubes.\n\nThe neighborhood size should be kept small enough to avoid running beyond computational resources, but a too-small size will result in a larger number of process invocations, which may slow down processing.\n\nThis process is DGGS-native and is the topological counterpart of ``apply_neighborhood()`` for raster data cubes.",
     "categories": [
-        "cubes"
+        "cubes",
+        "dggs"
     ],
+    "experimental": true,
     "parameters": [
         {
             "name": "data",
-            "description": "A raster data cube.",
+            "description": "A data cube with a DGGS dimension.",
             "schema": {
                 "type": "object",
                 "subtype": "datacube",
                 "dimensions": [
                     {
-                        "type": "spatial",
-                        "axis": [
-                            "x",
-                            "y"
-                        ]
+                        "type": "dggs"
                     }
                 ]
             }
@@ -40,11 +38,7 @@
                                 "subtype": "datacube",
                                 "dimensions": [
                                     {
-                                        "type": "spatial",
-                                        "axis": [
-                                            "x",
-                                            "y"
-                                        ]
+                                        "type": "dggs"
                                     }
                                 ]
                             },
@@ -66,7 +60,7 @@
                     }
                 ],
                 "returns": {
-                    "description": "An array or data cube with the newly computed values. The data type and dimensionality must correspond to the input data.\n\n* Data cubes must have the same dimensions and the dimension properties (name, type, labels, reference system and resolution) must remain unchanged. Otherwise, a `DataCubePropertiesImmutable` exception will be thrown.\n* Arrays can be returned with or without labels.",
+                    "description": "A data cube with the newly computed values. The dimensionality must correspond to the input data. The dimension properties (name, type, labels, reference system and resolution) must remain unchanged. Otherwise, a `DataCubePropertiesImmutable` exception is thrown.",
                     "schema": [
                         {
                             "title": "Multi-dimensional data",
@@ -74,11 +68,7 @@
                             "subtype": "datacube",
                             "dimensions": [
                                 {
-                                    "type": "spatial",
-                                    "axis": [
-                                        "x",
-                                        "y"
-                                    ]
+                                    "type": "dggs"
                                 }
                             ]
                         },
@@ -92,7 +82,7 @@
         },
         {
             "name": "size",
-            "description": "Neighborhood sizes along each dimension.\n\nThis object maps dimension names to either a physical measure (e.g. 100 m, 10 days) or pixels (e.g. 32 pixels). For dimensions not specified, the default is to provide all values. Be aware that including all values from overly large dimensions may not be processed at once.",
+            "description": "Neighborhood sizes along each dimension.\n\nThis object maps dimension names to either a physical measure (e.g. 100 m, 10 days) or k-rings (e.g. 3 k-rings). For the DGGS dimension, the unit must be `k` or `null`, in which case `k` is assumed. For dimensions not specified, the default is to provide all values. Be aware that including all values from overly large dimensions may not be processed at once.",
             "schema": {
                 "type": "array",
                 "items": {
@@ -127,7 +117,7 @@
                             ]
                         },
                         "unit": {
-                            "description": "The unit the values are given in, either in meters (`m`) or pixels (`px`). If no unit or `null` is given, uses the unit specified for the dimension or otherwise the default unit of the reference system.",
+                            "description": "The unit the values are given in, either in meters (`m`) or k-rings (`k`). For the DGGS dimension, `k` counts topological adjacency steps and `null` defaults to `k`. For other dimensions, `null` uses the unit specified for the dimension or otherwise the default unit of the reference system.",
                             "default": null,
                             "anyOf": [
                                 {
@@ -138,7 +128,7 @@
                                     "title": "Specific unit",
                                     "type": "string",
                                     "enum": [
-                                        "px",
+                                        "k",
                                         "m"
                                     ]
                                 }
@@ -150,7 +140,7 @@
         },
         {
             "name": "overlap",
-            "description": "Overlap of neighborhoods along each dimension to avoid border effects. By default no overlap is provided.\n\nFor instance a temporal dimension can add 1 month before and after a neighborhood. In the spatial dimensions, this is often a number of pixels. The overlap specified is added before and after, so an overlap of 8 pixels will add 8 pixels on both sides of the window, so 16 in total.\n\nBe aware that large overlaps increase the need for computational resources and modifying overlapping data in subsequent operations have no effect.",
+            "description": "Overlap of neighborhoods along each dimension to avoid edge effects. By default no overlap is provided.\n\nFor instance a temporal dimension can add 1 month before and after a neighborhood. For the DGGS dimension, overlap is given in k-rings and extends the requested core neighborhood by the given number of additional rings. Values returned for these overlap rings must be included in the sub-data cube returned by `process`, but changes to them are ignored when merging the result back into the output data cube.\n\nBe aware that large overlaps increase the need for computational resources and modifying overlapping data in subsequent operations has no effect.",
             "optional": true,
             "default": null,
             "schema": [
@@ -193,7 +183,7 @@
                                 ]
                             },
                             "unit": {
-                                "description": "The unit the values are given in, either in meters (`m`) or pixels (`px`). If no unit or `null` is given, uses the unit specified for the dimension or otherwise the default unit of the reference system.",
+                                "description": "The unit the values are given in, either in meters (`m`) or k-rings (`k`). For the DGGS dimension, `k` counts topological adjacency steps and `null` defaults to `k`. For other dimensions, `null` uses the unit specified for the dimension or otherwise the default unit of the reference system.",
                                 "default": null,
                                 "anyOf": [
                                     {
@@ -204,7 +194,7 @@
                                         "title": "Specific unit",
                                         "type": "string",
                                         "enum": [
-                                            "px",
+                                            "k",
                                             "m"
                                         ]
                                     }
@@ -226,90 +216,23 @@
         }
     ],
     "returns": {
-        "description": "A raster data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
+        "description": "A DGGS data cube with the newly computed values and the same dimensions. The dimension properties (name, type, labels, reference system and resolution) remain unchanged.",
         "schema": {
             "type": "object",
             "subtype": "datacube",
             "dimensions": [
                 {
-                    "type": "spatial",
-                    "axis": [
-                        "x",
-                        "y"
-                    ]
+                    "type": "dggs"
                 }
             ]
         }
     },
-    "examples": [
-        {
-            "arguments": {
-                "data": {
-                    "from_parameter": "data"
-                },
-                "process": {
-                    "process_graph": {
-                        "udf": {
-                            "process_id": "run_udf",
-                            "arguments": {
-                                "data": {
-                                    "from_parameter": "data"
-                                },
-                                "udf": "ml.py",
-                                "runtime": "Python"
-                            },
-                            "result": true
-                        }
-                    }
-                },
-                "size": [
-                    {
-                        "dimension": "x",
-                        "value": 128,
-                        "unit": "px"
-                    },
-                    {
-                        "dimension": "y",
-                        "value": 128,
-                        "unit": "px"
-                    },
-                    {
-                        "dimension": "t",
-                        "value": "P5D"
-                    }
-                ],
-                "overlap": [
-                    {
-                        "dimension": "x",
-                        "value": 16,
-                        "unit": "px"
-                    },
-                    {
-                        "dimension": "y",
-                        "value": 16,
-                        "unit": "px"
-                    },
-                    {
-                        "dimension": "t",
-                        "value": "P3D"
-                    }
-                ]
-            }
-        }
-    ],
     "exceptions": {
         "DimensionNotAvailable": {
-            "message": "A dimension with the specified name does not exist."
+            "message": "A DGGS dimension with the specified name does not exist."
         },
         "DataCubePropertiesImmutable": {
             "message": "The dimension properties (name, type, labels, reference system and resolution) must remain unchanged."
         }
-    },
-    "links": [
-        {
-            "href": "https://openeo.org/documentation/1.0/datacubes.html#apply",
-            "rel": "about",
-            "title": "Apply explained in the openEO documentation"
-        }
-    ]
+    }
 }

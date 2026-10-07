@@ -1,0 +1,110 @@
+{
+    "id": "resample_cube_dggs",
+    "summary": "Align one DGGS data cube to another",
+    "description": "Aligns the DGGS dimension of a source data cube to the DGGS dimension of a target data cube without reprojection.\n\nThis process is intended for DGGS-native cube alignment when both cubes use the same DGGS reference system (DGGRS) and the alignment makes sense in terms of zone hierarchy and target resolution.",
+    "categories": [
+        "cubes",
+        "reproject",
+        "dggs"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube with a DGGS dimension.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "dggs"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "target",
+            "description": "A target data cube with a DGGS dimension that defines the desired DGGS resolution and zone alignment.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "dggs"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "method",
+            "description": "Alignment method used to map values between DGGS zones. The default `near` preserves the closest matching zone semantics. Alternatively, a custom reducer applied to all child zone values when downsampling.",
+            "schema": [
+                {
+                    "type": "string",
+                    "enum": [
+                        "near",
+                        "average",
+                        "mode",
+                        "sum",
+                        "min",
+                        "max"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "subtype": "process-graph",
+                    "parameters": [
+                        {
+                            "name": "data",
+                            "description": "A labeled array of values from child zones.",
+                            "schema": {
+                                "type": "array",
+                                "subtype": "labeled-array",
+                                "items": {
+                                    "description": "Any data type."
+                                }
+                            }
+                        },
+                        {
+                            "name": "context",
+                            "description": "Additional data passed by the user.",
+                            "schema": {
+                                "description": "Any data type."
+                            },
+                            "optional": true,
+                            "default": null
+                        }
+                    ],
+                    "returns": {
+                        "description": "The value to assign to the parent DGGS zone.",
+                        "schema": {
+                            "description": "Any data type."
+                        }
+                    }
+                }
+            ],
+            "optional": true,
+            "default": "near"
+        }
+    ],
+    "returns": {
+        "description": "A data cube with the same dimensions as the input. The DGGS dimension keeps its name and type, while labels are aligned to the target DGGS cube.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "dggs"
+                }
+            ]
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A DGGS dimension with the specified name does not exist."
+        },
+        "IncompatibleDataCubes": {
+            "message": "The data cube and the target data cube are not compatible for DGGS alignment."
+        }
+    }
+}

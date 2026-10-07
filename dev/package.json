@@ -1,37 +1,38 @@
 {
-  "name": "@openeo/processes",
-  "version": "2.0.0-rc.2",
-  "author": "openEO Consortium",
-  "contributors": [
-    {
-      "name": "Matthias Mohr"
+    "name": "@openeo/processes",
+    "version": "2.0.0-rc.2",
+    "author": "openEO Consortium",
+    "contributors": [
+        {
+            "name": "Matthias Mohr"
+        }
+    ],
+    "license": "Apache-2.0",
+    "description": "Validates the processes specified in this repository.",
+    "homepage": "http://openeo.org",
+    "bugs": {
+        "url": "https://github.com/Open-EO/openeo-processes/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Open-EO/openeo-processes.git"
+    },
+    "devDependencies": {
+        "@openeo/processes-lint": "github:Open-EO/openeo-processes-lint#dggs",
+        "concat-json-files": "^1.1.0",
+        "http-server": "^14.1.1"
+    },
+    "scripts": {
+        "check-tests": "node check-tests.js",
+        "has-tests": "node has-tests.js",
+        "lint": "openeo-processes-lint testConfig.json",
+        "test": "npm run has-tests && npm run check-tests && npm run lint",
+        "generate": "concat-json-files \"../{*,proposals/*}.json\" -t \"processes.json\"",
+        "start": "npm run generate && http-server -p 9876 -o docs.html -c-1"
+    },
+    "dependencies": {
+        "ajv": "^8.17.1",
+        "json5": "^2.2.3"
     }
-  ],
-  "license": "Apache-2.0",
-  "description": "Validates the processes specified in this repository.",
-  "homepage": "http://openeo.org",
-  "bugs": {
-    "url": "https://github.com/Open-EO/openeo-processes/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Open-EO/openeo-processes.git"
-  },
-  "devDependencies": {
-    "@openeo/processes-lint": "^0.1.5",
-    "concat-json-files": "^1.1.0",
-    "http-server": "^14.1.1"
-  },
-  "scripts": {
-    "check-tests": "node check-tests.js",
-    "has-tests": "node has-tests.js",
-    "lint": "openeo-processes-lint testConfig.json",
-    "test": "npm run has-tests && npm run check-tests && npm run lint",
-    "generate": "concat-json-files \"../{*,proposals/*}.json\" -t \"processes.json\"",
-    "start": "npm run generate && http-server -p 9876 -o docs.html -c-1"
-  },
-  "dependencies": {
-    "ajv": "^8.17.1",
-    "json5": "^2.2.3"
-  }
+
 }
