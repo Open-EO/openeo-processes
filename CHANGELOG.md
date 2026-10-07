@@ -22,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `apply_kernel`, `apply_neighborhood`, `resample_spatial`, `resample_cube_spatial`, and `aggregate_spatial_window`: Added explicit DGGS guidance and updated cross-references to DGGS-native alternatives.
 - `reduce_spatial` and `resample_cube_spatial`: Added a recommended DGGS alternative.
-- `aggregate_spatial`, `filter_bbox`, `filter_spatial`, `load_collection`, `load_stac`, and `mask_polygon`: Added DGGS-specific behavior clarification (zone centroid inclusion rule for spatial filtering/masking/aggregation).
+- `aggregate_spatial`, `filter_bbox`, `filter_spatial`, `load_collection`, `load_stac`, and `mask_polygon`: Added DGGS-specific behavior clarification (zone centroid inclusion rule for polygons, containing zone for points and lines).
 - `resample_spatial`: Added support for DGGS input; a DGGS data cube can be converted to raster when a suitable target projection is provided.
 
 ### Fixed
