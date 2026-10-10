@@ -1,0 +1,251 @@
+{
+    "id": "filter_dggs",
+    "summary": "Select DGGS zones by spatial extent and zone identifiers",
+    "description": "Selects DGGS zones from a data cube based on a spatial bounding box, explicit DGGS zone identifiers, or a combination of both.\n\nWhen filtering by extent, the spatial predicate determines which zones intersect the bounding box. When filtering by zone identifiers, specific DGGS cells can be selected directly. Both filters can be combined to, for example, select specific zones within a geographic area, optionally expanded by a topological neighborhood.\n\nThis process is complementary to ``filter_bbox()``: while ``filter_bbox()`` filters by zone-centroid containment for DGGS data (analogous to pixel-centroid containment for raster data), ``filter_dggs()`` supports DGGS-specific operations such as zone-identifier-based selection and configurable spatial predicates for polygonal cells.",
+    "categories": [
+        "cubes",
+        "filter",
+        "dggs"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A data cube with a DGGS dimension.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "dggs"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "extent",
+            "description": "A bounding box, which may include a vertical axis (see ``base`` and ``height``).\n\nThe bounding box is specified in longitude/latitude (EPSG:4326) by default, see the ``crs`` property for specifying a different coordinate reference system. If another coordinate reference system is specified, the extent is interpreted in that coordinate reference system before evaluating the selected DGGS zones.\n\nSet this parameter to ``null`` when filtering only by zone identifiers.",
+            "schema": [
+                {
+                    "type": "object",
+                    "subtype": "bounding-box",
+                    "required": [
+                        "west",
+                        "south",
+                        "east",
+                        "north"
+                    ],
+                    "properties": {
+                        "west": {
+                            "description": "West (lower left corner, coordinate axis 1).",
+                            "type": "number"
+                        },
+                        "south": {
+                            "description": "South (lower left corner, coordinate axis 2).",
+                            "type": "number"
+                        },
+                        "east": {
+                            "description": "East (upper right corner, coordinate axis 1).",
+                            "type": "number"
+                        },
+                        "north": {
+                            "description": "North (upper right corner, coordinate axis 2).",
+                            "type": "number"
+                        },
+                        "base": {
+                            "description": "Base (optional, lower left corner, coordinate axis 3).",
+                            "type": [
+                                "number",
+                                "null"
+                            ],
+                            "default": null
+                        },
+                        "height": {
+                            "description": "Height (optional, upper right corner, coordinate axis 3).",
+                            "type": [
+                                "number",
+                                "null"
+                            ],
+                            "default": null
+                        },
+                        "crs": {
+                            "description": "Coordinate reference system of the extent, specified as [EPSG code](https://spatialreference.org/ref/epsg/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html). Defaults to ``4326`` (EPSG code 4326) unless the client explicitly requests a different coordinate reference system.",
+                            "anyOf": [
+                                {
+                                    "title": "EPSG Code",
+                                    "type": "integer",
+                                    "subtype": "epsg-code",
+                                    "minimum": 1000,
+                                    "examples": [
+                                        3857
+                                    ]
+                                },
+                                {
+                                    "title": "WKT2",
+                                    "type": "string",
+                                    "subtype": "wkt2-definition"
+                                }
+                            ],
+                            "default": 4326
+                        }
+                    }
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "optional": true,
+            "default": null
+        },
+        {
+            "name": "cells",
+            "description": "Explicit DGGS zone identifiers to select. Identifiers can be strings or integers, depending on the DGGS reference system and the data cube. For example, HEALPix cells are often represented by numeric identifiers. Identifiers that are not available in the data cube are ignored.\n\nSet this parameter to ``null`` when filtering only by spatial extent.",
+            "schema": [
+                {
+                    "type": "array",
+                    "items": {
+                        "type": [
+                            "integer",
+                            "string"
+                        ]
+                    },
+                    "minItems": 1
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "optional": true,
+            "default": null
+        },
+        {
+            "name": "predicate",
+            "description": "Spatial predicate for extent-based zone selection. ``intersects`` selects zones whose area intersects the extent. ``centroid`` selects zones whose centroid lies inside the extent. Only relevant when ``extent`` is provided.",
+            "schema": {
+                "type": "string",
+                "enum": [
+                    "intersects",
+                    "centroid"
+                ]
+            },
+            "optional": true,
+            "default": "intersects"
+        },
+        {
+            "name": "k",
+            "description": "Number of topological adjacency steps to expand around the explicit ``cells``. ``0`` selects only the requested cells. Only relevant when ``cells`` is provided.\n\nFor filtering only by k-ring neighborhood without an extent or cell-identifier constraint, use ``filter_k_ring()``.",
+            "schema": {
+                "type": "integer",
+                "minimum": 0
+            },
+            "optional": true,
+            "default": 0
+        },
+        {
+            "name": "dimension",
+            "description": "Name of the DGGS dimension. If not provided, the process applies to the DGGS dimension in the data cube.",
+            "schema": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "A DGGS data cube restricted to the selected zones. The dimensions and dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the DGGS dimension has fewer or the same dimension labels.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "dggs"
+                }
+            ]
+        }
+    },
+    "exceptions": {
+        "DimensionNotAvailable": {
+            "message": "A DGGS dimension with the specified name does not exist in the data cube."
+        }
+    },
+    "examples": [
+        {
+            "description": "Select all DGGS zones intersecting a bounding box over central Europe.",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "extent": {
+                    "west": 5,
+                    "south": 47,
+                    "east": 10,
+                    "north": 50
+                }
+            }
+        },
+        {
+            "description": "Select specific DGGS zones by their identifiers.",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "cells": [
+                    "R1",
+                    "R2",
+                    "R10"
+                ]
+            }
+        },
+        {
+            "description": "Select specific HEALPix zones by numeric identifiers.",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "cells": [
+                    3,
+                    8,
+                    13
+                ]
+            }
+        },
+        {
+            "description": "Select zones intersecting a bounding box, restricted to a set of zone identifiers, and expanded by one adjacency ring.",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "extent": {
+                    "west": 5,
+                    "south": 47,
+                    "east": 10,
+                    "north": 50
+                },
+                "cells": [
+                    "R1"
+                ],
+                "k": 1
+            }
+        },
+        {
+            "description": "Select all DGGS zones intersecting a Web Mercator bounding box.",
+            "arguments": {
+                "data": {
+                    "from_parameter": "data"
+                },
+                "extent": {
+                    "west": 556597,
+                    "south": 5942074,
+                    "east": 1113195,
+                    "north": 6446276,
+                    "crs": 3857
+                }
+            }
+        }
+    ]
+}

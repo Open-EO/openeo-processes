@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `aggregate_k_ring` - Aggregate values over DGGS k-ring neighborhoods, comparable to `aggregate_spatial_window`.
   - `apply_neighborhood_dggs` - Apply custom focal processes over DGGS neighborhoods, comparable to `apply_neighborhood`,
   - `apply_kernel_dggs` - Apply weighted DGGS neighborhood convolution based on topological distance, comparable to `apply_kernel`.
+  - `filter_dggs` - Filter DGGS zones by spatial extent and zone identifiers, comparable to `filter_bbox`.
   - `filter_k_ring` - Filter based on rings around DGGS zones.
   - `resample_dggs` - Up- and downsample based on DGGS resolution levels, comparable to `resample_spatial`,
   - `resample_cube_dggs` - Up and downsample based on a target DGGS data cube, comparable to `resample_cube_spatial`.
