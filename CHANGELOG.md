@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Tests: Fixed invalid or inconsistent test cases for `aggregate_temporal`, `aggregate_temporal_period`, `all`, `any`, `apply`, `apply_dimension`, `array_element`, `array_find`, `count`, `filter_bands`, `lte`, `mask`, `mask_polygon`, `merge_cubes`, `mod`, `product`, `reduce_dimension`, `rename_dimension` and `rename_labels`
+
 ## [2.0.0-rc.2] - 2026-02-02
 
 ### Added

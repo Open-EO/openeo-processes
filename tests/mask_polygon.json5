@@ -23,6 +23,29 @@
         "inside": true
       },
       "returns": {
+        "$ref": "assets/xyt-minimal-float.json5"
+      }
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "mask": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [16.1, 48.1],
+              [16.1, 48.6],
+              [16.6, 48.6],
+              [16.6, 48.1],
+              [16.1, 48.1]
+            ]
+          ]
+        },
+        "inside": false
+      },
+      "returns": {
         "type": "datacube",
         "nodata": NaN,
         "order": ["t", "y", "x"],
@@ -56,29 +79,6 @@
             [NaN, NaN, NaN, NaN]
           ]
         ]
-      }
-    },
-    {
-      "arguments": {
-        "data": {
-          "$ref": "assets/xyt-minimal-float.json5"
-        },
-        "mask": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [16.1, 48.1],
-              [16.1, 48.6],
-              [16.6, 48.6],
-              [16.6, 48.1],
-              [16.1, 48.1]
-            ]
-          ]
-        },
-        "inside": false
-      },
-      "returns": {
-        "$ref": "assets/xyt-minimal-float.json5"
       }
     },
     {

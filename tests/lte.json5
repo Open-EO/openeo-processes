@@ -112,7 +112,7 @@
         "x": Infinity,
         "y": Infinity
       },
-      "returns": false
+      "returns": true
     },
     {
       "arguments": {

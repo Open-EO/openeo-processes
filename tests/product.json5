@@ -105,7 +105,7 @@
           Infinity
         ]
       },
-      "returns": NaN
+      "returns": -Infinity
     }
   ]
 }
