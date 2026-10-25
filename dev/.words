@@ -53,5 +53,3 @@ Undeploy
 queryable
 Queryables
 polygonize
-gdal_polygonize
-gdal_rasterize
