@@ -1,7 +1,7 @@
 {
     "id": "vector_to_raster",
     "summary": "Convert a vector data cube into a raster data cube",
-    "description": "Converts a vector data cube into a raster data cube (also known as \"rasterize\"). The spatial dimensions `x` and `y` of the raster data cube, i.e. their extent, resolution, reference system and labels, are taken from `target`. All other dimensions of `target` are ignored.\n\nThe geometry dimension of `data` is replaced by the spatial dimensions `x` and `y`. All other dimensions of `data` remain unchanged, e.g. a dimension with properties of the geometries (see ``load_geojson()``) or the temporal and bands dimensions of the result of ``aggregate_spatial()``.\n\nThe values of a geometry are assigned to the pixels as follows:\n\n- Polygons: all pixels for which the point at the pixel center intersects with the polygon (as defined in the Simple Features standard by the OGC).\n- Lines: all pixels that are touched by the line.\n- Points: the pixel that contains the point.\n\nIf multiple geometries are assigned to a pixel, the values of the last geometry in the geometry dimension are used. Pixels without a geometry are set to no-data.\n\nThe geometries are reprojected to the spatial reference system of `target` if they are in a different reference system.",
+    "description": "Converts a vector data cube into a raster data cube (also known as \"rasterize\"). The spatial dimensions `x` and `y` of the raster data cube, i.e. their extent, resolution, reference system and labels, are taken from `target`. All other dimensions of `target` are ignored. The geometries are reprojected to the spatial reference system of `target` if needed.\n\nThe geometry dimension of `data` is replaced by the spatial dimensions `x` and `y`. All other dimensions of `data` remain unchanged, e.g. a dimension with properties of the geometries (see ``load_geojson()``) or the temporal and bands dimensions of the result of ``aggregate_spatial()``. The values must be numbers or no-data values, otherwise a `NonNumericValue` exception is thrown. If `data` only consists of the geometry dimension and has no values, the value `1` is used for all geometries, e.g. to create a mask.\n\nBy default, the values of a geometry are assigned to the following pixels:\n\n- Polygons: all pixels whose center lies within the polygon. Whether a pixel whose center lies exactly on the boundary is assigned is implementation-dependent.\n- Lines: the pixels on the render path of the line (as computed by the Bresenham line algorithm).\n- Points: the pixel that contains the point.\n\nIf `all_touched` is `true`, all pixels that are touched by a geometry are assigned instead.\n\nIf multiple geometries are assigned to a pixel, the values of the last geometry in the geometry dimension are used. Pixels without a geometry are set to no-data.",
     "categories": [
         "cubes",
         "vector"
@@ -37,6 +37,15 @@
                     }
                 ]
             }
+        },
+        {
+            "name": "all_touched",
+            "description": "If set to `true`, all pixels that are touched by a geometry are assigned the values of the geometry. Otherwise, only the pixels whose center lies within a polygon, the pixels on the render path of a line and the pixels that contain a point are assigned.",
+            "schema": {
+                "type": "boolean"
+            },
+            "default": false,
+            "optional": true
         }
     ],
     "returns": {
@@ -53,6 +62,11 @@
                     ]
                 }
             ]
+        }
+    },
+    "exceptions": {
+        "NonNumericValue": {
+            "message": "The vector data cube must only contain numbers or no-data values."
         }
     },
     "links": [
