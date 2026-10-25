@@ -1,0 +1,65 @@
+{
+    "id": "vector_to_raster",
+    "summary": "Convert a vector data cube into a raster data cube",
+    "description": "Converts a vector data cube into a raster data cube (also known as \"rasterize\"). The spatial dimensions `x` and `y` of the raster data cube, i.e. their extent, resolution, reference system and labels, are taken from `target`. All other dimensions of `target` are ignored.\n\nThe geometry dimension of `data` is replaced by the spatial dimensions `x` and `y`. All other dimensions of `data` remain unchanged, e.g. a dimension with properties of the geometries (see ``load_geojson()``) or the temporal and bands dimensions of the result of ``aggregate_spatial()``.\n\nThe values of a geometry are assigned to the pixels as follows:\n\n- Polygons: all pixels for which the point at the pixel center intersects with the polygon (as defined in the Simple Features standard by the OGC).\n- Lines: all pixels that are touched by the line.\n- Points: the pixel that contains the point.\n\nIf multiple geometries are assigned to a pixel, the values of the last geometry in the geometry dimension are used. Pixels without a geometry are set to no-data.\n\nThe geometries are reprojected to the spatial reference system of `target` if they are in a different reference system.",
+    "categories": [
+        "cubes",
+        "vector"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A vector data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "geometry"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "target",
+            "description": "A raster data cube that defines the spatial dimensions `x` and `y` of the result. All other dimensions are ignored.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "A raster data cube with the spatial dimensions `x` and `y` of `target` and all dimensions of `data` except for the geometry dimension.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "spatial",
+                    "axis": [
+                        "x",
+                        "y"
+                    ]
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "href": "https://gdal.org/en/stable/programs/gdal_rasterize.html",
+            "rel": "about",
+            "title": "gdal_rasterize in the GDAL documentation"
+        }
+    ]
+}
