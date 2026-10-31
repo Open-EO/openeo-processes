@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `resample_spatial`: Clarify the behavior of `resolution=0` (the default). [#567](https://github.com/Open-EO/openeo-processes/issues/567)
 - `filter_bbox`, `filter_vector`, `load_url`, `save_result` and `vector_reproject`: Clarify the handling of feature properties. [#466](https://github.com/Open-EO/openeo-processes/issues/466)
+- `load_geojson`: The parameter `properties` is `null` by default instead of an empty array, which creates a `properties` dimension with a single label `value` and no-data values. A single property name can be given to load array values. [#448](https://github.com/Open-EO/openeo-processes/issues/448), [#466](https://github.com/Open-EO/openeo-processes/issues/466)
 
 ### Fixed
 
