@@ -1,0 +1,49 @@
+{
+    "id": "sample_values_at_locations",
+    "summary": "Extracts values from a data cube for specific locations",
+    "description": "This process will extract values from a data cube `data` at specific locations, provided as vector geometries in `geometries`.\n\nIf the geometry is a Point, a  value will be extracted at each Point location.\nIf the geometry is a Line, a value will be extracted for the center of each raster cell the line intersects.\nIf the geometry is a Polygon, a value will be extracted for the center of each raster cell inside the polygon.\n\nAll geometries will be clipped to the extend of the data cube.",
+    "categories": [
+        "vector",
+        "cubes"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The data cube from which values are to be extracted",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "name": "geometries",
+            "description": "Location at which values are to be extracted from the data cube. Must be a GeoJSON FeatureCollection of Geometries",
+            "schema": {
+                "type": "object",
+                "subtype": "geojson"
+            }
+        }
+    ],
+    "returns": {
+        "description": "A vector data cube containing the values sampled at the provided geometry locations.\n\nThe resulting data cube will have all dimensions which `data` had (time, band etc.), except for the X and Y dimensions, which will have been replaced with a geometry dimension.\n\nThe geometry dimension contains the Points at which the data has been sampled.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "geometry"
+                }
+            ]
+        }
+    }
+}
