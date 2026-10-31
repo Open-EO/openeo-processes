@@ -253,6 +253,53 @@ The top-level object and/or each dimension can be enhanced with additional stats
 }
 ```
 
+## Feature properties of vector data cubes
+
+Vector data cubes are often created from GeoJSON or similar formats, where a feature has properties in addition to its geometry.
+The labels of the dimension of type `geometry` are these features, i.e. the geometries and their original properties.
+
+- Processes that keep the geometry dimension preserve the feature properties, e.g. `aggregate_spatial` (with a vector data cube as `geometries`), `filter_bbox`, `filter_vector`, `vector_reproject` and `vector_buffer`.
+- Processes that derive new geometries from existing ones preserve them for the new geometries if their description says "Feature properties are preserved", e.g. `vector_to_random_points` and `vector_to_regular_points`.
+- Geometries that are created from scratch, e.g. by converting a raster data cube, have no feature properties.
+
+### Identifiers
+
+Some formats store the identifier of a feature separately from its properties, e.g. the top-level `id` in GeoJSON, `gml:id` in GML or the FID in GDAL/OGR.
+Other formats don't distinguish them, e.g. in GeoParquet or FlatGeobuf an identifier is just a property (column).
+
+- A separate identifier is preserved like the properties, but kept apart from them. A property with the same name (e.g. a property `id` in GeoJSON) is a different property and both are preserved.
+- Processes that select properties by name (e.g. the `properties` parameter of `load_geojson`) refer to the properties, not to a separate identifier.
+- Processes that create several features from one (e.g. `vector_to_random_points` without grouping) don't keep the identifier, as identifiers should be unique. Their descriptions specify how identifiers are handled.
+
+### GeoJSON
+
+GeoJSON ([RFC 7946](https://www.rfc-editor.org/rfc/rfc7946.html)) is mapped as follows, e.g. in `load_geojson` and when storing a vector data cube as GeoJSON:
+
+- Each feature results in a dimension label of the geometry dimension. Its `properties` are the feature properties (`null` means no properties) and its top-level `id` is the separate identifier.
+- A feature without geometry (`null`) results in an empty geometry, and empty geometries are stored as features with a `null` geometry.
+- Geometries that are not part of a feature (e.g. a single `Polygon` object) have no properties and no identifier.
+- Other members of the features, e.g. `bbox` or foreign members, are not preserved. A `bbox` can be computed again when storing the data.
+- The GeoJSON type `GeometryCollection` is not supported.
+
+### Values
+
+The values of the data cube are separate from the feature properties.
+Feature properties only become values if requested, e.g. with the `properties` parameter of `load_geojson`.
+If no properties are requested, `load_geojson` creates a dimension `properties` with a single label `value` and no-data values, so that the data cube always has the same dimensions.
+A dimension label that has the same name as a feature property replaces this property when the data cube is exported (see below), which can be avoided by renaming the label with `rename_labels`.
+
+### Export
+
+When a vector data cube is stored in a format that supports feature properties (e.g. GeoJSON in `save_result`):
+
+- The feature properties are written as they were loaded.
+- Properties that have the same name as a dimension label are replaced by the values of the data cube. Labels that are not a property yet are added as properties.
+- A separate identifier is written as the identifier of the feature again (e.g. the top-level `id` in GeoJSON) and is never replaced by values.
+  If the format has no separate identifier, back-ends may write it as a property, but must not replace a property with the same name.
+
+For example, the result of `aggregate_spatial` then contains both the original properties and the aggregated values, without the need to join them.
+How the properties are named if the data cube has no or more than one dimension in addition to the geometry dimension (e.g. `t` and `bands`) is up to the back-end.
+
 ## Quantile algorithms
 
 The `quantiles` could implement a number of different algorithms, literature usually distinguishes [9 types](https://en.wikipedia.org/wiki/Quantile#Estimating_quantiles_from_a_sample).

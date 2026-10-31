@@ -8,9 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Implementation guide: Feature properties of vector data cubes, including how they are exported. [#466](https://github.com/Open-EO/openeo-processes/issues/466)
+
 ### Changed
 
 - `resample_spatial`: Clarify the behavior of `resolution=0` (the default). [#567](https://github.com/Open-EO/openeo-processes/issues/567)
+- `filter_bbox`, `filter_vector`, `load_url`, `save_result` and `vector_reproject`: Clarify the handling of feature properties. [#466](https://github.com/Open-EO/openeo-processes/issues/466)
 
 ### Fixed
 
