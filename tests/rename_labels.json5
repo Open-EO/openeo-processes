@@ -1,0 +1,218 @@
+{
+  "id": "rename_labels",
+  "level": "L2",
+  "tests": [
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-minimal-int.json5"
+        },
+        "dimension": "bands",
+        "target": [
+          "B1",
+          "B2",
+          "B3"
+        ]
+      },
+      "throws": "LabelsNotEnumerated"
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-minimal-int.json5"
+        },
+        "dimension": "bands",
+        "target": [
+          "B1"
+        ],
+        "source": [
+          "red",
+          "green"
+        ]
+      },
+      "throws": "LabelMismatch"
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-minimal-int.json5"
+        },
+        "dimension": "bands",
+        "target": [
+          "bar"
+        ],
+        "source": [
+          "foo"
+        ]
+      },
+      "throws": "LabelNotAvailable"
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-minimal-int.json5"
+        },
+        "dimension": "bands",
+        "target": [
+          "blue"
+        ],
+        "source": [
+          "green"
+        ]
+      },
+      "throws": "LabelExists"
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-minimal-int.json5"
+        },
+        "dimension": "bands",
+        "source": [
+          "red",
+          "green",
+          "blue"
+        ],
+        "target": [
+          "B1",
+          "B2",
+          "B3"
+        ]
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": 255,
+        "order": ["bands", "y", "x"],
+        "dimensions": {
+          "bands": {
+            "type": "bands",
+            "values": ["B1", "B2", "B3"]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": null
+      }
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-enumerated-bands.json5"
+        },
+        "dimension": "bands",
+        "source": [
+          "red",
+          "green",
+          "blue"
+        ]
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": 255,
+        "order": ["bands", "y", "x"],
+        "dimensions": {
+          "bands": {
+            "type": "bands",
+            "values": ["red", "green", "blue"]
+          },
+          "y": {
+            "type": "spatial",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": null
+      }
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-minimal-int.json5"
+        },
+        "dimension": "bands",
+        "source": [
+          "blue",
+          "green"
+        ],
+        "target": [
+          "B3",
+          "B2"
+        ]
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": 255,
+        "order": ["bands", "y", "x"],
+        "dimensions": {
+          "bands": {
+            "type": "bands",
+            "values": ["red", "B2", "B3"]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": null
+      }
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-enumerated-bands.json5"
+        },
+        "dimension": "bands",
+        "source": [
+          "red"
+        ]
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": 255,
+        "order": ["bands", "y", "x"],
+        "dimensions": {
+          "bands": {
+            "type": "bands",
+            "values": ["red", 1, 2]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": null
+      }
+    }
+  ]
+}

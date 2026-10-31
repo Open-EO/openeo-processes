@@ -1,0 +1,91 @@
+{
+  "id": "array_create_labeled",
+  "level": "L3",
+  "experimental": true,
+  "tests": [
+    // empty array
+    {
+      "arguments": {
+        "data": [],
+        "labels": []
+      },
+      "returns": {
+        "type": "labeled-array",
+        "data": []
+      }
+    },
+    {
+      "arguments": {
+        "data": [1.23, 0.98],
+        "labels": ["B01", "B02"]
+      },
+      "returns": {
+        "type": "labeled-array",
+        "data": [
+          {
+            "key": "B01",
+            "value": 1.23
+          },
+          {
+            "key": "B02",
+            "value": 0.98
+          }
+        ]
+      }
+    },
+    {
+      "arguments": {
+        "data": [5,6,7,NaN],
+        "labels": [8,7,5,4]
+      },
+      "returns": {
+        "type": "labeled-array",
+        "data": [
+          {
+            "key": 8,
+            "value": 5
+          },
+          {
+            "key": 7,
+            "value": 6
+          },
+          {
+            "key": 5,
+            "value": 7
+          },
+          {
+            "key": 4,
+            "value": NaN
+          },
+        ]
+      }
+    },
+    {
+      "arguments": {
+        "data": [true, false],
+        "labels": [1, "2"]
+      },
+      "returns": {
+        "type": "labeled-array",
+        "data": [
+          {
+            "key": 1,
+            "value": true
+          },
+          {
+            "key": "2",
+            "value": false
+          }
+        ]
+      }
+    },
+    {
+      // mismatch of array lengths
+      "arguments": {
+        "data": [1],
+        "labels": [1,2],
+      },
+      "throws": "ArrayLengthMismatch"
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "id": "log",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {
+        "x": -1,
+        "base": 10
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": 0,
+        "base": 10
+      },
+      "returns": -Infinity,
+      "throws": true
+    },
+    {
+      "arguments": {
+        "x": 0.5,
+        "base": 10
+      },
+      "returns": -0.30102999566
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "base": 10
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "x": 2.71828182846,
+        "base": 10
+      },
+      "returns": 0.43429448190
+    },
+    {
+      "arguments": {
+        "x": 10,
+        "base": 10
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "x": 100,
+        "base": 10
+      },
+      "returns": 2
+    },
+    {
+      "arguments": {
+        "x": 1000,
+        "base": 10
+      },
+      "returns": 3
+    },
+    {
+      "arguments": {
+        "x": 12345678990,
+        "base": 10
+      },
+      "returns": 10.09151498033
+    },
+    {
+      "arguments": {
+        "x": 2,
+        "base": 2
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "x": 4,
+        "base": 2
+      },
+      "returns": 2
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "base": 16
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "x": 16,
+        "base": 16
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "x": Infinity,
+        "base": 10
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "x": -Infinity,
+        "base": 10
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": NaN,
+        "base": 10
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"},
+        "base": 10
+      },
+      "returns": {"type": "nodata"}
+    }
+  ]
+}

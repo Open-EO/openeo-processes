@@ -39,20 +39,17 @@
             "description": "The climatology period as a closed temporal interval. The first element of the array is the first year to be fully included in the temporal interval. The second element is the last year to be fully included in the temporal interval.\n\nThe default climatology period is from 1981 until 2010 (both inclusive) right now, but this might be updated over time to what is commonly used in climatology. If you don't want to keep your research to be reproducible, please explicitly specify a period.",
             "schema": {
                 "type": "array",
-                "subtype": "temporal-interval",
+                "uniqueItems": true,
                 "minItems": 2,
                 "maxItems": 2,
                 "items": {
-                    "type": "string",
-                    "subtype": "year",
-                    "minLength": 4,
-                    "maxLength": 4,
-                    "pattern": "^\\d{4}$"
+                    "type": "integer",
+                    "subtype": "year"
                 }
             },
             "default": [
-                "1981",
-                "2010"
+                1981,
+                2010
             ],
             "optional": true
         }

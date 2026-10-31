@@ -1,0 +1,171 @@
+{
+  "id": "add_dimension",
+  "level": "L2",
+  "tests": [
+    {
+      // todo: add spatial dimension (x, y, z each)
+      // add bands dimension
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "name": "b",
+        "label": "B1",
+        "type": "bands"
+      },
+      "returns": {
+        "type": "datacube",
+        "order": ["b", "t", "y", "x"],
+        "dimensions": {
+          "b": {
+            "type": "bands",
+            "values": ["B1"]
+          },
+          "t": {
+            "type": "temporal",
+            "values": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z"]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": null
+      }
+    },
+    {
+      // add temporal dimension
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-minimal-int.json5"
+        },
+        "name": "t",
+        "label": "2020-01-01T00:00:00Z",
+        "type": "temporal"
+      },
+      "returns": {
+        "type": "datacube",
+        "order": ["t", "bands", "y", "x"],
+        "dimensions": {
+          "t": {
+            "type": "temporal",
+            "values": ["2020-01-01T00:00:00Z"]
+          },
+          "bands": {
+            "type": "bands",
+            "values": ["red", "green", "blue"]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": null
+      }
+    },
+    {
+      // add second temporal dimension
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "name": "t2",
+        "label": "2010-01-01T00:00:00.0Z",
+        "type": "temporal"
+      },
+      "returns": {
+        "type": "datacube",
+        "order": ["t2", "t", "y", "x"],
+        "dimensions": {
+          "t2": {
+            "type": "temporal",
+            "values": ["2010-01-01T00:00:00.0Z"]
+          },
+          "t": {
+            "type": "temporal",
+            "values": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z"]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": null
+      }
+    },
+    {
+      // add other dimension
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "name": "var",
+        "label": 1,
+        "type": "other"
+      },
+      "returns": {
+        "type": "datacube",
+        "order": ["var", "t", "y", "x"],
+        "dimensions": {
+          "var": {
+            "type": "other",
+            "values": [1]
+          },
+          "t": {
+            "type": "temporal",
+            "values": ["2020-06-01T00:00:00Z", "2020-06-03T00:00:00Z"]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": null
+      }
+    },
+    {
+      // throw for existing dimension
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-minimal-float.json5"
+        },
+        "name": "t",
+        "label": "2020-01-01",
+        "type": "temporal"
+      },
+      "throws": "DimensionExists"
+    }
+  ]
+}

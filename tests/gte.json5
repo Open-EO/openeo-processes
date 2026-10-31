@@ -1,0 +1,132 @@
+{
+  "id": "gte",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {
+        "x": 0,
+        "y": 0
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "y": 1.0
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": 2,
+        "y": 1
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": 2,
+        "y": "1"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "y": "1"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": "b",
+        "y": "a"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": -0.5,
+        "y": -0.6
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": "2018-01-02T00:00:00Z",
+        "y": "2018-01-01T00:00:00Z"
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": true,
+        "y": 0
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": true,
+        "y": false
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": 1,
+        "y": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"},
+        "y": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "x": 5,
+        "y": NaN
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": NaN,
+        "y": 5
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": NaN,
+        "y": NaN
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": Infinity,
+        "y": Infinity
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": -Infinity,
+        "y": Infinity
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
+        "x": Infinity,
+        "y": -Infinity
+      },
+      "returns": true
+    }
+  ]
+}

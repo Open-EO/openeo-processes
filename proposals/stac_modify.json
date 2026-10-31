@@ -1,0 +1,41 @@
+{
+    "id": "stac_modify",
+    "summary": "Updates an existing STAC resource",
+    "description": "Modifies the given STAC resource (e.g., a STAC Collection or Item) based on the given changeset.",
+    "categories": [
+        "stac"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The existing STAC resource.",
+            "schema": {
+                "type": "object",
+                "subtype": "stac"
+            }
+        },
+        {
+            "name": "changes",
+            "description": "A potentially incomplete STAC resource that should be merged with the existing STAC resource. It follows the [RFC 7386: JSON Merge Patch](https://www.rfc-editor.org/rfc/rfc7386.html) specification.",
+            "schema": {
+                "type": "object"
+            }
+        }
+    ],
+    "returns": {
+        "description": "Returns the modified STAC resource.",
+        "schema": {
+            "type": "object",
+            "subtype": "stac"
+        }
+    },
+    "links": [
+        {
+            "href": "https://www.rfc-editor.org/rfc/rfc7386.html",
+            "title": "RFC 7386: JSON Merge Patch",
+            "type": "text/html",
+            "rel": "about"
+        }
+    ]
+}

@@ -1,0 +1,150 @@
+{
+  "id": "array_concat",
+  "level": "L1",
+  "tests": [
+    {
+      // Adds an empty array
+      "arguments": {
+        "array1": [
+          1
+        ],
+        "array2": []
+      },
+      "returns": [
+        1
+      ]
+    },
+    {
+      // Adds to an empty array
+      "arguments": {
+        "array1": [],
+        "array2": [
+          1
+        ]
+      },
+      "returns": [
+        1
+      ]
+    },
+    {
+      // Concatenates two numerical arrays.
+      "arguments": {
+        "array1": [
+          1.5,
+          2.5
+        ],
+        "array2": [
+          5
+        ]
+      },
+      "returns": [
+        1.5,
+        2.5,
+        5
+      ]
+    },
+    {
+      // Concatenates two arrays containing different data type
+      "arguments": {
+        "array1": [
+          "a",
+          "b"
+        ],
+        "array2": [
+          1,
+          2
+        ]
+      },
+      "returns": [
+        "a",
+        "b",
+        1,
+        2
+      ],
+      // May not always be supported
+      "throws": true
+    },
+    {
+      // Check that a normal array and a labeled array lead to a normal array (labels get dropped)
+      "level": "L3",
+      "arguments": {
+        "array1": [
+          1,
+          2
+        ],
+        "array2": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": "B01",
+              "value": 3
+            },
+            {
+              "key": "B02",
+              "value": 4
+            }
+          ]
+        }
+      },
+      "returns": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      // Check that a labeled arrays are supported
+      "level": "L3",
+      "arguments": {
+        "array1": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": "B01",
+              "value": 1
+            },
+            {
+              "key": "B02",
+              "value": 2
+            }
+          ]
+        },
+        "array2": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": "B03",
+              "value": 3
+            },
+            {
+              "key": "B04",
+              "value": 4
+            }
+          ]
+        }
+      },
+      "returns": {
+        "type": "labeled-array",
+        "data": [
+          {
+            "key": "B01",
+            "value": 1
+          },
+          {
+            "key": "B02",
+            "value": 2
+          },
+          {
+            "key": "B03",
+            "value": 3
+          },
+          {
+            "key": "B04",
+            "value": 4
+          }
+        ]
+      }
+    }
+  ]
+}

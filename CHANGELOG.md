@@ -4,11 +4,87 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased / Draft
+## [Unreleased] - Draft
+
+### Added
+
+### Changed
+
+- `resample_spatial`: Clarify the behavior of `resolution=0` (the default). [#567](https://github.com/Open-EO/openeo-processes/issues/567)
+
+### Fixed
+
+## [2.0.0-rc.2] - 2026-02-02
+
+### Added
+
+- Implementation guide for implementing OGC API - Processes in openEO
+- Unit Tests (see folder `tests`, moved specification tests and CI tools to `dev`)
+- `date_difference`: Allow `week` as a unit [#506](https://github.com/Open-EO/openeo-processes/issues/506)
+- `export_collection`: New process
+- `export_workspace`: New process
+- `run_ogcapi`: New process
+- `run_ogcapi_externally`: New process
+- `stac_modify`: New process
+- `text_find`: New process
+
+### Changed
+
+- Processes that have been marked as stable: `apply_polygon`, `date_between`, `date_shift`, `filter_labels`, `inspect`
+- Clarified for various mathematical functions the defined input and output ranges.
+  Mention that `NaN` is returned outside of the defined input range where possible.
+- Clarified for several comparison processes how `NaN` values have to be handled. 
+- Clarified for various processes the handling of no-data values and `null`, see also the [implementation guide](meta/implementation.md#no-data-value).  [#480](https://github.com/Open-EO/openeo-processes/issues/480)
+- Added a [section about character encodings to the implementation guide](meta/implementation.md#character-encoding).
+  Removed any character encoding related wording from the process specifications itself.
+- Added a uniqueness contraint to various array-typed parameters (e.g. lists of dimension names or labels)
+- `all`: For empty arrays, returns `true` instead of no-data. [#494](https://github.com/Open-EO/openeo-processes/issues/494)
+- `any`: For empty arrays, returns `false` instead of no-data. [#494](https://github.com/Open-EO/openeo-processes/issues/494)
+- `apply_polygon`: Renamed `polygons` parameter to `geometries` for better alignment with other geometry handling processes. [#511](https://github.com/Open-EO/openeo-processes/issues/511)
+- `clip`: Throw an exception if min > max [#472](https://github.com/Open-EO/openeo-processes/issues/472)
+- `is_nan`: Return `false` instead of `true` for non-numerical data types. [#486](https://github.com/Open-EO/openeo-processes/issues/486)
+- `save_results`: Returns the STAC resource instead of boolean `true` [API#376](https://github.com/Open-EO/openeo-api/issues/376)
+
+### Fixed
+
+- Clarified for various mathematical functions the defined input and output ranges. Mention that `NaN` is returned outside of the defined input range where possible.
+- Clarified for various processes the handling of no-data values and null, see also the [implementation guide](meta/implementation.md).  [#480](https://github.com/Open-EO/openeo-processes/issues/480)
+- `add_dimension`: Clearly define behaviour for adding spatial dimensions
+- `apply_polygon`: Replaced outdated usage of `raster-cube` subtype with `datacube` and dimensions. [#524](https://github.com/Open-EO/openeo-processes/issues/524)
+- `aggregate_spatial` and `load_geojson`: Dimensions must by of type `geometry`, not `geometries`
+- `aggregate_spatial`: Clarified that the output geometries are unchanged compared to the input geometries. [#499](https://github.com/Open-EO/openeo-processes/issues/499)
+- `aggregate_temporal` and `aggregate_temporal_period`: Clarified that the process throws a `DimensionNotAvailable` exception when no temporal dimension exists.
+- `aggregate_temporal_period`: Removed unused exception `DistinctDimensionLabelsRequired`.
+- `aggregate_temporal_period`: Clarified that the definition of weeks follows ISO 8601.
+- `apply_polygon`: Replaced outdated usage of `raster-cube` subtype with `datacube` and dimensions. [#524](https://github.com/Open-EO/openeo-processes/issues/524)
+- `array_interpolate_linear`: Apply interpolation to NaN and no-data values.
+- `cummax`, `cummin`, `cumproduct`, `cumsum`: Clarified the descriptions around the `ignore_nodata` parameter.
+- `divide`: Clarified behavior for division by 0
+- `between`: Clarify that `null` is passed through.
+- `eq` and `neq`: Explicitly set the minimum value for the `delta` parameter.
+- `filter_bbox`, `load_collection`, `load_stac`: Clarified that the bounding box is reprojected to the CRS of the spatial data cube dimensions if required.
+- `filter_spatial`: Clarified that masking is applied using the given geometries. [#469](https://github.com/Open-EO/openeo-processes/issues/469)
+- `load_collection` and `load_stac`:
+    - Clarified that scale and offset are not applied automatically when loading the data. [#503](https://github.com/Open-EO/openeo-processes/issues/503)
+    - Clarify the dimension naming and the order of dimension labels for nominal labels. [#488](https://github.com/Open-EO/openeo-processes/issues/488), [#489](https://github.com/Open-EO/openeo-processes/issues/489)
+- `load_stac`: Clarify handling of the `properties` parameter in the context of STAC APIs and static catalogs. [#536](https://github.com/Open-EO/openeo-processes/issues/536)
+- `load_uploaded_files` and `run_udf`: Clarify handling of file paths and added `FileNotFound` exception. [#461](https://github.com/Open-EO/openeo-processes/issues/461)
+- `mask`: Add missing exception `IncompatibleDataCubes` [#538](https://github.com/Open-EO/openeo-processes/issues/538)
+- `mod`: Clarified behavior for y = 0
+- `run_udf`: Simplified and clarified the schema for `data` - no functional change.
+- `sqrt`: Clarified that NaN is returned for negative numbers.
+- Clarify allowed `FeatureCollection` geometries in `load_collection`, `mask_polygon`, `apply_polygon`, and `load_stac` [#527](https://github.com/Open-EO/openeo-processes/issues/527)
+
+## [2.0.0-rc.1] - 2023-05-25
+
+### Fixed
+
+- `array_append`: Added `number` type for labels to be consistent with other processes. Default to numerical index instead of string. Clarify that the `label` parameter only applies to labeled arrays.
 
 ### Added
 
 - New processes in proposal state:
+    - `date_between`
     - `date_difference`
     - `date_get_component`
     - `date_replace_component`
@@ -21,7 +97,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `vector_reproject`
     - `vector_to_random_points`
     - `vector_to_regular_points`
-- `add_dimension`: Added new dimension type `geometries`. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
+- `add_dimension`: Added new dimension type `geometry`. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
 
 ### Changed
 
@@ -41,9 +117,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Allow `null` as default value for units.
     - Input and Output for the `process` can either be data cubes or arrays (if one-dimensional). [#387](https://github.com/Open-EO/openeo-processes/issues/387)
 - `run_udf`: Allow all data types instead of just objects in the `context` parameter. [#376](https://github.com/Open-EO/openeo-processes/issues/376)
-- `load_collection` and `load_result`:
+- `load_collection` and `load_result`/`load_stac`:
     - Require at least one band if not set to `null`. [#372](https://github.com/Open-EO/openeo-processes/issues/372)
     - Added a `NoDataAvailable` exception
+- `aggregate_temporal`, `filter_temporal`, `load_collection` and `load_result`/`load_stac`:
+    - The temporal intervals must always be non-empty, i.e. the second instance in time must be after the first instance in time. [#331](https://github.com/Open-EO/openeo-processes/issues/331)
+    - `24` as the hour is not allowed anymore. [#331](https://github.com/Open-EO/openeo-processes/issues/331)
 - `inspect`: The parameter `message` has been moved to be the second argument. [#369](https://github.com/Open-EO/openeo-processes/issues/369)
 - `mask` and `merge_cubes`: The spatial dimensions `x` and `y` can now be resampled implicitly instead of throwing an error. [#402](https://github.com/Open-EO/openeo-processes/issues/402)
 - `save_result`: Added a more concrete `DataCubeEmpty` exception.
@@ -55,6 +134,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated the processes based on the subtypes `raster-cube` or `vector-cube` to work with the subtype `datacube` instead. [#68](https://github.com/Open-EO/openeo-processes/issues/68)
 - `sort` and `order`: The ordering of ties is not defined anymore. [#409](https://github.com/Open-EO/openeo-processes/issues/409)
 - `quantiles`: Parameter `probabilities` provided as array must be in ascending order. [#297](https://github.com/Open-EO/openeo-processes/pull/297)
+- `fit_curve` and `predict_curve`: Heavily modified specifications. `fit_curve` works on arrays instead of data cubes, `predict_curve` doesn't support gap filling anymore, clarify no-data handling, ... [#425](https://github.com/Open-EO/openeo-processes/issues/425)
+- `climatological_normal`: The `climatology_period` parameter accepts an array of integers instead of strings. [#331](https://github.com/Open-EO/openeo-processes/issues/331)
 
 ### Deprecated
 
@@ -63,7 +144,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - The `examples` folder has been migrated to the [openEO Community Examples](https://github.com/Open-EO/openeo-community-examples/tree/main/processes) repository.
-- `between`: Support for temporal comparison.
+- `between`: Support for temporal comparison. Use `date_between` instead. [#331](https://github.com/Open-EO/openeo-processes/issues/331)
 - Deprecated `GeometryCollections` are not supported any longer. [#389](https://github.com/Open-EO/openeo-processes/issues/389)
 - Deprecated PROJ definitions for the CRS are not supported any longer.
 - `load_result`:
@@ -73,6 +154,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The comparison processes `eq`, `neq`, `lt`, `lte`, `gt`, `gte` and `array_contains`:
     - Removed support for temporal comparison. Instead explicitly use `date_difference`.
     - Removed support for the input data types array and object. [#208](https://github.com/Open-EO/openeo-processes/issues/208)
+- `sort` and `order`: Removed support for time-only values. [#331](https://github.com/Open-EO/openeo-processes/issues/331)
 
 ### Fixed
 
@@ -358,7 +440,9 @@ First version which is separated from the openEO API. Complete rework of all pro
 Older versions of the processes were released as part of the openEO API, see the corresponding changelog for more information.
 
 
-[Unreleased]: <https://github.com/Open-EO/openeo-processes/compare/1.2.0...HEAD>
+[Unreleased]: <https://github.com/Open-EO/openeo-processes/compare/2.0.0-rc.2...HEAD>
+[2.0.0-rc.2]: <https://github.com/Open-EO/openeo-processes/compare/2.0.0-rc.1...2.0.0-rc.2>
+[2.0.0-rc.1]: <https://github.com/Open-EO/openeo-processes/compare/1.2.0...2.0.0-rc.1>
 [1.2.0]: <https://github.com/Open-EO/openeo-processes/compare/1.1.0...1.2.0>
 [1.1.0]: <https://github.com/Open-EO/openeo-processes/compare/1.0.0...1.1.0>
 [1.0.0]: <https://github.com/Open-EO/openeo-processes/compare/1.0.0-rc.1...1.0.0>

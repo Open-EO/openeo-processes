@@ -1,7 +1,7 @@
 {
     "id": "eq",
     "summary": "Equal to comparison",
-    "description": "Compares whether `x` is strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is `null`, the return value is `null`.\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
+    "description": "Compares whether `x` is strictly equal to `y`.\n\n**Remarks:**\n\n* Data types MUST be checked strictly. For example, a string with the content *1* is not equal to the number *1*. Nevertheless, an integer *1* is equal to a floating-point number *1.0* as `integer` is a sub-type of `number`.\n* If any operand is a no-data value, the result will be the no-data value (or `null`).\n* The comparison of `NaN` (not a number) follows [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229).\n* Temporal strings are normal strings. To compare temporal strings as dates/times, use ``date_difference()``.",
     "categories": [
         "texts",
         "comparison"
@@ -38,7 +38,8 @@
                 "type": [
                     "number",
                     "null"
-                ]
+                ],
+                "minimumExclusive": 0
             },
             "default": null,
             "optional": true
@@ -54,7 +55,7 @@
         }
     ],
     "returns": {
-        "description": "`true` if `x` is equal to `y`, `null` if any operand is `null`, otherwise `false`.",
+        "description": "`true` if `x` is equal to `y`, the no-data value (or `null`) if any operand is a no-data value, otherwise `false`.",
         "schema": {
             "type": [
                 "boolean",
@@ -66,13 +67,6 @@
         {
             "arguments": {
                 "x": 1,
-                "y": null
-            },
-            "returns": null
-        },
-        {
-            "arguments": {
-                "x": null,
                 "y": null
             },
             "returns": null
@@ -151,13 +145,13 @@
                 "y": "2018-01-01T00:00:00+00:00"
             },
             "returns": false
-        },
+        }
+    ],
+    "links": [
         {
-            "arguments": {
-                "x": null,
-                "y": null
-            },
-            "returns": null
+            "rel": "about",
+            "href": "https://ieeexplore.ieee.org/document/4610935",
+            "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
         }
     ]
 }

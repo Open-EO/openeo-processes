@@ -1,0 +1,57 @@
+{
+    "id": "run_ogcapi_externally",
+    "summary": "Run an externally hosted OGC API process",
+    "description": "Runs an OGC API - Processes process that is either externally hosted by a service provider or running on a local machine of the user.",
+    "categories": [
+        "cubes",
+        "import",
+        "udf"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The data to be passed to the external process.\n\nThe data must be given in a way that the external process can understand it.",
+            "schema": {
+                "description": "A value of any data type."
+            }
+        },
+        {
+            "name": "url",
+            "description": "Absolute URL to the OGC API - Processes landing page.",
+            "schema": {
+                "type": "string",
+                "format": "uri",
+                "subtype": "uri",
+                "pattern": "^https?://"
+            }
+        },
+        {
+            "name": "id",
+            "description": "The identifier of the OGC API process.",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "context",
+            "description": "Additional parameters as defined by the OGC API process.",
+            "schema": {
+                "type": "object"
+            },
+            "default": {},
+            "optional": true
+        }
+    ],
+    "exceptions": {
+        "InvalidOgcApiProcess": {
+            "message": "The specified OGC API process does not exist."
+        }
+    },
+    "returns": {
+        "description": "The data processed by the OGC API process. The returned value can be of any data type and is exactly what the OGC API process returns.",
+        "schema": {
+            "description": "Any data type."
+        }
+    }
+}

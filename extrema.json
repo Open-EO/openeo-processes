@@ -21,7 +21,7 @@
         },
         {
             "name": "ignore_nodata",
-            "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that an array with two `null` values is returned if any value is such a value.",
+            "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, any no-data value in the array results in an array with two no-data (or `null`) values.",
             "schema": {
                 "type": "boolean"
             },
@@ -30,7 +30,7 @@
         }
     ],
     "returns": {
-        "description": "An array containing the minimum and maximum values for the specified numbers. The first element is the minimum, the second element is the maximum. If the input array is empty both elements are set to `null`.",
+        "description": "An array containing the minimum and maximum values for the specified numbers. The first element is the minimum, the second element is the maximum. If the input array is empty both elements are set to the no-data value (or `null`).",
         "schema": [
             {
                 "type": "array",
@@ -89,16 +89,6 @@
                     2
                 ],
                 "ignore_nodata": false
-            },
-            "returns": [
-                null,
-                null
-            ]
-        },
-        {
-            "description": "The input array is empty: return two `null` values.",
-            "arguments": {
-                "data": []
             },
             "returns": [
                 null,

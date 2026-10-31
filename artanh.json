@@ -1,24 +1,26 @@
 {
     "id": "artanh",
     "summary": "Inverse hyperbolic tangent",
-    "description": "Computes the inverse hyperbolic tangent of `x`. It is the inverse function of the hyperbolic tangent so that *`artanh(tanh(x)) = x`*.\n\nWorks on radians only.\nThe no-data value `null` is passed through and therefore gets propagated.",
+    "description": "Computes the inverse hyperbolic tangent of `x`. It is the inverse function of the hyperbolic tangent so that *`artanh(tanh(x)) = x`*.\n\nNo-data values are passed through. `NaN` is returned for values outside of the allowed range. The computations follow [IEEE Standard 754](https://ieeexplore.ieee.org/document/8766229) whenever the processing environment supports it. Therefore, `x` = 1 results in +infinity and `x` = 0 results in -infinity. Otherwise, an exception is thrown.",
     "categories": [
         "math > trigonometric"
     ],
     "parameters": [
         {
             "name": "x",
-            "description": "A number.",
+            "description": "A number in the range *(-1, 1)*.",
             "schema": {
                 "type": [
                     "number",
                     "null"
-                ]
+                ],
+                "minimumExclusive": -1,
+                "maximumExclusive": 1
             }
         }
     ],
     "returns": {
-        "description": "The computed angle in radians.",
+        "description": "The computed hyperbolic angle in radians.",
         "schema": {
             "type": [
                 "number",
@@ -39,6 +41,11 @@
             "rel": "about",
             "href": "http://mathworld.wolfram.com/InverseHyperbolicTangent.html",
             "title": "Inverse hyperbolic tangent explained by Wolfram MathWorld"
+        },
+        {
+            "rel": "about",
+            "href": "https://ieeexplore.ieee.org/document/4610935",
+            "title": "IEEE Standard 754-2008 for Floating-Point Arithmetic"
         }
     ]
 }

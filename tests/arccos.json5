@@ -1,0 +1,72 @@
+{
+  "id": "arccos",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {
+        "x": 1
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "x": 0
+      },
+      "returns": 1.57079632679
+    },
+    {
+      "arguments": {
+        "x": -1
+      },
+      "returns": 3.14159265359
+    },
+    {
+      "arguments": {
+        "x": 0.5
+      },
+      "returns": 1.0471975512
+    },
+    {
+      "arguments": {
+        "x": -0.5
+      },
+      "returns": 2.09439510239
+    },
+    {
+      "arguments": {
+        "x": 2
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": -2
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": Infinity
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": -Infinity
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    }
+  ]
+}

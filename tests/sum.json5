@@ -1,0 +1,110 @@
+{
+  "id": "sum",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {
+        "data": [
+          5,
+          1
+        ]
+      },
+      "returns": 6
+    },
+    {
+      "arguments": {
+        "data": [
+          -2,
+          4,
+          2.5
+        ]
+      },
+      "returns": 4.5
+    },
+    {
+      "arguments": {
+        "data": [
+          {"type": "nodata"},
+          -2,
+          -2,
+          0
+        ]
+      },
+      "returns": -4
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          {"type": "nodata"}
+        ],
+        "ignore_nodata": false
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "data": [
+          100
+        ]
+      },
+      "returns": 100
+    },
+    {
+      "arguments": {
+        "data": [
+          {"type": "nodata"}
+        ],
+        "ignore_nodata": false
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "data": []
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          NaN,
+          3
+        ]
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          Infinity,
+          3
+        ]
+      },
+      "returns": Infinity
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          -Infinity,
+          3
+        ]
+      },
+      "returns": -Infinity
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          -Infinity,
+          3,
+          Infinity
+        ]
+      },
+      "returns": NaN
+    }
+  ]
+}

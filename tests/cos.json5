@@ -1,0 +1,54 @@
+{
+  "id": "cos",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {
+        "x": 0
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "x": 1
+      },
+      "returns": 0.54030230586
+    },
+    {
+      "arguments": {
+        "x": 10
+      },
+      "returns": -0.83907152908
+    },
+    {
+      "arguments": {
+        "x": -1
+      },
+      "returns": 0.54030230586
+    },
+    {
+      "arguments": {
+        "x": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": Infinity
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": -Infinity
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    }
+  ]
+}

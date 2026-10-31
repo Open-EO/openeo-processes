@@ -1,0 +1,196 @@
+{
+  "id": "filter_temporal",
+  "level": "L2",
+  "tests": [
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-more-timestamps.json5"
+        },
+        "extent": [
+          "2016-01-01",
+          "2015-01-01",
+        ]
+      },
+      "throws": "TemporalExtentEmpty"
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-more-timestamps.json5"
+        },
+        "extent": [
+          "2015-01-01",
+          "2016-01-01"
+        ],
+        "dimension": "time"
+      },
+      "throws": "DimensionNotAvailable",
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-minimal-int.json5"
+        },
+        "extent": [
+          "2015-01-01",
+          "2016-01-01"
+        ]
+      },
+      "throws": "DimensionNotAvailable",
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-more-timestamps.json5"
+        },
+        "extent": [
+          "2020-06-01T00:00:00Z",
+          "2020-06-05T00:00:00Z",
+        ]
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["t", "y", "x"],
+        "dimensions": {
+          "t": {
+            "type": "temporal",
+            "values": [
+              "2020-06-01T00:00:00Z",
+              "2020-06-03T00:00:00Z"
+            ]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [
+            [17.5, 53.75, -27.1, -64.25],
+            [-18.0, 8.45, -3.11, -20.5],
+            [50.4, 49.24, 25.16, -81.6]
+          ],
+          [
+            [-63.65, 9.0, -68.52, -8.0],
+            [1.05, -63.8, 73.05, 51.05],
+            [47.86, -21.30, NaN, 46.15]
+          ]
+        ]
+      }
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-more-timestamps.json5"
+        },
+        "extent": [
+          "2020-06-08",
+          null
+        ]
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["t", "y", "x"],
+        "dimensions": {
+          "t": {
+            "type": "temporal",
+            "values": [
+              "2020-06-09T00:00:00Z"
+            ]
+          },
+          "y": {
+            "type": "spatial",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [
+            [-12.23, 61.46, 2.38, -84.76],
+            [ 28.36, 48.45, -65.85, 65.90],
+            [ 29.50, -45.82, 78.05, 58.27]
+          ]
+        ]
+      }
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-more-timestamps.json5"
+        },
+        "extent": [
+          "2021-01-01",
+          null
+        ]
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["t", "y", "x"],
+        "dimensions": {
+          "t": {
+            "type": "temporal",
+            "values": []
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": []
+      }
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-more-timestamps.json5"
+        },
+        "extent": [
+          "2010-01-01T00:00:00Z",
+          "2030-01-01T00:00:00Z"
+        ]
+      },
+      "returns": {
+        "$ref": "assets/xyt-more-timestamps.json5"
+      }
+    },
+    {
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyt-more-timestamps.json5"
+        },
+        "extent": [
+          null,
+          "2022-01-01T00:00:00Z"
+        ]
+      },
+      "returns": {
+        "$ref": "assets/xyt-more-timestamps.json5"
+      }
+    }
+  ]
+}

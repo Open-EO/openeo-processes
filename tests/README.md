@@ -1,30 +1,119 @@
-# Tests for openEO Processes
+# Tests
 
-To run the tests follow these steps:
+This folder contains test cases for the openEO processes.
 
-1. Install [node and npm](https://nodejs.org) - should run with any recent version
-2. Run `npm install` in this folder to install the dependencies
-3. Run the tests with `npm test`. This will also lint the files and verify it follows best practices.
-4. To show the files nicely formatted in a web browser, run `npm start`. It starts a server and opens the corresponding page in a web browser.
+## Assumptions
 
-## Development processes
+The test cases assume a couple of things as they are an abstraction and not bound to specific implementations:
+- The JSON Schema type `number` explicitly includes the values `+Infinity`, `-Infinity` and `NaN`.
+- The input and output values for no-data values are `null` by default unless otherwise specified by a runner.
+- Input that is not valid according to the process schema must be rejected upfront, without any process evaluation attempt. Consequently, cases with schema mismatches are not covered in these tests. For example, the absolute process only tests against the data types `number` and `null`. There are no tests for a boolean or string input.
+- Numerical data types such as uint8 don't matter, i.e. tests don't check for overflows etc. This suite can't provide such tests as the underlying data type is not known.
+- If not otherwise specified for numbers, a precision of 10 decimals is checked so return values should have at least 11 decimals.
 
-All new processes must be added to the `proposals` folder. Each process must be declared to be `experimental`.
-Processes must comply to best practices, which ensure a certain degree of consistency.
-`npm test` will validate and lint the processes and also ensure the best practices are applied. 
+## Test Files
 
-The linting checks that the files are named correctly, that the content is correctly formatted and indented (JSON and embedded CommonMark).
-The best practices ensure that for examples the fields are not too short and also not too long for example.
+To allow for more data types (e.g. infinity and nan for numbers), all the files are encoded in **JSON5** instead of JSON.
 
-A spell check is also checking the texts. It may report names and rarely used technical words as errors. 
-If you are sure that these are correct, you can add them to the `.words` file to exclude the word from being reported as an error.
-The file must contain one word per line.
+The test files have the following schema: [schema/schema.json](./schema/schema.json)
 
-New processes should be added via GitHub Pull Requests.
+### No-data values
 
-## Subtype schemas
+No-data values have a special encoding in tests (see below).
+The encoding is replaced with `null` unless otherwise specified by the runners.
 
-Sometimes it is useful to define a new "data type" on top of the JSON types (number, string, array, object, ...).
-For example, a client could make a select box with all collections available by adding a subtype `collection-id` to the JSON type `string`.
-If you think a new subype should be added, you need to add it to the `meta/subtype-schemas.json` file.
-It must be a valid JSON Schema. The tests mentioned above will also verify to a certain degree that the subtypes are defined correctly.
+```json5
+{
+  "type": "nodata"
+}
+```
+
+### Datetimes
+
+Datetimes as strings have a varying precision, especially regarding the milliseconds.
+Also, sometimes timezones are differently handled.
+
+Datetimes in return values should be encoded in compliance with RFC 3339 so that the results can be compared better:
+
+```json5
+{
+  "type": "datetime",
+  "value": "2020-01-01T00:00:00Z"
+}
+```
+
+### External references
+
+Arguments and return values can point to external files, e.g.
+
+```json5
+{
+  "$ref": "https://host.example/datacube.json"
+}
+```
+
+The test suite can currently only load JSON and JSON5 files.
+
+### Labeled arrays
+
+Labeled arrays can't be represented in JSON5 and will be provided as an object instead.
+
+```json5
+{
+  "type": "labeled-array",
+  "data": [
+    {
+      "key": "B01",
+      "value": 1.23
+    },
+    {
+      "key": "B02",
+      "value": 0.98
+    }
+    // ...
+  ]
+}
+```
+
+### Datacubes
+
+Datacubes can't be represented in JSON5 and will be provided as an object instead.
+Vector datacubes are currently not supported.
+
+```json5
+{
+  "type": "datacube",
+  "data": [
+    // multi-dimensional array
+    // can be set to `null` if the data values are irrelevant for the test.
+  ],
+  "nodata": [
+    NaN
+  ],
+  "order": ["bands", "t", "y", "x"],
+  "dimensions": {
+    // similar to the STAC datacube extension
+    // properties: type, axis (if type = spatial), values, and reference_system (optional)
+    "bands": {
+      "type": "bands",
+      "values": ["blue","green","red","nir"]
+    },
+    "t": {
+      "type": "temporal",
+      "values": ["2020-06-01T00:00:00Z","2020-06-03T00:00:00Z","2020-06-06T00:00:00Z"]
+    },
+    "y": {
+      "type": "spatial",
+      "axis": "y",
+      "values": [5757495.0,5757485.0,5757475.0,5757465.0],
+      "reference_system": "EPSG:25832"
+    },
+    "x": {
+      "type": "spatial",
+      "axis": "x",
+      "values": [404835.0,404845.0,404855.0,404865.0,404875.0],
+      "reference_system": "EPSG:25832"
+    }
+  }
+}
+```

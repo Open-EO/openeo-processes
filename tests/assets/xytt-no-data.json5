@@ -1,0 +1,27 @@
+{
+  "type": "datacube",
+  "order": ["t2", "t", "y", "x"],
+  "dimensions": {
+    "t2": {
+      "type": "temporal",
+      "values": ["2019-01-01T00:00:00Z", "2020-01-01T00:00:00Z"]
+    },
+    "t": {
+      "type": "temporal",
+      "values": ["2020-01-01T00:00:00Z", "2021-01-01T00:00:00Z"]
+    },
+    "y": {
+      "type": "spatial",
+      "axis": "y",
+      "values": [5757495.0, 5757485.0, 5757475.0],
+      "reference_system": "EPSG:25832"
+    },
+    "x": {
+      "type": "spatial",
+      "axis": "x",
+      "values": [404835.0, 404845.0, 404855.0, 404865.0],
+      "reference_system": "EPSG:25832"
+    }
+  },
+  "data": null
+}

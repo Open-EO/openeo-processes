@@ -24,7 +24,7 @@
         },
         {
             "name": "projection",
-            "description": "Coordinate reference system to reproject to. Specified as an [EPSG code](http://www.epsg-registry.org/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html).",
+            "description": "Coordinate reference system to reproject to. Specified as [EPSG code](https://spatialreference.org/ref/epsg/) or [WKT2 CRS string](http://docs.opengeospatial.org/is/18-010r7/18-010r7.html).",
             "schema": [
                 {
                     "title": "EPSG Code",
@@ -85,8 +85,8 @@
         },
         {
             "rel": "about",
-            "href": "http://www.epsg-registry.org",
-            "title": "Official EPSG code registry"
+            "href": "https://spatialreference.org/ref/epsg",
+            "title": "EPSG code registry"
         },
         {
             "rel": "about",

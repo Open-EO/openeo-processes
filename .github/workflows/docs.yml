@@ -5,22 +5,21 @@ on:
   push:
     branches:
       - draft
-      - draft-2.0
       - master
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Inject env variables
-        uses: rlespinasse/github-slug-action@v3.x
-      - uses: actions/setup-node@v3
+        uses: rlespinasse/github-slug-action@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: |
           npm install
           npm run generate
-        working-directory: tests
+        working-directory: dev
       - name: clone gh-pages and clean-up
         if: ${{ env.GITHUB_REF_SLUG == 'master' }}
         run: |
@@ -32,8 +31,8 @@ jobs:
         if: ${{ env.GITHUB_REF_SLUG != 'master' }}
         run: mkdir gh-pages
       - run: |
-          cp tests/docs.html index.html
-          cp tests/processes.json processes.json
+          cp dev/docs.html index.html
+          cp dev/processes.json processes.json
           rsync -vrm --include='*.json' --include='*.html' --include='meta/***' --include='proposals/***' --exclude='*' . gh-pages
       - name: deploy to root (master)
         uses: peaceiris/actions-gh-pages@v3

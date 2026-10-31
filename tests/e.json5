@@ -1,0 +1,10 @@
+{
+  "id": "e",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {},
+      "returns": 2.718281828459
+    }
+  ]
+}

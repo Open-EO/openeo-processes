@@ -1,0 +1,47 @@
+{
+    "id": "run_ogcapi",
+    "summary": "Run a OGC API process",
+    "description": "Runs an OGC API - Processes process that the service provider offers through an instance of OGC API - Processes - Part 2 (Deploy, Replace, Undeploy).",
+    "categories": [
+        "cubes",
+        "import",
+        "udf"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "The data to be passed to the OGC API process.\n\nThe data must be given in a way that the external process can understand it.",
+            "schema": {
+                "description": "A value of any data type."
+            }
+        },
+        {
+            "name": "id",
+            "description": "The identifier of the OGC API process.",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "context",
+            "description": "Additional parameters as defined by the OGC API process.",
+            "schema": {
+                "type": "object"
+            },
+            "default": {},
+            "optional": true
+        }
+    ],
+    "exceptions": {
+        "InvalidOgcApiProcess": {
+            "message": "The specified OGC API process identifier does not exist."
+        }
+    },
+    "returns": {
+        "description": "The data processed by the OGC API process. The returned value can be of any data type and is exactly what the OGC API process returns.",
+        "schema": {
+            "description": "Any data type."
+        }
+    }
+}

@@ -1,0 +1,168 @@
+{
+  "id": "array_find",
+  "level": "L2",
+  "tests": [
+    {
+      "arguments": {
+        "data": [
+          1,
+          2,
+          3,
+          2,
+          3
+        ],
+        "value": 2
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          2,
+          3,
+          2,
+          3
+        ],
+        "value": 2,
+        "reverse": true
+      },
+      "returns": 3
+    },
+    {
+      "arguments": {
+        "data": [
+          "A",
+          "B",
+          "C"
+        ],
+        "value": "b"
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "data": [
+          false,
+          false
+        ],
+        "value": false
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "data": [
+          false,
+          false
+        ],
+        "value": false,
+        "reverse": true
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "data": [
+          true,
+          true
+        ],
+        "value": false
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "data": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": "B03",
+              "value": 3
+            },
+            {
+              "key": "B04",
+              "value": 4
+            }
+          ]
+        },
+        "value": 3
+      },
+      "returns": 1
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          2,
+          3
+        ],
+        "value": "2"
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "data": [
+          1,
+          {"type": "nodata"},
+          2,
+          {"type": "nodata"}
+        ],
+        "value": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    },
+    {
+      "arguments": {
+        "data": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "value": [
+          1,
+          2
+        ]
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "data": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "value": 2
+      },
+      "returns": null
+    },
+    {
+      "arguments": {
+        "data": [
+          {
+            "a": "b"
+          },
+          {
+            "c": "d"
+          }
+        ],
+        "value": {
+          "a": "b"
+        }
+      },
+      "returns": null
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
     "id": "mask_polygon",
     "summary": "Apply a polygon mask",
-    "description": "Applies a (multi) polygon mask to a raster data cube. To apply a raster mask use ``mask()``.\n\nAll pixels for which the point at the pixel center **does not** intersect with any polygon (as defined in the Simple Features standard by the OGC) are replaced. This behavior can be inverted by setting the parameter `inside` to `true`. The pixel values are replaced with the value specified for `replacement`, which defaults to `null` (no data). No data values in `data` will be left untouched by the masking operation.",
+    "description": "Applies a (multi) polygon mask to a raster data cube. To apply a raster mask use ``mask()``.\n\nAll pixels for which the point at the pixel center **does not** intersect with any polygon (as defined in the Simple Features standard by the OGC) are replaced. This behavior can be inverted by setting the parameter `inside` to `true`. The pixel values are replaced with the value specified for `replacement`, which defaults to the no-data value of the raster data cube. No data values in `data` will be left untouched by the masking operation.",
     "categories": [
         "cubes",
         "masks"
@@ -26,7 +26,7 @@
         },
         {
             "name": "mask",
-            "description": "A GeoJSON object or a vector data cube containing at least one polygon. The provided vector data can be one of the following:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry, or\n* a `FeatureCollection` containing at least one `Feature` with `Polygon` or `MultiPolygon` geometries.\n* Empty geometries are ignored.",
+            "description": "A GeoJSON object or a vector data cube containing at least one polygon. The provided vector data can be one of the following:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry, or\n* a `FeatureCollection` containing at least one `Feature`; where each `Feature` has a `Polygon` or `MultiPolygon` geometry.\n* Empty geometries are ignored.",
             "schema": [
                 {
                     "title": "Vector Data Cube",
@@ -53,7 +53,7 @@
         },
         {
             "name": "replacement",
-            "description": "The value used to replace masked values with.",
+            "description": "The value used to replace masked values with. `null` refers to the no-data value of the data cube provided for `data`.",
             "schema": [
                 {
                     "type": "number"

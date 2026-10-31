@@ -1,0 +1,54 @@
+{
+  "id": "sin",
+  "level": "L1",
+  "tests": [
+    {
+      "arguments": {
+        "x": 0
+      },
+      "returns": 0
+    },
+    {
+      "arguments": {
+        "x": 1
+      },
+      "returns": 0.8414709848
+    },
+    {
+      "arguments": {
+        "x": 10
+      },
+      "returns": -0.54402111089
+    },
+    {
+      "arguments": {
+        "x": -1
+      },
+      "returns": -0.8414709848
+    },
+    {
+      "arguments": {
+        "x": NaN
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": Infinity
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": -Infinity
+      },
+      "returns": NaN
+    },
+    {
+      "arguments": {
+        "x": {"type": "nodata"}
+      },
+      "returns": {"type": "nodata"}
+    }
+  ]
+}

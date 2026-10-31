@@ -1,7 +1,7 @@
 {
     "id": "sd",
     "summary": "Standard deviation",
-    "description": "Computes the sample standard deviation, which quantifies the amount of variation of an array of numbers. It is defined to be the square root of the corresponding variance (see ``variance()``).\n\nA low standard deviation indicates that the values tend to be close to the expected value, while a high standard deviation indicates that the values are spread out over a wider range.\n\nAn array without non-`null` elements resolves always with `null`.",
+    "description": "Computes the sample standard deviation, which quantifies the amount of variation of an array of numbers. It is defined to be the square root of the corresponding variance (see ``variance()``).\n\nA low standard deviation indicates that the values tend to be close to the expected value, while a high standard deviation indicates that the values are spread out over a wider range.\n\nAn array with solely no-data values returns the no-data value (or `null`).",
     "categories": [
         "math > statistics",
         "reducer"
@@ -22,7 +22,7 @@
         },
         {
             "name": "ignore_nodata",
-            "description": "Indicates whether no-data values are ignored or not. Ignores them by default. Setting this flag to `false` considers no-data values so that `null` is returned if any value is such a value.",
+            "description": "Indicates whether no-data values are ignored or not. Ignores them by default. If set to `false`, any no-data value in the array results in a no-data value (or `null`).",
             "schema": {
                 "type": "boolean"
             },
@@ -60,13 +60,6 @@
                     null
                 ],
                 "ignore_nodata": false
-            },
-            "returns": null
-        },
-        {
-            "description": "The input array is empty: return `null`.",
-            "arguments": {
-                "data": []
             },
             "returns": null
         }
