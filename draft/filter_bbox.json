@@ -39,7 +39,7 @@
         },
         {
             "name": "extent",
-            "description": "A bounding box, which may include a vertical axis (see `base` and `height`).\n\nIf the bounding box is not provided in the coordinate reference system (CRS) of the data cube, the bounding box is reprojected to the CRS of the spatial data cube dimensions.\n\nFor geographic coordinate reference systems (e.g. EPSG:4326), a bounding box that crosses the antimeridian has a `west` value greater than its `east` value, e.g. `west` = 179 and `east` = -179.",
+            "description": "A bounding box, which may include a vertical axis (see `base` and `height`).\n\nIf the bounding box is not provided in the coordinate reference system (CRS) of the data cube, the bounding box is reprojected to the CRS of the spatial data cube dimensions.",
             "schema": {
                 "type": "object",
                 "subtype": "bounding-box",
@@ -51,7 +51,7 @@
                 ],
                 "properties": {
                     "west": {
-                        "description": "West (lower left corner, coordinate axis 1). Greater than `east` for bounding boxes that cross the antimeridian in geographic coordinate reference systems.",
+                        "description": "West (lower left corner, coordinate axis 1).",
                         "type": "number"
                     },
                     "south": {
@@ -59,7 +59,7 @@
                         "type": "number"
                     },
                     "east": {
-                        "description": "East (upper right corner, coordinate axis 1). Less than `west` for bounding boxes that cross the antimeridian in geographic coordinate reference systems.",
+                        "description": "East (upper right corner, coordinate axis 1).",
                         "type": "number"
                     },
                     "north": {

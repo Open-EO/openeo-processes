@@ -18,7 +18,7 @@
         },
         {
             "name": "spatial_extent",
-            "description": "Limits the data to load from the collection to the specified bounding box or polygons.\n\n* For raster data, the process loads the pixel into the data cube if the point at the pixel center intersects with the bounding box or any of the polygons (as defined in the Simple Features standard by the OGC).\n* For vector data, the process loads the geometry into the data cube if the geometry is fully *within* the bounding box or any of the polygons (as defined in the Simple Features standard by the OGC). Empty geometries may only be in the data cube if no spatial extent has been provided.\n\nFor geographic coordinate reference systems (e.g. EPSG:4326), a bounding box that crosses the antimeridian has a `west` value greater than its `east` value, e.g. `west` = 179 and `east` = -179.\n\nThe GeoJSON can be one of the following feature types:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry, or\n* a `FeatureCollection` containing at least one `Feature`; where each `Feature` has a `Polygon` or `MultiPolygon` geometry.\n* Empty geometries are ignored.\n\nSet this parameter to `null` to set no limit for the spatial extent. Be careful with this when loading large datasets! It is recommended to use this parameter instead of using ``filter_bbox()`` or ``filter_spatial()`` directly after loading unbounded data.",
+            "description": "Limits the data to load from the collection to the specified bounding box or polygons.\n\n* For raster data, the process loads the pixel into the data cube if the point at the pixel center intersects with the bounding box or any of the polygons (as defined in the Simple Features standard by the OGC).\n* For vector data, the process loads the geometry into the data cube if the geometry is fully *within* the bounding box or any of the polygons (as defined in the Simple Features standard by the OGC). Empty geometries may only be in the data cube if no spatial extent has been provided.\n\nThe GeoJSON can be one of the following feature types:\n\n* A `Polygon` or `MultiPolygon` geometry,\n* a `Feature` with a `Polygon` or `MultiPolygon` geometry, or\n* a `FeatureCollection` containing at least one `Feature`; where each `Feature` has a `Polygon` or `MultiPolygon` geometry.\n* Empty geometries are ignored.\n\nSet this parameter to `null` to set no limit for the spatial extent. Be careful with this when loading large datasets! It is recommended to use this parameter instead of using ``filter_bbox()`` or ``filter_spatial()`` directly after loading unbounded data.",
             "schema": [
                 {
                     "title": "Bounding Box",
@@ -32,7 +32,7 @@
                     ],
                     "properties": {
                         "west": {
-                            "description": "West (lower left corner, coordinate axis 1). Greater than `east` for bounding boxes that cross the antimeridian in geographic coordinate reference systems.",
+                            "description": "West (lower left corner, coordinate axis 1).",
                             "type": "number"
                         },
                         "south": {
@@ -40,7 +40,7 @@
                             "type": "number"
                         },
                         "east": {
-                            "description": "East (upper right corner, coordinate axis 1). Less than `west` for bounding boxes that cross the antimeridian in geographic coordinate reference systems.",
+                            "description": "East (upper right corner, coordinate axis 1).",
                             "type": "number"
                         },
                         "north": {
