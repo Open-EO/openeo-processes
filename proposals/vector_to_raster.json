@@ -1,0 +1,67 @@
+{
+    "id": "vector_to_raster",
+    "summary": "Convert a vector data cube into a raster data cube",
+    "description": "Converts a vector data cube into a raster data cube (also known as \"rasterize\"). The spatial dimensions `x` and `y` of the raster data cube, i.e. their extent, resolution, reference system and labels, are taken from `target`. All other dimensions of `target` are ignored. The geometries are reprojected to the spatial reference system of `target` if needed.\n\nThe geometry dimension of `data` is replaced by the spatial dimensions `x` and `y`. All other dimensions of `data` remain unchanged, e.g. a dimension with properties of the geometries (see ``load_geojson()``) or the temporal and bands dimensions of the result of ``aggregate_spatial()``. To assign the same value to all geometries (e.g. for a mask), set the values with ``apply()`` beforehand.\n\nBy default, the values of a geometry are assigned to the following pixels:\n\n- Polygons: all pixels whose center lies within the polygon. Whether a pixel whose center lies exactly on the boundary is assigned is implementation-dependent.\n- Lines: the pixels on the render path of the line (e.g. as computed by Bresenham's line algorithm).\n- Points: the pixel that contains the point.\n\nIf `all_touched` is `true`, all pixels that are touched by a geometry are assigned instead.\n\nIf multiple geometries are assigned to a pixel, which of their values are used is implementation-dependent. Pixels without a geometry are set to no-data.",
+    "categories": [
+        "cubes",
+        "vector"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A vector data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "geometry"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "target",
+            "description": "A raster data cube that defines the spatial dimensions `x` and `y` of the result. All other dimensions are ignored.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "name": "all_touched",
+            "description": "If set to `true`, all pixels that are touched by a geometry are assigned the values of the geometry. Otherwise, only the pixels whose center lies within a polygon, the pixels on the render path of a line and the pixels that contain a point are assigned.",
+            "schema": {
+                "type": "boolean"
+            },
+            "default": false,
+            "optional": true
+        }
+    ],
+    "returns": {
+        "description": "A raster data cube with the spatial dimensions `x` and `y` of `target` and all dimensions of `data` except for the geometry dimension.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "spatial",
+                    "axis": [
+                        "x",
+                        "y"
+                    ]
+                }
+            ]
+        }
+    }
+}

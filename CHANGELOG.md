@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `raster_to_vector`: New process [#155](https://github.com/Open-EO/openeo-processes/issues/155)
+- `vector_to_raster`: New process [#442](https://github.com/Open-EO/openeo-processes/issues/442)
+
 ### Changed
 
 - `resample_spatial`: Clarify the behavior of `resolution=0` (the default). [#567](https://github.com/Open-EO/openeo-processes/issues/567)
