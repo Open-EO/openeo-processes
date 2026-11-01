@@ -14,7 +14,7 @@
             "type": "object",
             "subtype": "bounding-box",
             "title": "Bounding Box",
-            "description": "A bounding box with the required fields `west`, `south`, `east`, `north` and optionally `base`, `height`, `crs`. The `crs` is a EPSG code or a WKT2:2018 string.",
+            "description": "A bounding box with the required fields `west`, `south`, `east`, `north` and optionally `base`, `height`, `crs`. The `crs` is a EPSG code or a WKT2:2018 string. For geographic coordinate reference systems (e.g. EPSG:4326), a bounding box that crosses the antimeridian has a `west` value greater than its `east` value, e.g. `west` = 179 and `east` = -179.",
             "required": [
                 "west",
                 "south",
@@ -23,7 +23,7 @@
             ],
             "properties": {
                 "west": {
-                    "description": "West (lower left corner, coordinate axis 1).",
+                    "description": "West (lower left corner, coordinate axis 1). Greater than `east` for bounding boxes that cross the antimeridian in geographic coordinate reference systems.",
                     "type": "number"
                 },
                 "south": {
@@ -31,7 +31,7 @@
                     "type": "number"
                 },
                 "east": {
-                    "description": "East (upper right corner, coordinate axis 1).",
+                    "description": "East (upper right corner, coordinate axis 1). Less than `west` for bounding boxes that cross the antimeridian in geographic coordinate reference systems.",
                     "type": "number"
                 },
                 "north": {

@@ -134,6 +134,108 @@
       "returns": {
         "$ref": "assets/xytb-s2-small-filtered.json5"
       }
+    },
+    {
+      // bbox crossing the antimeridian (west > east): keeps the pixels around ±180°
+      "arguments": {
+        "data": {
+          "type": "datacube",
+          "nodata": NaN,
+          "order": ["y", "x"],
+          "dimensions": {
+            "y": {
+              "type": "spatial",
+              "axis": "y",
+              "values": [0.5],
+              "reference_system": "EPSG:4326"
+            },
+            "x": {
+              "type": "spatial",
+              "axis": "x",
+              "values": [-179.5, -178.5, 0.5, 178.5, 179.5],
+              "reference_system": "EPSG:4326"
+            }
+          },
+          "data": [[1, 2, 3, 4, 5]]
+        },
+        "extent": {
+          "west": 179,
+          "south": 0,
+          "east": -179,
+          "north": 1
+        }
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["y", "x"],
+        "dimensions": {
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [0.5],
+            "reference_system": "EPSG:4326"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [-179.5, 179.5],
+            "reference_system": "EPSG:4326"
+          }
+        },
+        "data": [[1, 5]]
+      }
+    },
+    {
+      // west < east: doesn't cross the antimeridian, covers 358 degrees of longitude
+      "arguments": {
+        "data": {
+          "type": "datacube",
+          "nodata": NaN,
+          "order": ["y", "x"],
+          "dimensions": {
+            "y": {
+              "type": "spatial",
+              "axis": "y",
+              "values": [0.5],
+              "reference_system": "EPSG:4326"
+            },
+            "x": {
+              "type": "spatial",
+              "axis": "x",
+              "values": [-179.5, -178.5, 0.5, 178.5, 179.5],
+              "reference_system": "EPSG:4326"
+            }
+          },
+          "data": [[1, 2, 3, 4, 5]]
+        },
+        "extent": {
+          "west": -179,
+          "south": 0,
+          "east": 179,
+          "north": 1
+        }
+      },
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["y", "x"],
+        "dimensions": {
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [0.5],
+            "reference_system": "EPSG:4326"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [-178.5, 0.5, 178.5],
+            "reference_system": "EPSG:4326"
+          }
+        },
+        "data": [[2, 3, 4]]
+      }
     }
   ]
 }
