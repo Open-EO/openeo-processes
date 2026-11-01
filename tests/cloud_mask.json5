@@ -1,0 +1,218 @@
+{
+  "id": "cloud_mask",
+  "level": "L3",
+  "experimental": true,
+  "tests": [
+    {
+      // categorical SCL mask with the default SCL values (all kernels disabled)
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-scl.json5"
+        },
+        "method": "scl_dilation",
+        "options": {
+          "valid_kernel_size": 0,
+          "cloud_kernel_size": 0
+        }
+      },
+      "returns": {
+        "type": "datacube",
+        "order": ["y", "x"],
+        "dimensions": {
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [1, 1, 0, 1],
+          [0, 0, 0, 0],
+          [1, 1, 1, 1]
+        ]
+      }
+    },
+    {
+      // custom SCL values: snow or ice (11) is valid, not a cloud
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-scl.json5"
+        },
+        "method": "scl_dilation",
+        "options": {
+          "valid_kernel_size": 0,
+          "cloud_kernel_size": 0,
+          "valid_values": [2, 4, 5, 6, 7, 11],
+          "cloud_values": [3, 8, 9, 10]
+        }
+      },
+      "returns": {
+        "type": "datacube",
+        "order": ["y", "x"],
+        "dimensions": {
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [1, 1, 0, 1],
+          [0, 0, 0, 0],
+          [1, 1, 1, 0]
+        ]
+      }
+    },
+    {
+      // all SCL values are valid and no SCL value is a cloud
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-scl.json5"
+        },
+        "method": "scl_dilation",
+        "options": {
+          "valid_kernel_size": 0,
+          "cloud_kernel_size": 0,
+          "valid_values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+          "cloud_values": []
+        }
+      },
+      "returns": {
+        "type": "datacube",
+        "order": ["y", "x"],
+        "dimensions": {
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0]
+        ]
+      }
+    },
+    {
+      // no SCL value is valid, so all pixels are masked
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-scl.json5"
+        },
+        "method": "scl_dilation",
+        "options": {
+          "valid_kernel_size": 0,
+          "cloud_kernel_size": 0,
+          "valid_values": [],
+          "cloud_values": []
+        }
+      },
+      "returns": {
+        "type": "datacube",
+        "order": ["y", "x"],
+        "dimensions": {
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [1, 1, 1, 1],
+          [1, 1, 1, 1],
+          [1, 1, 1, 1]
+        ]
+      }
+    },
+    {
+      // a pixel is masked if it is in both valid_values and cloud_values
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-scl.json5"
+        },
+        "method": "scl_dilation",
+        "options": {
+          "valid_kernel_size": 0,
+          "cloud_kernel_size": 0,
+          "valid_values": [2, 3, 4, 5, 6, 7],
+          "cloud_values": [3]
+        }
+      },
+      "returns": {
+        "type": "datacube",
+        "order": ["y", "x"],
+        "dimensions": {
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0, 404865.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [1, 1, 0, 1],
+          [0, 0, 0, 0],
+          [1, 1, 1, 1]
+        ]
+      }
+    },
+    {
+      // the band given in the option band does not exist
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-scl.json5"
+        },
+        "method": "scl_dilation",
+        "options": {
+          "band": "scene_classification"
+        }
+      },
+      "throws": "BandNotAvailable"
+    },
+    {
+      // the data cube does not contain an SCL band
+      "arguments": {
+        "data": {
+          "$ref": "assets/xyb-minimal-int.json5"
+        },
+        "method": "scl_dilation"
+      },
+      "throws": "BandNotAvailable"
+    }
+  ]
+}
