@@ -18,6 +18,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- New processes in proposal state:
+    - `combine_cubes`
+
 - Implementation guide for implementing OGC API - Processes in openEO
 - Unit Tests (see folder `tests`, moved specification tests and CI tools to `dev`)
 - `date_difference`: Allow `week` as a unit [#506](https://github.com/Open-EO/openeo-processes/issues/506)
