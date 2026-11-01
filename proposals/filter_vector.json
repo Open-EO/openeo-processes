@@ -56,7 +56,7 @@
         }
     ],
     "returns": {
-        "description": "A vector data cube restricted to the specified geometries. The dimensions and dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the geometries dimension has less (or the same) dimension labels.",
+        "description": "A vector data cube restricted to the specified geometries. The dimensions and dimension properties (name, type, labels, reference system and resolution) remain unchanged, except that the geometries dimension has less (or the same) dimension labels. Feature properties of the retained geometries are preserved.",
         "schema": {
             "type": "object",
             "subtype": "datacube",
