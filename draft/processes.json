@@ -10405,7 +10405,7 @@
       },
       {
         "name": "parameters",
-        "description": "Defined the number of parameters for the model function and provides an initial guess for them. At least one parameter is required.",
+        "description": "Defines the number of parameters for the model function and provides an initial guess for them. At least one parameter is required.",
         "schema": {
           "type": "array",
           "minItems": 1,
@@ -10444,7 +10444,7 @@
             }
           ],
           "returns": {
-            "description": "The computed value `y` value for the given independent variable `x` and the parameters.",
+            "description": "The computed value `y` for the given independent variable `x` and the parameters.",
             "schema": {
               "type": "number"
             }
@@ -11139,7 +11139,7 @@
             }
           ],
           "returns": {
-            "description": "The computed value `y` value for the given independent variable `x` and the parameters.",
+            "description": "The computed value `y` for the given independent variable `x` and the parameters.",
             "schema": {
               "type": "number"
             }
