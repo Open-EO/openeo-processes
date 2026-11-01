@@ -43,7 +43,7 @@
                     }
                 ],
                 "returns": {
-                    "description": "The computed value `y` value for the given independent variable `x` and the parameters.",
+                    "description": "The computed value `y` for the given independent variable `x` and the parameters.",
                     "schema": {
                         "type": "number"
                     }
