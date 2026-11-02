@@ -1,0 +1,140 @@
+{
+  "id": "slope",
+  "level": "L3",
+  "experimental": true,
+  "tests": [
+    {
+      // plane rising to the east by 10 m per 10 m pixel: slope π / 4 and aspect 3π / 2 (facing west) in the center;
+      // at the edges, neighbors outside of the data cube are replaced by the value of the center pixel
+      "arguments": {
+        "data": {
+          "type": "datacube",
+          "nodata": NaN,
+          "order": ["bands", "y", "x"],
+          "dimensions": {
+            "bands": {
+              "type": "bands",
+              "values": ["DEM"]
+            },
+            "y": {
+              "type": "spatial",
+              "axis": "y",
+              "values": [5757495.0, 5757485.0, 5757475.0],
+              "reference_system": "EPSG:25832"
+            },
+            "x": {
+              "type": "spatial",
+              "axis": "x",
+              "values": [404835.0, 404845.0, 404855.0],
+              "reference_system": "EPSG:25832"
+            }
+          },
+          "data": [
+            [
+              [0.0, 10.0, 20.0],
+              [0.0, 10.0, 20.0],
+              [0.0, 10.0, 20.0]
+            ]
+          ]
+        }
+      },
+      "delta": 0.000001,
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["bands", "y", "x"],
+        "dimensions": {
+          "bands": {
+            "type": "bands",
+            "values": ["DEM_slope"]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [
+            [0.376435, 0.643501, 0.376435],
+            [0.463648, 0.785398, 0.463648],
+            [0.376435, 0.643501, 0.376435]
+          ]
+        ]
+      }
+    },
+    {
+      // flat surface: slope 0 and aspect no-data
+      "arguments": {
+        "data": {
+          "type": "datacube",
+          "nodata": NaN,
+          "order": ["bands", "y", "x"],
+          "dimensions": {
+            "bands": {
+              "type": "bands",
+              "values": ["DEM"]
+            },
+            "y": {
+              "type": "spatial",
+              "axis": "y",
+              "values": [5757495.0, 5757485.0, 5757475.0],
+              "reference_system": "EPSG:25832"
+            },
+            "x": {
+              "type": "spatial",
+              "axis": "x",
+              "values": [404835.0, 404845.0, 404855.0],
+              "reference_system": "EPSG:25832"
+            }
+          },
+          "data": [
+            [
+              [100.0, 100.0, 100.0],
+              [100.0, 100.0, 100.0],
+              [100.0, 100.0, 100.0]
+            ]
+          ]
+        }
+      },
+      "delta": 0.000001,
+      "returns": {
+        "type": "datacube",
+        "nodata": NaN,
+        "order": ["bands", "y", "x"],
+        "dimensions": {
+          "bands": {
+            "type": "bands",
+            "values": ["DEM_slope"]
+          },
+          "y": {
+            "type": "spatial",
+            "axis": "y",
+            "values": [5757495.0, 5757485.0, 5757475.0],
+            "reference_system": "EPSG:25832"
+          },
+          "x": {
+            "type": "spatial",
+            "axis": "x",
+            "values": [404835.0, 404845.0, 404855.0],
+            "reference_system": "EPSG:25832"
+          }
+        },
+        "data": [
+          [
+            [0.0, 0.0, 0.0],
+            [0.0, 0.0, 0.0],
+            [0.0, 0.0, 0.0]
+          ]
+        ]
+      }
+    }
+  ]
+}
