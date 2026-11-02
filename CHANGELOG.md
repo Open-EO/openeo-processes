@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- New processes in proposal state:
+    - `aspect` [#557](https://github.com/Open-EO/openeo-processes/issues/557)
+    - `slope` [#556](https://github.com/Open-EO/openeo-processes/issues/556)
+
 ### Changed
 
 - `resample_spatial`: Clarify the behavior of `resolution=0` (the default). [#567](https://github.com/Open-EO/openeo-processes/issues/567)

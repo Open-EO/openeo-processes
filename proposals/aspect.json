@@ -1,0 +1,53 @@
+{
+    "id": "aspect",
+    "summary": "Aspect of a terrain surface",
+    "description": "Computes the aspect of a terrain surface from elevation data, i.e. the compass direction that the slope faces (the direction of the steepest descent), in radians.\n\nThe aspect is measured clockwise from north (the positive direction of the `y` axis) in the interval [0, 2π): north is `0`, east is `π / 2`, south is `π` and west is `3π / 2`. For flat pixels (i.e. both partial derivatives are zero), the aspect is undefined and a no-data value is returned.\n\nThe values are computed with Horn's method (Horn, 1981), which estimates the partial derivatives of the elevation in `x` and `y` direction from the 3 by 3 pixel neighborhood of each pixel in the horizontal spatial dimensions (axes `x` and `y`). The elevation values are expected to be in meters. The horizontal distances between the pixels are derived from the spatial resolution of the data cube and are converted to meters if the spatial reference system is not metric (e.g. geographic coordinates).\n\nNo-data values in the neighborhood and adjacent pixels outside of the data cube are replaced by the value of the center pixel. If the center pixel is a no-data value, the result for this pixel is a no-data value.\n\nThe process is applied to each band and each label of all other dimensions independently. All dimensions and their labels stay unchanged, except for the labels of the dimension of type `bands` (if present), which are suffixed as described in the return value.",
+    "categories": [
+        "cubes",
+        "math",
+        "terrain"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "data",
+            "description": "A raster data cube with elevation values in meters.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube",
+                "dimensions": [
+                    {
+                        "type": "spatial",
+                        "axis": [
+                            "x",
+                            "y"
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+    "returns": {
+        "description": "A raster data cube with the same dimensions as the input data cube. The labels of the dimension of type `bands` (if present) are the labels of the input data cube, suffixed with `_aspect` (e.g. `DEM` becomes `DEM_aspect`). The values are the aspects in radians, measured clockwise from north, in the interval [0, 2π). Flat pixels are set to no-data.",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube",
+            "dimensions": [
+                {
+                    "type": "spatial",
+                    "axis": [
+                        "x",
+                        "y"
+                    ]
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://doi.org/10.1109/PROC.1981.11918",
+            "title": "Horn (1981): Hill shading and the reflectance map. Proceedings of the IEEE, 69(1), 14-47."
+        }
+    ]
+}
