@@ -84,7 +84,7 @@
         ],
         "ignore_nodata": false
       },
-      "returns": false
+      "returns": {"type": "nodata"}
     },
     {
       "arguments": {

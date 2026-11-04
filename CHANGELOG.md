@@ -10,9 +10,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `array_apply`, `array_filter`: Clarified that the labels of labeled arrays are preserved
+- `mod`: Clarified the behavior for an infinite divisor `y`
 - `resample_spatial`: Clarify the behavior of `resolution=0` (the default). [#567](https://github.com/Open-EO/openeo-processes/issues/567)
 
 ### Fixed
+
+- `array_modify`: Fixed the example for removing a single value, which didn't specify `length` and thus didn't remove any value
+- Tests: Fixed invalid or inconsistent test cases for `aggregate_temporal`, `aggregate_temporal_period`, `all`, `any`, `apply`, `apply_dimension`, `array_append`, `array_apply`, `array_element`, `array_filter`, `array_find`, `array_modify`, `count`, `filter_bands`, `lte`, `mask`, `mask_polygon`, `merge_cubes`, `mod`, `product`, `reduce_dimension`, `rename_dimension` and `rename_labels`
 
 ## [2.0.0-rc.2] - 2026-02-02
 
