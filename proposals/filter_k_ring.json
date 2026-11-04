@@ -64,13 +64,13 @@
     },
     "examples": [
         {
-            "description": "Select all zones within two adjacency steps around zone C1A.",
+            "description": "Select all zones within two adjacency steps around zone `44360` (HEALPix, nested indexing scheme).",
             "arguments": {
                 "data": {
                     "from_parameter": "data"
                 },
                 "zones": [
-                    "C1A"
+                    "44360"
                 ],
                 "k": 2
             }
