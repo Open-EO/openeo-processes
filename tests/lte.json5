@@ -117,6 +117,13 @@
     {
       "arguments": {
         "x": -Infinity,
+        "y": -Infinity
+      },
+      "returns": true
+    },
+    {
+      "arguments": {
+        "x": -Infinity,
         "y": Infinity
       },
       "returns": true
