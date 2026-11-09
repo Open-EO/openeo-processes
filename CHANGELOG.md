@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - `array_apply`, `array_filter`: Clarified that the labels of labeled arrays are preserved
-- `mod`: Clarified the behavior for an infinite divisor `y`
+- `mod`: Clarified the behavior for infinite operands
 - `resample_spatial`: Clarify the behavior of `resolution=0` (the default). [#567](https://github.com/Open-EO/openeo-processes/issues/567)
 
 ### Fixed
