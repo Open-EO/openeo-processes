@@ -76,7 +76,8 @@
           "c"
         ],
         "values": [],
-        "index": 2
+        "index": 2,
+        "length": 1
       },
       "returns": [
         "a",

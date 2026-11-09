@@ -70,6 +70,22 @@
     },
     {
       "arguments": {
+        "x": Infinity,
+        "y": 0
+      },
+      "returns": NaN,
+      "throws": "DivisionByZero"
+    },
+    {
+      "arguments": {
+        "x": -Infinity,
+        "y": 0
+      },
+      "returns": NaN,
+      "throws": "DivisionByZero"
+    },
+    {
+      "arguments": {
         "x": NaN,
         "y": 2
       },
@@ -122,7 +138,7 @@
         "x": 2,
         "y": -Infinity
       },
-      "returns": 2
+      "returns": -Infinity
     },
     {
       "arguments": {

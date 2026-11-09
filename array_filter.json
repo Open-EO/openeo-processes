@@ -85,7 +85,7 @@
         }
     ],
     "returns": {
-        "description": "An array filtered by the specified condition. The number of elements are less than or equal compared to the original array.",
+        "description": "An array filtered by the specified condition. The number of elements are less than or equal compared to the original array. If the given array is a labeled array, the labels are preserved.",
         "schema": {
             "type": "array",
             "items": {

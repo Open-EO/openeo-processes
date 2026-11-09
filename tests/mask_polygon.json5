@@ -20,7 +20,7 @@
             ]
           ]
         },
-        "inside": true
+        "inside": false
       },
       "returns": {
         "type": "datacube",
@@ -75,7 +75,7 @@
             ]
           ]
         },
-        "inside": false
+        "inside": true
       },
       "returns": {
         "$ref": "assets/xyt-minimal-float.json5"

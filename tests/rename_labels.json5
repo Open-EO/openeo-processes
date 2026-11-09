@@ -110,7 +110,7 @@
           "$ref": "assets/xyb-enumerated-bands.json5"
         },
         "dimension": "bands",
-        "source": [
+        "target": [
           "red",
           "green",
           "blue"
@@ -185,8 +185,11 @@
           "$ref": "assets/xyb-enumerated-bands.json5"
         },
         "dimension": "bands",
-        "source": [
+        "target": [
           "red"
+        ],
+        "source": [
+          0
         ]
       },
       "returns": {
