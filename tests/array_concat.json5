@@ -145,6 +145,39 @@
           }
         ]
       }
+    },
+    {
+      // Labeled arrays with a conflicting label
+      "level": "L3",
+      "arguments": {
+        "array1": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": "B01",
+              "value": 1
+            },
+            {
+              "key": "B02",
+              "value": 2
+            }
+          ]
+        },
+        "array2": {
+          "type": "labeled-array",
+          "data": [
+            {
+              "key": "B02",
+              "value": 3
+            },
+            {
+              "key": "B03",
+              "value": 4
+            }
+          ]
+        }
+      },
+      "throws": "ArrayLabelConflict"
     }
   ]
 }

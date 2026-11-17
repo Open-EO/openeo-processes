@@ -9,15 +9,15 @@
       ],
       "arguments": {
         "data": [],
-        "process": {
+        "condition": {
           "process_graph": {
             "gt": {
               "process_id": "gt",
               "arguments": {
                 "x": {
-                  "from_argument": "x"
+                  "from_parameter": "x"
                 },
-                "x": 3
+                "y": 3
               },
               "result": true
             }
@@ -39,13 +39,13 @@
           -4.725,
           NaN
         ],
-        "process": {
+        "condition": {
           "process_graph": {
             "gt": {
               "process_id": "gt",
               "arguments": {
                 "x": {
-                  "from_argument": "x"
+                  "from_parameter": "x"
                 },
                 "y": 1
               },
@@ -61,7 +61,7 @@
     {
       // handle index from a normal array
       "required": [
-        "lt"
+        "lte"
       ],
       "arguments": {
         "data": [
@@ -70,13 +70,13 @@
           3,
           4
         ],
-        "process": {
+        "condition": {
           "process_graph": {
-            "lt": {
+            "lte": {
               "process_id": "lte",
               "arguments": {
                 "x": {
-                  "from_argument": "index"
+                  "from_parameter": "index"
                 },
                 "y": 2
               },
@@ -110,13 +110,13 @@
             }
           ]
         },
-        "process": {
+        "condition": {
           "process_graph": {
             "eq": {
               "process_id": "eq",
               "arguments": {
                 "x": {
-                  "from_argument": "label"
+                  "from_parameter": "label"
                 },
                 "y": "B02"
               },
@@ -125,12 +125,15 @@
           }
         }
       },
-      "returns": [
-        {
-          "key": "B02",
-          "value": 0.98
-        }
-      ]
+      "returns": {
+        "type": "labeled-array",
+        "data": [
+          {
+            "key": "B02",
+            "value": 0.98
+          }
+        ]
+      }
     },
     {
       // handle index from a labeled array
@@ -151,13 +154,13 @@
             }
           ]
         },
-        "process": {
+        "condition": {
           "process_graph": {
             "eq": {
               "process_id": "eq",
               "arguments": {
                 "x": {
-                  "from_argument": "index"
+                  "from_parameter": "index"
                 },
                 "y": 0
               },
@@ -166,15 +169,18 @@
           }
         }
       },
-      "returns": [
-        {
-          "key": "B01",
-          "value": 1.23
-        }
-      ]
+      "returns": {
+        "type": "labeled-array",
+        "data": [
+          {
+            "key": "B01",
+            "value": 1.23
+          }
+        ]
+      }
     },
     {
-      // single math process applied to a labeled array
+      // single comparison process applied to a labeled array
       "required": [
         "gt"
       ],
@@ -192,13 +198,13 @@
             }
           ]
         },
-        "process": {
+        "condition": {
           "process_graph": {
-            "const": {
-              "process_id": "subtract",
+            "gt": {
+              "process_id": "gt",
               "arguments": {
                 "x": {
-                  "from_argument": "x"
+                  "from_parameter": "x"
                 },
                 "y": 1
               },
@@ -218,7 +224,7 @@
       }
     },
     {
-      // apply multiple math process to a labeled array
+      // apply multiple comparison processes to a normal array
       "required": [
         "lt",
         "gt",
@@ -232,13 +238,13 @@
           -4.725,
           NaN
         ],
-        "process": {
+        "condition": {
           "process_graph": {
             "lt": {
               "process_id": "lt",
               "arguments": {
                 "x": {
-                  "from_argument": "x"
+                  "from_parameter": "x"
                 },
                 "y": -2
               }
@@ -247,7 +253,7 @@
               "process_id": "gt",
               "arguments": {
                 "x": {
-                  "from_argument": "x"
+                  "from_parameter": "x"
                 },
                 "y": 2
               }

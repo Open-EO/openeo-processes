@@ -128,6 +128,13 @@
     },
     {
       "arguments": {
+        "x": -Infinity,
+        "y": -Infinity
+      },
+      "returns": false
+    },
+    {
+      "arguments": {
         "x": Infinity,
         "y": -Infinity
       },

@@ -79,7 +79,7 @@
               "process_id": "lt",
               "arguments": {
                 "x": {
-                  "from_argument": "x"
+                  "from_parameter": "x"
                 },
                 "y": -50
               }
@@ -88,7 +88,7 @@
               "process_id": "gt",
               "arguments": {
                 "x": {
-                  "from_argument": "x"
+                  "from_parameter": "x"
                 },
                 "y": 50
               }
@@ -204,7 +204,7 @@
             [2300, 390, 255, 870]
           ],
           [
-            [1740, 880, 810, 1650],
+            [1740, 880, 810, 255],
             [250, 770, 720, 90],
             [1480, 1150, 255, 2080]
           ]

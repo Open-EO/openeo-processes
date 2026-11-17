@@ -50,15 +50,17 @@
           {"type": "nodata"}
         ],
         "condition": {
-          "gt": {
-            "process_id": "gt",
-            "arguments": {
-              "x": {
-                "from_parameter": "element"
+          "process_graph": {
+            "gt": {
+              "process_id": "gt",
+              "arguments": {
+                "x": {
+                  "from_parameter": "x"
+                },
+                "y": 2
               },
-              "y": 2
-            },
-            "result": true
+              "result": true
+            }
           }
         }
       },
@@ -77,17 +79,19 @@
           {"type": "nodata"}
         ],
         "condition": {
-          "gt": {
-            "process_id": "gt",
-            "arguments": {
-              "x": {
-                "from_parameter": "element"
+          "process_graph": {
+            "gt": {
+              "process_id": "gt",
+              "arguments": {
+                "x": {
+                  "from_parameter": "x"
+                },
+                "y": {
+                  "from_parameter": "context"
+                }
               },
-              "y": {
-                "from_parameter": "context"
-              }
-            },
-            "result": true
+              "result": true
+            }
           }
         },
         "context": 2
