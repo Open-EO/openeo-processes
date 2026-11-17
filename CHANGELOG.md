@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - `array_modify`: Fixed the example for removing a single value, which didn't specify `length` and thus didn't remove any value
+- `fit_curve`: Allow no-data values in `data`, which the parameter `ignore_nodata` handles
+- `normalized_difference`: Allow no-data values for `x`, `y` and the return value, consistent with `add`, `subtract` and `divide` and the tests
 - Tests: Fixed invalid or inconsistent test cases for `aggregate_temporal`, `aggregate_temporal_period`, `all`, `any`, `apply`, `apply_dimension`, `array_append`, `array_apply`, `array_element`, `array_filter`, `array_find`, `array_modify`, `count`, `filter_bands`, `lte`, `mask`, `mask_polygon`, `merge_cubes`, `mod`, `product`, `reduce_dimension`, `rename_dimension` and `rename_labels`
 
 ## [2.0.0-rc.2] - 2026-02-02
