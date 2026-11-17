@@ -84,7 +84,7 @@
         }
     ],
     "returns": {
-        "description": "An array with the newly computed values. The number of elements are the same as for the original array.",
+        "description": "An array with the newly computed values. The number of elements are the same as for the original array. If the given array is a labeled array, the labels are preserved.",
         "schema": {
             "type": "array",
             "items": {

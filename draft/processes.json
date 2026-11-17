@@ -2381,7 +2381,7 @@
       }
     ],
     "returns": {
-      "description": "An array with the newly computed values. The number of elements are the same as for the original array.",
+      "description": "An array with the newly computed values. The number of elements are the same as for the original array. If the given array is a labeled array, the labels are preserved.",
       "schema": {
         "type": "array",
         "items": {
@@ -2899,7 +2899,7 @@
       }
     ],
     "returns": {
-      "description": "An array filtered by the specified condition. The number of elements are less than or equal compared to the original array.",
+      "description": "An array filtered by the specified condition. The number of elements are less than or equal compared to the original array. If the given array is a labeled array, the labels are preserved.",
       "schema": {
         "type": "array",
         "items": {
@@ -7674,7 +7674,7 @@
   {
     "id": "mod",
     "summary": "Modulo",
-    "description": "Remainder after a division of `x` by `y` for both integers and floating-point numbers.\n\nThe result of a modulo operation has the sign of the divisor. The handling regarding the sign of the result [differs between programming languages](https://en.wikipedia.org/wiki/Modulo_operation#In_programming_languages) and needs careful consideration to avoid unexpected results.\n\nIf any argument is a no-data value, the result will be the no-data value (or `null`). If `y` is set to 0 this results in:\n\n- +infinity for `x` > 0,\n- -infinity for `x` < 0,\n- `NaN` for `x` = 0,\n- or otherwise, throws a `DivisionByZero` exception if the other options are not supported by the processing environment.",
+    "description": "Remainder after a division of `x` by `y` for both integers and floating-point numbers.\n\nThe result of a modulo operation has the sign of the divisor. The handling regarding the sign of the result [differs between programming languages](https://en.wikipedia.org/wiki/Modulo_operation#In_programming_languages) and needs careful consideration to avoid unexpected results.\n\nIf any argument is a no-data value, the result will be the no-data value (or `null`). If `y` is set to 0 this results in:\n\n- +infinity for a finite `x` > 0,\n- -infinity for a finite `x` < 0,\n- `NaN` for `x` = 0 or an infinite `x`,\n- or otherwise, throws a `DivisionByZero` exception if the other options are not supported by the processing environment.\n\nOtherwise, if `x` is infinite, the result is `NaN`. If `x` is finite and `y` is infinite, the result is `x` if `x` and `y` have the same sign or `x` is 0, otherwise the result is `y`.",
     "categories": [
       "math"
     ],
@@ -9460,7 +9460,8 @@
             "c"
           ],
           "values": [],
-          "index": 2
+          "index": 2,
+          "length": 1
         },
         "returns": [
           "a",
