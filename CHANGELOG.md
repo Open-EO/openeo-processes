@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `cloud_mask`: New process [#578](https://github.com/Open-EO/openeo-processes/issues/578)
+
 ### Changed
 
 - `array_apply`, `array_filter`: Clarified that the labels of labeled arrays are preserved

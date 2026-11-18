@@ -1,0 +1,34 @@
+{
+  "type": "datacube",
+  "order": ["bands", "y", "x"],
+  "dimensions": {
+    "bands": {
+      "type": "bands",
+      "values": ["B04", "SCL"]
+    },
+    "y": {
+      "type": "spatial",
+      "axis": "y",
+      "values": [5757495.0, 5757485.0, 5757475.0],
+      "reference_system": "EPSG:25832"
+    },
+    "x": {
+      "type": "spatial",
+      "axis": "x",
+      "values": [404835.0, 404845.0, 404855.0, 404865.0],
+      "reference_system": "EPSG:25832"
+    }
+  },
+  "data": [
+    [
+      [0, 9999, 312, 845],
+      [1204, 2210, 156, 980],
+      [6420, 7311, 3105, 8870]
+    ],
+    [
+      [0, 1, 2, 3],
+      [4, 5, 6, 7],
+      [8, 9, 10, 11]
+    ]
+  ]
+}
