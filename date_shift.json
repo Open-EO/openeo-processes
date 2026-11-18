@@ -31,7 +31,7 @@
         },
         {
             "name": "unit",
-            "description": "The unit for the value given. The following pre-defined units are available:\n\n- millisecond: Milliseconds\n- second: Seconds - leap seconds are ignored in computations.\n- minute: Minutes\n- hour: Hours\n- day: Days - changes only the the day part of a date\n- week: Weeks (equivalent to 7 days)\n- month: Months\n- year: Years\n\nManipulations with the unit `year`, `month`, `week` or `day` do never change the time. If any of the manipulations result in an invalid date or time, the corresponding part is rounded down to the next valid date or time respectively. For example, adding a month to `2020-01-31` would result in `2020-02-29`.",
+            "description": "The unit for the value given. The following pre-defined units are available:\n\n- millisecond: Milliseconds\n- second: Seconds - leap seconds are ignored in computations\n- minute: Minutes\n- hour: Hours\n- day: Days - changes only the day part of a date\n- week: Weeks (equivalent to 7 days)\n- month: Months\n- year: Years\n\nManipulations with the unit `year`, `month`, `week` or `day` do never change the time. If any of the manipulations result in an invalid date or time, the corresponding part is rounded down to the next valid date or time respectively. For example, adding a month to `2020-01-31` would result in `2020-02-29`.",
             "schema": {
                 "type": "string",
                 "enum": [

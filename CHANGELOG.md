@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `aggregate_temporal_period`, `anomaly`, `climatological_normal`, `date_difference`, `date_shift`: Consistent punctuation in the lists of options and labels
 - `array_modify`: Fixed the example for removing a single value, which didn't specify `length` and thus didn't remove any value
 - Tests: Fixed invalid or inconsistent test cases for `aggregate_temporal`, `aggregate_temporal_period`, `all`, `any`, `apply`, `apply_dimension`, `array_append`, `array_apply`, `array_element`, `array_filter`, `array_find`, `array_modify`, `count`, `filter_bands`, `lte`, `mask`, `mask_polygon`, `merge_cubes`, `mod`, `product`, `reduce_dimension`, `rename_dimension` and `rename_labels`
 
