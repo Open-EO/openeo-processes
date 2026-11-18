@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `array_apply`, `array_filter`: Clarified that the labels of labeled arrays are preserved
 - `mod`: Clarified the behavior for infinite operands
+- `resample_spatial`, `resample_cube_spatial`: Clarified the resampling methods in line with `gdalwarp`: which pixels contribute, that `average`, `mode`, `rms` and `sum` are weighted, that `med`, `q1` and `q3` do not interpolate, and how `near` handles pixel borders
 - `resample_spatial`: Clarify the behavior of `resolution=0` (the default). [#567](https://github.com/Open-EO/openeo-processes/issues/567)
 
 ### Fixed
