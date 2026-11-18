@@ -56,7 +56,7 @@
         }
     ],
     "returns": {
-        "description": "A vector data cube with geometries projected to the new coordinate reference system. The reference system of the geometry dimension changes, all other dimensions and properties remain unchanged.",
+        "description": "A vector data cube with geometries projected to the new coordinate reference system. The reference system of the geometry dimension changes, all other dimensions remain unchanged. Feature properties are preserved.",
         "schema": {
             "type": "object",
             "subtype": "datacube",
