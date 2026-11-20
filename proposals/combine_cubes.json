@@ -1,0 +1,99 @@
+{
+    "id": "combine_cubes",
+    "summary": "Combine two data cubes with a process",
+    "description": "The process combines two 'compatible' data cubes with a process.\n\nThe data cubes have to be compatible, which means that they must share a common subset of equal dimensions. To conveniently get to such a subset of equal dimensions, the process tries to align the horizontal spatial dimensions (axes `x` and `y`) implicitly with ``resample_cube_spatial()`` if required. `cube1` is the target data cube for resampling and the default parameters of ``resample_cube_spatial()`` apply. The equality for geometries follows the definition in the Simple Features standard by the OGC.\n\nAll overlapping dimensions share the same properties, such as name, type, reference system, and resolution. Dimensions can have disjoint or overlapping labels. The combine process is applied to all labels from both cubes. If there are dimension labels that exist in only one cube, the other cube will be considered as no-data at this label. It is up to the combine process to handle these no-data values.\nIf one cube contains a dimension not present in the other cube, the combine process will be applied for each label in this dimension and the result will contain this dimension with the original labels.\n\nIt is not possible to combine a vector and a raster data cube. Combining vector data cubes with different base geometry types (points, lines/line strings, polygons) is not possible and throws the `IncompatibleGeometryTypes` exception. The base geometry types can be combined with their corresponding multi geometry types.\n\nAfter the combination, the dimensions with a natural/inherent label order (with a reference system this is each spatial and temporal dimensions) still have all dimension labels sorted. For other dimensions without inherent order, including bands, the dimension labels keep the order in which they are present in the original data cubes, and the dimension labels of `cube2` get appended to the dimension labels of `cube1`.\n\nUse this process when you want to combine two cubes with a process on each label, e.g. multiply two cubes with the same extents to calculate indices. Use ``merge_cubes()`` when you want to merge two cubes with a reduction operator on overlapping labels, e.g. creating a cube with bands from two different sources or merging cubes with different (possibly overlapping) extents.",
+    "categories": [
+        "cubes"
+    ],
+    "experimental": true,
+    "parameters": [
+        {
+            "name": "cube1",
+            "description": "The base data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube"
+            }
+        },
+        {
+            "name": "cube2",
+            "description": "The other data cube to be combined with the base data cube.",
+            "schema": {
+                "type": "object",
+                "subtype": "datacube"
+            }
+        },
+        {
+            "name": "process",
+            "description": "A combine operator that takes two values. The combiner must return a value of the same data type as the input values are. The combine operator may be a single process such as ``multiply()`` or consist of multiple sub-processes.",
+            "schema": {
+                "type": "object",
+                "subtype": "process-graph",
+                "parameters": [
+                    {
+                        "name": "x",
+                        "description": "The overlapping value from the base data cube `cube1`.",
+                        "schema": {
+                            "description": "Any data type."
+                        }
+                    },
+                    {
+                        "name": "y",
+                        "description": "The overlapping value from the other data cube `cube2`.",
+                        "schema": {
+                            "description": "Any data type."
+                        }
+                    },
+                    {
+                        "name": "context",
+                        "description": "Additional data passed by the user.",
+                        "schema": {
+                            "description": "Any data type."
+                        },
+                        "optional": true,
+                        "default": null
+                    }
+                ],
+                "returns": {
+                    "description": "The value to be set in the combined data cube.",
+                    "schema": {
+                        "description": "Any data type."
+                    }
+                }
+            }
+        },
+        {
+            "name": "context",
+            "description": "Additional data to be passed to the overlap resolver.",
+            "schema": {
+                "description": "Any data type."
+            },
+            "optional": true,
+            "default": null
+        }
+    ],
+    "returns": {
+        "description": "The combined data cube. See the process description for details regarding the dimensions and dimension properties (name, type, labels, reference system and resolution).",
+        "schema": {
+            "type": "object",
+            "subtype": "datacube"
+        }
+    },
+    "exceptions": {
+        "IncompatibleGeometryTypes": {
+            "message": "The geometry types are not compatible and can't be combined."
+        }
+    },
+    "links": [
+        {
+            "rel": "about",
+            "href": "https://en.wikipedia.org/wiki/Reduction_Operator",
+            "title": "Background information on reduction operators (binary reducers) by Wikipedia"
+        },
+        {
+            "href": "http://www.opengeospatial.org/standards/sfa",
+            "rel": "about",
+            "title": "Simple Features standard by the OGC"
+        }
+    ]
+}
