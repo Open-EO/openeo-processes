@@ -15,7 +15,10 @@
                 "type": "array",
                 "subtype": "labeled-array",
                 "items": {
-                    "type": "number"
+                    "type": [
+                        "number",
+                        "null"
+                    ]
                 }
             }
         },
