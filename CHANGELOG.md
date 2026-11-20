@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `raster_to_vector`: New process [#155](https://github.com/Open-EO/openeo-processes/issues/155)
+- `vector_to_raster`: New process [#442](https://github.com/Open-EO/openeo-processes/issues/442)
+
 ### Changed
 
 - `array_apply`, `array_filter`: Clarified that the labels of labeled arrays are preserved
