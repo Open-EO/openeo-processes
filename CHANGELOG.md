@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `array_apply`, `array_filter`: Clarified that the labels of labeled arrays are preserved
 - `mod`: Clarified the behavior for infinite operands
 - `resample_spatial`: Clarify the behavior of `resolution=0` (the default). [#567](https://github.com/Open-EO/openeo-processes/issues/567)
+- `filter_bbox`, `load_collection` and `load_stac`: Clarify that bounding boxes crossing the antimeridian have a `west` value greater than the `east` value. [#568](https://github.com/Open-EO/openeo-processes/issues/568)
 
 ### Fixed
 
